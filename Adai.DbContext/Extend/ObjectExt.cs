@@ -18,6 +18,10 @@ namespace Adai.DbContext.Ext
 			var propertyInfos = obj.GetType().GetProperties();
 			foreach (var pi in propertyInfos)
 			{
+				if (pi.CanWrite == false)
+				{
+					continue;
+				}
 				if (values != null && values.TryGetValue(pi.Name, out var value))
 				{
 					pi.SetValue(obj, value);
