@@ -1,6 +1,6 @@
 ﻿namespace Adai.Standard
 {
-	public class SocketState : Adai.Model.Config
+	public class SocketState : Adai.Config.Model.Config
 	{
 		/// <summary>
 		/// 连接中

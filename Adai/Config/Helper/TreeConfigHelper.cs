@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Adai
+namespace Adai.Config
 {
 	/// <summary>
 	/// ConfigHelper

@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Version>5.0.0.0</Version>
+    <Company>Adai</Company>
+    <Authors>Shuang Yu</Authors>
+    <Description>常用方法封装</Description>
   </PropertyGroup>
 
   <ItemGroup>

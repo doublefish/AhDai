@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Adai.Standard.Helper
+namespace Adai.Standard
 {
 	/// <summary>
 	/// JsonHelper

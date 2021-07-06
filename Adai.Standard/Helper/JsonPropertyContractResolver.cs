@@ -4,13 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Adai.Standard.Helper
+namespace Adai.Standard
 {
 	/// <summary>
 	/// JsonPropertyContractResolver
 	/// </summary>
 	public class JsonPropertyContractResolver : DefaultContractResolver
 	{
+		readonly IEnumerable<string> _IncludeProperties;
+		readonly IEnumerable<string> _ExcludeProperties;
+
 		/// <summary>
 		/// 构造函数
 		/// </summary>
@@ -21,9 +24,6 @@ namespace Adai.Standard.Helper
 			_IncludeProperties = includeProperties;
 			_ExcludeProperties = excludeProperties;
 		}
-
-		IEnumerable<string> _IncludeProperties;
-		IEnumerable<string> _ExcludeProperties;
 
 		/// <summary>
 		/// CreateProperties

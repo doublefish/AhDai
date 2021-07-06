@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Adai
+namespace Adai.Config
 {
 	/// <summary>
-	/// TreeConfigIntHelper
+	/// TreeConfigStringHelper
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public static class TreeConfigIntHelper<T> where T : Model.TreeConfig<int>, new()
+	public static class TreeConfigStringHelper<T> where T : Model.TreeConfig<string>, new()
 	{
 		/// <summary>
 		/// Config
@@ -16,27 +16,27 @@ namespace Adai
 		/// <summary>
 		/// 所有
 		/// </summary>
-		public static IDictionary<string, IDictionary<int, string>> All => Config;
+		public static IDictionary<string, IDictionary<string, string>> All => Config;
 
 		/// <summary>
 		/// 是否包含指定的键
 		/// </summary>
 		/// <param name="key"></param>
 		/// <returns></returns>
-		public static bool ContainsKey(int key) => Config.ContainsKey(key);
+		public static bool ContainsKey(string key) => Config.ContainsKey(key);
 
 		/// <summary>
 		/// 获取指定键的值
 		/// </summary>
 		/// <param name="key"></param>
 		/// <returns></returns>
-		public static string GetValue(int key) => Config.GetValue(key);
+		public static string GetValue(string key) => Config.GetValue(key);
 
 		/// <summary>
 		/// 获取指定的项
 		/// </summary>
 		/// <param name="keys"></param>
 		/// <returns></returns>
-		public static IDictionary<string, IDictionary<int, string>> Filter(params int[] keys) => Config.Filter(keys);
+		public static IDictionary<string, IDictionary<string, string>> Filter(params string[] keys) => Config.Filter(keys);
 	}
 }

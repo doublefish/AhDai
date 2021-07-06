@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Language
 	/// </summary>
-	public class Language : Adai.Model.Config<string>
+	public class Language : Adai.Config.Model.Config<string>
 	{
 		/// <summary>
 		/// 默认

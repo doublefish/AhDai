@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Adai.Model
+namespace Adai.Config.Model
 {
 	/// <summary>
 	/// 配置基类

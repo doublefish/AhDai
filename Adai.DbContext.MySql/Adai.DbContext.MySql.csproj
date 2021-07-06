@@ -1,7 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>2.1.0.0</Version>
+    <Company>Adai</Company>
+    <Authors>Shuang Yu</Authors>
+    <Description>常用方法封装</Description>
   </PropertyGroup>
 
   <ItemGroup>
