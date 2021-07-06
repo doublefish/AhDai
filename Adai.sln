@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.DbContext", "Adai.DbContext\Adai.DbContext.csproj", "{853AF215-7DDA-4065-9853-255A0D143BBC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.Core", "Adai.Core\Adai.Core.csproj", "{60291029-A6F2-47BB-889E-E879E3FBDB74}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.Security", "Adai.Security\Adai.Security.csproj", "{A869EB4D-85F8-4967-BE69-0359691516B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.Standard", "Adai.Standard\Adai.Standard.csproj", "{56C301B7-39CA-4CE3-BB53-1B4C2F98F432}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai", "Adai\Adai.csproj", "{746BF7E9-D275-48DC-9181-7F0A6AC95B2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adai.DbContext.MySql", "Adai.DbContext.MySql\Adai.DbContext.MySql.csproj", "{AB8395DE-CC24-4797-9EF8-52B68FEE6CDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{853AF215-7DDA-4065-9853-255A0D143BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{853AF215-7DDA-4065-9853-255A0D143BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{853AF215-7DDA-4065-9853-255A0D143BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{853AF215-7DDA-4065-9853-255A0D143BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60291029-A6F2-47BB-889E-E879E3FBDB74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60291029-A6F2-47BB-889E-E879E3FBDB74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60291029-A6F2-47BB-889E-E879E3FBDB74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60291029-A6F2-47BB-889E-E879E3FBDB74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A869EB4D-85F8-4967-BE69-0359691516B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A869EB4D-85F8-4967-BE69-0359691516B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A869EB4D-85F8-4967-BE69-0359691516B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A869EB4D-85F8-4967-BE69-0359691516B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56C301B7-39CA-4CE3-BB53-1B4C2F98F432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C301B7-39CA-4CE3-BB53-1B4C2F98F432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C301B7-39CA-4CE3-BB53-1B4C2F98F432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C301B7-39CA-4CE3-BB53-1B4C2F98F432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{746BF7E9-D275-48DC-9181-7F0A6AC95B2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{746BF7E9-D275-48DC-9181-7F0A6AC95B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{746BF7E9-D275-48DC-9181-7F0A6AC95B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{746BF7E9-D275-48DC-9181-7F0A6AC95B2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB8395DE-CC24-4797-9EF8-52B68FEE6CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8395DE-CC24-4797-9EF8-52B68FEE6CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB8395DE-CC24-4797-9EF8-52B68FEE6CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8395DE-CC24-4797-9EF8-52B68FEE6CDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1DCD9F15-B17B-48EA-9494-16396F16043E}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Shuang Yu</Authors>
+    <Company>Adai</Company>
+    <Description>常用方法封装</Description>
+    <Copyright>Shuang Yu</Copyright>
+    <Version>1.0.0.8</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Helper\AESHelper.cs" />
+    <Compile Remove="Helper\DESHelper.cs" />
+    <Compile Remove="Helper\HMACHelper.cs" />
+    <Compile Remove="Helper\MD5Helper.cs" />
+    <Compile Remove="Helper\RSAHelper.cs" />
+    <Compile Remove="Helper\SHAHelper.cs" />
+    <Compile Remove="Helper\X509CertificateHelper.cs" />
+  </ItemGroup>
+
+</Project>
