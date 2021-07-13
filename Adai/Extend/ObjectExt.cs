@@ -14,31 +14,25 @@ namespace Adai.Extend
 		/// 克隆
 		/// </summary>
 		/// <typeparam name="T">类型</typeparam>
-		/// <param name="source">要克隆的属性的访问级别</param>
+		/// <param name="obj"></param>
 		/// <param name="ignores">忽略的属性</param>
-		public static T Clone<T>(this T source, params string[] ignores) where T : class, new()
-		{
-			return source.Clone(BindingFlags.Default, ignores);
-		}
-
-		/// <summary>
-		/// 克隆
-		/// </summary>
-		/// <typeparam name="T">类型</typeparam>
-		/// <param name="source"></param>
-		/// <param name="bindingAttr">要克隆的属性的访问级别</param>
-		/// <param name="ignores">忽略的属性</param>
-		public static T Clone<T>(this T source, BindingFlags bindingAttr, params string[] ignores) where T : class, new()
+		public static T Clone<T>(this T obj, params string[] ignores) where T : class, new()
 		{
 			var type = typeof(T);
 			var data = new T();
-			foreach (var propertyInfo in type.GetProperties(bindingAttr))
+			foreach (var pi in type.GetProperties())
 			{
-				if (ignores.Contains(propertyInfo.Name))
+				if (ignores.Contains(pi.Name) || pi.CanRead == false)
 				{
 					continue;
 				}
-				type.GetProperty(propertyInfo.Name).SetValue(data, propertyInfo.GetValue(source, null), null);
+				var targetPi = type.GetProperty(pi.Name);
+				if (targetPi.CanWrite == false)
+				{
+					continue;
+				}
+				var value = pi.GetValue(obj, null);
+				targetPi.SetValue(data, value, null);
 			}
 			return data;
 		}

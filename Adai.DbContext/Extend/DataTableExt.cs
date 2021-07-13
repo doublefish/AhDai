@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Adai.DbContext.Ext
 {
@@ -67,7 +68,11 @@ namespace Adai.DbContext.Ext
 		/// <param name="columns"></param>
 		static void SetValue<T>(T data, string name, object value, ICollection<Attribute.TableColumnAttribute> columns) where T : class
 		{
-			var column = columns.GetByName(name);
+			var column = columns.Where(o => string.Compare(o.Name, name, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+			if (column == null)
+			{
+				column = columns.Where(o => string.Compare(o.Property.Name, name, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+			}
 			if (column == null || column.Property == null)
 			{
 				return;
