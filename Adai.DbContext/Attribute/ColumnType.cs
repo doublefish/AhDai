@@ -5,6 +5,21 @@
 	/// </summary>
 	public enum ColumnType
 	{
-		Normal, Primary, Foreign, External
+		/// <summary>
+		/// 普通
+		/// </summary>
+		Normal,
+		/// <summary>
+		/// 主键
+		/// </summary>
+		Primary,
+		/// <summary>
+		/// 外键
+		/// </summary>
+		Foreign,
+		/// <summary>
+		/// 扩展
+		/// </summary>
+		External
 	}
 }

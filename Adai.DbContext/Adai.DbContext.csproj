@@ -8,4 +8,8 @@
     <Company>Adai</Company>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\DoubleFish\Adai\Adai.DbContext\Adai.DbContext.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

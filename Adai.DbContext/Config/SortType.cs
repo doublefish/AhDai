@@ -5,6 +5,13 @@
 	/// </summary>
 	public enum SortType
 	{
-		ASC, DESC
+		/// <summary>
+		/// 正序
+		/// </summary>
+		ASC,
+		/// <summary>
+		/// 倒序
+		/// </summary>
+		DESC
 	}
 }

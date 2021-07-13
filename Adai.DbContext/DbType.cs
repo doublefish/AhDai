@@ -5,6 +5,17 @@
 	/// </summary>
 	public enum DbType
 	{
-		MSSQL, MySQL, Oracle
+		/// <summary>
+		/// MSSQL
+		/// </summary>
+		MSSQL,
+		/// <summary>
+		/// MySQL
+		/// </summary>
+		MySQL,
+		/// <summary>
+		/// Oracle
+		/// </summary>
+		Oracle
 	}
 }

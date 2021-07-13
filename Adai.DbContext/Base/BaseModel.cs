@@ -7,10 +7,6 @@
 	{
 		#region 扩展
 		/// <summary>
-		/// 是否修改过
-		/// </summary>
-		//public bool IsModified { get; set; }
-		/// <summary>
 		/// 数据库名称
 		/// </summary>
 		public string DbName { get; set; }
