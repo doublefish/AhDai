@@ -16,7 +16,6 @@ namespace Adai.Extend
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="dataTable"></param>
-		/// <param name="tableColumns"></param>
 		/// <returns></returns>
 		public static ICollection<T> ToList<T>(this DataTable dataTable) where T : class, new()
 		{
@@ -63,7 +62,6 @@ namespace Adai.Extend
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="dataReader"></param>
-		/// <param name="tableColumns"></param>
 		/// <returns></returns>
 		public static ICollection<T> ToList<T>(this IDataReader dataReader) where T : class, new()
 		{
