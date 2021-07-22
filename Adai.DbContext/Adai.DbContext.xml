@@ -420,12 +420,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContext.CreateCommand">
-            <summary>
-            CreateCommand
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Adai.DbContext.DbContext.CreateDataAdapter">
             <summary>
             CreateDataAdapter
@@ -446,9 +440,9 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContext.GetConnection">
+        <member name="M:Adai.DbContext.DbContext.CreateCommand">
             <summary>
-            CreateConnection
+            CreateCommand
             </summary>
             <returns></returns>
         </member>
@@ -467,6 +461,12 @@
             <param name="connection"></param>
             <param name="sql"></param>
             <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContext.GetConnection">
+            <summary>
+            CreateConnection
+            </summary>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.DbContext.GetDataSet(System.String,System.Data.IDbDataParameter[])">
@@ -953,12 +953,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.IDbContext.CreateCommand">
-            <summary>
-            CreateCommand
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Adai.DbContext.IDbContext.CreateDataAdapter">
             <summary>
             CreateDataAdapter
@@ -977,6 +971,29 @@
             </summary>
             <param name="name"></param>
             <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.IDbContext.CreateCommand">
+            <summary>
+            CreateCommand
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.IDbContext.CreateCommand(System.String,System.Data.IDbDataParameter[])">
+            <summary>
+            CreateCommand
+            </summary>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.IDbContext.CreateCommand(System.Data.IDbConnection,System.String,System.Data.IDbDataParameter[])">
+            <summary>
+            CreateCommand
+            </summary>
+            <param name="connection"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.IDbContext.GetDataSet(System.String,System.Data.IDbDataParameter[])">

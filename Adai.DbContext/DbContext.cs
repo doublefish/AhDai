@@ -45,12 +45,6 @@ namespace Adai.DbContext
 		public abstract IDbConnection CreateConnection();
 
 		/// <summary>
-		/// CreateCommand
-		/// </summary>
-		/// <returns></returns>
-		public abstract IDbCommand CreateCommand();
-
-		/// <summary>
 		/// CreateDataAdapter
 		/// </summary>
 		/// <returns></returns>
@@ -77,15 +71,10 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// CreateConnection
+		/// CreateCommand
 		/// </summary>
 		/// <returns></returns>
-		public IDbConnection GetConnection()
-		{
-			var conn = CreateConnection();
-			conn.ConnectionString = ConnectionString;
-			return conn;
-		}
+		public abstract IDbCommand CreateCommand();
 
 		/// <summary>
 		/// CreateCommand
@@ -116,6 +105,16 @@ namespace Adai.DbContext
 			return cmd;
 		}
 
+		/// <summary>
+		/// CreateConnection
+		/// </summary>
+		/// <returns></returns>
+		public IDbConnection GetConnection()
+		{
+			var conn = CreateConnection();
+			conn.ConnectionString = ConnectionString;
+			return conn;
+		}
 
 		/// <summary>
 		/// 查询
