@@ -161,7 +161,7 @@ namespace Adai.Security.Extend
 			var DP = parameters.DP != null ? Convert.ToBase64String(parameters.DP) : null;
 			var DQ = parameters.DQ != null ? Convert.ToBase64String(parameters.DQ) : null;
 			var InverseQ = parameters.InverseQ != null ? Convert.ToBase64String(parameters.InverseQ) : null;
-			var D = parameters.D != null ? Convert.ToBase64String(parameters.D) : null);
+			var D = parameters.D != null ? Convert.ToBase64String(parameters.D) : null;
 			return $"<RSAKeyValue><Modulus>{Modulus}</Modulus><Exponent>{Exponent}</Exponent><P>{P}</P><Q>{Q}</Q><DP>{DP}</DP><DQ>{DQ}</DQ><InverseQ>{InverseQ}</InverseQ><D>{D}</D></RSAKeyValue>";
 		}
 	}

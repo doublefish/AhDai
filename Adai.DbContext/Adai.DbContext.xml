@@ -511,7 +511,7 @@
             <summary>
             执行之前
             </summary>
-            <param name="command"></param>
+            <param name="commands"></param>
         </member>
         <member name="M:Adai.DbContext.DbContext.BeforeExecute(System.Data.IDbCommand)">
             <summary>

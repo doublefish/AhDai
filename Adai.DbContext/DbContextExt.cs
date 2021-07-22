@@ -339,7 +339,7 @@ namespace Adai.DbContext
 			builder0 = builder0.Remove(0, 1);
 			builder1 = builder1.Remove(0, 1);
 			parameters = paras.ToArray();
-			var sql = $"INSERT INTO {tableName} ({builder0.ToString()}) VALUES ({builder1.ToString()})";
+			var sql = $"INSERT INTO {tableName} ({builder0}) VALUES ({builder1})";
 			return sql;
 		}
 
@@ -415,7 +415,7 @@ namespace Adai.DbContext
 				paras.Add(dbContext.CreateParameter(column.Name, value));
 			}
 			parameters = paras.ToArray();
-			var sql = $"UPDATE {tableName} SET {builder.ToString()}";
+			var sql = $"UPDATE {tableName} SET {builder}";
 			return sql;
 		}
 

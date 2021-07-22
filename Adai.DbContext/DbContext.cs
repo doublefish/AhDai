@@ -263,7 +263,7 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 执行之前
 		/// </summary>
-		/// <param name="command"></param>
+		/// <param name="commands"></param>
 		protected virtual void BeforeExecute(IEnumerable<IDbCommand> commands)
 		{
 			foreach (var cmd in commands)
