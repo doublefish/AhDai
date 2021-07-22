@@ -37,14 +37,14 @@ namespace Adai.Standard
 			var dateTime = DateTime.Now;
 			var time = dateTime.TimeOfDay;
 			var redis = RedisHelper.Db15;
-			var key = string.Format("{0}-{1}", CacheKey, dateTime.ToString("yyMMddHH"));
+			var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 			var hashField = guid;
 			if (redis.HashExists(key, hashField))
 			{
 				throw new ArgumentException("Unique code already exists.");
 			}
 			var bytes = GenerateImageCode(length, out var code);
-			var value = string.Format("{0},{1}", code, time.Add(Expiry));
+			var value = $"{code},{time.Add(Expiry)}";
 			if (redis.KeyExists(key))
 			{
 				redis.HashSet(key, hashField, value);
@@ -71,13 +71,13 @@ namespace Adai.Standard
 			var dateTime = DateTime.Now;
 			var time = dateTime.TimeOfDay;
 			var redis = RedisHelper.Db15;
-			var key = string.Format("{0}-{1}", CacheKey, dateTime.ToString("yyMMddHH"));
+			var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 			var hashField = guid;
 			var value = redis.HashGet(key, hashField);
 			if (value.IsNullOrEmpty && time.Minutes <= Expiry.TotalMinutes)
 			{
 				//从上一小时钟查询
-				key = string.Format("{0}-{1}", CacheKey, dateTime.AddHours(-1).ToString("yyMMddHH"));
+				key = $"{CacheKey}-{dateTime.AddHours(-1):yyMMddHH}";
 				value = redis.HashGet(key, hashField);
 			}
 			if (value.IsNullOrEmpty)

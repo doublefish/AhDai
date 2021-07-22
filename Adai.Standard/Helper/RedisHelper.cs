@@ -114,9 +114,9 @@ namespace Adai.Standard
 		/// <param name="port"></param>
 		/// <param name="password"></param>
 		/// <returns></returns>
-		public static string CreateConfiguration(string host = "localhost", int port = 6379, string password = null)
+		public static string CreateConfiguration(string host = "127.0.0.1", int port = 6379, string password = null)
 		{
-			return string.Format("{0}:{1},password={2}", host, port, password);
+			return $"{host}:{port},password={password}";
 		}
 	}
 }

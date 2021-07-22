@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
-namespace Adai.DbContext.Ext
+namespace Adai.DbContext.Extend
 {
 	/// <summary>
 	/// CustomAttributeExt
@@ -31,6 +32,22 @@ namespace Adai.DbContext.Ext
 				list.Add(attr);
 			}
 			return list.ToArray();
+		}
+
+		/// <summary>
+		/// 获取列名和属性的映射关系
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="attributes"></param>
+		/// <returns></returns>
+		public static IDictionary<string, PropertyInfo> GetMappings<T>(this IEnumerable<T> attributes) where T : Attribute.CustomAttribute
+		{
+			var dict = new Dictionary<string, PropertyInfo>();
+			foreach (var attr in attributes)
+			{
+				dict.Add(attr.Name, attr.Property);
+			}
+			return dict;
 		}
 	}
 }

@@ -8,7 +8,7 @@ namespace Adai.DbContext
 	/// <typeparam name="Model"></typeparam>
 	/// <typeparam name="DAL"></typeparam>
 	public class BaseBLL<Model, DAL>
-		where Model : BaseModel
+		where Model : BaseModel, new()
 		where DAL : BaseDAL<Model>
 	{
 		/// <summary>

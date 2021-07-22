@@ -24,8 +24,8 @@ namespace Adai.Standard
 			var dateTime = DateTime.Now;
 			var time = dateTime.TimeOfDay;
 			var redis = RedisHelper.Db15;
-			var key = string.Format("{0}-{1}", CacheKey, dateTime.ToString("yyMMddHH"));
-			var hashField = string.Format("{0}-{1}", ipAddress, path);
+			var key = $"{CacheKey}-{dateTime:yyMMddHH}";
+			var hashField = $"{ipAddress}-{path}";
 			if (redis.KeyExists(key))
 			{
 				var value = redis.HashGet(key, hashField);
@@ -70,7 +70,7 @@ namespace Adai.Standard
 						value = string.Join(',', array, 0, 9);
 					}
 					//记录本次访问时间
-					value = string.Format("{0},{1}", time, value);
+					value = $"{time},{value}";
 				}
 				redis.HashSet(key, hashField, value);
 			}

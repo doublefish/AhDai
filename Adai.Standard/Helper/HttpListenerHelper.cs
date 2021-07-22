@@ -48,7 +48,7 @@ namespace Adai.Standard
 
 						//设置返回给客服端http状态代码
 						httpContext.Response.StatusCode = (int)HttpStatusCode.OK;
-						httpContext.Response.ContentType = string.Format("{0}; {1}", contentType, "charset=utf-8");
+						httpContext.Response.ContentType = $"{contentType}; charset=utf-8";
 
 						IDictionary<string, string> parameters;
 						if (httpContext.Request.HttpMethod == HttpMethod.Get)

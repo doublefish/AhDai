@@ -19,7 +19,7 @@ namespace Adai.Standard.Extend
 		/// <returns></returns>
 		public static string GetFullPath(this HttpRequest httpRequest)
 		{
-			return string.Format("{0}://{1}{2}", httpRequest.Scheme, httpRequest.Host.Value, httpRequest.PathBase.Value);
+			return $"{httpRequest.Scheme}://{httpRequest.Host.Value}{httpRequest.PathBase.Value}";
 		}
 
 		/// <summary>

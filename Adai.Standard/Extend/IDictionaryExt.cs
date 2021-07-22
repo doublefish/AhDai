@@ -150,7 +150,7 @@ namespace Adai.Standard.Extend
 				{
 					continue;
 				}
-				builder.Append(string.Format("&{0}={1}", kv.Key, kv.Value));
+				builder.Append($"&{kv.Key}={kv.Value}");
 			}
 			return builder.Remove(0, 1).ToString();
 		}
@@ -176,7 +176,7 @@ namespace Adai.Standard.Extend
 				{
 					continue;
 				}
-				builder.Append(string.Format("{0}{1}", separator, kv.Value));
+				builder.Append($"{separator}{kv.Value}");
 			}
 			if (!string.IsNullOrEmpty(separator))
 			{
@@ -205,7 +205,7 @@ namespace Adai.Standard.Extend
 				{
 					continue;
 				}
-				builder.Append(string.Format("<{0}>{1}</{0}>", kv.Key, kv.Value));
+				builder.Append($"<{kv.Key}>{kv.Value}</{kv.Key}>");
 			}
 			return builder.ToString();
 		}
@@ -230,7 +230,7 @@ namespace Adai.Standard.Extend
 				{
 					continue;
 				}
-				builder.Append(string.Format("&{0}={1}", kv.Key, kv.Value));
+				builder.Append($"&{kv.Key}={kv.Value}");
 			}
 			return builder.Remove(0, 1).ToString();
 		}

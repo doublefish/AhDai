@@ -1,6 +1,7 @@
-﻿using Adai.DbContext.Ext;
+﻿using Adai.DbContext.Extend;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -43,11 +44,10 @@ namespace Adai.DbContext
 				if (attrs != null)
 				{
 					attribute = attrs.FirstOrDefault() as Attribute.TableAttribute;
-					if (attribute == null)
+					if (attribute != null)
 					{
-						throw new Exception("没有设置表特性");
+						attribute.ColumnAttributes = type.GetPropertyAttributes<Attribute.TableColumnAttribute>();
 					}
-					attribute.ColumnAttributes = type.GetPropertyAttributes<Attribute.TableColumnAttribute>();
 					TableAttributes.Add(type.FullName, attribute);
 				}
 			}
@@ -57,7 +57,7 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 数据库连接字符串
 		/// </summary>
-		static IDictionary<string, string> ConnectionStrings;
+		public static IDictionary<string, string> ConnectionStrings;
 
 		/// <summary>
 		/// 已初始化
@@ -83,13 +83,26 @@ namespace Adai.DbContext
 		{
 			if (!Initialized)
 			{
-				throw new Exception(string.Format("DbHelper尚未初始化，请先执行Init", dbName));
+				throw new Exception("DbHelper尚未初始化，请先执行Init");
 			}
 			if (ConnectionStrings.TryGetValue(dbName, out var connStr))
 			{
 				return connStr;
 			}
-			throw new Exception(string.Format("获取数据库{0}的连接字符串失败", dbName));
+			throw new Exception($"获取数据库{dbName}的连接字符串失败");
+		}
+
+		/// <summary>
+		/// AddRange
+		/// </summary>
+		/// <param name="collection"></param>
+		/// <param name="values"></param>
+		public static void AddRange(this IDataParameterCollection collection, Array values)
+		{
+			foreach (var value in values)
+			{
+				collection.Add(value);
+			}
 		}
 
 		/// <summary>
@@ -117,7 +130,7 @@ namespace Adai.DbContext
 				while (skip < values.Length)
 				{
 					var _values = values.Skip(skip).Take(take);
-					builder.AppendFormat("{0} {1} {2} ('{3}')", key_word0, column, key_word1, string.Join("','", _values));
+					builder.Append($"{key_word0} {column} {key_word1} ('{string.Join("','", _values)}')");
 					skip += take;
 				}
 			}
@@ -126,7 +139,7 @@ namespace Adai.DbContext
 				while (skip < values.Length)
 				{
 					var _values = values.Skip(skip).Take(take);
-					builder.AppendFormat("{0} {1} {2} ({3})", key_word0, column, key_word1, string.Join(",", _values));
+					builder.Append($"{key_word0} {column} {key_word1} ({string.Join(",", _values)})");
 					skip += take;
 				}
 			}
@@ -136,7 +149,7 @@ namespace Adai.DbContext
 				sql = builder.Remove(0, key_word0.Length + 1).ToString();
 				if (skip > 0)
 				{
-					string.Format("({0})", sql);
+					sql = $"({sql})";
 				}
 			}
 			return sql;

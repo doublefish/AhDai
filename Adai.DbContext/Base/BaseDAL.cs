@@ -1,4 +1,5 @@
-﻿using Adai.DbContext.Ext;
+﻿using Adai.DbContext.Extend;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Adai.DbContext
 	/// </summary>
 	/// <typeparam name="Model"></typeparam>
 	public abstract class BaseDAL<Model>
-		where Model : BaseModel
+		where Model : BaseModel, new()
 	{
 		/// <summary>
 		/// 构造函数
@@ -31,6 +32,10 @@ namespace Adai.DbContext
 			Init(dbName, tableName);
 			Alias = "t";
 			var tableAttr = DbHelper.GetTableAttribute<Model>();
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
 			if (string.IsNullOrEmpty(tableName))
 			{
 				TableName = tableAttr.Name;
@@ -109,7 +114,7 @@ namespace Adai.DbContext
 		/// </summary>
 		protected virtual string InitSelectSql()
 		{
-			return string.Format("SELECT {0}.* FROM {1} {0} WHERE 1=1", Alias, TableName);
+			return $"SELECT {Alias}.* FROM {TableName} {Alias} WHERE 1=1";
 		}
 
 		/// <summary>
@@ -206,7 +211,7 @@ namespace Adai.DbContext
 		public virtual Model GetByColumn<T>(string column, T value)
 		{
 			var sql = SelectSql;
-			sql += string.Format(" AND {0}.{1}=@{1} LIMIT 0,1", Alias, column);
+			sql += $" AND {Alias}.{column}=@{column} LIMIT 0,1";
 			var para = DbContext.CreateParameter(column, value);
 			return GetList(sql, para).FirstOrDefault();
 		}
@@ -221,7 +226,7 @@ namespace Adai.DbContext
 		public virtual ICollection<Model> ListByColumn<T>(string column, T value)
 		{
 			var sql = SelectSql;
-			sql += string.Format(" AND {0}.{1}=@{1}", Alias, column);
+			sql += $" AND {Alias}.{column}=@{column}";
 			var para = DbContext.CreateParameter(column, value);
 			return GetList(sql, para);
 		}
@@ -236,8 +241,8 @@ namespace Adai.DbContext
 		public virtual ICollection<Model> ListByColumn<T>(string column, T[] values)
 		{
 			var sql = SelectSql;
-			var sql_in = DbHelper.CreateInSql(string.Format("{0}.{1}", Alias, column), values);
-			sql += string.Format(" AND {0}", sql_in);
+			var sql_in = DbHelper.CreateInSql($"{Alias}.{column}", values);
+			sql += $" AND {sql_in}";
 			return GetList(sql);
 		}
 
@@ -255,17 +260,21 @@ namespace Adai.DbContext
 			var sqls = new StringBuilder();
 			foreach (var tableName in tableNames)
 			{
-				sqls.Append(string.Format("SELECT * FROM {0} WHERE {1}=@{1};\r\n", tableName, column));
+				sqls.Append($"SELECT * FROM {tableName} WHERE {column}=@{column};\r\n");
 			}
 			var sql = sqls.ToString();
 			var para = DbContext.CreateParameter(column, value);
 			var ds = DbContext.GetDataSet(dbName, sql, para);
 			var tableAttr = DbHelper.GetTableAttribute<Model>();
-			var columns = tableAttr.ColumnAttributes;
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
+			var mappings = tableAttr.ColumnAttributes.GetMappings();
 			var list = new List<Model>();
 			for (var i = 0; i < ds.Tables.Count; i++)
 			{
-				var _list = ds.Tables[i].ToList<Model>(columns);
+				var _list = ds.Tables[i].ToList<Model>(mappings);
 				foreach (var data in _list)
 				{
 					data.DbName = dbName;
@@ -285,7 +294,11 @@ namespace Adai.DbContext
 		protected ICollection<Model> ListByColumn<T>(IDictionary<string, IDictionary<string, ICollection<T>>> dict, string column)
 		{
 			var tableAttr = DbHelper.GetTableAttribute<Model>();
-			var columns = tableAttr.ColumnAttributes;
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
+			var mappings = tableAttr.ColumnAttributes.GetMappings();
 			var list = new List<Model>();
 			foreach (var kv in dict)
 			{
@@ -296,13 +309,13 @@ namespace Adai.DbContext
 					var tableName = _kv.Key;
 					var values = _kv.Value;
 					var sql_in = DbHelper.CreateInSql(column, values.ToArray());
-					sqls.Append(string.Format("SELECT * FROM {0} WHERE {1};\r\n", tableName, sql_in));
+					sqls.Append($"SELECT * FROM {tableName} WHERE {sql_in};\r\n");
 				}
 				var sql = sqls.ToString();
 				var ds = DbContext.GetDataSet(dbName, sql);
 				for (var i = 0; i < ds.Tables.Count; i++)
 				{
-					var _list = ds.Tables[i].ToList<Model>(columns);
+					var _list = ds.Tables[i].ToList<Model>(mappings);
 					foreach (var data in _list)
 					{
 						data.DbName = dbName;

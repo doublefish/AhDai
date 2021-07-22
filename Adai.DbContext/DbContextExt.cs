@@ -1,4 +1,4 @@
-﻿using Adai.DbContext.Ext;
+﻿using Adai.DbContext.Extend;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -37,6 +37,42 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
+		/// 查询-分次
+		/// </summary>
+		/// <param name="dbContext"></param>
+		/// <param name="dbName"></param>
+		/// <param name="take"></param>
+		/// <param name="sql"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static DataSet GetDataSet(this IDbContext dbContext, string dbName, int take, string sql, params IDbDataParameter[] parameters)
+		{
+			dbContext.ConnectionString = GetConnectionString(dbName);
+			var ds = new DataSet();
+			using (var conn = dbContext.CreateConnection())
+			{
+				conn.Open();
+				var skip = 0;
+				while (true)
+				{
+					var _sql = $"{sql} LIMIT {skip},{take}";
+					var adapter = dbContext.CreateDataAdapter();
+					adapter.SelectCommand = conn.CreateCommand();
+					adapter.SelectCommand.CommandText = _sql;
+					adapter.SelectCommand.Parameters.AddRange(parameters);
+					adapter.Fill(ds);
+					var count = adapter.Fill(ds);
+					if (count < take)
+					{
+						break;
+					}
+					skip += take;
+				}
+			}
+			return ds;
+		}
+
+		/// <summary>
 		/// 查询
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
@@ -45,9 +81,9 @@ namespace Adai.DbContext
 		/// <param name="sql"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static T Single<T>(this IDbContext dbContext, string dbName, string sql, params IDbDataParameter[] parameters) where T : class
+		public static T Single<T>(this IDbContext dbContext, string dbName, string sql, params IDbDataParameter[] parameters) where T : class, new()
 		{
-			sql = string.Format("{0} LIMIT 0,1", sql);
+			sql = $"{sql} LIMIT 0,1";
 			return dbContext.GetList<T>(dbName, sql, parameters).FirstOrDefault();
 		}
 
@@ -59,12 +95,16 @@ namespace Adai.DbContext
 		/// <param name="sql"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static ICollection<T> GetList<T>(this IDbContext dbContext, string sql, params IDbDataParameter[] parameters) where T : class
+		public static ICollection<T> GetList<T>(this IDbContext dbContext, string sql, params IDbDataParameter[] parameters) where T : class, new()
 		{
 			var ds = dbContext.GetDataSet(sql, parameters);
 			var tableAttr = DbHelper.GetTableAttribute<T>();
-			var columns = tableAttr.ColumnAttributes;
-			return ds.Tables[0].ToList<T>(columns);
+			if (tableAttr == null)
+			{
+				return ds.Tables[0].ToList<T>();
+			}
+			var mappings = tableAttr.ColumnAttributes.GetMappings();
+			return ds.Tables[0].ToList<T>(mappings);
 		}
 
 		/// <summary>
@@ -76,7 +116,7 @@ namespace Adai.DbContext
 		/// <param name="sql"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static ICollection<T> GetList<T>(this IDbContext dbContext, string dbName, string sql, params IDbDataParameter[] parameters) where T : class
+		public static ICollection<T> GetList<T>(this IDbContext dbContext, string dbName, string sql, params IDbDataParameter[] parameters) where T : class, new()
 		{
 			dbContext.ConnectionString = GetConnectionString(dbName);
 			return dbContext.GetList<T>(sql, parameters);
@@ -152,6 +192,10 @@ namespace Adai.DbContext
 		public static string CreateQueryCondition<T>(this IDbContext dbContext, IFilter<T> filter, string alias, out IDbDataParameter[] parameters) where T : class
 		{
 			var tableAttr = DbHelper.GetTableAttribute(filter.Self.GetType());
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
 			var columns = tableAttr.ColumnAttributes;
 			var sql = new StringBuilder();
 			var paras = new List<IDbDataParameter>();
@@ -171,7 +215,7 @@ namespace Adai.DbContext
 				{
 					continue;
 				}
-				sql.AppendFormat(" AND {0}.{1}=@{1}", alias, column.Name);
+				sql.Append($" AND {alias}.{column.Name}=@{column.Name}");
 				paras.Add(dbContext.CreateParameter(column.Name, value));
 			}
 			if (!string.IsNullOrEmpty(filter.SortName))
@@ -180,18 +224,18 @@ namespace Adai.DbContext
 				if (sortName.IndexOf('.') == -1)
 				{
 					var sortColumn = columns.Find(filter.SortName);
-					sortName = string.Format("{0}.{1}", alias, sortColumn.Name);
+					sortName = $"{alias}.{sortColumn.Name}";
 				}
 				else
 				{
 					// 主表外的字段需要是实际的字段名，后面有空看怎么扩展成自动获取的吧
 				}
 				var sortType = filter.SortType == Config.SortType.DESC ? "DESC" : "ASC";
-				sql.AppendFormat(" ORDER BY {0} {1}", sortName, sortType);
+				sql.Append($" ORDER BY {sortName} {sortType}");
 			}
 			if (filter.Take > 0)
 			{
-				sql.AppendFormat(" LIMIT {0},{1}", filter.Skip, filter.Take);
+				sql.Append($" LIMIT {filter.Skip},{filter.Take}");
 			}
 			parameters = paras.ToArray();
 			return sql.ToString();
@@ -260,6 +304,10 @@ namespace Adai.DbContext
 		public static string CreateInsertSql<T>(this IDbContext dbContext, T data, string tableName, out IDbDataParameter[] parameters) where T : class
 		{
 			var tableAttr = DbHelper.GetTableAttribute<T>();
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
 			if (string.IsNullOrEmpty(tableName))
 			{
 				tableName = tableAttr.Name;
@@ -284,14 +332,14 @@ namespace Adai.DbContext
 				{
 					continue;
 				}
-				builder0.AppendFormat(",{0}", column.Name);
-				builder1.AppendFormat(",@{0}", column.Name);
+				builder0.Append($",{column.Name}");
+				builder1.Append($",@{column.Name}");
 				paras.Add(dbContext.CreateParameter(column.Name, value));
 			}
 			builder0 = builder0.Remove(0, 1);
 			builder1 = builder1.Remove(0, 1);
 			parameters = paras.ToArray();
-			var sql = string.Format("INSERT INTO {0} ({1}) VALUES ({2})", tableName, builder0.ToString(), builder1.ToString());
+			var sql = $"INSERT INTO {tableName} ({builder0.ToString()}) VALUES ({builder1.ToString()})";
 			return sql;
 		}
 
@@ -309,6 +357,10 @@ namespace Adai.DbContext
 		public static string CreateUpdateSql<T>(this IDbContext dbContext, T data, string tableName, string[] updateColumns, string[] whereColumns, out IDbDataParameter[] parameters) where T : class
 		{
 			var tableAttr = DbHelper.GetTableAttribute<T>();
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
 			if (string.IsNullOrEmpty(tableName))
 			{
 				tableName = tableAttr.Name;
@@ -337,7 +389,7 @@ namespace Adai.DbContext
 				{
 					continue;
 				}
-				builder.AppendFormat(",{0}=@{0}", column.Name);
+				builder.Append($",{column.Name}=@{column.Name}");
 				paras.Add(dbContext.CreateParameter(column.Name, value));
 			}
 			builder = builder.Remove(0, 1);
@@ -359,29 +411,16 @@ namespace Adai.DbContext
 				{
 					continue;
 				}
-				builder.AppendFormat(" AND {0}=@{0}", column.Name);
+				builder.Append($" AND {column.Name}=@{column.Name}");
 				paras.Add(dbContext.CreateParameter(column.Name, value));
 			}
 			parameters = paras.ToArray();
-			var sql = string.Format("UPDATE {0} SET {1}", tableName, builder.ToString());
+			var sql = $"UPDATE {tableName} SET {builder.ToString()}";
 			return sql;
 		}
 
 		#region 私有方法
 
 		#endregion
-
-		/// <summary>
-		/// AddRange
-		/// </summary>
-		/// <param name="collection"></param>
-		/// <param name="values"></param>
-		public static void AddRange(this IDataParameterCollection collection, Array values)
-		{
-			foreach (var value in values)
-			{
-				collection.Add(value);
-			}
-		}
 	}
 }

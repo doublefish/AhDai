@@ -77,7 +77,7 @@ namespace Adai.Standard
 				throw new ArgumentException("The source file directory does not exist.");
 			}
 			//cmd = " a -m0 " + rarName + " " + sourcePath + " *.* -r";
-			var cmd = string.Format("a -m{0} -ep1 \"{1}\" \"{2}\" -r", Level, rarName, sourcePath);//执行rar的命令参数
+			var cmd = $"a -m{Level} -ep1 \"{rarName}\" \"{sourcePath}\" -r";//执行rar的命令参数
 
 			var processStartInfo = new ProcessStartInfo
 			{
@@ -108,7 +108,7 @@ namespace Adai.Standard
 				Directory.CreateDirectory(path);//创建压缩到目标路径
 			}
 			//cmd = "x " + rarName + " " + path + " -y";
-			var cmd = string.Format("x \"{0}\" \"{1}\" -y", rarName, path);//执行rar的命令参数
+			var cmd = $"x \"{rarName}\" \"{path}\" -y";//执行rar的命令参数
 
 			var processStartInfo = new ProcessStartInfo
 			{

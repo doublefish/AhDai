@@ -40,6 +40,6 @@
 		/// <summary>
 		/// 扩展.文件全名
 		/// </summary>
-		public string FullName => string.Format("{0}.{1}", Guid, Extension);
+		public string FullName => $"{Guid}.{Extension}";
 	}
 }

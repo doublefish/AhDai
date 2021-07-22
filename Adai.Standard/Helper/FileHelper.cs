@@ -83,7 +83,7 @@ namespace Adai.Standard
 
 			//虚拟目录
 			var dir = DateTime.Now.ToString("yyyy-MM-dd");
-			var virtualDir = string.Format("{0}/{1}", UploadDirectory, dir);
+			var virtualDir = $"{UploadDirectory}/{dir}";
 			//物理路径
 			var physicalPath = Path.Combine(rootPath, UploadDirectory, dir);
 			if (!Directory.Exists(physicalPath))
@@ -110,12 +110,12 @@ namespace Adai.Standard
 				}
 				if (formFile.Length > Configuration.MaxSize)
 				{
-					throw new Exception(string.Format("超出文件大小限制：{0}", Configuration.MaxSizeNote));
+					throw new Exception($"超出文件大小限制：{Configuration.MaxSizeNote}");
 				}
 				//物理路径
 				data.PhysicalPath = Path.Combine(physicalPath, data.FullName);
 				//虚拟路径
-				data.VirtualPath = string.Format("{0}/{1}", virtualDir.Replace("\\", "/"), data.FullName);
+				data.VirtualPath = $"{virtualDir.Replace("\\", "/")}/{data.FullName}";
 				using (var stream = new FileStream(data.PhysicalPath, FileMode.Create))
 				{
 					await formFile.CopyToAsync(stream).ConfigureAwait(false);
@@ -158,7 +158,7 @@ namespace Adai.Standard
 			}
 
 			//生成RAR文件
-			var fileName = string.Format("{0}.rar", timestamp);
+			var fileName = $"{timestamp}.rar";
 			RARHelper.Compress(tempFolderPath, folderPath, fileName);
 			//清空临时文件夹
 			Directory.Delete(tempFolderPath, true);
@@ -179,8 +179,8 @@ namespace Adai.Standard
 			}
 			var bytes = File.ReadAllBytes(path);
 			var extension = Path.GetExtension(path);
-			var type = string.Format("image/{0}", extension.Substring(1));
-			var name = string.Format("{0}{1}", Guid.NewGuid().ToString(), extension);
+			var type = $"image/{extension.Substring(1)}";
+			var name = $"{Guid.NewGuid().ToString()}{extension}";
 			return Output(bytes, type, name);
 		}
 

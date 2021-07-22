@@ -154,17 +154,15 @@ namespace Adai.Security.Extend
 		/// <returns></returns>
 		public static string ToXmlString(this RSAParameters parameters)
 		{
-			return string.Format("<RSAKeyValue><Modulus>{0}</Modulus><Exponent>{1}</Exponent><P>{2}</P><Q>{3}</Q><DP>{4}</DP><DQ>{5}</DQ><InverseQ>{6}</InverseQ><D>{7}</D></RSAKeyValue>",
-				  parameters.Modulus != null ? Convert.ToBase64String(parameters.Modulus) : null,
-				  parameters.Exponent != null ? Convert.ToBase64String(parameters.Exponent) : null,
-				  parameters.P != null ? Convert.ToBase64String(parameters.P) : null,
-				  parameters.Q != null ? Convert.ToBase64String(parameters.Q) : null,
-				  parameters.DP != null ? Convert.ToBase64String(parameters.DP) : null,
-				  parameters.DQ != null ? Convert.ToBase64String(parameters.DQ) : null,
-				  parameters.InverseQ != null ? Convert.ToBase64String(parameters.InverseQ) : null,
-				  parameters.D != null ? Convert.ToBase64String(parameters.D) : null);
+			var Modulus = parameters.Modulus != null ? Convert.ToBase64String(parameters.Modulus) : null;
+			var Exponent = parameters.Exponent != null ? Convert.ToBase64String(parameters.Exponent) : null;
+			var P = parameters.P != null ? Convert.ToBase64String(parameters.P) : null;
+			var Q = parameters.Q != null ? Convert.ToBase64String(parameters.Q) : null;
+			var DP = parameters.DP != null ? Convert.ToBase64String(parameters.DP) : null;
+			var DQ = parameters.DQ != null ? Convert.ToBase64String(parameters.DQ) : null;
+			var InverseQ = parameters.InverseQ != null ? Convert.ToBase64String(parameters.InverseQ) : null;
+			var D = parameters.D != null ? Convert.ToBase64String(parameters.D) : null);
+			return $"<RSAKeyValue><Modulus>{Modulus}</Modulus><Exponent>{Exponent}</Exponent><P>{P}</P><Q>{Q}</Q><DP>{DP}</DP><DQ>{DQ}</DQ><InverseQ>{InverseQ}</InverseQ><D>{D}</D></RSAKeyValue>";
 		}
-
-
 	}
 }

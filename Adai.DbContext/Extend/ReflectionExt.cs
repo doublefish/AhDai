@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Adai.DbContext.Ext
+namespace Adai.DbContext.Extend
 {
 	/// <summary>
 	/// ReflectionExt

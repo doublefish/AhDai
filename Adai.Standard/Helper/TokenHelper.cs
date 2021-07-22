@@ -52,8 +52,8 @@ namespace Adai.Standard
 		/// <returns></returns>
 		public static Token<T> Set<T>(T data, string suffix = null) where T : TokenData
 		{
-			var key = string.Format("{0}-{1}", CacheKey, suffix);
-			var sign = string.Format("{0}-{1}", data.Username, data.Platform);
+			var key = $"{CacheKey}-{suffix}";
+			var sign = $"{data.Username}-{data.Platform}";
 			var token = new Token<T>()
 			{
 				Id = data.Id,
@@ -78,7 +78,7 @@ namespace Adai.Standard
 			{
 				return null;
 			}
-			var key = string.Format("{0}-{1}", CacheKey, suffix);
+			var key = $"{CacheKey}-{suffix}";
 			return RedisHelper.Db15.HashGet<Token<T>>(key, signature);
 		}
 
@@ -98,7 +98,7 @@ namespace Adai.Standard
 				return false;
 			}
 			var redis = RedisHelper.Db15;
-			var key = string.Format("{0}-{1}", CacheKey, suffix);
+			var key = $"{CacheKey}-{suffix}";
 			token = redis.HashGet<Token<T>>(key, signature);
 			if (token == null || token.Expiry < DateTime.UtcNow)
 			{
