@@ -32,10 +32,35 @@ namespace Adai.DbContext
 		IDbDataParameter CreateParameter();
 
 		/// <summary>
+		/// CreateParameter
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		IDbDataParameter CreateParameter(string name, object value);
+
+		/// <summary>
 		/// CreateCommand
 		/// </summary>
 		/// <returns></returns>
 		IDbCommand CreateCommand();
+
+		/// <summary>
+		/// CreateCommand
+		/// </summary>
+		/// <param name="sql"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		IDbCommand CreateCommand(string sql, params IDbDataParameter[] parameters);
+
+		/// <summary>
+		/// CreateCommand
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <param name="sql"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		IDbCommand CreateCommand(IDbConnection connection, string sql, params IDbDataParameter[] parameters);
 
 		/// <summary>
 		/// 查询

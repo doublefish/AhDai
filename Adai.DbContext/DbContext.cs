@@ -57,12 +57,6 @@ namespace Adai.DbContext
 		public abstract IDbDataParameter CreateParameter();
 
 		/// <summary>
-		/// CreateCommand
-		/// </summary>
-		/// <returns></returns>
-		public abstract IDbCommand CreateCommand();
-
-		/// <summary>
 		/// CreateParameter
 		/// </summary>
 		/// <param name="name"></param>
@@ -75,6 +69,12 @@ namespace Adai.DbContext
 			para.Value = value;
 			return para;
 		}
+
+		/// <summary>
+		/// CreateCommand
+		/// </summary>
+		/// <returns></returns>
+		public abstract IDbCommand CreateCommand();
 
 		/// <summary>
 		/// CreateCommand
