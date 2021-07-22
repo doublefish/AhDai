@@ -420,6 +420,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Adai.DbContext.DbContext.CreateConnection(System.String)">
+            <summary>
+            CreateConnection
+            </summary>
+            <param name="connectionString"></param>
+            <returns></returns>
+        </member>
         <member name="M:Adai.DbContext.DbContext.CreateDataAdapter">
             <summary>
             CreateDataAdapter

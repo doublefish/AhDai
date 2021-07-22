@@ -45,6 +45,18 @@ namespace Adai.DbContext
 		public abstract IDbConnection CreateConnection();
 
 		/// <summary>
+		/// CreateConnection
+		/// </summary>
+		/// <param name="connectionString"></param>
+		/// <returns></returns>
+		public virtual IDbConnection CreateConnection(string connectionString)
+		{
+			var conn = CreateConnection();
+			conn.ConnectionString = connectionString;
+			return conn;
+		}
+
+		/// <summary>
 		/// CreateDataAdapter
 		/// </summary>
 		/// <returns></returns>
