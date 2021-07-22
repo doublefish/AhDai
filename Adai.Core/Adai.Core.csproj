@@ -8,6 +8,10 @@
     <Description>常用方法封装</Description>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\DoubleFish\Adai\Adai.Core\Adai.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Adai.DbContext.MySql</name>
+    </assembly>
+    <members>
+        <member name="T:Adai.DbContext.MySql.BaseDAL`1">
+            <summary>
+            BaseDAL
+            </summary>
+            <typeparam name="Model"></typeparam>
+        </member>
+        <member name="M:Adai.DbContext.MySql.BaseDAL`1.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.MySql.BaseDAL`1.InitDbContext">
+            <summary>
+            InitDbContext
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.DbContext.MySql.MySqlDbContext">
+            <summary>
+            MySqlDbContext
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.MySql.MySqlDbContext.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.MySql.MySqlDbContext.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="connectionString"></param>
+        </member>
+        <member name="M:Adai.DbContext.MySql.MySqlDbContext.CreateConnection">
+            <summary>
+            CreateConnection
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.MySql.MySqlDbContext.CreateCommand">
+            <summary>
+            CreateCommand
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.MySql.MySqlDbContext.CreateDataAdapter">
+            <summary>
+            CreateDataAdapter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.MySql.MySqlDbContext.CreateParameter">
+            <summary>
+            CreateParameter
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

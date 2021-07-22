@@ -13,6 +13,7 @@ namespace Adai.Standard.Extend
 		/// Get
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
+		/// <param name="db"></param>
 		/// <param name="key"></param>
 		/// <param name="flags"></param>
 		/// <returns></returns>
@@ -47,6 +48,7 @@ namespace Adai.Standard.Extend
 		/// HashGet
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
+		/// <param name="db"></param>
 		/// <param name="key"></param>
 		/// <param name="hashField"></param>
 		/// <param name="flags"></param>
@@ -65,6 +67,7 @@ namespace Adai.Standard.Extend
 		/// HashGet
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
+		/// <param name="db"></param>
 		/// <param name="key"></param>
 		/// <param name="hashFields"></param>
 		/// <param name="flags"></param>
@@ -92,8 +95,8 @@ namespace Adai.Standard.Extend
 		/// HashValues
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
+		/// <param name="db"></param>
 		/// <param name="key"></param>
-		/// <param name="hashField"></param>
 		/// <param name="flags"></param>
 		/// <returns></returns>
 		public static ICollection<T> HashValues<T>(this IDatabase db, RedisKey key, CommandFlags flags = CommandFlags.None) where T : class
@@ -131,9 +134,11 @@ namespace Adai.Standard.Extend
 		/// <summary>
 		/// HashSet
 		/// </summary>
+		/// <typeparam name="T"></typeparam>
 		/// <param name="db"></param>
 		/// <param name="key"></param>
 		/// <param name="hashFields"></param>
+		/// <param name="values"></param>
 		/// <param name="flags"></param>
 		public static void HashSet<T>(this IDatabase db, RedisKey key, RedisValue[] hashFields, T[] values, CommandFlags flags = CommandFlags.None) where T : class
 		{

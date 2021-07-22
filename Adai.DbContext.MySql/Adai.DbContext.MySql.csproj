@@ -8,6 +8,10 @@
     <Description>常用方法封装</Description>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\DoubleFish\Adai\Adai.DbContext.MySql\Adai.DbContext.MySql.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.25" />
   </ItemGroup>

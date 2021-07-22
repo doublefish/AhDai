@@ -12,4 +12,8 @@
     <DocumentationFile>D:\DoubleFish\Adai\Adai.DbContext\Adai.DbContext.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\DoubleFish\Adai\Adai.DbContext\Adai.DbContext.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

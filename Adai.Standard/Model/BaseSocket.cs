@@ -79,6 +79,7 @@ namespace Adai.Standard.Model
 		/// <summary>
 		/// 连接状态改变委托
 		/// </summary>
+		/// <param name="remote"></param>
 		/// <param name="state"></param>
 		/// <param name="message"></param>
 		public delegate void StateChangeHandler(Socket remote, int state, string message);
@@ -167,7 +168,7 @@ namespace Adai.Standard.Model
 		/// 发送消息（服务端）
 		/// </summary>
 		/// <param name="message"></param>
-		/// <param name="remotes"></param>
+		/// <param name="remote"></param>
 		/// <returns></returns>
 		public int Send(string message, Socket remote)
 		{

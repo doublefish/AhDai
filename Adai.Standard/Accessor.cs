@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 namespace Adai.Standard
 {
 	/// <summary>
-	/// Accessor<S>
+	/// Accessor
 	/// </summary>
 	/// <typeparam name="S"></typeparam>
 	public class Accessor<S>
@@ -56,7 +56,7 @@ namespace Adai.Standard
 	}
 
 	/// <summary>
-	/// Accessor<S, T>
+	/// Accessor
 	/// </summary>
 	/// <typeparam name="S"></typeparam>
 	/// <typeparam name="T"></typeparam>

@@ -7,7 +7,7 @@ namespace Adai.DbContext.MySql
 	/// </summary>
 	/// <typeparam name="Model"></typeparam>
 	public class BaseDAL<Model> : Adai.DbContext.BaseDAL<Model>
-		where Model : BaseModel
+		where Model : BaseModel, new()
 	{
 		/// <summary>
 		/// 构造函数

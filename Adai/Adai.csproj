@@ -15,6 +15,10 @@
     <DocumentationFile>D:\DoubleFish\Adai\Adai\Adai.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\DoubleFish\Adai\Adai\Adai.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Helper\AESHelper.cs" />
     <Compile Remove="Helper\DESHelper.cs" />

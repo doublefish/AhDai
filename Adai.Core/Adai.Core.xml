@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Adai.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Adai.Core.VerifyCodeHelper">
+            <summary>
+            VerifyCodeHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Core.VerifyCodeHelper.GenerateImageCode(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int32)">
+            <summary>
+            生成图片验证码
+            </summary>
+            <param name="httpResponse"></param>
+            <param name="guid"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.VerifyCodeHelper.VerifyImageCode(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            验证图片验证码
+            </summary>
+            <param name="httpRequest"></param>
+        </member>
+    </members>
+</doc>

@@ -196,6 +196,7 @@ namespace Adai.Extend
 		/// <summary>
 		/// 读取子级属性
 		/// </summary>
+		/// <param name="array"></param>
 		/// <param name="value"></param>
 		/// <returns></returns>
 		public static string[] ListByStartsWith(this string[] array, string value)

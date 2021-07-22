@@ -1,5 +1,8 @@
 ﻿namespace Adai.Standard
 {
+	/// <summary>
+	/// SocketState
+	/// </summary>
 	public class SocketState : Adai.Config.Model.Config
 	{
 		/// <summary>

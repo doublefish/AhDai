@@ -98,7 +98,7 @@ namespace Adai.Standard
 		/// <summary>
 		/// 利用WinRAR进行解压缩
 		/// </summary>
-		/// <param name=”path”>文件解压路径（绝对）</param>
+		/// <param name="path">文件解压路径（绝对）</param>
 		/// <param name="rarPath">要解压缩的.rar文件的存放目录（绝对路径）</param>
 		/// <param name="rarName">要解压缩的.rar文件名（包括后缀）</param>
 		public static void UnCompress(string path, string rarPath, string rarName)

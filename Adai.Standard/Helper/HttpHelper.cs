@@ -222,9 +222,8 @@ namespace Adai.Standard
 		/// <summary>
 		/// UrlEncode
 		/// </summary>
-		/// <typeparam name="T">IDictionary<string, string></typeparam>
-		/// <param name="parameters">参数</param>
-		/// <param name="upperCode">编码大写</param>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="parameters"></param>
 		/// <returns></returns>
 		public static T UrlEncode<T>(T parameters) where T : IDictionary<string, string>
 		{
@@ -234,9 +233,9 @@ namespace Adai.Standard
 		/// <summary>
 		/// UrlEncode
 		/// </summary>
-		/// <typeparam name="T">IDictionary<string, string></typeparam>
-		/// <param name="parameters">参数</param>
-		/// <param name="encoding">编码</param>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="parameters"></param>
+		/// <param name="encoding"></param>
 		/// <returns></returns>
 		public static T UrlEncode<T>(T parameters, Encoding encoding) where T : IDictionary<string, string>
 		{
@@ -251,9 +250,8 @@ namespace Adai.Standard
 		/// <summary>
 		/// UrlEncode
 		/// </summary>
-		/// <typeparam name="T">IDictionary<string, string></typeparam>
-		/// <param name="parameters">参数</param>
-		/// <param name="encoding">编码</param>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="parameters"></param>
 		/// <returns></returns>
 		public static T UrlEncodeUpper<T>(T parameters) where T : IDictionary<string, string>
 		{
@@ -263,9 +261,9 @@ namespace Adai.Standard
 		/// <summary>
 		/// UrlEncode
 		/// </summary>
-		/// <typeparam name="T">IDictionary<string, string></typeparam>
-		/// <param name="parameters">参数</param>
-		/// <param name="encoding">编码</param>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="parameters"></param>
+		/// <param name="encoding"></param>
 		/// <returns></returns>
 		public static T UrlEncodeUpper<T>(T parameters, Encoding encoding) where T : IDictionary<string, string>
 		{
@@ -318,8 +316,8 @@ namespace Adai.Standard
 		/// <summary>
 		/// UrlDecode
 		/// </summary>
-		/// <typeparam name="T">IDictionary<string, string></typeparam>
-		/// <param name="parameters">参数</param>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="parameters"></param>
 		/// <returns></returns>
 		public static T UrlDecode<T>(T parameters) where T : IDictionary<string, string>
 		{
@@ -329,9 +327,9 @@ namespace Adai.Standard
 		/// <summary>
 		/// UrlDecode
 		/// </summary>
-		/// <typeparam name="T">IDictionary<string, string></typeparam>
-		/// <param name="parameters">参数</param>
-		/// <param name="encoding">编码</param>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="parameters"></param>
+		/// <param name="encoding"></param>
 		/// <returns></returns>
 		public static T UrlDecode<T>(T parameters, Encoding encoding) where T : IDictionary<string, string>
 		{

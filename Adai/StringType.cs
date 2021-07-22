@@ -5,7 +5,13 @@
 	/// </summary>
 	public enum StringType
 	{
+		/// <summary>
+		/// Base64
+		/// </summary>
 		Base64,
+		/// <summary>
+		/// Hex
+		/// </summary>
 		Hex
 	}
 }

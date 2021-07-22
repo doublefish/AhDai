@@ -38,7 +38,6 @@ namespace Adai.Standard.Extend
 		/// <summary>
 		/// ASCII排序
 		/// </summary>
-		/// <typeparam name="TKey"></typeparam>
 		/// <typeparam name="TValue"></typeparam>
 		/// <param name="dic"></param>
 		/// <returns></returns>
@@ -190,7 +189,6 @@ namespace Adai.Standard.Extend
 		/// </summary>
 		/// <param name="parameters"></param>
 		/// <param name="ignores"></param>
-		/// <param name="ignoreNullOrEmpty"></param>
 		/// <returns></returns>
 		public static string ToXmlString(this IDictionary<string, string> parameters, params string[] ignores)
 		{
