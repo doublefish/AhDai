@@ -28,8 +28,8 @@ namespace Adai.DbContext
 		/// <param name="tableName">数据表名</param>
 		public BaseDAL(string dbName, string tableName)
 		{
-			DbContext = InitDbContext();
-			Init(dbName, tableName);
+			DbName = dbName;
+			TableName = tableName;
 			Alias = "t";
 			var tableAttr = DbHelper.GetTableAttribute<Model>();
 			if (tableAttr == null)
@@ -45,6 +45,7 @@ namespace Adai.DbContext
 			{
 				PrimaryKey = primaryAttr.Name;
 			}
+			DbContext = InitDbContext();
 		}
 		string selectSql;
 
@@ -91,23 +92,6 @@ namespace Adai.DbContext
 		/// </summary>
 		/// <returns></returns>
 		protected abstract IDbContext InitDbContext();
-
-		/// <summary>
-		/// 初始化
-		/// </summary>
-		/// <param name="dbName"></param>
-		/// <param name="tableName"></param>
-		public virtual void Init(string dbName, string tableName)
-		{
-			if (!string.IsNullOrEmpty(dbName))
-			{
-				DbName = dbName;
-			}
-			if (!string.IsNullOrEmpty(tableName))
-			{
-				TableName = tableName;
-			}
-		}
 
 		/// <summary>
 		/// 初始化查询语句
