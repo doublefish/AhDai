@@ -31,6 +31,17 @@ namespace Adai.Standard
 
 		static readonly ILog LogInfo = LogManager.GetLogger(Repository.Name, "LogInfo");
 		static readonly ILog LogError = LogManager.GetLogger(Repository.Name, "LogError");
+		static readonly ILog LogDebug = LogManager.GetLogger(Repository.Name, "LogDebug");
+
+		/// <summary>
+		/// InfoFormat
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="exception"></param>
+		public static void Info(string message, Exception exception = null)
+		{
+			LogInfo.Info(message, exception);
+		}
 
 		/// <summary>
 		/// InfoFormat
@@ -40,6 +51,16 @@ namespace Adai.Standard
 		public static void InfoFormat(string format, params object[] args)
 		{
 			LogInfo.InfoFormat(format, args);
+		}
+
+		/// <summary>
+		/// Error
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="exception"></param>
+		public static void Error(string message, Exception exception = null)
+		{
+			LogError.Error(message, exception);
 		}
 
 		/// <summary>
@@ -53,23 +74,23 @@ namespace Adai.Standard
 		}
 
 		/// <summary>
-		/// InfoFormat
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
-		public static void Info(string message, Exception exception = null)
-		{
-			LogInfo.Info(message, exception);
-		}
-
-		/// <summary>
 		/// Error
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
-		public static void Error(string message, Exception exception = null)
+		public static void Debug(string message, Exception exception = null)
 		{
-			LogError.Error(message, exception);
+			LogError.Debug(message, exception);
+		}
+
+		/// <summary>
+		/// ErrorFormat
+		/// </summary>
+		/// <param name="format"></param>
+		/// <param name="args"></param>
+		public static void DebugFormat(string format, params object[] args)
+		{
+			LogError.DebugFormat(format, args);
 		}
 	}
 }
