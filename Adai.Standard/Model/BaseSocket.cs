@@ -82,7 +82,7 @@ namespace Adai.Standard.Model
 		/// <param name="remote"></param>
 		/// <param name="state"></param>
 		/// <param name="message"></param>
-		public delegate void StateChangeHandler(Socket remote, int state, string message);
+		public delegate void StateChangeHandler(Socket remote, Config.SocketState state, string message);
 
 		/// <summary>
 		/// 接收消息事件
@@ -97,21 +97,19 @@ namespace Adai.Standard.Model
 		/// 开启连接
 		/// </summary>
 		/// <param name="remote"></param>
-		/// <param name="state"></param>
-		protected void Open(Socket remote, int state = SocketState.Open)
+		protected void Open(Socket remote)
 		{
-			ChangeState(remote, state, "开启连接");
+			ChangeState(remote, Config.SocketState.Open, "开启连接");
 		}
 
 		/// <summary>
 		/// 关闭连接
 		/// </summary>
 		/// <param name="remote"></param>
-		/// <param name="state"></param>
 		/// <param name="reason"></param>
-		protected void Close(Socket remote, int state = SocketState.Closed, string reason = "close")
+		protected void Close(Socket remote, string reason = "close")
 		{
-			ChangeState(remote, state, reason);
+			ChangeState(remote, Config.SocketState.Closed, reason);
 			remote.Shutdown(SocketShutdown.Both);
 			if (remote.Connected)
 			{
@@ -128,12 +126,12 @@ namespace Adai.Standard.Model
 		protected void Receive(Socket remote, byte[] bytes, int size)
 		{
 			var message = Encoding.GetString(bytes, 0, size);
-			InfoFormat("接收【{0}】的消息=>{1}", remote.RemoteEndPoint.ToString(), message);
+			LogHelper.Info($"接收来自【{remote.RemoteEndPoint}】的消息=>{message}");
 			MessageEvent?.Invoke(remote, message);
 		}
 
 		/// <summary>
-		/// 发送消息（客户端）
+		/// 客户端发送消息给服务端
 		/// </summary>
 		/// <param name="message"></param>
 		/// <returns></returns>
@@ -143,12 +141,12 @@ namespace Adai.Standard.Model
 			{
 				return 0;
 			}
-			InfoFormat("【{0}】发送消息给【{1}】=>{2}", LocalEndPoint, RemoteEndPoint, message);
+			LogHelper.Info($"【{LocalEndPoint}】发送消息给【{RemoteEndPoint}】=>{message}");
 			return Send(Encoding.GetBytes(message));
 		}
 
 		/// <summary>
-		/// 发送消息（服务端）
+		/// 服务端发送消息给客户端
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="remotes"></param>
@@ -158,14 +156,14 @@ namespace Adai.Standard.Model
 			var i = 0;
 			foreach (var remote in remotes)
 			{
-				InfoFormat("【{0}】发送消息给【{1}】=>{2}", remote.LocalEndPoint, remote.RemoteEndPoint, message);
+				LogHelper.Info($"【{remote.LocalEndPoint}】发送消息给【{remote.RemoteEndPoint}】=>{message}");
 				i += remote.Send(Encoding.GetBytes(message));
 			}
 			return i;
 		}
 
 		/// <summary>
-		/// 发送消息（服务端）
+		/// 客户端发送消息给服务端
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="remote"></param>
@@ -176,7 +174,7 @@ namespace Adai.Standard.Model
 			{
 				return 0;
 			}
-			InfoFormat("【{0}】发送消息给【{1}】=>{2}", remote.LocalEndPoint, remote.RemoteEndPoint, message);
+			LogHelper.Info($"【{remote.LocalEndPoint}】发送消息给【{remote.RemoteEndPoint}】=>{message}");
 			return remote.Send(Encoding.GetBytes(message));
 		}
 
@@ -186,11 +184,10 @@ namespace Adai.Standard.Model
 		/// <param name="remote"></param>
 		/// <param name="state"></param>
 		/// <param name="message"></param>
-		protected void ChangeState(Socket remote, int state, string message)
+		protected void ChangeState(Socket remote, Config.SocketState state, string message)
 		{
 			Send(message, remote);
-			var note = ConfigIntHelper<SocketState>.GetValue(state);
-			InfoFormat("【{0}】的连接状态变为=>[{1}]{2}，{3}", remote.RemoteEndPoint.ToString(), state, note, message);
+			LogHelper.Info($"【{remote.RemoteEndPoint}】的连接状态变为=>[{state}]{state.GetNote()},{message}");
 			StateChangeEvent?.Invoke(remote, state, message);
 		}
 
@@ -217,9 +214,9 @@ namespace Adai.Standard.Model
 					}
 					catch (Exception ex)
 					{
-						InfoFormat("接收远程【{0}】消息报错=>{1}", client.RemoteEndPoint.ToString(), ex.Message);
-						Error("接收消息", ex);
-						Close(client, SocketState.Closed, ex.Message);
+						LogHelper.Info($"接收来自【{client.RemoteEndPoint}】的消息发生异常=>{ex.Message}");
+						LogHelper.Error($"接收消息发生异常=>{ex}");
+						Close(client, ex.Message);
 						break;
 					}
 				}
@@ -228,46 +225,6 @@ namespace Adai.Standard.Model
 				Name = Name
 			};
 			thread.Start(client ?? (this));
-		}
-
-		/// <summary>
-		/// 记录日志
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="args"></param>
-		protected void InfoFormat(string format, params object[] args)
-		{
-			Log4netHelper.InfoFormat(format, args);
-		}
-
-		/// <summary>
-		/// 记录日志
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="args"></param>
-		protected void ErrorFormat(string format, params object[] args)
-		{
-			Log4netHelper.ErrorFormat(format, args);
-		}
-
-		/// <summary>
-		/// InfoFormat
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
-		protected static void Info(string message, Exception exception = null)
-		{
-			Log4netHelper.Info(message, exception);
-		}
-
-		/// <summary>
-		/// 记录日志
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
-		protected void Error(string message, Exception exception = null)
-		{
-			Log4netHelper.Error(message, exception);
 		}
 	}
 }
