@@ -100,6 +100,12 @@
             Dal
             </summary>
         </member>
+        <member name="M:Adai.DbContext.BaseBLL`2.InitDal">
+            <summary>
+            初始化Dal
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Adai.DbContext.BaseBLL`2.GetById(System.String)">
             <summary>
             查询
@@ -191,13 +197,6 @@
             InitDbContext
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:Adai.DbContext.BaseDAL`1.Init(System.String,System.String)">
-            <summary>
-            初始化
-            </summary>
-            <param name="dbName"></param>
-            <param name="tableName"></param>
         </member>
         <member name="M:Adai.DbContext.BaseDAL`1.InitSelectSql">
             <summary>
@@ -513,12 +512,6 @@
             </summary>
             <param name="dict">connStr-cmds</param>
             <returns></returns>
-        </member>
-        <member name="M:Adai.DbContext.DbContext.BeforeExecute(System.Collections.Generic.IEnumerable{System.Data.IDbCommand})">
-            <summary>
-            执行之前
-            </summary>
-            <param name="commands"></param>
         </member>
         <member name="M:Adai.DbContext.DbContext.BeforeExecute(System.Data.IDbCommand)">
             <summary>

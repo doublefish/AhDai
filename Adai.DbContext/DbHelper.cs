@@ -62,17 +62,7 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 已初始化
 		/// </summary>
-		public static bool Initialized = false;
-
-		/// <summary>
-		/// 初始化
-		/// </summary>
-		/// <param name="connectionStrings"></param>
-		public static void Init(IDictionary<string, string> connectionStrings)
-		{
-			ConnectionStrings = connectionStrings;
-			Initialized = connectionStrings != null && connectionStrings.Count > 0;
-		}
+		public static bool Initialized { get; internal set; }
 
 		/// <summary>
 		/// 获取连接字符串
@@ -83,7 +73,7 @@ namespace Adai.DbContext
 		{
 			if (!Initialized)
 			{
-				throw new Exception("DbHelper尚未初始化，请先执行Init");
+				throw new Exception("程序尚未初始化，请先执行Startup.Init");
 			}
 			if (ConnectionStrings.TryGetValue(dbName, out var connStr))
 			{
