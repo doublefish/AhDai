@@ -142,6 +142,7 @@ namespace Adai.DbContext
 				conn.Open();
 				var adapter = CreateDataAdapter();
 				adapter.SelectCommand = CreateCommand(conn, sql, parameters);
+				BeforeExecute(adapter.SelectCommand);
 				adapter.Fill(ds);
 			}
 			return ds;
@@ -196,9 +197,9 @@ namespace Adai.DbContext
 				{
 					cmd.Connection = conn;
 					cmd.Transaction = tran;
+					BeforeExecute(cmd);
 					result += cmd.ExecuteNonQuery();
 				}
-				BeforeExecute(commands);
 				tran.Commit();
 			}
 			catch (Exception ex)
@@ -244,9 +245,9 @@ namespace Adai.DbContext
 					{
 						cmd.Connection = conn;
 						cmd.Transaction = tran;
+						BeforeExecute(cmd);
 						result += cmd.ExecuteNonQuery();
 					}
-					BeforeExecute(cmds);
 					tran.Commit();
 				}
 			}
@@ -269,18 +270,6 @@ namespace Adai.DbContext
 				}
 			}
 			return result;
-		}
-
-		/// <summary>
-		/// 执行之前
-		/// </summary>
-		/// <param name="commands"></param>
-		protected virtual void BeforeExecute(IEnumerable<IDbCommand> commands)
-		{
-			foreach (var cmd in commands)
-			{
-				BeforeExecute(cmd);
-			}
 		}
 
 		/// <summary>
