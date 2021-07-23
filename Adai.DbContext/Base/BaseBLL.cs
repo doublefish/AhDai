@@ -7,7 +7,7 @@ namespace Adai.DbContext
 	/// </summary>
 	/// <typeparam name="Model"></typeparam>
 	/// <typeparam name="DAL"></typeparam>
-	public class BaseBLL<Model, DAL>
+	public abstract class BaseBLL<Model, DAL>
 		where Model : BaseModel, new()
 		where DAL : BaseDAL<Model>
 	{
@@ -16,12 +16,19 @@ namespace Adai.DbContext
 		/// </summary>
 		public BaseBLL()
 		{
+			Dal = InitDal();
 		}
 
 		/// <summary>
 		/// Dal
 		/// </summary>
 		protected DAL Dal { get; set; }
+
+		/// <summary>
+		/// 初始化Dal
+		/// </summary>
+		/// <returns></returns>
+		protected abstract DAL InitDal();
 
 		/// <summary>
 		/// 查询

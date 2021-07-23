@@ -44,16 +44,6 @@ namespace Adai.Standard
 		}
 
 		/// <summary>
-		/// InfoFormat
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="args"></param>
-		public static void InfoFormat(string format, params object[] args)
-		{
-			LogInfo.InfoFormat(format, args);
-		}
-
-		/// <summary>
 		/// Error
 		/// </summary>
 		/// <param name="message"></param>
@@ -64,16 +54,6 @@ namespace Adai.Standard
 		}
 
 		/// <summary>
-		/// ErrorFormat
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="args"></param>
-		public static void ErrorFormat(string format, params object[] args)
-		{
-			LogError.ErrorFormat(format, args);
-		}
-
-		/// <summary>
 		/// Error
 		/// </summary>
 		/// <param name="message"></param>
@@ -81,16 +61,6 @@ namespace Adai.Standard
 		public static void Debug(string message, Exception exception = null)
 		{
 			LogError.Debug(message, exception);
-		}
-
-		/// <summary>
-		/// ErrorFormat
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="args"></param>
-		public static void DebugFormat(string format, params object[] args)
-		{
-			LogError.DebugFormat(format, args);
 		}
 	}
 }
