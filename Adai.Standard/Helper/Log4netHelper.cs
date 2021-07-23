@@ -29,8 +29,8 @@ namespace Adai.Standard
 			}
 		}
 
-		static readonly ILog logInfo = LogManager.GetLogger(Repository.Name, "LogInfo");
-		static readonly ILog logError = LogManager.GetLogger(Repository.Name, "LogError");
+		static readonly ILog LogInfo = LogManager.GetLogger(Repository.Name, "LogInfo");
+		static readonly ILog LogError = LogManager.GetLogger(Repository.Name, "LogError");
 
 		/// <summary>
 		/// InfoFormat
@@ -39,7 +39,7 @@ namespace Adai.Standard
 		/// <param name="args"></param>
 		public static void InfoFormat(string format, params object[] args)
 		{
-			logInfo.InfoFormat(format, args);
+			LogInfo.InfoFormat(format, args);
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace Adai.Standard
 		/// <param name="args"></param>
 		public static void ErrorFormat(string format, params object[] args)
 		{
-			logError.ErrorFormat(format, args);
+			LogError.ErrorFormat(format, args);
 		}
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace Adai.Standard
 		/// <param name="exception"></param>
 		public static void Info(string message, Exception exception = null)
 		{
-			logInfo.Info(message, exception);
+			LogInfo.Info(message, exception);
 		}
 
 		/// <summary>
@@ -69,7 +69,7 @@ namespace Adai.Standard
 		/// <param name="exception"></param>
 		public static void Error(string message, Exception exception = null)
 		{
-			logError.Error(message, exception);
+			LogError.Error(message, exception);
 		}
 	}
 }
