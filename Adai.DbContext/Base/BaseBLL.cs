@@ -16,13 +16,24 @@ namespace Adai.DbContext
 		/// </summary>
 		public BaseBLL()
 		{
-			Dal = InitDal();
 		}
+
+		DAL dal;
 
 		/// <summary>
 		/// Dal
 		/// </summary>
-		protected DAL Dal { get; set; }
+		protected DAL Dal
+		{
+			get
+			{
+				if (dal == null)
+				{
+					dal = InitDal();
+				}
+				return dal;
+			}
+		}
 
 		/// <summary>
 		/// 初始化Dal
