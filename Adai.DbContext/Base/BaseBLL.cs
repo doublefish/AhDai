@@ -33,6 +33,10 @@ namespace Adai.DbContext
 				}
 				return dal;
 			}
+			set
+			{
+				dal = value;
+			}
 		}
 
 		/// <summary>
