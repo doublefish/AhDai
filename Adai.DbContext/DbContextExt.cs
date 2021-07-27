@@ -19,6 +19,10 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		static string GetConnectionString(string dbName)
 		{
+			if (string.IsNullOrEmpty(dbName))
+			{
+				throw new ArgumentNullException("参数dbName不能为空");
+			}
 			return DbHelper.GetConnectionString(dbName);
 		}
 

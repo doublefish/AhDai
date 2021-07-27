@@ -75,11 +75,15 @@ namespace Adai.DbContext
 			{
 				throw new Exception("程序尚未初始化，请先执行Startup.Init");
 			}
-			if (ConnectionStrings.TryGetValue(dbName, out var connStr))
+			if (string.IsNullOrEmpty(dbName))
 			{
-				return connStr;
+				throw new ArgumentNullException("参数dbName不能为空");
 			}
-			throw new Exception($"获取数据库{dbName}的连接字符串失败");
+			if (!ConnectionStrings.TryGetValue(dbName, out var connStr))
+			{
+				throw new ArgumentNullException($"未配置{dbName}的连接字符串");
+			}
+			return connStr;
 		}
 
 		/// <summary>
