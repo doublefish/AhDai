@@ -34,7 +34,7 @@ namespace Adai.Standard
 		static readonly ILog LogDebug = LogManager.GetLogger(Repository.Name, "LogDebug");
 
 		/// <summary>
-		/// InfoFormat
+		/// Info
 		/// </summary>
 		/// <param name="eventId">事件Id</param>
 		/// <param name="message"></param>
