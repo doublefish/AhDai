@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 
 namespace Adai.DbContext.MySql
@@ -6,22 +7,30 @@ namespace Adai.DbContext.MySql
 	/// <summary>
 	/// MySqlDbContext
 	/// </summary>
-	public sealed class MySqlDbContext : DbContext
+	public sealed class MySqlDbContext : DbContext, IDbContext
 	{
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		public MySqlDbContext() : this(null)
+		/// <param name="eventId">事件Id</param>
+		public MySqlDbContext(string eventId) : this(eventId, null)
 		{
 		}
 
 		/// <summary>
 		/// 构造函数
 		/// </summary>
+		/// <param name="eventId">事件Id</param>
 		/// <param name="connectionString"></param>
-		public MySqlDbContext(string connectionString) : base(DbType.MySQL, connectionString)
+		public MySqlDbContext(string eventId, string connectionString) : base(DbType.MySQL, connectionString)
 		{
+			EventId = eventId;
 		}
+
+		/// <summary>
+		/// 事件Id
+		/// </summary>
+		public string EventId { get; set; }
 
 		/// <summary>
 		/// CreateConnection
@@ -58,5 +67,19 @@ namespace Adai.DbContext.MySql
 		{
 			return new MySqlParameter();
 		}
+
+		/// <summary>
+		/// 执行之前
+		/// </summary>
+		/// <param name="command"></param>
+		protected override void BeforeExecute(IDbCommand command)
+		{
+			BeforeExecuteAction?.Invoke(EventId, command);
+		}
+
+		/// <summary>
+		/// 执行之前
+		/// </summary>
+		internal static Action<string, IDbCommand> BeforeExecuteAction;
 	}
 }

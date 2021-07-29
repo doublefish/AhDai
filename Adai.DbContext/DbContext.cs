@@ -291,14 +291,6 @@ namespace Adai.DbContext
 		/// 执行之前
 		/// </summary>
 		/// <param name="command"></param>
-		protected virtual void BeforeExecute(IDbCommand command)
-		{
-			// 记录日志
-			//command.CommandText = command.CommandText.Replace("@", ParaPrefix);
-			foreach (IDbDataParameter para in command.Parameters)
-			{
-				//para.ParameterName = para.ParameterName.Replace("@", ParaPrefix);
-			}
-		}
+		protected abstract void BeforeExecute(IDbCommand command);
 	}
 }

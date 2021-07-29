@@ -36,31 +36,34 @@ namespace Adai.Standard
 		/// <summary>
 		/// InfoFormat
 		/// </summary>
+		/// <param name="eventId">事件Id</param>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
-		public static void Info(string message, Exception exception = null)
+		public static void Info(string eventId, string message, Exception exception = null)
 		{
-			LogInfo.Info(message, exception);
+			LogInfo.Info($"[{eventId}]{message}", exception);
 		}
 
 		/// <summary>
 		/// Error
 		/// </summary>
+		/// <param name="eventId">事件Id</param>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
-		public static void Error(string message, Exception exception = null)
+		public static void Error(string eventId, string message, Exception exception = null)
 		{
-			LogError.Error(message, exception);
+			LogError.Error($"[{eventId}]{message}", exception);
 		}
 
 		/// <summary>
 		/// Error
 		/// </summary>
+		/// <param name="eventId">事件Id</param>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
-		public static void Debug(string message, Exception exception = null)
+		public static void Debug(string eventId, string message, Exception exception = null)
 		{
-			LogError.Debug(message, exception);
+			LogDebug.Debug($"[{eventId}]{message}", exception);
 		}
 	}
 }
