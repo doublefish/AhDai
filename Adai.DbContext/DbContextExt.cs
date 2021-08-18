@@ -85,9 +85,8 @@ namespace Adai.DbContext
 		/// <param name="sql"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static T Single<T>(this IDbContext dbContext, string dbName, string sql, params IDbDataParameter[] parameters) where T : class, new()
+		public static T GetSingle<T>(this IDbContext dbContext, string dbName, string sql, params IDbDataParameter[] parameters) where T : class, new()
 		{
-			sql = $"{sql} LIMIT 0,1";
 			return dbContext.GetList<T>(dbName, sql, parameters).FirstOrDefault();
 		}
 
