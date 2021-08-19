@@ -1,5 +1,5 @@
 ﻿using Adai.Security;
-using Adai.Standard.Extend;
+using Adai.Standard.Extension;
 using Adai.Standard.Model;
 using System;
 

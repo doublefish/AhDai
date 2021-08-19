@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 
-namespace Adai.Extend
+namespace Adai.Extension
 {
 	/// <summary>
 	/// NameValueCollectionExt

@@ -1,4 +1,4 @@
-﻿using Adai.Extend;
+﻿using Adai.Extension;
 using Adai.Security.Extend;
 using System;
 using System.IO;

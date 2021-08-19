@@ -4,38 +4,28 @@
         <name>Adai.DbContext.MySql</name>
     </assembly>
     <members>
-        <member name="T:Adai.DbContext.MySql.BaseDAL`1">
-            <summary>
-            BaseDAL
-            </summary>
-            <typeparam name="Model"></typeparam>
-        </member>
-        <member name="M:Adai.DbContext.MySql.BaseDAL`1.#ctor(System.String,System.String)">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:Adai.DbContext.MySql.BaseDAL`1.InitDbContext">
-            <summary>
-            InitDbContext
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Adai.DbContext.MySql.MySqlDbContext">
             <summary>
             MySqlDbContext
-            </summary>
-        </member>
-        <member name="M:Adai.DbContext.MySql.MySqlDbContext.#ctor">
-            <summary>
-            构造函数
             </summary>
         </member>
         <member name="M:Adai.DbContext.MySql.MySqlDbContext.#ctor(System.String)">
             <summary>
             构造函数
             </summary>
+            <param name="eventId">事件Id</param>
+        </member>
+        <member name="M:Adai.DbContext.MySql.MySqlDbContext.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="eventId">事件Id</param>
             <param name="connectionString"></param>
+        </member>
+        <member name="P:Adai.DbContext.MySql.MySqlDbContext.EventId">
+            <summary>
+            事件Id
+            </summary>
         </member>
         <member name="M:Adai.DbContext.MySql.MySqlDbContext.CreateConnection">
             <summary>
@@ -59,6 +49,30 @@
             <summary>
             CreateParameter
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.MySql.MySqlDbContext.BeforeExecute(System.Data.IDbCommand)">
+            <summary>
+            执行之前
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="F:Adai.DbContext.MySql.MySqlDbContext.BeforeExecuteAction">
+            <summary>
+            执行之前
+            </summary>
+        </member>
+        <member name="T:Adai.DbContext.MySql.Startup">
+            <summary>
+            启动
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.MySql.Startup.Init(System.Collections.Generic.IDictionary{System.String,System.String},System.Action{System.String,System.Data.IDbCommand})">
+            <summary>
+            初始化
+            </summary>
+            <param name="connectionStrings">数据库标识和连接字符串</param>
+            <param name="beforeExecute">执行之前执行，可用于记录SQL，第一个参数是初始化时传入的EventId</param>
             <returns></returns>
         </member>
     </members>

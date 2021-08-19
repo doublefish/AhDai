@@ -1,4 +1,4 @@
-﻿using Adai.Config;
+﻿using Adai.Standard.Extension;
 using System;
 using System.Collections.Generic;
 using System.Net;

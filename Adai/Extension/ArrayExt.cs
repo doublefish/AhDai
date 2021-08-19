@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Adai.Extend
+namespace Adai.Extension
 {
 	/// <summary>
 	/// ArrayExt

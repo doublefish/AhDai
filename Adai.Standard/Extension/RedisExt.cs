@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Adai.Standard.Extend
+namespace Adai.Standard.Extension
 {
 	/// <summary>
 	/// RedisExt

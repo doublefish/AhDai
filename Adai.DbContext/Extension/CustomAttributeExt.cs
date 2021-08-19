@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Adai.DbContext.Extend
+namespace Adai.DbContext.Extension
 {
 	/// <summary>
 	/// CustomAttributeExt

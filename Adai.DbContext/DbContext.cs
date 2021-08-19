@@ -189,7 +189,6 @@ namespace Adai.DbContext
 			var result = 0;
 			var conn = GetConnection();
 			IDbTransaction tran = null;
-			var hasCommitted = false;
 			try
 			{
 				conn.Open();
@@ -201,12 +200,11 @@ namespace Adai.DbContext
 					BeforeExecute(cmd);
 					result += cmd.ExecuteNonQuery();
 				}
-				hasCommitted = true;
 				tran.Commit();
 			}
 			catch (Exception ex)
 			{
-				if (hasCommitted)
+				if (tran != null)
 				{
 					tran.Rollback();
 				}
@@ -231,9 +229,7 @@ namespace Adai.DbContext
 		{
 			var result = 0;
 			var conns = new List<IDbConnection>();
-			//var trans = new List<IDbTransaction>();
-			var trans = new Dictionary<string, IDbTransaction>();
-			var hasCommitteds = new Dictionary<string, bool>();
+			var trans = new List<IDbTransaction>();
 			try
 			{
 				foreach (var kv in dict)
@@ -244,9 +240,7 @@ namespace Adai.DbContext
 					conn.Open();
 					conns.Add(conn);
 					var tran = conn.BeginTransaction();
-					//trans.Add(tran);
-					trans[kv.Key] = tran;
-					hasCommitteds[kv.Key] = false;
+					trans.Add(tran);
 					foreach (var cmd in cmds)
 					{
 						cmd.Connection = conn;
@@ -254,23 +248,17 @@ namespace Adai.DbContext
 						BeforeExecute(cmd);
 						result += cmd.ExecuteNonQuery();
 					}
-					hasCommitteds[kv.Key] = true;
+				}
+				foreach (var tran in trans)
+				{
 					tran.Commit();
 				}
 			}
 			catch (Exception ex)
 			{
-				foreach (var kv in dict)
+				foreach (var tran in trans)
 				{
-					if (!trans.TryGetValue(kv.Key, out var tran))
-					{
-						break;
-					}
-					var hasCommitted = hasCommitteds[kv.Key];
-					if (hasCommitted)
-					{
-						tran.Rollback();
-					}
+					tran.Rollback();
 				}
 				throw ex;
 			}

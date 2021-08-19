@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Adai.Extend
+namespace Adai.Extension
 {
 	/// <summary>
 	/// SortedDictionaryExt

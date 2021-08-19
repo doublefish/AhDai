@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Adai.Standard.Extend
+namespace Adai.Standard.Extension
 {
 	/// <summary>
 	/// IDictionaryExt

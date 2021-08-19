@@ -552,7 +552,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.Single``1(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
+        <member name="M:Adai.DbContext.DbContextExt.GetSingle``1(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
             <summary>
             查询
             </summary>
@@ -719,16 +719,10 @@
             数据库连接字符串
             </summary>
         </member>
-        <member name="F:Adai.DbContext.DbHelper.Initialized">
+        <member name="P:Adai.DbContext.DbHelper.Initialized">
             <summary>
             已初始化
             </summary>
-        </member>
-        <member name="M:Adai.DbContext.DbHelper.Init(System.Collections.Generic.IDictionary{System.String,System.String})">
-            <summary>
-            初始化
-            </summary>
-            <param name="connectionStrings"></param>
         </member>
         <member name="M:Adai.DbContext.DbHelper.GetConnectionString(System.String)">
             <summary>
@@ -774,17 +768,17 @@
             Oracle
             </summary>
         </member>
-        <member name="T:Adai.DbContext.Extend.AttributeExt">
+        <member name="T:Adai.DbContext.Extension.AttributeExt">
             <summary>
             AttributeExt
             </summary>
         </member>
-        <member name="T:Adai.DbContext.Extend.CustomAttributeExt">
+        <member name="T:Adai.DbContext.Extension.CustomAttributeExt">
             <summary>
             CustomAttributeExt
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Extend.CustomAttributeExt.GetPropertyAttributes``1(System.Type)">
+        <member name="M:Adai.DbContext.Extension.CustomAttributeExt.GetPropertyAttributes``1(System.Type)">
             <summary>
             读取类的属性的的特性
             </summary>
@@ -792,7 +786,7 @@
             <param name="type">类的Type</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extend.CustomAttributeExt.GetMappings``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Adai.DbContext.Extension.CustomAttributeExt.GetMappings``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             获取列名和属性的映射关系
             </summary>
@@ -800,12 +794,12 @@
             <param name="attributes"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.DbContext.Extend.DataTableExt">
+        <member name="T:Adai.DbContext.Extension.DataTableExt">
             <summary>
             DataTableExt
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Extend.DataTableExt.ToModel``1(System.Data.DataRow)">
+        <member name="M:Adai.DbContext.Extension.DataTableExt.ToModel``1(System.Data.DataRow)">
             <summary>
             ToModel
             </summary>
@@ -813,7 +807,7 @@
             <param name="dataRow"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extend.DataTableExt.ToModel``1(System.Data.DataRow,System.Reflection.PropertyInfo[])">
+        <member name="M:Adai.DbContext.Extension.DataTableExt.ToModel``1(System.Data.DataRow,System.Reflection.PropertyInfo[])">
             <summary>
             ToModel
             </summary>
@@ -822,7 +816,7 @@
             <param name="propertyInfos"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extend.DataTableExt.ToList``1(System.Data.DataTable)">
+        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.DataTable)">
             <summary>
             ToList
             </summary>
@@ -830,7 +824,7 @@
             <param name="dataTable"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extend.DataTableExt.ToList``1(System.Data.DataTable,System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.DataTable,System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
             ToList
             </summary>
@@ -839,7 +833,7 @@
             <param name="mappings">映射（列名-属性名）</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extend.DataTableExt.ToList``1(System.Data.DataTable,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
+        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.DataTable,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
             <summary>
             ToList
             </summary>
@@ -848,7 +842,7 @@
             <param name="mappings">映射（列名-属性）</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extend.DataTableExt.ToList``1(System.Data.IDataReader)">
+        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.IDataReader)">
             <summary>
             ToList
             </summary>
@@ -856,7 +850,7 @@
             <param name="dataReader"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extend.DataTableExt.ToList``1(System.Data.IDataReader,System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.IDataReader,System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
             ToList
             </summary>
@@ -865,7 +859,7 @@
             <param name="mappings">映射（列名-属性名）</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extend.DataTableExt.ToList``1(System.Data.IDataReader,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
+        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.IDataReader,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
             <summary>
             ToList
             </summary>
@@ -874,7 +868,7 @@
             <param name="mappings">映射（列名-属性）</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extend.DataTableExt.SetValue``1(``0,System.String,System.Object,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
+        <member name="M:Adai.DbContext.Extension.DataTableExt.SetValue``1(``0,System.String,System.Object,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
             <summary>
             赋值
             </summary>
@@ -884,7 +878,7 @@
             <param name="value"></param>
             <param name="mappings">映射（列名-属性）</param>
         </member>
-        <member name="M:Adai.DbContext.Extend.DataTableExt.GetMappings``1(System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Adai.DbContext.Extension.DataTableExt.GetMappings``1(System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
             获取列名和属性的映射关系
             </summary>
@@ -892,31 +886,31 @@
             <param name="mappings"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.DbContext.Extend.ObjectExt">
+        <member name="T:Adai.DbContext.Extension.ObjectExt">
             <summary>
             ObjectExt
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Extend.ObjectExt.SetMinValue(System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+        <member name="M:Adai.DbContext.Extension.ObjectExt.SetMinValue(System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
             设置默认值为对应类型的最小值
             </summary>
             <param name="obj"></param>
             <param name="values">例外的默认值，格式：属性名称-值</param>
         </member>
-        <member name="M:Adai.DbContext.Extend.ObjectExt.IsMinValue(System.Object)">
+        <member name="M:Adai.DbContext.Extension.ObjectExt.IsMinValue(System.Object)">
             <summary>
             是否最小值
             </summary>
             <param name="obj"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.DbContext.Extend.ReflectionExt">
+        <member name="T:Adai.DbContext.Extension.ReflectionExt">
             <summary>
             ReflectionExt
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Extend.ReflectionExt.SetValueExt(System.Reflection.PropertyInfo,System.Object,System.Object)">
+        <member name="M:Adai.DbContext.Extension.ReflectionExt.SetValueExt(System.Reflection.PropertyInfo,System.Object,System.Object)">
             <summary>
             赋值-自动转换类型
             </summary>
@@ -924,12 +918,12 @@
             <param name="obj"></param>
             <param name="value"></param>
         </member>
-        <member name="T:Adai.DbContext.Extend.TableColumnAttributeExt">
+        <member name="T:Adai.DbContext.Extension.TableColumnAttributeExt">
             <summary>
             TableColumnAttributeExt
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Extend.TableColumnAttributeExt.Find(System.Collections.Generic.IEnumerable{Adai.DbContext.Attribute.TableColumnAttribute},System.String)">
+        <member name="M:Adai.DbContext.Extension.TableColumnAttributeExt.Find(System.Collections.Generic.IEnumerable{Adai.DbContext.Attribute.TableColumnAttribute},System.String)">
             <summary>
             查询：匹配列名或者属性名
             </summary>
@@ -1090,17 +1084,16 @@
             数据表名称
             </summary>
         </member>
-        <member name="T:Adai.Extend.ObjectExt">
+        <member name="T:Adai.DbContext.Startup">
             <summary>
-            ObjectExt
+            启动
             </summary>
         </member>
-        <member name="M:Adai.Extend.ObjectExt.IsMinValue``1(``0)">
+        <member name="M:Adai.DbContext.Startup.Init(System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
-            是否最小值
+            初始化（建议在程序启动时执行此方法）
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="value"></param>
+            <param name="connectionStrings"></param>
             <returns></returns>
         </member>
     </members>

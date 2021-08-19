@@ -1,5 +1,5 @@
-﻿using Adai.Extend;
-using Adai.Standard.Extend;
+﻿using Adai.Extension;
+using Adai.Standard.Extension;
 using System;
 
 namespace Adai.Standard

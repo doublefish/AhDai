@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Adai.Extend
+namespace Adai.Extension
 {
 	/// <summary>
 	/// ExceptionExt

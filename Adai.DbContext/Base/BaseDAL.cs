@@ -1,4 +1,4 @@
-﻿using Adai.DbContext.Extend;
+﻿using Adai.DbContext.Extension;
 using System;
 using System.Collections.Generic;
 using System.Data;

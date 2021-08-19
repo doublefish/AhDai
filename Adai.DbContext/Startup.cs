@@ -17,7 +17,6 @@ namespace Adai.DbContext
 		public static bool Init(IDictionary<string, string> connectionStrings)
 		{
 			DbHelper.ConnectionStrings = connectionStrings;
-			DbHelper.Initialized = connectionStrings != null && connectionStrings.Count > 0;
 			return DbHelper.Initialized;
 		}
 	}

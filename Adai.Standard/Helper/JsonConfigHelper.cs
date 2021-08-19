@@ -11,19 +11,7 @@ namespace Adai.Standard
 	/// </summary>
 	public static class JsonConfigHelper
 	{
-		/// <summary>
-		/// configuration
-		/// </summary>
 		static JObject configuration;
-
-		/// <summary>
-		/// 最后写入时间
-		/// </summary>
-		public static DateTime LastWriteTime { get; private set; }
-		/// <summary>
-		/// 文件路径
-		/// </summary>
-		public static readonly string Path = AppDomain.CurrentDomain.BaseDirectory + "appsettings.json";
 
 		/// <summary>
 		/// Configuration
@@ -32,16 +20,11 @@ namespace Adai.Standard
 		{
 			get
 			{
-				var file = new FileInfo(Path);
-				if (!file.Exists)
+				if (configuration == null)
 				{
-					throw new FileNotFoundException("Configuration file does not exist.");
-				}
-				if (LastWriteTime <= file.LastWriteTime)
-				{
-					LastWriteTime = file.LastWriteTime;
+					var path = Path.Combine(AppContext.BaseDirectory, "appsettings.json");
 					var json = string.Empty;
-					using (var sr = new StreamReader(Path, Encoding.UTF8))
+					using (var sr = new StreamReader(path, Encoding.UTF8))
 					{
 						json = sr.ReadToEnd();
 					}
@@ -54,10 +37,6 @@ namespace Adai.Standard
 				return configuration;
 			}
 		}
-		/// <summary>
-		/// ConnectionStrings
-		/// </summary>
-		public static IDictionary<string, string> ConnectionStrings => Configuration["ConnectionStrings"].ToObject<IDictionary<string, string>>();
 
 		/// <summary>
 		/// 读取

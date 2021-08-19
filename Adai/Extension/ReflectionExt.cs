@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Adai.Extend
+namespace Adai.Extension
 {
 	/// <summary>
 	/// ReflectionExt

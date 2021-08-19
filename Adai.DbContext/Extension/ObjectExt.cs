@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Adai.DbContext.Extend
+namespace Adai.DbContext.Extension
 {
 	/// <summary>
 	/// ObjectExt

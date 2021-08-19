@@ -1,4 +1,4 @@
-﻿namespace Adai.Standard.Extend
+﻿namespace Adai.Standard.Extension
 {
 	/// <summary>
 	/// X509CertificateExt

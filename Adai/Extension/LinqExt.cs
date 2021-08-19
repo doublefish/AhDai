@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Adai.Extend
+namespace Adai.Extension
 {
 	/// <summary>
 	/// LinqExt

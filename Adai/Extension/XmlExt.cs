@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace Adai.Extend
+namespace Adai.Extension
 {
 	/// <summary>
 	/// XmlExt

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Adai.Extend
+namespace Adai.Extension
 {
 	/// <summary>
 	/// StringExt

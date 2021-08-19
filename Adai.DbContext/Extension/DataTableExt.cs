@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace Adai.DbContext.Extend
+namespace Adai.DbContext.Extension
 {
 	/// <summary>
 	/// DataTableExt

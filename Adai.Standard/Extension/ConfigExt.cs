@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Adai.Standard
+namespace Adai.Standard.Extension
 {
 	/// <summary>
 	/// ConfigExt

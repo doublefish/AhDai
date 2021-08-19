@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai", "Adai\Adai.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.DbContext.MySql", "Adai.DbContext.MySql\Adai.DbContext.MySql.csproj", "{AB8395DE-CC24-4797-9EF8-52B68FEE6CDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adai.Test", "Adai.Test\Adai.Test.csproj", "{B220A81B-5464-4D86-BC2B-DD69131EDF79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AB8395DE-CC24-4797-9EF8-52B68FEE6CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB8395DE-CC24-4797-9EF8-52B68FEE6CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB8395DE-CC24-4797-9EF8-52B68FEE6CDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B220A81B-5464-4D86-BC2B-DD69131EDF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B220A81B-5464-4D86-BC2B-DD69131EDF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B220A81B-5464-4D86-BC2B-DD69131EDF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B220A81B-5464-4D86-BC2B-DD69131EDF79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

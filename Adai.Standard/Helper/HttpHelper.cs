@@ -1,4 +1,4 @@
-﻿using Adai.Standard.Extend;
+﻿using Adai.Standard.Extension;
 using Adai.Standard.Model;
 using System;
 using System.Collections.Generic;

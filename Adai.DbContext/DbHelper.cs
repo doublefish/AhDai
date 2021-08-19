@@ -1,4 +1,4 @@
-﻿using Adai.DbContext.Extend;
+﻿using Adai.DbContext.Extension;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -62,7 +62,7 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 已初始化
 		/// </summary>
-		public static bool Initialized { get; internal set; }
+		public static bool Initialized => ConnectionStrings != null && ConnectionStrings.Count > 0;
 
 		/// <summary>
 		/// 获取连接字符串
@@ -81,7 +81,7 @@ namespace Adai.DbContext
 			}
 			if (!ConnectionStrings.TryGetValue(dbName, out var connStr))
 			{
-				throw new ArgumentNullException($"未配置{dbName}的连接字符串");
+				throw new ArgumentException($"未配置{dbName}的连接字符串");
 			}
 			return connStr;
 		}

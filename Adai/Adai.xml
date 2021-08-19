@@ -338,82 +338,82 @@
             <param name="keys"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Extend.ArrayExt">
+        <member name="T:Adai.Extension.ArrayExt">
             <summary>
             ArrayExt
             </summary>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ToByte(System.String[])">
+        <member name="M:Adai.Extension.ArrayExt.ToByte(System.String[])">
             <summary>
             类型转换
             </summary>
             <param name="array"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ToSByte(System.String[])">
+        <member name="M:Adai.Extension.ArrayExt.ToSByte(System.String[])">
             <summary>
             类型转换
             </summary>
             <param name="array"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ToInt16(System.String[])">
+        <member name="M:Adai.Extension.ArrayExt.ToInt16(System.String[])">
             <summary>
             类型转换
             </summary>
             <param name="array"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ToInt32(System.String[])">
+        <member name="M:Adai.Extension.ArrayExt.ToInt32(System.String[])">
             <summary>
             类型转换
             </summary>
             <param name="array"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ToInt64(System.String[])">
+        <member name="M:Adai.Extension.ArrayExt.ToInt64(System.String[])">
             <summary>
             类型转换
             </summary>
             <param name="array"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ToSingle(System.String[])">
+        <member name="M:Adai.Extension.ArrayExt.ToSingle(System.String[])">
             <summary>
             类型转换
             </summary>
             <param name="array"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ToDouble(System.String[])">
+        <member name="M:Adai.Extension.ArrayExt.ToDouble(System.String[])">
             <summary>
             类型转换
             </summary>
             <param name="array"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ToDecimal(System.String[])">
+        <member name="M:Adai.Extension.ArrayExt.ToDecimal(System.String[])">
             <summary>
             类型转换
             </summary>
             <param name="array"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ToDateTime(System.String[])">
+        <member name="M:Adai.Extension.ArrayExt.ToDateTime(System.String[])">
             <summary>
             类型转换
             </summary>
             <param name="array"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ToTimeSpan(System.String[])">
+        <member name="M:Adai.Extension.ArrayExt.ToTimeSpan(System.String[])">
             <summary>
             类型转换
             </summary>
             <param name="array"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.Compare(System.Byte[],System.Byte[])">
+        <member name="M:Adai.Extension.ArrayExt.Compare(System.Byte[],System.Byte[])">
             <summary>
             对比
             </summary>
@@ -421,7 +421,7 @@
             <param name="bytesB"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ExistByStartsWith(System.String[],System.String)">
+        <member name="M:Adai.Extension.ArrayExt.ExistByStartsWith(System.String[],System.String)">
             <summary>
             是否存在指定属性
             </summary>
@@ -429,7 +429,7 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.ArrayExt.ListByStartsWith(System.String[],System.String)">
+        <member name="M:Adai.Extension.ArrayExt.ListByStartsWith(System.String[],System.String)">
             <summary>
             读取子级属性
             </summary>
@@ -437,12 +437,12 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Extend.DataTableExt">
+        <member name="T:Adai.Extension.DataTableExt">
             <summary>
             DataTableExt
             </summary>
         </member>
-        <member name="M:Adai.Extend.DataTableExt.ToList``1(System.Data.DataTable)">
+        <member name="M:Adai.Extension.DataTableExt.ToList``1(System.Data.DataTable)">
             <summary>
             ToList
             </summary>
@@ -450,7 +450,7 @@
             <param name="dataTable"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.DataTableExt.ToModel``1(System.Data.DataRow,System.Reflection.PropertyInfo[])">
+        <member name="M:Adai.Extension.DataTableExt.ToModel``1(System.Data.DataRow,System.Reflection.PropertyInfo[])">
             <summary>
             ToModel
             </summary>
@@ -459,7 +459,7 @@
             <param name="propertyInfos"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.DataTableExt.ToList``1(System.Data.IDataReader)">
+        <member name="M:Adai.Extension.DataTableExt.ToList``1(System.Data.IDataReader)">
             <summary>
             ToList
             </summary>
@@ -467,24 +467,24 @@
             <param name="dataReader"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Extend.ExceptionExt">
+        <member name="T:Adai.Extension.ExceptionExt">
             <summary>
             ExceptionExt
             </summary>
         </member>
-        <member name="M:Adai.Extend.ExceptionExt.GetInner(System.Exception)">
+        <member name="M:Adai.Extension.ExceptionExt.GetInner(System.Exception)">
             <summary>
             获取内部Exception
             </summary>
             <param name="ex"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Extend.LinqExt">
+        <member name="T:Adai.Extension.LinqExt">
             <summary>
             LinqExt
             </summary>
         </member>
-        <member name="M:Adai.Extend.LinqExt.Paginate``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
+        <member name="M:Adai.Extension.LinqExt.Paginate``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
             <summary>
             分页
             </summary>
@@ -494,24 +494,24 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Extend.NameValueCollectionExt">
+        <member name="T:Adai.Extension.NameValueCollectionExt">
             <summary>
             NameValueCollectionExt
             </summary>
         </member>
-        <member name="M:Adai.Extend.NameValueCollectionExt.ToDictionary(System.Collections.Specialized.NameValueCollection)">
+        <member name="M:Adai.Extension.NameValueCollectionExt.ToDictionary(System.Collections.Specialized.NameValueCollection)">
             <summary>
             转换为字典
             </summary>
             <param name="collection"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Extend.ObjectExt">
+        <member name="T:Adai.Extension.ObjectExt">
             <summary>
             ObjectExt
             </summary>
         </member>
-        <member name="M:Adai.Extend.ObjectExt.Clone``1(``0,System.String[])">
+        <member name="M:Adai.Extension.ObjectExt.Clone``1(``0,System.String[])">
             <summary>
             克隆
             </summary>
@@ -519,26 +519,26 @@
             <param name="obj"></param>
             <param name="ignores">忽略的属性</param>
         </member>
-        <member name="M:Adai.Extend.ObjectExt.SetMinValue(System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+        <member name="M:Adai.Extension.ObjectExt.SetMinValue(System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
             设置默认值为对应类型的最小值
             </summary>
             <param name="obj"></param>
             <param name="values">例外的默认值，格式：属性名称-值</param>
         </member>
-        <member name="M:Adai.Extend.ObjectExt.IsMinValue(System.Object)">
+        <member name="M:Adai.Extension.ObjectExt.IsMinValue(System.Object)">
             <summary>
             是否最小值
             </summary>
             <param name="obj"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Extend.ReflectionExt">
+        <member name="T:Adai.Extension.ReflectionExt">
             <summary>
             ReflectionExt
             </summary>
         </member>
-        <member name="M:Adai.Extend.ReflectionExt.SetValueExt(System.Reflection.PropertyInfo,System.Object,System.Object)">
+        <member name="M:Adai.Extension.ReflectionExt.SetValueExt(System.Reflection.PropertyInfo,System.Object,System.Object)">
             <summary>
             赋值-自动转换类型
             </summary>
@@ -546,12 +546,12 @@
             <param name="obj"></param>
             <param name="value"></param>
         </member>
-        <member name="T:Adai.Extend.SortedDictionaryExt">
+        <member name="T:Adai.Extension.SortedDictionaryExt">
             <summary>
             SortedDictionaryExt
             </summary>
         </member>
-        <member name="M:Adai.Extend.SortedDictionaryExt.ToDictionary``2(System.Collections.Generic.SortedDictionary{``0,``1})">
+        <member name="M:Adai.Extension.SortedDictionaryExt.ToDictionary``2(System.Collections.Generic.SortedDictionary{``0,``1})">
             <summary>
             类型转换
             </summary>
@@ -560,12 +560,12 @@
             <param name="sorted"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Extend.StringExt">
+        <member name="T:Adai.Extension.StringExt">
             <summary>
             StringExt
             </summary>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToByte(System.String,System.Byte)">
+        <member name="M:Adai.Extension.StringExt.ToByte(System.String,System.Byte)">
             <summary>
             类型转换
             </summary>
@@ -573,7 +573,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToSByte(System.String,System.SByte)">
+        <member name="M:Adai.Extension.StringExt.ToSByte(System.String,System.SByte)">
             <summary>
             类型转换
             </summary>
@@ -581,7 +581,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToBoolean(System.String,System.Boolean)">
+        <member name="M:Adai.Extension.StringExt.ToBoolean(System.String,System.Boolean)">
             <summary>
             类型转换
             </summary>
@@ -589,7 +589,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToInt16(System.String,System.Int16)">
+        <member name="M:Adai.Extension.StringExt.ToInt16(System.String,System.Int16)">
             <summary>
             类型转换
             </summary>
@@ -597,7 +597,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToInt32(System.String,System.Int32)">
+        <member name="M:Adai.Extension.StringExt.ToInt32(System.String,System.Int32)">
             <summary>
             类型转换
             </summary>
@@ -605,7 +605,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToInt64(System.String,System.Int64)">
+        <member name="M:Adai.Extension.StringExt.ToInt64(System.String,System.Int64)">
             <summary>
             类型转换
             </summary>
@@ -613,7 +613,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToUInt64(System.String,System.UInt64)">
+        <member name="M:Adai.Extension.StringExt.ToUInt64(System.String,System.UInt64)">
             <summary>
             类型转换
             </summary>
@@ -621,7 +621,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToSingle(System.String,System.Single)">
+        <member name="M:Adai.Extension.StringExt.ToSingle(System.String,System.Single)">
             <summary>
             类型转换
             </summary>
@@ -629,7 +629,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToDouble(System.String,System.Double)">
+        <member name="M:Adai.Extension.StringExt.ToDouble(System.String,System.Double)">
             <summary>
             类型转换
             </summary>
@@ -637,7 +637,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToDecimal(System.String,System.Decimal)">
+        <member name="M:Adai.Extension.StringExt.ToDecimal(System.String,System.Decimal)">
             <summary>
             类型转换
             </summary>
@@ -645,14 +645,14 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToDateTime(System.String)">
+        <member name="M:Adai.Extension.StringExt.ToDateTime(System.String)">
             <summary>
             类型转换
             </summary>
             <param name="s"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToDateTime(System.String,System.DateTime)">
+        <member name="M:Adai.Extension.StringExt.ToDateTime(System.String,System.DateTime)">
             <summary>
             类型转换
             </summary>
@@ -660,7 +660,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToDateTimeExact(System.String,System.String,System.IFormatProvider)">
+        <member name="M:Adai.Extension.StringExt.ToDateTimeExact(System.String,System.String,System.IFormatProvider)">
             <summary>
             类型转换
             </summary>
@@ -669,41 +669,7 @@
             <param name="provider"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToDateTimeExact(System.String,System.String,System.IFormatProvider,System.DateTime)">
-            <summary>
-            类型转换
-            </summary>
-            <param name="s"></param>
-            <param name="format"></param>
-            <param name="provider"></param>
-            <param name="error"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Extend.StringExt.ToTimeSpan(System.String)">
-            <summary>
-            类型转换
-            </summary>
-            <param name="s"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Extend.StringExt.ToTimeSpan(System.String,System.TimeSpan)">
-            <summary>
-            类型转换
-            </summary>
-            <param name="s"></param>
-            <param name="error"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Extend.StringExt.ToTimeSpanExact(System.String,System.String,System.IFormatProvider)">
-            <summary>
-            类型转换
-            </summary>
-            <param name="s"></param>
-            <param name="format"></param>
-            <param name="provider"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Extend.StringExt.ToTimeSpanExact(System.String,System.String,System.IFormatProvider,System.TimeSpan)">
+        <member name="M:Adai.Extension.StringExt.ToDateTimeExact(System.String,System.String,System.IFormatProvider,System.DateTime)">
             <summary>
             类型转换
             </summary>
@@ -713,7 +679,41 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.Complete(System.String,System.Int32,System.String)">
+        <member name="M:Adai.Extension.StringExt.ToTimeSpan(System.String)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Extension.StringExt.ToTimeSpan(System.String,System.TimeSpan)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Extension.StringExt.ToTimeSpanExact(System.String,System.String,System.IFormatProvider)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="format"></param>
+            <param name="provider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Extension.StringExt.ToTimeSpanExact(System.String,System.String,System.IFormatProvider,System.TimeSpan)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="format"></param>
+            <param name="provider"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Extension.StringExt.Complete(System.String,System.Int32,System.String)">
             <summary>
             补齐
             </summary>
@@ -722,7 +722,7 @@
             <param name="prefix">前缀</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.Replace(System.String,System.Int32,System.Int32)">
+        <member name="M:Adai.Extension.StringExt.Replace(System.String,System.Int32,System.Int32)">
             <summary>
             替换字符
             </summary>
@@ -731,7 +731,7 @@
             <param name="endIndex"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.Replace(System.String,System.Char,System.Int32,System.Int32)">
+        <member name="M:Adai.Extension.StringExt.Replace(System.String,System.Char,System.Int32,System.Int32)">
             <summary>
             替换字符
             </summary>
@@ -741,19 +741,19 @@
             <param name="endIndex"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.StringExt.ToInline(System.String)">
+        <member name="M:Adai.Extension.StringExt.ToInline(System.String)">
             <summary>
             去除空格、回车、换行符和制表符
             </summary>
             <param name="s"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Extend.XmlExt">
+        <member name="T:Adai.Extension.XmlExt">
             <summary>
             XmlExt
             </summary>
         </member>
-        <member name="M:Adai.Extend.XmlExt.GetAttribute(System.Xml.XmlNode,System.String)">
+        <member name="M:Adai.Extension.XmlExt.GetAttribute(System.Xml.XmlNode,System.String)">
             <summary>
             GetAttribute
             </summary>
@@ -761,7 +761,7 @@
             <param name="name"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.XmlExt.GetInnerText(System.Xml.XmlDocument,System.String)">
+        <member name="M:Adai.Extension.XmlExt.GetInnerText(System.Xml.XmlDocument,System.String)">
             <summary>
             GetInnerText
             </summary>
@@ -769,7 +769,7 @@
             <param name="xpath"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Extend.XmlExt.GetInnerText(System.Xml.XmlNode,System.String)">
+        <member name="M:Adai.Extension.XmlExt.GetInnerText(System.Xml.XmlNode,System.String)">
             <summary>
             GetInnerText
             </summary>
