@@ -16,6 +16,10 @@
 		/// <summary>
 		/// Oracle
 		/// </summary>
-		Oracle
+		Oracle,
+		/// <summary>
+		/// SQLite
+		/// </summary>
+		SQLite
 	}
 }
