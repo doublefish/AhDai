@@ -20,7 +20,7 @@ namespace Adai.Test
 			var dbConfigs = JsonConfigHelper.Get<ICollection<DbConfiguration>>("Database");
 			//var dict = dbConfigs.ToDictionary(o => o.Name);
 			var dict = dbConfigs.ToDictionary(o => o.Name, o => o.Value);
-			Adai.DbContext.MySql.Startup.Init(dict, BeforeExecute);
+			Adai.DbContext.Startup.Init(dict, BeforeExecute);
 		}
 
 		/// <summary>
