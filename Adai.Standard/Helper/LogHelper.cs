@@ -40,7 +40,7 @@ namespace Adai.Standard
 		/// <param name="exception"></param>
 		public static void Info(string message, Exception exception = null)
 		{
-			LogInfo.Info($"{message}", exception);
+			LogInfo.Info(message, exception);
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace Adai.Standard
 		/// <param name="exception"></param>
 		public static void Error(string message, Exception exception = null)
 		{
-			LogError.Error($"{message}", exception);
+			LogError.Error(message, exception);
 		}
 
 		/// <summary>
@@ -82,7 +82,7 @@ namespace Adai.Standard
 		/// <param name="exception"></param>
 		public static void Debug(string message, Exception exception = null)
 		{
-			LogDebug.Debug($"{message}", exception);
+			LogDebug.Debug(message, exception);
 		}
 
 		/// <summary>

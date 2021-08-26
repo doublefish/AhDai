@@ -781,29 +781,21 @@
             MailHelper
             </summary>
         </member>
-        <member name="F:Adai.Standard.MailHelper.smtpConfiguration">
-            <summary>
-            smtpConfiguration
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.MailHelper.expiry">
-            <summary>
-            有效时间
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.MailHelper.SmptConfiguration">
+        <member name="P:Adai.Standard.MailHelper.Configuration">
             <summary>
             SmptConfiguration
             </summary>
         </member>
-        <member name="P:Adai.Standard.MailHelper.Expiry">
+        <member name="M:Adai.Standard.MailHelper.Init(Adai.Standard.Model.MailConfiguration)">
             <summary>
-            有效时间
+            初始化
             </summary>
+            <param name="configuration"></param>
+            <returns></returns>
         </member>
-        <member name="P:Adai.Standard.MailHelper.Client">
+        <member name="M:Adai.Standard.MailHelper.CreateSmtpClient">
             <summary>
-            Client
+            CreateSmtpClient
             </summary>
         </member>
         <member name="M:Adai.Standard.MailHelper.Send(System.String,System.String,System.String)">
@@ -819,60 +811,30 @@
             RedisHelper
             </summary>
         </member>
-        <member name="F:Adai.Standard.RedisHelper.configuration">
-            <summary>
-            configuration
-            </summary>
-        </member>
         <member name="P:Adai.Standard.RedisHelper.Configuration">
             <summary>
-            Configuration
+            SmptConfiguration
             </summary>
+        </member>
+        <member name="M:Adai.Standard.RedisHelper.Init(Adai.Standard.Model.RedisConfiguration)">
+            <summary>
+            初始化
+            </summary>
+            <param name="configuration"></param>
+            <returns></returns>
         </member>
         <member name="F:Adai.Standard.RedisHelper.DbCount">
             <summary>
             DbCount
             </summary>
         </member>
-        <member name="P:Adai.Standard.RedisHelper.Instance">
+        <member name="M:Adai.Standard.RedisHelper.GetDatabase(System.Int32,System.Object)">
             <summary>
-            Instance
+            GetDatabase
             </summary>
-        </member>
-        <member name="F:Adai.Standard.RedisHelper.Db">
-            <summary>
-            Db
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.RedisHelper.Db0">
-            <summary>
-            Db0
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.RedisHelper.Db1">
-            <summary>
-            Db1
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.RedisHelper.Db2">
-            <summary>
-            Db2
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.RedisHelper.Db3">
-            <summary>
-            Db3
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.RedisHelper.Db4">
-            <summary>
-            Db4
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.RedisHelper.Db15">
-            <summary>
-            Db15
-            </summary>
+            <param name="db"></param>
+            <param name="asyncState"></param>
+            <returns></returns>
         </member>
         <member name="M:Adai.Standard.RedisHelper.CreateInstance(Adai.Standard.Model.RedisConfiguration)">
             <summary>
@@ -1441,6 +1403,31 @@
             Content
             </summary>
         </member>
+        <member name="T:Adai.Standard.Model.MailConfiguration">
+            <summary>
+            MailConfiguration
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Model.MailConfiguration.Host">
+            <summary>
+            Host
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Model.MailConfiguration.Port">
+            <summary>
+            Port
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Model.MailConfiguration.Username">
+            <summary>
+            Username
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Model.MailConfiguration.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
         <member name="T:Adai.Standard.Model.PageArg`1">
             <summary>
             查询条件
@@ -1623,32 +1610,7 @@
         </member>
         <member name="P:Adai.Standard.Model.RedisConfiguration.DbNumber">
             <summary>
-            DbIndex
-            </summary>
-        </member>
-        <member name="T:Adai.Standard.Model.SmtpConfiguration">
-            <summary>
-            SmtpConfiguration
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.SmtpConfiguration.Host">
-            <summary>
-            Host
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.SmtpConfiguration.Port">
-            <summary>
-            Port
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.SmtpConfiguration.Username">
-            <summary>
-            Username
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.SmtpConfiguration.Password">
-            <summary>
-            Password
+            DbNumber
             </summary>
         </member>
         <member name="T:Adai.Standard.Model.SocketClient">

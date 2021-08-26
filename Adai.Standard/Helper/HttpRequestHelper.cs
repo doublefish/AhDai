@@ -23,7 +23,7 @@ namespace Adai.Standard
 			path = path.ToLower();
 			var dateTime = DateTime.Now;
 			var time = dateTime.TimeOfDay;
-			var redis = RedisHelper.Db15;
+			var redis = RedisHelper.GetDatabase(15);
 			var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 			var hashField = $"{ipAddress}-{path}";
 			if (redis.KeyExists(key))

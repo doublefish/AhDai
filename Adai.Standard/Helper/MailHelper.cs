@@ -11,77 +11,35 @@ namespace Adai.Standard
 	public static class MailHelper
 	{
 		/// <summary>
-		/// smtpConfiguration
-		/// </summary>
-		static SmtpConfiguration smtpConfiguration;
-		/// <summary>
-		/// 有效时间
-		/// </summary>
-		static TimeSpan expiry;
-
-		/// <summary>
 		/// SmptConfiguration
 		/// </summary>
-		public static SmtpConfiguration SmptConfiguration
+		public static Model.MailConfiguration Configuration { get; private set; }
+
+		/// <summary>
+		/// 初始化
+		/// </summary>
+		/// <param name="configuration"></param>
+		/// <returns></returns>
+		public static bool Init(Model.MailConfiguration configuration)
 		{
-			get
-			{
-				if (smtpConfiguration == null)
-				{
-					var config = JsonConfigHelper.Get("Mail.Smtp");
-					if (config != null)
-					{
-						smtpConfiguration = new SmtpConfiguration()
-						{
-							Host = config.Value<string>("Host"),
-							Port = config.Value<int>("Port"),
-							Username = config.Value<string>("Username"),
-							Password = config.Value<string>("Password")
-						};
-					}
-					else
-					{
-						throw new Exception("Not configured.");
-					}
-				}
-				return smtpConfiguration;
-			}
+			Configuration = configuration;
+			return true;
 		}
 
 		/// <summary>
-		/// 有效时间
+		/// CreateSmtpClient
 		/// </summary>
-		public static TimeSpan Expiry
+		public static SmtpClient CreateSmtpClient()
 		{
-			get
+			return new SmtpClient()
 			{
-				if (expiry == null || expiry == TimeSpan.Zero)
-				{
-					var config = JsonConfigHelper.Get("Mail.Expiry");
-					if (config != null)
-					{
-						expiry = config.ToObject<TimeSpan>();
-					}
-					else
-					{
-						throw new Exception("Not configured.");
-					}
-				}
-				return expiry;
-			}
+				Host = Configuration.Host,
+				Port = Configuration.Port,
+				EnableSsl = true,
+				//UseDefaultCredentials = true,
+				Credentials = new NetworkCredential(Configuration.Username, Configuration.Password)
+			};
 		}
-
-		/// <summary>
-		/// Client
-		/// </summary>
-		public static SmtpClient Client => new SmtpClient()
-		{
-			Host = SmptConfiguration.Host,
-			Port = SmptConfiguration.Port,
-			EnableSsl = true,
-			//UseDefaultCredentials = true,
-			Credentials = new NetworkCredential(SmptConfiguration.Username, SmptConfiguration.Password)
-		};
 
 		/// <summary>
 		/// 发送
@@ -91,9 +49,9 @@ namespace Adai.Standard
 		/// <param name="body"></param>
 		public static void Send(string recipients, string subject, string body)
 		{
-			using (var client = Client)
+			using (var client = CreateSmtpClient())
 			{
-				client.Send(new MailMessage(SmptConfiguration.Username, recipients)
+				client.Send(new MailMessage(Configuration.Username, recipients)
 				{
 					Subject = subject,
 					Body = body,

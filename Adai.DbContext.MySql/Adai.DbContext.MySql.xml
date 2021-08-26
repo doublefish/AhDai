@@ -57,23 +57,5 @@
             </summary>
             <param name="command"></param>
         </member>
-        <member name="F:Adai.DbContext.MySql.MySqlDbContext.BeforeExecuteAction">
-            <summary>
-            执行之前
-            </summary>
-        </member>
-        <member name="T:Adai.DbContext.MySql.Startup">
-            <summary>
-            启动
-            </summary>
-        </member>
-        <member name="M:Adai.DbContext.MySql.Startup.Init(System.Collections.Generic.IDictionary{System.String,System.String},System.Action{System.String,System.Data.IDbCommand})">
-            <summary>
-            初始化
-            </summary>
-            <param name="connectionStrings">数据库标识和连接字符串</param>
-            <param name="beforeExecute">执行之前执行，可用于记录SQL，第一个参数是初始化时传入的EventId</param>
-            <returns></returns>
-        </member>
     </members>
 </doc>

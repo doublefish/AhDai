@@ -10,83 +10,43 @@ namespace Adai.Standard
 	public static class RedisHelper
 	{
 		/// <summary>
-		/// configuration
+		/// SmptConfiguration
 		/// </summary>
-		static RedisConfiguration configuration;
+		public static Model.RedisConfiguration Configuration { get; private set; }
 
 		/// <summary>
-		/// Configuration
+		/// 初始化
 		/// </summary>
-		public static RedisConfiguration Configuration
+		/// <param name="configuration"></param>
+		/// <returns></returns>
+		public static bool Init(Model.RedisConfiguration configuration)
 		{
-			get
-			{
-				if (configuration == null)
-				{
-					var config = JsonConfigHelper.Get("Redis");
-					if (config != null)
-					{
-						configuration = new RedisConfiguration()
-						{
-							Host = config.Value<string>("Host"),
-							Port = config.Value<int>("Port"),
-							Password = config.Value<string>("Password"),
-							DbNumber = config.Value<int>("DbNumber")
-						};
-					}
-					else
-					{
-						throw new Exception("Not configured.");
-					}
-				}
-				return configuration;
-			}
+			Configuration = configuration;
+			return true;
 		}
 
 		/// <summary>
 		/// DbCount
 		/// </summary>
-		public static readonly int DbCount = 16;
-		/// <summary>
-		/// Instance
-		/// </summary>
-		public static ConnectionMultiplexer Instance => CreateInstance(Configuration);
+		public const int DbCount = 16;
 
 		/// <summary>
-		/// Db
+		/// GetDatabase
 		/// </summary>
-		public static IDatabase Db = Instance.GetDatabase(Configuration.DbNumber);
-		/// <summary>
-		/// Db0
-		/// </summary>
-		public static IDatabase Db0 = Instance.GetDatabase(0);
-		/// <summary>
-		/// Db1
-		/// </summary>
-		public static IDatabase Db1 = Instance.GetDatabase(1);
-		/// <summary>
-		/// Db2
-		/// </summary>
-		public static IDatabase Db2 = Instance.GetDatabase(2);
-		/// <summary>
-		/// Db3
-		/// </summary>
-		public static IDatabase Db3 = Instance.GetDatabase(3);
-		/// <summary>
-		/// Db4
-		/// </summary>
-		public static IDatabase Db4 = Instance.GetDatabase(4);
-		/// <summary>
-		/// Db15
-		/// </summary>
-		public static IDatabase Db15 = Instance.GetDatabase(15);
+		/// <param name="db"></param>
+		/// <param name="asyncState"></param>
+		/// <returns></returns>
+		public static IDatabase GetDatabase(int db = -1, object asyncState = null)
+		{
+			return CreateInstance().GetDatabase(db, asyncState);
+		}
 
 		/// <summary>
 		/// CreateConnection
 		/// </summary>
 		/// <param name="configuration"></param>
 		/// <returns></returns>
-		public static ConnectionMultiplexer CreateInstance(RedisConfiguration configuration = null)
+		public static ConnectionMultiplexer CreateInstance(Model.RedisConfiguration configuration = null)
 		{
 			if (configuration == null)
 			{
@@ -101,7 +61,7 @@ namespace Adai.Standard
 		/// </summary>
 		/// <param name="configuration"></param>
 		/// <returns></returns>
-		public static IDatabase CreateDatabase(RedisConfiguration configuration = null)
+		public static IDatabase CreateDatabase(Model.RedisConfiguration configuration = null)
 		{
 			using var instance = CreateInstance(configuration);
 			return instance.GetDatabase(configuration.DbNumber);

@@ -18,7 +18,7 @@
 		/// </summary>
 		public string Password { get; set; }
 		/// <summary>
-		/// DbIndex
+		/// DbNumber
 		/// </summary>
 		public int DbNumber { get; set; }
 	}

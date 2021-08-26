@@ -1,9 +1,9 @@
 ﻿namespace Adai.Standard.Model
 {
 	/// <summary>
-	/// SmtpConfiguration
+	/// MailConfiguration
 	/// </summary>
-	public class SmtpConfiguration
+	public class MailConfiguration
 	{
 		/// <summary>
 		/// Host

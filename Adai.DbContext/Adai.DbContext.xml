@@ -768,6 +768,11 @@
             Oracle
             </summary>
         </member>
+        <member name="F:Adai.DbContext.DbType.SQLite">
+            <summary>
+            SQLite
+            </summary>
+        </member>
         <member name="T:Adai.DbContext.Extension.AttributeExt">
             <summary>
             AttributeExt
@@ -1089,12 +1094,18 @@
             启动
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Startup.Init(System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Adai.DbContext.Startup.Init(System.Collections.Generic.IDictionary{System.String,System.String},System.Action{System.String,System.Data.IDbCommand})">
             <summary>
             初始化（建议在程序启动时执行此方法）
             </summary>
-            <param name="connectionStrings"></param>
+            <param name="connectionStrings">数据库别名-连接字符串</param>
+            <param name="beforeExecute">执行之前执行，可用于记录SQL，第一个参数是初始化时传入的EventId</param>
             <returns></returns>
+        </member>
+        <member name="P:Adai.DbContext.Startup.BeforeExecuteAction">
+            <summary>
+            执行之前
+            </summary>
         </member>
     </members>
 </doc>
