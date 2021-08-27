@@ -38,23 +38,6 @@ namespace Adai.Core.WebApi
 		/// UseExceptionHandler
 		/// </summary>
 		/// <param name="app"></param>
-		/// <param name="configure"></param>
-		/// <returns></returns>
-		public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder app, Action<IApplicationBuilder> configure)
-		{
-			var newBuilder = app.New();
-			configure(newBuilder);
-
-			return app.UseExceptionHandler(new ExceptionHandlerOptions
-			{
-				ExceptionHandler = newBuilder.Build()
-			});
-		}
-
-		/// <summary>
-		/// UseExceptionHandler
-		/// </summary>
-		/// <param name="app"></param>
 		/// <param name="options"></param>
 		/// <returns></returns>
 		public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder app, ExceptionHandlerOptions options)

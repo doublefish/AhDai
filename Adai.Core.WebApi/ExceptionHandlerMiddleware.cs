@@ -20,37 +20,21 @@ namespace Adai.Core.WebApi
 		/// <summary>
 		/// _Next
 		/// </summary>
-		readonly RequestDelegate _next;
+		readonly RequestDelegate _Next;
 		/// <summary>
-		/// _LoggerFactory
+		/// _Logger
 		/// </summary>
-		readonly ILoggerFactory _loggerFactory;
-		/// <summary>
-		/// _Options
-		/// </summary>
-		readonly ExceptionHandlerOptions _options;
-		/// <summary>
-		/// _DiagnosticSource
-		/// </summary>
-		readonly DiagnosticSource _diagnosticSource;
+		readonly ILogger _Logger;
 
 		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="next"></param>
-		/// <param name="loggerFactory"></param>
-		/// <param name="options"></param>
-		/// <param name="diagnosticSource"></param>
-		public ExceptionHandlerMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, IOptions<ExceptionHandlerOptions> options, DiagnosticSource diagnosticSource)
+		/// <param name="logger"></param>
+		public ExceptionHandlerMiddleware(RequestDelegate next, ILogger<ExceptionHandlerMiddleware> logger)
 		{
-			_next = next;
-			_options = options.Value;
-			_loggerFactory = loggerFactory;
-			_diagnosticSource = diagnosticSource;
-			if (_options != null && _diagnosticSource != null)
-			{
-
-			}
+			_Next = next;
+			_Logger = logger;
 		}
 
 		/// <summary>
@@ -62,11 +46,11 @@ namespace Adai.Core.WebApi
 		{
 			try
 			{
-				await _next(context).ConfigureAwait(false);
+				await _Next(context).ConfigureAwait(false);
 			}
 			catch (Exception ex)
 			{
-				_loggerFactory.CreateLogger("Default").LogTrace(ex, ex.Message);
+				_Logger.LogError(ex, ex.Message);
 				await HandleExceptionAsync(context, ex).ConfigureAwait(false);
 			}
 		}
