@@ -57,7 +57,7 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 数据库连接字符串
 		/// </summary>
-		public static IDictionary<string, string> ConnectionStrings;
+		public static IDictionary<string, string> ConnectionStrings { get; internal set; }
 
 		/// <summary>
 		/// 已初始化
