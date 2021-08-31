@@ -54,8 +54,8 @@ namespace Adai.Standard
 		/// <returns></returns>
 		public static IDatabase GetDatabase(Model.RedisConfiguration configuration = null)
 		{
-			using var instance = GetConnectionMultiplexer(configuration);
-			return instance.GetDatabase(configuration.Database);
+			using var multiplexer = GetConnectionMultiplexer(configuration);
+			return multiplexer.GetDatabase(configuration.Database);
 		}
 
 		/// <summary>
