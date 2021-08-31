@@ -1,6 +1,5 @@
-﻿using Adai.Standard.Model;
-using StackExchange.Redis;
-using System;
+﻿using StackExchange.Redis;
+using System.Collections.Generic;
 
 namespace Adai.Standard
 {
@@ -15,6 +14,13 @@ namespace Adai.Standard
 		public static Model.RedisConfiguration Configuration { get; private set; }
 
 		/// <summary>
+		/// 已初始化
+		/// </summary>
+		public static bool Initialized => Configuration != null
+			&& !string.IsNullOrEmpty(Configuration.Host) && Configuration.Port > 0
+			&& !string.IsNullOrEmpty(Configuration.Password);
+
+		/// <summary>
 		/// 初始化
 		/// </summary>
 		/// <param name="configuration"></param>
@@ -22,7 +28,7 @@ namespace Adai.Standard
 		public static bool Init(Model.RedisConfiguration configuration)
 		{
 			Configuration = configuration;
-			return true;
+			return Initialized;
 		}
 
 		/// <summary>
@@ -38,15 +44,26 @@ namespace Adai.Standard
 		/// <returns></returns>
 		public static IDatabase GetDatabase(int db = -1, object asyncState = null)
 		{
-			return CreateInstance().GetDatabase(db, asyncState);
+			return GetConnectionMultiplexer().GetDatabase(db, asyncState);
 		}
 
 		/// <summary>
-		/// CreateConnection
+		/// GetDatabase
 		/// </summary>
 		/// <param name="configuration"></param>
 		/// <returns></returns>
-		public static ConnectionMultiplexer CreateInstance(Model.RedisConfiguration configuration = null)
+		public static IDatabase GetDatabase(Model.RedisConfiguration configuration = null)
+		{
+			using var instance = GetConnectionMultiplexer(configuration);
+			return instance.GetDatabase(configuration.Database);
+		}
+
+		/// <summary>
+		/// GetConnectionMultiplexer
+		/// </summary>
+		/// <param name="configuration"></param>
+		/// <returns></returns>
+		public static IConnectionMultiplexer GetConnectionMultiplexer(Model.RedisConfiguration configuration = null)
 		{
 			if (configuration == null)
 			{
@@ -54,17 +71,6 @@ namespace Adai.Standard
 			}
 			var str = CreateConfiguration(configuration.Host, configuration.Port, configuration.Password);
 			return ConnectionMultiplexer.Connect(str);
-		}
-
-		/// <summary>
-		/// CreateDatabase
-		/// </summary>
-		/// <param name="configuration"></param>
-		/// <returns></returns>
-		public static IDatabase CreateDatabase(Model.RedisConfiguration configuration = null)
-		{
-			using var instance = CreateInstance(configuration);
-			return instance.GetDatabase(configuration.DbNumber);
 		}
 
 		/// <summary>

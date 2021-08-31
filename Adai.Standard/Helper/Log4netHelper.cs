@@ -7,9 +7,9 @@ using System.IO;
 namespace Adai.Standard
 {
 	/// <summary>
-	/// LogHelper
+	/// Log4netHelper
 	/// </summary>
-	public static class LogHelper
+	public static class Log4netHelper
 	{
 		static ILoggerRepository repository;
 

@@ -16,6 +16,14 @@ namespace Adai.Standard
 		public static Model.MailConfiguration Configuration { get; private set; }
 
 		/// <summary>
+		/// 已初始化
+		/// </summary>
+		public static bool Initialized => Configuration != null
+			&& !string.IsNullOrEmpty(Configuration.Host) && Configuration.Port > 0
+			&& !string.IsNullOrEmpty(Configuration.Username)
+			&& !string.IsNullOrEmpty(Configuration.Password);
+
+		/// <summary>
 		/// 初始化
 		/// </summary>
 		/// <param name="configuration"></param>
@@ -23,7 +31,7 @@ namespace Adai.Standard
 		public static bool Init(Model.MailConfiguration configuration)
 		{
 			Configuration = configuration;
-			return true;
+			return Initialized;
 		}
 
 		/// <summary>

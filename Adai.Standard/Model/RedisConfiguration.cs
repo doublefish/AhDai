@@ -20,6 +20,6 @@
 		/// <summary>
 		/// DbNumber
 		/// </summary>
-		public int DbNumber { get; set; }
+		public int Database { get; set; }
 	}
 }

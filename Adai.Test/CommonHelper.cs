@@ -35,7 +35,7 @@ namespace Adai.Test
 			{
 				message += $"{para.ParameterName}={para.Value},";
 			}
-			LogHelper.Debug(eventId, message);
+			Log4netHelper.Debug(eventId, message);
 		}
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using Adai.Extension;
 using Adai.Standard;
-using Adai.Standard.Extension;
 using Adai.Standard.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

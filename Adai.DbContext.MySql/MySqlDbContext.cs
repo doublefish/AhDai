@@ -72,7 +72,7 @@ namespace Adai.DbContext.MySql
 		/// 执行之前
 		/// </summary>
 		/// <param name="command"></param>
-		protected override void BeforeExecute(IDbCommand command)
+		public override void BeforeExecute(IDbCommand command)
 		{
 			Startup.BeforeExecuteAction?.Invoke(EventId, command);
 		}

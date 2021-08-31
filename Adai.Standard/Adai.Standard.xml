@@ -124,38 +124,38 @@
             已关闭
             </summary>
         </member>
-        <member name="T:Adai.Standard.Extension.ConfigExt">
+        <member name="T:Adai.Standard.ConfigExt">
             <summary>
             ConfigExt
             </summary>
         </member>
-        <member name="M:Adai.Standard.Extension.ConfigExt.GetNote(Adai.Standard.Config.SocketState)">
+        <member name="M:Adai.Standard.ConfigExt.GetNote(Adai.Standard.Config.SocketState)">
             <summary>
             获取说明
             </summary>
             <param name="state"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Standard.Extension.HttpRequestExt">
+        <member name="T:Adai.Standard.HttpRequestExt">
             <summary>
             HttpRequestExt
             </summary>
         </member>
-        <member name="M:Adai.Standard.Extension.HttpRequestExt.GetFullPath(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Adai.Standard.HttpRequestExt.GetFullPath(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             GetFullPath
             </summary>
             <param name="httpRequest"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.HttpRequestExt.GetPath(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Adai.Standard.HttpRequestExt.GetPath(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             获取请求路径
             </summary>
             <param name="httpRequest"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.HttpRequestExt.VerifyRequestFrequencyLimit(Microsoft.AspNetCore.Http.HttpRequest,System.Double,System.String)">
+        <member name="M:Adai.Standard.HttpRequestExt.VerifyRequestFrequencyLimit(Microsoft.AspNetCore.Http.HttpRequest,System.Double,System.String)">
             <summary>
             验证请求频率
             </summary>
@@ -164,14 +164,14 @@
             <param name="path"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.HttpRequestExt.GetParameters(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Adai.Standard.HttpRequestExt.GetParameters(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             获取请求参数
             </summary>
             <param name="httpRequest"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.HttpRequestExt.ReadBody(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+        <member name="M:Adai.Standard.HttpRequestExt.ReadBody(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
             <summary>
             读取内容
             </summary>
@@ -179,14 +179,14 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.HttpRequestExt.IsMobileDevice(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Adai.Standard.HttpRequestExt.IsMobileDevice(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             是否移动设备
             </summary>
             <param name="httpRequest"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.HttpRequestExt.GetValue(Microsoft.AspNetCore.Http.IHeaderDictionary,System.String)">
+        <member name="M:Adai.Standard.HttpRequestExt.GetValue(Microsoft.AspNetCore.Http.IHeaderDictionary,System.String)">
             <summary>
             获取值
             </summary>
@@ -194,12 +194,12 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Standard.Extension.IDictionaryExt">
+        <member name="T:Adai.Standard.IDictionaryExt">
             <summary>
             IDictionaryExt
             </summary>
         </member>
-        <member name="M:Adai.Standard.Extension.IDictionaryExt.Sort``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IComparer{``0})">
+        <member name="M:Adai.Standard.IDictionaryExt.Sort``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IComparer{``0})">
             <summary>
             排序
             </summary>
@@ -209,7 +209,7 @@
             <param name="comparer"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.IDictionaryExt.SortByASCII``1(System.Collections.Generic.IDictionary{System.String,``0})">
+        <member name="M:Adai.Standard.IDictionaryExt.SortByASCII``1(System.Collections.Generic.IDictionary{System.String,``0})">
             <summary>
             ASCII排序
             </summary>
@@ -217,7 +217,7 @@
             <param name="dic"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.IDictionaryExt.ToSortedDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
+        <member name="M:Adai.Standard.IDictionaryExt.ToSortedDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
             <summary>
             类型转换
             </summary>
@@ -226,7 +226,7 @@
             <param name="dic"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.IDictionaryExt.FilterSort``2(System.Collections.Generic.IDictionary{``0,``1},``0[])">
+        <member name="M:Adai.Standard.IDictionaryExt.FilterSort``2(System.Collections.Generic.IDictionary{``0,``1},``0[])">
             <summary>
             按指定键值筛选并排序
             </summary>
@@ -236,7 +236,7 @@
             <param name="keys"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.IDictionaryExt.Remove``2(System.Collections.Generic.IDictionary{``0,``1},``0[])">
+        <member name="M:Adai.Standard.IDictionaryExt.Remove``2(System.Collections.Generic.IDictionary{``0,``1},``0[])">
             <summary>
             删除指定键
             </summary>
@@ -246,7 +246,7 @@
             <param name="keys"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.IDictionaryExt.ToQueryString(System.Collections.Generic.IDictionary{System.String,System.String},System.Boolean,System.String[])">
+        <member name="M:Adai.Standard.IDictionaryExt.ToQueryString(System.Collections.Generic.IDictionary{System.String,System.String},System.Boolean,System.String[])">
             <summary>
             转换为QueryString
             </summary>
@@ -255,7 +255,7 @@
             <param name="ignores"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.IDictionaryExt.ToJoinString(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.Boolean,System.String[])">
+        <member name="M:Adai.Standard.IDictionaryExt.ToJoinString(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.Boolean,System.String[])">
             <summary>
             转换为连接字符串
             </summary>
@@ -265,7 +265,7 @@
             <param name="ignores"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.IDictionaryExt.ToXmlString(System.Collections.Generic.IDictionary{System.String,System.String},System.String[])">
+        <member name="M:Adai.Standard.IDictionaryExt.ToXmlString(System.Collections.Generic.IDictionary{System.String,System.String},System.String[])">
             <summary>
             转换为Xml字符串
             </summary>
@@ -273,7 +273,7 @@
             <param name="ignores"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.IDictionaryExt.ToQueryString(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Microsoft.Extensions.Primitives.StringValues}},System.Boolean,System.String[])">
+        <member name="M:Adai.Standard.IDictionaryExt.ToQueryString(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Microsoft.Extensions.Primitives.StringValues}},System.Boolean,System.String[])">
             <summary>
             转换为QueryString
             </summary>
@@ -282,12 +282,12 @@
             <param name="ignores"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Standard.Extension.RedisExt">
+        <member name="T:Adai.Standard.RedisExt">
             <summary>
             RedisExt
             </summary>
         </member>
-        <member name="M:Adai.Standard.Extension.RedisExt.Get``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.CommandFlags)">
+        <member name="M:Adai.Standard.RedisExt.Get``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.CommandFlags)">
             <summary>
             Get
             </summary>
@@ -297,7 +297,7 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.RedisExt.Set``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,``0,System.Nullable{System.TimeSpan},StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
+        <member name="M:Adai.Standard.RedisExt.Set``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,``0,System.Nullable{System.TimeSpan},StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
             <summary>
             Get
             </summary>
@@ -310,7 +310,7 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.RedisExt.HashGet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue,StackExchange.Redis.CommandFlags)">
+        <member name="M:Adai.Standard.RedisExt.HashGet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue,StackExchange.Redis.CommandFlags)">
             <summary>
             HashGet
             </summary>
@@ -321,7 +321,7 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.RedisExt.HashGet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],StackExchange.Redis.CommandFlags)">
+        <member name="M:Adai.Standard.RedisExt.HashGet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],StackExchange.Redis.CommandFlags)">
             <summary>
             HashGet
             </summary>
@@ -332,7 +332,7 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.RedisExt.HashValues``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.CommandFlags)">
+        <member name="M:Adai.Standard.RedisExt.HashValues``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.CommandFlags)">
             <summary>
             HashValues
             </summary>
@@ -342,7 +342,7 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.RedisExt.HashSet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue,``0,StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
+        <member name="M:Adai.Standard.RedisExt.HashSet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue,``0,StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
             <summary>
             HashSet
             </summary>
@@ -355,7 +355,7 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.RedisExt.HashSet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],``0[],StackExchange.Redis.CommandFlags)">
+        <member name="M:Adai.Standard.RedisExt.HashSet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],``0[],StackExchange.Redis.CommandFlags)">
             <summary>
             HashSet
             </summary>
@@ -366,7 +366,7 @@
             <param name="values"></param>
             <param name="flags"></param>
         </member>
-        <member name="M:Adai.Standard.Extension.RedisExt.ToInt32(StackExchange.Redis.RedisValue,System.Int32)">
+        <member name="M:Adai.Standard.RedisExt.ToInt32(StackExchange.Redis.RedisValue,System.Int32)">
             <summary>
             类型转换
             </summary>
@@ -374,7 +374,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extension.RedisExt.ToInt64(StackExchange.Redis.RedisValue,System.Int64)">
+        <member name="M:Adai.Standard.RedisExt.ToInt64(StackExchange.Redis.RedisValue,System.Int64)">
             <summary>
             类型转换
             </summary>
@@ -382,7 +382,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Standard.Extension.X509CertificateExt">
+        <member name="T:Adai.Standard.X509CertificateExt">
             <summary>
             X509CertificateExt
             </summary>
@@ -721,24 +721,24 @@
             <param name="memberSerialization"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Standard.LogHelper">
+        <member name="T:Adai.Standard.Log4netHelper">
             <summary>
-            LogHelper
+            Log4netHelper
             </summary>
         </member>
-        <member name="P:Adai.Standard.LogHelper.Repository">
+        <member name="P:Adai.Standard.Log4netHelper.Repository">
             <summary>
             Repository
             </summary>
         </member>
-        <member name="M:Adai.Standard.LogHelper.Info(System.String,System.Exception)">
+        <member name="M:Adai.Standard.Log4netHelper.Info(System.String,System.Exception)">
             <summary>
             Info
             </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:Adai.Standard.LogHelper.Info(System.String,System.String,System.Exception)">
+        <member name="M:Adai.Standard.Log4netHelper.Info(System.String,System.String,System.Exception)">
             <summary>
             Info
             </summary>
@@ -746,14 +746,14 @@
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:Adai.Standard.LogHelper.Error(System.String,System.Exception)">
+        <member name="M:Adai.Standard.Log4netHelper.Error(System.String,System.Exception)">
             <summary>
             Error
             </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:Adai.Standard.LogHelper.Error(System.String,System.String,System.Exception)">
+        <member name="M:Adai.Standard.Log4netHelper.Error(System.String,System.String,System.Exception)">
             <summary>
             Error
             </summary>
@@ -761,18 +761,82 @@
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:Adai.Standard.LogHelper.Debug(System.String,System.Exception)">
+        <member name="M:Adai.Standard.Log4netHelper.Debug(System.String,System.Exception)">
             <summary>
             Error
             </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:Adai.Standard.LogHelper.Debug(System.String,System.String,System.Exception)">
+        <member name="M:Adai.Standard.Log4netHelper.Debug(System.String,System.String,System.Exception)">
             <summary>
             Error
             </summary>
             <param name="eventId">事件Id</param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="T:Adai.Standard.Helper.LoggerHelper">
+            <summary>
+            LoggerHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Helper.LoggerHelper.Logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Helper.LoggerHelper.Initialized">
+            <summary>
+            已初始化
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Helper.LoggerHelper.Init(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            初始化
+            </summary>
+            <param name="logger"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Helper.LoggerHelper.Trace(System.String,System.Exception)">
+            <summary>
+            Trace
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Adai.Standard.Helper.LoggerHelper.Debug(System.String,System.Exception)">
+            <summary>
+            Debug
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Adai.Standard.Helper.LoggerHelper.Info(System.String,System.Exception)">
+            <summary>
+            Info
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Adai.Standard.Helper.LoggerHelper.Warn(System.String,System.Exception)">
+            <summary>
+            Warn
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Adai.Standard.Helper.LoggerHelper.Error(System.String,System.Exception)">
+            <summary>
+            Error
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Adai.Standard.Helper.LoggerHelper.Critical(System.String,System.Exception)">
+            <summary>
+            Critical
+            </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
@@ -784,6 +848,11 @@
         <member name="P:Adai.Standard.MailHelper.Configuration">
             <summary>
             SmptConfiguration
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.MailHelper.Initialized">
+            <summary>
+            已初始化
             </summary>
         </member>
         <member name="M:Adai.Standard.MailHelper.Init(Adai.Standard.Model.MailConfiguration)">
@@ -816,6 +885,11 @@
             SmptConfiguration
             </summary>
         </member>
+        <member name="P:Adai.Standard.RedisHelper.Initialized">
+            <summary>
+            已初始化
+            </summary>
+        </member>
         <member name="M:Adai.Standard.RedisHelper.Init(Adai.Standard.Model.RedisConfiguration)">
             <summary>
             初始化
@@ -836,16 +910,16 @@
             <param name="asyncState"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.RedisHelper.CreateInstance(Adai.Standard.Model.RedisConfiguration)">
+        <member name="M:Adai.Standard.RedisHelper.GetDatabase(Adai.Standard.Model.RedisConfiguration)">
             <summary>
-            CreateConnection
+            GetDatabase
             </summary>
             <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.RedisHelper.CreateDatabase(Adai.Standard.Model.RedisConfiguration)">
+        <member name="M:Adai.Standard.RedisHelper.GetConnectionMultiplexer(Adai.Standard.Model.RedisConfiguration)">
             <summary>
-            CreateDatabase
+            GetConnectionMultiplexer
             </summary>
             <param name="configuration"></param>
             <returns></returns>
@@ -1608,7 +1682,7 @@
             Password
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.RedisConfiguration.DbNumber">
+        <member name="P:Adai.Standard.Model.RedisConfiguration.Database">
             <summary>
             DbNumber
             </summary>

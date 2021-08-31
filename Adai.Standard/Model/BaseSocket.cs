@@ -1,5 +1,4 @@
-﻿using Adai.Standard.Extension;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -126,7 +125,7 @@ namespace Adai.Standard.Model
 		protected void Receive(Socket remote, byte[] bytes, int size)
 		{
 			var message = Encoding.GetString(bytes, 0, size);
-			LogHelper.Info($"接收来自【{remote.RemoteEndPoint}】的消息=>{message}");
+			Log4netHelper.Info($"接收来自【{remote.RemoteEndPoint}】的消息=>{message}");
 			MessageEvent?.Invoke(remote, message);
 		}
 
@@ -141,7 +140,7 @@ namespace Adai.Standard.Model
 			{
 				return 0;
 			}
-			LogHelper.Info($"【{LocalEndPoint}】发送消息给【{RemoteEndPoint}】=>{message}");
+			Log4netHelper.Info($"【{LocalEndPoint}】发送消息给【{RemoteEndPoint}】=>{message}");
 			return Send(Encoding.GetBytes(message));
 		}
 
@@ -156,7 +155,7 @@ namespace Adai.Standard.Model
 			var i = 0;
 			foreach (var remote in remotes)
 			{
-				LogHelper.Info($"【{remote.LocalEndPoint}】发送消息给【{remote.RemoteEndPoint}】=>{message}");
+				Log4netHelper.Info($"【{remote.LocalEndPoint}】发送消息给【{remote.RemoteEndPoint}】=>{message}");
 				i += remote.Send(Encoding.GetBytes(message));
 			}
 			return i;
@@ -174,7 +173,7 @@ namespace Adai.Standard.Model
 			{
 				return 0;
 			}
-			LogHelper.Info($"【{remote.LocalEndPoint}】发送消息给【{remote.RemoteEndPoint}】=>{message}");
+			Log4netHelper.Info($"【{remote.LocalEndPoint}】发送消息给【{remote.RemoteEndPoint}】=>{message}");
 			return remote.Send(Encoding.GetBytes(message));
 		}
 
@@ -187,7 +186,7 @@ namespace Adai.Standard.Model
 		protected void ChangeState(Socket remote, Config.SocketState state, string message)
 		{
 			Send(message, remote);
-			LogHelper.Info($"【{remote.RemoteEndPoint}】的连接状态变为=>[{state}]{state.GetNote()},{message}");
+			Log4netHelper.Info($"【{remote.RemoteEndPoint}】的连接状态变为=>[{state}]{state.GetNote()},{message}");
 			StateChangeEvent?.Invoke(remote, state, message);
 		}
 
@@ -214,8 +213,8 @@ namespace Adai.Standard.Model
 					}
 					catch (Exception ex)
 					{
-						LogHelper.Info($"接收来自【{client.RemoteEndPoint}】的消息发生异常=>{ex.Message}");
-						LogHelper.Error($"接收消息发生异常=>{ex}");
+						Log4netHelper.Info($"接收来自【{client.RemoteEndPoint}】的消息发生异常=>{ex.Message}");
+						Log4netHelper.Error($"接收消息发生异常=>{ex}");
 						Close(client, ex.Message);
 						break;
 					}

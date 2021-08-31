@@ -1,6 +1,4 @@
 ﻿using Adai.Security;
-using Adai.Standard.Extension;
-using Adai.Standard.Model;
 using System;
 
 namespace Adai.Standard
@@ -50,11 +48,11 @@ namespace Adai.Standard
 		/// <param name="data"></param>
 		/// <param name="suffix"></param>
 		/// <returns></returns>
-		public static Token<T> Set<T>(T data, string suffix = null) where T : TokenData
+		public static Model.Token<T> Set<T>(T data, string suffix = null) where T : Model.TokenData
 		{
 			var key = $"{CacheKey}-{suffix}";
 			var sign = $"{data.Username}-{data.Platform}";
-			var token = new Token<T>()
+			var token = new Model.Token<T>()
 			{
 				Id = data.Id,
 				Signature = MD5Helper.Encrypt(sign),
@@ -72,14 +70,14 @@ namespace Adai.Standard
 		/// <param name="signature"></param>
 		/// <param name="suffix"></param>
 		/// <returns></returns>
-		public static Token<T> Get<T>(string signature, string suffix = null) where T : TokenData
+		public static Model.Token<T> Get<T>(string signature, string suffix = null) where T : Model.TokenData
 		{
 			if (string.IsNullOrEmpty(signature))
 			{
 				return null;
 			}
 			var key = $"{CacheKey}-{suffix}";
-			return RedisHelper.GetDatabase(15).HashGet<Token<T>>(key, signature);
+			return RedisHelper.GetDatabase(15).HashGet<Model.Token<T>>(key, signature);
 		}
 
 		/// <summary>
@@ -90,7 +88,7 @@ namespace Adai.Standard
 		/// <param name="token"></param>
 		/// <param name="suffix"></param>
 		/// <returns></returns>
-		public static bool Verify<T>(string signature, out Token<T> token, string suffix = null) where T : TokenData
+		public static bool Verify<T>(string signature, out Model.Token<T> token, string suffix = null) where T : Model.TokenData
 		{
 			if (string.IsNullOrEmpty(signature))
 			{
@@ -99,7 +97,7 @@ namespace Adai.Standard
 			}
 			var redis = RedisHelper.GetDatabase(15);
 			var key = $"{CacheKey}-{suffix}";
-			token = redis.HashGet<Token<T>>(key, signature);
+			token = redis.HashGet<Model.Token<T>>(key, signature);
 			if (token == null || token.Expiry < DateTime.UtcNow)
 			{
 				return false;

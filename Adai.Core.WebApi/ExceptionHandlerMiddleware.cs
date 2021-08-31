@@ -90,13 +90,13 @@ namespace Adai.Core.WebApi
 			{
 				result.Code = ReturnCode.ApiException;
 				result.Message = string.Format("[ApiError]{0}", result.Message);
-				LogHelper.Error(result.Message, exception);
+				Log4netHelper.Error(result.Message, exception);
 			}
 			else
 			{
 				result.Code = ReturnCode.SystemException;
 				result.Message = string.Format("[SystemError]{0}", result.Message);
-				LogHelper.Error(result.Message, exception);
+				Log4netHelper.Error(result.Message, exception);
 			}
 
 			context.Response.ContentType = HttpContentType.Json;

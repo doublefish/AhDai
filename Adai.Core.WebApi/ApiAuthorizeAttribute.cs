@@ -1,7 +1,6 @@
 ﻿using Adai;
 using Adai.Extension;
 using Adai.Standard;
-using Adai.Standard.Extension;
 using Adai.Standard.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -196,7 +195,7 @@ namespace Adai.Core.WebApi
 		protected virtual void WriteLog(HttpContext httpContext)
 		{
 			var paras = httpContext.Request.GetParameters();
-			LogHelper.Info($"接收请求=>ip={httpContext.Connection.RemoteIpAddress}" +
+			Log4netHelper.Info($"接收请求=>ip={httpContext.Connection.RemoteIpAddress}" +
 				$",port={httpContext.Connection.RemotePort}" +
 				$",mac={httpContext.Request.Headers["X-Mac"].FirstOrDefault()}" +
 				$",method={httpContext.Request.Method}" +
