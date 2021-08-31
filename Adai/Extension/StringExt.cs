@@ -78,17 +78,17 @@ namespace Adai.Extension
 		/// <returns></returns>
 		public static int ToInt32(this string s, int error = int.MinValue)
 		{
-			s = s.ToLower();
-			if (s.Contains("e"))
+			if (!string.IsNullOrEmpty(s))
 			{
-				if (int.TryParse(s, NumberStyles.Float, null, out int result))
+				s = s.ToLower();
+				if (s.Contains("e"))
 				{
-					return result;
+					if (int.TryParse(s, NumberStyles.Float, null, out int result))
+					{
+						return result;
+					}
 				}
-			}
-			else
-			{
-				if (int.TryParse(s, out int result))
+				else if (int.TryParse(s, out int result))
 				{
 					return result;
 				}
@@ -104,19 +104,22 @@ namespace Adai.Extension
 		/// <returns></returns>
 		public static long ToInt64(this string s, long error = long.MinValue)
 		{
-			s = s.ToLower();
-			if (s.Contains("e"))
+			if (!string.IsNullOrEmpty(s))
 			{
-				if (long.TryParse(s, NumberStyles.Float, null, out long result))
+				s = s.ToLower();
+				if (s.Contains("e"))
 				{
-					return result;
+					if (long.TryParse(s, NumberStyles.Float, null, out long result))
+					{
+						return result;
+					}
 				}
-			}
-			else
-			{
-				if (long.TryParse(s, out long result))
+				else
 				{
-					return result;
+					if (long.TryParse(s, out long result))
+					{
+						return result;
+					}
 				}
 			}
 			return error;
@@ -130,19 +133,22 @@ namespace Adai.Extension
 		/// <returns></returns>
 		public static ulong ToUInt64(this string s, ulong error = ulong.MinValue)
 		{
-			s = s.ToLower();
-			if (s.Contains("e"))
+			if (!string.IsNullOrEmpty(s))
 			{
-				if (ulong.TryParse(s, NumberStyles.Float, null, out ulong result))
+				s = s.ToLower();
+				if (s.Contains("e"))
 				{
-					return result;
+					if (ulong.TryParse(s, NumberStyles.Float, null, out ulong result))
+					{
+						return result;
+					}
 				}
-			}
-			else
-			{
-				if (ulong.TryParse(s, out ulong result))
+				else
 				{
-					return result;
+					if (ulong.TryParse(s, out ulong result))
+					{
+						return result;
+					}
 				}
 			}
 			return error;
@@ -156,19 +162,22 @@ namespace Adai.Extension
 		/// <returns></returns>
 		public static float ToSingle(this string s, float error = float.MinValue)
 		{
-			s = s.ToLower();
-			if (s.Contains("e"))
+			if (!string.IsNullOrEmpty(s))
 			{
-				if (float.TryParse(s, NumberStyles.Float, null, out float result))
+				s = s.ToLower();
+				if (s.Contains("e"))
 				{
-					return result;
+					if (float.TryParse(s, NumberStyles.Float, null, out float result))
+					{
+						return result;
+					}
 				}
-			}
-			else
-			{
-				if (float.TryParse(s, out float result))
+				else
 				{
-					return result;
+					if (float.TryParse(s, out float result))
+					{
+						return result;
+					}
 				}
 			}
 			return error;
@@ -182,19 +191,22 @@ namespace Adai.Extension
 		/// <returns></returns>
 		public static double ToDouble(this string s, double error = double.MinValue)
 		{
-			s = s.ToLower();
-			if (s.Contains("e"))
+			if (!string.IsNullOrEmpty(s))
 			{
-				if (double.TryParse(s, NumberStyles.Float, null, out double result))
+				s = s.ToLower();
+				if (s.Contains("e"))
 				{
-					return result;
+					if (double.TryParse(s, NumberStyles.Float, null, out double result))
+					{
+						return result;
+					}
 				}
-			}
-			else
-			{
-				if (double.TryParse(s, out double result))
+				else
 				{
-					return result;
+					if (double.TryParse(s, out double result))
+					{
+						return result;
+					}
 				}
 			}
 			return error;
@@ -208,19 +220,22 @@ namespace Adai.Extension
 		/// <returns></returns>
 		public static decimal ToDecimal(this string s, decimal error = decimal.MinValue)
 		{
-			s = s.ToLower();
-			if (s.Contains("e"))
+			if (!string.IsNullOrEmpty(s))
 			{
-				if (decimal.TryParse(s, NumberStyles.Float, null, out decimal result))
+				s = s.ToLower();
+				if (s.Contains("e"))
 				{
-					return result;
+					if (decimal.TryParse(s, NumberStyles.Float, null, out decimal result))
+					{
+						return result;
+					}
 				}
-			}
-			else
-			{
-				if (decimal.TryParse(s, out decimal result))
+				else
 				{
-					return result;
+					if (decimal.TryParse(s, out decimal result))
+					{
+						return result;
+					}
 				}
 			}
 			return error;
