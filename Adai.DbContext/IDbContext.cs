@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 
 namespace Adai.DbContext
 {
@@ -89,15 +88,14 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 执行
 		/// </summary>
-		/// <param name="commands"></param>
+		/// <param name="command"></param>
 		/// <returns></returns>
-		int ExecuteNonQuery(params IDbCommand[] commands);
+		int ExecuteNonQuery(IDbCommand command);
 
 		/// <summary>
-		/// 跨库执行
+		/// 执行之前
 		/// </summary>
-		/// <param name="dict">connStr-cmds</param>
-		/// <returns></returns>
-		int ExecuteNonQuery(IDictionary<string, ICollection<IDbCommand>> dict);
+		/// <param name="command"></param>
+		void BeforeExecute(IDbCommand command);
 	}
 }

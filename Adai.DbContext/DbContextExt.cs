@@ -167,6 +167,105 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
+		/// 执行
+		/// </summary>
+		/// <param name="dbContext"></param>
+		/// <param name="commands"></param>
+		/// <returns></returns>
+		public static int ExecuteNonQuery(this IDbContext dbContext, IDbCommand[] commands)
+		{
+			var result = 0;
+			var conn = dbContext.CreateConnection();
+			conn.ConnectionString = dbContext.ConnectionString;
+			IDbTransaction tran = null;
+			try
+			{
+				conn.Open();
+				tran = conn.BeginTransaction();
+				foreach (var cmd in commands)
+				{
+					cmd.Connection = conn;
+					cmd.Transaction = tran;
+					dbContext.BeforeExecute(cmd);
+					result += cmd.ExecuteNonQuery();
+				}
+				tran.Commit();
+			}
+			catch (Exception ex)
+			{
+				if (tran != null)
+				{
+					tran.Rollback();
+				}
+				throw ex;
+			}
+			finally
+			{
+				if (conn.State == ConnectionState.Open)
+				{
+					conn.Close();
+				}
+			}
+			return result;
+		}
+
+		/// <summary>
+		/// 跨库执行
+		/// </summary>
+		/// <param name="dbContext"></param>
+		/// <param name="dict">connStr-cmds</param>
+		/// <returns></returns>
+		public static int ExecuteNonQuery(this IDbContext dbContext, IDictionary<string, ICollection<IDbCommand>> dict)
+		{
+			var result = 0;
+			var conns = new List<IDbConnection>();
+			var trans = new List<IDbTransaction>();
+			try
+			{
+				foreach (var kv in dict)
+				{
+					var conn = dbContext.CreateConnection();
+					conn.ConnectionString = kv.Key;
+					var cmds = kv.Value;
+					conn.Open();
+					conns.Add(conn);
+					var tran = conn.BeginTransaction();
+					trans.Add(tran);
+					foreach (var cmd in cmds)
+					{
+						cmd.Connection = conn;
+						cmd.Transaction = tran;
+						dbContext.BeforeExecute(cmd);
+						result += cmd.ExecuteNonQuery();
+					}
+				}
+				foreach (var tran in trans)
+				{
+					tran.Commit();
+				}
+			}
+			catch (Exception ex)
+			{
+				foreach (var tran in trans)
+				{
+					tran.Rollback();
+				}
+				throw ex;
+			}
+			finally
+			{
+				foreach (var conn in conns)
+				{
+					if (conn.State == ConnectionState.Open)
+					{
+						conn.Close();
+					}
+				}
+			}
+			return result;
+		}
+
+		/// <summary>
 		/// 跨库执行
 		/// </summary>
 		/// <param name="dbContext"></param>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 
 namespace Adai.DbContext
 {
@@ -136,15 +134,13 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public virtual DataSet GetDataSet(string sql, params IDbDataParameter[] parameters)
 		{
+			using var conn = GetConnection();
+			conn.Open();
+			var adapter = CreateDataAdapter();
+			adapter.SelectCommand = CreateCommand(conn, sql, parameters);
+			BeforeExecute(adapter.SelectCommand);
 			var ds = new DataSet();
-			using (var conn = GetConnection())
-			{
-				conn.Open();
-				var adapter = CreateDataAdapter();
-				adapter.SelectCommand = CreateCommand(conn, sql, parameters);
-				BeforeExecute(adapter.SelectCommand);
-				adapter.Fill(ds);
-			}
+			adapter.Fill(ds);
 			return ds;
 		}
 
@@ -156,15 +152,13 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public object ExecuteScalar(string sql, params IDbDataParameter[] parameters)
 		{
-			using (var conn = GetConnection())
-			{
-				conn.Open();
-				var cmd = conn.CreateCommand();
-				cmd.CommandText = sql;
-				cmd.Parameters.AddRange(parameters);
-				BeforeExecute(cmd);
-				return cmd.ExecuteScalar();
-			}
+			using var conn = GetConnection();
+			conn.Open();
+			var cmd = conn.CreateCommand();
+			cmd.CommandText = sql;
+			cmd.Parameters.AddRange(parameters);
+			BeforeExecute(cmd);
+			return cmd.ExecuteScalar();
 		}
 
 		/// <summary>
@@ -182,103 +176,20 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 执行
 		/// </summary>
-		/// <param name="commands"></param>
+		/// <param name="command"></param>
 		/// <returns></returns>
-		public virtual int ExecuteNonQuery(params IDbCommand[] commands)
+		public virtual int ExecuteNonQuery(IDbCommand command)
 		{
-			var result = 0;
-			var conn = GetConnection();
-			IDbTransaction tran = null;
-			try
-			{
-				conn.Open();
-				tran = conn.BeginTransaction();
-				foreach (var cmd in commands)
-				{
-					cmd.Connection = conn;
-					cmd.Transaction = tran;
-					BeforeExecute(cmd);
-					result += cmd.ExecuteNonQuery();
-				}
-				tran.Commit();
-			}
-			catch (Exception ex)
-			{
-				if (tran != null)
-				{
-					tran.Rollback();
-				}
-				throw ex;
-			}
-			finally
-			{
-				if (conn.State == ConnectionState.Open)
-				{
-					conn.Close();
-				}
-			}
-			return result;
-		}
-
-		/// <summary>
-		/// 跨库执行
-		/// </summary>
-		/// <param name="dict">connStr-cmds</param>
-		/// <returns></returns>
-		public virtual int ExecuteNonQuery(IDictionary<string, ICollection<IDbCommand>> dict)
-		{
-			var result = 0;
-			var conns = new List<IDbConnection>();
-			var trans = new List<IDbTransaction>();
-			try
-			{
-				foreach (var kv in dict)
-				{
-					var conn = CreateConnection();
-					conn.ConnectionString = kv.Key;
-					var cmds = kv.Value;
-					conn.Open();
-					conns.Add(conn);
-					var tran = conn.BeginTransaction();
-					trans.Add(tran);
-					foreach (var cmd in cmds)
-					{
-						cmd.Connection = conn;
-						cmd.Transaction = tran;
-						BeforeExecute(cmd);
-						result += cmd.ExecuteNonQuery();
-					}
-				}
-				foreach (var tran in trans)
-				{
-					tran.Commit();
-				}
-			}
-			catch (Exception ex)
-			{
-				foreach (var tran in trans)
-				{
-					tran.Rollback();
-				}
-				throw ex;
-			}
-			finally
-			{
-				foreach (var conn in conns)
-				{
-					if (conn.State == ConnectionState.Open)
-					{
-						conn.Close();
-					}
-				}
-			}
-			return result;
+			using var conn = GetConnection();
+			conn.Open();
+			BeforeExecute(command);
+			return command.ExecuteNonQuery();
 		}
 
 		/// <summary>
 		/// 执行之前
 		/// </summary>
 		/// <param name="command"></param>
-		protected abstract void BeforeExecute(IDbCommand command);
+		public abstract void BeforeExecute(IDbCommand command);
 	}
 }

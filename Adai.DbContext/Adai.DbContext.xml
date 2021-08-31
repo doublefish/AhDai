@@ -499,18 +499,11 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContext.ExecuteNonQuery(System.Data.IDbCommand[])">
+        <member name="M:Adai.DbContext.DbContext.ExecuteNonQuery(System.Data.IDbCommand)">
             <summary>
             执行
             </summary>
-            <param name="commands"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.DbContext.DbContext.ExecuteNonQuery(System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{System.Data.IDbCommand}})">
-            <summary>
-            跨库执行
-            </summary>
-            <param name="dict">connStr-cmds</param>
+            <param name="command"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.DbContext.BeforeExecute(System.Data.IDbCommand)">
@@ -611,6 +604,22 @@
             <param name="dbContext"></param>
             <param name="dbName"></param>
             <param name="commands"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContextExt.ExecuteNonQuery(Adai.DbContext.IDbContext,System.Data.IDbCommand[])">
+            <summary>
+            执行
+            </summary>
+            <param name="dbContext"></param>
+            <param name="commands"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContextExt.ExecuteNonQuery(Adai.DbContext.IDbContext,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{System.Data.IDbCommand}})">
+            <summary>
+            跨库执行
+            </summary>
+            <param name="dbContext"></param>
+            <param name="dict">connStr-cmds</param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.DbContextExt.ExecuteNonQueryByDbName(Adai.DbContext.IDbContext,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{System.Data.IDbCommand}})">
@@ -714,7 +723,7 @@
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="F:Adai.DbContext.DbHelper.ConnectionStrings">
+        <member name="P:Adai.DbContext.DbHelper.ConnectionStrings">
             <summary>
             数据库连接字符串
             </summary>
@@ -1019,19 +1028,18 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.IDbContext.ExecuteNonQuery(System.Data.IDbCommand[])">
+        <member name="M:Adai.DbContext.IDbContext.ExecuteNonQuery(System.Data.IDbCommand)">
             <summary>
             执行
             </summary>
-            <param name="commands"></param>
+            <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.IDbContext.ExecuteNonQuery(System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{System.Data.IDbCommand}})">
+        <member name="M:Adai.DbContext.IDbContext.BeforeExecute(System.Data.IDbCommand)">
             <summary>
-            跨库执行
+            执行之前
             </summary>
-            <param name="dict">connStr-cmds</param>
-            <returns></returns>
+            <param name="command"></param>
         </member>
         <member name="T:Adai.DbContext.IFilter`1">
             <summary>
