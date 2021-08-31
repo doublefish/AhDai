@@ -17,10 +17,10 @@ namespace Adai.Test
 		public static void InitDbConfig()
 		{
 			// 读取数据库配置
-			var dbConfigs = JsonConfigHelper.Get<ICollection<DbConfiguration>>("Database");
-			//var dict = dbConfigs.ToDictionary(o => o.Name);
-			var dict = dbConfigs.ToDictionary(o => o.Name, o => o.Value);
-			Adai.DbContext.Startup.Init(dict, BeforeExecute);
+			//var dbConfigs = JsonConfigHelper.Get<ICollection<DbConfiguration>>("Database");
+			////var dict = dbConfigs.ToDictionary(o => o.Name);
+			//var dict = dbConfigs.ToDictionary(o => o.Name, o => o.Value);
+			//Adai.DbContext.Startup.Init(dict, BeforeExecute);
 		}
 
 		/// <summary>

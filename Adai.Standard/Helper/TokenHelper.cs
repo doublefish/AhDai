@@ -14,32 +14,9 @@ namespace Adai.Standard
 		public static readonly string CacheKey = "Token";
 
 		/// <summary>
-		/// 有效时间
+		/// 过期时间
 		/// </summary>
-		static TimeSpan expiry;
-
-		/// <summary>
-		/// 有效时间
-		/// </summary>
-		public static TimeSpan Expiry
-		{
-			get
-			{
-				if (expiry == null || expiry == TimeSpan.Zero)
-				{
-					var config = JsonConfigHelper.Get("Token.Expiry");
-					if (config != null)
-					{
-						expiry = config.ToObject<TimeSpan>();
-					}
-					else
-					{
-						throw new Exception("Not configured.");
-					}
-				}
-				return expiry;
-			}
-		}
+		public static readonly TimeSpan Expiry = new TimeSpan(0, 30, 0);
 
 		/// <summary>
 		/// 设置

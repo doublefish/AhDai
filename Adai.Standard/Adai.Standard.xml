@@ -415,25 +415,22 @@
             FileHelper
             </summary>
         </member>
-        <member name="F:Adai.Standard.FileHelper.configuration">
-            <summary>
-            configuration
-            </summary>
-        </member>
         <member name="P:Adai.Standard.FileHelper.Configuration">
             <summary>
-            Config
+            Configuration
             </summary>
         </member>
-        <member name="F:Adai.Standard.FileHelper.UploadDirectory">
+        <member name="P:Adai.Standard.FileHelper.Initialized">
             <summary>
-            上传根目录
+            已初始化
             </summary>
         </member>
-        <member name="F:Adai.Standard.FileHelper.DownloadDirectory">
+        <member name="M:Adai.Standard.FileHelper.Init(Adai.Standard.Model.FileConfiguration)">
             <summary>
-            下载根目录
+            初始化
             </summary>
+            <param name="configuration"></param>
+            <returns></returns>
         </member>
         <member name="M:Adai.Standard.FileHelper.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
             <summary>
@@ -641,84 +638,65 @@
             <param name="limit">每秒限制次数</param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Standard.JsonConfigHelper">
+        <member name="T:Adai.Standard.DatetimeJsonConverter">
             <summary>
-            JsonConfigHelper
+            JsonConverter
             </summary>
         </member>
-        <member name="P:Adai.Standard.JsonConfigHelper.Configuration">
+        <member name="M:Adai.Standard.DatetimeJsonConverter.#ctor(System.String)">
             <summary>
-            Configuration
+            构造函数
+            </summary>
+            <param name="format"></param>
+        </member>
+        <member name="P:Adai.Standard.DatetimeJsonConverter.Format">
+            <summary>
+            格式
             </summary>
         </member>
-        <member name="M:Adai.Standard.JsonConfigHelper.Get(System.String)">
+        <member name="M:Adai.Standard.DatetimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
             <summary>
-            读取
+            Read
             </summary>
-            <param name="key"></param>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.JsonConfigHelper.Get``1(System.String)">
+        <member name="M:Adai.Standard.DatetimeJsonConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateTime,System.Text.Json.JsonSerializerOptions)">
             <summary>
-            读取
+            Write
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="key"></param>
-            <returns></returns>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
         </member>
         <member name="T:Adai.Standard.JsonHelper">
             <summary>
             JsonHelper
             </summary>
         </member>
-        <member name="F:Adai.Standard.JsonHelper.Settings">
+        <member name="F:Adai.Standard.JsonHelper.JsonSerializerOptions">
             <summary>
-            Settings
+            JsonSerializerOptions
             </summary>
         </member>
-        <member name="M:Adai.Standard.JsonHelper.SerializeObject``1(``0)">
+        <member name="M:Adai.Standard.JsonHelper.SerializeObject``1(``0,System.Text.Json.JsonSerializerOptions)">
             <summary>
             序列化
             </summary>
             <typeparam name="T"></typeparam>
             <param name="obj"></param>
+            <param name="options"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.JsonHelper.SerializeObject(System.Object,System.String[],System.String[])">
-            <summary>
-            SerializeObject
-            </summary>
-            <param name="value"></param>
-            <param name="includeProperties"></param>
-            <param name="excludeProperties"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.JsonHelper.DeserializeObject``1(System.String)">
+        <member name="M:Adai.Standard.JsonHelper.DeserializeObject``1(System.String,System.Text.Json.JsonSerializerOptions)">
             <summary>
             反序列化
             </summary>
             <typeparam name="T"></typeparam>
             <param name="json"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Adai.Standard.JsonPropertyContractResolver">
-            <summary>
-            JsonPropertyContractResolver
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.JsonPropertyContractResolver.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            构造函数
-            </summary>
-            <param name="includeProperties"></param>
-            <param name="excludeProperties"></param>
-        </member>
-        <member name="M:Adai.Standard.JsonPropertyContractResolver.CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization)">
-            <summary>
-            CreateProperties
-            </summary>
-            <param name="type"></param>
-            <param name="memberSerialization"></param>
+            <param name="options"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.Standard.Log4netHelper">
@@ -943,14 +921,9 @@
             CacheKey
             </summary>
         </member>
-        <member name="F:Adai.Standard.TokenHelper.expiry">
+        <member name="F:Adai.Standard.TokenHelper.Expiry">
             <summary>
-            有效时间
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.TokenHelper.Expiry">
-            <summary>
-            有效时间
+            过期时间
             </summary>
         </member>
         <member name="M:Adai.Standard.TokenHelper.Set``1(``0,System.String)">
@@ -1317,22 +1290,37 @@
             Value
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.FileConfig">
+        <member name="T:Adai.Standard.Model.FileConfiguration">
             <summary>
             文件配置
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileConfig.MaxSize">
+        <member name="M:Adai.Standard.Model.FileConfiguration.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Model.FileConfiguration.UploadDirectory">
+            <summary>
+            上传根目录
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Model.FileConfiguration.DownloadDirectory">
+            <summary>
+            下载根目录
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Model.FileConfiguration.MaxSize">
             <summary>
             大小限制
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileConfig.Extensions">
+        <member name="P:Adai.Standard.Model.FileConfiguration.Extensions">
             <summary>
             扩展名
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileConfig.MaxSizeNote">
+        <member name="P:Adai.Standard.Model.FileConfiguration.MaxSizeNote">
             <summary>
             大小限制说明
             </summary>

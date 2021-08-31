@@ -39,7 +39,7 @@ namespace Adai.Core.WebApi
 		/// <summary>
 		/// øÁ”Ú
 		/// </summary>
-		readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+		readonly string MyAllowOrigins = "MyAllowOrigins";
 
 		/// <summary>
 		/// This method gets called by the runtime. Use this method to add services to the container.
@@ -75,21 +75,12 @@ namespace Adai.Core.WebApi
 			});
 
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-			//services.AddSession(options =>
-			//{
-			//	// Set a short timeout for easy testing.
-			//	options.IdleTimeout = TimeSpan.FromSeconds(10);
-			//	options.Cookie.Name = ".AdventureWorks.Session";
-			//	options.Cookie.HttpOnly = true;
-			//	// Make the session cookie essential
-			//	options.Cookie.IsEssential = true;
-			//});
 			//services.AddAuthorization();
 
 			//øÁ”Ú
 			services.AddCors(options =>
 			{
-				options.AddPolicy(MyAllowSpecificOrigins, builder =>
+				options.AddPolicy(MyAllowOrigins, builder =>
 				{
 					builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 				});
@@ -152,7 +143,7 @@ namespace Adai.Core.WebApi
 			//∆Ù”√Routing
 			app.UseRouting();
 			//∆Ù”√øÁ”Ú
-			app.UseCors(MyAllowSpecificOrigins);
+			app.UseCors(MyAllowOrigins);
 			//∆Ù”√StaticFiles
 			app.UseStaticFiles();
 			//∆Ù”√CookiePolicy

@@ -338,6 +338,16 @@
             <param name="keys"></param>
             <returns></returns>
         </member>
+        <member name="T:Adai.Const">
+            <summary>
+            Const
+            </summary>
+        </member>
+        <member name="F:Adai.Const.DateTimeFormat">
+            <summary>
+            时间格式
+            </summary>
+        </member>
         <member name="T:Adai.Extension.ArrayExt">
             <summary>
             ArrayExt
@@ -1410,6 +1420,12 @@
             <summary>
             表示 UtcDateTime 的最小值。 此字段为只读。
             </summary>
+        </member>
+        <member name="M:Adai.UtcDateTime.GetTimestamp">
+            <summary>
+            获取时间戳（秒）
+            </summary>
+            <returns></returns>
         </member>
     </members>
 </doc>

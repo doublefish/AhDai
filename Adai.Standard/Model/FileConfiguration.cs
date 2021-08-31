@@ -5,8 +5,25 @@ namespace Adai.Standard.Model
 	/// <summary>
 	/// 文件配置
 	/// </summary>
-	public class FileConfig
+	public class FileConfiguration
 	{
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		public FileConfiguration()
+		{
+			UploadDirectory = "upload";
+			DownloadDirectory = "download";
+		}
+
+		/// <summary>
+		/// 上传根目录
+		/// </summary>
+		public string UploadDirectory { get; set; }
+		/// <summary>
+		/// 下载根目录
+		/// </summary>
+		public string DownloadDirectory { get; set; }
 		/// <summary>
 		/// 大小限制
 		/// </summary>

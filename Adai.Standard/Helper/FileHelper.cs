@@ -1,6 +1,5 @@
 ﻿using Adai.Standard.Model;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,51 +19,28 @@ namespace Adai.Standard
 	public static class FileHelper
 	{
 		/// <summary>
-		/// configuration
+		/// Configuration
 		/// </summary>
-		static FileConfig configuration;
+		public static FileConfiguration Configuration { get; private set; }
 
 		/// <summary>
-		/// Config
+		/// 已初始化
 		/// </summary>
-		public static FileConfig Configuration
+		public static bool Initialized => Configuration != null
+			&& !string.IsNullOrEmpty(Configuration.UploadDirectory) && Configuration.MaxSize > 0
+			&& !string.IsNullOrEmpty(Configuration.DownloadDirectory);
+
+		/// <summary>
+		/// 初始化
+		/// </summary>
+		/// <param name="configuration"></param>
+		/// <returns></returns>
+		public static bool Init(Model.FileConfiguration configuration)
 		{
-			get
-			{
-				if (configuration == null)
-				{
-					var config = JsonConfigHelper.Get("Upload");
-					if (config != null)
-					{
-						configuration = new FileConfig()
-						{
-							MaxSize = config.Value<long>("MaxSize"),
-							Extensions = new Dictionary<string, string[]>()
-						};
-						var extensions = config.Value<JToken>("Extensions");
-						var keys = new string[] { "Image", "File" };
-						foreach (var key in keys)
-						{
-							var value = extensions.Value<string>(key);
-							configuration.Extensions.Add(key, value.Split(","));
-						}
-					}
-					else
-					{
-						throw new Exception("Not configured.");
-					}
-				}
-				return configuration;
-			}
+			Configuration = configuration;
+			// var keys = new string[] { "Image", "File" };
+			return Initialized;
 		}
-		/// <summary>
-		/// 上传根目录
-		/// </summary>
-		public const string UploadDirectory = "upload";
-		/// <summary>
-		/// 下载根目录
-		/// </summary>
-		public const string DownloadDirectory = "download";
 
 		/// <summary>
 		/// 上传
@@ -83,9 +59,9 @@ namespace Adai.Standard
 
 			//虚拟目录
 			var dir = DateTime.Now.ToString("yyyy-MM-dd");
-			var virtualDir = $"{UploadDirectory}/{dir}";
+			var virtualDir = $"{Configuration.UploadDirectory}/{dir}";
 			//物理路径
-			var physicalPath = Path.Combine(rootPath, UploadDirectory, dir);
+			var physicalPath = Path.Combine(rootPath, Configuration.UploadDirectory, dir);
 			if (!Directory.Exists(physicalPath))
 			{
 				Directory.CreateDirectory(physicalPath);
@@ -140,7 +116,7 @@ namespace Adai.Standard
 			var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
 
 			//文件目录
-			var folderPath = Path.Combine(rootPath, DownloadDirectory);
+			var folderPath = Path.Combine(rootPath, Configuration.DownloadDirectory);
 			//临时文件夹路径
 			var tempFolderPath = Path.Combine(folderPath, timestamp);
 			//创建临时文件夹

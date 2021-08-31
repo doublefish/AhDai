@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 
 namespace Adai.Standard
 {
@@ -8,17 +10,12 @@ namespace Adai.Standard
 	public static class JsonHelper
 	{
 		/// <summary>
-		/// Settings
+		/// JsonSerializerOptions
 		/// </summary>
-		public static JsonSerializerSettings Settings = new JsonSerializerSettings
+		public static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions()
 		{
-
-			//NullValueHandling = NullValueHandling.Ignore,
-			//DateFormatString = "yyyy-MM-dd HH:mm:ss.fff",
-			//DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-			//PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-			//MissingMemberHandling = MissingMemberHandling.Ignore,
-			ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+			Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+			Converters = { new DatetimeJsonConverter(Const.DateTimeFormat) }
 		};
 
 		/// <summary>
@@ -26,27 +23,11 @@ namespace Adai.Standard
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="obj"></param>
+		/// <param name="options"></param>
 		/// <returns></returns>
-		public static string SerializeObject<T>(T obj)
+		public static string SerializeObject<T>(T obj, JsonSerializerOptions options = null)
 		{
-			return JsonConvert.SerializeObject(obj, Settings);
-		}
-
-		/// <summary>
-		/// SerializeObject
-		/// </summary>
-		/// <param name="value"></param>
-		/// <param name="includeProperties"></param>
-		/// <param name="excludeProperties"></param>
-		/// <returns></returns>
-		public static string SerializeObject(this object value, string[] includeProperties, string[] excludeProperties)
-		{
-			var settings = new JsonSerializerSettings()
-			{
-				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-				ContractResolver = new JsonPropertyContractResolver(includeProperties, excludeProperties)
-			};
-			return JsonConvert.SerializeObject(value, Formatting.None, settings);
+			return JsonSerializer.Serialize(obj, options ?? JsonSerializerOptions);
 		}
 
 		/// <summary>
@@ -54,10 +35,11 @@ namespace Adai.Standard
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="json"></param>
+		/// <param name="options"></param>
 		/// <returns></returns>
-		public static T DeserializeObject<T>(string json)
+		public static T DeserializeObject<T>(string json, JsonSerializerOptions options = null)
 		{
-			return JsonConvert.DeserializeObject<T>(json, Settings);
+			return JsonSerializer.Deserialize<T>(json, options ?? JsonSerializerOptions);
 		}
 	}
 }

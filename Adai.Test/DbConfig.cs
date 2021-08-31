@@ -12,7 +12,7 @@ namespace Adai.Test
 	/// </summary>
 	public class DbConfig
 	{
-		public static string Basic = JsonConfigHelper.Get<string>("Database[0].Name");
-		public static string Basic0 = JsonConfigHelper.Get<string>("Database[1].Name");
+		public static string Basic = "";
+		public static string Basic0 = "";
 	}
 }
