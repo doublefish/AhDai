@@ -11,6 +11,7 @@ namespace Adai.Standard
 	public static class MailHelper
 	{
 		static Model.MailConfiguration _Configuration;
+
 		/// <summary>
 		/// Configuration
 		/// </summary>
