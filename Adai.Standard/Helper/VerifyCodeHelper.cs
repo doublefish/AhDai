@@ -1,5 +1,6 @@
 ﻿using Adai.Extension;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;

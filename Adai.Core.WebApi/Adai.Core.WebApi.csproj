@@ -9,8 +9,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Adai.Core\Adai.Core.csproj" />
-  </ItemGroup>
-
 </Project>
