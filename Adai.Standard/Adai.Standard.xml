@@ -878,7 +878,7 @@
         </member>
         <member name="P:Adai.Standard.MailHelper.Configuration">
             <summary>
-            SmptConfiguration
+            Configuration
             </summary>
         </member>
         <member name="P:Adai.Standard.MailHelper.Initialized">
@@ -911,9 +911,14 @@
             RedisHelper
             </summary>
         </member>
+        <member name="F:Adai.Standard.RedisHelper.DbCount">
+            <summary>
+            DbCount
+            </summary>
+        </member>
         <member name="P:Adai.Standard.RedisHelper.Configuration">
             <summary>
-            SmptConfiguration
+            Configuration
             </summary>
         </member>
         <member name="P:Adai.Standard.RedisHelper.Initialized">
@@ -927,11 +932,6 @@
             </summary>
             <param name="configuration"></param>
             <returns></returns>
-        </member>
-        <member name="F:Adai.Standard.RedisHelper.DbCount">
-            <summary>
-            DbCount
-            </summary>
         </member>
         <member name="M:Adai.Standard.RedisHelper.GetDatabase(System.Int32,System.Object)">
             <summary>

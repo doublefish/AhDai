@@ -10,18 +10,29 @@ namespace Adai.Standard
 	/// </summary>
 	public static class MailHelper
 	{
+		static Model.MailConfiguration _Configuration;
 		/// <summary>
-		/// SmptConfiguration
+		/// Configuration
 		/// </summary>
-		public static Model.MailConfiguration Configuration { get; private set; }
+		public static Model.MailConfiguration Configuration
+		{
+			get
+			{
+				if (!Initialized)
+				{
+					throw new Exception("默认配置未初始化");
+				}
+				return _Configuration;
+			}
+		}
 
 		/// <summary>
 		/// 已初始化
 		/// </summary>
-		public static bool Initialized => Configuration != null
-			&& !string.IsNullOrEmpty(Configuration.Host) && Configuration.Port > 0
-			&& !string.IsNullOrEmpty(Configuration.Username)
-			&& !string.IsNullOrEmpty(Configuration.Password);
+		public static bool Initialized => _Configuration != null
+			&& !string.IsNullOrEmpty(_Configuration.Host) && _Configuration.Port > 0
+			&& !string.IsNullOrEmpty(_Configuration.Username)
+			&& !string.IsNullOrEmpty(_Configuration.Password);
 
 		/// <summary>
 		/// 初始化
@@ -30,7 +41,7 @@ namespace Adai.Standard
 		/// <returns></returns>
 		public static bool Init(Model.MailConfiguration configuration)
 		{
-			Configuration = configuration;
+			_Configuration = configuration;
 			return Initialized;
 		}
 

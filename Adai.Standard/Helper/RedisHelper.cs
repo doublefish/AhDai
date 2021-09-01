@@ -1,4 +1,5 @@
 ﻿using StackExchange.Redis;
+using System;
 using System.Collections.Generic;
 
 namespace Adai.Standard
@@ -8,20 +9,36 @@ namespace Adai.Standard
 	/// </summary>
 	public static class RedisHelper
 	{
+		static Model.RedisConfiguration _Configuration;
 		static IDictionary<string, IConnectionMultiplexer> Instances { get; set; }
 		static readonly object Locker = new object();
 
 		/// <summary>
-		/// SmptConfiguration
+		/// DbCount
 		/// </summary>
-		public static Model.RedisConfiguration Configuration { get; private set; }
+		public const int DbCount = 16;
+
+		/// <summary>
+		/// Configuration
+		/// </summary>
+		public static Model.RedisConfiguration Configuration
+		{
+			get
+			{
+				if (!Initialized)
+				{
+					throw new Exception("默认配置未初始化");
+				}
+				return _Configuration;
+			}
+		}
 
 		/// <summary>
 		/// 已初始化
 		/// </summary>
-		public static bool Initialized => Configuration != null
-			&& !string.IsNullOrEmpty(Configuration.Host) && Configuration.Port > 0
-			&& !string.IsNullOrEmpty(Configuration.Password);
+		public static bool Initialized => _Configuration != null
+			&& !string.IsNullOrEmpty(_Configuration.Host) && _Configuration.Port > 0
+			&& !string.IsNullOrEmpty(_Configuration.Password);
 
 		/// <summary>
 		/// 初始化
@@ -30,14 +47,9 @@ namespace Adai.Standard
 		/// <returns></returns>
 		public static bool Init(Model.RedisConfiguration configuration)
 		{
-			Configuration = configuration;
+			_Configuration = configuration;
 			return Initialized;
 		}
-
-		/// <summary>
-		/// DbCount
-		/// </summary>
-		public const int DbCount = 16;
 
 		/// <summary>
 		/// GetDatabase
