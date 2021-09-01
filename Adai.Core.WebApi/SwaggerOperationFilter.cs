@@ -2,6 +2,7 @@
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
 using System.Linq;
 
 namespace Adai.Core.WebApi
@@ -29,11 +30,19 @@ namespace Adai.Core.WebApi
 			});
 			operation.Parameters.Add(new OpenApiParameter()
 			{
-				Name = "X-Version",
+				Name = "x-version",
 				In = ParameterLocation.Header,
 				Required = true,
 				Schema = new OpenApiSchema() { Type = "string", Default = new OpenApiString("1.0") },
 				Description = "接口版本"
+			});
+			operation.Parameters.Add(new OpenApiParameter()
+			{
+				Name = Const.RequestId,
+				In = ParameterLocation.Header,
+				Required = true,
+				Schema = new OpenApiSchema() { Type = "string", Default = new OpenApiString(Guid.NewGuid().ToString("N")) },
+				Description = "请求Id"
 			});
 
 			if (context.ApiDescription.TryGetMethodInfo(out var methodInfo))

@@ -10,13 +10,13 @@
 		/// </summary>
 		public const string Text = "text/plain";
 		/// <summary>
-		/// Html
+		/// TextHtml
 		/// </summary>
-		public const string Html = "text/html";
+		public const string TextHtml = "text/html";
 		/// <summary>
-		/// Xml
+		/// TextXml
 		/// </summary>
-		public const string Xml = "text/xml";
+		public const string TextXml = "text/xml";
 		/// <summary>
 		/// Url
 		/// </summary>
@@ -29,5 +29,9 @@
 		/// Json
 		/// </summary>
 		public const string Json = "application/json";
+		/// <summary>
+		/// Xml
+		/// </summary>
+		public const string Xml = "application/xml";
 	}
 }

@@ -7,9 +7,9 @@ using Adai.Core.WebApi.Models;
 namespace Adai.Core.WebApi
 {
 	/// <summary>
-	/// MvcController
+	/// ControllerMvc
 	/// </summary>
-	public class MvcController : Controller
+	public class ControllerMvc : Controller
 	{
 		/// <summary>
 		/// 目录名称
@@ -52,7 +52,7 @@ namespace Adai.Core.WebApi
 			{
 				var value = (context.Result as ObjectResult).Value;
 				//重写输出内容
-				var result = new ReturnResult<object>(ReturnCode.OK, null, value);
+				var result = new ReturnResult<object>(0, null, value);
 				context.Result = new ContentResult()
 				{
 					StatusCode = StatusCodes.Status200OK,

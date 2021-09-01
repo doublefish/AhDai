@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 
 namespace Adai.Standard.Model
 {
@@ -10,25 +12,17 @@ namespace Adai.Standard.Model
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		public CustomException() : this(string.Empty, null)
+		/// <param name="code">建议使用1000-2000之间的值</param>
+		/// <param name="message"></param>
+		/// <param name="innerException"></param>
+		public CustomException(int code, string? message, Exception? innerException = null) : base(message, innerException)
 		{
+			Code = code;
 		}
 
 		/// <summary>
-		/// 构造函数
+		/// Code
 		/// </summary>
-		/// <param name="message"></param>
-		public CustomException(string message) : this(message, null)
-		{
-		}
-
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="inner"></param>
-		public CustomException(string message, Exception inner) : base(message, inner)
-		{
-		}
+		public int Code { get; private set; }
 	}
 }

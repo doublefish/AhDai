@@ -56,16 +56,16 @@ namespace Adai.Core.WebApi
 			{
 				return null;
 			}
-			var version = context.HttpContext.Request.Headers["X-Version"].FirstOrDefault();
+			var version = context.HttpContext.Request.Headers["x-version"].FirstOrDefault();
 			if (version != "1.0")
 			{
-				throw new CustomException("无效的版本。");
+				throw new CustomException(1, "无效的版本。");
 			}
 
 			var temp = context.HttpContext.Request.Headers["X-Timestamp"].FirstOrDefault();
 			if (string.IsNullOrEmpty(temp))
 			{
-				throw new CustomException("无效的时间戳。");
+				throw new CustomException(1, "无效的时间戳。");
 			}
 			var timestamp = temp.ToDouble();
 
@@ -103,15 +103,15 @@ namespace Adai.Core.WebApi
 				var token = context.HttpContext.Request.Headers["X-Token"].FirstOrDefault();
 				if (string.IsNullOrEmpty(token))
 				{
-					throw new CustomException("login_timeout");
+					throw new CustomException(1, "login_timeout");
 				}
 				if (!VerifyLogin(token, out var login))
 				{
-					throw new CustomException("login_timeout");
+					throw new CustomException(1, "login_timeout");
 				}
 				if (VerifyRight && !VerifyRequestRight(login.Id, path))
 				{
-					throw new CustomException("没有访问权限。");
+					throw new CustomException(1, "没有访问权限。");
 				}
 			}
 			try
@@ -155,16 +155,16 @@ namespace Adai.Core.WebApi
 			var headers = httpContext.Request.Headers["X-ExcelHeaders"].FirstOrDefault();
 			if (string.IsNullOrEmpty(fileName))
 			{
-				throw new CustomException("参数不能为空（X-ExcelName）。");
+				throw new CustomException(1, "参数不能为空（X-ExcelName）。");
 			}
 			if (string.IsNullOrEmpty(headers))
 			{
-				throw new CustomException("参数不能为空（X-ExcelHeaders）。");
+				throw new CustomException(1, "参数不能为空（X-ExcelHeaders）。");
 			}
 			var _headers = headers.Split(',');
 			if (_headers.Length == 0)
 			{
-				throw new CustomException("参数格式错误（X-ExcelHeaders）。");
+				throw new CustomException(1, "参数格式错误（X-ExcelHeaders）。");
 			}
 			var dic = new Dictionary<string, string>();
 			foreach (var _header in _headers)
@@ -172,17 +172,17 @@ namespace Adai.Core.WebApi
 				var kv = _header.Split(':');
 				if (kv.Length != 2)
 				{
-					throw new CustomException("列头格式错误。");
+					throw new CustomException(1, "列头格式错误。");
 				}
 				var key = kv[0];
 				if (string.IsNullOrEmpty(key))
 				{
-					throw new CustomException("列头格式错误。");
+					throw new CustomException(1, "列头格式错误。");
 				}
 				var value = kv[1];
 				if (dic.ContainsKey(key))
 				{
-					throw new CustomException("列头格式错误。");
+					throw new CustomException(1, "列头格式错误。");
 				}
 				dic.Add(key, value);
 			}

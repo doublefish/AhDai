@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Adai.Standard.Helper
+namespace Adai.Standard
 {
 	/// <summary>
 	/// LoggerHelper

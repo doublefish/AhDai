@@ -332,17 +332,7 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.RedisExt.HashValues``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.CommandFlags)">
-            <summary>
-            HashValues
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="db"></param>
-            <param name="key"></param>
-            <param name="flags"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.RedisExt.HashSet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue,``0,StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
+        <member name="M:Adai.Standard.RedisExt.HashSet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisValue,StackExchange.Redis.RedisValue,``0,StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
             <summary>
             HashSet
             </summary>
@@ -355,20 +345,39 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.RedisExt.HashSet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],``0[],StackExchange.Redis.CommandFlags)">
+        <member name="M:Adai.Standard.RedisExt.HashSet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,System.Collections.Generic.IDictionary{StackExchange.Redis.RedisValue,``0},StackExchange.Redis.CommandFlags)">
             <summary>
             HashSet
             </summary>
             <typeparam name="T"></typeparam>
             <param name="db"></param>
             <param name="key"></param>
-            <param name="hashFields"></param>
-            <param name="values"></param>
+            <param name="hash"></param>
             <param name="flags"></param>
+        </member>
+        <member name="M:Adai.Standard.RedisExt.HashGetAll``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.CommandFlags)">
+            <summary>
+            HashGetAll
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <param name="key"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RedisExt.HashValues``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.CommandFlags)">
+            <summary>
+            HashValues
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <param name="key"></param>
+            <param name="flags"></param>
+            <returns></returns>
         </member>
         <member name="M:Adai.Standard.RedisExt.ToInt32(StackExchange.Redis.RedisValue,System.Int32)">
             <summary>
-            类型转换
+            转换为整形
             </summary>
             <param name="value"></param>
             <param name="error"></param>
@@ -376,10 +385,54 @@
         </member>
         <member name="M:Adai.Standard.RedisExt.ToInt64(StackExchange.Redis.RedisValue,System.Int64)">
             <summary>
-            类型转换
+            转换为长整形
             </summary>
             <param name="value"></param>
             <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RedisExt.ToInt32Array(StackExchange.Redis.RedisValue[])">
+            <summary>
+            从RedisValue数组创建一个整形数组
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RedisExt.ToInt64Array(StackExchange.Redis.RedisValue[])">
+            <summary>
+            从RedisValue数组创建一个长整型数组
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RedisExt.ToStringArray(StackExchange.Redis.RedisValue[])">
+            <summary>
+            从RedisValue数组创建一个长整型数组
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RedisExt.ToObjectArray``1(StackExchange.Redis.RedisValue[])">
+            <summary>
+            从RedisValue数组（Json字符串）创建一个指定类型的对象数组
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RedisExt.ToStringDictionary(StackExchange.Redis.HashEntry[])">
+            <summary>
+            从HashEntry数组创建一个字典（value的类型是字符串）
+            </summary>
+            <param name="hash"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RedisExt.ToObjectDictionary``1(StackExchange.Redis.HashEntry[])">
+            <summary>
+            从HashEntry数组（value的类型是Json字符串）创建一个字典（value的类型是指定对象）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hash"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.Standard.X509CertificateExt">
@@ -754,64 +807,64 @@
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="T:Adai.Standard.Helper.LoggerHelper">
+        <member name="T:Adai.Standard.LoggerHelper">
             <summary>
             LoggerHelper
             </summary>
         </member>
-        <member name="P:Adai.Standard.Helper.LoggerHelper.Logger">
+        <member name="P:Adai.Standard.LoggerHelper.Logger">
             <summary>
             Logger
             </summary>
         </member>
-        <member name="P:Adai.Standard.Helper.LoggerHelper.Initialized">
+        <member name="P:Adai.Standard.LoggerHelper.Initialized">
             <summary>
             已初始化
             </summary>
         </member>
-        <member name="M:Adai.Standard.Helper.LoggerHelper.Init(Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Adai.Standard.LoggerHelper.Init(Microsoft.Extensions.Logging.ILogger)">
             <summary>
             初始化
             </summary>
             <param name="logger"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Helper.LoggerHelper.Trace(System.String,System.Exception)">
+        <member name="M:Adai.Standard.LoggerHelper.Trace(System.String,System.Exception)">
             <summary>
             Trace
             </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:Adai.Standard.Helper.LoggerHelper.Debug(System.String,System.Exception)">
+        <member name="M:Adai.Standard.LoggerHelper.Debug(System.String,System.Exception)">
             <summary>
             Debug
             </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:Adai.Standard.Helper.LoggerHelper.Info(System.String,System.Exception)">
+        <member name="M:Adai.Standard.LoggerHelper.Info(System.String,System.Exception)">
             <summary>
             Info
             </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:Adai.Standard.Helper.LoggerHelper.Warn(System.String,System.Exception)">
+        <member name="M:Adai.Standard.LoggerHelper.Warn(System.String,System.Exception)">
             <summary>
             Warn
             </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:Adai.Standard.Helper.LoggerHelper.Error(System.String,System.Exception)">
+        <member name="M:Adai.Standard.LoggerHelper.Error(System.String,System.Exception)">
             <summary>
             Error
             </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:Adai.Standard.Helper.LoggerHelper.Critical(System.String,System.Exception)">
+        <member name="M:Adai.Standard.LoggerHelper.Critical(System.String,System.Exception)">
             <summary>
             Critical
             </summary>
@@ -911,6 +964,55 @@
             <param name="password"></param>
             <returns></returns>
         </member>
+        <member name="M:Adai.Standard.RedisHelper.MuxerConfigurationChangedBroadcast(System.Object,StackExchange.Redis.EndPointEventArgs)">
+            <summary>
+            当节点被明确请求通过广播重新配置时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Standard.RedisHelper.MuxerHashSlotMoved(System.Object,StackExchange.Redis.HashSlotMovedEventArgs)">
+            <summary>
+            当哈希槽被重新定位时/更改集群
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Standard.RedisHelper.MuxerErrorMessage(System.Object,StackExchange.Redis.RedisErrorEventArgs)">
+            <summary>
+            发生错误时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Standard.RedisHelper.MuxerConfigurationChanged(System.Object,StackExchange.Redis.EndPointEventArgs)">
+            <summary>
+            检测到配置更改时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Standard.RedisHelper.MuxerConnectionFailed(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            连接失败，如果重新连接成功将不会收到这个通知
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Standard.RedisHelper.MuxerInternalError(System.Object,StackExchange.Redis.InternalErrorEventArgs)">
+            <summary>
+            发生内部错误时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Standard.RedisHelper.MuxerConnectionRestored(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            建立物理连接时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
         <member name="T:Adai.Standard.TokenHelper">
             <summary>
             TokenHelper
@@ -1007,14 +1109,14 @@
             Text
             </summary>
         </member>
-        <member name="F:Adai.Standard.HttpContentType.Html">
+        <member name="F:Adai.Standard.HttpContentType.TextHtml">
             <summary>
-            Html
+            TextHtml
             </summary>
         </member>
-        <member name="F:Adai.Standard.HttpContentType.Xml">
+        <member name="F:Adai.Standard.HttpContentType.TextXml">
             <summary>
-            Xml
+            TextXml
             </summary>
         </member>
         <member name="F:Adai.Standard.HttpContentType.Url">
@@ -1030,6 +1132,11 @@
         <member name="F:Adai.Standard.HttpContentType.Json">
             <summary>
             Json
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.HttpContentType.Xml">
+            <summary>
+            Xml
             </summary>
         </member>
         <member name="T:Adai.Standard.HttpMethod">
@@ -1252,23 +1359,18 @@
             CustomException
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.CustomException.#ctor">
+        <member name="M:Adai.Standard.Model.CustomException.#ctor(System.Int32,System.String,System.Exception)">
             <summary>
             构造函数
             </summary>
-        </member>
-        <member name="M:Adai.Standard.Model.CustomException.#ctor(System.String)">
-            <summary>
-            构造函数
-            </summary>
+            <param name="code">建议使用1000-2000之间的值</param>
             <param name="message"></param>
+            <param name="innerException"></param>
         </member>
-        <member name="M:Adai.Standard.Model.CustomException.#ctor(System.String,System.Exception)">
+        <member name="P:Adai.Standard.Model.CustomException.Code">
             <summary>
-            构造函数
+            Code
             </summary>
-            <param name="message"></param>
-            <param name="inner"></param>
         </member>
         <member name="T:Adai.Standard.Model.DbConfiguration">
             <summary>
