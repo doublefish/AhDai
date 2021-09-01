@@ -10,15 +10,27 @@ namespace Adai.Standard
 	/// </summary>
 	public static class LoggerHelper
 	{
+		static ILogger _Logger;
+
 		/// <summary>
 		/// Logger
 		/// </summary>
-		public static ILogger Logger { get; private set; }
+		public static ILogger Logger
+		{
+			get
+			{
+				if (!Initialized)
+				{
+					throw new Exception("默认配置未初始化");
+				}
+				return _Logger;
+			}
+		}
 
 		/// <summary>
 		/// 已初始化
 		/// </summary>
-		public static bool Initialized => Logger != null;
+		public static bool Initialized => _Logger != null;
 
 		/// <summary>
 		/// 初始化
@@ -27,7 +39,7 @@ namespace Adai.Standard
 		/// <returns></returns>
 		public static bool Init(ILogger logger)
 		{
-			Logger = logger;
+			_Logger = logger;
 			return Initialized;
 		}
 
