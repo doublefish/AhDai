@@ -47,9 +47,9 @@ namespace Adai.Core.WebApi
 		/// 获取声明的值
 		/// </summary>
 		/// <param name="httpRequest"></param>
-		/// <param name="userIdName"></param>
+		/// <param name="claimName"></param>
 		/// <returns></returns>
-		public static string GetClaimValue(this HttpRequest httpRequest, string claimName)
+		public static string GetClaimValue(HttpRequest httpRequest, string claimName)
 		{
 			var userValues = httpRequest.Headers["Authorization"];
 			if (userValues.Count == 0)
