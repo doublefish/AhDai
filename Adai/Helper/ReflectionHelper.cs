@@ -10,8 +10,8 @@ namespace Adai
 	/// </summary>
 	public static class ReflectionHelper
 	{
-		static readonly IDictionary<string, ICollection<PropertyInfo>> properties = new Dictionary<string, ICollection<PropertyInfo>>();
-		static readonly object lockOfProperties = new object();
+		static IDictionary<string, ICollection<PropertyInfo>> allProperties;
+		static readonly object locker = new object();
 
 		/// <summary>
 		/// 获取属性
@@ -31,13 +31,18 @@ namespace Adai
 		/// <returns></returns>
 		public static ICollection<PropertyInfo> GetProperties(Type type)
 		{
-			lock (lockOfProperties)
+			lock (locker)
 			{
-				if (!properties.ContainsKey(type.FullName))
+				if (allProperties == null)
 				{
-					properties.Add(type.FullName, type.GetProperties());
+					allProperties = new Dictionary<string, ICollection<PropertyInfo>>();
 				}
-				return properties[type.FullName];
+				if (allProperties.TryGetValue(type.FullName, out var properties))
+				{
+					properties = type.GetProperties();
+					allProperties.Add(type.FullName, properties);
+				}
+				return properties;
 			}
 		}
 

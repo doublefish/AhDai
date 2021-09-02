@@ -8,7 +8,7 @@ namespace Adai.Standard
 	/// </summary>
 	public static class RedisHelper
 	{
-		static readonly object Locker = new object();
+		static readonly object locker = new object();
 
 		/// <summary>
 		/// DbCount
@@ -68,7 +68,7 @@ namespace Adai.Standard
 				configuration = Configuration;
 			}
 			var str = CreateConfiguration(configuration.Host, configuration.Port, configuration.Password);
-			lock (Locker)
+			lock (locker)
 			{
 				if (Instances == null)
 				{
