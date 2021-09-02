@@ -15,7 +15,7 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 表特性
 		/// </summary>
-		static IDictionary<string, Attribute.TableAttribute> TableAttributes;
+		public static IDictionary<string, Attribute.TableAttribute> TableAttributes { get; private set; }
 
 		/// <summary>
 		/// 获取映射
@@ -57,12 +57,23 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 数据库连接字符串
 		/// </summary>
-		public static IDictionary<string, string> ConnectionStrings { get; internal set; }
+		public static IDictionary<string, string> ConnectionStrings { get; private set; }
 
 		/// <summary>
-		/// 已初始化
+		/// 执行之前
 		/// </summary>
-		public static bool Initialized => ConnectionStrings != null && ConnectionStrings.Count > 0;
+		public static Action<string, IDbCommand> BeforeExecuteAction { get; private set; }
+
+		/// <summary>
+		/// 初始化（建议在程序启动时执行此方法）
+		/// </summary>
+		/// <param name="connectionStrings">数据库别名-连接字符串</param>
+		/// <param name="beforeExecute">执行之前执行，可用于记录SQL，第一个参数是初始化时传入的EventId</param>
+		public static void Init(IDictionary<string, string> connectionStrings, Action<string, IDbCommand> beforeExecute = null)
+		{
+			ConnectionStrings = connectionStrings;
+			BeforeExecuteAction = beforeExecute;
+		}
 
 		/// <summary>
 		/// 获取连接字符串
@@ -71,9 +82,9 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public static string GetConnectionString(string dbName)
 		{
-			if (!Initialized)
+			if (ConnectionStrings == null || ConnectionStrings.Count == 0)
 			{
-				throw new Exception("程序尚未初始化，请先执行Startup.Init");
+				throw new Exception("程序尚未初始化，请先执行Init");
 			}
 			if (string.IsNullOrEmpty(dbName))
 			{

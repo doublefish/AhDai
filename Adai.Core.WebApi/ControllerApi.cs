@@ -15,12 +15,12 @@ namespace Adai.Core.WebApi
 	[ApiController]
 	public abstract class ControllerApi : ControllerBase
 	{
-		string _UserId;
-		string _Token;
-		int _Platform;
-		string _Mac;
-		string _Ip;
-		Token<TokenData> _LoginInfo;
+		string userId;
+		string token;
+		int platform;
+		string mac;
+		string ip;
+		Token<TokenData> loginInfo;
 
 		/// <summary>
 		/// 构造函数
@@ -68,11 +68,11 @@ namespace Adai.Core.WebApi
 		{
 			get
 			{
-				if (_Token == null)
+				if (token == null)
 				{
-					_Token = Request.Headers.GetValue("X-Token");
+					token = Request.Headers.GetValue("x-token");
 				}
-				return _Token;
+				return token;
 			}
 		}
 
@@ -83,12 +83,12 @@ namespace Adai.Core.WebApi
 		{
 			get
 			{
-				if (_Platform == 0)
+				if (platform == 0)
 				{
-					var value = Request.Headers.GetValue("X-Platform");
-					_Platform = value != null ? value.ToInt32(0) : 0;
+					var value = Request.Headers.GetValue("x-platform");
+					platform = value != null ? value.ToInt32(0) : 0;
 				}
-				return _Platform;
+				return platform;
 			}
 		}
 
@@ -99,11 +99,11 @@ namespace Adai.Core.WebApi
 		{
 			get
 			{
-				if (_Mac == null)
+				if (mac == null)
 				{
-					_Mac = Request.Headers.GetValue("X-Mac");
+					mac = Request.Headers.GetValue("x-mac");
 				}
-				return _Mac;
+				return mac;
 			}
 		}
 
@@ -114,11 +114,11 @@ namespace Adai.Core.WebApi
 		{
 			get
 			{
-				if (_Ip == null)
+				if (ip == null)
 				{
-					_Ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+					ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
 				}
-				return _Ip;
+				return ip;
 			}
 		}
 
@@ -129,7 +129,7 @@ namespace Adai.Core.WebApi
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(_UserId))
+				if (string.IsNullOrEmpty(userId))
 				{
 					var userValues = HttpContext.Request.Headers["Authorization"];
 					if (userValues.Count > 0)
@@ -152,14 +152,14 @@ namespace Adai.Core.WebApi
 								var chain = claims.Current;
 								if (chain != null && chain.Type == "open-id")
 								{
-									_UserId = chain.Value;
+									userId = chain.Value;
 									break;
 								}
 							}
 						}
 					}
 				}
-				return _UserId;
+				return userId;
 			}
 		}
 
@@ -170,11 +170,11 @@ namespace Adai.Core.WebApi
 		{
 			get
 			{
-				if (_LoginInfo == null && !string.IsNullOrEmpty(Token))
+				if (loginInfo == null && !string.IsNullOrEmpty(Token))
 				{
-					_LoginInfo = GetLogin(Token);
+					loginInfo = GetLogin(Token);
 				}
-				return _LoginInfo;
+				return loginInfo;
 			}
 		}
 

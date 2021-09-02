@@ -9,8 +9,6 @@ namespace Adai.Standard
 	/// </summary>
 	public static class RedisHelper
 	{
-		static Model.RedisConfiguration _Configuration;
-		static IDictionary<string, IConnectionMultiplexer> Instances { get; set; }
 		static readonly object Locker = new object();
 
 		/// <summary>
@@ -19,36 +17,22 @@ namespace Adai.Standard
 		public const int DbCount = 16;
 
 		/// <summary>
-		/// Configuration
+		/// 实例
 		/// </summary>
-		public static Model.RedisConfiguration Configuration
-		{
-			get
-			{
-				if (!Initialized)
-				{
-					throw new Exception("默认配置未初始化");
-				}
-				return _Configuration;
-			}
-		}
+		public static IDictionary<string, IConnectionMultiplexer> Instances { get; private set; }
 
 		/// <summary>
-		/// 已初始化
+		/// Configuration
 		/// </summary>
-		public static bool Initialized => _Configuration != null
-			&& !string.IsNullOrEmpty(_Configuration.Host) && _Configuration.Port > 0
-			&& !string.IsNullOrEmpty(_Configuration.Password);
+		public static Model.RedisConfiguration Configuration { get; private set; }
 
 		/// <summary>
 		/// 初始化
 		/// </summary>
 		/// <param name="configuration"></param>
-		/// <returns></returns>
-		public static bool Init(Model.RedisConfiguration configuration)
+		public static void Init(Model.RedisConfiguration configuration)
 		{
-			_Configuration = configuration;
-			return Initialized;
+			Configuration = configuration;
 		}
 
 		/// <summary>

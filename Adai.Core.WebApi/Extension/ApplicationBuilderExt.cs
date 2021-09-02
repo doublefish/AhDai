@@ -22,11 +22,7 @@ namespace Adai.Core.WebApi
 		/// <returns></returns>
 		public static IApplicationBuilder UseDbContext(this IApplicationBuilder app, IConfiguration config)
 		{
-			//var res = DbHelper.Init(config);
-			//if (res == false)
-			//{
-			//	throw new Exception("DbHelper初始化失败，请检查配置项");
-			//}
+			//DbHelper.Init(config);
 			return app;
 		}
 
@@ -44,11 +40,7 @@ namespace Adai.Core.WebApi
 				Port = config.GetSection("redis:port").Value.ToInt32(),
 				Password = config.GetSection("redis:password").Value
 			};
-			var res = RedisHelper.Init(_config);
-			if (res == false)
-			{
-				throw new Exception("RedisHelper初始化失败，请检查配置项");
-			}
+			RedisHelper.Init(_config);
 			return app;
 		}
 
@@ -67,11 +59,7 @@ namespace Adai.Core.WebApi
 				Username = config.GetSection("mail:smtp:username").Value,
 				Password = config.GetSection("mail:smtp:password").Value
 			};
-			var res = MailHelper.Init(_config);
-			if (res == false)
-			{
-				throw new Exception("MailHelper初始化失败，请检查配置项");
-			}
+			MailHelper.Init(_config);
 			return app;
 		}
 

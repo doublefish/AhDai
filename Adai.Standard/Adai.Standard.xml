@@ -473,17 +473,11 @@
             Configuration
             </summary>
         </member>
-        <member name="P:Adai.Standard.FileHelper.Initialized">
-            <summary>
-            已初始化
-            </summary>
-        </member>
         <member name="M:Adai.Standard.FileHelper.Init(Adai.Standard.Model.FileConfiguration)">
             <summary>
             初始化
             </summary>
             <param name="configuration"></param>
-            <returns></returns>
         </member>
         <member name="M:Adai.Standard.FileHelper.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
             <summary>
@@ -817,17 +811,11 @@
             Logger
             </summary>
         </member>
-        <member name="P:Adai.Standard.LoggerHelper.Initialized">
-            <summary>
-            已初始化
-            </summary>
-        </member>
         <member name="M:Adai.Standard.LoggerHelper.Init(Microsoft.Extensions.Logging.ILogger)">
             <summary>
             初始化
             </summary>
             <param name="logger"></param>
-            <returns></returns>
         </member>
         <member name="M:Adai.Standard.LoggerHelper.Trace(System.String,System.Exception)">
             <summary>
@@ -881,17 +869,11 @@
             Configuration
             </summary>
         </member>
-        <member name="P:Adai.Standard.MailHelper.Initialized">
-            <summary>
-            已初始化
-            </summary>
-        </member>
         <member name="M:Adai.Standard.MailHelper.Init(Adai.Standard.Model.MailConfiguration)">
             <summary>
             初始化
             </summary>
             <param name="configuration"></param>
-            <returns></returns>
         </member>
         <member name="M:Adai.Standard.MailHelper.CreateSmtpClient">
             <summary>
@@ -916,14 +898,14 @@
             DbCount
             </summary>
         </member>
+        <member name="P:Adai.Standard.RedisHelper.Instances">
+            <summary>
+            实例
+            </summary>
+        </member>
         <member name="P:Adai.Standard.RedisHelper.Configuration">
             <summary>
             Configuration
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.RedisHelper.Initialized">
-            <summary>
-            已初始化
             </summary>
         </member>
         <member name="M:Adai.Standard.RedisHelper.Init(Adai.Standard.Model.RedisConfiguration)">
@@ -931,7 +913,6 @@
             初始化
             </summary>
             <param name="configuration"></param>
-            <returns></returns>
         </member>
         <member name="M:Adai.Standard.RedisHelper.GetDatabase(System.Int32,System.Object)">
             <summary>
@@ -1607,16 +1588,6 @@
             <param name="sortName"></param>
             <param name="sortType"></param>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.PageSize">
-            <summary>
-            每页条数
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.PageNumber">
-            <summary>
-            页码（从0开始）
-            </summary>
-        </member>
         <member name="P:Adai.Standard.Model.PageArg`1.TotalCount">
             <summary>
             总记录条数，如果此属性预设值大于零则表示不需要从数据库获取。
@@ -1625,6 +1596,21 @@
         <member name="P:Adai.Standard.Model.PageArg`1.Results">
             <summary>
             分页结果集。
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Model.PageArg`1.Filter">
+            <summary>
+            筛选
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Model.PageArg`1.PageSize">
+            <summary>
+            每页条数
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Model.PageArg`1.PageNumber">
+            <summary>
+            页码（从0开始）
             </summary>
         </member>
         <member name="P:Adai.Standard.Model.PageArg`1.SortName">
@@ -1637,12 +1623,7 @@
             排序方式：ASC/DESC
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.LinkProperties">
-            <summary>
-            查询关联数据
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1._OnlyCount">
+        <member name="P:Adai.Standard.Model.PageArg`1.OnlyCount">
             <summary>
             只统计总数
             </summary>
@@ -1672,41 +1653,6 @@
             关键词组
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Code">
-            <summary>
-            编码
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.FullName">
-            <summary>
-            全名
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Number">
-            <summary>
-            编号
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Type">
-            <summary>
-            类型
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.TypeName">
-            <summary>
-            类型名称
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Types">
-            <summary>
-            类型
-            </summary>
-        </member>
         <member name="P:Adai.Standard.Model.PageArg`1.UserId">
             <summary>
             用户Id
@@ -1720,36 +1666,6 @@
         <member name="P:Adai.Standard.Model.PageArg`1.Platform">
             <summary>
             平台标识
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Min">
-            <summary>
-            最小值
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Max">
-             <summary>
-            最大值
-             </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Start">
-            <summary>
-            开始时间
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.End">
-            <summary>
-            结束时间
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Status">
-            <summary>
-            状态
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Statuses">
-            <summary>
-            状态
             </summary>
         </member>
         <member name="T:Adai.Standard.Model.RedisConfiguration">

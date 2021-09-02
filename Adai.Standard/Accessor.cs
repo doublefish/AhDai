@@ -62,8 +62,8 @@ namespace Adai.Standard
 	/// <typeparam name="T"></typeparam>
 	public class Accessor<S, T> : Accessor<S>
 	{
-		readonly Func<S, T> _Getter;
-		readonly Action<S, T> _Setter;
+		readonly Func<S, T> getter;
+		readonly Action<S, T> setter;
 
 		/// <summary>
 		/// Getter
@@ -72,11 +72,11 @@ namespace Adai.Standard
 		{
 			get
 			{
-				if (_Getter == null)
+				if (getter == null)
 				{
 					throw new ArgumentException("Property get method not found.");
 				}
-				return _Getter;
+				return getter;
 			}
 		}
 		/// <summary>
@@ -86,11 +86,11 @@ namespace Adai.Standard
 		{
 			get
 			{
-				if (_Setter == null)
+				if (setter == null)
 				{
 					throw new ArgumentException("Property set method not found.");
 				}
-				return _Setter;
+				return setter;
 			}
 		}
 		/// <summary>
@@ -138,11 +138,11 @@ namespace Adai.Standard
 			CanWrite = prop.CanWrite;
 			if (CanRead)
 			{
-				_Getter = prop.GetGetMethod().CreateDelegate<Func<S, T>>();
+				getter = prop.GetGetMethod().CreateDelegate<Func<S, T>>();
 			}
 			if (CanWrite)
 			{
-				_Setter = prop.GetSetMethod().CreateDelegate<Action<S, T>>();
+				setter = prop.GetSetMethod().CreateDelegate<Action<S, T>>();
 			}
 		}
 	}

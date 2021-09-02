@@ -13,6 +13,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Adai.DbContext.MySql\Adai.DbContext.MySql.csproj" />
 		<ProjectReference Include="..\Adai.Standard\Adai.Standard.csproj" />
 	</ItemGroup>
 

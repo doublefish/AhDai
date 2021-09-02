@@ -24,22 +24,13 @@ namespace Adai.Standard
 		public static FileConfiguration Configuration { get; private set; }
 
 		/// <summary>
-		/// 已初始化
-		/// </summary>
-		public static bool Initialized => Configuration != null
-			&& !string.IsNullOrEmpty(Configuration.UploadDirectory) && Configuration.MaxSize > 0
-			&& !string.IsNullOrEmpty(Configuration.DownloadDirectory);
-
-		/// <summary>
 		/// 初始化
 		/// </summary>
 		/// <param name="configuration"></param>
-		/// <returns></returns>
-		public static bool Init(Model.FileConfiguration configuration)
+		public static void Init(Model.FileConfiguration configuration)
 		{
 			Configuration = configuration;
 			// var keys = new string[] { "Image", "File" };
-			return Initialized;
 		}
 
 		/// <summary>

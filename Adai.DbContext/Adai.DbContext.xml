@@ -704,7 +704,7 @@
             DbHelper
             </summary>
         </member>
-        <member name="F:Adai.DbContext.DbHelper.TableAttributes">
+        <member name="P:Adai.DbContext.DbHelper.TableAttributes">
             <summary>
             表特性
             </summary>
@@ -728,10 +728,17 @@
             数据库连接字符串
             </summary>
         </member>
-        <member name="P:Adai.DbContext.DbHelper.Initialized">
+        <member name="P:Adai.DbContext.DbHelper.BeforeExecuteAction">
             <summary>
-            已初始化
+            执行之前
             </summary>
+        </member>
+        <member name="M:Adai.DbContext.DbHelper.Init(System.Collections.Generic.IDictionary{System.String,System.String},System.Action{System.String,System.Data.IDbCommand})">
+            <summary>
+            初始化（建议在程序启动时执行此方法）
+            </summary>
+            <param name="connectionStrings">数据库别名-连接字符串</param>
+            <param name="beforeExecute">执行之前执行，可用于记录SQL，第一个参数是初始化时传入的EventId</param>
         </member>
         <member name="M:Adai.DbContext.DbHelper.GetConnectionString(System.String)">
             <summary>
@@ -1095,24 +1102,6 @@
         <member name="P:Adai.DbContext.IModel.TableName">
             <summary>
             数据表名称
-            </summary>
-        </member>
-        <member name="T:Adai.DbContext.Startup">
-            <summary>
-            启动
-            </summary>
-        </member>
-        <member name="M:Adai.DbContext.Startup.Init(System.Collections.Generic.IDictionary{System.String,System.String},System.Action{System.String,System.Data.IDbCommand})">
-            <summary>
-            初始化（建议在程序启动时执行此方法）
-            </summary>
-            <param name="connectionStrings">数据库别名-连接字符串</param>
-            <param name="beforeExecute">执行之前执行，可用于记录SQL，第一个参数是初始化时传入的EventId</param>
-            <returns></returns>
-        </member>
-        <member name="P:Adai.DbContext.Startup.BeforeExecuteAction">
-            <summary>
-            执行之前
             </summary>
         </member>
     </members>

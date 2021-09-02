@@ -7,10 +7,7 @@ namespace Adai.Core.WebApi
 	/// </summary>
 	public static class ResourceHelper
 	{
-		/// <summary>
-		/// _SharedLocalizer
-		/// </summary>
-		private static ResourceManager _SharedLocalizer;
+		static ResourceManager sharedLocalizer;
 
 		/// <summary>
 		/// 共享本地语言
@@ -19,13 +16,13 @@ namespace Adai.Core.WebApi
 		{
 			get
 			{
-				if (_SharedLocalizer == null)
+				if (sharedLocalizer == null)
 				{
 					//var type = typeof(Language.Shared);
 					var type = typeof(ResourceHelper);
-					_SharedLocalizer = new ResourceManager(type.FullName, type.Assembly);
+					sharedLocalizer = new ResourceManager(type.FullName, type.Assembly);
 				}
-				return _SharedLocalizer;
+				return sharedLocalizer;
 			}
 		}
 	}

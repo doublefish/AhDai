@@ -18,11 +18,11 @@ namespace Adai.Core.WebApi
 		/// <summary>
 		/// _Next
 		/// </summary>
-		readonly RequestDelegate _Next;
+		public readonly RequestDelegate Next;
 		/// <summary>
 		/// _Logger
 		/// </summary>
-		readonly ILogger _Logger;
+		public readonly ILogger Logger;
 
 		/// <summary>
 		/// 构造函数
@@ -31,8 +31,8 @@ namespace Adai.Core.WebApi
 		/// <param name="logger"></param>
 		public ExceptionHandlerMiddleware(RequestDelegate next, ILogger<ExceptionHandlerMiddleware> logger)
 		{
-			_Next = next;
-			_Logger = logger;
+			Next = next;
+			Logger = logger;
 		}
 
 		/// <summary>
@@ -52,11 +52,11 @@ namespace Adai.Core.WebApi
 						Activity.Current.SetCustomProperty(Const.RequestId, requestId);
 					}
 				}
-				await _Next(context);
+				await Next(context);
 			}
 			catch (Exception ex)
 			{
-				_Logger.LogError(ex.Message, ex);
+				Logger.LogError(ex.Message, ex);
 				await HandleExceptionAsync(context, ex);
 			}
 		}
