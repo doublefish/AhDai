@@ -37,7 +37,7 @@ namespace Adai
 				{
 					allProperties = new Dictionary<string, ICollection<PropertyInfo>>();
 				}
-				if (allProperties.TryGetValue(type.FullName, out var properties))
+				if (!allProperties.TryGetValue(type.FullName, out var properties))
 				{
 					properties = type.GetProperties();
 					allProperties.Add(type.FullName, properties);

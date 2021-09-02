@@ -1,11 +1,10 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Adai.Core.WebApi
 {
@@ -15,23 +14,15 @@ namespace Adai.Core.WebApi
 	public static class JwtHelper
 	{
 		/// <summary>
-		/// CreateToken
+		/// CreateToken-Bearer
 		/// </summary>
+		/// <param name="issuer">发行人</param>
+		/// <param name="audience">受众人</param>
+		/// <param name="sign">签名凭证，长度必须大于等于16个字符</param>
+		/// <param name="claims">定义许多种的声明Claim，信息存储部分，Claims的实体一般包含用户和一些元数据</param>
 		/// <returns></returns>
-		public static string CreateToken()
+		public static string CreateToken(string issuer, string audience, string sign, params Claim[] claims)
 		{
-			// 定义发行人issuer
-			var issuer = "127.0.0.1";
-			// 定义受众人audience
-			var audience = "127.0.0.1";
-			// signingCredentials 签名凭证，SecurityKey 的长度必须 大于等于 16个字符
-			var sign = "a2DqeIJAneJKq9h6";
-
-			// 定义许多种的声明Claim，信息存储部分，Claims的实体一般包含用户和一些元数据
-			IEnumerable<Claim> claims = new Claim[]
-			{
-				new Claim("open-id", "123456789")
-			};
 			// notBefore 生效时间
 			// long nbf = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds();
 			var notBefore = DateTime.UtcNow;
@@ -50,6 +41,31 @@ namespace Adai.Core.WebApi
 			//	token_type = "Bearer",
 			//};
 			return token;
+		}
+
+		/// <summary>
+		/// 获取声明的值
+		/// </summary>
+		/// <param name="httpRequest"></param>
+		/// <param name="userIdName"></param>
+		/// <returns></returns>
+		public static string GetClaimValue(this HttpRequest httpRequest, string claimName)
+		{
+			var userValues = httpRequest.Headers["Authorization"];
+			if (userValues.Count == 0)
+			{
+				return null;
+			}
+			var token = userValues[0];
+			if (string.IsNullOrEmpty(token) || token.Length < 15)
+			{
+				return null;
+			}
+			// token.Substring(7, token.Length - 7);
+			token = token[7..];
+			var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
+			var claim = jwt.Claims.Where(o => o.Type == claimName).FirstOrDefault();
+			return claim?.Value;
 		}
 	}
 }

@@ -10,8 +10,8 @@ namespace Adai
 	/// </summary>
 	public static class ResourceHelper
 	{
-		static readonly IDictionary<string, ResourceManager> resources = new Dictionary<string, ResourceManager>();
-		static readonly object lockOfResources = new object();
+		static IDictionary<string, ResourceManager> resources;
+		static readonly object locker = new object();
 
 		/// <summary>
 		/// 获取资源文件
@@ -42,13 +42,18 @@ namespace Adai
 		/// <returns></returns>
 		public static ResourceManager Get(string baseName, Assembly assembly)
 		{
-			lock (lockOfResources)
+			lock (locker)
 			{
-				if (!resources.ContainsKey(baseName))
+				if (resources == null)
 				{
-					resources.Add(baseName, new ResourceManager(baseName, assembly));
+					resources = new Dictionary<string, ResourceManager>();
 				}
-				return resources[baseName];
+				if (!resources.TryGetValue(baseName, out var resource))
+				{
+					resource = new ResourceManager(baseName, assembly);
+					resources.Add(baseName, resource);
+				}
+				return resource;
 			}
 		}
 	}
