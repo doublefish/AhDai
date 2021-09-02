@@ -30,7 +30,7 @@ namespace Adai.Test
 		/// <param name="command"></param>
 		static void BeforeExecute(string eventId, IDbCommand command)
 		{
-			var message = $@"记录SQL=>{command.CommandText};Paras=>";
+			var message = $"记录SQL=>{command.CommandText};Paras=>";
 			foreach (IDbDataParameter para in command.Parameters)
 			{
 				message += $"{para.ParameterName}={para.Value},";
