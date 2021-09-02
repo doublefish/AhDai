@@ -89,25 +89,25 @@ namespace Adai.DbContext.Extension
 		public static bool IsMinValue(this object obj)
 		{
 			var type = obj.GetType();
-			switch (type.FullName)
+			return type.FullName switch
 			{
-				case "System.Byte": return obj.Equals(byte.MinValue);
-				case "System.SByte": return obj.Equals(sbyte.MinValue);
-				case "System.Char": return obj.Equals(char.MinValue);
-				case "System.String": return obj.Equals(string.Empty);
-				case "System.Int16": return obj.Equals(short.MinValue);
-				case "System.Int32": return obj.Equals(int.MinValue);
-				case "System.Int64": return obj.Equals(long.MinValue);
-				case "System.UInt16": return obj.Equals(ushort.MinValue);
-				case "System.UInt32": return obj.Equals(uint.MinValue);
-				case "System.UInt64": return obj.Equals(ulong.MinValue);
-				case "System.Boolean": return obj.Equals(false);
-				case "System.Single": return obj.Equals(float.MinValue);
-				case "System.Double": return obj.Equals(double.MinValue);
-				case "System.Decimal": return obj.Equals(decimal.MinValue);
-				case "System.DateTime": return obj.Equals(DateTime.MinValue);
-				default: return true;
-			}
+				"System.Byte" => obj.Equals(byte.MinValue),
+				"System.SByte" => obj.Equals(sbyte.MinValue),
+				"System.Char" => obj.Equals(char.MinValue),
+				"System.String" => obj.Equals(string.Empty),
+				"System.Int16" => obj.Equals(short.MinValue),
+				"System.Int32" => obj.Equals(int.MinValue),
+				"System.Int64" => obj.Equals(long.MinValue),
+				"System.UInt16" => obj.Equals(ushort.MinValue),
+				"System.UInt32" => obj.Equals(uint.MinValue),
+				"System.UInt64" => obj.Equals(ulong.MinValue),
+				"System.Boolean" => obj.Equals(false),
+				"System.Single" => obj.Equals(float.MinValue),
+				"System.Double" => obj.Equals(double.MinValue),
+				"System.Decimal" => obj.Equals(decimal.MinValue),
+				"System.DateTime" => obj.Equals(DateTime.MinValue),
+				_ => false,
+			};
 		}
 	}
 }

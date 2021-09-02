@@ -469,12 +469,6 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContext.GetConnection">
-            <summary>
-            CreateConnection
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Adai.DbContext.DbContext.GetDataSet(System.String,System.Data.IDbDataParameter[])">
             <summary>
             查询
@@ -709,20 +703,6 @@
             表特性
             </summary>
         </member>
-        <member name="M:Adai.DbContext.DbHelper.GetTableAttribute``1">
-            <summary>
-            获取映射
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.DbContext.DbHelper.GetTableAttribute(System.Type)">
-            <summary>
-            获取属性
-            </summary>
-            <param name="type"></param>
-            <returns></returns>
-        </member>
         <member name="P:Adai.DbContext.DbHelper.ConnectionStrings">
             <summary>
             数据库连接字符串
@@ -739,6 +719,20 @@
             </summary>
             <param name="connectionStrings">数据库别名-连接字符串</param>
             <param name="beforeExecute">执行之前执行，可用于记录SQL，第一个参数是初始化时传入的EventId</param>
+        </member>
+        <member name="M:Adai.DbContext.DbHelper.GetTableAttribute``1">
+            <summary>
+            获取映射
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbHelper.GetTableAttribute(System.Type)">
+            <summary>
+            获取属性
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
         </member>
         <member name="M:Adai.DbContext.DbHelper.GetConnectionString(System.String)">
             <summary>

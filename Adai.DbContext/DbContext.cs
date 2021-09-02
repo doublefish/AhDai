@@ -116,17 +116,6 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// CreateConnection
-		/// </summary>
-		/// <returns></returns>
-		public IDbConnection GetConnection()
-		{
-			var conn = CreateConnection();
-			conn.ConnectionString = ConnectionString;
-			return conn;
-		}
-
-		/// <summary>
 		/// 查询
 		/// </summary>
 		/// <param name="sql"></param>
@@ -134,14 +123,21 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public virtual DataSet GetDataSet(string sql, params IDbDataParameter[] parameters)
 		{
-			using var conn = GetConnection();
-			conn.Open();
-			var adapter = CreateDataAdapter();
-			adapter.SelectCommand = CreateCommand(conn, sql, parameters);
-			BeforeExecute(adapter.SelectCommand);
-			var ds = new DataSet();
-			adapter.Fill(ds);
-			return ds;
+			var conn = CreateConnection(ConnectionString);
+			try
+			{
+				conn.Open();
+				var adapter = CreateDataAdapter();
+				adapter.SelectCommand = CreateCommand(conn, sql, parameters);
+				BeforeExecute(adapter.SelectCommand);
+				var ds = new DataSet();
+				adapter.Fill(ds);
+				return ds;
+			}
+			finally
+			{
+				conn.Dispose();
+			}
 		}
 
 		/// <summary>
@@ -152,13 +148,20 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public object ExecuteScalar(string sql, params IDbDataParameter[] parameters)
 		{
-			using var conn = GetConnection();
-			conn.Open();
-			var cmd = conn.CreateCommand();
-			cmd.CommandText = sql;
-			cmd.Parameters.AddRange(parameters);
-			BeforeExecute(cmd);
-			return cmd.ExecuteScalar();
+			var conn = CreateConnection(ConnectionString);
+			try
+			{
+				conn.Open();
+				var cmd = conn.CreateCommand();
+				cmd.CommandText = sql;
+				cmd.Parameters.AddRange(parameters);
+				BeforeExecute(cmd);
+				return cmd.ExecuteScalar();
+			}
+			finally
+			{
+				conn.Dispose();
+			}
 		}
 
 		/// <summary>
@@ -180,10 +183,17 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public virtual int ExecuteNonQuery(IDbCommand command)
 		{
-			using var conn = GetConnection();
-			conn.Open();
-			BeforeExecute(command);
-			return command.ExecuteNonQuery();
+			var conn = CreateConnection(ConnectionString);
+			try
+			{
+				conn.Open();
+				BeforeExecute(command);
+				return command.ExecuteNonQuery();
+			}
+			finally
+			{
+				conn.Dispose();
+			}
 		}
 
 		/// <summary>
