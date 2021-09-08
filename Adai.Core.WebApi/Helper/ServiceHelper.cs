@@ -9,13 +9,23 @@ namespace Adai.Core.WebApi
 	public static class ServiceHelper
 	{
 		/// <summary>
-		/// ServiceCollection
+		/// Services
 		/// </summary>
-		public static IServiceCollection ServiceCollection { get; set; }
-		/// <summary>
-		/// ServiceProvider
-		/// </summary>
-		public static IServiceProvider ServiceProvider { get; set; }
+		public static IServiceCollection Services { get; private set; }
 
+		/// <summary>
+		/// Provider
+		/// </summary>
+		public static IServiceProvider Provider { get; private set; }
+
+		/// <summary>
+		/// 初始化
+		/// </summary>
+		/// <param name="services"></param>
+		public static void Init(IServiceCollection services)
+		{
+			Services = services;
+			Provider = services.BuildServiceProvider();
+		}
 	}
 }

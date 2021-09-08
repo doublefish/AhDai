@@ -50,8 +50,7 @@ namespace Adai.Core.WebApi
 		/// <param name="services"></param>
 		public virtual void ConfigureServices(IServiceCollection services)
 		{
-			ServiceHelper.ServiceCollection = services;
-			ServiceHelper.ServiceProvider = services.BuildServiceProvider();
+			ServiceHelper.Init(services);
 
 			//添加本地化
 			services.AddLocalization(options => options.ResourcesPath = "Languages");

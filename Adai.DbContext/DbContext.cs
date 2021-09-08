@@ -187,6 +187,7 @@ namespace Adai.DbContext
 			try
 			{
 				conn.Open();
+				command.Connection = conn;
 				BeforeExecute(command);
 				return command.ExecuteNonQuery();
 			}
