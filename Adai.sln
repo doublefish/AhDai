@@ -15,7 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.Test", "Adai.Test\Adai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.Core.WebApi", "Adai.Core.WebApi\Adai.Core.WebApi.csproj", "{124480A1-819D-4608-BA16-C63E5FF73CEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adai.DbContext.SQLite", "Adai.DbContext.SQLite\Adai.DbContext.SQLite.csproj", "{33E52CD8-03C3-4462-AC2C-92526A4CE85D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.DbContext.SQLite", "Adai.DbContext.SQLite\Adai.DbContext.SQLite.csproj", "{33E52CD8-03C3-4462-AC2C-92526A4CE85D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73142106-B90E-4618-947F-E633F9624E33}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.txt = nuget.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
