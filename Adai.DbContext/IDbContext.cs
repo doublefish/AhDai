@@ -8,6 +8,11 @@ namespace Adai.DbContext
 	public interface IDbContext
 	{
 		/// <summary>
+		/// 数据库类型
+		/// </summary>
+		Config.DbType DbType { get; set; }
+
+		/// <summary>
 		/// 连接字符串
 		/// </summary>
 		string ConnectionString { get; set; }

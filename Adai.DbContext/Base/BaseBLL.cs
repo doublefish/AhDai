@@ -16,6 +16,7 @@ namespace Adai.DbContext
 		/// </summary>
 		public BaseBLL()
 		{
+
 		}
 
 		DAL dal;

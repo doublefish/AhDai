@@ -1,4 +1,4 @@
-﻿using Adai.DbContext.Extension;
+﻿using Adai.DbContext.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -40,7 +40,7 @@ namespace Adai.DbContext
 			{
 				TableName = tableAttr.Name;
 			}
-			var primaryAttr = tableAttr.ColumnAttributes.Where(o => o.Type == Attribute.ColumnType.Primary).FirstOrDefault();
+			var primaryAttr = tableAttr.ColumnAttributes.Where(o => o.Type == Attributes.ColumnType.Primary).FirstOrDefault();
 			if (primaryAttr != null)
 			{
 				PrimaryKey = primaryAttr.Name;
@@ -270,7 +270,7 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// 查询
+		/// 跨库跨表查询
 		/// </summary>
 		/// <param name="dict">dbName-tableName-values</param>
 		/// <param name="column"></param>

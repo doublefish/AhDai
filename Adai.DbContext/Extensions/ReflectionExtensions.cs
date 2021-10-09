@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Adai.DbContext.Extension
+namespace Adai.DbContext.Extensions
 {
 	/// <summary>
-	/// ReflectionExt
+	/// ReflectionExtensions
 	/// </summary>
-	public static class ReflectionExt
+	public static class ReflectionExtensions
 	{
 		/// <summary>
 		/// 赋值-自动转换类型

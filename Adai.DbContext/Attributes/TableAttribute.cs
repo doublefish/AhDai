@@ -1,4 +1,4 @@
-﻿namespace Adai.DbContext.Attribute
+﻿namespace Adai.DbContext.Attributes
 {
 	/// <summary>
 	/// 表的特性

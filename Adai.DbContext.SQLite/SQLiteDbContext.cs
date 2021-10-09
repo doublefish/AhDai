@@ -1,18 +1,18 @@
-﻿using MySql.Data.MySqlClient;
-using System.Data;
+﻿using System.Data;
+using System.Data.SQLite;
 
-namespace Adai.DbContext.MySql
+namespace Adai.DbContext.SQLite
 {
 	/// <summary>
-	/// MySqlDbContext
+	/// SQLiteDbContext
 	/// </summary>
-	public sealed class MySqlDbContext : DbContext, IDbContext
+	public class SQLiteDbContext : DbContext, IDbContext
 	{
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		/// <param name="eventId">事件Id</param>
-		public MySqlDbContext(string eventId) : this(eventId, null)
+		/// <param name="eventId"></param>
+		public SQLiteDbContext(string eventId) : this(eventId, null)
 		{
 		}
 
@@ -21,7 +21,7 @@ namespace Adai.DbContext.MySql
 		/// </summary>
 		/// <param name="eventId">事件Id</param>
 		/// <param name="connectionString"></param>
-		public MySqlDbContext(string eventId, string connectionString) : base(Config.DbType.MySQL, connectionString)
+		public SQLiteDbContext(string eventId, string connectionString) : base(Config.DbType.MySQL, connectionString)
 		{
 			EventId = eventId;
 		}
@@ -37,7 +37,7 @@ namespace Adai.DbContext.MySql
 		/// <returns></returns>
 		public override IDbConnection CreateConnection()
 		{
-			return new MySqlConnection();
+			return new SQLiteConnection();
 		}
 
 		/// <summary>
@@ -46,7 +46,7 @@ namespace Adai.DbContext.MySql
 		/// <returns></returns>
 		public override IDbCommand CreateCommand()
 		{
-			return new MySqlCommand();
+			return new SQLiteCommand();
 		}
 
 		/// <summary>
@@ -55,7 +55,7 @@ namespace Adai.DbContext.MySql
 		/// <returns></returns>
 		public override IDbDataAdapter CreateDataAdapter()
 		{
-			return new MySqlDataAdapter();
+			return new SQLiteDataAdapter();
 		}
 
 		/// <summary>
@@ -64,7 +64,7 @@ namespace Adai.DbContext.MySql
 		/// <returns></returns>
 		public override IDbDataParameter CreateParameter()
 		{
-			return new MySqlParameter();
+			return new SQLiteParameter();
 		}
 
 		/// <summary>

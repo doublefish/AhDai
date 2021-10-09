@@ -1,4 +1,6 @@
-﻿namespace Adai.DbContext.Attribute
+﻿using System.Reflection;
+
+namespace Adai.DbContext.Attributes
 {
 	/// <summary>
 	/// 表里的列的特性
@@ -19,5 +21,9 @@
 		/// 扩展字段
 		/// </summary>
 		public ColumnType Type { get; set; }
+		/// <summary>
+		/// 属性
+		/// </summary>
+		public PropertyInfo Property { get; set; }
 	}
 }

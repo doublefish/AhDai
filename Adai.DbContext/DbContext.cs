@@ -11,7 +11,7 @@ namespace Adai.DbContext
 		/// 构造函数
 		/// </summary>
 		/// <param name="dbType"></param>
-		public DbContext(DbType dbType) : this(dbType, null)
+		public DbContext(Config.DbType dbType) : this(dbType, null)
 		{
 		}
 
@@ -20,7 +20,7 @@ namespace Adai.DbContext
 		/// </summary>
 		/// <param name="dbType"></param>
 		/// <param name="connectionString"></param>
-		public DbContext(DbType dbType, string connectionString)
+		public DbContext(Config.DbType dbType, string connectionString)
 		{
 			DbType = dbType;
 			ConnectionString = connectionString;
@@ -29,7 +29,7 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 数据库类型
 		/// </summary>
-		public DbType DbType { get; private set; }
+		public Config.DbType DbType { get; set; }
 
 		/// <summary>
 		/// 数据库连接

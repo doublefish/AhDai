@@ -21,7 +21,7 @@ namespace Adai.DbContext
 		public BaseFilter(IDictionary<string, object> defaultValues = null)
 		{
 			Self = new T();
-			Extension.ObjectExt.SetMinValue(Self, defaultValues);
+			Extensions.ObjectExtensions.SetMinValue(Self, defaultValues);
 			SortType = Config.SortType.DESC;
 		}
 

@@ -1,25 +1,25 @@
-﻿namespace Adai.DbContext
+﻿namespace Adai.DbContext.Attributes
 {
 	/// <summary>
-	/// 数据库类型
+	/// 列类型
 	/// </summary>
-	public enum DbType
+	public enum ColumnType
 	{
 		/// <summary>
-		/// MSSQL
+		/// 普通
 		/// </summary>
-		MSSQL,
+		Normal,
 		/// <summary>
-		/// MySQL
+		/// 主键
 		/// </summary>
-		MySQL,
+		Primary,
 		/// <summary>
-		/// Oracle
+		/// 外键
 		/// </summary>
-		Oracle,
+		Foreign,
 		/// <summary>
-		/// SQLite
+		/// 扩展
 		/// </summary>
-		SQLite
+		External
 	}
 }

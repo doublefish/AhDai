@@ -1,11 +1,12 @@
-﻿using System.Reflection;
+﻿using System;
 
-namespace Adai.DbContext.Attribute
+namespace Adai.DbContext.Attributes
 {
 	/// <summary>
 	/// 自定义特性
 	/// </summary>
-	public class CustomAttribute : System.Attribute
+	[AttributeUsage(AttributeTargets.All)]
+	public class CustomAttribute : Attribute
 	{
 		/// <summary>
 		/// 构造函数
@@ -20,9 +21,5 @@ namespace Adai.DbContext.Attribute
 		/// 名称
 		/// </summary>
 		public string Name { get; set; }
-		/// <summary>
-		/// 属性
-		/// </summary>
-		public PropertyInfo Property { get; set; }
 	}
 }

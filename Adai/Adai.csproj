@@ -1,32 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Authors>Shuang Yu</Authors>
-    <Company>Adai</Company>
-    <Description>常用方法封装</Description>
-    <Copyright>Shuang Yu</Copyright>
-    <Version>2.1.0.0</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>2.1.0.0</AssemblyVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Authors>Shuang Yu</Authors>
+		<Company>Adai</Company>
+		<Description>常用方法封装</Description>
+		<Copyright>Shuang Yu</Copyright>
+		<Version>2.1.0.0</Version>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<AssemblyVersion>2.1.0.0</AssemblyVersion>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\DoubleFish\Adai\Adai\Adai.xml</DocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>Adai.xml</DocumentationFile>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>D:\DoubleFish\Adai\Adai\Adai.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Helper\AESHelper.cs" />
-    <Compile Remove="Helper\DESHelper.cs" />
-    <Compile Remove="Helper\HMACHelper.cs" />
-    <Compile Remove="Helper\MD5Helper.cs" />
-    <Compile Remove="Helper\RSAHelper.cs" />
-    <Compile Remove="Helper\SHAHelper.cs" />
-    <Compile Remove="Helper\X509CertificateHelper.cs" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>Adai.xml</DocumentationFile>
+	</PropertyGroup>
 
 </Project>

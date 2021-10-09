@@ -1,13 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Adai.DbContext.Extension
+namespace Adai.DbContext.Extensions
 {
 	/// <summary>
-	/// ObjectExt
+	/// ObjectExtensions
 	/// </summary>
-	public static class ObjectExt
+	public static class ObjectExtensions
 	{
+		/// <summary>
+		/// 克隆
+		/// </summary>
+		/// <typeparam name="T">类型</typeparam>
+		/// <param name="obj"></param>
+		/// <param name="ignores">忽略的属性</param>
+		public static T Clone<T>(this T obj, params string[] ignores) where T : class, new()
+		{
+			var type = typeof(T);
+			var data = new T();
+			foreach (var pi in type.GetProperties())
+			{
+				if (ignores.Contains(pi.Name) || pi.CanRead == false)
+				{
+					continue;
+				}
+				var targetPi = type.GetProperty(pi.Name);
+				if (targetPi.CanWrite == false)
+				{
+					continue;
+				}
+				var value = pi.GetValue(obj, null);
+				targetPi.SetValue(data, value, null);
+			}
+			return data;
+		}
+
 		/// <summary>
 		/// 设置默认值为对应类型的最小值
 		/// </summary>
@@ -89,7 +117,7 @@ namespace Adai.DbContext.Extension
 		public static bool IsMinValue(this object obj)
 		{
 			var type = obj.GetType();
-			return type.FullName switch
+			var res = type.FullName switch
 			{
 				"System.Byte" => obj.Equals(byte.MinValue),
 				"System.SByte" => obj.Equals(sbyte.MinValue),
@@ -108,6 +136,7 @@ namespace Adai.DbContext.Extension
 				"System.DateTime" => obj.Equals(DateTime.MinValue),
 				_ => false,
 			};
+			return res;
 		}
 	}
 }

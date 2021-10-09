@@ -1,4 +1,4 @@
-﻿using Adai.DbContext.Extension;
+﻿using Adai.DbContext.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,22 +8,36 @@ using System.Text;
 namespace Adai.DbContext
 {
 	/// <summary>
-	/// DbContextExt
+	/// DbContextExtensions
 	/// </summary>
-	public static class DbContextExt
+	public static class DbContextExtensions
 	{
 		/// <summary>
-		/// GetConnectionString
+		/// 获取连接字符串
 		/// </summary>
+		/// <param name="dbContext"></param>
 		/// <param name="dbName"></param>
 		/// <returns></returns>
-		static string GetConnectionString(string dbName)
+		static string GetConnectionString(this IDbContext dbContext, string dbName)
 		{
-			if (string.IsNullOrEmpty(dbName))
+			var dbConfig = DbHelper.GetDbConfig(dbContext.DbType, dbName);
+			if (dbConfig == null || string.IsNullOrEmpty(dbConfig.ConnectionString))
 			{
-				throw new ArgumentNullException("参数dbName不能为空");
+				throw new ArgumentException($"未配置类型是{dbContext.DbType.ToName()}，别名是{dbName}的数据库配置");
 			}
-			return DbHelper.GetConnectionString(dbName);
+			return dbConfig.ConnectionString;
+		}
+
+		/// <summary>
+		/// 变更连接字符串
+		/// </summary>
+		/// <param name="dbContext"></param>
+		/// <param name="dbName"></param>
+		/// <returns></returns>
+		static void ChangeConnectionString(this IDbContext dbContext, string dbName)
+		{
+			var connStr = dbContext.GetConnectionString(dbName);
+			dbContext.ConnectionString = connStr;
 		}
 
 		/// <summary>
@@ -36,44 +50,8 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public static DataSet GetDataSet(this IDbContext dbContext, string dbName, string sql, params IDbDataParameter[] parameters)
 		{
-			dbContext.ConnectionString = GetConnectionString(dbName);
+			dbContext.ChangeConnectionString(dbName);
 			return dbContext.GetDataSet(sql, parameters);
-		}
-
-		/// <summary>
-		/// 查询-分次
-		/// </summary>
-		/// <param name="dbContext"></param>
-		/// <param name="dbName"></param>
-		/// <param name="take"></param>
-		/// <param name="sql"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static DataSet GetDataSet(this IDbContext dbContext, string dbName, int take, string sql, params IDbDataParameter[] parameters)
-		{
-			dbContext.ConnectionString = GetConnectionString(dbName);
-			var ds = new DataSet();
-			using (var conn = dbContext.CreateConnection())
-			{
-				conn.Open();
-				var skip = 0;
-				while (true)
-				{
-					var _sql = $"{sql} LIMIT {skip},{take}";
-					var adapter = dbContext.CreateDataAdapter();
-					adapter.SelectCommand = conn.CreateCommand();
-					adapter.SelectCommand.CommandText = _sql;
-					adapter.SelectCommand.Parameters.AddRange(parameters);
-					adapter.Fill(ds);
-					var count = adapter.Fill(ds);
-					if (count < take)
-					{
-						break;
-					}
-					skip += take;
-				}
-			}
-			return ds;
 		}
 
 		/// <summary>
@@ -121,7 +99,7 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public static ICollection<T> GetList<T>(this IDbContext dbContext, string dbName, string sql, params IDbDataParameter[] parameters) where T : class, new()
 		{
-			dbContext.ConnectionString = GetConnectionString(dbName);
+			dbContext.ChangeConnectionString(dbName);
 			return dbContext.GetList<T>(sql, parameters);
 		}
 
@@ -135,7 +113,7 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public static object ExecuteScalar(this IDbContext dbContext, string dbName, string sql, params IDbDataParameter[] parameters)
 		{
-			dbContext.ConnectionString = GetConnectionString(dbName);
+			dbContext.ChangeConnectionString(dbName);
 			return dbContext.ExecuteScalar(sql, parameters);
 		}
 
@@ -149,7 +127,7 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public static int ExecuteNonQuery(this IDbContext dbContext, string dbName, string sql, params IDbDataParameter[] parameters)
 		{
-			dbContext.ConnectionString = GetConnectionString(dbName);
+			dbContext.ChangeConnectionString(dbName);
 			return dbContext.ExecuteNonQuery(sql, parameters);
 		}
 
@@ -162,7 +140,7 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public static int ExecuteNonQuery(this IDbContext dbContext, string dbName, params IDbCommand[] commands)
 		{
-			dbContext.ConnectionString = GetConnectionString(dbName);
+			dbContext.ChangeConnectionString(dbName);
 			return dbContext.ExecuteNonQuery(commands);
 		}
 
@@ -191,13 +169,13 @@ namespace Adai.DbContext
 				}
 				tran.Commit();
 			}
-			catch (Exception ex)
+			catch
 			{
 				if (tran != null)
 				{
 					tran.Rollback();
 				}
-				throw ex;
+				throw;
 			}
 			finally
 			{
@@ -244,13 +222,13 @@ namespace Adai.DbContext
 					tran.Commit();
 				}
 			}
-			catch (Exception ex)
+			catch
 			{
 				foreach (var tran in trans)
 				{
 					tran.Rollback();
 				}
-				throw ex;
+				throw;
 			}
 			finally
 			{
@@ -276,7 +254,7 @@ namespace Adai.DbContext
 			var _dict = new Dictionary<string, ICollection<IDbCommand>>();
 			foreach (var kv in dict)
 			{
-				var connStr = GetConnectionString(kv.Key);
+				var connStr = dbContext.GetConnectionString(kv.Key);
 				_dict.Add(connStr, kv.Value);
 			}
 			return dbContext.ExecuteNonQuery(_dict);
@@ -303,7 +281,7 @@ namespace Adai.DbContext
 			var paras = new List<IDbDataParameter>();
 			foreach (var column in columns)
 			{
-				if (column.Type == Attribute.ColumnType.External)
+				if (column.Type == Attributes.ColumnType.External)
 				{
 					continue;
 				}
@@ -323,7 +301,7 @@ namespace Adai.DbContext
 			if (!string.IsNullOrEmpty(filter.SortName))
 			{
 				var sortName = filter.SortName;
-				if (sortName.IndexOf('.') == -1)
+				if (!sortName.Contains('.'))
 				{
 					var sortColumn = columns.Find(filter.SortName);
 					sortName = $"{alias}.{sortColumn.Name}";
@@ -337,7 +315,25 @@ namespace Adai.DbContext
 			}
 			if (filter.Take > 0)
 			{
-				sql.Append($" LIMIT {filter.Skip},{filter.Take}");
+				switch (dbContext.DbType)
+				{
+					case Config.DbType.MSSQL:
+						// 2012版本以上
+						sql.Append($" OFFSET {filter.Skip} ROWS FETCH NEXT {filter.Take} ROWS ONLY");
+						break;
+					case Config.DbType.MySQL:
+					case Config.DbType.SQLite:
+						//sql.Append($" LIMIT {filter.Skip},{filter.Take}");
+						sql.Append($" LIMIT {filter.Take} OFFSET {filter.Skip}");
+						break;
+					case Config.DbType.Oracle:
+						//select a.* from ( select t.*,rownum rowno from test t where rownum <= 20 ) a where a.rowno >= 11;
+						sql.Insert(0, $"SELECT t1.* FROM (SELECT t0.*,ROWNUM ROWNO FROM (");
+						sql.Append($") t0 WHERE ROWNUM <= {filter.Take + filter.Skip} ) t1 WHERE t1.ROWNO > {filter.Skip}");
+						break;
+					default:
+						throw new Exception("无法识别的数据库类型");
+				}
 			}
 			parameters = paras.ToArray();
 			return sql.ToString();
@@ -420,7 +416,7 @@ namespace Adai.DbContext
 			var paras = new List<IDbDataParameter>();
 			foreach (var column in columns)
 			{
-				if (column.Type == Attribute.ColumnType.External)
+				if (column.Type == Attributes.ColumnType.External)
 				{
 					continue;
 				}
@@ -472,12 +468,13 @@ namespace Adai.DbContext
 			{
 				throw new Exception("未指定参数whereColumns");
 			}
-			var builder = new StringBuilder();
+			var builderSet = new StringBuilder();
+			var builderWhere = new StringBuilder();
 			var paras = new List<IDbDataParameter>();
 			foreach (var updateColumn in updateColumns)
 			{
 				var column = columns.Find(updateColumn);
-				if (column == null || column.Type == Attribute.ColumnType.External)
+				if (column == null || column.Type == Attributes.ColumnType.External)
 				{
 					continue;
 				}
@@ -491,33 +488,31 @@ namespace Adai.DbContext
 				{
 					continue;
 				}
-				builder.Append($",{column.Name}=@{column.Name}");
+				builderSet.Append($",{column.Name}=@{column.Name}");
 				paras.Add(dbContext.CreateParameter(column.Name, value));
 			}
-			builder = builder.Remove(0, 1);
-			builder.Append(" WHERE 1=1");
+			builderSet = builderSet.Remove(0, 1);
+
 			foreach (var whereColumn in whereColumns)
 			{
 				var column = columns.Find(whereColumn);
-				if (column == null || column.Type == Attribute.ColumnType.External)
+				if (column == null || column.Type == Attributes.ColumnType.External)
 				{
-					continue;
+					throw new ArgumentException($"找不到{whereColumn}对应的列");
 				}
 				var pi = column.Property;
 				var value = pi.GetValue(data);
-				if (value == null)
+				if (value == null || value.IsMinValue())
 				{
-					continue;
+					throw new ArgumentNullException(whereColumn);
 				}
-				if (value.IsMinValue())
-				{
-					continue;
-				}
-				builder.Append($" AND {column.Name}=@{column.Name}");
+				builderWhere.Append($"AND {column.Name}=@{column.Name}");
 				paras.Add(dbContext.CreateParameter(column.Name, value));
 			}
+			builderWhere = builderWhere.Remove(0, 4);
+
 			parameters = paras.ToArray();
-			var sql = $"UPDATE {tableName} SET {builder}";
+			var sql = $"UPDATE {tableName} SET {builderSet} WHERE {builderWhere}";
 			return sql;
 		}
 

@@ -4,12 +4,12 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace Adai.DbContext.Extension
+namespace Adai.DbContext.Extensions
 {
 	/// <summary>
-	/// DataTableExt
+	/// DataTableExtensions
 	/// </summary>
-	public static class DataTableExt
+	public static class DataTableExtensions
 	{
 		/// <summary>
 		/// ToModel

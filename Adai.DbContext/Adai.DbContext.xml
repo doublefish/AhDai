@@ -4,83 +4,83 @@
         <name>Adai.DbContext</name>
     </assembly>
     <members>
-        <member name="T:Adai.DbContext.Attribute.ColumnType">
+        <member name="T:Adai.DbContext.Attributes.ColumnType">
             <summary>
             列类型
             </summary>
         </member>
-        <member name="F:Adai.DbContext.Attribute.ColumnType.Normal">
+        <member name="F:Adai.DbContext.Attributes.ColumnType.Normal">
             <summary>
             普通
             </summary>
         </member>
-        <member name="F:Adai.DbContext.Attribute.ColumnType.Primary">
+        <member name="F:Adai.DbContext.Attributes.ColumnType.Primary">
             <summary>
             主键
             </summary>
         </member>
-        <member name="F:Adai.DbContext.Attribute.ColumnType.Foreign">
+        <member name="F:Adai.DbContext.Attributes.ColumnType.Foreign">
             <summary>
             外键
             </summary>
         </member>
-        <member name="F:Adai.DbContext.Attribute.ColumnType.External">
+        <member name="F:Adai.DbContext.Attributes.ColumnType.External">
             <summary>
             扩展
             </summary>
         </member>
-        <member name="T:Adai.DbContext.Attribute.CustomAttribute">
+        <member name="T:Adai.DbContext.Attributes.CustomAttribute">
             <summary>
             自定义特性
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Attribute.CustomAttribute.#ctor(System.String)">
+        <member name="M:Adai.DbContext.Attributes.CustomAttribute.#ctor(System.String)">
             <summary>
             构造函数
             </summary>
             <param name="name">名称</param>
         </member>
-        <member name="P:Adai.DbContext.Attribute.CustomAttribute.Name">
+        <member name="P:Adai.DbContext.Attributes.CustomAttribute.Name">
             <summary>
             名称
             </summary>
         </member>
-        <member name="P:Adai.DbContext.Attribute.CustomAttribute.Property">
-            <summary>
-            属性
-            </summary>
-        </member>
-        <member name="T:Adai.DbContext.Attribute.TableAttribute">
+        <member name="T:Adai.DbContext.Attributes.TableAttribute">
             <summary>
             表的特性
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Attribute.TableAttribute.#ctor(System.String)">
+        <member name="M:Adai.DbContext.Attributes.TableAttribute.#ctor(System.String)">
             <summary>
             构造函数
             </summary>
             <param name="name">名称</param>
         </member>
-        <member name="P:Adai.DbContext.Attribute.TableAttribute.ColumnAttributes">
+        <member name="P:Adai.DbContext.Attributes.TableAttribute.ColumnAttributes">
             <summary>
             列的特性
             </summary>
         </member>
-        <member name="T:Adai.DbContext.Attribute.TableColumnAttribute">
+        <member name="T:Adai.DbContext.Attributes.TableColumnAttribute">
             <summary>
             表里的列的特性
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Attribute.TableColumnAttribute.#ctor(System.String,Adai.DbContext.Attribute.ColumnType)">
+        <member name="M:Adai.DbContext.Attributes.TableColumnAttribute.#ctor(System.String,Adai.DbContext.Attributes.ColumnType)">
             <summary>
             构造函数
             </summary>
             <param name="name">名称</param>
             <param name="type">类型</param>
         </member>
-        <member name="P:Adai.DbContext.Attribute.TableColumnAttribute.Type">
+        <member name="P:Adai.DbContext.Attributes.TableColumnAttribute.Type">
             <summary>
             扩展字段
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.Attributes.TableColumnAttribute.Property">
+            <summary>
+            属性
             </summary>
         </member>
         <member name="T:Adai.DbContext.BaseBLL`2">
@@ -290,7 +290,7 @@
         </member>
         <member name="M:Adai.DbContext.BaseDAL`1.ListByColumn``1(System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{``0}}},System.String)">
             <summary>
-            查询
+            跨库跨表查询
             </summary>
             <param name="dict">dbName-tableName-values</param>
             <param name="column"></param>
@@ -370,6 +370,31 @@
             数据表名称
             </summary>
         </member>
+        <member name="T:Adai.DbContext.Config.DbType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="F:Adai.DbContext.Config.DbType.MSSQL">
+            <summary>
+            MSSQL
+            </summary>
+        </member>
+        <member name="F:Adai.DbContext.Config.DbType.MySQL">
+            <summary>
+            MySQL
+            </summary>
+        </member>
+        <member name="F:Adai.DbContext.Config.DbType.Oracle">
+            <summary>
+            Oracle
+            </summary>
+        </member>
+        <member name="F:Adai.DbContext.Config.DbType.SQLite">
+            <summary>
+            SQLite
+            </summary>
+        </member>
         <member name="T:Adai.DbContext.Config.SortType">
             <summary>
             排序类型
@@ -390,13 +415,13 @@
             DbContext
             </summary>
         </member>
-        <member name="M:Adai.DbContext.DbContext.#ctor(Adai.DbContext.DbType)">
+        <member name="M:Adai.DbContext.DbContext.#ctor(Adai.DbContext.Config.DbType)">
             <summary>
             构造函数
             </summary>
             <param name="dbType"></param>
         </member>
-        <member name="M:Adai.DbContext.DbContext.#ctor(Adai.DbContext.DbType,System.String)">
+        <member name="M:Adai.DbContext.DbContext.#ctor(Adai.DbContext.Config.DbType,System.String)">
             <summary>
             构造函数
             </summary>
@@ -506,19 +531,28 @@
             </summary>
             <param name="command"></param>
         </member>
-        <member name="T:Adai.DbContext.DbContextExt">
+        <member name="T:Adai.DbContext.DbContextExtensions">
             <summary>
-            DbContextExt
+            DbContextExtensions
             </summary>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.GetConnectionString(System.String)">
+        <member name="M:Adai.DbContext.DbContextExtensions.GetConnectionString(Adai.DbContext.IDbContext,System.String)">
             <summary>
-            GetConnectionString
+            获取连接字符串
             </summary>
+            <param name="dbContext"></param>
             <param name="dbName"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.GetDataSet(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
+        <member name="M:Adai.DbContext.DbContextExtensions.ChangeConnectionString(Adai.DbContext.IDbContext,System.String)">
+            <summary>
+            变更连接字符串
+            </summary>
+            <param name="dbContext"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContextExtensions.GetDataSet(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
             <summary>
             查询
             </summary>
@@ -528,39 +562,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.GetDataSet(Adai.DbContext.IDbContext,System.String,System.Int32,System.String,System.Data.IDbDataParameter[])">
-            <summary>
-            查询-分次
-            </summary>
-            <param name="dbContext"></param>
-            <param name="dbName"></param>
-            <param name="take"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.DbContext.DbContextExt.GetSingle``1(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
-            <summary>
-            查询
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="dbContext"></param>
-            <param name="dbName"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.DbContext.DbContextExt.GetList``1(Adai.DbContext.IDbContext,System.String,System.Data.IDbDataParameter[])">
-            <summary>
-            查询
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="dbContext"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.DbContext.DbContextExt.GetList``1(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
+        <member name="M:Adai.DbContext.DbContextExtensions.GetSingle``1(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
             <summary>
             查询
             </summary>
@@ -571,7 +573,28 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.ExecuteScalar(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
+        <member name="M:Adai.DbContext.DbContextExtensions.GetList``1(Adai.DbContext.IDbContext,System.String,System.Data.IDbDataParameter[])">
+            <summary>
+            查询
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbContext"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContextExtensions.GetList``1(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
+            <summary>
+            查询
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbContext"></param>
+            <param name="dbName"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContextExtensions.ExecuteScalar(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
             <summary>
             查询
             </summary>
@@ -581,7 +604,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.ExecuteNonQuery(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
+        <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQuery(Adai.DbContext.IDbContext,System.String,System.String,System.Data.IDbDataParameter[])">
             <summary>
             执行
             </summary>
@@ -591,7 +614,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.ExecuteNonQuery(Adai.DbContext.IDbContext,System.String,System.Data.IDbCommand[])">
+        <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQuery(Adai.DbContext.IDbContext,System.String,System.Data.IDbCommand[])">
             <summary>
             执行
             </summary>
@@ -600,7 +623,7 @@
             <param name="commands"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.ExecuteNonQuery(Adai.DbContext.IDbContext,System.Data.IDbCommand[])">
+        <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQuery(Adai.DbContext.IDbContext,System.Data.IDbCommand[])">
             <summary>
             执行
             </summary>
@@ -608,7 +631,7 @@
             <param name="commands"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.ExecuteNonQuery(Adai.DbContext.IDbContext,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{System.Data.IDbCommand}})">
+        <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQuery(Adai.DbContext.IDbContext,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{System.Data.IDbCommand}})">
             <summary>
             跨库执行
             </summary>
@@ -616,7 +639,7 @@
             <param name="dict">connStr-cmds</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.ExecuteNonQueryByDbName(Adai.DbContext.IDbContext,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{System.Data.IDbCommand}})">
+        <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQueryByDbName(Adai.DbContext.IDbContext,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{System.Data.IDbCommand}})">
             <summary>
             跨库执行
             </summary>
@@ -624,7 +647,7 @@
             <param name="dict">dbName-cmds</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.CreateQueryCondition``1(Adai.DbContext.IDbContext,Adai.DbContext.IFilter{``0},System.String,System.Data.IDbDataParameter[]@)">
+        <member name="M:Adai.DbContext.DbContextExtensions.CreateQueryCondition``1(Adai.DbContext.IDbContext,Adai.DbContext.IFilter{``0},System.String,System.Data.IDbDataParameter[]@)">
             <summary>
             创建查询条件
             </summary>
@@ -635,7 +658,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.CreateInsertCommand``1(Adai.DbContext.IDbContext,``0,System.String)">
+        <member name="M:Adai.DbContext.DbContextExtensions.CreateInsertCommand``1(Adai.DbContext.IDbContext,``0,System.String)">
             <summary>
             生成InsertCommand
             </summary>
@@ -645,7 +668,7 @@
             <param name="tableName">可为空，读取实体特性</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.CreateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String[],System.String,System.String)">
+        <member name="M:Adai.DbContext.DbContextExtensions.CreateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String[],System.String,System.String)">
             <summary>
             生成UpdateCommand（根据主键修改）
             </summary>
@@ -657,7 +680,7 @@
             <param name="tableName">可为空，读取实体特性</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.CreateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String[],System.String[],System.String)">
+        <member name="M:Adai.DbContext.DbContextExtensions.CreateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String[],System.String[],System.String)">
             <summary>
             生成UpdateCommand
             </summary>
@@ -669,7 +692,7 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.CreateInsertSql``1(Adai.DbContext.IDbContext,``0,System.String,System.Data.IDbDataParameter[]@)">
+        <member name="M:Adai.DbContext.DbContextExtensions.CreateInsertSql``1(Adai.DbContext.IDbContext,``0,System.String,System.Data.IDbDataParameter[]@)">
             <summary>
             生成Insert语句
             </summary>
@@ -680,7 +703,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExt.CreateUpdateSql``1(Adai.DbContext.IDbContext,``0,System.String,System.String[],System.String[],System.Data.IDbDataParameter[]@)">
+        <member name="M:Adai.DbContext.DbContextExtensions.CreateUpdateSql``1(Adai.DbContext.IDbContext,``0,System.String,System.String[],System.String[],System.Data.IDbDataParameter[]@)">
             <summary>
             生成Update语句
             </summary>
@@ -703,9 +726,9 @@
             表特性
             </summary>
         </member>
-        <member name="P:Adai.DbContext.DbHelper.ConnectionStrings">
+        <member name="P:Adai.DbContext.DbHelper.DbConfigs">
             <summary>
-            数据库连接字符串
+            数据库配置
             </summary>
         </member>
         <member name="P:Adai.DbContext.DbHelper.BeforeExecuteAction">
@@ -713,11 +736,11 @@
             执行之前
             </summary>
         </member>
-        <member name="M:Adai.DbContext.DbHelper.Init(System.Collections.Generic.IDictionary{System.String,System.String},System.Action{System.String,System.Data.IDbCommand})">
+        <member name="M:Adai.DbContext.DbHelper.Init(System.Collections.Generic.ICollection{Adai.DbContext.Models.DbConfig},System.Action{System.String,System.Data.IDbCommand})">
             <summary>
-            初始化（建议在程序启动时执行此方法）
+            初始化
             </summary>
-            <param name="connectionStrings">数据库别名-连接字符串</param>
+            <param name="dbConfigs">数据库配置</param>
             <param name="beforeExecute">执行之前执行，可用于记录SQL，第一个参数是初始化时传入的EventId</param>
         </member>
         <member name="M:Adai.DbContext.DbHelper.GetTableAttribute``1">
@@ -734,10 +757,11 @@
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbHelper.GetConnectionString(System.String)">
+        <member name="M:Adai.DbContext.DbHelper.GetDbConfig(Adai.DbContext.Config.DbType,System.String)">
             <summary>
-            获取连接字符串
+            获取数据库配置
             </summary>
+            <param name="dbType"></param>
             <param name="dbName"></param>
             <returns></returns>
         </member>
@@ -758,42 +782,29 @@
             <param name="notIn"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.DbContext.DbType">
+        <member name="T:Adai.DbContext.Extensions.AttributeExtensions">
             <summary>
-            数据库类型
+            AttributeExtensions
             </summary>
         </member>
-        <member name="F:Adai.DbContext.DbType.MSSQL">
+        <member name="T:Adai.DbContext.Extensions.ConfigExtensions">
             <summary>
-            MSSQL
+            ConfigExtensions
             </summary>
         </member>
-        <member name="F:Adai.DbContext.DbType.MySQL">
+        <member name="M:Adai.DbContext.Extensions.ConfigExtensions.ToName(Adai.DbContext.Config.DbType)">
             <summary>
-            MySQL
+            转换为名称
+            </summary>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.DbContext.Extensions.CustomAttributeExtensions">
+            <summary>
+            CustomAttributeExtensions
             </summary>
         </member>
-        <member name="F:Adai.DbContext.DbType.Oracle">
-            <summary>
-            Oracle
-            </summary>
-        </member>
-        <member name="F:Adai.DbContext.DbType.SQLite">
-            <summary>
-            SQLite
-            </summary>
-        </member>
-        <member name="T:Adai.DbContext.Extension.AttributeExt">
-            <summary>
-            AttributeExt
-            </summary>
-        </member>
-        <member name="T:Adai.DbContext.Extension.CustomAttributeExt">
-            <summary>
-            CustomAttributeExt
-            </summary>
-        </member>
-        <member name="M:Adai.DbContext.Extension.CustomAttributeExt.GetPropertyAttributes``1(System.Type)">
+        <member name="M:Adai.DbContext.Extensions.CustomAttributeExtensions.GetPropertyAttributes``1(System.Type)">
             <summary>
             读取类的属性的的特性
             </summary>
@@ -801,7 +812,7 @@
             <param name="type">类的Type</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extension.CustomAttributeExt.GetMappings``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Adai.DbContext.Extensions.CustomAttributeExtensions.GetMappings``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             获取列名和属性的映射关系
             </summary>
@@ -809,12 +820,22 @@
             <param name="attributes"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.DbContext.Extension.DataTableExt">
+        <member name="M:Adai.DbContext.Extensions.CustomAttributeExtensions.Find``1(System.Collections.Generic.IEnumerable{``0},System.String,System.StringComparison)">
             <summary>
-            DataTableExt
+            查询：匹配列名或者属性名
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="attributes"></param>
+            <param name="name"></param>
+            <param name="comparisonType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.DbContext.Extensions.DataTableExtensions">
+            <summary>
+            DataTableExtensions
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Extension.DataTableExt.ToModel``1(System.Data.DataRow)">
+        <member name="M:Adai.DbContext.Extensions.DataTableExtensions.ToModel``1(System.Data.DataRow)">
             <summary>
             ToModel
             </summary>
@@ -822,7 +843,7 @@
             <param name="dataRow"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extension.DataTableExt.ToModel``1(System.Data.DataRow,System.Reflection.PropertyInfo[])">
+        <member name="M:Adai.DbContext.Extensions.DataTableExtensions.ToModel``1(System.Data.DataRow,System.Reflection.PropertyInfo[])">
             <summary>
             ToModel
             </summary>
@@ -831,7 +852,7 @@
             <param name="propertyInfos"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.DataTable)">
+        <member name="M:Adai.DbContext.Extensions.DataTableExtensions.ToList``1(System.Data.DataTable)">
             <summary>
             ToList
             </summary>
@@ -839,7 +860,7 @@
             <param name="dataTable"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.DataTable,System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Adai.DbContext.Extensions.DataTableExtensions.ToList``1(System.Data.DataTable,System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
             ToList
             </summary>
@@ -848,7 +869,7 @@
             <param name="mappings">映射（列名-属性名）</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.DataTable,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
+        <member name="M:Adai.DbContext.Extensions.DataTableExtensions.ToList``1(System.Data.DataTable,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
             <summary>
             ToList
             </summary>
@@ -857,7 +878,7 @@
             <param name="mappings">映射（列名-属性）</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.IDataReader)">
+        <member name="M:Adai.DbContext.Extensions.DataTableExtensions.ToList``1(System.Data.IDataReader)">
             <summary>
             ToList
             </summary>
@@ -865,7 +886,7 @@
             <param name="dataReader"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.IDataReader,System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Adai.DbContext.Extensions.DataTableExtensions.ToList``1(System.Data.IDataReader,System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
             ToList
             </summary>
@@ -874,7 +895,7 @@
             <param name="mappings">映射（列名-属性名）</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extension.DataTableExt.ToList``1(System.Data.IDataReader,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
+        <member name="M:Adai.DbContext.Extensions.DataTableExtensions.ToList``1(System.Data.IDataReader,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
             <summary>
             ToList
             </summary>
@@ -883,7 +904,7 @@
             <param name="mappings">映射（列名-属性）</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.Extension.DataTableExt.SetValue``1(``0,System.String,System.Object,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
+        <member name="M:Adai.DbContext.Extensions.DataTableExtensions.SetValue``1(``0,System.String,System.Object,System.Collections.Generic.IDictionary{System.String,System.Reflection.PropertyInfo})">
             <summary>
             赋值
             </summary>
@@ -893,7 +914,7 @@
             <param name="value"></param>
             <param name="mappings">映射（列名-属性）</param>
         </member>
-        <member name="M:Adai.DbContext.Extension.DataTableExt.GetMappings``1(System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Adai.DbContext.Extensions.DataTableExtensions.GetMappings``1(System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
             获取列名和属性的映射关系
             </summary>
@@ -901,31 +922,39 @@
             <param name="mappings"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.DbContext.Extension.ObjectExt">
+        <member name="T:Adai.DbContext.Extensions.ObjectExtensions">
             <summary>
-            ObjectExt
+            ObjectExtensions
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Extension.ObjectExt.SetMinValue(System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+        <member name="M:Adai.DbContext.Extensions.ObjectExtensions.Clone``1(``0,System.String[])">
+            <summary>
+            克隆
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="obj"></param>
+            <param name="ignores">忽略的属性</param>
+        </member>
+        <member name="M:Adai.DbContext.Extensions.ObjectExtensions.SetMinValue(System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
             设置默认值为对应类型的最小值
             </summary>
             <param name="obj"></param>
             <param name="values">例外的默认值，格式：属性名称-值</param>
         </member>
-        <member name="M:Adai.DbContext.Extension.ObjectExt.IsMinValue(System.Object)">
+        <member name="M:Adai.DbContext.Extensions.ObjectExtensions.IsMinValue(System.Object)">
             <summary>
             是否最小值
             </summary>
             <param name="obj"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.DbContext.Extension.ReflectionExt">
+        <member name="T:Adai.DbContext.Extensions.ReflectionExtensions">
             <summary>
-            ReflectionExt
+            ReflectionExtensions
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Extension.ReflectionExt.SetValueExt(System.Reflection.PropertyInfo,System.Object,System.Object)">
+        <member name="M:Adai.DbContext.Extensions.ReflectionExtensions.SetValueExt(System.Reflection.PropertyInfo,System.Object,System.Object)">
             <summary>
             赋值-自动转换类型
             </summary>
@@ -933,22 +962,14 @@
             <param name="obj"></param>
             <param name="value"></param>
         </member>
-        <member name="T:Adai.DbContext.Extension.TableColumnAttributeExt">
-            <summary>
-            TableColumnAttributeExt
-            </summary>
-        </member>
-        <member name="M:Adai.DbContext.Extension.TableColumnAttributeExt.Find(System.Collections.Generic.IEnumerable{Adai.DbContext.Attribute.TableColumnAttribute},System.String)">
-            <summary>
-            查询：匹配列名或者属性名
-            </summary>
-            <param name="attributes"></param>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
         <member name="T:Adai.DbContext.IDbContext">
             <summary>
             IDbContext
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.IDbContext.DbType">
+            <summary>
+            数据库类型
             </summary>
         </member>
         <member name="P:Adai.DbContext.IDbContext.ConnectionString">
@@ -1096,6 +1117,26 @@
         <member name="P:Adai.DbContext.IModel.TableName">
             <summary>
             数据表名称
+            </summary>
+        </member>
+        <member name="T:Adai.DbContext.Models.DbConfig">
+            <summary>
+            数据库配置
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.Models.DbConfig.DbType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.Models.DbConfig.Name">
+            <summary>
+            别名
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.Models.DbConfig.ConnectionString">
+            <summary>
+            连接字符串
             </summary>
         </member>
     </members>

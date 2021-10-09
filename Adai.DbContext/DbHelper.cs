@@ -1,4 +1,4 @@
-﻿using Adai.DbContext.Extension;
+﻿using Adai.DbContext.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,12 +15,12 @@ namespace Adai.DbContext
 		/// <summary>
 		/// 表特性
 		/// </summary>
-		public static IDictionary<string, Attribute.TableAttribute> TableAttributes { get; private set; }
+		public static IDictionary<string, Attributes.TableAttribute> TableAttributes { get; private set; }
 
 		/// <summary>
-		/// 数据库连接字符串
+		/// 数据库配置
 		/// </summary>
-		public static IDictionary<string, string> ConnectionStrings { get; private set; }
+		public static ICollection<Models.DbConfig> DbConfigs { get; private set; }
 
 		/// <summary>
 		/// 执行之前
@@ -28,13 +28,13 @@ namespace Adai.DbContext
 		public static Action<string, IDbCommand> BeforeExecuteAction { get; private set; }
 
 		/// <summary>
-		/// 初始化（建议在程序启动时执行此方法）
+		/// 初始化
 		/// </summary>
-		/// <param name="connectionStrings">数据库别名-连接字符串</param>
+		/// <param name="dbConfigs">数据库配置</param>
 		/// <param name="beforeExecute">执行之前执行，可用于记录SQL，第一个参数是初始化时传入的EventId</param>
-		public static void Init(IDictionary<string, string> connectionStrings, Action<string, IDbCommand> beforeExecute = null)
+		public static void Init(ICollection<Models.DbConfig> dbConfigs, Action<string, IDbCommand> beforeExecute = null)
 		{
-			ConnectionStrings = connectionStrings;
+			DbConfigs = dbConfigs;
 			BeforeExecuteAction = beforeExecute;
 		}
 
@@ -43,7 +43,7 @@ namespace Adai.DbContext
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public static Attribute.TableAttribute GetTableAttribute<T>() where T : class
+		public static Attributes.TableAttribute GetTableAttribute<T>() where T : class
 		{
 			return GetTableAttribute(typeof(T));
 		}
@@ -53,21 +53,21 @@ namespace Adai.DbContext
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public static Attribute.TableAttribute GetTableAttribute(Type type)
+		public static Attributes.TableAttribute GetTableAttribute(Type type)
 		{
 			if (TableAttributes == null)
 			{
-				TableAttributes = new Dictionary<string, Attribute.TableAttribute>();
+				TableAttributes = new Dictionary<string, Attributes.TableAttribute>();
 			}
 			if (!TableAttributes.TryGetValue(type.FullName, out var attribute))
 			{
 				var attrs = type.GetCustomAttributes(true);
 				if (attrs != null)
 				{
-					attribute = attrs.FirstOrDefault() as Attribute.TableAttribute;
+					attribute = attrs.FirstOrDefault() as Attributes.TableAttribute;
 					if (attribute != null)
 					{
-						attribute.ColumnAttributes = type.GetPropertyAttributes<Attribute.TableColumnAttribute>();
+						attribute.ColumnAttributes = type.GetPropertyAttributes<Attributes.TableColumnAttribute>();
 					}
 					TableAttributes.Add(type.FullName, attribute);
 				}
@@ -76,25 +76,23 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// 获取连接字符串
+		/// 获取数据库配置
 		/// </summary>
+		/// <param name="dbType"></param>
 		/// <param name="dbName"></param>
 		/// <returns></returns>
-		public static string GetConnectionString(string dbName)
+		public static Models.DbConfig GetDbConfig(Config.DbType dbType, string dbName)
 		{
-			if (ConnectionStrings == null || ConnectionStrings.Count == 0)
+			if (DbConfigs == null || DbConfigs.Count == 0)
 			{
 				throw new Exception("程序尚未初始化，请先执行Init");
 			}
 			if (string.IsNullOrEmpty(dbName))
 			{
-				throw new ArgumentNullException("参数dbName不能为空");
+				throw new ArgumentNullException(nameof(dbName));
 			}
-			if (!ConnectionStrings.TryGetValue(dbName, out var connStr))
-			{
-				throw new ArgumentException($"未配置{dbName}的连接字符串");
-			}
-			return connStr;
+			var dbConfig = DbConfigs.Where(o => o.DbType == dbType && o.Name == dbName).FirstOrDefault();
+			return dbConfig;
 		}
 
 		/// <summary>
