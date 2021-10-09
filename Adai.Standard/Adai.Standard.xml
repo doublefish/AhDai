@@ -473,7 +473,7 @@
             Configuration
             </summary>
         </member>
-        <member name="M:Adai.Standard.FileHelper.Init(Adai.Standard.Model.FileConfiguration)">
+        <member name="M:Adai.Standard.FileHelper.Init(Adai.Standard.Models.FileConfiguration)">
             <summary>
             初始化
             </summary>
@@ -564,14 +564,14 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.HttpHelper.CreateRequest(Adai.Standard.Model.HttpRequest)">
+        <member name="M:Adai.Standard.HttpHelper.CreateRequest(Adai.Standard.Models.HttpRequest)">
             <summary>
             创建请求
             </summary>
             <param name="data"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.HttpHelper.SendRequest(Adai.Standard.Model.HttpRequest)">
+        <member name="M:Adai.Standard.HttpHelper.SendRequest(Adai.Standard.Models.HttpRequest)">
             <summary>
             发送POST请求
             </summary>
@@ -869,7 +869,7 @@
             Configuration
             </summary>
         </member>
-        <member name="M:Adai.Standard.MailHelper.Init(Adai.Standard.Model.MailConfiguration)">
+        <member name="M:Adai.Standard.MailHelper.Init(Adai.Standard.Models.MailConfiguration)">
             <summary>
             初始化
             </summary>
@@ -908,7 +908,7 @@
             Configuration
             </summary>
         </member>
-        <member name="M:Adai.Standard.RedisHelper.Init(Adai.Standard.Model.RedisConfiguration)">
+        <member name="M:Adai.Standard.RedisHelper.Init(Adai.Standard.Models.RedisConfiguration)">
             <summary>
             初始化
             </summary>
@@ -922,14 +922,14 @@
             <param name="asyncState"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.RedisHelper.GetDatabase(Adai.Standard.Model.RedisConfiguration)">
+        <member name="M:Adai.Standard.RedisHelper.GetDatabase(Adai.Standard.Models.RedisConfiguration)">
             <summary>
             GetDatabase
             </summary>
             <param name="configuration"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.RedisHelper.GetConnectionMultiplexer(Adai.Standard.Model.RedisConfiguration)">
+        <member name="M:Adai.Standard.RedisHelper.GetConnectionMultiplexer(Adai.Standard.Models.RedisConfiguration)">
             <summary>
             GetConnectionMultiplexer
             </summary>
@@ -1027,7 +1027,7 @@
             <param name="suffix"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.TokenHelper.Verify``1(System.String,Adai.Standard.Model.Token{``0}@,System.String)">
+        <member name="M:Adai.Standard.TokenHelper.Verify``1(System.String,Adai.Standard.Models.Token{``0}@,System.String)">
             <summary>
             验证
             </summary>
@@ -1150,55 +1150,45 @@
             Language
             </summary>
         </member>
-        <member name="F:Adai.Standard.Language.Default">
-            <summary>
-            默认
-            </summary>
-        </member>
         <member name="F:Adai.Standard.Language.ZH_CN">
             <summary>
-            ZH_CN
+            中文（简体）
             </summary>
         </member>
         <member name="F:Adai.Standard.Language.EN_US">
             <summary>
-            EN_US
+            英文（美国）
             </summary>
         </member>
-        <member name="M:Adai.Standard.Language.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="T:Adai.Standard.Model.ApiException">
+        <member name="T:Adai.Standard.Models.ApiException">
             <summary>
             ApiException
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.ApiException.#ctor">
+        <member name="M:Adai.Standard.Models.ApiException.#ctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.ApiException.#ctor(System.String)">
+        <member name="M:Adai.Standard.Models.ApiException.#ctor(System.String)">
             <summary>
             构造函数
             </summary>
             <param name="message"></param>
         </member>
-        <member name="M:Adai.Standard.Model.ApiException.#ctor(System.String,System.Exception)">
+        <member name="M:Adai.Standard.Models.ApiException.#ctor(System.String,System.Exception)">
             <summary>
             构造函数
             </summary>
             <param name="message"></param>
             <param name="inner"></param>
         </member>
-        <member name="T:Adai.Standard.Model.BaseSocket">
+        <member name="T:Adai.Standard.Models.BaseSocket">
             <summary>
             BaseSocket
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.BaseSocket.#ctor(System.String,System.Int32,System.String,System.Boolean)">
+        <member name="M:Adai.Standard.Models.BaseSocket.#ctor(System.String,System.Int32,System.String,System.Boolean)">
             <summary>
             构造函数
             </summary>
@@ -1207,59 +1197,59 @@
             <param name="name"></param>
             <param name="log"></param>
         </member>
-        <member name="P:Adai.Standard.Model.BaseSocket.Encoding">
+        <member name="P:Adai.Standard.Models.BaseSocket.Encoding">
             <summary>
             编码
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.BaseSocket.Host">
+        <member name="P:Adai.Standard.Models.BaseSocket.Host">
             <summary>
             主机
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.BaseSocket.Port">
+        <member name="P:Adai.Standard.Models.BaseSocket.Port">
             <summary>
             端口
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.BaseSocket.IPAddress">
+        <member name="P:Adai.Standard.Models.BaseSocket.IPAddress">
             <summary>
             IPAddress
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.BaseSocket.IPEndPoint">
+        <member name="P:Adai.Standard.Models.BaseSocket.IPEndPoint">
             <summary>
             IPEndPoint
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.BaseSocket.Remotes">
+        <member name="P:Adai.Standard.Models.BaseSocket.Remotes">
             <summary>
             远程
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.BaseSocket.Name">
+        <member name="P:Adai.Standard.Models.BaseSocket.Name">
             <summary>
             名称
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.BaseSocket.State">
+        <member name="P:Adai.Standard.Models.BaseSocket.State">
             <summary>
             状态
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.BaseSocket.Log">
+        <member name="P:Adai.Standard.Models.BaseSocket.Log">
             <summary>
             是否记录日志
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.BaseSocket.MessageHandler">
+        <member name="T:Adai.Standard.Models.BaseSocket.MessageHandler">
             <summary>
             接收消息委托
             </summary>
             <param name="remote"></param>
             <param name="message"></param>
         </member>
-        <member name="T:Adai.Standard.Model.BaseSocket.StateChangeHandler">
+        <member name="T:Adai.Standard.Models.BaseSocket.StateChangeHandler">
             <summary>
             连接状态改变委托
             </summary>
@@ -1267,30 +1257,30 @@
             <param name="state"></param>
             <param name="message"></param>
         </member>
-        <member name="E:Adai.Standard.Model.BaseSocket.MessageEvent">
+        <member name="E:Adai.Standard.Models.BaseSocket.MessageEvent">
             <summary>
             接收消息事件
             </summary>
         </member>
-        <member name="E:Adai.Standard.Model.BaseSocket.StateChangeEvent">
+        <member name="E:Adai.Standard.Models.BaseSocket.StateChangeEvent">
             <summary>
             连接状态改变事件
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.BaseSocket.Open(System.Net.Sockets.Socket)">
+        <member name="M:Adai.Standard.Models.BaseSocket.Open(System.Net.Sockets.Socket)">
             <summary>
             开启连接
             </summary>
             <param name="remote"></param>
         </member>
-        <member name="M:Adai.Standard.Model.BaseSocket.Close(System.Net.Sockets.Socket,System.String)">
+        <member name="M:Adai.Standard.Models.BaseSocket.Close(System.Net.Sockets.Socket,System.String)">
             <summary>
             关闭连接
             </summary>
             <param name="remote"></param>
             <param name="reason"></param>
         </member>
-        <member name="M:Adai.Standard.Model.BaseSocket.Receive(System.Net.Sockets.Socket,System.Byte[],System.Int32)">
+        <member name="M:Adai.Standard.Models.BaseSocket.Receive(System.Net.Sockets.Socket,System.Byte[],System.Int32)">
             <summary>
             接收消息
             </summary>
@@ -1298,14 +1288,14 @@
             <param name="bytes"></param>
             <param name="size"></param>
         </member>
-        <member name="M:Adai.Standard.Model.BaseSocket.Send(System.String)">
+        <member name="M:Adai.Standard.Models.BaseSocket.Send(System.String)">
             <summary>
             客户端发送消息给服务端
             </summary>
             <param name="message"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Model.BaseSocket.Send(System.String,System.Net.Sockets.Socket[])">
+        <member name="M:Adai.Standard.Models.BaseSocket.Send(System.String,System.Net.Sockets.Socket[])">
             <summary>
             服务端发送消息给客户端
             </summary>
@@ -1313,7 +1303,7 @@
             <param name="remotes"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Model.BaseSocket.Send(System.String,System.Net.Sockets.Socket)">
+        <member name="M:Adai.Standard.Models.BaseSocket.Send(System.String,System.Net.Sockets.Socket)">
             <summary>
             客户端发送消息给服务端
             </summary>
@@ -1321,7 +1311,7 @@
             <param name="remote"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Model.BaseSocket.ChangeState(System.Net.Sockets.Socket,Adai.Standard.Config.SocketState,System.String)">
+        <member name="M:Adai.Standard.Models.BaseSocket.ChangeState(System.Net.Sockets.Socket,Adai.Standard.Config.SocketState,System.String)">
             <summary>
             改变状态
             </summary>
@@ -1329,18 +1319,18 @@
             <param name="state"></param>
             <param name="message"></param>
         </member>
-        <member name="M:Adai.Standard.Model.BaseSocket.ListenReceive(System.Net.Sockets.Socket)">
+        <member name="M:Adai.Standard.Models.BaseSocket.ListenReceive(System.Net.Sockets.Socket)">
             <summary>
             监听消息
             </summary>
             <param name="client"></param>
         </member>
-        <member name="T:Adai.Standard.Model.CustomException">
+        <member name="T:Adai.Standard.Models.CustomException">
             <summary>
             CustomException
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.CustomException.#ctor(System.Int32,System.String,System.Exception)">
+        <member name="M:Adai.Standard.Models.CustomException.#ctor(System.Int32,System.String,System.Exception)">
             <summary>
             构造函数
             </summary>
@@ -1348,117 +1338,117 @@
             <param name="message"></param>
             <param name="innerException"></param>
         </member>
-        <member name="P:Adai.Standard.Model.CustomException.Code">
+        <member name="P:Adai.Standard.Models.CustomException.Code">
             <summary>
             Code
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.DbConfiguration">
+        <member name="T:Adai.Standard.Models.DbConfiguration">
             <summary>
             DbConfiguration
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.DbConfiguration.Name">
+        <member name="P:Adai.Standard.Models.DbConfiguration.Name">
             <summary>
             名称
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.DbConfiguration.Type">
+        <member name="P:Adai.Standard.Models.DbConfiguration.Type">
             <summary>
             Type
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.DbConfiguration.Value">
+        <member name="P:Adai.Standard.Models.DbConfiguration.Value">
             <summary>
             Value
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.FileConfiguration">
+        <member name="T:Adai.Standard.Models.FileConfiguration">
             <summary>
             文件配置
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.FileConfiguration.#ctor">
+        <member name="M:Adai.Standard.Models.FileConfiguration.#ctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileConfiguration.UploadDirectory">
+        <member name="P:Adai.Standard.Models.FileConfiguration.UploadDirectory">
             <summary>
             上传根目录
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileConfiguration.DownloadDirectory">
+        <member name="P:Adai.Standard.Models.FileConfiguration.DownloadDirectory">
             <summary>
             下载根目录
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileConfiguration.MaxSize">
+        <member name="P:Adai.Standard.Models.FileConfiguration.MaxSize">
             <summary>
             大小限制
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileConfiguration.Extensions">
+        <member name="P:Adai.Standard.Models.FileConfiguration.Extensions">
             <summary>
             扩展名
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileConfiguration.MaxSizeNote">
+        <member name="P:Adai.Standard.Models.FileConfiguration.MaxSizeNote">
             <summary>
             大小限制说明
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.FileData">
+        <member name="T:Adai.Standard.Models.FileData">
             <summary>
             上传文件
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.FileData.#ctor">
+        <member name="M:Adai.Standard.Models.FileData.#ctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileData.Guid">
+        <member name="P:Adai.Standard.Models.FileData.Guid">
             <summary>
             唯一标识
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileData.Name">
+        <member name="P:Adai.Standard.Models.FileData.Name">
             <summary>
             文件名
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileData.Extension">
+        <member name="P:Adai.Standard.Models.FileData.Extension">
             <summary>
             后缀名
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileData.Length">
+        <member name="P:Adai.Standard.Models.FileData.Length">
             <summary>
             大小
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileData.PhysicalPath">
+        <member name="P:Adai.Standard.Models.FileData.PhysicalPath">
             <summary>
             物理路径
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileData.VirtualPath">
+        <member name="P:Adai.Standard.Models.FileData.VirtualPath">
             <summary>
             虚拟路径
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.FileData.FullName">
+        <member name="P:Adai.Standard.Models.FileData.FullName">
             <summary>
             扩展.文件全名
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.HttpRequest">
+        <member name="T:Adai.Standard.Models.HttpRequest">
             <summary>
             Http请求数据
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.HttpRequest.#ctor(System.String,System.String,System.String)">
+        <member name="M:Adai.Standard.Models.HttpRequest.#ctor(System.String,System.String,System.String)">
             <summary>
             构造函数
             </summary>
@@ -1466,120 +1456,120 @@
             <param name="method"></param>
             <param name="contentType"></param>
         </member>
-        <member name="P:Adai.Standard.Model.HttpRequest.Url">
+        <member name="P:Adai.Standard.Models.HttpRequest.Url">
             <summary>
             Url
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpRequest.Method">
+        <member name="P:Adai.Standard.Models.HttpRequest.Method">
             <summary>
             方法
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpRequest.ContentType">
+        <member name="P:Adai.Standard.Models.HttpRequest.ContentType">
             <summary>
             内容类型
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpRequest.Content">
+        <member name="P:Adai.Standard.Models.HttpRequest.Content">
             <summary>
             内容
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpRequest.Headers">
+        <member name="P:Adai.Standard.Models.HttpRequest.Headers">
             <summary>
             请求头
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpRequest.Body">
+        <member name="P:Adai.Standard.Models.HttpRequest.Body">
             <summary>
             内容参数
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.HttpResponse">
+        <member name="T:Adai.Standard.Models.HttpResponse">
             <summary>
             Http响应数据
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.HttpResponse.#ctor(System.Net.HttpWebResponse,System.String)">
+        <member name="M:Adai.Standard.Models.HttpResponse.#ctor(System.Net.HttpWebResponse,System.String)">
             <summary>
             构造函数
             </summary>
             <param name="httpWebResponse"></param>
             <param name="content"></param>
         </member>
-        <member name="P:Adai.Standard.Model.HttpResponse.StatusCode">
+        <member name="P:Adai.Standard.Models.HttpResponse.StatusCode">
             <summary>
             StatusCode
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpResponse.ResponseUri">
+        <member name="P:Adai.Standard.Models.HttpResponse.ResponseUri">
             <summary>
             ResponseUri
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpResponse.StatusDescription">
+        <member name="P:Adai.Standard.Models.HttpResponse.StatusDescription">
             <summary>
             StatusDescription
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpResponse.ContentLength">
+        <member name="P:Adai.Standard.Models.HttpResponse.ContentLength">
             <summary>
             ContentLength
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpResponse.ContentEncoding">
+        <member name="P:Adai.Standard.Models.HttpResponse.ContentEncoding">
             <summary>
             ContentEncoding
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpResponse.CharacterSet">
+        <member name="P:Adai.Standard.Models.HttpResponse.CharacterSet">
             <summary>
             CharacterSet
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpResponse.ContentType">
+        <member name="P:Adai.Standard.Models.HttpResponse.ContentType">
             <summary>
             ContentType
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.HttpResponse.Content">
+        <member name="P:Adai.Standard.Models.HttpResponse.Content">
             <summary>
             Content
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.MailConfiguration">
+        <member name="T:Adai.Standard.Models.MailConfiguration">
             <summary>
             MailConfiguration
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.MailConfiguration.Host">
+        <member name="P:Adai.Standard.Models.MailConfiguration.Host">
             <summary>
             Host
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.MailConfiguration.Port">
+        <member name="P:Adai.Standard.Models.MailConfiguration.Port">
             <summary>
             Port
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.MailConfiguration.Username">
+        <member name="P:Adai.Standard.Models.MailConfiguration.Username">
             <summary>
             Username
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.MailConfiguration.Password">
+        <member name="P:Adai.Standard.Models.MailConfiguration.Password">
             <summary>
             Password
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.PageArg`1">
+        <member name="T:Adai.Standard.Models.PageArg`1">
             <summary>
             查询条件
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:Adai.Standard.Model.PageArg`1.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,Adai.Standard.Model.SortType)">
+        <member name="M:Adai.Standard.Models.PageArg`1.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,Adai.Standard.Models.SortType)">
             <summary>
             构造函数
             </summary>
@@ -1588,117 +1578,117 @@
             <param name="sortName"></param>
             <param name="sortType"></param>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.TotalCount">
+        <member name="P:Adai.Standard.Models.PageArg`1.TotalCount">
             <summary>
             总记录条数，如果此属性预设值大于零则表示不需要从数据库获取。
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Results">
+        <member name="P:Adai.Standard.Models.PageArg`1.Results">
             <summary>
             分页结果集。
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Filter">
+        <member name="P:Adai.Standard.Models.PageArg`1.Filter">
             <summary>
             筛选
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.PageSize">
+        <member name="P:Adai.Standard.Models.PageArg`1.PageSize">
             <summary>
             每页条数
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.PageNumber">
+        <member name="P:Adai.Standard.Models.PageArg`1.PageNumber">
             <summary>
             页码（从0开始）
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.SortName">
+        <member name="P:Adai.Standard.Models.PageArg`1.SortName">
             <summary>
             排序字段
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.SortType">
+        <member name="P:Adai.Standard.Models.PageArg`1.SortType">
             <summary>
             排序方式：ASC/DESC
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.OnlyCount">
+        <member name="P:Adai.Standard.Models.PageArg`1.OnlyCount">
             <summary>
             只统计总数
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.CountFlag">
+        <member name="P:Adai.Standard.Models.PageArg`1.CountFlag">
             <summary>
             统计数量标识
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.SumFlag">
+        <member name="P:Adai.Standard.Models.PageArg`1.SumFlag">
             <summary>
             统计总和标识
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.SumResults">
+        <member name="P:Adai.Standard.Models.PageArg`1.SumResults">
             <summary>
             计算结果
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Keyword">
+        <member name="P:Adai.Standard.Models.PageArg`1.Keyword">
             <summary>
             关键词
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Keywords">
+        <member name="P:Adai.Standard.Models.PageArg`1.Keywords">
             <summary>
             关键词组
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.UserId">
+        <member name="P:Adai.Standard.Models.PageArg`1.UserId">
             <summary>
             用户Id
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Username">
+        <member name="P:Adai.Standard.Models.PageArg`1.Username">
             <summary>
             用户名
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.PageArg`1.Platform">
+        <member name="P:Adai.Standard.Models.PageArg`1.Platform">
             <summary>
             平台标识
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.RedisConfiguration">
+        <member name="T:Adai.Standard.Models.RedisConfiguration">
             <summary>
             RedisConfiguration
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.RedisConfiguration.Host">
+        <member name="P:Adai.Standard.Models.RedisConfiguration.Host">
             <summary>
             Host
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.RedisConfiguration.Port">
+        <member name="P:Adai.Standard.Models.RedisConfiguration.Port">
             <summary>
             Port
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.RedisConfiguration.Password">
+        <member name="P:Adai.Standard.Models.RedisConfiguration.Password">
             <summary>
             Password
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.RedisConfiguration.Database">
+        <member name="P:Adai.Standard.Models.RedisConfiguration.Database">
             <summary>
             DbNumber
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.SocketClient">
+        <member name="T:Adai.Standard.Models.SocketClient">
             <summary>
             SocketClient
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.SocketClient.#ctor(System.String,System.Int32,System.String,System.Boolean)">
+        <member name="M:Adai.Standard.Models.SocketClient.#ctor(System.String,System.Int32,System.String,System.Boolean)">
             <summary>
             构造函数
             </summary>
@@ -1707,12 +1697,12 @@
             <param name="name"></param>
             <param name="log"></param>
         </member>
-        <member name="T:Adai.Standard.Model.SocketService">
+        <member name="T:Adai.Standard.Models.SocketService">
             <summary>
             SocketService
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.SocketService.#ctor(System.String,System.Int32,System.String,System.Boolean)">
+        <member name="M:Adai.Standard.Models.SocketService.#ctor(System.String,System.Int32,System.String,System.Boolean)">
             <summary>
             构造函数
             </summary>
@@ -1721,138 +1711,138 @@
             <param name="name"></param>
             <param name="log"></param>
         </member>
-        <member name="T:Adai.Standard.Model.SortType">
+        <member name="T:Adai.Standard.Models.SortType">
             <summary>
             排序方式
             </summary>
         </member>
-        <member name="F:Adai.Standard.Model.SortType.Desc">
+        <member name="F:Adai.Standard.Models.SortType.Desc">
             <summary>
             降序
             </summary>
         </member>
-        <member name="F:Adai.Standard.Model.SortType.Asc">
+        <member name="F:Adai.Standard.Models.SortType.Asc">
             <summary>
             升序
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.StatisticFlag">
+        <member name="T:Adai.Standard.Models.StatisticFlag">
             <summary>
             统计标识
             </summary>
         </member>
-        <member name="F:Adai.Standard.Model.StatisticFlag.Not">
+        <member name="F:Adai.Standard.Models.StatisticFlag.Not">
             <summary>
             不统计
             </summary>
         </member>
-        <member name="F:Adai.Standard.Model.StatisticFlag.General">
+        <member name="F:Adai.Standard.Models.StatisticFlag.General">
             <summary>
             一般统计
             </summary>
         </member>
-        <member name="F:Adai.Standard.Model.StatisticFlag.Only">
+        <member name="F:Adai.Standard.Models.StatisticFlag.Only">
             <summary>
             只统计
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.Token`1">
+        <member name="T:Adai.Standard.Models.Token`1">
             <summary>
             Token
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.Token`1.Id">
+        <member name="P:Adai.Standard.Models.Token`1.Id">
             <summary>
             用户Id
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.Token`1.Signature">
+        <member name="P:Adai.Standard.Models.Token`1.Signature">
             <summary>
             用户名对应签名Token
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.Token`1.Expiry">
+        <member name="P:Adai.Standard.Models.Token`1.Expiry">
             <summary>
             Token过期时间
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.Token`1.Data">
+        <member name="P:Adai.Standard.Models.Token`1.Data">
             <summary>
             数据
             </summary>
         </member>
-        <member name="T:Adai.Standard.Model.TokenData">
+        <member name="T:Adai.Standard.Models.TokenData">
             <summary>
             TokenData
             </summary>
         </member>
-        <member name="M:Adai.Standard.Model.TokenData.#ctor(System.String)">
+        <member name="M:Adai.Standard.Models.TokenData.#ctor(System.String)">
             <summary>
             构造函数
             </summary>
             <param name="type">类型</param>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.Id">
+        <member name="P:Adai.Standard.Models.TokenData.Id">
             <summary>
             用户标识
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.Username">
+        <member name="P:Adai.Standard.Models.TokenData.Username">
             <summary>
             用户名
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.Nickname">
+        <member name="P:Adai.Standard.Models.TokenData.Nickname">
             <summary>
             昵称
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.Avatar">
+        <member name="P:Adai.Standard.Models.TokenData.Avatar">
             <summary>
             头像
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.FirstName">
+        <member name="P:Adai.Standard.Models.TokenData.FirstName">
             <summary>
             名
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.LastName">
+        <member name="P:Adai.Standard.Models.TokenData.LastName">
             <summary>
             姓
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.Email">
+        <member name="P:Adai.Standard.Models.TokenData.Email">
             <summary>
             电子邮箱
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.Mobile">
+        <member name="P:Adai.Standard.Models.TokenData.Mobile">
             <summary>
             手机号码
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.RoleIds">
+        <member name="P:Adai.Standard.Models.TokenData.RoleIds">
             <summary>
             角色Id
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.AgentId">
+        <member name="P:Adai.Standard.Models.TokenData.AgentId">
             <summary>
             代理商Id
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.IsAdminOfAgent">
+        <member name="P:Adai.Standard.Models.TokenData.IsAdminOfAgent">
             <summary>
             是否代理商管理员
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.Type">
+        <member name="P:Adai.Standard.Models.TokenData.Type">
             <summary>
             类型
             </summary>
         </member>
-        <member name="P:Adai.Standard.Model.TokenData.Platform">
+        <member name="P:Adai.Standard.Models.TokenData.Platform">
             <summary>
             平台
             </summary>
