@@ -1,15 +1,36 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Description>数据库访问基础类库-SQLite</Description>
+		<Authors>Shuang Yu</Authors>
+		<Company>Adai</Company>
+		<Version>2.1.0.1</Version>
+		<AssemblyVersion>2.1.0.1</AssemblyVersion>
+		<FileVersion>2.1.0.1</FileVersion>
+		<PackageReleaseNotes>无</PackageReleaseNotes>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/doublefish/Adai.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>Adai.DbContext.SQLite</PackageTags>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.115" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Adai.DbContext" Version="2.1.0.1" />
+		<PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.115" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Adai.DbContext\Adai.DbContext.csproj" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' ">
+		<PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.115" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1' ">
+		<PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.115" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net452' ">
+		<PackageReference Include="Stub.System.Data.SQLite.Core.NetFramework" Version="1.0.115" />
+	</ItemGroup>
 
 </Project>
