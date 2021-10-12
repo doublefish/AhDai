@@ -1,4 +1,4 @@
-﻿using Adai.Utilities;
+﻿using Adai.Utils;
 
 namespace Adai.Standard
 {

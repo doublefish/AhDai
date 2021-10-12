@@ -37,7 +37,7 @@ namespace Adai.Security.Extensions
 		public static byte[] Decrypt(this RSACryptoServiceProvider rsa, string ciphertext)
 		{
 			ciphertext += "====".Substring(0, ciphertext.Length % 4);
-			var buffer = Adai.Utilities.Base64Helper.ToBytes(ciphertext);
+			var buffer = Adai.Utils.Base64Helper.ToBytes(ciphertext);
 			return rsa.Decrypt(buffer);
 		}
 

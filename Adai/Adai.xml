@@ -113,6 +113,18 @@
             <param name="value"></param>
             <returns></returns>
         </member>
+        <member name="T:Adai.Extensions.CollectionExtensions">
+            <summary>
+            CollectionExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Extensions.CollectionExtensions.ToDictionary(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            转换为字典
+            </summary>
+            <param name="collection"></param>
+            <returns></returns>
+        </member>
         <member name="T:Adai.Extensions.DataTableExtensions">
             <summary>
             DataTableExt
@@ -168,18 +180,6 @@
             <param name="query"></param>
             <param name="pageNumber">页码</param>
             <param name="pageSize"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Adai.Extensions.NameValueCollectionExtensions">
-            <summary>
-            NameValueCollectionExt
-            </summary>
-        </member>
-        <member name="M:Adai.Extensions.NameValueCollectionExtensions.ToDictionary(System.Collections.Specialized.NameValueCollection)">
-            <summary>
-            转换为字典
-            </summary>
-            <param name="collection"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.Extensions.ObjectExtensions">
@@ -543,12 +543,12 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Security.Utilities.AESHelper">
+        <member name="T:Adai.Security.Utils.AESHelper">
             <summary>
             AESHelper
             </summary>
         </member>
-        <member name="M:Adai.Security.Utilities.AESHelper.RijndaelEncrypt(System.String,System.String,System.String,System.Security.Cryptography.PaddingMode,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.AESHelper.RijndaelEncrypt(System.String,System.String,System.String,System.Security.Cryptography.PaddingMode,Adai.StringType,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -560,7 +560,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.AESHelper.RijndaelDecrypt(System.String,System.String,System.String,System.Security.Cryptography.PaddingMode,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.AESHelper.RijndaelDecrypt(System.String,System.String,System.String,System.Security.Cryptography.PaddingMode,Adai.StringType,System.Text.Encoding)">
             <summary>
             解密
             </summary>
@@ -572,12 +572,12 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Security.Utilities.DESHelper">
+        <member name="T:Adai.Security.Utils.DESHelper">
             <summary>
             DESExt
             </summary>
         </member>
-        <member name="M:Adai.Security.Utilities.DESHelper.TripleEncrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.DESHelper.TripleEncrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -588,7 +588,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.DESHelper.TripleDecrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.DESHelper.TripleDecrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Text.Encoding)">
             <summary>
             解密
             </summary>
@@ -599,12 +599,12 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Security.Utilities.HMACHelper">
+        <member name="T:Adai.Security.Utils.HMACHelper">
             <summary>
             HMACHelper
             </summary>
         </member>
-        <member name="M:Adai.Security.Utilities.HMACHelper.Encrypt(System.String,System.String,System.String,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.HMACHelper.Encrypt(System.String,System.String,System.String,System.Text.Encoding)">
             <summary>
             MD5
             </summary>
@@ -614,7 +614,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.HMACHelper.Verify(System.String,System.String,System.String,System.String,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.HMACHelper.Verify(System.String,System.String,System.String,System.String,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -625,12 +625,12 @@
             <param name="encode"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Security.Utilities.MD5Helper">
+        <member name="T:Adai.Security.Utils.MD5Helper">
             <summary>
             MD5Helper
             </summary>
         </member>
-        <member name="M:Adai.Security.Utilities.MD5Helper.Encrypt(System.String,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.MD5Helper.Encrypt(System.String,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -638,7 +638,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.MD5Helper.Verify(System.String,System.String,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.MD5Helper.Verify(System.String,System.String,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -647,12 +647,12 @@
             <param name="encode"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Security.Utilities.RSAHelper">
+        <member name="T:Adai.Security.Utils.RSAHelper">
             <summary>
             RSAHelper
             </summary>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.EncryptByXml(System.String,System.String,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.RSAHelper.EncryptByXml(System.String,System.String,Adai.StringType,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -662,7 +662,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.DecryptByXml(System.String,System.String,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.RSAHelper.DecryptByXml(System.String,System.String,Adai.StringType,System.Text.Encoding)">
             <summary>
             解密
             </summary>
@@ -672,7 +672,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.SignByXml(System.String,System.String,System.String,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.RSAHelper.SignByXml(System.String,System.String,System.String,Adai.StringType,System.Text.Encoding)">
             <summary>
             签名
             </summary>
@@ -683,7 +683,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.VerifyByXml(System.String,System.String,System.String,System.String,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.RSAHelper.VerifyByXml(System.String,System.String,System.String,System.String,Adai.StringType,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -695,7 +695,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.EncryptByPKCS8(System.String,System.String,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.RSAHelper.EncryptByPKCS8(System.String,System.String,Adai.StringType,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -705,7 +705,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.DecryptByPKCS8(System.String,System.String,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.RSAHelper.DecryptByPKCS8(System.String,System.String,Adai.StringType,System.Text.Encoding)">
             <summary>
             解密
             </summary>
@@ -715,7 +715,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.SignByPKCS8(System.String,System.String,System.String,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.RSAHelper.SignByPKCS8(System.String,System.String,System.String,Adai.StringType,System.Text.Encoding)">
             <summary>
             签名
             </summary>
@@ -726,7 +726,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.VerifyByPKCS8(System.String,System.String,System.String,System.String,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.RSAHelper.VerifyByPKCS8(System.String,System.String,System.String,System.String,Adai.StringType,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -738,7 +738,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.VerifyByX509Certificate(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate,System.String,Adai.StringType,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.RSAHelper.VerifyByX509Certificate(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate,System.String,Adai.StringType,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -750,42 +750,42 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.ConvertPKCS8PublicKey(System.String)">
+        <member name="M:Adai.Security.Utils.RSAHelper.ConvertPKCS8PublicKey(System.String)">
             <summary>
             转换公钥PEM
             </summary>
             <param name="publicKey"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.ConvertPKCS8PrivateKey(System.String)">
+        <member name="M:Adai.Security.Utils.RSAHelper.ConvertPKCS8PrivateKey(System.String)">
             <summary>
             转换私钥PKCS8
             </summary>
             <param name="privateKey"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.ConvertX509PublicKey(System.String)">
+        <member name="M:Adai.Security.Utils.RSAHelper.ConvertX509PublicKey(System.String)">
             <summary>
             转换公钥X509
             </summary>
             <param name="publicKey"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.GetRSAParameters(System.Security.Cryptography.X509Certificates.X509Certificate)">
+        <member name="M:Adai.Security.Utils.RSAHelper.GetRSAParameters(System.Security.Cryptography.X509Certificates.X509Certificate)">
             <summary>
             从x509格式的证书中,提取公钥,并转换成xml格式
             </summary>
             <param name="certificate"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.GetIntegerSize(System.IO.BinaryReader)">
+        <member name="M:Adai.Security.Utils.RSAHelper.GetIntegerSize(System.IO.BinaryReader)">
             <summary>
             GetIntegerSize
             </summary>
             <param name="binaryReader"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.FromPKCS8PublicKey(System.Security.Cryptography.RSA,System.String)">
+        <member name="M:Adai.Security.Utils.RSAHelper.FromPKCS8PublicKey(System.Security.Cryptography.RSA,System.String)">
             <summary>
             FromPKCS8PublicKey
             </summary>
@@ -793,7 +793,7 @@
             <param name="pkcs8String"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.RSAHelper.FromPKCS8PrivateKey(System.Security.Cryptography.RSA,System.String)">
+        <member name="M:Adai.Security.Utils.RSAHelper.FromPKCS8PrivateKey(System.Security.Cryptography.RSA,System.String)">
             <summary>
             FromPKCS8PrivateKey
             </summary>
@@ -801,12 +801,12 @@
             <param name="pkcs8String"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Security.Utilities.SHAHelper">
+        <member name="T:Adai.Security.Utils.SHAHelper">
             <summary>
             SHAHelper
             </summary>
         </member>
-        <member name="M:Adai.Security.Utilities.SHAHelper.Encrypt(System.String,System.String,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.SHAHelper.Encrypt(System.String,System.String,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -815,7 +815,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.SHAHelper.Verify(System.String,System.String,System.String,System.Text.Encoding)">
+        <member name="M:Adai.Security.Utils.SHAHelper.Verify(System.String,System.String,System.String,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -825,12 +825,12 @@
             <param name="encode"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Security.Utilities.X509CertificateHelper">
+        <member name="T:Adai.Security.Utils.X509CertificateHelper">
             <summary>
             X509CertificateHelper
             </summary>
         </member>
-        <member name="M:Adai.Security.Utilities.X509CertificateHelper.VerifyCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Collections.Generic.IEnumerable{System.Security.Cryptography.X509Certificates.X509Certificate2})">
+        <member name="M:Adai.Security.Utils.X509CertificateHelper.VerifyCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Collections.Generic.IEnumerable{System.Security.Cryptography.X509Certificates.X509Certificate2})">
             <summary>
             验证证书链
             </summary>
@@ -838,7 +838,7 @@
             <param name="additionalCertificates">它预计链的顺序为： ...，INTERMEDIATE2，INTERMEDIATE1（INTERMEDIATE2的签名者），CA（INTERMEDIATE1的签名者）</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Security.Utilities.X509CertificateHelper.VerifyCertificate(System.Byte[],System.Collections.Generic.IEnumerable{System.Byte[]})">
+        <member name="M:Adai.Security.Utils.X509CertificateHelper.VerifyCertificate(System.Byte[],System.Collections.Generic.IEnumerable{System.Byte[]})">
             <summary>
             验证证书链
             </summary>
@@ -877,12 +877,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Adai.Utilities.Base64Helper">
+        <member name="T:Adai.Utils.Base64Helper">
             <summary>
             Base64Helper
             </summary>
         </member>
-        <member name="M:Adai.Utilities.Base64Helper.ToBase64String(System.String,System.Text.Encoding)">
+        <member name="M:Adai.Utils.Base64Helper.ToBase64String(System.String,System.Text.Encoding)">
             <summary>
             字符串转Base64字符串
             </summary>
@@ -890,7 +890,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.Base64Helper.ToString(System.String,System.Text.Encoding)">
+        <member name="M:Adai.Utils.Base64Helper.ToString(System.String,System.Text.Encoding)">
             <summary>
             Base64字符串转字符串
             </summary>
@@ -898,39 +898,39 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.Base64Helper.ToBytes(System.String)">
+        <member name="M:Adai.Utils.Base64Helper.ToBytes(System.String)">
             <summary>
             Base64字符串转字节数组
             </summary>
             <param name="s"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Utilities.DateTimeHelper">
+        <member name="T:Adai.Utils.DateTimeHelper">
             <summary>
             DateTimeHelper
             </summary>
         </member>
-        <member name="P:Adai.Utilities.DateTimeHelper.Timestamp">
+        <member name="P:Adai.Utils.DateTimeHelper.Timestamp">
             <summary>
             时间戳
             </summary>
         </member>
-        <member name="P:Adai.Utilities.DateTimeHelper.TimestampOfMilliseconds">
+        <member name="P:Adai.Utils.DateTimeHelper.TimestampOfMilliseconds">
             <summary>
             时间戳（距1970-01-01的毫秒数）
             </summary>
         </member>
-        <member name="P:Adai.Utilities.DateTimeHelper.TimestampOfSeconds">
+        <member name="P:Adai.Utils.DateTimeHelper.TimestampOfSeconds">
             <summary>
             时间戳（距1970-01-01的秒数）
             </summary>
         </member>
-        <member name="T:Adai.Utilities.HashAlgorithmHelper">
+        <member name="T:Adai.Utils.HashAlgorithmHelper">
             <summary>
             HashAlgorithmHelper
             </summary>
         </member>
-        <member name="M:Adai.Utilities.HashAlgorithmHelper.ComputeHashByUsing``1(System.Byte[])">
+        <member name="M:Adai.Utils.HashAlgorithmHelper.ComputeHashByUsing``1(System.Byte[])">
             <summary>
             使用using调用ComputeHash
             </summary>
@@ -938,12 +938,12 @@
             <param name="buffer"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Utilities.HexHelper">
+        <member name="T:Adai.Utils.HexHelper">
             <summary>
             HexHelper
             </summary>
         </member>
-        <member name="M:Adai.Utilities.HexHelper.ToHexString(System.String,System.Text.Encoding)">
+        <member name="M:Adai.Utils.HexHelper.ToHexString(System.String,System.Text.Encoding)">
             <summary>
             字符串转16进制字符串
             </summary>
@@ -951,14 +951,14 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.HexHelper.ToHexString(System.Byte[])">
+        <member name="M:Adai.Utils.HexHelper.ToHexString(System.Byte[])">
             <summary>
             字节数组转16进制字符串
             </summary>
             <param name="bytes"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.HexHelper.ToString(System.String,System.Text.Encoding)">
+        <member name="M:Adai.Utils.HexHelper.ToString(System.String,System.Text.Encoding)">
             <summary>
             16进制字符串转字符串
             </summary>
@@ -966,33 +966,33 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.HexHelper.ToBytes(System.String)">
+        <member name="M:Adai.Utils.HexHelper.ToBytes(System.String)">
             <summary>
             16进制字符串转字节数组
             </summary>
             <param name="hex"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Utilities.ReflectionHelper">
+        <member name="T:Adai.Utils.ReflectionHelper">
             <summary>
             ReflectionHelper
             </summary>
         </member>
-        <member name="M:Adai.Utilities.ReflectionHelper.GetProperties``1">
+        <member name="M:Adai.Utils.ReflectionHelper.GetProperties``1">
             <summary>
             获取属性
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.ReflectionHelper.GetProperties(System.Type)">
+        <member name="M:Adai.Utils.ReflectionHelper.GetProperties(System.Type)">
             <summary>
             获取属性
             </summary>
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.ReflectionHelper.BuildGetter``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+        <member name="M:Adai.Utils.ReflectionHelper.BuildGetter``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
             <summary>
             BuildGetter
             </summary>
@@ -1001,7 +1001,7 @@
             <param name="propertySelector"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.ReflectionHelper.BuildSetter``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+        <member name="M:Adai.Utils.ReflectionHelper.BuildSetter``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
             <summary>
             BuildSet
             </summary>
@@ -1010,7 +1010,7 @@
             <param name="propertySelector"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.ReflectionHelper.CreateDelegate``1(System.Reflection.MethodInfo)">
+        <member name="M:Adai.Utils.ReflectionHelper.CreateDelegate``1(System.Reflection.MethodInfo)">
             <summary>
             CreateDelegate
             </summary>
@@ -1018,7 +1018,7 @@
             <param name="method"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.ReflectionHelper.GetPropertyInfo``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+        <member name="M:Adai.Utils.ReflectionHelper.GetPropertyInfo``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
             <summary>
             GetPropertyInfo
             </summary>
@@ -1027,26 +1027,26 @@
             <param name="propertySelector"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Utilities.ResourceHelper">
+        <member name="T:Adai.Utils.ResourceHelper">
             <summary>
             ResourceHelper
             </summary>
         </member>
-        <member name="M:Adai.Utilities.ResourceHelper.Get``1">
+        <member name="M:Adai.Utils.ResourceHelper.Get``1">
             <summary>
             获取资源文件
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.ResourceHelper.Get(System.Type)">
+        <member name="M:Adai.Utils.ResourceHelper.Get(System.Type)">
             <summary>
             获取资源文件
             </summary>
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.ResourceHelper.Get(System.String,System.Reflection.Assembly)">
+        <member name="M:Adai.Utils.ResourceHelper.Get(System.String,System.Reflection.Assembly)">
             <summary>
             获取指定类型的属性
             </summary>
@@ -1054,26 +1054,26 @@
             <param name="assembly"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Utilities.StringHelper">
+        <member name="T:Adai.Utils.StringHelper">
             <summary>
             StringHelper
             </summary>
         </member>
-        <member name="M:Adai.Utilities.StringHelper.GenerateRandomDigital(System.Int32)">
+        <member name="M:Adai.Utils.StringHelper.GenerateRandomDigital(System.Int32)">
             <summary>
             生成指定长度的随机数字字符串
             </summary>
             <param name="length"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.StringHelper.GenerateRandom(System.Int32)">
+        <member name="M:Adai.Utils.StringHelper.GenerateRandom(System.Int32)">
             <summary>
             生成指定长度的随机字符串
             </summary>
             <param name="length"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Utilities.StringHelper.GenerateRandom(System.String,System.Int32)">
+        <member name="M:Adai.Utils.StringHelper.GenerateRandom(System.String,System.Int32)">
             <summary>
             生成验指定长度的随机字符串
             </summary>
@@ -1081,16 +1081,29 @@
             <param name="length"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Utilities.TextHelper">
+        <member name="T:Adai.Utils.TextHelper">
             <summary>
             TextHelper
             </summary>
         </member>
-        <member name="M:Adai.Utilities.TextHelper.GetEncoding(System.String)">
+        <member name="M:Adai.Utils.TextHelper.GetEncoding(System.String)">
             <summary>
             GetEncoding
             </summary>
             <param name="charset"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Utils.XmlHelper">
+            <summary>
+            XmlHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Utils.XmlHelper.SerializeObject``1(``0)">
+            <summary>
+            序列化
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
             <returns></returns>
         </member>
     </members>

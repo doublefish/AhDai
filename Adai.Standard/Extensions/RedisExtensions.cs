@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Adai.Standard
+namespace Adai.Standard.Extensions
 {
 	/// <summary>
-	/// RedisExt
+	/// RedisExtensions
 	/// </summary>
 	public static class RedisExtensions
 	{
@@ -24,7 +24,7 @@ namespace Adai.Standard
 			{
 				return default;
 			}
-			return JsonHelper.DeserializeObject<T>(value);
+			return Utils.JsonHelper.Deserialize<T>(value);
 		}
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace Adai.Standard
 		/// <returns></returns>
 		public static bool Set<T>(this IDatabase db, RedisKey key, T value, TimeSpan? expiry = null, When when = When.Always, CommandFlags flags = CommandFlags.None) where T : class
 		{
-			var json = JsonHelper.SerializeObject(value);
+			var json = Utils.JsonHelper.Serialize(value);
 			return db.StringSet(key, json, expiry, when, flags);
 		}
 
@@ -60,7 +60,7 @@ namespace Adai.Standard
 			{
 				return default;
 			}
-			return JsonHelper.DeserializeObject<T>(value);
+			return Utils.JsonHelper.Deserialize<T>(value);
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace Adai.Standard
 		/// <returns></returns>
 		public static bool HashSet<T>(this IDatabase db, RedisValue key, RedisValue hashField, T value, When when = When.Always, CommandFlags flags = CommandFlags.None) where T : class
 		{
-			var json = JsonHelper.SerializeObject(value);
+			var json = Utils.JsonHelper.Serialize(value);
 			return db.HashSet(key, hashField, json, when, flags);
 		}
 
@@ -108,7 +108,7 @@ namespace Adai.Standard
 			var i = 0;
 			foreach (var kv in hash)
 			{
-				array[i] = new HashEntry(kv.Key, JsonHelper.SerializeObject(kv.Value));
+				array[i] = new HashEntry(kv.Key, Utils.JsonHelper.Serialize(kv.Value));
 				i++;
 			}
 			db.HashSet(key, array, flags);
@@ -233,7 +233,7 @@ namespace Adai.Standard
 			var array = new T[values.Length];
 			for (var i = 0; i < values.Length; i++)
 			{
-				array[i] = JsonHelper.DeserializeObject<T>(values[i]);
+				array[i] = Utils.JsonHelper.Deserialize<T>(values[i]);
 			}
 			return array;
 		}
@@ -259,7 +259,7 @@ namespace Adai.Standard
 			var dict = new Dictionary<string, T>();
 			foreach (var item in hash)
 			{
-				dict.Add(item.Name, JsonHelper.DeserializeObject<T>(item.Value));
+				dict.Add(item.Name, Utils.JsonHelper.Deserialize<T>(item.Value));
 			}
 			return dict;
 		}

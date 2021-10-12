@@ -1,4 +1,4 @@
-﻿namespace Adai.Standard
+﻿namespace Adai.Standard.Extensions
 {
 	/// <summary>
 	/// ConfigExt

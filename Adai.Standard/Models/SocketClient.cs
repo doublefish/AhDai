@@ -17,7 +17,7 @@
 		{
 			// 连接到服务器
 			Connect(IPEndPoint);
-			Log4netHelper.Info($"连接服务端【{RemoteEndPoint}】成功");
+			Utils.Log4netHelper.Info($"连接服务端【{RemoteEndPoint}】成功");
 
 			// 启动监听接收消息
 			ListenReceive();

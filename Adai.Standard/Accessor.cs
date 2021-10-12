@@ -1,4 +1,4 @@
-﻿using Adai.Utilities;
+﻿using Adai.Utils;
 using System;
 using System.Linq.Expressions;
 

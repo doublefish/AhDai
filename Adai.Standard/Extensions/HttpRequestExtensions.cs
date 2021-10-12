@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Adai.Standard
+namespace Adai.Standard.Extensions
 {
 	/// <summary>
 	/// HttpRequestExt
@@ -64,7 +64,7 @@ namespace Adai.Standard
 			var ipAddress = httpRequest.HttpContext.Connection.RemoteIpAddress;
 			try
 			{
-				HttpRequestHelper.VerifyFrequencyLimit(ipAddress.ToString(), path, limit);
+				Utils.HttpRequestHelper.VerifyFrequencyLimit(ipAddress.ToString(), path, limit);
 			}
 			catch (Exception ex)
 			{
