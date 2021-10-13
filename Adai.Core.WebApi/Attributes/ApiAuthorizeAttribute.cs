@@ -1,14 +1,15 @@
-﻿using Adai;
-using Adai.Extension;
-using Adai.Standard;
-using Adai.Standard.Model;
+﻿using Adai.Extensions;
+using Adai.Standard.Extensions;
+using Adai.Standard.Models;
+using Adai.Standard.Utils;
+using Adai.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Adai.Core.WebApi
+namespace Adai.WebApi.Attributes
 {
 	/// <summary>
 	/// ApiAuthorizeAttribute

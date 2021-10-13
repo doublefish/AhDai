@@ -37,7 +37,7 @@ namespace Adai.Standard.Utils
 				Expiry = DateTime.UtcNow.Add(Expiry),
 				Data = data
 			};
-			RedisHelper.GetDatabase(15).HashSet(key, token.Signature, token);
+			Redis.Helper.GetDatabase(15).HashSet(key, token.Signature, token);
 			return token;
 		}
 
@@ -55,7 +55,7 @@ namespace Adai.Standard.Utils
 				return null;
 			}
 			var key = $"{CacheKey}-{suffix}";
-			return RedisHelper.GetDatabase(15).HashGet<Models.Token<T>>(key, signature);
+			return Redis.Helper.GetDatabase(15).HashGet<Models.Token<T>>(key, signature);
 		}
 
 		/// <summary>
@@ -73,7 +73,7 @@ namespace Adai.Standard.Utils
 				token = null;
 				return false;
 			}
-			var redis = RedisHelper.GetDatabase(15);
+			var redis = Redis.Helper.GetDatabase(15);
 			var key = $"{CacheKey}-{suffix}";
 			token = redis.HashGet<Models.Token<T>>(key, signature);
 			if (token == null || token.Expiry < DateTime.UtcNow)

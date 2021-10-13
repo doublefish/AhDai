@@ -4,15 +4,15 @@ using RabbitMQ.Client;
 namespace Adai.Standard.RabbitMQ
 {
 	/// <summary>
-	/// 消费者
+	/// Basic
 	/// </summary>
-	public class Base
+	public class Basic
 	{
 		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="logger"></param>
-		public Base(ILogger logger)
+		public Basic(ILogger logger)
 		{
 			Logger = logger;
 		}
@@ -36,7 +36,7 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// 失败后转发（RoutingKey@error）
 		/// </summary>
-		public bool ForwardAfterFailure { get; set; }
+		public bool ForwardFailure { get; set; }
 
 		/// <summary>
 		/// Connection
@@ -52,7 +52,7 @@ namespace Adai.Standard.RabbitMQ
 		/// </summary>
 		protected void Init()
 		{
-			var factory = Utils.RabbitMQHelper.CreateConnectionFactory();
+			var factory = Helper.CreateConnectionFactory();
 			Connection = factory.CreateConnection();
 			Channel = Connection.CreateModel();
 		}

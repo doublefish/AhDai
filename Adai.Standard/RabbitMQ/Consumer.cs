@@ -10,7 +10,7 @@ namespace Adai.Standard.RabbitMQ
 	/// <summary>
 	/// 消费者
 	/// </summary>
-	public class Consumer : Base
+	public class Consumer : Basic
 	{
 		/// <summary>
 		/// 构造函数
@@ -53,16 +53,16 @@ namespace Adai.Standard.RabbitMQ
 			try
 			{
 				message = Encoding.UTF8.GetString(ea.Body.ToArray());
-				//执行业务处理
+				// 执行业务处理
 				if (Func.Invoke(message))
 				{
-					//业务处理成功,删除队列
+					// 业务处理成功，删除队列
 					Channel.BasicAck(ea.DeliveryTag, false);
 				}
 				else
 				{
 					Logger.LogError($"消息处理失败=>{message}");
-					if (ForwardAfterFailure)
+					if (ForwardFailure)
 					{
 						// 失败后转发消息到失败队列
 						var properties = Channel.CreateBasicProperties();

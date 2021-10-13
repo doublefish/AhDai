@@ -17,13 +17,13 @@ namespace Adai.Standard.Services
 		public RedisService(IConfiguration configuration)
 		{
 			Configuration = configuration;
-			var config = new Models.RedisConfig()
+			var config = new Redis.Config()
 			{
 				Host = Configuration.GetSection("redis:host").Value,
 				Port = Configuration.GetSection("redis:port").Value.ToInt32(),
 				Password = Configuration.GetSection("redis:password").Value
 			};
-			Utils.RedisHelper.Init(config);
+			Redis.Helper.Init(config);
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace Adai.Standard.Services
 		/// <returns></returns>
 		public IDatabase GetDatabase(int db = -1, object asyncState = null)
 		{
-			return Utils.RedisHelper.GetDatabase(db, asyncState);
+			return Redis.Helper.GetDatabase(db, asyncState);
 		}
 	}
 }

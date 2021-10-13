@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Adai.Core.WebApi
+namespace Adai.WebApi.Filters
 {
 	/// <summary>
 	/// 添加控制器模块说明

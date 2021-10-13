@@ -8,6 +8,6 @@
 		/// <summary>
 		/// 邮箱配置
 		/// </summary>
-		public Models.MailConfig Config { get; set; }
+		public Net.MailConfig Config { get; set; }
 	}
 }

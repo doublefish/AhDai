@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace Adai.Core.WebApi
+namespace Adai.WebApi.Utils
 {
 	/// <summary>
 	/// JwtHelper

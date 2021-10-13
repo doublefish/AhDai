@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Adai.Core.WebApi
+namespace Adai.Standard.Utils
 {
 	/// <summary>
 	/// ServiceHelper
@@ -26,6 +26,17 @@ namespace Adai.Core.WebApi
 		{
 			Services = services;
 			Provider = services.BuildServiceProvider();
+		}
+
+		/// <summary>
+		/// GetScope
+		/// </summary>
+		/// <param name="provider"></param>
+		/// <returns></returns>
+		public static IServiceScope GetScope(IServiceProvider provider = null)
+		{
+			provider ??= Provider;
+			return provider?.GetRequiredService<IServiceScopeFactory>().CreateScope();
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Mail;
 
-namespace Adai.Standard.Utils
+namespace Adai.Standard.Net
 {
 	/// <summary>
 	/// MailHelper
@@ -11,13 +11,13 @@ namespace Adai.Standard.Utils
 		/// <summary>
 		/// Config
 		/// </summary>
-		public static Models.MailConfig Config { get; private set; }
+		public static MailConfig Config { get; private set; }
 
 		/// <summary>
 		/// 初始化
 		/// </summary>
 		/// <param name="configuration"></param>
-		public static void Init(Models.MailConfig configuration)
+		public static void Init(MailConfig configuration)
 		{
 			Config = configuration;
 		}

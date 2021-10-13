@@ -5,9 +5,9 @@
 		<Description>常用方法封装</Description>
 		<Authors>Shuang Yu</Authors>
 		<Company>Adai</Company>
-		<Version>2.1.0.1</Version>
-		<AssemblyVersion>2.1.0.1</AssemblyVersion>
-		<FileVersion>2.1.0.1</FileVersion>
+		<Version>2.1.0.2</Version>
+		<AssemblyVersion>2.1.0.2</AssemblyVersion>
+		<FileVersion>2.1.0.2</FileVersion>
 		<PackageReleaseNotes>无</PackageReleaseNotes>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>

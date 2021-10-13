@@ -1,16 +1,19 @@
-﻿using Adai.Standard;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Adai.Core.WebApi.Models;
+using System.Resources;
 
-namespace Adai.Core.WebApi
+namespace Adai.WebApi
 {
 	/// <summary>
 	/// ControllerMvc
 	/// </summary>
 	public class ControllerMvc : Controller
 	{
+		string _UserId;
+		string _RequestId;
+		ResourceManager _SharedLocalizer;
+
 		/// <summary>
 		/// 目录名称
 		/// </summary>
@@ -25,6 +28,52 @@ namespace Adai.Core.WebApi
 		public string ActionName { get; set; }
 
 		/// <summary>
+		/// 共享本地语言
+		/// </summary>
+		protected ResourceManager SharedLocalizer
+		{
+			get
+			{
+				if (_SharedLocalizer == null)
+				{
+					var type = GetType();
+					_SharedLocalizer = new ResourceManager(type.FullName, type.Assembly);
+				}
+				return _SharedLocalizer;
+			}
+		}
+
+		/// <summary>
+		/// 请求Id
+		/// </summary>
+		protected string RequestId
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(_RequestId))
+				{
+					_RequestId = HttpContext.Request.Headers[Const.RequestId];
+				}
+				return _RequestId;
+			}
+		}
+
+		/// <summary>
+		/// 用户Id
+		/// </summary>
+		protected string UserId
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(_UserId))
+				{
+					_UserId = Utils.JwtHelper.GetClaimValue(HttpContext.Request, "open-id");
+				}
+				return _UserId;
+			}
+		}
+
+		/// <summary>
 		/// Action 执行前执行
 		/// </summary>
 		/// <param name="context"></param>
@@ -35,7 +84,7 @@ namespace Adai.Core.WebApi
 			var lastName = namespaceNames[^1];
 			if (lastName != "Controllers")
 			{
-				DirectoryName = lastName.Substring(1);
+				DirectoryName = lastName[1..];
 			}
 			ControllerName = RouteData.Values["controller"].ToString();
 			ActionName = RouteData.Values["action"].ToString();
@@ -51,13 +100,13 @@ namespace Adai.Core.WebApi
 			if (context.Result is ObjectResult)
 			{
 				var value = (context.Result as ObjectResult).Value;
-				//重写输出内容
-				var result = new ReturnResult<object>(0, null, value);
+				// 重写输出内容
+				var result = new Standard.Models.ActionResult<object>(RequestId, 0, null, value);
 				context.Result = new ContentResult()
 				{
 					StatusCode = StatusCodes.Status200OK,
-					Content = JsonHelper.SerializeObject(result),
-					ContentType = HttpContentType.Json
+					Content = Standard.Utils.JsonHelper.SerializeObject(result),
+					ContentType = Standard.HttpContentType.Json
 				};
 			}
 			else

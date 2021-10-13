@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.IO;
 
-namespace Adai.Core.WebApi.Models
+namespace Adai.WebApi.Models
 {
 	/// <summary>
 	/// TypeSorter

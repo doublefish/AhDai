@@ -917,148 +917,6 @@
             <param name="message"></param>
             <param name="inner"></param>
         </member>
-        <member name="T:Adai.Standard.Models.BaseSocket">
-            <summary>
-            BaseSocket
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Models.BaseSocket.#ctor(System.String,System.Int32,System.String,System.Boolean)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="host"></param>
-            <param name="port"></param>
-            <param name="name"></param>
-            <param name="log"></param>
-        </member>
-        <member name="P:Adai.Standard.Models.BaseSocket.Encoding">
-            <summary>
-            编码
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.BaseSocket.Host">
-            <summary>
-            主机
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.BaseSocket.Port">
-            <summary>
-            端口
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.BaseSocket.IPAddress">
-            <summary>
-            IPAddress
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.BaseSocket.IPEndPoint">
-            <summary>
-            IPEndPoint
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.BaseSocket.Remotes">
-            <summary>
-            远程
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.BaseSocket.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.BaseSocket.State">
-            <summary>
-            状态
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.BaseSocket.Log">
-            <summary>
-            是否记录日志
-            </summary>
-        </member>
-        <member name="T:Adai.Standard.Models.BaseSocket.MessageHandler">
-            <summary>
-            接收消息委托
-            </summary>
-            <param name="remote"></param>
-            <param name="message"></param>
-        </member>
-        <member name="T:Adai.Standard.Models.BaseSocket.StateChangeHandler">
-            <summary>
-            连接状态改变委托
-            </summary>
-            <param name="remote"></param>
-            <param name="state"></param>
-            <param name="message"></param>
-        </member>
-        <member name="E:Adai.Standard.Models.BaseSocket.MessageEvent">
-            <summary>
-            接收消息事件
-            </summary>
-        </member>
-        <member name="E:Adai.Standard.Models.BaseSocket.StateChangeEvent">
-            <summary>
-            连接状态改变事件
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Models.BaseSocket.Open(System.Net.Sockets.Socket)">
-            <summary>
-            开启连接
-            </summary>
-            <param name="remote"></param>
-        </member>
-        <member name="M:Adai.Standard.Models.BaseSocket.Close(System.Net.Sockets.Socket,System.String)">
-            <summary>
-            关闭连接
-            </summary>
-            <param name="remote"></param>
-            <param name="reason"></param>
-        </member>
-        <member name="M:Adai.Standard.Models.BaseSocket.Receive(System.Net.Sockets.Socket,System.Byte[],System.Int32)">
-            <summary>
-            接收消息
-            </summary>
-            <param name="remote"></param>
-            <param name="bytes"></param>
-            <param name="size"></param>
-        </member>
-        <member name="M:Adai.Standard.Models.BaseSocket.Send(System.String)">
-            <summary>
-            客户端发送消息给服务端
-            </summary>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Models.BaseSocket.Send(System.String,System.Net.Sockets.Socket[])">
-            <summary>
-            服务端发送消息给客户端
-            </summary>
-            <param name="message"></param>
-            <param name="remotes"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Models.BaseSocket.Send(System.String,System.Net.Sockets.Socket)">
-            <summary>
-            客户端发送消息给服务端
-            </summary>
-            <param name="message"></param>
-            <param name="remote"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Models.BaseSocket.ChangeState(System.Net.Sockets.Socket,Adai.Standard.Config.SocketState,System.String)">
-            <summary>
-            改变状态
-            </summary>
-            <param name="remote"></param>
-            <param name="state"></param>
-            <param name="message"></param>
-        </member>
-        <member name="M:Adai.Standard.Models.BaseSocket.ListenReceive(System.Net.Sockets.Socket)">
-            <summary>
-            监听消息
-            </summary>
-            <param name="client"></param>
-        </member>
         <member name="T:Adai.Standard.Models.CustomException">
             <summary>
             CustomException
@@ -1272,31 +1130,6 @@
             <param name="memberSerialization"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Standard.Models.MailConfig">
-            <summary>
-            MailConfig
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.MailConfig.SmtpHost">
-            <summary>
-            SmtpHost
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.MailConfig.SmtpPort">
-            <summary>
-            SmtpPort
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.MailConfig.SmtpUsername">
-            <summary>
-            SmtpUsername
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.MailConfig.SmtpPassword">
-            <summary>
-            SmtpPassword
-            </summary>
-        </member>
         <member name="T:Adai.Standard.Models.PageArg`1">
             <summary>
             查询条件
@@ -1391,89 +1224,6 @@
             <summary>
             平台标识
             </summary>
-        </member>
-        <member name="T:Adai.Standard.Models.RabbitMqConfig">
-            <summary>
-            RabbitMqConfig
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RabbitMqConfig.Host">
-            <summary>
-            Host
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RabbitMqConfig.VirtualHost">
-            <summary>
-            VHost
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RabbitMqConfig.Port">
-            <summary>
-            Port
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RabbitMqConfig.Username">
-            <summary>
-            Username
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RabbitMqConfig.Password">
-            <summary>
-            Password
-            </summary>
-        </member>
-        <member name="T:Adai.Standard.Models.RedisConfig">
-            <summary>
-            RedisConfig
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RedisConfig.Host">
-            <summary>
-            Host
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RedisConfig.Port">
-            <summary>
-            Port
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RedisConfig.Password">
-            <summary>
-            Password
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RedisConfig.Database">
-            <summary>
-            Database
-            </summary>
-        </member>
-        <member name="T:Adai.Standard.Models.SocketClient">
-            <summary>
-            SocketClient
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Models.SocketClient.#ctor(System.String,System.Int32,System.String,System.Boolean)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="host"></param>
-            <param name="port"></param>
-            <param name="name"></param>
-            <param name="log"></param>
-        </member>
-        <member name="T:Adai.Standard.Models.SocketService">
-            <summary>
-            SocketService
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Models.SocketService.#ctor(System.String,System.Int32,System.String,System.Boolean)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="host"></param>
-            <param name="port"></param>
-            <param name="name"></param>
-            <param name="log"></param>
         </member>
         <member name="T:Adai.Standard.Models.SortType">
             <summary>
@@ -1611,6 +1361,230 @@
             平台
             </summary>
         </member>
+        <member name="T:Adai.Standard.Net.BaseSocket">
+            <summary>
+            BaseSocket
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Net.BaseSocket.#ctor(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+            <param name="name"></param>
+            <param name="log"></param>
+        </member>
+        <member name="P:Adai.Standard.Net.BaseSocket.Encoding">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.BaseSocket.Host">
+            <summary>
+            主机
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.BaseSocket.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.BaseSocket.IPAddress">
+            <summary>
+            IPAddress
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.BaseSocket.IPEndPoint">
+            <summary>
+            IPEndPoint
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.BaseSocket.Remotes">
+            <summary>
+            远程
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.BaseSocket.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.BaseSocket.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.BaseSocket.Log">
+            <summary>
+            是否记录日志
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.Net.BaseSocket.MessageHandler">
+            <summary>
+            接收消息委托
+            </summary>
+            <param name="remote"></param>
+            <param name="message"></param>
+        </member>
+        <member name="T:Adai.Standard.Net.BaseSocket.StateChangeHandler">
+            <summary>
+            连接状态改变委托
+            </summary>
+            <param name="remote"></param>
+            <param name="state"></param>
+            <param name="message"></param>
+        </member>
+        <member name="E:Adai.Standard.Net.BaseSocket.MessageEvent">
+            <summary>
+            接收消息事件
+            </summary>
+        </member>
+        <member name="E:Adai.Standard.Net.BaseSocket.StateChangeEvent">
+            <summary>
+            连接状态改变事件
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Net.BaseSocket.Open(System.Net.Sockets.Socket)">
+            <summary>
+            开启连接
+            </summary>
+            <param name="remote"></param>
+        </member>
+        <member name="M:Adai.Standard.Net.BaseSocket.Close(System.Net.Sockets.Socket,System.String)">
+            <summary>
+            关闭连接
+            </summary>
+            <param name="remote"></param>
+            <param name="reason"></param>
+        </member>
+        <member name="M:Adai.Standard.Net.BaseSocket.Receive(System.Net.Sockets.Socket,System.Byte[],System.Int32)">
+            <summary>
+            接收消息
+            </summary>
+            <param name="remote"></param>
+            <param name="bytes"></param>
+            <param name="size"></param>
+        </member>
+        <member name="M:Adai.Standard.Net.BaseSocket.Send(System.String)">
+            <summary>
+            客户端发送消息给服务端
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.BaseSocket.Send(System.String,System.Net.Sockets.Socket[])">
+            <summary>
+            服务端发送消息给客户端
+            </summary>
+            <param name="message"></param>
+            <param name="remotes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.BaseSocket.Send(System.String,System.Net.Sockets.Socket)">
+            <summary>
+            客户端发送消息给服务端
+            </summary>
+            <param name="message"></param>
+            <param name="remote"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.BaseSocket.ChangeState(System.Net.Sockets.Socket,Adai.Standard.Config.SocketState,System.String)">
+            <summary>
+            改变状态
+            </summary>
+            <param name="remote"></param>
+            <param name="state"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:Adai.Standard.Net.BaseSocket.ListenReceive(System.Net.Sockets.Socket)">
+            <summary>
+            监听消息
+            </summary>
+            <param name="client"></param>
+        </member>
+        <member name="T:Adai.Standard.Net.MailConfig">
+            <summary>
+            MailConfig
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.MailConfig.SmtpHost">
+            <summary>
+            SmtpHost
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.MailConfig.SmtpPort">
+            <summary>
+            SmtpPort
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.MailConfig.SmtpUsername">
+            <summary>
+            SmtpUsername
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.MailConfig.SmtpPassword">
+            <summary>
+            SmtpPassword
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.Net.MailHelper">
+            <summary>
+            MailHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.MailHelper.Config">
+            <summary>
+            Config
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Net.MailHelper.Init(Adai.Standard.Net.MailConfig)">
+            <summary>
+            初始化
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Adai.Standard.Net.MailHelper.CreateSmtpClient">
+            <summary>
+            CreateSmtpClient
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Net.MailHelper.Send(System.String,System.String,System.String)">
+            <summary>
+            发送
+            </summary>
+            <param name="recipients"></param>
+            <param name="subject"></param>
+            <param name="body"></param>
+        </member>
+        <member name="T:Adai.Standard.Net.SocketClient">
+            <summary>
+            SocketClient
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Net.SocketClient.#ctor(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+            <param name="name"></param>
+            <param name="log"></param>
+        </member>
+        <member name="T:Adai.Standard.Net.SocketService">
+            <summary>
+            SocketService
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Net.SocketService.#ctor(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+            <param name="name"></param>
+            <param name="log"></param>
+        </member>
         <member name="T:Adai.Standard.Options.DbContextOptions">
             <summary>
             DbContextOptions
@@ -1668,60 +1642,90 @@
             Dispose
             </summary>
         </member>
-        <member name="T:Adai.Standard.RabbitMQ.Base">
+        <member name="T:Adai.Standard.RabbitMQ.Basic">
             <summary>
-            消费者
+            Basic
             </summary>
         </member>
-        <member name="M:Adai.Standard.RabbitMQ.Base.#ctor(Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Adai.Standard.RabbitMQ.Basic.#ctor(Microsoft.Extensions.Logging.ILogger)">
             <summary>
             构造函数
             </summary>
             <param name="logger"></param>
         </member>
-        <member name="P:Adai.Standard.RabbitMQ.Base.Logger">
+        <member name="P:Adai.Standard.RabbitMQ.Basic.Logger">
             <summary>
             Logger
             </summary>
         </member>
-        <member name="P:Adai.Standard.RabbitMQ.Base.Queue">
+        <member name="P:Adai.Standard.RabbitMQ.Basic.Queue">
             <summary>
             队列
             </summary>
         </member>
-        <member name="P:Adai.Standard.RabbitMQ.Base.Exchange">
+        <member name="P:Adai.Standard.RabbitMQ.Basic.Exchange">
             <summary>
             通道
             </summary>
         </member>
-        <member name="P:Adai.Standard.RabbitMQ.Base.RoutingKey">
+        <member name="P:Adai.Standard.RabbitMQ.Basic.RoutingKey">
             <summary>
             路由
             </summary>
         </member>
-        <member name="P:Adai.Standard.RabbitMQ.Base.ForwardAfterFailure">
+        <member name="P:Adai.Standard.RabbitMQ.Basic.ForwardFailure">
             <summary>
             失败后转发（RoutingKey@error）
             </summary>
         </member>
-        <member name="P:Adai.Standard.RabbitMQ.Base.Connection">
+        <member name="P:Adai.Standard.RabbitMQ.Basic.Connection">
             <summary>
             Connection
             </summary>
         </member>
-        <member name="P:Adai.Standard.RabbitMQ.Base.Channel">
+        <member name="P:Adai.Standard.RabbitMQ.Basic.Channel">
             <summary>
             Channel
             </summary>
         </member>
-        <member name="M:Adai.Standard.RabbitMQ.Base.Init">
+        <member name="M:Adai.Standard.RabbitMQ.Basic.Init">
             <summary>
             初始化
             </summary>
         </member>
-        <member name="M:Adai.Standard.RabbitMQ.Base.Dispose">
+        <member name="M:Adai.Standard.RabbitMQ.Basic.Dispose">
             <summary>
             销毁
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.RabbitMQ.Config">
+            <summary>
+            Config
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Config.Host">
+            <summary>
+            Host
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Config.VirtualHost">
+            <summary>
+            VHost
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Config.Port">
+            <summary>
+            Port
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Config.Username">
+            <summary>
+            Username
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Config.Password">
+            <summary>
+            Password
             </summary>
         </member>
         <member name="T:Adai.Standard.RabbitMQ.Consumer">
@@ -1753,6 +1757,29 @@
             <param name="sender"></param>
             <param name="ea"></param>
         </member>
+        <member name="T:Adai.Standard.RabbitMQ.Helper">
+            <summary>
+            Helper
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Helper.Config">
+            <summary>
+            Config
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.Init(Adai.Standard.RabbitMQ.Config)">
+            <summary>
+            初始化
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.CreateConnectionFactory(Adai.Standard.RabbitMQ.Config)">
+            <summary>
+            CreateConnectionFactory
+            </summary>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:Adai.Standard.RabbitMQ.Publisher">
             <summary>
             生产者
@@ -1769,36 +1796,122 @@
             订阅消息
             </summary>
         </member>
-        <member name="T:Adai.Standard.RARHelper">
+        <member name="T:Adai.Standard.Redis.Config">
             <summary>
-            RARHelper
+            Config
             </summary>
         </member>
-        <member name="P:Adai.Standard.RARHelper.ApplicationPath">
+        <member name="P:Adai.Standard.Redis.Config.Host">
             <summary>
-            WinRAR.exe路径
+            Host
             </summary>
         </member>
-        <member name="P:Adai.Standard.RARHelper.Level">
+        <member name="P:Adai.Standard.Redis.Config.Port">
             <summary>
-            压缩级别（0-5）
+            Port
             </summary>
         </member>
-        <member name="M:Adai.Standard.RARHelper.Compress(System.String,System.String,System.String)">
+        <member name="P:Adai.Standard.Redis.Config.Password">
             <summary>
-            利用WinRAR进行压缩
+            Password
             </summary>
-            <param name="sourcePath">要压缩的文件夹（绝对路径）</param>
-            <param name="rarPath">压缩后的.rar文件的存放目录（绝对路径）</param>
-            <param name="rarName">压缩文件的名称（包括后缀）</param>
         </member>
-        <member name="M:Adai.Standard.RARHelper.UnCompress(System.String,System.String,System.String)">
+        <member name="P:Adai.Standard.Redis.Config.Database">
             <summary>
-            利用WinRAR进行解压缩
+            Database
             </summary>
-            <param name="path">文件解压路径（绝对）</param>
-            <param name="rarPath">要解压缩的.rar文件的存放目录（绝对路径）</param>
-            <param name="rarName">要解压缩的.rar文件名（包括后缀）</param>
+        </member>
+        <member name="F:Adai.Standard.Redis.Config.ConfigurationChangedBroadcast">
+            <summary>
+            当节点被明确请求通过广播重新配置时
+            </summary>
+        </member>
+        <member name="E:Adai.Standard.Redis.Config.HashSlotMoved">
+            <summary>
+            当哈希槽被重新定位时/更改集群
+            </summary>
+        </member>
+        <member name="E:Adai.Standard.Redis.Config.ErrorMessage">
+            <summary>
+            发生错误时
+            </summary>
+        </member>
+        <member name="E:Adai.Standard.Redis.Config.ConfigurationChanged">
+            <summary>
+            检测到配置更改时
+            </summary>
+        </member>
+        <member name="E:Adai.Standard.Redis.Config.ConnectionFailed">
+            <summary>
+            连接失败，如果重新连接成功将不会收到这个通知
+            </summary>
+        </member>
+        <member name="E:Adai.Standard.Redis.Config.InternalError">
+            <summary>
+            发生内部错误时
+            </summary>
+        </member>
+        <member name="E:Adai.Standard.Redis.Config.ConnectionRestored">
+            <summary>
+            建立物理连接时
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.Redis.Helper">
+            <summary>
+            RedisHelper
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Redis.Helper.DbCount">
+            <summary>
+            DbCount
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Redis.Helper.Instances">
+            <summary>
+            实例
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Redis.Helper.Config">
+            <summary>
+            Config
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Redis.Helper.Init(Adai.Standard.Redis.Config)">
+            <summary>
+            初始化
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="M:Adai.Standard.Redis.Helper.GetDatabase(System.Int32,System.Object)">
+            <summary>
+            GetDatabase
+            </summary>
+            <param name="db"></param>
+            <param name="asyncState"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Redis.Helper.GetDatabase(Adai.Standard.Redis.Config)">
+            <summary>
+            GetDatabase
+            </summary>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Redis.Helper.GetConnectionMultiplexer(Adai.Standard.Redis.Config)">
+            <summary>
+            GetConnectionMultiplexer
+            </summary>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Redis.Helper.CreateConfiguration(System.String,System.Int32,System.String)">
+            <summary>
+            CreateConfiguration
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+            <param name="password"></param>
+            <returns></returns>
         </member>
         <member name="T:Adai.Standard.Services.DbService">
             <summary>
@@ -1990,16 +2103,16 @@
             FileHelper
             </summary>
         </member>
-        <member name="P:Adai.Standard.Utils.FileHelper.Configuration">
+        <member name="P:Adai.Standard.Utils.FileHelper.Config">
             <summary>
-            Configuration
+            Config
             </summary>
         </member>
         <member name="M:Adai.Standard.Utils.FileHelper.Init(Adai.Standard.Models.FileConfig)">
             <summary>
             初始化
             </summary>
-            <param name="configuration"></param>
+            <param name="config"></param>
         </member>
         <member name="M:Adai.Standard.Utils.FileHelper.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
             <summary>
@@ -2432,163 +2545,96 @@
             <param name="message"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Standard.Utils.MailHelper">
+        <member name="T:Adai.Standard.Utils.RARHelper">
             <summary>
-            MailHelper
+            RARHelper
             </summary>
         </member>
-        <member name="P:Adai.Standard.Utils.MailHelper.Config">
+        <member name="P:Adai.Standard.Utils.RARHelper.ApplicationPath">
             <summary>
-            Config
+            WinRAR.exe路径
             </summary>
         </member>
-        <member name="M:Adai.Standard.Utils.MailHelper.Init(Adai.Standard.Models.MailConfig)">
+        <member name="P:Adai.Standard.Utils.RARHelper.Level">
+            <summary>
+            压缩级别（0-5）
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Utils.RARHelper.Compress(System.String,System.String,System.String)">
+            <summary>
+            利用WinRAR进行压缩
+            </summary>
+            <param name="sourcePath">要压缩的文件夹（绝对路径）</param>
+            <param name="rarPath">压缩后的.rar文件的存放目录（绝对路径）</param>
+            <param name="rarName">压缩文件的名称（包括后缀）</param>
+        </member>
+        <member name="M:Adai.Standard.Utils.RARHelper.UnCompress(System.String,System.String,System.String)">
+            <summary>
+            利用WinRAR进行解压缩
+            </summary>
+            <param name="path">文件解压路径（绝对）</param>
+            <param name="rarPath">要解压缩的.rar文件的存放目录（绝对路径）</param>
+            <param name="rarName">要解压缩的.rar文件名（包括后缀）</param>
+        </member>
+        <member name="T:Adai.Standard.Utils.ResourceHelper">
+            <summary>
+            ResourceHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Utils.ResourceHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Utils.ResourceHelper.Get``1">
+            <summary>
+            获取资源文件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.ResourceHelper.Get(System.Type)">
+            <summary>
+            获取资源文件
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.ResourceHelper.Get(System.String,System.Reflection.Assembly)">
+            <summary>
+            获取指定类型的属性
+            </summary>
+            <param name="baseName"></param>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Standard.Utils.ServiceHelper">
+            <summary>
+            ServiceHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Utils.ServiceHelper.Services">
+            <summary>
+            Services
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Utils.ServiceHelper.Provider">
+            <summary>
+            Provider
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Utils.ServiceHelper.Init(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             初始化
             </summary>
-            <param name="configuration"></param>
+            <param name="services"></param>
         </member>
-        <member name="M:Adai.Standard.Utils.MailHelper.CreateSmtpClient">
+        <member name="M:Adai.Standard.Utils.ServiceHelper.GetScope(System.IServiceProvider)">
             <summary>
-            CreateSmtpClient
+            GetScope
             </summary>
-        </member>
-        <member name="M:Adai.Standard.Utils.MailHelper.Send(System.String,System.String,System.String)">
-            <summary>
-            发送
-            </summary>
-            <param name="recipients"></param>
-            <param name="subject"></param>
-            <param name="body"></param>
-        </member>
-        <member name="T:Adai.Standard.Utils.RabbitMQHelper">
-            <summary>
-            RabbitMQHelper
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Utils.RabbitMQHelper.Config">
-            <summary>
-            Config
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Utils.RabbitMQHelper.Init(Adai.Standard.Models.RabbitMqConfig)">
-            <summary>
-            初始化
-            </summary>
-            <param name="config"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.RabbitMQHelper.CreateConnectionFactory(Adai.Standard.Models.RabbitMqConfig)">
-            <summary>
-            CreateConnectionFactory
-            </summary>
-            <param name="configuration"></param>
+            <param name="provider"></param>
             <returns></returns>
-        </member>
-        <member name="T:Adai.Standard.Utils.RedisHelper">
-            <summary>
-            RedisHelper
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.Utils.RedisHelper.DbCount">
-            <summary>
-            DbCount
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Utils.RedisHelper.Instances">
-            <summary>
-            实例
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Utils.RedisHelper.Configuration">
-            <summary>
-            Configuration
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.Init(Adai.Standard.Models.RedisConfig)">
-            <summary>
-            初始化
-            </summary>
-            <param name="configuration"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.GetDatabase(System.Int32,System.Object)">
-            <summary>
-            GetDatabase
-            </summary>
-            <param name="db"></param>
-            <param name="asyncState"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.GetDatabase(Adai.Standard.Models.RedisConfig)">
-            <summary>
-            GetDatabase
-            </summary>
-            <param name="configuration"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.GetConnectionMultiplexer(Adai.Standard.Models.RedisConfig)">
-            <summary>
-            GetConnectionMultiplexer
-            </summary>
-            <param name="configuration"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.CreateConfiguration(System.String,System.Int32,System.String)">
-            <summary>
-            CreateConfiguration
-            </summary>
-            <param name="host"></param>
-            <param name="port"></param>
-            <param name="password"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.MuxerConfigurationChangedBroadcast(System.Object,StackExchange.Redis.EndPointEventArgs)">
-            <summary>
-            当节点被明确请求通过广播重新配置时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.MuxerHashSlotMoved(System.Object,StackExchange.Redis.HashSlotMovedEventArgs)">
-            <summary>
-            当哈希槽被重新定位时/更改集群
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.MuxerErrorMessage(System.Object,StackExchange.Redis.RedisErrorEventArgs)">
-            <summary>
-            发生错误时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.MuxerConfigurationChanged(System.Object,StackExchange.Redis.EndPointEventArgs)">
-            <summary>
-            检测到配置更改时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.MuxerConnectionFailed(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
-            <summary>
-            连接失败，如果重新连接成功将不会收到这个通知
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.MuxerInternalError(System.Object,StackExchange.Redis.InternalErrorEventArgs)">
-            <summary>
-            发生内部错误时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.RedisHelper.MuxerConnectionRestored(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
-            <summary>
-            建立物理连接时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
         </member>
         <member name="T:Adai.Standard.Utils.TokenHelper">
             <summary>

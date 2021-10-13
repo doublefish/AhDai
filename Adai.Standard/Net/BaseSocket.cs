@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace Adai.Standard.Models
+namespace Adai.Standard.Net
 {
 	/// <summary>
 	/// BaseSocket

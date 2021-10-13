@@ -8,6 +8,6 @@
 		/// <summary>
 		/// Redis配置
 		/// </summary>
-		public Models.RedisConfig Config { get; set; }
+		public Redis.Config Config { get; set; }
 	}
 }

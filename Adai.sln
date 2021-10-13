@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.DbContext.MySql", "Ada
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.Test", "Adai.Test\Adai.Test.csproj", "{B220A81B-5464-4D86-BC2B-DD69131EDF79}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.Core.WebApi", "Adai.Core.WebApi\Adai.Core.WebApi.csproj", "{124480A1-819D-4608-BA16-C63E5FF73CEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.WebApi", "Adai.Core.WebApi\Adai.WebApi.csproj", "{124480A1-819D-4608-BA16-C63E5FF73CEC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.DbContext.SQLite", "Adai.DbContext.SQLite\Adai.DbContext.SQLite.csproj", "{33E52CD8-03C3-4462-AC2C-92526A4CE85D}"
 EndProject

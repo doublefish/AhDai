@@ -2,7 +2,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Adai.Core.WebApi.Service
+namespace Adai.WebApi.Services
 {
 	/// <summary>
 	/// LoggerService

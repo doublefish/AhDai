@@ -1,11 +1,11 @@
-﻿using Adai;
+﻿using Adai.Utils;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Linq;
 
-namespace Adai.Core.WebApi
+namespace Adai.WebApi.Filters
 {
 	/// <summary>
 	/// 操作过过滤器 添加通用参数等
@@ -47,8 +47,8 @@ namespace Adai.Core.WebApi
 
 			if (context.ApiDescription.TryGetMethodInfo(out var methodInfo))
 			{
-				var type = typeof(ApiAuthorizeAttribute);
-				if (methodInfo.GetCustomAttributes(type, true).FirstOrDefault() is ApiAuthorizeAttribute author)
+				var type = typeof(Attributes.ApiAuthorizeAttribute);
+				if (methodInfo.GetCustomAttributes(type, true).FirstOrDefault() is Attributes.ApiAuthorizeAttribute author)
 				{
 					//选项
 					//var options = new List<IOpenApiAny>() { new OpenApiInteger(1), new OpenApiInteger(2), new OpenApiInteger(3), new OpenApiInteger(4) };

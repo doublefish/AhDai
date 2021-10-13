@@ -1,5 +1,4 @@
-﻿using Adai.Standard.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,17 +18,17 @@ namespace Adai.Standard.Utils
 	public static class FileHelper
 	{
 		/// <summary>
-		/// Configuration
+		/// Config
 		/// </summary>
-		public static FileConfig Configuration { get; private set; }
+		public static Models.FileConfig Config { get; private set; }
 
 		/// <summary>
 		/// 初始化
 		/// </summary>
-		/// <param name="configuration"></param>
-		public static void Init(Models.FileConfig configuration)
+		/// <param name="config"></param>
+		public static void Init(Models.FileConfig config)
 		{
-			Configuration = configuration;
+			Config = config;
 			// var keys = new string[] { "Image", "File" };
 		}
 
@@ -39,7 +38,7 @@ namespace Adai.Standard.Utils
 		/// <param name="rootPath"></param>
 		/// <param name="formFiles"></param>
 		/// <returns></returns>
-		public static async Task<ICollection<FileData>> UploadAsync(string rootPath, params IFormFile[] formFiles)
+		public static async Task<ICollection<Models.FileData>> UploadAsync(string rootPath, params IFormFile[] formFiles)
 		{
 			formFiles = formFiles.Where(o => o != null).ToArray();
 			//If the request is correct, the binary data will be extracted from content and IIS stores files in specified location.
@@ -50,24 +49,24 @@ namespace Adai.Standard.Utils
 
 			//虚拟目录
 			var dir = DateTime.Now.ToString("yyyy-MM-dd");
-			var virtualDir = $"{Configuration.UploadDirectory}/{dir}";
+			var virtualDir = $"{Config.UploadDirectory}/{dir}";
 			//物理路径
-			var physicalPath = Path.Combine(rootPath, Configuration.UploadDirectory, dir);
+			var physicalPath = Path.Combine(rootPath, Config.UploadDirectory, dir);
 			if (!Directory.Exists(physicalPath))
 			{
 				Directory.CreateDirectory(physicalPath);
 			}
-			var datas = new HashSet<FileData>();
+			var datas = new HashSet<Models.FileData>();
 			foreach (var formFile in formFiles)
 			{
-				var data = new FileData()
+				var data = new Models.FileData()
 				{
 					Guid = Guid.NewGuid().ToString(),
 					Name = Path.GetFileNameWithoutExtension(formFile.FileName),
 					Extension = Path.GetExtension(formFile.FileName).Substring(1),
 					Length = formFile.Length
 				};
-				foreach (var kv in Configuration.Extensions)
+				foreach (var kv in Config.Extensions)
 				{
 					if (kv.Value.Contains(data.Extension))
 					{
@@ -75,9 +74,9 @@ namespace Adai.Standard.Utils
 					}
 					throw new Exception("不支持的文件类型");
 				}
-				if (formFile.Length > Configuration.MaxSize)
+				if (formFile.Length > Config.MaxSize)
 				{
-					throw new Exception($"超出文件大小限制：{Configuration.MaxSizeNote}");
+					throw new Exception($"超出文件大小限制：{Config.MaxSizeNote}");
 				}
 				//物理路径
 				data.PhysicalPath = Path.Combine(physicalPath, data.FullName);
@@ -107,7 +106,7 @@ namespace Adai.Standard.Utils
 			var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
 
 			//文件目录
-			var folderPath = Path.Combine(rootPath, Configuration.DownloadDirectory);
+			var folderPath = Path.Combine(rootPath, Config.DownloadDirectory);
 			//临时文件夹路径
 			var tempFolderPath = Path.Combine(folderPath, timestamp);
 			//创建临时文件夹

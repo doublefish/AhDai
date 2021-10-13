@@ -1,4 +1,4 @@
-﻿namespace Adai.Core.WebApi
+﻿namespace Adai.WebApi
 {
 	/// <summary>
 	/// Const

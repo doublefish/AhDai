@@ -7,7 +7,7 @@ namespace Adai.Standard.RabbitMQ
 	/// <summary>
 	/// 生产者
 	/// </summary>
-	public class Publisher : Base
+	public class Publisher : Basic
 	{
 		/// <summary>
 		/// 构造函数

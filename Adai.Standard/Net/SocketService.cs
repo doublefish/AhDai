@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace Adai.Standard.Models
+namespace Adai.Standard.Net
 {
 	/// <summary>
 	/// SocketService

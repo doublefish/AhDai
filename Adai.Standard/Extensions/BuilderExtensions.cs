@@ -56,7 +56,7 @@ namespace Adai.Standard.Extensions
 		{
 			if (options != null)
 			{
-				Utils.RedisHelper.Init(options.Config);
+				Redis.Helper.Init(options.Config);
 			}
 			return app;
 		}
@@ -91,7 +91,7 @@ namespace Adai.Standard.Extensions
 		{
 			if (options != null)
 			{
-				Utils.RabbitMQHelper.Init(options.Config);
+				RabbitMQ.Helper.Init(options.Config);
 			}
 			return app;
 		}
@@ -126,7 +126,7 @@ namespace Adai.Standard.Extensions
 		{
 			if (options != null)
 			{
-				Utils.MailHelper.Init(options.Config);
+				Net.MailHelper.Init(options.Config);
 			}
 			return app;
 		}

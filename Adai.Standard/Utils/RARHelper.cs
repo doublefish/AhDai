@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace Adai.Standard
+namespace Adai.Standard.Utils
 {
 	/// <summary>
 	/// RARHelper
