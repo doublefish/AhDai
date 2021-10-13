@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 
-namespace Adai.Standard.Utils
+namespace Adai.Standard.Net
 {
 	/// <summary>
 	/// HttpListenerHelper
@@ -67,7 +67,7 @@ namespace Adai.Standard.Utils
 								var contentType = httpContext.Request.ContentType;
 								if (!string.IsNullOrEmpty(contentType) && contentType.IndexOf("/json") != -1)
 								{
-									parameters = JsonHelper.DeserializeObject<IDictionary<string, string>>(body);
+									parameters = Utils.JsonHelper.DeserializeObject<IDictionary<string, string>>(body);
 								}
 								else
 								{

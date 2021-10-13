@@ -1015,101 +1015,6 @@
             扩展.文件全名
             </summary>
         </member>
-        <member name="T:Adai.Standard.Models.HttpRequest">
-            <summary>
-            Http请求数据
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Models.HttpRequest.#ctor(System.String,System.String,System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="url"></param>
-            <param name="method"></param>
-            <param name="contentType"></param>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpRequest.Url">
-            <summary>
-            Url
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpRequest.Method">
-            <summary>
-            方法
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpRequest.ContentType">
-            <summary>
-            内容类型
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpRequest.Content">
-            <summary>
-            内容
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpRequest.Headers">
-            <summary>
-            请求头
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpRequest.Body">
-            <summary>
-            内容参数
-            </summary>
-        </member>
-        <member name="T:Adai.Standard.Models.HttpResponse">
-            <summary>
-            Http响应数据
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Models.HttpResponse.#ctor(System.Net.HttpWebResponse,System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="httpWebResponse"></param>
-            <param name="content"></param>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.StatusCode">
-            <summary>
-            StatusCode
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.ResponseUri">
-            <summary>
-            ResponseUri
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.StatusDescription">
-            <summary>
-            StatusDescription
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.ContentLength">
-            <summary>
-            ContentLength
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.ContentEncoding">
-            <summary>
-            ContentEncoding
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.CharacterSet">
-            <summary>
-            CharacterSet
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.ContentType">
-            <summary>
-            ContentType
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.Content">
-            <summary>
-            Content
-            </summary>
-        </member>
         <member name="T:Adai.Standard.Models.JsonPropertyContractResolver">
             <summary>
             JsonPropertyContractResolver
@@ -1502,6 +1407,237 @@
             监听消息
             </summary>
             <param name="client"></param>
+        </member>
+        <member name="T:Adai.Standard.Net.HttpHelper">
+            <summary>
+            HttpHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.SendGet(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            发送参数类型为Url的GET请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.SendPost(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            发送参数类型为Url的POST请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.SendPostByJson``1(System.String,System.Collections.Generic.IDictionary{System.String,``0})">
+            <summary>
+            发送参数类型为Json的POST请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.CreateRequest(Adai.Standard.Net.HttpRequest)">
+            <summary>
+            创建请求
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.SendRequest(Adai.Standard.Net.HttpRequest)">
+            <summary>
+            发送POST请求
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.ParseQueryString(System.String)">
+            <summary>
+            ParseQueryString
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.UrlEncode``1(``0)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.UrlEncode``1(``0,System.Text.Encoding)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.UrlEncodeUpper``1(``0)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.UrlEncodeUpper``1(``0,System.Text.Encoding)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.UrlEncodeUpper(System.String)">
+            <summary>
+            转换Url编码为大写
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.UrlEncodeUpper(System.String,System.Text.Encoding)">
+            <summary>
+            转换Url编码为大写
+            </summary>
+            <param name="str"></param>
+            <param name="encoding">编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.UrlDecode``1(``0)">
+            <summary>
+            UrlDecode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.UrlDecode``1(``0,System.Text.Encoding)">
+            <summary>
+            UrlDecode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpHelper.IsIp(System.String)">
+            <summary>
+            IsIp
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Standard.Net.HttpListenerHelper">
+            <summary>
+            HttpListenerHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpListenerHelper.Start(System.String,System.Func{System.Net.HttpListenerRequest,System.Collections.Generic.IDictionary{System.String,System.String},System.String},System.String)">
+            <summary>
+            开启服务
+            </summary>
+            <param name="uriPrefix"></param>
+            <param name="contentType"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="T:Adai.Standard.Net.HttpRequest">
+            <summary>
+            Http请求数据
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpRequest.#ctor(System.String,System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="url"></param>
+            <param name="method"></param>
+            <param name="contentType"></param>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpRequest.Url">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpRequest.Method">
+            <summary>
+            方法
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpRequest.ContentType">
+            <summary>
+            内容类型
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpRequest.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpRequest.Headers">
+            <summary>
+            请求头
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpRequest.Body">
+            <summary>
+            内容参数
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.Net.HttpResponse">
+            <summary>
+            Http响应数据
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Net.HttpResponse.#ctor(System.Net.HttpWebResponse,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="httpWebResponse"></param>
+            <param name="content"></param>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpResponse.StatusCode">
+            <summary>
+            StatusCode
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpResponse.ResponseUri">
+            <summary>
+            ResponseUri
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpResponse.StatusDescription">
+            <summary>
+            StatusDescription
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpResponse.ContentLength">
+            <summary>
+            ContentLength
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpResponse.ContentEncoding">
+            <summary>
+            ContentEncoding
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpResponse.CharacterSet">
+            <summary>
+            CharacterSet
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpResponse.ContentType">
+            <summary>
+            ContentType
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Net.HttpResponse.Content">
+            <summary>
+            Content
+            </summary>
         </member>
         <member name="T:Adai.Standard.Net.MailConfig">
             <summary>
@@ -2169,142 +2305,6 @@
             </summary>
             <param name="b"></param>
             <returns></returns>
-        </member>
-        <member name="T:Adai.Standard.Utils.HttpHelper">
-            <summary>
-            HttpHelper
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.SendGet(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
-            <summary>
-            发送参数类型为Url的GET请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.SendPost(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
-            <summary>
-            发送参数类型为Url的POST请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.SendPostByJson``1(System.String,System.Collections.Generic.IDictionary{System.String,``0})">
-            <summary>
-            发送参数类型为Json的POST请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.CreateRequest(Adai.Standard.Models.HttpRequest)">
-            <summary>
-            创建请求
-            </summary>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.SendRequest(Adai.Standard.Models.HttpRequest)">
-            <summary>
-            发送POST请求
-            </summary>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.ParseQueryString(System.String)">
-            <summary>
-            ParseQueryString
-            </summary>
-            <param name="query"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.UrlEncode``1(``0)">
-            <summary>
-            UrlEncode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.UrlEncode``1(``0,System.Text.Encoding)">
-            <summary>
-            UrlEncode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.UrlEncodeUpper``1(``0)">
-            <summary>
-            UrlEncode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.UrlEncodeUpper``1(``0,System.Text.Encoding)">
-            <summary>
-            UrlEncode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.UrlEncodeUpper(System.String)">
-            <summary>
-            转换Url编码为大写
-            </summary>
-            <param name="str"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.UrlEncodeUpper(System.String,System.Text.Encoding)">
-            <summary>
-            转换Url编码为大写
-            </summary>
-            <param name="str"></param>
-            <param name="encoding">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.UrlDecode``1(``0)">
-            <summary>
-            UrlDecode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.UrlDecode``1(``0,System.Text.Encoding)">
-            <summary>
-            UrlDecode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.IsIp(System.String)">
-            <summary>
-            IsIp
-            </summary>
-            <param name="ip"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Adai.Standard.Utils.HttpListenerHelper">
-            <summary>
-            HttpListenerHelper
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Utils.HttpListenerHelper.Start(System.String,System.Func{System.Net.HttpListenerRequest,System.Collections.Generic.IDictionary{System.String,System.String},System.String},System.String)">
-            <summary>
-            开启服务
-            </summary>
-            <param name="uriPrefix"></param>
-            <param name="contentType"></param>
-            <param name="callback"></param>
         </member>
         <member name="T:Adai.Standard.Utils.HttpRequestHelper">
             <summary>

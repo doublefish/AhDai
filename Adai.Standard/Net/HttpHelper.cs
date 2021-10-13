@@ -11,7 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace Adai.Standard.Utils
+namespace Adai.Standard.Net
 {
 	/// <summary>
 	/// HttpHelper
@@ -58,7 +58,7 @@ namespace Adai.Standard.Utils
 		{
 			var data = new HttpRequest(url, HttpMethod.Post, HttpContentType.Json)
 			{
-				Content = JsonHelper.SerializeObject(parameters)
+				Content = Utils.JsonHelper.SerializeObject(parameters)
 			};
 			return SendRequest(data);
 		}
@@ -75,7 +75,7 @@ namespace Adai.Standard.Utils
 				data.ContentType += ";charset=utf-8";
 				if (data.Body != null)
 				{
-					data.Content = JsonHelper.SerializeObject(data.Body);
+					data.Content = Utils.JsonHelper.SerializeObject(data.Body);
 				}
 			}
 			else if (data.Body != null)
