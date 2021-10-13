@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Adai.Standard;
-using Adai.Standard.Utils;
+﻿using Adai.Standard.Utils;
 using StackExchange.Redis;
 
 namespace Adai.WebApi
@@ -17,9 +11,19 @@ namespace Adai.WebApi
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		static void MuxerConfigurationChangedBroadcast(object sender, EndPointEventArgs e)
+		public static void ConfigurationChangedBroadcast(object sender, EndPointEventArgs e)
 		{
 			Log4netHelper.Debug($"ConfigurationChangedBroadcast=>=>EndPoint={e.EndPoint}");
+		}
+
+		/// <summary>
+		/// 检测到配置更改时
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public static void ConfigurationChanged(object sender, EndPointEventArgs e)
+		{
+			Log4netHelper.Debug($"ConfigurationChanged=>EndPoint=e.EndPoint");
 		}
 
 		/// <summary>
@@ -27,7 +31,7 @@ namespace Adai.WebApi
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		static void MuxerHashSlotMoved(object sender, HashSlotMovedEventArgs e)
+		public static void HashSlotMoved(object sender, HashSlotMovedEventArgs e)
 		{
 			Log4netHelper.Debug($"HashSlotMoved=>NewEndPoint={e.NewEndPoint},OldEndPoint={e.OldEndPoint}");
 		}
@@ -37,29 +41,9 @@ namespace Adai.WebApi
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		static void MuxerErrorMessage(object sender, RedisErrorEventArgs e)
+		public static void ErrorMessage(object sender, RedisErrorEventArgs e)
 		{
 			Log4netHelper.Debug($"ErrorMessage=>{e.Message}");
-		}
-
-		/// <summary>
-		/// 检测到配置更改时
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		static void MuxerConfigurationChanged(object sender, EndPointEventArgs e)
-		{
-			Log4netHelper.Debug($"ConfigurationChanged=>EndPoint=e.EndPoint");
-		}
-
-		/// <summary>
-		/// 连接失败，如果重新连接成功将不会收到这个通知
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		static void MuxerConnectionFailed(object sender, ConnectionFailedEventArgs e)
-		{
-			Log4netHelper.Debug($"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}", e.Exception);
 		}
 
 		/// <summary>
@@ -67,9 +51,19 @@ namespace Adai.WebApi
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		static void MuxerInternalError(object sender, InternalErrorEventArgs e)
+		public static void InternalError(object sender, InternalErrorEventArgs e)
 		{
 			Log4netHelper.Debug($"InternalError=>{e.Exception.Message}", e.Exception);
+		}
+
+		/// <summary>
+		/// 连接失败，如果重新连接成功将不会收到这个通知
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public static void ConnectionFailed(object sender, ConnectionFailedEventArgs e)
+		{
+			Log4netHelper.Debug($"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}", e.Exception);
 		}
 
 		/// <summary>
@@ -77,7 +71,7 @@ namespace Adai.WebApi
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		static void MuxerConnectionRestored(object sender, ConnectionFailedEventArgs e)
+		public static void ConnectionRestored(object sender, ConnectionFailedEventArgs e)
 		{
 			Log4netHelper.Debug($"ConnectionRestored=>EndPoint={e.EndPoint}");
 		}

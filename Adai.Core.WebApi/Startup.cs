@@ -327,6 +327,13 @@ namespace Adai.WebApi
 				Port = Configuration.GetSection("redis:port").Value.ToInt32(),
 				Password = Configuration.GetSection("redis:password").Value
 			};
+			options.Config.ConfigurationChangedBroadcast = StartupRedis.ConfigurationChangedBroadcast;
+			options.Config.ConfigurationChanged = StartupRedis.ConfigurationChanged;
+			options.Config.HashSlotMoved = StartupRedis.HashSlotMoved;
+			options.Config.ErrorMessage = StartupRedis.ErrorMessage;
+			options.Config.InternalError = StartupRedis.InternalError;
+			options.Config.ConnectionFailed = StartupRedis.ConnectionFailed;
+			options.Config.ConnectionRestored = StartupRedis.ConnectionRestored;
 		}
 
 		/// <summary>

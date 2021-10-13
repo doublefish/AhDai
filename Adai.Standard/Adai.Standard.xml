@@ -1826,32 +1826,32 @@
             当节点被明确请求通过广播重新配置时
             </summary>
         </member>
-        <member name="E:Adai.Standard.Redis.Config.HashSlotMoved">
-            <summary>
-            当哈希槽被重新定位时/更改集群
-            </summary>
-        </member>
-        <member name="E:Adai.Standard.Redis.Config.ErrorMessage">
-            <summary>
-            发生错误时
-            </summary>
-        </member>
-        <member name="E:Adai.Standard.Redis.Config.ConfigurationChanged">
+        <member name="F:Adai.Standard.Redis.Config.ConfigurationChanged">
             <summary>
             检测到配置更改时
             </summary>
         </member>
-        <member name="E:Adai.Standard.Redis.Config.ConnectionFailed">
+        <member name="F:Adai.Standard.Redis.Config.HashSlotMoved">
             <summary>
-            连接失败，如果重新连接成功将不会收到这个通知
+            当哈希槽被重新定位时/更改集群
             </summary>
         </member>
-        <member name="E:Adai.Standard.Redis.Config.InternalError">
+        <member name="F:Adai.Standard.Redis.Config.ErrorMessage">
+            <summary>
+            发生错误时
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Redis.Config.InternalError">
             <summary>
             发生内部错误时
             </summary>
         </member>
-        <member name="E:Adai.Standard.Redis.Config.ConnectionRestored">
+        <member name="F:Adai.Standard.Redis.Config.ConnectionFailed">
+            <summary>
+            连接失败，如果重新连接成功将不会收到这个通知
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Redis.Config.ConnectionRestored">
             <summary>
             建立物理连接时
             </summary>

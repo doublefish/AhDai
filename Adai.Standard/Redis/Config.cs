@@ -29,31 +29,31 @@ namespace Adai.Standard.Redis
 		/// <summary>
 		/// 当节点被明确请求通过广播重新配置时
 		/// </summary>
-		public Action<object, EndPointEventArgs> ConfigurationChangedBroadcast;
-		/// <summary>
-		/// 当哈希槽被重新定位时/更改集群
-		/// </summary>
-		public event EventHandler<HashSlotMovedEventArgs> HashSlotMoved;
-		/// <summary>
-		/// 发生错误时
-		/// </summary>
-		public event EventHandler<RedisErrorEventArgs> ErrorMessage;
+		public EventHandler<EndPointEventArgs> ConfigurationChangedBroadcast;
 		/// <summary>
 		/// 检测到配置更改时
 		/// </summary>
-		public event EventHandler<EndPointEventArgs> ConfigurationChanged;
+		public EventHandler<EndPointEventArgs> ConfigurationChanged;
 		/// <summary>
-		/// 连接失败，如果重新连接成功将不会收到这个通知
+		/// 当哈希槽被重新定位时/更改集群
 		/// </summary>
-		public event EventHandler<ConnectionFailedEventArgs> ConnectionFailed;
+		public EventHandler<HashSlotMovedEventArgs> HashSlotMoved;
+		/// <summary>
+		/// 发生错误时
+		/// </summary>
+		public EventHandler<RedisErrorEventArgs> ErrorMessage;
 		/// <summary>
 		/// 发生内部错误时
 		/// </summary>
-		public event EventHandler<InternalErrorEventArgs> InternalError;
+		public EventHandler<InternalErrorEventArgs> InternalError;
+		/// <summary>
+		/// 连接失败，如果重新连接成功将不会收到这个通知
+		/// </summary>
+		public EventHandler<ConnectionFailedEventArgs> ConnectionFailed;
 		/// <summary>
 		/// 建立物理连接时
 		/// </summary>
-		public event EventHandler<ConnectionFailedEventArgs> ConnectionRestored;
+		public EventHandler<ConnectionFailedEventArgs> ConnectionRestored;
 		#endregion
 	}
 }

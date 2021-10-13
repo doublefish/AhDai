@@ -79,13 +79,13 @@ namespace Adai.Standard.Redis
 					instance = ConnectionMultiplexer.Connect(str);
 
 					// 注册事件
-					//instance.ConfigurationChangedBroadcast += config.ConfigurationChangedBroadcast;
-					//instance.HashSlotMoved += MuxerHashSlotMoved;
-					//instance.ErrorMessage += MuxerErrorMessage;
-					//instance.ConfigurationChanged += MuxerConfigurationChanged;
-					//instance.ConnectionFailed += MuxerConnectionFailed;
-					//instance.InternalError += MuxerInternalError;
-					//instance.ConnectionRestored += MuxerConnectionRestored;
+					instance.ConfigurationChangedBroadcast += config.ConfigurationChangedBroadcast;
+					instance.ConfigurationChanged += config.ConfigurationChanged;
+					instance.HashSlotMoved += config.HashSlotMoved;
+					instance.ErrorMessage += config.ErrorMessage;
+					instance.InternalError += config.InternalError;
+					instance.ConnectionFailed += config.ConnectionFailed;
+					instance.ConnectionRestored += config.ConnectionRestored;
 				}
 				return instance;
 			}
