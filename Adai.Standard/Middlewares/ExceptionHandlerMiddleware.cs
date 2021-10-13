@@ -40,14 +40,14 @@ namespace Adai.Standard.Middlewares
 		{
 			try
 			{
-				if (Activity.Current != null)
-				{
-					var requestId = context.Request.Headers[Const.RequestId];
-					if (!string.IsNullOrEmpty(requestId))
-					{
-						Activity.Current.SetCustomProperty(Const.RequestId, requestId);
-					}
-				}
+				//if (Activity.Current != null)
+				//{
+				//	var requestId = context.Request.Headers[Const.RequestId];
+				//	if (!string.IsNullOrEmpty(requestId))
+				//	{
+				//		Activity.Current.SetCustomProperty(Const.RequestId, requestId);
+				//	}
+				//}
 				await next(context);
 			}
 			catch (Exception ex)

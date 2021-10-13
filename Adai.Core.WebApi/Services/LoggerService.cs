@@ -41,8 +41,8 @@ namespace Adai.WebApi.Services
 				LogLevel.None => "None",
 				_ => string.Empty
 			};
-			var requestId = Activity.Current?.GetCustomProperty(Const.RequestId)?.ToString();
-			Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}|{level}|{methodName}|{requestId}|{formatter(state, exception)}|{exception}");
+			//var requestId = Activity.Current?.GetCustomProperty(Const.RequestId)?.ToString();
+			Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}|[{Process.GetCurrentProcess().Id}]|{level}|{methodName}|{formatter(state, exception)}|{exception}");
 		}
 
 		/// <summary>
