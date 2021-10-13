@@ -23,7 +23,7 @@ namespace Adai.WebApi
 		/// <param name="e"></param>
 		public static void ConfigurationChanged(object sender, EndPointEventArgs e)
 		{
-			Log4netHelper.Debug($"ConfigurationChanged=>EndPoint=e.EndPoint");
+			Log4netHelper.Debug($"ConfigurationChanged=>EndPoint={e.EndPoint}");
 		}
 
 		/// <summary>
