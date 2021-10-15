@@ -76,7 +76,7 @@ namespace Adai.Standard.Middlewares
 			var contentType = context.Response?.ContentType?.ToLower();
 			if (!string.IsNullOrEmpty(contentType) && (contentType == HttpContentType.Xml || contentType == HttpContentType.TextHtml))
 			{
-				await context.Response.WriteAsync(Adai.Base.Utils.XmlHelper.SerializeObject(result)).ConfigureAwait(false);
+				await context.Response.WriteAsync(Base.Utils.XmlHelper.SerializeObject(result)).ConfigureAwait(false);
 			}
 			else
 			{
