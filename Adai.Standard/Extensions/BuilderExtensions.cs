@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 
@@ -149,5 +150,17 @@ namespace Adai.Standard.Extensions
 			return app.UseMail(options);
 		}
 		#endregion
+
+		/// <summary>
+		/// AddLoggerProvider
+		/// </summary>
+		/// <param name="builder"></param>
+		/// <returns></returns>
+		public static ILoggingBuilder AddLoggerProvider(this ILoggingBuilder builder)
+		{
+			// 删除所有 ILoggerProvider 实例
+			builder.ClearProviders();
+			return builder.AddProvider(new Providers.LoggerProvider());
+		}
 	}
 }

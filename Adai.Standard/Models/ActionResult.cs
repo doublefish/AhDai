@@ -66,8 +66,8 @@ namespace Adai.Standard.Models
 		{
 			var text = ContentType switch
 			{
-				HttpContentType.Xml => Adai.Utils.XmlHelper.SerializeObject(this),
-				HttpContentType.TextXml => Adai.Utils.XmlHelper.SerializeObject(this),
+				HttpContentType.Xml => Adai.Base.Utils.XmlHelper.SerializeObject(this),
+				HttpContentType.TextXml => Adai.Base.Utils.XmlHelper.SerializeObject(this),
 				_ => Utils.JsonHelper.Serialize(this),
 			};
 			//var bytes = Encoding.Default.GetBytes(text);

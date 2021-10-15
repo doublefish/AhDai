@@ -208,6 +208,13 @@
             <param name="setupAction"></param>
             <returns></returns>
         </member>
+        <member name="M:Adai.Standard.Extensions.BuilderExtensions.AddLoggerProvider(Microsoft.Extensions.Logging.ILoggingBuilder)">
+            <summary>
+            AddLoggerProvider
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
         <member name="T:Adai.Standard.Extensions.ConfigExtensions">
             <summary>
             ConfigExt
@@ -384,13 +391,6 @@
             <summary>
             ProviderExtensions
             </summary>
-        </member>
-        <member name="M:Adai.Standard.Extensions.ProviderExtensions.AddLoggerProvider(Microsoft.Extensions.Logging.ILoggingBuilder)">
-            <summary>
-            AddLoggerProvider
-            </summary>
-            <param name="builder"></param>
-            <returns></returns>
         </member>
         <member name="T:Adai.Standard.Extensions.RedisExtensions">
             <summary>
@@ -831,12 +831,13 @@
             <param name="context"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Middlewares.ExceptionHandlerMiddleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+        <member name="M:Adai.Standard.Middlewares.ExceptionHandlerMiddleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception,Microsoft.Extensions.Logging.ILogger)">
             <summary>
             HandleExceptionAsync
             </summary>
             <param name="context"></param>
             <param name="exception"></param>
+            <param name="logger"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.Standard.Models.ActionResult`1">
@@ -2087,6 +2088,16 @@
             LoggerService
             </summary>
         </member>
+        <member name="M:Adai.Standard.Services.LoggerService.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Services.LoggerService.EventId">
+            <summary>
+            EventId
+            </summary>
+        </member>
         <member name="M:Adai.Standard.Services.LoggerService.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
             <summary>
             Log
@@ -2613,15 +2624,21 @@
             ServiceHelper
             </summary>
         </member>
-        <member name="P:Adai.Standard.Utils.ServiceHelper.Services">
+        <member name="P:Adai.Standard.Utils.ServiceHelper.Instance">
             <summary>
-            Services
+            服务实例
             </summary>
         </member>
-        <member name="P:Adai.Standard.Utils.ServiceHelper.Provider">
+        <member name="P:Adai.Standard.Utils.ServiceHelper.HttpContextAccessor">
             <summary>
-            Provider
+            HttpContextAccessor
             </summary>
+        </member>
+        <member name="M:Adai.Standard.Utils.ServiceHelper.Init(System.IServiceProvider)">
+            <summary>
+            初始化
+            </summary>
+            <param name="instance"></param>
         </member>
         <member name="M:Adai.Standard.Utils.ServiceHelper.Init(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
@@ -2629,11 +2646,25 @@
             </summary>
             <param name="services"></param>
         </member>
-        <member name="M:Adai.Standard.Utils.ServiceHelper.GetScope(System.IServiceProvider)">
+        <member name="M:Adai.Standard.Utils.ServiceHelper.GetScopedService``1">
             <summary>
-            GetScope
+            获取指定类型的范围服务的实例（通过 AddScoped 添加的）
             </summary>
-            <param name="provider"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.ServiceHelper.GetService``1">
+            <summary>
+            获取注入的（范围或单例）服务的实例
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.ServiceHelper.GetRequiredService``1">
+            <summary>
+            获取注入的（范围或单例）服务的实例
+            </summary>
+            <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
         <member name="T:Adai.Standard.Utils.TokenHelper">

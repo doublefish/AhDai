@@ -32,17 +32,16 @@ namespace Adai.WebApi.Services
 
 			var level = logLevel switch
 			{
-				LogLevel.Trace => "Trace",
-				LogLevel.Debug => "Debug",
-				LogLevel.Information => "Info",
-				LogLevel.Warning => "Warn",
-				LogLevel.Error => "Error",
-				LogLevel.Critical => "Critical",
-				LogLevel.None => "None",
+				LogLevel.Trace => "trce",
+				LogLevel.Debug => "dbug",
+				LogLevel.Information => "info",
+				LogLevel.Warning => "warn",
+				LogLevel.Error => "fail",
+				LogLevel.Critical => "crit",
 				_ => string.Empty
 			};
-			//var requestId = Activity.Current?.GetCustomProperty(Const.RequestId)?.ToString();
-			Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}|[{Process.GetCurrentProcess().Id}]|{level}|{methodName}|{formatter(state, exception)}|{exception}");
+			var requestId = Activity.Current?.GetCustomProperty(Const.RequestId)?.ToString();
+			Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}|[{Process.GetCurrentProcess().Id}]|{level}|{methodName}|{requestId}|{formatter(state, exception)}|{exception}");
 		}
 
 		/// <summary>

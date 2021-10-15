@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Adai.Extensions;
+using Adai.Base.Extensions;
 using Adai.Standard.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -95,12 +95,12 @@ namespace Adai.WebApi
 				options.SupportedUICultures = supportedCultures;
 			});
 
-			// 单例服务
+			// 添加单例服务
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			// 添加数据库服务
-			services.AddSingleton<Standard.Interfaces.IDbService, Standard.Services.DbService>();
+			//services.AddSingleton<Standard.Interfaces.IDbService, Standard.Services.DbService>();
 			// 添加Redis服务
-			services.AddSingleton<Standard.Interfaces.IRedisService, Standard.Services.RedisService>();
+			//services.AddSingleton<Standard.Interfaces.IRedisService, Standard.Services.RedisService>();
 
 			//services.AddAuthorization();
 			// 添加认证
@@ -193,7 +193,8 @@ namespace Adai.WebApi
 				options.DocumentFilter<Filters.SwaggerDocumentFilter>();
 			});
 
-			Standard.Utils.ServiceHelper.Init(services);
+			// 另存服务实例
+			//Standard.Utils.ServiceHelper.Init(services);
 		}
 
 		/// <summary>
@@ -203,6 +204,9 @@ namespace Adai.WebApi
 		/// <param name="env"></param>
 		public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			// 另存服务实例
+			Standard.Utils.ServiceHelper.Init(app.ApplicationServices);
+
 			// 允许多次读取body
 			app.Use(next => context =>
 			{
@@ -374,7 +378,7 @@ namespace Adai.WebApi
 		public virtual void AddSwaggerGen(SwaggerGenOptions options)
 		{
 			options.SwaggerDoc("common", new OpenApiInfo { Title = "Common v1.0", Version = "1.0", Description = "By CCN" });
-			var provider = Standard.Utils.ServiceHelper.Provider.GetRequiredService<IApiVersionDescriptionProvider>();
+			var provider = Standard.Utils.ServiceHelper.GetRequiredService<IApiVersionDescriptionProvider>();
 			// add a swagger document for each discovered API version
 			// note: you might choose to skip or document deprecated API versions differently
 			foreach (var description in provider.ApiVersionDescriptions)
@@ -403,7 +407,7 @@ namespace Adai.WebApi
 		public virtual void UseSwaggerUI(SwaggerUIOptions options, string root = null)
 		{
 			options.SwaggerEndpoint($"{root}/swagger/common/swagger.json", "Common v1.0");
-			var provider = Standard.Utils.ServiceHelper.Provider.GetRequiredService<IApiVersionDescriptionProvider>();
+			var provider = Standard.Utils.ServiceHelper.GetRequiredService<IApiVersionDescriptionProvider>();
 			foreach (var description in provider.ApiVersionDescriptions)
 			{
 				//options.SwaggerEndpoint($"{root}/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());

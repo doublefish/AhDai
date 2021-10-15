@@ -42,10 +42,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Adai\Adai.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Update="log4net.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
@@ -53,6 +49,10 @@
 
 	<ItemGroup>
 	  <Folder Include="Middlewares\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Adai.Base\Adai.Base.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using Adai.Extensions;
+﻿using Adai.Base.Extensions;
 using Adai.Standard.Extensions;
 using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;

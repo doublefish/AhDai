@@ -1,8 +1,12 @@
 ﻿using Adai.Standard.Utils;
+using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 
 namespace Adai.WebApi
 {
+	/// <summary>
+	/// StartupRedis
+	/// </summary>
 	public class StartupRedis
 	{
 		#region 接收通知事件
@@ -13,7 +17,8 @@ namespace Adai.WebApi
 		/// <param name="e"></param>
 		public static void ConfigurationChangedBroadcast(object sender, EndPointEventArgs e)
 		{
-			Log4netHelper.Debug($"ConfigurationChangedBroadcast=>=>EndPoint={e.EndPoint}");
+			var logger = GetLogger();
+			logger.LogDebug($"ConfigurationChangedBroadcast=>=>EndPoint={e.EndPoint}");
 		}
 
 		/// <summary>
@@ -23,7 +28,8 @@ namespace Adai.WebApi
 		/// <param name="e"></param>
 		public static void ConfigurationChanged(object sender, EndPointEventArgs e)
 		{
-			Log4netHelper.Debug($"ConfigurationChanged=>EndPoint={e.EndPoint}");
+			var logger = GetLogger();
+			logger.LogDebug($"ConfigurationChanged=>EndPoint={e.EndPoint}");
 		}
 
 		/// <summary>
@@ -33,7 +39,8 @@ namespace Adai.WebApi
 		/// <param name="e"></param>
 		public static void HashSlotMoved(object sender, HashSlotMovedEventArgs e)
 		{
-			Log4netHelper.Debug($"HashSlotMoved=>NewEndPoint={e.NewEndPoint},OldEndPoint={e.OldEndPoint}");
+			var logger = GetLogger();
+			logger.LogDebug($"HashSlotMoved=>NewEndPoint={e.NewEndPoint},OldEndPoint={e.OldEndPoint}");
 		}
 
 		/// <summary>
@@ -43,7 +50,8 @@ namespace Adai.WebApi
 		/// <param name="e"></param>
 		public static void ErrorMessage(object sender, RedisErrorEventArgs e)
 		{
-			Log4netHelper.Debug($"ErrorMessage=>{e.Message}");
+			var logger = GetLogger();
+			logger.LogDebug($"ErrorMessage=>{e.Message}");
 		}
 
 		/// <summary>
@@ -53,7 +61,8 @@ namespace Adai.WebApi
 		/// <param name="e"></param>
 		public static void InternalError(object sender, InternalErrorEventArgs e)
 		{
-			Log4netHelper.Debug($"InternalError=>{e.Exception.Message}", e.Exception);
+			var logger = GetLogger();
+			logger.LogDebug($"InternalError=>{e.Exception.Message}", e.Exception);
 		}
 
 		/// <summary>
@@ -63,7 +72,8 @@ namespace Adai.WebApi
 		/// <param name="e"></param>
 		public static void ConnectionFailed(object sender, ConnectionFailedEventArgs e)
 		{
-			Log4netHelper.Debug($"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}", e.Exception);
+			var logger = GetLogger();
+			logger.LogDebug($"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}", e.Exception);
 		}
 
 		/// <summary>
@@ -73,8 +83,18 @@ namespace Adai.WebApi
 		/// <param name="e"></param>
 		public static void ConnectionRestored(object sender, ConnectionFailedEventArgs e)
 		{
-			Log4netHelper.Debug($"ConnectionRestored=>EndPoint={e.EndPoint}");
+			var logger = GetLogger();
+			logger.LogDebug($"ConnectionRestored=>EndPoint={e.EndPoint}");
 		}
 		#endregion
+
+		/// <summary>
+		/// GetLogger
+		/// </summary>
+		/// <returns></returns>
+		static ILogger GetLogger()
+		{
+			return ServiceHelper.GetService<ILogger>();
+		}
 	}
 }

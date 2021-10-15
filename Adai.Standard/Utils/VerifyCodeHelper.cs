@@ -1,5 +1,5 @@
-﻿using Adai.Extensions;
-using Adai.Utils;
+﻿using Adai.Base.Extensions;
+using Adai.Base.Utils;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Drawing;

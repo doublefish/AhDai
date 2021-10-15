@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Adai.Base.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Adai.Standard.Middlewares
@@ -40,20 +40,14 @@ namespace Adai.Standard.Middlewares
 		{
 			try
 			{
-				//if (Activity.Current != null)
-				//{
-				//	var requestId = context.Request.Headers[Const.RequestId];
-				//	if (!string.IsNullOrEmpty(requestId))
-				//	{
-				//		Activity.Current.SetCustomProperty(Const.RequestId, requestId);
-				//	}
-				//}
+				var requestId = context.Request.Headers[Const.RequestId];
+				logger.LogDebug(requestId, $"收到请求=>{context.Request.Path}{context.Request.QueryString}");
 				await next(context);
+				//logger.LogDebug(requestId, $"返回结果=>{context.Response}");
 			}
 			catch (Exception ex)
 			{
-				logger.LogError(ex.Message, ex);
-				await HandleExceptionAsync(context, ex);
+				await HandleExceptionAsync(context, ex, logger);
 			}
 		}
 
@@ -62,10 +56,11 @@ namespace Adai.Standard.Middlewares
 		/// </summary>
 		/// <param name="context"></param>
 		/// <param name="exception"></param>
+		/// <param name="logger"></param>
 		/// <returns></returns>
-		static async Task HandleExceptionAsync(HttpContext context, Exception exception)
+		static async Task HandleExceptionAsync(HttpContext context, Exception exception, ILogger logger)
 		{
-			exception = Adai.Extensions.ExceptionExtensions.GetInner(exception);
+			exception = exception.GetInner();
 			var requestId = context.Request.Headers[Const.RequestId];
 			var result = new Models.ActionResult<string>(requestId, 1, exception.Message);
 			if (exception is Models.CustomException)
@@ -75,13 +70,13 @@ namespace Adai.Standard.Middlewares
 			}
 			else
 			{
-				Utils.LoggerHelper.Error(requestId, exception.Message, exception);
+				logger.LogError(requestId, exception, "请求异常");
 			}
 
 			var contentType = context.Response?.ContentType?.ToLower();
 			if (!string.IsNullOrEmpty(contentType) && (contentType == HttpContentType.Xml || contentType == HttpContentType.TextHtml))
 			{
-				await context.Response.WriteAsync(Adai.Utils.XmlHelper.SerializeObject(result)).ConfigureAwait(false);
+				await context.Response.WriteAsync(Adai.Base.Utils.XmlHelper.SerializeObject(result)).ConfigureAwait(false);
 			}
 			else
 			{

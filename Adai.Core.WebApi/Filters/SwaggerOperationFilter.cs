@@ -1,4 +1,4 @@
-﻿using Adai.Utils;
+﻿using Adai.Base.Utils;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;

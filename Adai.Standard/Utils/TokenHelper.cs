@@ -1,4 +1,4 @@
-﻿using Adai.Security.Utils;
+﻿using Adai.Base.Security.Utils;
 using Adai.Standard.Extensions;
 using System;
 

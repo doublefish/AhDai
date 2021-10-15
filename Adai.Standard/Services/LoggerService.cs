@@ -10,6 +10,20 @@ namespace Adai.Standard.Services
 	public class LoggerService : ILogger
 	{
 		/// <summary>
+		/// 构造函数
+		/// </summary>
+		public LoggerService()
+		{
+			EventId = Guid.NewGuid().ToString();
+			this.LogInformation($"初始化=>{EventId}");
+		}
+
+		/// <summary>
+		/// EventId
+		/// </summary>
+		public string EventId { get; private set; }
+
+		/// <summary>
 		/// Log
 		/// </summary>
 		/// <typeparam name="TState"></typeparam>
@@ -22,27 +36,27 @@ namespace Adai.Standard.Services
 		{
 			var st = new StackTrace(6, true);
 			var sfs = st.GetFrames();
-			var methodName = string.Empty;
-
+			var trace = string.Empty;
 			if (StackFrame.OFFSET_UNKNOWN != sfs[0].GetILOffset())
 			{
 				var methodInfo = sfs[0].GetMethod();
-				methodName = $"{methodInfo?.ReflectedType?.FullName}.{methodInfo?.Name}:{sfs[0].GetFileLineNumber()}";
+				trace = $"{methodInfo?.ReflectedType?.FullName}.{methodInfo?.Name}:{sfs[0].GetFileLineNumber()}";
 			}
 
-			var level = logLevel switch
+			var levelName = logLevel switch
 			{
-				LogLevel.Trace => "Trace",
-				LogLevel.Debug => "Debug",
-				LogLevel.Information => "Info",
-				LogLevel.Warning => "Warn",
-				LogLevel.Error => "Error",
-				LogLevel.Critical => "Critical",
-				LogLevel.None => "None",
+				LogLevel.Trace => "trce",
+				LogLevel.Debug => "dbug",
+				LogLevel.Information => "info",
+				LogLevel.Warning => "warn",
+				LogLevel.Error => "fail",
+				LogLevel.Critical => "crit",
 				_ => string.Empty
 			};
-			var requestId = Activity.Current?.GetCustomProperty(Const.RequestId)?.ToString();
-			Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}|{level}|{methodName}|{requestId}|{formatter(state, exception)}|{exception}");
+			var msg = $"{levelName}: {trace}[{eventId.Id}]"
+				+ $"\r\n      {formatter(state, exception)}"
+				+ $"\r\n      {exception}";
+			Console.WriteLine(msg);
 		}
 
 		/// <summary>
