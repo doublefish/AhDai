@@ -373,6 +373,146 @@
             <param name="ignores"></param>
             <returns></returns>
         </member>
+        <member name="T:Adai.Standard.Extensions.LoggerExtensions">
+            <summary>
+            LoggerExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogTrace(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogTrace
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogTrace(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogTrace
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogDebug(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogDebug
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogDebug(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogDebug
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogInformation(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogInformation
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogInformation(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogInformation
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogWarning(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogWarning
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogWarning(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogWarning
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogError(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogError
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogError(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogError
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogCritical(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogCritical
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogCritical(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogCritical
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Log(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,System.String,System.String,System.Object[])">
+            <summary>
+            Log
+            </summary>
+            <param name="logger"></param>
+            <param name="logLevel"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Log(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            Log
+            </summary>
+            <param name="logger"></param>
+            <param name="logLevel"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
         <member name="T:Adai.Standard.Extensions.OptionsExtensions">
             <summary>
             OptionsExtensions
@@ -2489,71 +2629,29 @@
             LoggerHelper
             </summary>
         </member>
-        <member name="P:Adai.Standard.Utils.LoggerHelper.Logger">
+        <member name="M:Adai.Standard.Utils.LoggerHelper.#cctor">
             <summary>
-            Logger
+            构造函数
             </summary>
         </member>
-        <member name="M:Adai.Standard.Utils.LoggerHelper.Init(Microsoft.Extensions.Logging.ILogger)">
+        <member name="P:Adai.Standard.Utils.LoggerHelper.Provider">
             <summary>
-            初始化
+            
             </summary>
-            <param name="logger"></param>
         </member>
-        <member name="M:Adai.Standard.Utils.LoggerHelper.Trace(System.String,System.String,System.Exception)">
+        <member name="M:Adai.Standard.Utils.LoggerHelper.GetLogger``1">
             <summary>
-            Trace
+            GetLogger
             </summary>
-            <param name="requestId"></param>
-            <param name="message"></param>
-            <param name="exception"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Utils.LoggerHelper.Debug(System.String,System.String,System.Exception)">
+        <member name="M:Adai.Standard.Utils.LoggerHelper.GetLogger(System.String,System.Int32)">
             <summary>
-            Debug
+            GetLogger
             </summary>
-            <param name="requestId"></param>
-            <param name="message"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.LoggerHelper.Info(System.String,System.String,System.Exception)">
-            <summary>
-            Info
-            </summary>
-            <param name="requestId"></param>
-            <param name="message"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.LoggerHelper.Warn(System.String,System.String,System.Exception)">
-            <summary>
-            Warn
-            </summary>
-            <param name="requestId"></param>
-            <param name="message"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.LoggerHelper.Error(System.String,System.String,System.Exception)">
-            <summary>
-            Error
-            </summary>
-            <param name="requestId"></param>
-            <param name="message"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.LoggerHelper.Critical(System.String,System.String,System.Exception)">
-            <summary>
-            Critical
-            </summary>
-            <param name="requestId"></param>
-            <param name="message"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.LoggerHelper.FormatMessage(System.String,System.String)">
-            <summary>
-            格式化消息
-            </summary>
-            <param name="requestId"></param>
-            <param name="message"></param>
+            <param name="categoryName"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.Standard.Utils.RARHelper">

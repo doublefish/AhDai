@@ -16,7 +16,7 @@ namespace Adai.Standard.Providers
 		public ILogger CreateLogger(string categoryName)
 		{
 			var logger = new Services.LoggerService();
-			Utils.LoggerHelper.Init(logger);
+			//Console.WriteLine($"CreateLogger=>{logger.EventId}");
 			return logger;
 		}
 

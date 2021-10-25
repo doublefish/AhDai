@@ -10,6 +10,14 @@ namespace Adai.WebApi.Services
 	public class LoggerService : ILogger
 	{
 		/// <summary>
+		/// 构造函数
+		/// </summary>
+		public LoggerService()
+		{
+			//Console.WriteLine($"new LoggerService=>{EventId}");
+		}
+
+		/// <summary>
 		/// Log
 		/// </summary>
 		/// <typeparam name="TState"></typeparam>
@@ -20,17 +28,25 @@ namespace Adai.WebApi.Services
 		/// <param name="formatter"></param>
 		public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
 		{
-			var st = new StackTrace(6, true);
+			var st = new StackTrace(3, true);
 			var sfs = st.GetFrames();
-			var methodName = string.Empty;
-
-			if (StackFrame.OFFSET_UNKNOWN != sfs[0].GetILOffset())
+			var trace = string.Empty;
+			var offset = sfs[0].GetILOffset();
+			foreach (var sf in sfs)
 			{
-				var methodInfo = sfs[0].GetMethod();
-				methodName = $"{methodInfo?.ReflectedType?.FullName}.{methodInfo?.Name}:{sfs[0].GetFileLineNumber()}";
+				var method = sf.GetMethod();
+				var fullName = method.DeclaringType.FullName;
+				if (StackFrame.OFFSET_UNKNOWN == offset ||
+					fullName.StartsWith("Microsoft.Extensions.Logging")
+					|| fullName == "Ccn.Unofficial.Core.Extensions.LoggerExtensions")
+				{
+					continue;
+				}
+				trace = $"{method?.ReflectedType?.FullName}.{method?.Name}:{sf.GetFileLineNumber()}";
+				break;
 			}
 
-			var level = logLevel switch
+			var levelName = logLevel switch
 			{
 				LogLevel.Trace => "trce",
 				LogLevel.Debug => "dbug",
@@ -40,8 +56,10 @@ namespace Adai.WebApi.Services
 				LogLevel.Critical => "crit",
 				_ => string.Empty
 			};
-			var requestId = Activity.Current?.GetCustomProperty(Const.RequestId)?.ToString();
-			Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}|[{Process.GetCurrentProcess().Id}]|{level}|{methodName}|{requestId}|{formatter(state, exception)}|{exception}");
+			var msg = $"{levelName}: {trace}[{eventId.Id}]"
+				+ $"\r\n      {formatter(state, exception)}"
+				+ $"\r\n      {exception}";
+			Console.WriteLine(msg);
 		}
 
 		/// <summary>

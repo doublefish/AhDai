@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Adai.Standard.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -80,12 +81,14 @@ namespace Adai.Standard.Utils
 		/// <param name="command"></param>
 		static void BeforeExecute(string eventId, IDbCommand command)
 		{
-			var message = $"记录SQL=>{command.CommandText};Paras=>";
+			var message = $"SQL=>{command.CommandText};Paras=>";
 			foreach (IDbDataParameter para in command.Parameters)
 			{
 				message += $"{para.ParameterName}={para.Value},";
 			}
-			LoggerHelper.Debug(eventId, message);
+
+			var logger = LoggerHelper.GetLogger();
+			logger.LogDebug(eventId, message);
 		}
 	}
 }

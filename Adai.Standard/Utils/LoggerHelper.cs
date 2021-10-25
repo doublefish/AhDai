@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Adai.Standard.Utils
 {
@@ -9,100 +9,48 @@ namespace Adai.Standard.Utils
 	public static class LoggerHelper
 	{
 		/// <summary>
-		/// Logger
+		/// 构造函数
 		/// </summary>
-		public static ILogger Logger { get; private set; }
-
-		/// <summary>
-		/// 初始化
-		/// </summary>
-		/// <param name="logger"></param>
-		public static void Init(ILogger logger)
+		static LoggerHelper()
 		{
-			Logger = logger;
+
 		}
 
 		/// <summary>
-		/// Trace
+		/// 
 		/// </summary>
-		/// <param name="requestId"></param>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
-		public static void Trace(string requestId, string message, Exception exception = null)
-		{
-			message = FormatMessage(requestId, message);
-			Logger.LogTrace(exception, message);
-		}
+		public static ILoggerProvider Provider { get; private set; }
 
 		/// <summary>
-		/// Debug
+		/// GetLogger
 		/// </summary>
-		/// <param name="requestId"></param>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
-		public static void Debug(string requestId, string message, Exception exception = null)
-		{
-			message = FormatMessage(requestId, message);
-			Logger.LogDebug(exception, message);
-		}
-
-		/// <summary>
-		/// Info
-		/// </summary>
-		/// <param name="requestId"></param>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
-		public static void Info(string requestId, string message, Exception exception = null)
-		{
-			message = FormatMessage(requestId, message);
-			Logger.LogInformation(exception, message);
-		}
-
-		/// <summary>
-		/// Warn
-		/// </summary>
-		/// <param name="requestId"></param>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
-		public static void Warn(string requestId, string message, Exception exception = null)
-		{
-			message = FormatMessage(requestId, message);
-			Logger.LogWarning(exception, message);
-		}
-
-		/// <summary>
-		/// Error
-		/// </summary>
-		/// <param name="requestId"></param>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
-		public static void Error(string requestId, string message, Exception exception = null)
-		{
-			message = FormatMessage(requestId, message);
-			Logger.LogError(exception, message);
-		}
-
-		/// <summary>
-		/// Critical
-		/// </summary>
-		/// <param name="requestId"></param>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
-		public static void Critical(string requestId, string message, Exception exception = null)
-		{
-			message = FormatMessage(requestId, message);
-			Logger.LogCritical(exception, message);
-		}
-
-		/// <summary>
-		/// 格式化消息
-		/// </summary>
-		/// <param name="requestId"></param>
-		/// <param name="message"></param>
+		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		static string FormatMessage(string requestId, string message)
+		public static ILogger GetLogger<T>()
 		{
-			return $"[{requestId}]{message}";
+			return GetLogger(typeof(T).FullName);
+		}
+
+		/// <summary>
+		/// GetLogger
+		/// </summary>
+		/// <param name="categoryName"></param>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		public static ILogger GetLogger(string categoryName = null, int type = 0)
+		{
+			if (type == 1)
+			{
+				var factory = ServiceHelper.Instance.GetService<ILoggerFactory>();
+				// 复用同名对象
+				return factory.CreateLogger(categoryName ?? "");
+			}
+			else
+			{
+				var provider = ServiceHelper.Instance.GetService<ILoggerProvider>();
+				var logger = provider.CreateLogger(categoryName);
+				return logger;
+			}
 		}
 	}
 }
