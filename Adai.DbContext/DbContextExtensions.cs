@@ -352,7 +352,10 @@ namespace Adai.DbContext
 			var sql = dbContext.CreateInsertSql(data, tableName, out var paras);
 			var cmd = dbContext.CreateCommand();
 			cmd.CommandText = sql;
-			cmd.Parameters.AddRange(paras);
+			if (paras?.Length > 0)
+			{
+				cmd.Parameters.AddRange(paras);
+			}
 			return cmd;
 		}
 
@@ -386,7 +389,10 @@ namespace Adai.DbContext
 			var sql = dbContext.CreateUpdateSql(data, tableName, updateColumns, whereColumns, out var paras);
 			var cmd = dbContext.CreateCommand();
 			cmd.CommandText = sql;
-			cmd.Parameters.AddRange(paras);
+			if (paras?.Length > 0)
+			{
+				cmd.Parameters.AddRange(paras);
+			}
 			return cmd;
 		}
 

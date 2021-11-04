@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Adai.DbContext.Extensions;
+using System.Data;
 
 namespace Adai.DbContext
 {
@@ -96,7 +97,10 @@ namespace Adai.DbContext
 		{
 			var cmd = CreateCommand();
 			cmd.CommandText = sql;
-			cmd.Parameters.AddRange(parameters);
+			if (parameters?.Length > 0)
+			{
+				cmd.Parameters.AddRange(parameters);
+			}
 			return cmd;
 		}
 
@@ -111,7 +115,10 @@ namespace Adai.DbContext
 		{
 			var cmd = connection.CreateCommand();
 			cmd.CommandText = sql;
-			cmd.Parameters.AddRange(parameters);
+			if (parameters?.Length > 0)
+			{
+				cmd.Parameters.AddRange(parameters);
+			}
 			return cmd;
 		}
 
@@ -154,7 +161,10 @@ namespace Adai.DbContext
 				conn.Open();
 				var cmd = conn.CreateCommand();
 				cmd.CommandText = sql;
-				cmd.Parameters.AddRange(parameters);
+				if (parameters?.Length > 0)
+				{
+					cmd.Parameters.AddRange(parameters);
+				}
 				BeforeExecute(cmd);
 				return cmd.ExecuteScalar();
 			}

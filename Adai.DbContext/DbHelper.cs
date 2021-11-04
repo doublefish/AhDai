@@ -96,19 +96,6 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// AddRange
-		/// </summary>
-		/// <param name="collection"></param>
-		/// <param name="values"></param>
-		public static void AddRange(this IDataParameterCollection collection, Array values)
-		{
-			foreach (var value in values)
-			{
-				collection.Add(value);
-			}
-		}
-
-		/// <summary>
 		/// 生成 In 语句，一千条一个In
 		/// </summary>
 		/// <typeparam name="T"></typeparam>

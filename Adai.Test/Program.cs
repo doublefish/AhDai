@@ -17,7 +17,6 @@ namespace Adai.Test
 			// 初始化数据库配置
 			CommonHelper.InitDbConfig();
 
-
 			TestDbTrans();
 		}
 

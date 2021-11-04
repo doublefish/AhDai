@@ -37,7 +37,9 @@ namespace Adai.DbContext.Extensions
 			{
 				var name = dataColumn.ColumnName;
 				var value = dataRow[name];
-				var pi = propertyInfos.Where(o => o.Name == name).FirstOrDefault();
+				//var pi = propertyInfos.Where(o => o.Name == name).FirstOrDefault();
+				// 不区分大小写
+				var pi = propertyInfos.Where(o => string.Compare(o.Name, name, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
 				if (pi == null || pi.CanWrite == false)
 				{
 					continue;
