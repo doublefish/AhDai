@@ -4,6 +4,38 @@
         <name>Adai.DbContext</name>
     </assembly>
     <members>
+        <member name="T:Adai.DbContext.Attributes.ColumnAttribute">
+            <summary>
+            列的特性
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.Attributes.ColumnAttribute.#ctor(System.String,Adai.DbContext.Attributes.ColumnType)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">名称</param>
+            <param name="type">类型</param>
+        </member>
+        <member name="P:Adai.DbContext.Attributes.ColumnAttribute.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.Attributes.ColumnAttribute.Order">
+            <summary>
+            排序（未启用）
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.Attributes.ColumnAttribute.TypeName">
+            <summary>
+            特定数据类型（未启用）
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.Attributes.ColumnAttribute.Property">
+            <summary>
+            属性
+            </summary>
+        </member>
         <member name="T:Adai.DbContext.Attributes.ColumnType">
             <summary>
             列类型
@@ -34,6 +66,11 @@
             自定义特性
             </summary>
         </member>
+        <member name="M:Adai.DbContext.Attributes.CustomAttribute.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
         <member name="M:Adai.DbContext.Attributes.CustomAttribute.#ctor(System.String)">
             <summary>
             构造函数
@@ -56,31 +93,14 @@
             </summary>
             <param name="name">名称</param>
         </member>
+        <member name="P:Adai.DbContext.Attributes.TableAttribute.Schema">
+            <summary>
+            库名
+            </summary>
+        </member>
         <member name="P:Adai.DbContext.Attributes.TableAttribute.ColumnAttributes">
             <summary>
             列的特性
-            </summary>
-        </member>
-        <member name="T:Adai.DbContext.Attributes.TableColumnAttribute">
-            <summary>
-            表里的列的特性
-            </summary>
-        </member>
-        <member name="M:Adai.DbContext.Attributes.TableColumnAttribute.#ctor(System.String,Adai.DbContext.Attributes.ColumnType)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="name">名称</param>
-            <param name="type">类型</param>
-        </member>
-        <member name="P:Adai.DbContext.Attributes.TableColumnAttribute.Type">
-            <summary>
-            扩展字段
-            </summary>
-        </member>
-        <member name="P:Adai.DbContext.Attributes.TableColumnAttribute.Property">
-            <summary>
-            属性
             </summary>
         </member>
         <member name="T:Adai.DbContext.BaseBLL`2">
@@ -721,6 +741,11 @@
             DbHelper
             </summary>
         </member>
+        <member name="M:Adai.DbContext.DbHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
         <member name="P:Adai.DbContext.DbHelper.TableAttributes">
             <summary>
             表特性
@@ -765,13 +790,6 @@
             <param name="dbName"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbHelper.AddRange(System.Data.IDataParameterCollection,System.Array)">
-            <summary>
-            AddRange
-            </summary>
-            <param name="collection"></param>
-            <param name="values"></param>
-        </member>
         <member name="M:Adai.DbContext.DbHelper.CreateInSql``1(System.String,``0[],System.Boolean)">
             <summary>
             生成 In 语句，一千条一个In
@@ -804,7 +822,7 @@
             CustomAttributeExtensions
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Extensions.CustomAttributeExtensions.GetPropertyAttributes``1(System.Type)">
+        <member name="M:Adai.DbContext.Extensions.CustomAttributeExtensions.GetColumnAttributes``1(System.Type)">
             <summary>
             读取类的属性的的特性
             </summary>
@@ -921,6 +939,18 @@
             <typeparam name="T"></typeparam>
             <param name="mappings"></param>
             <returns></returns>
+        </member>
+        <member name="T:Adai.DbContext.Extensions.ICollectionExtensions">
+            <summary>
+            ICollectionExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.Extensions.ICollectionExtensions.AddRange(System.Data.IDataParameterCollection,System.Array)">
+            <summary>
+            AddRange
+            </summary>
+            <param name="collection"></param>
+            <param name="values"></param>
         </member>
         <member name="T:Adai.DbContext.Extensions.ObjectExtensions">
             <summary>

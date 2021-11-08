@@ -11,8 +11,15 @@ namespace Adai.DbContext.Attributes
 		/// <summary>
 		/// 构造函数
 		/// </summary>
+		public CustomAttribute()
+		{
+		}
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
 		/// <param name="name">名称</param>
-		public CustomAttribute(string name = null)
+		public CustomAttribute(string name)
 		{
 			Name = name;
 		}
@@ -20,6 +27,6 @@ namespace Adai.DbContext.Attributes
 		/// <summary>
 		/// 名称
 		/// </summary>
-		public string Name { get; set; }
+		public string Name { get; }
 	}
 }

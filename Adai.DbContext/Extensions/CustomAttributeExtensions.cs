@@ -16,7 +16,7 @@ namespace Adai.DbContext.Extensions
 		/// <typeparam name="T">类的属性的特性的类型</typeparam>
 		/// <param name="type">类的Type</param>
 		/// <returns></returns>
-		public static T[] GetPropertyAttributes<T>(this Type type) where T : Attributes.TableColumnAttribute
+		public static T[] GetColumnAttributes<T>(this Type type) where T : Attributes.ColumnAttribute
 		{
 			var properties = type.GetProperties();
 			var list = new List<T>();
@@ -41,7 +41,7 @@ namespace Adai.DbContext.Extensions
 		/// <typeparam name="T"></typeparam>
 		/// <param name="attributes"></param>
 		/// <returns></returns>
-		public static IDictionary<string, PropertyInfo> GetMappings<T>(this IEnumerable<T> attributes) where T : Attributes.TableColumnAttribute
+		public static IDictionary<string, PropertyInfo> GetMappings<T>(this IEnumerable<T> attributes) where T : Attributes.ColumnAttribute
 		{
 			var dict = new Dictionary<string, PropertyInfo>();
 			foreach (var attr in attributes)
@@ -59,7 +59,7 @@ namespace Adai.DbContext.Extensions
 		/// <param name="name"></param>
 		/// <param name="comparisonType"></param>
 		/// <returns></returns>
-		public static T Find<T>(this IEnumerable<T> attributes, string name, StringComparison comparisonType = StringComparison.OrdinalIgnoreCase) where T : Attributes.TableColumnAttribute
+		public static T Find<T>(this IEnumerable<T> attributes, string name, StringComparison comparisonType = StringComparison.OrdinalIgnoreCase) where T : Attributes.ColumnAttribute
 		{
 			var attribute = attributes.Where(o => string.Compare(o.Name, name, comparisonType) == 0).FirstOrDefault();
 			if (attribute == null)

@@ -13,6 +13,16 @@ namespace Adai.DbContext
 	public static class DbHelper
 	{
 		/// <summary>
+		/// 构造函数
+		/// </summary>
+		static DbHelper()
+		{
+			Locker = new object();
+		}
+
+		static object Locker { get; set; }
+
+		/// <summary>
 		/// 表特性
 		/// </summary>
 		public static IDictionary<string, Attributes.TableAttribute> TableAttributes { get; private set; }
@@ -55,24 +65,25 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public static Attributes.TableAttribute GetTableAttribute(Type type)
 		{
-			if (TableAttributes == null)
+			lock (Locker)
 			{
-				TableAttributes = new Dictionary<string, Attributes.TableAttribute>();
-			}
-			if (!TableAttributes.TryGetValue(type.FullName, out var attribute))
-			{
-				var attrs = type.GetCustomAttributes(true);
-				if (attrs != null)
+				if (TableAttributes == null)
 				{
-					attribute = attrs.FirstOrDefault() as Attributes.TableAttribute;
-					if (attribute != null)
-					{
-						attribute.ColumnAttributes = type.GetPropertyAttributes<Attributes.TableColumnAttribute>();
-					}
-					TableAttributes.Add(type.FullName, attribute);
+					TableAttributes = new Dictionary<string, Attributes.TableAttribute>();
 				}
+				if (!TableAttributes.TryGetValue(type.FullName, out var data))
+				{
+					var typeA = typeof(Attributes.TableAttribute);
+					var attrs = type.GetCustomAttributes(typeA, true);
+					if (attrs != null && attrs.Length > 0)
+					{
+						data = attrs.FirstOrDefault() as Attributes.TableAttribute;
+					}
+					data.ColumnAttributes = type.GetColumnAttributes<Attributes.ColumnAttribute>();
+					TableAttributes.Add(type.FullName, data);
+				}
+				return data;
 			}
-			return attribute;
 		}
 
 		/// <summary>

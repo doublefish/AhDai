@@ -472,7 +472,8 @@ namespace Adai.DbContext
 			var columns = tableAttr.ColumnAttributes;
 			if (whereColumns == null || whereColumns.Length == 0)
 			{
-				throw new Exception("未指定参数whereColumns");
+				//throw new Exception("未指定参数whereColumns");
+				throw new ArgumentNullException(nameof(whereColumns));
 			}
 			var builderSet = new StringBuilder();
 			var builderWhere = new StringBuilder();

@@ -1,8 +1,11 @@
-﻿namespace Adai.DbContext.Attributes
+﻿using System;
+
+namespace Adai.DbContext.Attributes
 {
 	/// <summary>
 	/// 表的特性
 	/// </summary>
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 	public class TableAttribute : CustomAttribute
 	{
 		/// <summary>
@@ -14,8 +17,13 @@
 		}
 
 		/// <summary>
+		/// 库名
+		/// </summary>
+		public string Schema { get; set; }
+
+		/// <summary>
 		/// 列的特性
 		/// </summary>
-		public TableColumnAttribute[] ColumnAttributes { get; set; }
+		public ColumnAttribute[] ColumnAttributes { get; set; }
 	}
 }
