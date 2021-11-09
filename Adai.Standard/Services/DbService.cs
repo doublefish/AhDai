@@ -15,7 +15,6 @@ namespace Adai.Standard.Services
 		/// <param name="configuration"></param>
 		public DbService(IConfiguration configuration)
 		{
-			Configuration = configuration;
 			var dbs = new string[] { "db0", "db1" };
 			var dbConfigs = new List<DbContext.Models.DbConfig>();
 			foreach (var db in dbs)
@@ -29,11 +28,6 @@ namespace Adai.Standard.Services
 			}
 			Utils.DbContextHelper.Init(dbConfigs);
 		}
-
-		/// <summary>
-		/// Configuration
-		/// </summary>
-		public IConfiguration Configuration { get; private set; }
 
 		/// <summary>
 		/// GetDbContext

@@ -16,20 +16,14 @@ namespace Adai.Standard.Services
 		/// <param name="configuration"></param>
 		public RedisService(IConfiguration configuration)
 		{
-			Configuration = configuration;
 			var config = new Redis.Config()
 			{
-				Host = Configuration.GetSection("redis:host").Value,
-				Port = Configuration.GetSection("redis:port").Value.ToInt32(),
-				Password = Configuration.GetSection("redis:password").Value
+				Host = configuration.GetSection("redis:host").Value,
+				Port = configuration.GetSection("redis:port").Value.ToInt32(),
+				Password = configuration.GetSection("redis:password").Value
 			};
 			Redis.Helper.Init(config);
 		}
-
-		/// <summary>
-		/// Configuration
-		/// </summary>
-		public IConfiguration Configuration { get; private set; }
 
 		/// <summary>
 		/// GetDatabase

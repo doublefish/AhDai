@@ -17,7 +17,6 @@ namespace Adai.Standard.Services
 		/// <param name="configuration"></param>
 		public RabbitMqService(IConfiguration configuration)
 		{
-			Configuration = configuration;
 			var config = new RabbitMQ.Config()
 			{
 				Host = configuration.GetSection("rabbitmq:host").Value,
@@ -28,11 +27,6 @@ namespace Adai.Standard.Services
 			};
 			RabbitMQ.Helper.Init(config);
 		}
-
-		/// <summary>
-		/// Configuration
-		/// </summary>
-		public IConfiguration Configuration { get; private set; }
 
 		/// <summary>
 		/// GetPublisher
