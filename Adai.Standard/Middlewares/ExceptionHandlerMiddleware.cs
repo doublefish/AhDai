@@ -1,4 +1,5 @@
 ﻿using Adai.Base.Extensions;
+using Adai.Standard.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -73,16 +74,7 @@ namespace Adai.Standard.Middlewares
 				logger.LogError(requestId, exception, "请求异常");
 			}
 
-			var contentType = context.Response?.ContentType?.ToLower();
-			if (!string.IsNullOrEmpty(contentType) && (contentType == HttpContentType.Xml || contentType == HttpContentType.TextHtml))
-			{
-				await context.Response.WriteAsync(Base.Utils.XmlHelper.SerializeObject(result)).ConfigureAwait(false);
-			}
-			else
-			{
-				context.Response.ContentType = HttpContentType.Json;
-				await context.Response.WriteAsync(Utils.JsonHelper.Serialize(result)).ConfigureAwait(false);
-			}
+			await context.Response.WriteObjectAsync(result).ConfigureAwait(false);
 		}
 	}
 }

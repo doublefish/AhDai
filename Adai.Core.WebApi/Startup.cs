@@ -22,6 +22,7 @@ using Adai.Base.Extensions;
 using Adai.Standard.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using System.Threading.Tasks;
 
 namespace Adai.WebApi
 {
@@ -132,6 +133,22 @@ namespace Adai.WebApi
 					// 是否验证密钥
 					ValidateIssuerSigningKey = true,
 					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey))
+				};
+				options.Events = new JwtBearerEvents
+				{
+					// 此处为权限验证失败后触发的事件
+					OnChallenge = context =>
+					{
+						// 此处代码为终止.Net Core默认的返回类型和数据结果
+						context.HandleResponse();
+
+						// 自定义返回内容
+						var requestId = context.Request.Headers[Const.RequestId];
+						var result = new Standard.Models.ActionResult<string>(requestId, StatusCodes.Status401Unauthorized, "Unauthorized");
+
+						context.Response.WriteObjectAsync(result);
+						return Task.FromResult(0);
+					}
 				};
 			});
 
