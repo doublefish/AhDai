@@ -12,8 +12,10 @@ namespace Adai.DbContext.Attributes
 		/// 构造函数
 		/// </summary>
 		/// <param name="name">名称</param>
-		public TableAttribute(string name) : base(name)
+		/// <param name="schema">库名</param>
+		public TableAttribute(string name, string schema = null) : base(name)
 		{
+			Schema = schema;
 		}
 
 		/// <summary>
