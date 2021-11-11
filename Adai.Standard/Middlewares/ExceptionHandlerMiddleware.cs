@@ -71,7 +71,7 @@ namespace Adai.Standard.Middlewares
 			}
 			else
 			{
-				logger.LogError(requestId, exception, "请求异常");
+				logger.LogError(requestId, exception, "请求发生异常");
 			}
 
 			await context.Response.WriteObjectAsync(result).ConfigureAwait(false);

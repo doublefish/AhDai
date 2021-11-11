@@ -184,7 +184,7 @@ namespace Adai.Standard.Extensions
 		/// <param name="args"></param>
 		public static void Log(this ILogger logger, LogLevel logLevel, string eventId, Exception exception, string message, params object[] args)
 		{
-			message = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}][{Process.GetCurrentProcess().Id}][{eventId}]{message}";
+			message = $"[{DateTime.UtcNow:yyyy-MM-dd HH:mm:ss.fff}][{Process.GetCurrentProcess().Id}][{eventId}]{message}";
 			logger.Log(logLevel, exception, message, args);
 		}
 	}
