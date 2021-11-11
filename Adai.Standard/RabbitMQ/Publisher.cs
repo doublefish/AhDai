@@ -7,7 +7,7 @@ namespace Adai.Standard.RabbitMQ
 	/// <summary>
 	/// 生产者
 	/// </summary>
-	public class Publisher : Basic
+	public class Publisher : Base
 	{
 		/// <summary>
 		/// 构造函数
@@ -19,13 +19,15 @@ namespace Adai.Standard.RabbitMQ
 		}
 
 		/// <summary>
-		/// 订阅消息
+		/// 发布消息
 		/// </summary>
-		public void Publish(string message)
+		/// <param name="properties"></param>
+		/// <param name="message"></param>
+		public void Publish(IBasicProperties properties, string message)
 		{
 			var body = Encoding.UTF8.GetBytes(message);
 			// 绑定
-			Channel.BasicPublish(Exchange, RoutingKey, null, body);
+			Channel.BasicPublish(Exchange, RoutingKey, properties, body);
 		}
 	}
 }

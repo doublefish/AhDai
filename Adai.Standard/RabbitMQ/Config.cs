@@ -1,7 +1,7 @@
 ﻿namespace Adai.Standard.RabbitMQ
 {
 	/// <summary>
-	/// Config
+	/// RabbitMQConfig
 	/// </summary>
 	public class Config
 	{

@@ -1,18 +1,19 @@
 ﻿using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
+using System;
 
 namespace Adai.Standard.RabbitMQ
 {
 	/// <summary>
-	/// Basic
+	/// Base
 	/// </summary>
-	public class Basic
+	public class Base : IDisposable
 	{
 		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="logger"></param>
-		public Basic(ILogger logger)
+		public Base(ILogger logger)
 		{
 			Logger = logger;
 		}
@@ -33,10 +34,6 @@ namespace Adai.Standard.RabbitMQ
 		/// 路由
 		/// </summary>
 		public string RoutingKey { get; set; }
-		/// <summary>
-		/// 失败后转发（RoutingKey@error）
-		/// </summary>
-		public bool ForwardFailure { get; set; }
 
 		/// <summary>
 		/// Connection
@@ -62,16 +59,8 @@ namespace Adai.Standard.RabbitMQ
 		/// </summary>
 		public void Dispose()
 		{
-			if (Channel != null)
-			{
-				Channel.Close();
-				Channel.Dispose();
-			}
-			if (Connection != null)
-			{
-				Connection.Close();
-				Connection.Dispose();
-			}
+			Channel?.Dispose();
+			Connection?.Dispose();
 		}
 	}
 }

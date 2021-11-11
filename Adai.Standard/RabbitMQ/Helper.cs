@@ -3,7 +3,7 @@
 namespace Adai.Standard.RabbitMQ
 {
 	/// <summary>
-	/// Helper
+	/// RabbitMQHelper
 	/// </summary>
 	public static class Helper
 	{
@@ -24,21 +24,21 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// CreateConnectionFactory
 		/// </summary>
-		/// <param name="config"></param>
+		/// <param name="configuration"></param>
 		/// <returns></returns>
-		public static IAsyncConnectionFactory CreateConnectionFactory(Config config = null)
+		public static IAsyncConnectionFactory CreateConnectionFactory(Config configuration = null)
 		{
-			if (config == null)
+			if (configuration == null)
 			{
-				config = Config;
+				configuration = Config;
 			}
 			return new ConnectionFactory
 			{
-				HostName = config.Host,
-				VirtualHost = config.VirtualHost,
-				Port = config.Port,
-				UserName = config.Username,
-				Password = config.Password
+				HostName = configuration.Host,
+				VirtualHost = configuration.VirtualHost,
+				Port = configuration.Port,
+				UserName = configuration.Username,
+				Password = configuration.Password
 			};
 		}
 	}

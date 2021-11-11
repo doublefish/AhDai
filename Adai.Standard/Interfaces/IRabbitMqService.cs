@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using RabbitMQ.Client.Events;
 using System;
 
 namespace Adai.Standard.Interfaces
@@ -19,8 +20,8 @@ namespace Adai.Standard.Interfaces
 		/// GetConsumer
 		/// </summary>
 		/// <param name="logger"></param>
-		/// <param name="func"></param>
+		/// <param name="action"></param>
 		/// <returns></returns>
-		public RabbitMQ.Consumer GetConsumer(ILogger logger, Func<string, bool> func);
+		public RabbitMQ.Consumer GetConsumer(ILogger logger, Action<object, BasicDeliverEventArgs> action);
 	}
 }
