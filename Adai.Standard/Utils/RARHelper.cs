@@ -10,58 +10,39 @@ namespace Adai.Standard.Utils
 	/// </summary>
 	public static class RARHelper
 	{
-		static string applicationPath;
-		static int level;
-
 		/// <summary>
 		/// WinRAR.exe路径
 		/// </summary>
-		public static string ApplicationPath
+		public static string ApplicationPath { get; private set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		static RARHelper()
 		{
-			get
+			try
 			{
-				if (applicationPath == null)
+				using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\WinRAR.exe");
+				// 判断是否安装了WinRAR.exe
+				if (key != null)
 				{
-					try
-					{
-						using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\WinRAR.exe");
-						//判断是否安装了WinRAR.exe
-						if (key != null)
-						{
-							//获取WinRAR.exe路径
-							applicationPath = key.GetValue(string.Empty).ToString();
-						}
-					}
-					catch
-					{
-						throw new Exception("WinRAR is not installed, please do this after confirming that WinRAR is installed.");
-					}
+					// 获取WinRAR.exe路径
+					ApplicationPath = key.GetValue(string.Empty).ToString();
 				}
-				return applicationPath;
+			}
+			catch
+			{
+				throw new Exception("WinRAR is not installed, please do this after confirming that WinRAR is installed.");
 			}
 		}
 
 		/// <summary>
-		/// 压缩级别（0-5）
+		/// 初始化
 		/// </summary>
-		public static int Level
+		/// <param name="applicationPath"></param>
+		public static void SetApplicationPath(string applicationPath)
 		{
-			set { level = value; }
-			get
-			{
-				if (level > 5)
-				{
-					return 5;
-				}
-				else if (level < 0)
-				{
-					return 0;
-				}
-				else
-				{
-					return level;
-				}
-			}
+			ApplicationPath = applicationPath;
 		}
 
 		/// <summary>
@@ -70,14 +51,15 @@ namespace Adai.Standard.Utils
 		/// <param name="sourcePath">要压缩的文件夹（绝对路径）</param>
 		/// <param name="rarPath">压缩后的.rar文件的存放目录（绝对路径）</param>
 		/// <param name="rarName">压缩文件的名称（包括后缀）</param>
-		public static void Compress(string sourcePath, string rarPath, string rarName)
+		/// <param name="level">压缩级别（0-5）</param>
+		public static void Compress(string sourcePath, string rarPath, string rarName, int level = 0)
 		{
 			if (!Directory.Exists(sourcePath))//判断输入目录是否存在
 			{
 				throw new ArgumentException("The source file directory does not exist.");
 			}
 			//cmd = " a -m0 " + rarName + " " + sourcePath + " *.* -r";
-			var cmd = $"a -m{Level} -ep1 \"{rarName}\" \"{sourcePath}\" -r";//执行rar的命令参数
+			var cmd = $"a -m{level} -ep1 \"{rarName}\" \"{sourcePath}\" -r";//执行rar的命令参数
 
 			var processStartInfo = new ProcessStartInfo
 			{
