@@ -9,6 +9,16 @@ namespace Adai.DbContext
 	public abstract class DbContext : IDbContext
 	{
 		/// <summary>
+		/// 数据库类型
+		/// </summary>
+		public Config.DbType DbType { get; set; }
+
+		/// <summary>
+		/// 数据库连接
+		/// </summary>
+		public string ConnectionString { get; set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="dbType"></param>
@@ -26,16 +36,6 @@ namespace Adai.DbContext
 			DbType = dbType;
 			ConnectionString = connectionString;
 		}
-
-		/// <summary>
-		/// 数据库类型
-		/// </summary>
-		public Config.DbType DbType { get; set; }
-
-		/// <summary>
-		/// 数据库连接
-		/// </summary>
-		public string ConnectionString { get; set; }
 
 		/// <summary>
 		/// CreateConnection

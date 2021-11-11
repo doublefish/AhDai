@@ -9,6 +9,11 @@ namespace Adai.DbContext.SQLite
 	public class SQLiteDbContext : DbContext, IDbContext
 	{
 		/// <summary>
+		/// 事件Id
+		/// </summary>
+		public string EventId { get; set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="eventId"></param>
@@ -25,11 +30,6 @@ namespace Adai.DbContext.SQLite
 		{
 			EventId = eventId;
 		}
-
-		/// <summary>
-		/// 事件Id
-		/// </summary>
-		public string EventId { get; set; }
 
 		/// <summary>
 		/// CreateConnection

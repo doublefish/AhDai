@@ -12,14 +12,6 @@ namespace Adai.DbContext
 	/// </summary>
 	public static class DbHelper
 	{
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		static DbHelper()
-		{
-			Locker = new object();
-		}
-
 		static object Locker { get; set; }
 
 		/// <summary>
@@ -36,6 +28,14 @@ namespace Adai.DbContext
 		/// 执行之前
 		/// </summary>
 		public static Action<string, IDbCommand> BeforeExecuteAction { get; private set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		static DbHelper()
+		{
+			Locker = new object();
+		}
 
 		/// <summary>
 		/// 初始化

@@ -9,23 +9,6 @@ namespace Adai.Standard.Models
 	/// <typeparam name="T"></typeparam>
 	public class PageArg<T> where T : class, new()
 	{
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="pageNumber"></param>
-		/// <param name="pageSize"></param>
-		/// <param name="sortName"></param>
-		/// <param name="sortType"></param>
-		public PageArg(int? pageNumber = null, int? pageSize = null, string sortName = null, SortType sortType = 0)
-		{
-			//Filter = new T();
-			PageNumber = pageNumber ?? 0;
-			PageSize = pageSize ?? 20;
-			SortName = sortName;
-			SortType = sortType;
-			CountFlag = StatisticFlag.Not;
-		}
-
 		#region 查询结果
 		/// <summary>
 		/// 总记录条数，如果此属性预设值大于零则表示不需要从数据库获取。
@@ -96,5 +79,22 @@ namespace Adai.Standard.Models
 		/// </summary>
 		public int? Platform { get; set; }
 		#endregion
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="pageNumber"></param>
+		/// <param name="pageSize"></param>
+		/// <param name="sortName"></param>
+		/// <param name="sortType"></param>
+		public PageArg(int? pageNumber = null, int? pageSize = null, string sortName = null, SortType sortType = 0)
+		{
+			//Filter = new T();
+			PageNumber = pageNumber ?? 0;
+			PageSize = pageSize ?? 20;
+			SortName = sortName;
+			SortType = sortType;
+			CountFlag = StatisticFlag.Not;
+		}
 	}
 }

@@ -8,15 +8,6 @@ namespace Adai.Standard.Models
 	public class TokenData
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="type">类型</param>
-		public TokenData(string type = null)
-		{
-			Type = type;
-		}
-
-		/// <summary>
 		/// 用户标识
 		/// </summary>
 		public int Id { get; set; }
@@ -68,5 +59,14 @@ namespace Adai.Standard.Models
 		/// 平台
 		/// </summary>
 		public string Platform { get; set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="type">类型</param>
+		public TokenData(string type = null)
+		{
+			Type = type;
+		}
 	}
 }

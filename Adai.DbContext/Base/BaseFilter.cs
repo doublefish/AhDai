@@ -8,24 +8,6 @@ namespace Adai.DbContext
 	public class BaseFilter<T> : IFilter<T> where T : class, new()
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		public BaseFilter() : this(null)
-		{
-		}
-
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="defaultValues">Self的特殊默认值</param>
-		public BaseFilter(IDictionary<string, object> defaultValues = null)
-		{
-			Self = new T();
-			Extensions.ObjectExtensions.SetMinValue(Self, defaultValues);
-			SortType = Config.SortType.DESC;
-		}
-
-		/// <summary>
 		/// 结果
 		/// </summary>
 		public ICollection<T> Results { get; set; }
@@ -59,5 +41,23 @@ namespace Adai.DbContext
 		/// 排序规则（1-倒序，0-正序）
 		/// </summary>
 		public Config.SortType SortType { get; set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		public BaseFilter() : this(null)
+		{
+		}
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="defaultValues">Self的特殊默认值</param>
+		public BaseFilter(IDictionary<string, object> defaultValues = null)
+		{
+			Self = new T();
+			Extensions.ObjectExtensions.SetMinValue(Self, defaultValues);
+			SortType = Config.SortType.DESC;
+		}
 	}
 }

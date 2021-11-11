@@ -8,15 +8,6 @@ namespace Adai.Standard.Models
 	public class FileConfig
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		public FileConfig()
-		{
-			UploadDirectory = "upload";
-			DownloadDirectory = "download";
-		}
-
-		/// <summary>
 		/// 上传根目录
 		/// </summary>
 		public string UploadDirectory { get; set; }
@@ -37,5 +28,16 @@ namespace Adai.Standard.Models
 		/// 大小限制说明
 		/// </summary>
 		public string MaxSizeNote => Utils.FileHelper.GetFileSize(MaxSize);
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="uploadDirectory"></param>
+		/// <param name="downloadDirectory"></param>
+		public FileConfig(string uploadDirectory = "upload", string downloadDirectory = "download")
+		{
+			UploadDirectory = uploadDirectory;
+			DownloadDirectory = downloadDirectory;
+		}
 	}
 }

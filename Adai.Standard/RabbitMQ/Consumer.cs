@@ -11,6 +11,11 @@ namespace Adai.Standard.RabbitMQ
 	public class Consumer : Base
 	{
 		/// <summary>
+		/// 业务方法
+		/// </summary>
+		protected Action<object, BasicDeliverEventArgs> Action { get; set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="logger"></param>
@@ -27,11 +32,6 @@ namespace Adai.Standard.RabbitMQ
 		{
 			Action = action;
 		}
-
-		/// <summary>
-		/// 业务方法
-		/// </summary>
-		protected Action<object, BasicDeliverEventArgs> Action { get; set; }
 
 		/// <summary>
 		/// 订阅消息

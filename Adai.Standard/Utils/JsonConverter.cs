@@ -10,6 +10,11 @@ namespace Adai.Standard.Utils
 	public class DatetimeJsonConverter : JsonConverter<DateTime>
 	{
 		/// <summary>
+		/// 格式
+		/// </summary>
+		public string Format { get; set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="format"></param>
@@ -17,11 +22,6 @@ namespace Adai.Standard.Utils
 		{
 			Format = format;
 		}
-
-		/// <summary>
-		/// 格式
-		/// </summary>
-		public string Format { get; set; }
 
 		/// <summary>
 		/// Read

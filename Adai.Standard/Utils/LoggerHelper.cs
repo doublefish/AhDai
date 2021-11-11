@@ -9,17 +9,17 @@ namespace Adai.Standard.Utils
 	public static class LoggerHelper
 	{
 		/// <summary>
+		/// 
+		/// </summary>
+		public static ILoggerProvider Provider { get; private set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		static LoggerHelper()
 		{
 
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static ILoggerProvider Provider { get; private set; }
 
 		/// <summary>
 		/// GetLogger

@@ -6,13 +6,6 @@
 	public class FileData
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		public FileData()
-		{
-		}
-
-		/// <summary>
 		/// 唯一标识
 		/// </summary>
 		public string Guid { get; set; }
@@ -41,5 +34,12 @@
 		/// 扩展.文件全名
 		/// </summary>
 		public string FullName => $"{Guid}.{Extension}";
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		public FileData()
+		{
+		}
 	}
 }

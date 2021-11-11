@@ -9,16 +9,6 @@ namespace Adai.DbContext.Attributes
 	public class TableAttribute : CustomAttribute
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="name">名称</param>
-		/// <param name="schema">库名</param>
-		public TableAttribute(string name, string schema = null) : base(name)
-		{
-			Schema = schema;
-		}
-
-		/// <summary>
 		/// 库名
 		/// </summary>
 		public string Schema { get; set; }
@@ -27,5 +17,15 @@ namespace Adai.DbContext.Attributes
 		/// 列的特性
 		/// </summary>
 		public ColumnAttribute[] ColumnAttributes { get; set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="name">名称</param>
+		/// <param name="schema">库名</param>
+		public TableAttribute(string name, string schema = null) : base(name)
+		{
+			Schema = schema;
+		}
 	}
 }

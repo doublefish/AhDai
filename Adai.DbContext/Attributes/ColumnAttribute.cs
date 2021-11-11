@@ -10,16 +10,6 @@ namespace Adai.DbContext.Attributes
 	public class ColumnAttribute : CustomAttribute
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="name">名称</param>
-		/// <param name="type">类型</param>
-		public ColumnAttribute(string name, ColumnType type = ColumnType.Normal) : base(name)
-		{
-			Type = type;
-		}
-
-		/// <summary>
 		/// 类型
 		/// </summary>
 		public ColumnType Type { get; set; }
@@ -35,5 +25,15 @@ namespace Adai.DbContext.Attributes
 		/// 属性
 		/// </summary>
 		public PropertyInfo Property { get; set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="name">名称</param>
+		/// <param name="type">类型</param>
+		public ColumnAttribute(string name, ColumnType type = ColumnType.Normal) : base(name)
+		{
+			Type = type;
+		}
 	}
 }

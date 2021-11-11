@@ -11,14 +11,6 @@ namespace Adai.DbContext
 		where Model : BaseModel, new()
 		where DAL : BaseDAL<Model>
 	{
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		public BaseBLL()
-		{
-
-		}
-
 		DAL dal;
 
 		/// <summary>
@@ -38,6 +30,14 @@ namespace Adai.DbContext
 			{
 				dal = value;
 			}
+		}
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		public BaseBLL()
+		{
+
 		}
 
 		/// <summary>

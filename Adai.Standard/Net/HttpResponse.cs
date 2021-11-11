@@ -9,23 +9,6 @@ namespace Adai.Standard.Net
 	public class HttpResponse
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="httpWebResponse"></param>
-		/// <param name="content"></param>
-		public HttpResponse(HttpWebResponse httpWebResponse, string content = null)
-		{
-			StatusCode = httpWebResponse.StatusCode;
-			ResponseUri = httpWebResponse.ResponseUri;
-			StatusDescription = httpWebResponse.StatusDescription;
-			ContentLength = httpWebResponse.ContentLength;
-			ContentEncoding = httpWebResponse.ContentEncoding;
-			CharacterSet = httpWebResponse.CharacterSet;
-			ContentType = httpWebResponse.ContentType;
-			Content = content;
-		}
-
-		/// <summary>
 		/// StatusCode
 		/// </summary>
 		public HttpStatusCode StatusCode { get; private set; }
@@ -57,5 +40,22 @@ namespace Adai.Standard.Net
 		/// Content
 		/// </summary>
 		public string Content { get; private set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="httpWebResponse"></param>
+		/// <param name="content"></param>
+		public HttpResponse(HttpWebResponse httpWebResponse, string content = null)
+		{
+			StatusCode = httpWebResponse.StatusCode;
+			ResponseUri = httpWebResponse.ResponseUri;
+			StatusDescription = httpWebResponse.StatusDescription;
+			ContentLength = httpWebResponse.ContentLength;
+			ContentEncoding = httpWebResponse.ContentEncoding;
+			CharacterSet = httpWebResponse.CharacterSet;
+			ContentType = httpWebResponse.ContentType;
+			Content = content;
+		}
 	}
 }

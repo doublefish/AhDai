@@ -10,6 +10,11 @@ namespace Adai.Standard.Services
 	public class LoggerService : ILogger
 	{
 		/// <summary>
+		/// EventId
+		/// </summary>
+		public string EventId { get; private set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		public LoggerService()
@@ -17,11 +22,6 @@ namespace Adai.Standard.Services
 			EventId = Guid.NewGuid().ToString();
 			this.LogInformation($"初始化=>{EventId}");
 		}
-
-		/// <summary>
-		/// EventId
-		/// </summary>
-		public string EventId { get; private set; }
 
 		/// <summary>
 		/// Log

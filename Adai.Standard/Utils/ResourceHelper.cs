@@ -10,6 +10,9 @@ namespace Adai.Standard.Utils
 	/// </summary>
 	public static class ResourceHelper
 	{
+		static object Locker { get; set; }
+		static IDictionary<string, ResourceManager> Resources { get; set; }
+
 		/// <summary>
 		/// 构造函数
 		/// </summary>
@@ -18,9 +21,6 @@ namespace Adai.Standard.Utils
 			Locker = new object();
 			Resources = new Dictionary<string, ResourceManager>();
 		}
-
-		static object Locker { get; set; }
-		static IDictionary<string, ResourceManager> Resources { get; set; }
 
 		/// <summary>
 		/// 获取资源文件

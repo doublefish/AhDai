@@ -13,6 +13,11 @@ namespace Adai.Standard.Services
 	public class RabbitMqService : Interfaces.IRabbitMqService
 	{
 		/// <summary>
+		/// Logger
+		/// </summary>
+		ILogger<RabbitMqService> Logger { get; set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="configuration"></param>
@@ -30,11 +35,6 @@ namespace Adai.Standard.Services
 			RabbitMQ.Helper.Init(config);
 			Logger = logger;
 		}
-
-		/// <summary>
-		/// Logger
-		/// </summary>
-		ILogger<RabbitMqService> Logger { get; set; }
 
 		/// <summary>
 		/// GetPublisher

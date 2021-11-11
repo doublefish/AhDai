@@ -14,39 +14,6 @@ namespace Adai.DbContext
 	public abstract class BaseDAL<Model>
 		where Model : BaseModel, new()
 	{
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		public BaseDAL() : this(null, null)
-		{
-		}
-
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="dbName">数据库名</param>
-		/// <param name="tableName">数据表名</param>
-		public BaseDAL(string dbName, string tableName)
-		{
-			DbName = dbName;
-			TableName = tableName;
-			Alias = "t";
-			var tableAttr = DbHelper.GetTableAttribute<Model>();
-			if (tableAttr == null)
-			{
-				throw new Exception("未设置表特性");
-			}
-			if (string.IsNullOrEmpty(tableName))
-			{
-				TableName = tableAttr.Name;
-			}
-			var primaryAttr = tableAttr.ColumnAttributes.Where(o => o.Type == Attributes.ColumnType.Primary).FirstOrDefault();
-			if (primaryAttr != null)
-			{
-				PrimaryKey = primaryAttr.Name;
-			}
-			DbContext = InitDbContext();
-		}
 		string selectSql;
 
 		/// <summary>
@@ -86,6 +53,41 @@ namespace Adai.DbContext
 		/// 别名
 		/// </summary>
 		protected string Alias { get; set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		public BaseDAL() : this(null, null)
+		{
+		}
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="dbName">数据库名</param>
+		/// <param name="tableName">数据表名</param>
+		public BaseDAL(string dbName, string tableName)
+		{
+			DbName = dbName;
+			TableName = tableName;
+			Alias = "t";
+			var tableAttr = DbHelper.GetTableAttribute<Model>();
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
+			if (string.IsNullOrEmpty(tableName))
+			{
+				TableName = tableAttr.Name;
+			}
+			var primaryAttr = tableAttr.ColumnAttributes.Where(o => o.Type == Attributes.ColumnType.Primary).FirstOrDefault();
+			if (primaryAttr != null)
+			{
+				PrimaryKey = primaryAttr.Name;
+			}
+			DbContext = InitDbContext();
+			//SelectSql = InitSelectSql();
+		}
 
 		/// <summary>
 		/// InitDbContext

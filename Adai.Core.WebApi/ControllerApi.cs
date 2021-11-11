@@ -15,22 +15,6 @@ namespace Adai.WebApi
 		ResourceManager _SharedLocalizer;
 
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		public ControllerApi() : this(null)
-		{
-		}
-
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="webHostEnvironment"></param>
-		public ControllerApi(IWebHostEnvironment webHostEnvironment)
-		{
-			WebHostEnvironment = webHostEnvironment;
-		}
-
-		/// <summary>
 		/// HostingEnvironment
 		/// </summary>
 		protected readonly IWebHostEnvironment WebHostEnvironment;
@@ -79,6 +63,22 @@ namespace Adai.WebApi
 				}
 				return _UserId;
 			}
+		}
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		public ControllerApi() : this(null)
+		{
+		}
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="webHostEnvironment"></param>
+		public ControllerApi(IWebHostEnvironment webHostEnvironment)
+		{
+			WebHostEnvironment = webHostEnvironment;
 		}
 
 		/// <summary>

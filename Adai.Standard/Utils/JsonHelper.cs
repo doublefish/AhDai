@@ -11,6 +11,11 @@ namespace Adai.Standard.Utils
 	public static class JsonHelper
 	{
 		/// <summary>
+		/// Options
+		/// </summary>
+		public static JsonSerializerOptions Options { get; private set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		static JsonHelper()
@@ -26,11 +31,6 @@ namespace Adai.Standard.Utils
 				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
 			};
 		}
-
-		/// <summary>
-		/// Options
-		/// </summary>
-		public static JsonSerializerOptions Options { get; private set; }
 
 		/// <summary>
 		/// 序列化

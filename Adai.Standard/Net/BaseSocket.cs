@@ -13,26 +13,6 @@ namespace Adai.Standard.Net
 	public class BaseSocket : Socket
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="host"></param>
-		/// <param name="port"></param>
-		/// <param name="name"></param>
-		/// <param name="log"></param>
-		public BaseSocket(string host, int port = 8080, string name = null, bool log = false)
-			: base(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-		{
-			Encoding = Encoding.UTF8;
-			Host = host;
-			Port = port;
-			Name = name;
-			Log = log;
-
-			IPAddress = IPAddress.Parse(host);
-			IPEndPoint = new IPEndPoint(IPAddress, port);
-			Remotes = new HashSet<Socket>();
-		}
-		/// <summary>
 		/// 编码
 		/// </summary>
 		public Encoding Encoding { get; protected set; }
@@ -91,6 +71,27 @@ namespace Adai.Standard.Net
 		/// 连接状态改变事件
 		/// </summary>
 		public event StateChangeHandler StateChangeEvent;
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="host"></param>
+		/// <param name="port"></param>
+		/// <param name="name"></param>
+		/// <param name="log"></param>
+		public BaseSocket(string host, int port = 8080, string name = null, bool log = false)
+			: base(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+		{
+			Encoding = Encoding.UTF8;
+			Host = host;
+			Port = port;
+			Name = name;
+			Log = log;
+
+			IPAddress = IPAddress.Parse(host);
+			IPEndPoint = new IPEndPoint(IPAddress, port);
+			Remotes = new HashSet<Socket>();
+		}
 
 		/// <summary>
 		/// 开启连接

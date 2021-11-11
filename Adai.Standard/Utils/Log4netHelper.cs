@@ -12,6 +12,9 @@ namespace Adai.Standard.Utils
 	public static class Log4netHelper
 	{
 		static ILoggerRepository repository;
+		static readonly ILog LogInfo = LogManager.GetLogger(Repository.Name, "LogInfo");
+		static readonly ILog LogError = LogManager.GetLogger(Repository.Name, "LogError");
+		static readonly ILog LogDebug = LogManager.GetLogger(Repository.Name, "LogDebug");
 
 		/// <summary>
 		/// Repository
@@ -28,10 +31,6 @@ namespace Adai.Standard.Utils
 				return repository;
 			}
 		}
-
-		static readonly ILog LogInfo = LogManager.GetLogger(Repository.Name, "LogInfo");
-		static readonly ILog LogError = LogManager.GetLogger(Repository.Name, "LogError");
-		static readonly ILog LogDebug = LogManager.GetLogger(Repository.Name, "LogDebug");
 
 		/// <summary>
 		/// Info

@@ -10,6 +10,11 @@ namespace Adai.Standard.Models
 	public class CustomException : Exception
 	{
 		/// <summary>
+		/// Code
+		/// </summary>
+		public int Code { get; private set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="code">建议使用1000-2000之间的值</param>
@@ -19,10 +24,5 @@ namespace Adai.Standard.Models
 		{
 			Code = code;
 		}
-
-		/// <summary>
-		/// Code
-		/// </summary>
-		public int Code { get; private set; }
 	}
 }

@@ -9,6 +9,11 @@ namespace Adai.DbContext.Attributes
 	public class CustomAttribute : Attribute
 	{
 		/// <summary>
+		/// 名称
+		/// </summary>
+		public string Name { get; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		public CustomAttribute()
@@ -23,10 +28,5 @@ namespace Adai.DbContext.Attributes
 		{
 			Name = name;
 		}
-
-		/// <summary>
-		/// 名称
-		/// </summary>
-		public string Name { get; }
 	}
 }

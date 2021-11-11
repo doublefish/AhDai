@@ -10,15 +10,6 @@ namespace Adai.Standard.RabbitMQ
 	public class Base : IDisposable
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="logger"></param>
-		public Base(ILogger logger)
-		{
-			Logger = logger;
-		}
-
-		/// <summary>
 		/// Logger
 		/// </summary>
 		public ILogger Logger { get; private set; }
@@ -43,6 +34,15 @@ namespace Adai.Standard.RabbitMQ
 		/// Channel
 		/// </summary>
 		protected IModel Channel { get; private set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="logger"></param>
+		public Base(ILogger logger)
+		{
+			Logger = logger;
+		}
 
 		/// <summary>
 		/// 初始化

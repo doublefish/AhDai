@@ -8,19 +8,6 @@ namespace Adai.Standard.Net
 	public class HttpRequest
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="method"></param>
-		/// <param name="contentType"></param>
-		public HttpRequest(string url = "", string method = HttpMethod.Get, string contentType = HttpContentType.Url)
-		{
-			Url = url;
-			Method = method;
-			ContentType = contentType;
-		}
-
-		/// <summary>
 		/// Url
 		/// </summary>
 		public string Url { get; set; }
@@ -44,5 +31,18 @@ namespace Adai.Standard.Net
 		/// 内容参数
 		/// </summary>
 		public IDictionary<string, string> Body { get; set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="method"></param>
+		/// <param name="contentType"></param>
+		public HttpRequest(string url = "", string method = HttpMethod.Get, string contentType = HttpContentType.Url)
+		{
+			Url = url;
+			Method = method;
+			ContentType = contentType;
+		}
 	}
 }

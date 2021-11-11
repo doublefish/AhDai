@@ -32,15 +32,6 @@ namespace Adai.WebApi
 	public class Startup
 	{
 		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="configuration"></param>
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
-
-		/// <summary>
 		/// Configuration
 		/// </summary>
 		public IConfiguration Configuration { get; }
@@ -48,6 +39,15 @@ namespace Adai.WebApi
 		/// 跨域
 		/// </summary>
 		readonly string MyAllowOrigins = "MyAllowOrigins";
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="configuration"></param>
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
 		/// <summary>
 		/// This method gets called by the runtime. Use this method to add services to the container.
