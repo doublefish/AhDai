@@ -16,7 +16,8 @@ namespace Adai.Standard.Services
 		/// 构造函数
 		/// </summary>
 		/// <param name="configuration"></param>
-		public RabbitMqService(IConfiguration configuration)
+		/// <param name="logger"></param>
+		public RabbitMqService(IConfiguration configuration, ILogger<RabbitMqService> logger)
 		{
 			var config = new RabbitMQ.Config()
 			{
@@ -27,27 +28,31 @@ namespace Adai.Standard.Services
 				Password = configuration.GetSection("rabbitmq:password").Value
 			};
 			RabbitMQ.Helper.Init(config);
+			Logger = logger;
 		}
+
+		/// <summary>
+		/// Logger
+		/// </summary>
+		ILogger<RabbitMqService> Logger { get; set; }
 
 		/// <summary>
 		/// GetPublisher
 		/// </summary>
-		/// <param name="logger"></param>
 		/// <returns></returns>
-		public RabbitMQ.Publisher GetPublisher(ILogger logger)
+		public RabbitMQ.Publisher GetPublisher()
 		{
-			return new RabbitMQ.Publisher(logger);
+			return new RabbitMQ.Publisher(Logger);
 		}
 
 		/// <summary>
 		/// GetConsumer
 		/// </summary>
-		/// <param name="logger"></param>
 		/// <param name="action"></param>
 		/// <returns></returns>
-		public RabbitMQ.Consumer GetConsumer(ILogger logger, Action<object, BasicDeliverEventArgs> action)
+		public RabbitMQ.Consumer GetConsumer(Action<object, BasicDeliverEventArgs> action)
 		{
-			return new RabbitMQ.Consumer(logger, action);
+			return new RabbitMQ.Consumer(Logger, action);
 		}
 	}
 }
