@@ -88,7 +88,7 @@ namespace Adai.Standard.Extensions
 		/// <param name="app"></param>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public static IApplicationBuilder UseRabbitMQ(this IApplicationBuilder app, Options.RabbitMQOptions1 options)
+		public static IApplicationBuilder UseRabbitMQ(this IApplicationBuilder app, Options.RabbitMQOptions options)
 		{
 			if (options != null)
 			{
@@ -103,13 +103,13 @@ namespace Adai.Standard.Extensions
 		/// <param name="app"></param>
 		/// <param name="setupAction"></param>
 		/// <returns></returns>
-		public static IApplicationBuilder UseRabbitMQ(this IApplicationBuilder app, Action<Options.RabbitMQOptions1> setupAction = null)
+		public static IApplicationBuilder UseRabbitMQ(this IApplicationBuilder app, Action<Options.RabbitMQOptions> setupAction = null)
 		{
-			Options.RabbitMQOptions1 options;
+			Options.RabbitMQOptions options;
 			using (var scope = app.ApplicationServices.CreateScope())
 			{
 				// 这里才会执行添加配置时传入的action
-				options = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<Options.RabbitMQOptions1>>().Value;
+				options = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<Options.RabbitMQOptions>>().Value;
 				setupAction?.Invoke(options);
 			}
 			return app.UseRabbitMQ(options);

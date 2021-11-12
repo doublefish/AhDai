@@ -1,9 +1,9 @@
 ﻿namespace Adai.Standard.Options
 {
 	/// <summary>
-	/// RabbitMqOptions
+	/// RabbitMQOptions
 	/// </summary>
-	public class RabbitMQOptions1
+	public class RabbitMQOptions
 	{
 		/// <summary>
 		/// RabbitMQ配置

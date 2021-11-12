@@ -362,7 +362,7 @@ namespace Adai.WebApi
 		/// AddRabbitMqConfig
 		/// </summary>
 		/// <param name="options"></param>
-		public virtual void AddRabbitMqConfig(Standard.Options.RabbitMQOptions1 options)
+		public virtual void AddRabbitMqConfig(Standard.Options.RabbitMQOptions options)
 		{
 			options.Config = new Standard.Models.RabbitMQConfig()
 			{
