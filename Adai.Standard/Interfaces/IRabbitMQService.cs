@@ -7,7 +7,7 @@ namespace Adai.Standard.Interfaces
 	/// <summary>
 	/// RabbitMQ服务
 	/// </summary>
-	public interface IRabbitMQService1
+	public interface IRabbitMQService
 	{
 		/// <summary>
 		/// 获取连接

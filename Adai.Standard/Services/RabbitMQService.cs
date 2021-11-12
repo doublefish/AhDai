@@ -10,7 +10,7 @@ namespace Adai.Standard.Services
 	/// <summary>
 	/// RabbitMQ服务
 	/// </summary>
-	public class RabbitMQService1 : Interfaces.IRabbitMQService1
+	public class RabbitMQService : Interfaces.IRabbitMQService
 	{
 		/// <summary>
 		/// 配置
@@ -21,7 +21,7 @@ namespace Adai.Standard.Services
 		/// 构造函数
 		/// </summary>
 		/// <param name="configuration"></param>
-		public RabbitMQService1(IConfiguration configuration)
+		public RabbitMQService(IConfiguration configuration)
 		{
 			Config = new RabbitMQ.Config()
 			{
