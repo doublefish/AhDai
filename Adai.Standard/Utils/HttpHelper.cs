@@ -1,5 +1,4 @@
 ﻿using Adai.Standard.Extensions;
-using Adai.Standard.Models;
 using Adai.Base.Utils;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace Adai.Standard.Net
+namespace Adai.Standard.Utils
 {
 	/// <summary>
 	/// HttpHelper
@@ -24,9 +23,9 @@ namespace Adai.Standard.Net
 		/// <param name="url"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static HttpResponse SendGet(string url, IDictionary<string, string> parameters = null)
+		public static Models.HttpResponse SendGet(string url, IDictionary<string, string> parameters = null)
 		{
-			var data = new HttpRequest(url, HttpMethod.Get, HttpContentType.Url)
+			var data = new Models.HttpRequest(url, HttpMethod.Get, HttpContentType.Url)
 			{
 				Body = parameters
 			};
@@ -39,9 +38,9 @@ namespace Adai.Standard.Net
 		/// <param name="url"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static HttpResponse SendPost(string url, IDictionary<string, string> parameters = null)
+		public static Models.HttpResponse SendPost(string url, IDictionary<string, string> parameters = null)
 		{
-			var data = new HttpRequest(url, HttpMethod.Post, HttpContentType.Url)
+			var data = new Models.HttpRequest(url, HttpMethod.Post, HttpContentType.Url)
 			{
 				Body = parameters
 			};
@@ -54,11 +53,11 @@ namespace Adai.Standard.Net
 		/// <param name="url"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static HttpResponse SendPostByJson<TValue>(string url, IDictionary<string, TValue> parameters)
+		public static Models.HttpResponse SendPostByJson<TValue>(string url, IDictionary<string, TValue> parameters)
 		{
-			var data = new HttpRequest(url, HttpMethod.Post, HttpContentType.Json)
+			var data = new Models.HttpRequest(url, HttpMethod.Post, HttpContentType.Json)
 			{
-				Content = Utils.JsonHelper.SerializeObject(parameters)
+				Content = JsonHelper.SerializeObject(parameters)
 			};
 			return SendRequest(data);
 		}
@@ -68,14 +67,14 @@ namespace Adai.Standard.Net
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		public static HttpWebRequest CreateRequest(HttpRequest data)
+		public static HttpWebRequest CreateRequest(Models.HttpRequest data)
 		{
 			if (data.ContentType == HttpContentType.Json)
 			{
 				data.ContentType += ";charset=utf-8";
 				if (data.Body != null)
 				{
-					data.Content = Utils.JsonHelper.SerializeObject(data.Body);
+					data.Content = JsonHelper.SerializeObject(data.Body);
 				}
 			}
 			else if (data.Body != null)
@@ -132,7 +131,7 @@ namespace Adai.Standard.Net
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		public static HttpResponse SendRequest(HttpRequest data)
+		public static Models.HttpResponse SendRequest(Models.HttpRequest data)
 		{
 			//创建请求
 			var httpWebRequest = CreateRequest(data);
@@ -161,7 +160,7 @@ namespace Adai.Standard.Net
 			}
 
 			//读取响应内容
-			HttpResponse response;
+			Models.HttpResponse response;
 			using (var httpWebResponse = (HttpWebResponse)webResponse)
 			{
 				var content = string.Empty;
@@ -186,7 +185,7 @@ namespace Adai.Standard.Net
 						content = reader.ReadToEnd();
 					}
 				}
-				response = new HttpResponse(httpWebResponse, content);
+				response = new Models.HttpResponse(httpWebResponse, content);
 			}
 			return response;
 		}

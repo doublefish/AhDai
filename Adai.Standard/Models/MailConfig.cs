@@ -1,4 +1,4 @@
-﻿namespace Adai.Standard.Net
+﻿namespace Adai.Standard.Models
 {
 	/// <summary>
 	/// MailConfig

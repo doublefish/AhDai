@@ -4,19 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Adai.Standard.RabbitMQ
+namespace Adai.Standard.Utils
 {
 	/// <summary>
 	/// RabbitMQHelper
 	/// </summary>
-	public static class Helper
+	public static class RabbitMQHelper
 	{
 		static object Locker { get; set; }
 
 		/// <summary>
 		/// Config
 		/// </summary>
-		public static Config Config { get; private set; }
+		public static Models.RabbitMQConfig Config { get; private set; }
 
 		/// <summary>
 		/// 连接实例
@@ -26,7 +26,7 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		static Helper()
+		static RabbitMQHelper()
 		{
 			Locker = new object();
 		}
@@ -35,7 +35,7 @@ namespace Adai.Standard.RabbitMQ
 		/// 初始化
 		/// </summary>
 		/// <param name="config"></param>
-		public static void Init(Config config)
+		public static void Init(Models.RabbitMQConfig config)
 		{
 			Config = config;
 		}
@@ -45,7 +45,7 @@ namespace Adai.Standard.RabbitMQ
 		/// </summary>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static IAsyncConnectionFactory GetConnectionFactory(Config config = null)
+		public static IAsyncConnectionFactory GetConnectionFactory(Models.RabbitMQConfig config = null)
 		{
 			var c = config ?? Config;
 			var str = $"{c.Host}-{c.VirtualHost}-{c.Port}-{c.Username}-{c.Password}";
@@ -76,7 +76,7 @@ namespace Adai.Standard.RabbitMQ
 		/// </summary>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static IConnection GetConnection(Config config = null)
+		public static IConnection GetConnection(Models.RabbitMQConfig config = null)
 		{
 			var factory = GetConnectionFactory(config);
 			return factory.CreateConnection();
@@ -89,7 +89,7 @@ namespace Adai.Standard.RabbitMQ
 		/// <param name="received"></param>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static string Subscribe(string queue, EventHandler<BasicDeliverEventArgs> received, Config config = null)
+		public static string Subscribe(string queue, EventHandler<BasicDeliverEventArgs> received, Models.RabbitMQConfig config = null)
 		{
 			var factory = GetConnectionFactory(config);
 			var connection = factory.CreateConnection();
@@ -109,7 +109,7 @@ namespace Adai.Standard.RabbitMQ
 		/// <param name="basicProperties"></param>
 		/// <param name="body"></param>
 		/// <param name="config"></param>
-		public static void Publish(string exchange, string routingKey, IBasicProperties basicProperties, ReadOnlyMemory<byte> body, Config config = null)
+		public static void Publish(string exchange, string routingKey, IBasicProperties basicProperties, ReadOnlyMemory<byte> body, Models.RabbitMQConfig config = null)
 		{
 			var factory = GetConnectionFactory(config);
 			using var connection = factory.CreateConnection();
@@ -125,7 +125,7 @@ namespace Adai.Standard.RabbitMQ
 		/// <param name="basicProperties"></param>
 		/// <param name="body"></param>
 		/// <param name="config"></param>
-		public static void Publish(string exchange, string routingKey, IBasicProperties basicProperties, string body, Config config = null)
+		public static void Publish(string exchange, string routingKey, IBasicProperties basicProperties, string body, Models.RabbitMQConfig config = null)
 		{
 			Publish(exchange, routingKey, basicProperties, Encoding.UTF8.GetBytes(body), config);
 		}

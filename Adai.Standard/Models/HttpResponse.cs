@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Adai.Standard.Net
+namespace Adai.Standard.Models
 {
 	/// <summary>
 	/// Http响应数据

@@ -3,11 +3,11 @@
 	/// <summary>
 	/// RabbitMqOptions
 	/// </summary>
-	public class RabbitMqOptions
+	public class RabbitMQOptions1
 	{
 		/// <summary>
 		/// RabbitMQ配置
 		/// </summary>
-		public RabbitMQ.Config Config { get; set; }
+		public Models.RabbitMQConfig Config { get; set; }
 	}
 }

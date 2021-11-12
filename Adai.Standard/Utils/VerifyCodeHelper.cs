@@ -36,7 +36,7 @@ namespace Adai.Standard.Utils
 			}
 			var dateTime = DateTime.Now;
 			var time = dateTime.TimeOfDay;
-			var redis = Redis.Helper.GetDatabase(15);
+			var redis = RedisHelper.GetDatabase(15);
 			var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 			var hashField = guid;
 			if (redis.HashExists(key, hashField))
@@ -70,7 +70,7 @@ namespace Adai.Standard.Utils
 			}
 			var dateTime = DateTime.Now;
 			var time = dateTime.TimeOfDay;
-			var redis = Redis.Helper.GetDatabase(15);
+			var redis = RedisHelper.GetDatabase(15);
 			var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 			var hashField = guid;
 			var value = redis.HashGet(key, hashField);

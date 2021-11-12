@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Mail;
 
-namespace Adai.Standard.Net
+namespace Adai.Standard.Utils
 {
 	/// <summary>
 	/// MailHelper
@@ -11,13 +11,13 @@ namespace Adai.Standard.Net
 		/// <summary>
 		/// Config
 		/// </summary>
-		public static MailConfig Config { get; private set; }
+		public static Models.MailConfig Config { get; private set; }
 
 		/// <summary>
 		/// 初始化
 		/// </summary>
 		/// <param name="config"></param>
-		public static void Init(MailConfig config)
+		public static void Init(Models.MailConfig config)
 		{
 			Config = config;
 		}
@@ -27,7 +27,7 @@ namespace Adai.Standard.Net
 		/// </summary>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static SmtpClient CreateSmtpClient(MailConfig config = null)
+		public static SmtpClient CreateSmtpClient(Models.MailConfig config = null)
 		{
 			var c = config ?? Config;
 			return new SmtpClient()
@@ -47,7 +47,7 @@ namespace Adai.Standard.Net
 		/// <param name="subject"></param>
 		/// <param name="body"></param>
 		/// <param name="config"></param>
-		public static void Send(string recipients, string subject, string body, MailConfig config = null)
+		public static void Send(string recipients, string subject, string body, Models.MailConfig config = null)
 		{
 			var c = config ?? Config;
 			using (var client = CreateSmtpClient(c))

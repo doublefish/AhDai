@@ -1,9 +1,9 @@
-﻿namespace Adai.Standard.RabbitMQ
+﻿namespace Adai.Standard.Models
 {
 	/// <summary>
 	/// RabbitMQConfig
 	/// </summary>
-	public class Config
+	public class RabbitMQConfig
 	{
 		/// <summary>
 		/// Host

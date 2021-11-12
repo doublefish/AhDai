@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Adai.Standard.Net
+namespace Adai.Standard.Models
 {
 	/// <summary>
 	/// Http请求数据

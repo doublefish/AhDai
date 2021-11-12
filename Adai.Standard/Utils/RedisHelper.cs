@@ -1,12 +1,12 @@
 ﻿using StackExchange.Redis;
 using System.Collections.Generic;
 
-namespace Adai.Standard.Redis
+namespace Adai.Standard.Utils
 {
 	/// <summary>
 	/// RedisHelper
 	/// </summary>
-	public static class Helper
+	public static class RedisHelper
 	{
 		static object Locker { get; set; }
 
@@ -23,12 +23,12 @@ namespace Adai.Standard.Redis
 		/// <summary>
 		/// Config
 		/// </summary>
-		public static Config Config { get; private set; }
+		public static Models.RedisConfig Config { get; private set; }
 
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		static Helper()
+		static RedisHelper()
 		{
 			Locker = new object();
 		}
@@ -37,7 +37,7 @@ namespace Adai.Standard.Redis
 		/// 初始化
 		/// </summary>
 		/// <param name="config"></param>
-		public static void Init(Config config)
+		public static void Init(Models.RedisConfig config)
 		{
 			Config = config;
 		}
@@ -59,7 +59,7 @@ namespace Adai.Standard.Redis
 		/// </summary>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static string CreateConfiguration(Config config)
+		public static string CreateConfiguration(Models.RedisConfig config)
 		{
 			return CreateConfiguration(config.Host, config.Port, config.Password);
 		}
@@ -69,7 +69,7 @@ namespace Adai.Standard.Redis
 		/// </summary>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static IConnectionMultiplexer GetConnectionMultiplexer(Config config = null)
+		public static IConnectionMultiplexer GetConnectionMultiplexer(Models.RedisConfig config = null)
 		{
 			var c = config ?? Config;
 			var str = CreateConfiguration(c);
@@ -104,7 +104,7 @@ namespace Adai.Standard.Redis
 		/// <param name="asyncState"></param>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static IDatabase GetDatabase(int db = -1, object asyncState = null, Config config = null)
+		public static IDatabase GetDatabase(int db = -1, object asyncState = null, Models.RedisConfig config = null)
 		{
 			var multiplexer = GetConnectionMultiplexer(config);
 			if (db == -1)
@@ -120,7 +120,7 @@ namespace Adai.Standard.Redis
 		/// </summary>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static IDatabase GetDatabase(Config config = null)
+		public static IDatabase GetDatabase(Models.RedisConfig config = null)
 		{
 			return GetDatabase(-1, null, config);
 		}

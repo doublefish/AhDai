@@ -343,7 +343,7 @@ namespace Adai.WebApi
 		/// <param name="options"></param>
 		public virtual void AddRedisConfig(Standard.Options.RedisOptions options)
 		{
-			options.Config = new Standard.Redis.Config()
+			options.Config = new Standard.Models.RedisConfig()
 			{
 				Host = Configuration.GetSection("redis:host").Value,
 				Port = Configuration.GetSection("redis:port").Value.ToInt32(),
@@ -362,9 +362,9 @@ namespace Adai.WebApi
 		/// AddRabbitMqConfig
 		/// </summary>
 		/// <param name="options"></param>
-		public virtual void AddRabbitMqConfig(Standard.Options.RabbitMqOptions options)
+		public virtual void AddRabbitMqConfig(Standard.Options.RabbitMQOptions1 options)
 		{
-			options.Config = new Standard.RabbitMQ.Config()
+			options.Config = new Standard.Models.RabbitMQConfig()
 			{
 				Host = Configuration.GetSection("rabbitmq:host").Value,
 				VirtualHost = Configuration.GetSection("rabbitmq:vhost").Value,
@@ -380,7 +380,7 @@ namespace Adai.WebApi
 		/// <param name="options"></param>
 		public virtual void AddMailConfig(Standard.Options.MailOptions options)
 		{
-			options.Config = new Standard.Net.MailConfig()
+			options.Config = new Standard.Models.MailConfig()
 			{
 				SmtpHost = Configuration.GetSection("mail:smtp:host").Value,
 				SmtpPort = Configuration.GetSection("mail:smtp:port").Value.ToInt32(),

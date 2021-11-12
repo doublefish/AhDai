@@ -57,7 +57,7 @@ namespace Adai.Standard.Extensions
 		{
 			if (options != null)
 			{
-				Redis.Helper.Init(options.Config);
+				Utils.RedisHelper.Init(options.Config);
 			}
 			return app;
 		}
@@ -88,11 +88,11 @@ namespace Adai.Standard.Extensions
 		/// <param name="app"></param>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public static IApplicationBuilder UseRabbitMQ(this IApplicationBuilder app, Options.RabbitMqOptions options)
+		public static IApplicationBuilder UseRabbitMQ(this IApplicationBuilder app, Options.RabbitMQOptions1 options)
 		{
 			if (options != null)
 			{
-				RabbitMQ.Helper.Init(options.Config);
+				Utils.RabbitMQHelper.Init(options.Config);
 			}
 			return app;
 		}
@@ -103,13 +103,13 @@ namespace Adai.Standard.Extensions
 		/// <param name="app"></param>
 		/// <param name="setupAction"></param>
 		/// <returns></returns>
-		public static IApplicationBuilder UseRabbitMQ(this IApplicationBuilder app, Action<Options.RabbitMqOptions> setupAction = null)
+		public static IApplicationBuilder UseRabbitMQ(this IApplicationBuilder app, Action<Options.RabbitMQOptions1> setupAction = null)
 		{
-			Options.RabbitMqOptions options;
+			Options.RabbitMQOptions1 options;
 			using (var scope = app.ApplicationServices.CreateScope())
 			{
 				// 这里才会执行添加配置时传入的action
-				options = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<Options.RabbitMqOptions>>().Value;
+				options = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<Options.RabbitMQOptions1>>().Value;
 				setupAction?.Invoke(options);
 			}
 			return app.UseRabbitMQ(options);
@@ -127,7 +127,7 @@ namespace Adai.Standard.Extensions
 		{
 			if (options != null)
 			{
-				Net.MailHelper.Init(options.Config);
+				Utils.MailHelper.Init(options.Config);
 			}
 			return app;
 		}

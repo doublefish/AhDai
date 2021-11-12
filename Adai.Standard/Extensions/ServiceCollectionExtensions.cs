@@ -102,7 +102,7 @@ namespace Adai.Standard.Extensions
 		/// <param name="services"></param>
 		/// <param name="setupAction"></param>
 		/// <returns></returns>
-		public static IServiceCollection AddRabbitMQ(this IServiceCollection services, Action<Options.RabbitMqOptions> setupAction = null)
+		public static IServiceCollection AddRabbitMQ(this IServiceCollection services, Action<Options.RabbitMQOptions1> setupAction = null)
 		{
 			if (setupAction != null)
 			{
@@ -116,7 +116,7 @@ namespace Adai.Standard.Extensions
 		/// </summary>
 		/// <param name="services"></param>
 		/// <param name="setupAction"></param>
-		public static void ConfigureRabbitMQ(this IServiceCollection services, Action<Options.RabbitMqOptions> setupAction)
+		public static void ConfigureRabbitMQ(this IServiceCollection services, Action<Options.RabbitMQOptions1> setupAction)
 		{
 			services.Configure(setupAction);
 		}

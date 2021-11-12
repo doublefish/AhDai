@@ -1,12 +1,12 @@
 ﻿using StackExchange.Redis;
 using System;
 
-namespace Adai.Standard.Redis
+namespace Adai.Standard.Models
 {
 	/// <summary>
 	/// Config
 	/// </summary>
-	public class Config
+	public class RedisConfig
 	{
 		/// <summary>
 		/// Host
