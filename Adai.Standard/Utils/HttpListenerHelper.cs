@@ -67,7 +67,7 @@ namespace Adai.Standard.Utils
 								var contentType = httpContext.Request.ContentType;
 								if (!string.IsNullOrEmpty(contentType) && contentType.IndexOf("/json") != -1)
 								{
-									parameters = Utils.JsonHelper.DeserializeObject<IDictionary<string, string>>(body);
+									parameters = JsonHelper.DeserializeObject<IDictionary<string, string>>(body);
 								}
 								else
 								{

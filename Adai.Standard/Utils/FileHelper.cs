@@ -63,7 +63,7 @@ namespace Adai.Standard.Utils
 				{
 					Guid = Guid.NewGuid().ToString(),
 					Name = Path.GetFileNameWithoutExtension(formFile.FileName),
-					Extension = Path.GetExtension(formFile.FileName).Substring(1),
+					Extension = Path.GetExtension(formFile.FileName)[1..],
 					Length = formFile.Length
 				};
 				foreach (var kv in Config.Extensions)
@@ -145,8 +145,8 @@ namespace Adai.Standard.Utils
 			}
 			var bytes = File.ReadAllBytes(path);
 			var extension = Path.GetExtension(path);
-			var type = $"image/{extension.Substring(1)}";
-			var name = $"{Guid.NewGuid().ToString()}{extension}";
+			var type = $"image/{extension[1..]}";
+			var name = $"{Guid.NewGuid()}{extension}";
 			return Output(bytes, type, name);
 		}
 
