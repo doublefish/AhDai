@@ -113,7 +113,8 @@ namespace Adai.WebApi
 			{
 				var issuer = Configuration.GetSection("jwt:issuer").Value;
 				var audience = Configuration.GetSection("jwt:audience").Value;
-				var signingKey = Configuration.GetSection("jwt:key").Value;
+				var key = Configuration.GetSection("jwt:key").Value;
+				var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
 				options.TokenValidationParameters = new TokenValidationParameters
 				{
 					// 是否验证签发人
@@ -132,7 +133,7 @@ namespace Adai.WebApi
 					ClockSkew = TimeSpan.FromSeconds(30),
 					// 是否验证密钥
 					ValidateIssuerSigningKey = true,
-					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey))
+					IssuerSigningKey = signingKey
 				};
 				options.Events = new JwtBearerEvents
 				{
