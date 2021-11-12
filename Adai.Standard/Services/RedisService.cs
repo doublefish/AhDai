@@ -11,18 +11,23 @@ namespace Adai.Standard.Services
 	public class RedisService : Interfaces.IRedisService
 	{
 		/// <summary>
+		/// 配置
+		/// </summary>
+		public Redis.Config Config { get; private set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="configuration"></param>
 		public RedisService(IConfiguration configuration)
 		{
-			var config = new Redis.Config()
+			Config = new Redis.Config()
 			{
 				Host = configuration.GetSection("redis:host").Value,
 				Port = configuration.GetSection("redis:port").Value.ToInt32(),
 				Password = configuration.GetSection("redis:password").Value
 			};
-			Redis.Helper.Init(config);
+			Redis.Helper.Init(Config);
 		}
 
 		/// <summary>
@@ -33,7 +38,7 @@ namespace Adai.Standard.Services
 		/// <returns></returns>
 		public IDatabase GetDatabase(int db = -1, object asyncState = null)
 		{
-			return Redis.Helper.GetDatabase(db, asyncState);
+			return Redis.Helper.GetDatabase(db, asyncState, Config);
 		}
 	}
 }

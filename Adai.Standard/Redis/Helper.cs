@@ -8,7 +8,7 @@ namespace Adai.Standard.Redis
 	/// </summary>
 	public static class Helper
 	{
-		static readonly object locker = new object();
+		static object Locker { get; set; }
 
 		/// <summary>
 		/// DbCount
@@ -16,7 +16,7 @@ namespace Adai.Standard.Redis
 		public const int DbCount = 16;
 
 		/// <summary>
-		/// 实例
+		/// 连接实例
 		/// </summary>
 		public static IDictionary<string, IConnectionMultiplexer> Instances { get; private set; }
 
@@ -24,6 +24,14 @@ namespace Adai.Standard.Redis
 		/// Config
 		/// </summary>
 		public static Config Config { get; private set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		static Helper()
+		{
+			Locker = new object();
+		}
 
 		/// <summary>
 		/// 初始化
@@ -35,29 +43,29 @@ namespace Adai.Standard.Redis
 		}
 
 		/// <summary>
-		/// GetDatabase
+		/// CreateConfiguration
 		/// </summary>
-		/// <param name="db"></param>
-		/// <param name="asyncState"></param>
+		/// <param name="host"></param>
+		/// <param name="port"></param>
+		/// <param name="password"></param>
 		/// <returns></returns>
-		public static IDatabase GetDatabase(int db = -1, object asyncState = null)
+		public static string CreateConfiguration(string host = "127.0.0.1", int port = 6379, string password = null)
 		{
-			return GetConnectionMultiplexer().GetDatabase(db, asyncState);
+			return $"{host}:{port},password={password}";
 		}
 
 		/// <summary>
-		/// GetDatabase
+		/// CreateConfiguration
 		/// </summary>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static IDatabase GetDatabase(Config config = null)
+		public static string CreateConfiguration(Config config)
 		{
-			var multiplexer = GetConnectionMultiplexer(config);
-			return multiplexer.GetDatabase(config.Database);
+			return CreateConfiguration(config.Host, config.Port, config.Password);
 		}
 
 		/// <summary>
-		/// GetConnectionMultiplexer
+		/// 获取连接实例
 		/// </summary>
 		/// <param name="config"></param>
 		/// <returns></returns>
@@ -67,8 +75,8 @@ namespace Adai.Standard.Redis
 			{
 				config = Config;
 			}
-			var str = CreateConfiguration(config.Host, config.Port, config.Password);
-			lock (locker)
+			var str = CreateConfiguration(config);
+			lock (Locker)
 			{
 				if (Instances == null)
 				{
@@ -86,21 +94,37 @@ namespace Adai.Standard.Redis
 					instance.InternalError += config.InternalError;
 					instance.ConnectionFailed += config.ConnectionFailed;
 					instance.ConnectionRestored += config.ConnectionRestored;
+					Instances.Add(str, instance);
 				}
 				return instance;
 			}
 		}
 
 		/// <summary>
-		/// CreateConfiguration
+		/// GetDatabase
 		/// </summary>
-		/// <param name="host"></param>
-		/// <param name="port"></param>
-		/// <param name="password"></param>
+		/// <param name="db"></param>
+		/// <param name="asyncState"></param>
+		/// <param name="config"></param>
 		/// <returns></returns>
-		public static string CreateConfiguration(string host = "127.0.0.1", int port = 6379, string password = null)
+		public static IDatabase GetDatabase(int db = -1, object asyncState = null, Config config = null)
 		{
-			return $"{host}:{port},password={password}";
+			if (db == -1 && config != null)
+			{
+				db = config.Database;
+			}
+			var multiplexer = GetConnectionMultiplexer(config);
+			return multiplexer.GetDatabase(db, asyncState);
+		}
+
+		/// <summary>
+		/// GetDatabase
+		/// </summary>
+		/// <param name="config"></param>
+		/// <returns></returns>
+		public static IDatabase GetDatabase(Config config = null)
+		{
+			return GetDatabase(-1, null, config);
 		}
 	}
 }

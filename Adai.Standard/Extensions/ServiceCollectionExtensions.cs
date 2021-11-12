@@ -37,7 +37,7 @@ namespace Adai.Standard.Extensions
 		/// <returns></returns>
 		public static IServiceCollection AddRabbitMqService(this IServiceCollection services)
 		{
-			services.AddSingleton<Interfaces.IRabbitMqService, Services.RabbitMqService>();
+			services.AddSingleton<Interfaces.IRabbitMQService1, Services.RabbitMQService1>();
 			return services;
 		}
 
