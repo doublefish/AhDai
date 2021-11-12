@@ -47,11 +47,8 @@ namespace Adai.Standard.RabbitMQ
 		/// <returns></returns>
 		public static IAsyncConnectionFactory GetConnectionFactory(Config config = null)
 		{
-			if (config == null)
-			{
-				config = Config;
-			}
-			var str = $"{config.Host}-{config.VirtualHost}-{config.Port}-{config.Username}-{config.Password}";
+			var c = config ?? Config;
+			var str = $"{c.Host}-{c.VirtualHost}-{c.Port}-{c.Username}-{c.Password}";
 			lock (Locker)
 			{
 				if (Instances == null)
@@ -62,11 +59,11 @@ namespace Adai.Standard.RabbitMQ
 				{
 					instance = new ConnectionFactory()
 					{
-						HostName = config.Host,
-						VirtualHost = config.VirtualHost,
-						Port = config.Port,
-						UserName = config.Username,
-						Password = config.Password
+						HostName = c.Host,
+						VirtualHost = c.VirtualHost,
+						Port = c.Port,
+						UserName = c.Username,
+						Password = c.Password
 					};
 					Instances.Add(str, instance);
 				}

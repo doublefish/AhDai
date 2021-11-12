@@ -71,11 +71,8 @@ namespace Adai.Standard.Redis
 		/// <returns></returns>
 		public static IConnectionMultiplexer GetConnectionMultiplexer(Config config = null)
 		{
-			if (config == null)
-			{
-				config = Config;
-			}
-			var str = CreateConfiguration(config);
+			var c = config ?? Config;
+			var str = CreateConfiguration(c);
 			lock (Locker)
 			{
 				if (Instances == null)
@@ -87,13 +84,13 @@ namespace Adai.Standard.Redis
 					instance = ConnectionMultiplexer.Connect(str);
 
 					// 注册事件
-					instance.ConfigurationChangedBroadcast += config.ConfigurationChangedBroadcast;
-					instance.ConfigurationChanged += config.ConfigurationChanged;
-					instance.HashSlotMoved += config.HashSlotMoved;
-					instance.ErrorMessage += config.ErrorMessage;
-					instance.InternalError += config.InternalError;
-					instance.ConnectionFailed += config.ConnectionFailed;
-					instance.ConnectionRestored += config.ConnectionRestored;
+					instance.ConfigurationChangedBroadcast += c.ConfigurationChangedBroadcast;
+					instance.ConfigurationChanged += c.ConfigurationChanged;
+					instance.HashSlotMoved += c.HashSlotMoved;
+					instance.ErrorMessage += c.ErrorMessage;
+					instance.InternalError += c.InternalError;
+					instance.ConnectionFailed += c.ConnectionFailed;
+					instance.ConnectionRestored += c.ConnectionRestored;
 					Instances.Add(str, instance);
 				}
 				return instance;
@@ -109,11 +106,12 @@ namespace Adai.Standard.Redis
 		/// <returns></returns>
 		public static IDatabase GetDatabase(int db = -1, object asyncState = null, Config config = null)
 		{
-			if (db == -1 && config != null)
-			{
-				db = config.Database;
-			}
 			var multiplexer = GetConnectionMultiplexer(config);
+			if (db == -1)
+			{
+				var c = config ?? Config;
+				db = c.Database;
+			}
 			return multiplexer.GetDatabase(db, asyncState);
 		}
 

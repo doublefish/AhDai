@@ -16,24 +16,27 @@ namespace Adai.Standard.Net
 		/// <summary>
 		/// 初始化
 		/// </summary>
-		/// <param name="configuration"></param>
-		public static void Init(MailConfig configuration)
+		/// <param name="config"></param>
+		public static void Init(MailConfig config)
 		{
-			Config = configuration;
+			Config = config;
 		}
 
 		/// <summary>
-		/// CreateSmtpClient
+		/// 创建客户端
 		/// </summary>
-		public static SmtpClient CreateSmtpClient()
+		/// <param name="config"></param>
+		/// <returns></returns>
+		public static SmtpClient CreateSmtpClient(MailConfig config = null)
 		{
+			var c = config ?? Config;
 			return new SmtpClient()
 			{
-				Host = Config.SmtpHost,
-				Port = Config.SmtpPort,
+				Host = c.SmtpHost,
+				Port = c.SmtpPort,
 				EnableSsl = true,
 				//UseDefaultCredentials = true,
-				Credentials = new NetworkCredential(Config.SmtpUsername, Config.SmtpPassword)
+				Credentials = new NetworkCredential(c.SmtpUsername, c.SmtpPassword)
 			};
 		}
 
@@ -43,11 +46,13 @@ namespace Adai.Standard.Net
 		/// <param name="recipients"></param>
 		/// <param name="subject"></param>
 		/// <param name="body"></param>
-		public static void Send(string recipients, string subject, string body)
+		/// <param name="config"></param>
+		public static void Send(string recipients, string subject, string body, MailConfig config = null)
 		{
-			using (var client = CreateSmtpClient())
+			var c = config ?? Config;
+			using (var client = CreateSmtpClient(c))
 			{
-				client.Send(new MailMessage(Config.SmtpUsername, recipients)
+				client.Send(new MailMessage(c.SmtpUsername, recipients)
 				{
 					Subject = subject,
 					Body = body,
