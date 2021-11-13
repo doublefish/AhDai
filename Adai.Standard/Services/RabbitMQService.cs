@@ -57,11 +57,11 @@ namespace Adai.Standard.Services
 		/// 订阅队列
 		/// </summary>
 		/// <param name="queue"></param>
-		/// <param name="received"></param>
+		/// <param name="excute"></param>
 		/// <returns></returns>
-		public string Subscribe(string queue, EventHandler<BasicDeliverEventArgs> received)
+		public string Subscribe(string queue, Func<object, BasicDeliverEventArgs, RabbitMQ.ResultType> excute)
 		{
-			return RabbitMQ.Helper.Subscribe(queue, received, Config);
+			return RabbitMQ.Helper.Subscribe(queue, excute, Config);
 		}
 
 		/// <summary>

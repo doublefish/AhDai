@@ -103,10 +103,10 @@ namespace Adai.Standard.RabbitMQ
 		/// 订阅队列
 		/// </summary>
 		/// <param name="queue"></param>
-		/// <param name="received"></param>
+		/// <param name="excute"></param>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static string Subscribe(string queue, EventHandler<BasicDeliverEventArgs> received, Config config = null)
+		public static string Subscribe(string queue, Func<object, BasicDeliverEventArgs, ResultType> excute, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
 			var connection = factory.CreateConnection();
@@ -114,7 +114,39 @@ namespace Adai.Standard.RabbitMQ
 
 			// 消费者
 			var consumer = new EventingBasicConsumer(channel);
-			consumer.Received += received;
+			consumer.Received += (sender, eventArgs) =>
+			{
+				ResultType result;
+				try
+				{
+					result = excute.Invoke(sender, eventArgs);
+				}
+				catch
+				{
+					result = ResultType.Exception;
+				}
+				switch (result)
+				{
+					case ResultType.Success:
+						// 业务处理成功，从队列中移除
+						channel.BasicAck(eventArgs.DeliveryTag, false);
+						break;
+					case ResultType.Fail:
+						// 从队列中移除
+						channel.BasicNack(eventArgs.DeliveryTag, false, false);
+						break;
+					case ResultType.Retry:
+						// 添加到队列尾部
+						channel.BasicNack(eventArgs.DeliveryTag, false, true);
+						break;
+					case ResultType.Exception:
+						// 从队列中移除
+						channel.BasicNack(eventArgs.DeliveryTag, false, false);
+						break;
+					default:
+						goto case ResultType.Fail;
+				}
+			};
 			return channel.BasicConsume(queue, false, consumer);
 		}
 

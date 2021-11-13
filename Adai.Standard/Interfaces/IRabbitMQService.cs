@@ -25,9 +25,9 @@ namespace Adai.Standard.Interfaces
 		/// 订阅队列
 		/// </summary>
 		/// <param name="queue"></param>
-		/// <param name="received"></param>
+		/// <param name="excute"></param>
 		/// <returns></returns>
-		public string Subscribe(string queue, EventHandler<BasicDeliverEventArgs> received);
+		public string Subscribe(string queue, Func<object, BasicDeliverEventArgs, RabbitMQ.ResultType> excute);
 
 		/// <summary>
 		/// 发布消息

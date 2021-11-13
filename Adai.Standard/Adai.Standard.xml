@@ -926,12 +926,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Interfaces.IRabbitMQService.Subscribe(System.String,System.EventHandler{RabbitMQ.Client.Events.BasicDeliverEventArgs})">
+        <member name="M:Adai.Standard.Interfaces.IRabbitMQService.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Standard.RabbitMQ.ResultType})">
             <summary>
             订阅队列
             </summary>
             <param name="queue"></param>
-            <param name="received"></param>
+            <param name="excute"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.Standard.Interfaces.IRabbitMQService.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.ReadOnlyMemory{System.Byte})">
@@ -1840,12 +1840,12 @@
             <param name="exchange"></param>
             <param name="config"></param>
         </member>
-        <member name="M:Adai.Standard.RabbitMQ.Helper.Subscribe(System.String,System.EventHandler{RabbitMQ.Client.Events.BasicDeliverEventArgs},Adai.Standard.RabbitMQ.Config)">
+        <member name="M:Adai.Standard.RabbitMQ.Helper.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Standard.RabbitMQ.ResultType},Adai.Standard.RabbitMQ.Config)">
             <summary>
             订阅队列
             </summary>
             <param name="queue"></param>
-            <param name="received"></param>
+            <param name="excute"></param>
             <param name="config"></param>
             <returns></returns>
         </member>
@@ -1868,6 +1868,31 @@
             <param name="basicProperties"></param>
             <param name="body"></param>
             <param name="config"></param>
+        </member>
+        <member name="T:Adai.Standard.RabbitMQ.ResultType">
+            <summary>
+            处理结果类型
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.RabbitMQ.ResultType.Success">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.RabbitMQ.ResultType.Fail">
+            <summary>
+            失败（把消息从队列中移除）
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.RabbitMQ.ResultType.Retry">
+            <summary>
+            重试（把消息追加到队尾）
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.RabbitMQ.ResultType.Exception">
+            <summary>
+            异常
+            </summary>
         </member>
         <member name="T:Adai.Standard.Services.DbService">
             <summary>
@@ -1966,12 +1991,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Services.RabbitMQService.Subscribe(System.String,System.EventHandler{RabbitMQ.Client.Events.BasicDeliverEventArgs})">
+        <member name="M:Adai.Standard.Services.RabbitMQService.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Standard.RabbitMQ.ResultType})">
             <summary>
             订阅队列
             </summary>
             <param name="queue"></param>
-            <param name="received"></param>
+            <param name="excute"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.Standard.Services.RabbitMQService.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.ReadOnlyMemory{System.Byte})">
