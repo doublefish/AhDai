@@ -169,7 +169,7 @@ namespace Adai.WebApi
 			// 注册Redis
 			services.AddRedis(AddRedisConfig);
 			// 注册RabbitMQ
-			services.AddRabbitMQ(AddRabbitMqConfig);
+			services.AddRabbitMQ(AddRabbitMQConfig);
 
 			// 注册Swagger生成器，定义一个和多个Swagger 文档
 			services.AddSwaggerGen(options =>
@@ -359,10 +359,10 @@ namespace Adai.WebApi
 		}
 
 		/// <summary>
-		/// AddRabbitMqConfig
+		/// AddRabbitMQConfig
 		/// </summary>
 		/// <param name="options"></param>
-		public virtual void AddRabbitMqConfig(Standard.Options.RabbitMQOptions options)
+		public virtual void AddRabbitMQConfig(Standard.Options.RabbitMQOptions options)
 		{
 			options.Config = new Standard.RabbitMQ.Config()
 			{

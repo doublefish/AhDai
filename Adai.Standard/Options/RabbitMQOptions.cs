@@ -8,6 +8,6 @@
 		/// <summary>
 		/// RabbitMQ配置
 		/// </summary>
-		public Standard.RabbitMQ.Config Config { get; set; }
+		public RabbitMQ.Config Config { get; set; }
 	}
 }
