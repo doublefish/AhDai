@@ -136,9 +136,22 @@ namespace Adai.DbContext
 		/// </summary>
 		/// <param name="dbContext"></param>
 		/// <param name="dbName"></param>
+		/// <param name="command"></param>
+		/// <returns></returns>
+		public static int ExecuteNonQuery(this IDbContext dbContext, string dbName, IDbCommand command)
+		{
+			dbContext.ChangeConnectionString(dbName);
+			return dbContext.ExecuteNonQuery(command);
+		}
+
+		/// <summary>
+		/// 批量执行
+		/// </summary>
+		/// <param name="dbContext"></param>
+		/// <param name="dbName"></param>
 		/// <param name="commands"></param>
 		/// <returns></returns>
-		public static int ExecuteNonQuery(this IDbContext dbContext, string dbName, params IDbCommand[] commands)
+		public static int ExecuteNonQuery(this IDbContext dbContext, string dbName, IDbCommand[] commands)
 		{
 			dbContext.ChangeConnectionString(dbName);
 			return dbContext.ExecuteNonQuery(commands);
@@ -148,16 +161,16 @@ namespace Adai.DbContext
 		/// 跨库执行
 		/// </summary>
 		/// <param name="dbContext"></param>
-		/// <param name="dict">connStr-cmds</param>
+		/// <param name="dictCmds">connStr-cmds</param>
 		/// <returns></returns>
-		public static int ExecuteNonQuery(this IDbContext dbContext, IDictionary<string, ICollection<IDbCommand>> dict)
+		public static int ExecuteNonQuery(this IDbContext dbContext, IDictionary<string, ICollection<IDbCommand>> dictCmds)
 		{
 			var result = 0;
 			var conns = new List<IDbConnection>();
 			var trans = new List<IDbTransaction>();
 			try
 			{
-				foreach (var kv in dict)
+				foreach (var kv in dictCmds)
 				{
 					var conn = dbContext.CreateConnection();
 					conn.ConnectionString = kv.Key;
@@ -204,12 +217,12 @@ namespace Adai.DbContext
 		/// 跨库执行
 		/// </summary>
 		/// <param name="dbContext"></param>
-		/// <param name="dict">dbName-cmds</param>
+		/// <param name="dictCmds">dbName-cmds</param>
 		/// <returns></returns>
-		public static int ExecuteNonQueryByDbName(this IDbContext dbContext, IDictionary<string, ICollection<IDbCommand>> dict)
+		public static int ExecuteNonQueryByDbName(this IDbContext dbContext, IDictionary<string, ICollection<IDbCommand>> dictCmds)
 		{
 			var _dict = new Dictionary<string, ICollection<IDbCommand>>();
-			foreach (var kv in dict)
+			foreach (var kv in dictCmds)
 			{
 				var connStr = dbContext.GetConnectionString(kv.Key);
 				_dict.Add(connStr, kv.Value);
