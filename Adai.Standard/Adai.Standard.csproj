@@ -16,6 +16,10 @@
 		<PackageTags>Adai.Standard</PackageTags>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>Adai.Standard.xml</DocumentationFile>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<DocumentationFile>Adai.Standard.xml</DocumentationFile>
 	</PropertyGroup>

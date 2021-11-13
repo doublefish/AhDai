@@ -16,6 +16,14 @@
 		<PackageTags>Adai.DbContext.SQLite</PackageTags>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>Adai.DbContext.SQLite.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>Adai.DbContext.SQLite.xml</DocumentationFile>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Adai.DbContext" Version="2.1.0.1" />
 		<PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.115" />
