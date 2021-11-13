@@ -15,7 +15,7 @@ namespace Adai.Standard.Services
 		/// <summary>
 		/// 配置
 		/// </summary>
-		public Models.RabbitMQConfig Config { get; private set; }
+		public RabbitMQ.Config Config { get; private set; }
 
 		/// <summary>
 		/// 构造函数
@@ -23,7 +23,7 @@ namespace Adai.Standard.Services
 		/// <param name="configuration"></param>
 		public RabbitMQService(IConfiguration configuration)
 		{
-			Config = new Models.RabbitMQConfig()
+			Config = new RabbitMQ.Config()
 			{
 				Host = configuration.GetSection("rabbitmq:host").Value,
 				VirtualHost = configuration.GetSection("rabbitmq:vhost").Value,
@@ -31,7 +31,7 @@ namespace Adai.Standard.Services
 				Username = configuration.GetSection("rabbitmq:username").Value,
 				Password = configuration.GetSection("rabbitmq:password").Value
 			};
-			Utils.RabbitMQHelper.Init(Config);
+			RabbitMQ.Helper.Init(Config);
 		}
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace Adai.Standard.Services
 		/// <returns></returns>
 		public IAsyncConnectionFactory GetConnectionFactory()
 		{
-			return Utils.RabbitMQHelper.GetConnectionFactory(Config);
+			return RabbitMQ.Helper.GetConnectionFactory(Config);
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace Adai.Standard.Services
 		/// <returns></returns>
 		public string Subscribe(string queue, EventHandler<BasicDeliverEventArgs> received)
 		{
-			return Utils.RabbitMQHelper.Subscribe(queue, received, Config);
+			return RabbitMQ.Helper.Subscribe(queue, received, Config);
 		}
 
 		/// <summary>
@@ -73,7 +73,7 @@ namespace Adai.Standard.Services
 		/// <param name="body"></param>
 		public void Publish(string exchange, string routingKey, IBasicProperties basicProperties, ReadOnlyMemory<byte> body)
 		{
-			Utils.RabbitMQHelper.Publish(exchange, routingKey, basicProperties, body, Config);
+			RabbitMQ.Helper.Publish(exchange, routingKey, basicProperties, body, Config);
 		}
 
 		/// <summary>
@@ -85,7 +85,7 @@ namespace Adai.Standard.Services
 		/// <param name="body"></param>
 		public void Publish(string exchange, string routingKey, IBasicProperties basicProperties, string body)
 		{
-			Utils.RabbitMQHelper.Publish(exchange, routingKey, basicProperties, body, Config);
+			RabbitMQ.Helper.Publish(exchange, routingKey, basicProperties, body, Config);
 		}
 	}
 }

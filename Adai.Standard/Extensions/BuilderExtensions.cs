@@ -92,7 +92,7 @@ namespace Adai.Standard.Extensions
 		{
 			if (options != null)
 			{
-				Utils.RabbitMQHelper.Init(options.Config);
+				RabbitMQ.Helper.Init(options.Config);
 			}
 			return app;
 		}

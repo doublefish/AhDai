@@ -4,19 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Adai.Standard.Utils
+namespace Adai.Standard.RabbitMQ
 {
 	/// <summary>
 	/// RabbitMQHelper
 	/// </summary>
-	public static class RabbitMQHelper
+	public static class Helper
 	{
 		static object Locker { get; set; }
 
 		/// <summary>
 		/// Config
 		/// </summary>
-		public static Models.RabbitMQConfig Config { get; private set; }
+		public static Config Config { get; private set; }
 
 		/// <summary>
 		/// 连接实例
@@ -26,7 +26,7 @@ namespace Adai.Standard.Utils
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		static RabbitMQHelper()
+		static Helper()
 		{
 			Locker = new object();
 		}
@@ -35,7 +35,7 @@ namespace Adai.Standard.Utils
 		/// 初始化
 		/// </summary>
 		/// <param name="config"></param>
-		public static void Init(Models.RabbitMQConfig config)
+		public static void Init(Config config)
 		{
 			Config = config;
 		}
@@ -45,7 +45,7 @@ namespace Adai.Standard.Utils
 		/// </summary>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static IAsyncConnectionFactory GetConnectionFactory(Models.RabbitMQConfig config = null)
+		public static IAsyncConnectionFactory GetConnectionFactory(Config config = null)
 		{
 			var c = config ?? Config;
 			var str = $"{c.Host}-{c.VirtualHost}-{c.Port}-{c.Username}-{c.Password}";
@@ -76,10 +76,27 @@ namespace Adai.Standard.Utils
 		/// </summary>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static IConnection GetConnection(Models.RabbitMQConfig config = null)
+		public static IConnection GetConnection(Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
 			return factory.CreateConnection();
+		}
+
+		/// <summary>
+		/// 队列初始化（声明交换器+声明队列+绑定队列）
+		/// </summary>
+		/// <param name="queue"></param>
+		/// <param name="routingKey"></param>
+		/// <param name="exchange"></param>
+		/// <param name="config"></param>
+		public static void QueueInit(string queue, string routingKey, Exchange exchange, Config config = null)
+		{
+			var factory = GetConnectionFactory(config);
+			using var connection = factory.CreateConnection();
+			using var channel = connection.CreateModel();
+			channel.ExchangeDeclare(exchange.Name, exchange.Type.GetString(), exchange.Durable, exchange.AutoDelete);
+			channel.QueueDeclare(queue, true, false, false);
+			channel.QueueBind(queue, exchange.Name, routingKey);
 		}
 
 		/// <summary>
@@ -89,7 +106,7 @@ namespace Adai.Standard.Utils
 		/// <param name="received"></param>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static string Subscribe(string queue, EventHandler<BasicDeliverEventArgs> received, Models.RabbitMQConfig config = null)
+		public static string Subscribe(string queue, EventHandler<BasicDeliverEventArgs> received, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
 			var connection = factory.CreateConnection();
@@ -109,7 +126,7 @@ namespace Adai.Standard.Utils
 		/// <param name="basicProperties"></param>
 		/// <param name="body"></param>
 		/// <param name="config"></param>
-		public static void Publish(string exchange, string routingKey, IBasicProperties basicProperties, ReadOnlyMemory<byte> body, Models.RabbitMQConfig config = null)
+		public static void Publish(string exchange, string routingKey, IBasicProperties basicProperties, ReadOnlyMemory<byte> body, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
 			using var connection = factory.CreateConnection();
@@ -125,7 +142,7 @@ namespace Adai.Standard.Utils
 		/// <param name="basicProperties"></param>
 		/// <param name="body"></param>
 		/// <param name="config"></param>
-		public static void Publish(string exchange, string routingKey, IBasicProperties basicProperties, string body, Models.RabbitMQConfig config = null)
+		public static void Publish(string exchange, string routingKey, IBasicProperties basicProperties, string body, Config config = null)
 		{
 			Publish(exchange, routingKey, basicProperties, Encoding.UTF8.GetBytes(body), config);
 		}

@@ -364,7 +364,7 @@ namespace Adai.WebApi
 		/// <param name="options"></param>
 		public virtual void AddRabbitMqConfig(Standard.Options.RabbitMQOptions options)
 		{
-			options.Config = new Standard.Models.RabbitMQConfig()
+			options.Config = new Standard.RabbitMQ.Config()
 			{
 				Host = Configuration.GetSection("rabbitmq:host").Value,
 				VirtualHost = Configuration.GetSection("rabbitmq:vhost").Value,

@@ -1431,36 +1431,6 @@
             <param name="sortName"></param>
             <param name="sortType"></param>
         </member>
-        <member name="T:Adai.Standard.Models.RabbitMQConfig">
-            <summary>
-            RabbitMQConfig
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RabbitMQConfig.Host">
-            <summary>
-            Host
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RabbitMQConfig.VirtualHost">
-            <summary>
-            VHost
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RabbitMQConfig.Port">
-            <summary>
-            Port
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RabbitMQConfig.Username">
-            <summary>
-            Username
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.RabbitMQConfig.Password">
-            <summary>
-            Password
-            </summary>
-        </member>
         <member name="T:Adai.Standard.Models.RedisConfig">
             <summary>
             Config
@@ -1713,6 +1683,191 @@
             <summary>
             Dispose
             </summary>
+        </member>
+        <member name="T:Adai.Standard.RabbitMQ.Config">
+            <summary>
+            RabbitMQConfig
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Config.Host">
+            <summary>
+            Host
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Config.VirtualHost">
+            <summary>
+            VHost
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Config.Port">
+            <summary>
+            Port
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Config.Username">
+            <summary>
+            Username
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Config.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.RabbitMQ.Exchange">
+            <summary>
+            交换器
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Exchange.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Exchange.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Exchange.Durable">
+            <summary>
+            持久的（Durable/Transient）默认：true
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Exchange.AutoDelete">
+            <summary>
+            自动删除
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Exchange.Internal">
+            <summary>
+            内部的
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Exchange.Arguments">
+            <summary>
+            参数（无效）
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.RabbitMQ.ExchangeType">
+            <summary>
+            交换器类型
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.RabbitMQ.ExchangeType.Fanout">
+            <summary>
+            fanout
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.RabbitMQ.ExchangeType.Direct">
+            <summary>
+            direct
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.RabbitMQ.ExchangeType.Topic">
+            <summary>
+            topic
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.RabbitMQ.ExchangeType.Headers">
+            <summary>
+            headers
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.RabbitMQ.ExchangeType.Delayed">
+            <summary>
+            x-delayed-message
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.RabbitMQ.Extensions">
+            <summary>
+            RabbitMQExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Extensions.GetString(Adai.Standard.RabbitMQ.ExchangeType)">
+            <summary>
+            GetString
+            </summary>
+            <param name="exchangeType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Standard.RabbitMQ.Helper">
+            <summary>
+            RabbitMQHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Helper.Config">
+            <summary>
+            Config
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.RabbitMQ.Helper.Instances">
+            <summary>
+            连接实例
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.Init(Adai.Standard.RabbitMQ.Config)">
+            <summary>
+            初始化
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.GetConnectionFactory(Adai.Standard.RabbitMQ.Config)">
+            <summary>
+            获取连接工厂
+            </summary>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.GetConnection(Adai.Standard.RabbitMQ.Config)">
+            <summary>
+            获取连接工厂
+            </summary>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.QueueInit(System.String,System.String,Adai.Standard.RabbitMQ.Exchange,Adai.Standard.RabbitMQ.Config)">
+            <summary>
+            队列初始化（声明交换器+声明队列+绑定队列）
+            </summary>
+            <param name="queue"></param>
+            <param name="routingKey"></param>
+            <param name="exchange"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.Subscribe(System.String,System.EventHandler{RabbitMQ.Client.Events.BasicDeliverEventArgs},Adai.Standard.RabbitMQ.Config)">
+            <summary>
+            订阅队列
+            </summary>
+            <param name="queue"></param>
+            <param name="received"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.ReadOnlyMemory{System.Byte},Adai.Standard.RabbitMQ.Config)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange"></param>
+            <param name="routingKey"></param>
+            <param name="basicProperties"></param>
+            <param name="body"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.String,Adai.Standard.RabbitMQ.Config)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange"></param>
+            <param name="routingKey"></param>
+            <param name="basicProperties"></param>
+            <param name="body"></param>
+            <param name="config"></param>
         </member>
         <member name="T:Adai.Standard.Services.DbService">
             <summary>
@@ -2531,75 +2686,6 @@
             </summary>
             <param name="recipients"></param>
             <param name="subject"></param>
-            <param name="body"></param>
-            <param name="config"></param>
-        </member>
-        <member name="T:Adai.Standard.Utils.RabbitMQHelper">
-            <summary>
-            RabbitMQHelper
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Utils.RabbitMQHelper.Config">
-            <summary>
-            Config
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Utils.RabbitMQHelper.Instances">
-            <summary>
-            连接实例
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Utils.RabbitMQHelper.#cctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:Adai.Standard.Utils.RabbitMQHelper.Init(Adai.Standard.Models.RabbitMQConfig)">
-            <summary>
-            初始化
-            </summary>
-            <param name="config"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.RabbitMQHelper.GetConnectionFactory(Adai.Standard.Models.RabbitMQConfig)">
-            <summary>
-            获取连接工厂
-            </summary>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.RabbitMQHelper.GetConnection(Adai.Standard.Models.RabbitMQConfig)">
-            <summary>
-            获取连接工厂
-            </summary>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.RabbitMQHelper.Subscribe(System.String,System.EventHandler{RabbitMQ.Client.Events.BasicDeliverEventArgs},Adai.Standard.Models.RabbitMQConfig)">
-            <summary>
-            订阅队列
-            </summary>
-            <param name="queue"></param>
-            <param name="received"></param>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Utils.RabbitMQHelper.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.ReadOnlyMemory{System.Byte},Adai.Standard.Models.RabbitMQConfig)">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange"></param>
-            <param name="routingKey"></param>
-            <param name="basicProperties"></param>
-            <param name="body"></param>
-            <param name="config"></param>
-        </member>
-        <member name="M:Adai.Standard.Utils.RabbitMQHelper.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.String,Adai.Standard.Models.RabbitMQConfig)">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange"></param>
-            <param name="routingKey"></param>
-            <param name="basicProperties"></param>
             <param name="body"></param>
             <param name="config"></param>
         </member>
