@@ -9,6 +9,11 @@
             MySqlDbContext
             </summary>
         </member>
+        <member name="P:Adai.DbContext.MySql.MySqlDbContext.EventId">
+            <summary>
+            事件Id
+            </summary>
+        </member>
         <member name="M:Adai.DbContext.MySql.MySqlDbContext.#ctor(System.String)">
             <summary>
             构造函数
@@ -21,11 +26,6 @@
             </summary>
             <param name="eventId">事件Id</param>
             <param name="connectionString"></param>
-        </member>
-        <member name="P:Adai.DbContext.MySql.MySqlDbContext.EventId">
-            <summary>
-            事件Id
-            </summary>
         </member>
         <member name="M:Adai.DbContext.MySql.MySqlDbContext.CreateConnection">
             <summary>

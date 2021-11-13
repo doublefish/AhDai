@@ -9,13 +9,6 @@
             列的特性
             </summary>
         </member>
-        <member name="M:Adai.DbContext.Attributes.ColumnAttribute.#ctor(System.String,Adai.DbContext.Attributes.ColumnType)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="name">名称</param>
-            <param name="type">类型</param>
-        </member>
         <member name="P:Adai.DbContext.Attributes.ColumnAttribute.Type">
             <summary>
             类型
@@ -35,6 +28,13 @@
             <summary>
             属性
             </summary>
+        </member>
+        <member name="M:Adai.DbContext.Attributes.ColumnAttribute.#ctor(System.String,Adai.DbContext.Attributes.ColumnType)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">名称</param>
+            <param name="type">类型</param>
         </member>
         <member name="T:Adai.DbContext.Attributes.ColumnType">
             <summary>
@@ -66,6 +66,11 @@
             自定义特性
             </summary>
         </member>
+        <member name="P:Adai.DbContext.Attributes.CustomAttribute.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
         <member name="M:Adai.DbContext.Attributes.CustomAttribute.#ctor">
             <summary>
             构造函数
@@ -77,21 +82,10 @@
             </summary>
             <param name="name">名称</param>
         </member>
-        <member name="P:Adai.DbContext.Attributes.CustomAttribute.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
         <member name="T:Adai.DbContext.Attributes.TableAttribute">
             <summary>
             表的特性
             </summary>
-        </member>
-        <member name="M:Adai.DbContext.Attributes.TableAttribute.#ctor(System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="name">名称</param>
         </member>
         <member name="P:Adai.DbContext.Attributes.TableAttribute.Schema">
             <summary>
@@ -103,6 +97,13 @@
             列的特性
             </summary>
         </member>
+        <member name="M:Adai.DbContext.Attributes.TableAttribute.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">名称</param>
+            <param name="schema">库名</param>
+        </member>
         <member name="T:Adai.DbContext.BaseBLL`2">
             <summary>
             BaseBLL
@@ -110,14 +111,14 @@
             <typeparam name="Model"></typeparam>
             <typeparam name="DAL"></typeparam>
         </member>
-        <member name="M:Adai.DbContext.BaseBLL`2.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
         <member name="P:Adai.DbContext.BaseBLL`2.Dal">
             <summary>
             Dal
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.BaseBLL`2.#ctor">
+            <summary>
+            构造函数
             </summary>
         </member>
         <member name="M:Adai.DbContext.BaseBLL`2.InitDal">
@@ -170,18 +171,6 @@
             </summary>
             <typeparam name="Model"></typeparam>
         </member>
-        <member name="M:Adai.DbContext.BaseDAL`1.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:Adai.DbContext.BaseDAL`1.#ctor(System.String,System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="dbName">数据库名</param>
-            <param name="tableName">数据表名</param>
-        </member>
         <member name="P:Adai.DbContext.BaseDAL`1.DbName">
             <summary>
             数据库名
@@ -211,6 +200,18 @@
             <summary>
             别名
             </summary>
+        </member>
+        <member name="M:Adai.DbContext.BaseDAL`1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.BaseDAL`1.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="dbName">数据库名</param>
+            <param name="tableName">数据表名</param>
         </member>
         <member name="M:Adai.DbContext.BaseDAL`1.InitDbContext">
             <summary>
@@ -329,17 +330,6 @@
             BaseFilter
             </summary>
         </member>
-        <member name="M:Adai.DbContext.BaseFilter`1.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:Adai.DbContext.BaseFilter`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            构造函数
-            </summary>
-            <param name="defaultValues">Self的特殊默认值</param>
-        </member>
         <member name="P:Adai.DbContext.BaseFilter`1.Results">
             <summary>
             结果
@@ -374,6 +364,17 @@
             <summary>
             排序规则（1-倒序，0-正序）
             </summary>
+        </member>
+        <member name="M:Adai.DbContext.BaseFilter`1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.BaseFilter`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="defaultValues">Self的特殊默认值</param>
         </member>
         <member name="T:Adai.DbContext.BaseModel">
             <summary>
@@ -435,6 +436,16 @@
             DbContext
             </summary>
         </member>
+        <member name="P:Adai.DbContext.DbContext.DbType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.DbContext.ConnectionString">
+            <summary>
+            数据库连接
+            </summary>
+        </member>
         <member name="M:Adai.DbContext.DbContext.#ctor(Adai.DbContext.Config.DbType)">
             <summary>
             构造函数
@@ -447,16 +458,6 @@
             </summary>
             <param name="dbType"></param>
             <param name="connectionString"></param>
-        </member>
-        <member name="P:Adai.DbContext.DbContext.DbType">
-            <summary>
-            数据库类型
-            </summary>
-        </member>
-        <member name="P:Adai.DbContext.DbContext.ConnectionString">
-            <summary>
-            数据库连接
-            </summary>
         </member>
         <member name="M:Adai.DbContext.DbContext.CreateConnection">
             <summary>
@@ -543,6 +544,13 @@
             执行
             </summary>
             <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContext.ExecuteNonQuery(System.Data.IDbCommand[])">
+            <summary>
+            批量执行
+            </summary>
+            <param name="commands"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.DbContext.BeforeExecute(System.Data.IDbCommand)">
@@ -643,14 +651,6 @@
             <param name="commands"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQuery(Adai.DbContext.IDbContext,System.Data.IDbCommand[])">
-            <summary>
-            执行
-            </summary>
-            <param name="dbContext"></param>
-            <param name="commands"></param>
-            <returns></returns>
-        </member>
         <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQuery(Adai.DbContext.IDbContext,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{System.Data.IDbCommand}})">
             <summary>
             跨库执行
@@ -741,11 +741,6 @@
             DbHelper
             </summary>
         </member>
-        <member name="M:Adai.DbContext.DbHelper.#cctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
         <member name="P:Adai.DbContext.DbHelper.TableAttributes">
             <summary>
             表特性
@@ -759,6 +754,11 @@
         <member name="P:Adai.DbContext.DbHelper.BeforeExecuteAction">
             <summary>
             执行之前
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.DbHelper.#cctor">
+            <summary>
+            构造函数
             </summary>
         </member>
         <member name="M:Adai.DbContext.DbHelper.Init(System.Collections.Generic.ICollection{Adai.DbContext.Models.DbConfig},System.Action{System.String,System.Data.IDbCommand})">
@@ -1085,6 +1085,13 @@
             执行
             </summary>
             <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.IDbContext.ExecuteNonQuery(System.Data.IDbCommand[])">
+            <summary>
+            批量执行
+            </summary>
+            <param name="commands"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.IDbContext.BeforeExecute(System.Data.IDbCommand)">
