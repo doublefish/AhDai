@@ -208,7 +208,7 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// 执行
+		/// 批量执行
 		/// </summary>
 		/// <param name="commands"></param>
 		/// <returns></returns>
