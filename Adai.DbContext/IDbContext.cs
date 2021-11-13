@@ -98,6 +98,13 @@ namespace Adai.DbContext
 		int ExecuteNonQuery(IDbCommand command);
 
 		/// <summary>
+		/// 批量执行
+		/// </summary>
+		/// <param name="commands"></param>
+		/// <returns></returns>
+		int ExecuteNonQuery(IDbCommand[] commands);
+
+		/// <summary>
 		/// 执行之前
 		/// </summary>
 		/// <param name="command"></param>

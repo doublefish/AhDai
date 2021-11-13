@@ -145,49 +145,6 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// 执行
-		/// </summary>
-		/// <param name="dbContext"></param>
-		/// <param name="commands"></param>
-		/// <returns></returns>
-		public static int ExecuteNonQuery(this IDbContext dbContext, IDbCommand[] commands)
-		{
-			var result = 0;
-			var conn = dbContext.CreateConnection();
-			conn.ConnectionString = dbContext.ConnectionString;
-			IDbTransaction tran = null;
-			try
-			{
-				conn.Open();
-				tran = conn.BeginTransaction();
-				foreach (var cmd in commands)
-				{
-					cmd.Connection = conn;
-					cmd.Transaction = tran;
-					dbContext.BeforeExecute(cmd);
-					result += cmd.ExecuteNonQuery();
-				}
-				tran.Commit();
-			}
-			catch
-			{
-				if (tran != null)
-				{
-					tran.Rollback();
-				}
-				throw;
-			}
-			finally
-			{
-				if (conn.State == ConnectionState.Open)
-				{
-					conn.Close();
-				}
-			}
-			return result;
-		}
-
-		/// <summary>
 		/// 跨库执行
 		/// </summary>
 		/// <param name="dbContext"></param>

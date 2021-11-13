@@ -208,6 +208,47 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
+		/// 执行
+		/// </summary>
+		/// <param name="commands"></param>
+		/// <returns></returns>
+		public int ExecuteNonQuery(IDbCommand[] commands)
+		{
+			var result = 0;
+			var conn = CreateConnection(ConnectionString);
+			IDbTransaction tran = null;
+			try
+			{
+				conn.Open();
+				tran = conn.BeginTransaction();
+				foreach (var command in commands)
+				{
+					command.Connection = conn;
+					command.Transaction = tran;
+					BeforeExecute(command);
+					result += command.ExecuteNonQuery();
+				}
+				tran.Commit();
+			}
+			catch
+			{
+				if (tran != null)
+				{
+					tran.Rollback();
+				}
+				throw;
+			}
+			finally
+			{
+				if (conn.State == ConnectionState.Open)
+				{
+					conn.Close();
+				}
+			}
+			return result;
+		}
+
+		/// <summary>
 		/// 执行之前
 		/// </summary>
 		/// <param name="command"></param>
