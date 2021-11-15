@@ -45,7 +45,7 @@ namespace Adai.Standard.RabbitMQ
 		public static IAsyncConnectionFactory GetConnectionFactory(Config config = null)
 		{
 			var c = config ?? Config;
-			var str = $"{c.Host}-{c.VirtualHost}-{c.Port}-{c.Username}-{c.Password}";
+			var str = $"{c.Host}-{c.Port}-{c.VirtualHost}-{c.Username}-{c.Password}";
 			lock (Locker)
 			{
 				if (!Factories.TryGetValue(str, out var factory))
