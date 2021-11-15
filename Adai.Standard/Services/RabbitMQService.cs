@@ -26,8 +26,8 @@ namespace Adai.Standard.Services
 			Config = new RabbitMQ.Config()
 			{
 				Host = configuration.GetSection("rabbitmq:host").Value,
-				VirtualHost = configuration.GetSection("rabbitmq:vhost").Value,
 				Port = configuration.GetSection("rabbitmq:port").Value.ToInt32(),
+				VirtualHost = configuration.GetSection("rabbitmq:vhost").Value,
 				Username = configuration.GetSection("rabbitmq:username").Value,
 				Password = configuration.GetSection("rabbitmq:password").Value
 			};

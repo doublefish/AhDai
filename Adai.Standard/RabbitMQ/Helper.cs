@@ -53,8 +53,8 @@ namespace Adai.Standard.RabbitMQ
 					factory = new ConnectionFactory()
 					{
 						HostName = c.Host,
-						VirtualHost = c.VirtualHost,
 						Port = c.Port,
+						VirtualHost = c.VirtualHost,
 						UserName = c.Username,
 						Password = c.Password
 					};

@@ -10,13 +10,13 @@
 		/// </summary>
 		public string Host { get; set; }
 		/// <summary>
-		/// VHost
-		/// </summary>
-		public string VirtualHost { get; set; }
-		/// <summary>
 		/// Port
 		/// </summary>
 		public int Port { get; set; }
+		/// <summary>
+		/// VirtualHost
+		/// </summary>
+		public string VirtualHost { get; set; }
 		/// <summary>
 		/// Username
 		/// </summary>

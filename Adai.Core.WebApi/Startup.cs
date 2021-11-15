@@ -367,8 +367,8 @@ namespace Adai.WebApi
 			options.Config = new Standard.RabbitMQ.Config()
 			{
 				Host = Configuration.GetSection("rabbitmq:host").Value,
-				VirtualHost = Configuration.GetSection("rabbitmq:vhost").Value,
 				Port = Configuration.GetSection("rabbitmq:port").Value.ToInt32(),
+				VirtualHost = Configuration.GetSection("rabbitmq:vhost").Value,
 				Username = Configuration.GetSection("rabbitmq:username").Value,
 				Password = Configuration.GetSection("rabbitmq:password").Value
 			};
