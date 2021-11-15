@@ -76,20 +76,59 @@ namespace Adai.Standard.RabbitMQ
 		}
 
 		/// <summary>
-		/// 队列初始化（声明交换器+声明队列+绑定队列）
+		/// 声明交换器
 		/// </summary>
-		/// <param name="queue"></param>
-		/// <param name="routingKey"></param>
 		/// <param name="exchange"></param>
 		/// <param name="config"></param>
-		public static void QueueInit(string queue, string routingKey, Exchange exchange, Config config = null)
+		public static void ExchangeDeclare(Exchange exchange, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
 			using var connection = factory.CreateConnection();
 			using var channel = connection.CreateModel();
-			channel.ExchangeDeclare(exchange.Name, exchange.Type.GetString(), exchange.Durable, exchange.AutoDelete);
-			channel.QueueDeclare(queue, true, false, false);
-			channel.QueueBind(queue, exchange.Name, routingKey);
+			channel.ExchangeDeclare(exchange);
+		}
+
+		/// <summary>
+		/// 声明队列
+		/// </summary>
+		/// <param name="queue"></param>
+		/// <param name="config"></param>
+		public static void QueueDeclare(Queue queue, Config config = null)
+		{
+			var factory = GetConnectionFactory(config);
+			using var connection = factory.CreateConnection();
+			using var channel = connection.CreateModel();
+			channel.QueueDeclare(queue);
+		}
+
+		/// <summary>
+		/// 声明队列并绑定到已存在的交换器
+		/// </summary>
+		/// <param name="queue"></param>
+		/// <param name="exchange"></param>
+		/// <param name="routingKey"></param>
+		/// <param name="config"></param>
+		public static void QueueDeclareAndBind(Queue queue, string exchange, string routingKey, Config config = null)
+		{
+			var factory = GetConnectionFactory(config);
+			using var connection = factory.CreateConnection();
+			using var channel = connection.CreateModel();
+			channel.QueueDeclareAndBind(queue, exchange, routingKey);
+		}
+
+		/// <summary>
+		/// 声明交换器和队列并绑定
+		/// </summary>
+		/// <param name="exchange"></param>
+		/// <param name="queue"></param>
+		/// <param name="routingKey"></param>
+		/// <param name="config"></param>
+		public static void DeclareAndBind(Exchange exchange, Queue queue, string routingKey, Config config = null)
+		{
+			var factory = GetConnectionFactory(config);
+			using var connection = factory.CreateConnection();
+			using var channel = connection.CreateModel();
+			channel.DeclareAndBind(exchange, queue, routingKey);
 		}
 
 		/// <summary>

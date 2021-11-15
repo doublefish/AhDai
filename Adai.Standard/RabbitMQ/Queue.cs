@@ -3,19 +3,17 @@
 namespace Adai.Standard.RabbitMQ
 {
 	/// <summary>
-	/// 交换器
+	/// 队列
 	/// </summary>
-	public class Exchange
+	public class Queue
 	{
 		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="name"></param>
-		/// <param name="type"></param>
-		public Exchange(string name, ExchangeType type = ExchangeType.Direct)
+		public Queue(string name)
 		{
 			Name = name;
-			Type = type;
 		}
 
 		/// <summary>
@@ -23,21 +21,17 @@ namespace Adai.Standard.RabbitMQ
 		/// </summary>
 		public string Name { get; set; }
 		/// <summary>
-		/// 类型
-		/// </summary>
-		public ExchangeType Type { get; set; }
-		/// <summary>
 		/// 持久的（Durable/Transient）默认：true
 		/// </summary>
 		public bool Durable { get; set; } = true;
 		/// <summary>
+		/// 独占
+		/// </summary>
+		public bool Exclusive { get; set; }
+		/// <summary>
 		/// 自动删除
 		/// </summary>
 		public bool AutoDelete { get; set; }
-		/// <summary>
-		/// 内部的
-		/// </summary>
-		public bool Internal { get; set; }
 		/// <summary>
 		/// 参数（无效）
 		/// </summary>
