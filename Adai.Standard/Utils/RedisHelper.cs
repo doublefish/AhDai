@@ -8,17 +8,13 @@ namespace Adai.Standard.Utils
 	/// </summary>
 	public static class RedisHelper
 	{
-		static object Locker { get; set; }
+		static readonly IDictionary<string, IConnectionMultiplexer> ConnectionMultiplexers;
+		static readonly object Locker;
 
 		/// <summary>
 		/// DbCount
 		/// </summary>
 		public const int DbCount = 16;
-
-		/// <summary>
-		/// 连接实例
-		/// </summary>
-		public static IDictionary<string, IConnectionMultiplexer> Instances { get; private set; }
 
 		/// <summary>
 		/// Config
@@ -30,6 +26,7 @@ namespace Adai.Standard.Utils
 		/// </summary>
 		static RedisHelper()
 		{
+			ConnectionMultiplexers = new Dictionary<string, IConnectionMultiplexer>();
 			Locker = new object();
 		}
 
@@ -75,25 +72,21 @@ namespace Adai.Standard.Utils
 			var str = CreateConfiguration(c);
 			lock (Locker)
 			{
-				if (Instances == null)
+				if (!ConnectionMultiplexers.TryGetValue(str, out var multiplexer) || !multiplexer.IsConnected)
 				{
-					Instances = new Dictionary<string, IConnectionMultiplexer>();
-				}
-				if (!Instances.TryGetValue(str, out var instance) || !instance.IsConnected)
-				{
-					instance = ConnectionMultiplexer.Connect(str);
+					multiplexer = ConnectionMultiplexer.Connect(str);
 
 					// 注册事件
-					instance.ConfigurationChangedBroadcast += c.ConfigurationChangedBroadcast;
-					instance.ConfigurationChanged += c.ConfigurationChanged;
-					instance.HashSlotMoved += c.HashSlotMoved;
-					instance.ErrorMessage += c.ErrorMessage;
-					instance.InternalError += c.InternalError;
-					instance.ConnectionFailed += c.ConnectionFailed;
-					instance.ConnectionRestored += c.ConnectionRestored;
-					Instances.Add(str, instance);
+					multiplexer.ConfigurationChangedBroadcast += c.ConfigurationChangedBroadcast;
+					multiplexer.ConfigurationChanged += c.ConfigurationChanged;
+					multiplexer.HashSlotMoved += c.HashSlotMoved;
+					multiplexer.ErrorMessage += c.ErrorMessage;
+					multiplexer.InternalError += c.InternalError;
+					multiplexer.ConnectionFailed += c.ConnectionFailed;
+					multiplexer.ConnectionRestored += c.ConnectionRestored;
+					ConnectionMultiplexers.Add(str, multiplexer);
 				}
-				return instance;
+				return multiplexer;
 			}
 		}
 

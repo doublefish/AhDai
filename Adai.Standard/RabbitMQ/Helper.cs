@@ -11,7 +11,8 @@ namespace Adai.Standard.RabbitMQ
 	/// </summary>
 	public static class Helper
 	{
-		static object Locker { get; set; }
+		static readonly IDictionary<string, IAsyncConnectionFactory> Factories;
+		static readonly object Locker;
 
 		/// <summary>
 		/// Config
@@ -19,15 +20,11 @@ namespace Adai.Standard.RabbitMQ
 		public static Config Config { get; private set; }
 
 		/// <summary>
-		/// 连接实例
-		/// </summary>
-		public static IDictionary<string, IAsyncConnectionFactory> Instances { get; private set; }
-
-		/// <summary>
 		/// 构造函数
 		/// </summary>
 		static Helper()
 		{
+			Factories = new Dictionary<string, IAsyncConnectionFactory>();
 			Locker = new object();
 		}
 
@@ -51,13 +48,9 @@ namespace Adai.Standard.RabbitMQ
 			var str = $"{c.Host}-{c.VirtualHost}-{c.Port}-{c.Username}-{c.Password}";
 			lock (Locker)
 			{
-				if (Instances == null)
+				if (!Factories.TryGetValue(str, out var factory))
 				{
-					Instances = new Dictionary<string, IAsyncConnectionFactory>();
-				}
-				if (!Instances.TryGetValue(str, out var instance))
-				{
-					instance = new ConnectionFactory()
+					factory = new ConnectionFactory()
 					{
 						HostName = c.Host,
 						VirtualHost = c.VirtualHost,
@@ -65,9 +58,9 @@ namespace Adai.Standard.RabbitMQ
 						UserName = c.Username,
 						Password = c.Password
 					};
-					Instances.Add(str, instance);
+					Factories.Add(str, factory);
 				}
-				return instance;
+				return factory;
 			}
 		}
 
