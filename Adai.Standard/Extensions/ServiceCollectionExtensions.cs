@@ -31,11 +31,11 @@ namespace Adai.Standard.Extensions
 		}
 
 		/// <summary>
-		/// 添加RabbitMq服务 - 依赖注入单例
+		/// 添加RabbitMQ服务 - 依赖注入单例
 		/// </summary>
 		/// <param name="services"></param>
 		/// <returns></returns>
-		public static IServiceCollection AddRabbitMqService(this IServiceCollection services)
+		public static IServiceCollection AddRabbitMQService(this IServiceCollection services)
 		{
 			services.AddSingleton<Interfaces.IRabbitMQService, Services.RabbitMQService>();
 			return services;
