@@ -9,14 +9,14 @@ namespace Adai.Standard.Utils
 	public static class MailHelper
 	{
 		/// <summary>
-		/// Config
+		/// 配置
 		/// </summary>
 		public static Models.MailConfig Config { get; private set; }
 
 		/// <summary>
 		/// 初始化
 		/// </summary>
-		/// <param name="config"></param>
+		/// <param name="config">配置</param>
 		public static void Init(Models.MailConfig config)
 		{
 			Config = config;
@@ -25,7 +25,7 @@ namespace Adai.Standard.Utils
 		/// <summary>
 		/// 创建客户端
 		/// </summary>
-		/// <param name="config"></param>
+		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
 		public static SmtpClient CreateSmtpClient(Models.MailConfig config = null)
 		{
@@ -43,10 +43,10 @@ namespace Adai.Standard.Utils
 		/// <summary>
 		/// 发送
 		/// </summary>
-		/// <param name="recipients"></param>
-		/// <param name="subject"></param>
-		/// <param name="body"></param>
-		/// <param name="config"></param>
+		/// <param name="recipients">接收人</param>
+		/// <param name="subject">标题</param>
+		/// <param name="body">内容</param>
+		/// <param name="config">自定义配置</param>
 		public static void Send(string recipients, string subject, string body, Models.MailConfig config = null)
 		{
 			var c = config ?? Config;

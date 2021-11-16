@@ -15,7 +15,7 @@ namespace Adai.Standard.RabbitMQ
 		static readonly object Locker;
 
 		/// <summary>
-		/// Config
+		/// 配置
 		/// </summary>
 		public static Config Config { get; private set; }
 
@@ -31,7 +31,7 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// 初始化
 		/// </summary>
-		/// <param name="config"></param>
+		/// <param name="config">配置</param>
 		public static void Init(Config config)
 		{
 			Config = config;
@@ -40,7 +40,7 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// 获取连接工厂
 		/// </summary>
-		/// <param name="config"></param>
+		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
 		public static IAsyncConnectionFactory GetConnectionFactory(Config config = null)
 		{
@@ -67,7 +67,7 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// 获取连接工厂
 		/// </summary>
-		/// <param name="config"></param>
+		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
 		public static IConnection GetConnection(Config config = null)
 		{
@@ -78,8 +78,8 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// 声明交换器
 		/// </summary>
-		/// <param name="exchange"></param>
-		/// <param name="config"></param>
+		/// <param name="exchange">交换器</param>
+		/// <param name="config">自定义配置</param>
 		public static void ExchangeDeclare(Exchange exchange, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
@@ -92,7 +92,7 @@ namespace Adai.Standard.RabbitMQ
 		/// 声明队列
 		/// </summary>
 		/// <param name="queue"></param>
-		/// <param name="config"></param>
+		/// <param name="config">自定义配置</param>
 		public static void QueueDeclare(Queue queue, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
@@ -104,10 +104,10 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// 声明队列并绑定到已存在的交换器
 		/// </summary>
-		/// <param name="queue"></param>
-		/// <param name="exchange"></param>
-		/// <param name="routingKey"></param>
-		/// <param name="config"></param>
+		/// <param name="queue">队列</param>
+		/// <param name="exchange">交换器</param>
+		/// <param name="routingKey">路由</param>
+		/// <param name="config">自定义配置</param>
 		public static void QueueDeclareAndBind(Queue queue, string exchange, string routingKey, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
@@ -119,10 +119,10 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// 声明交换器和队列并绑定
 		/// </summary>
-		/// <param name="exchange"></param>
-		/// <param name="queue"></param>
-		/// <param name="routingKey"></param>
-		/// <param name="config"></param>
+		/// <param name="exchange">交换器</param>
+		/// <param name="queue">队列</param>
+		/// <param name="routingKey">路由</param>
+		/// <param name="config">自定义配置</param>
 		public static void DeclareAndBind(Exchange exchange, Queue queue, string routingKey, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
@@ -134,11 +134,12 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// 订阅队列
 		/// </summary>
-		/// <param name="queue"></param>
-		/// <param name="excute"></param>
-		/// <param name="config"></param>
+		/// <param name="queue">队列</param>
+		/// <param name="received">接收消息处理方法</param>
+		/// <param name="autoStart">自动启动</param>
+		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
-		public static string Subscribe(string queue, Func<object, BasicDeliverEventArgs, ResultType> excute, Config config = null)
+		public static string Subscribe(string queue, Func<object, BasicDeliverEventArgs, ResultType> received, bool autoStart = true, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
 			var connection = factory.CreateConnection();
@@ -151,7 +152,7 @@ namespace Adai.Standard.RabbitMQ
 				ResultType result;
 				try
 				{
-					result = excute.Invoke(sender, eventArgs);
+					result = received.Invoke(sender, eventArgs);
 				}
 				catch
 				{
@@ -179,17 +180,21 @@ namespace Adai.Standard.RabbitMQ
 						goto case ResultType.Fail;
 				}
 			};
+			if (!autoStart)
+			{
+				return null;
+			}
 			return channel.BasicConsume(queue, false, consumer);
 		}
 
 		/// <summary>
 		/// 发布消息
 		/// </summary>
-		/// <param name="exchange"></param>
-		/// <param name="routingKey"></param>
-		/// <param name="basicProperties"></param>
-		/// <param name="body"></param>
-		/// <param name="config"></param>
+		/// <param name="exchange">交换器</param>
+		/// <param name="routingKey">路由</param>
+		/// <param name="basicProperties">属性</param>
+		/// <param name="body">内容</param>
+		/// <param name="config">自定义配置</param>
 		public static void Publish(string exchange, string routingKey, IBasicProperties basicProperties, ReadOnlyMemory<byte> body, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
@@ -201,11 +206,11 @@ namespace Adai.Standard.RabbitMQ
 		/// <summary>
 		/// 发布消息
 		/// </summary>
-		/// <param name="exchange"></param>
-		/// <param name="routingKey"></param>
-		/// <param name="basicProperties"></param>
-		/// <param name="body"></param>
-		/// <param name="config"></param>
+		/// <param name="exchange">交换器</param>
+		/// <param name="routingKey">路由</param>
+		/// <param name="basicProperties">属性</param>
+		/// <param name="body">内容</param>
+		/// <param name="config">自定义配置</param>
 		public static void Publish(string exchange, string routingKey, IBasicProperties basicProperties, string body, Config config = null)
 		{
 			Publish(exchange, routingKey, basicProperties, Encoding.UTF8.GetBytes(body), config);

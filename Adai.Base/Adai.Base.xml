@@ -978,6 +978,11 @@
             ReflectionHelper
             </summary>
         </member>
+        <member name="M:Adai.Base.Utils.ReflectionHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
         <member name="M:Adai.Base.Utils.ReflectionHelper.GetProperties``1">
             <summary>
             获取属性

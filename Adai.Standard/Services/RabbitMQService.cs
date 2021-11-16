@@ -56,21 +56,22 @@ namespace Adai.Standard.Services
 		/// <summary>
 		/// 订阅队列
 		/// </summary>
-		/// <param name="queue"></param>
-		/// <param name="excute"></param>
+		/// <param name="queue">队列</param>
+		/// <param name="recived">接收消息处理方法</param>
+		/// <param name="autoStart">自动启动</param>
 		/// <returns></returns>
-		public string Subscribe(string queue, Func<object, BasicDeliverEventArgs, RabbitMQ.ResultType> excute)
+		public string Subscribe(string queue, Func<object, BasicDeliverEventArgs, RabbitMQ.ResultType> recived, bool autoStart = true)
 		{
-			return RabbitMQ.Helper.Subscribe(queue, excute, Config);
+			return RabbitMQ.Helper.Subscribe(queue, recived, autoStart, Config);
 		}
 
 		/// <summary>
 		/// 发布消息
 		/// </summary>
-		/// <param name="exchange"></param>
-		/// <param name="routingKey"></param>
-		/// <param name="basicProperties"></param>
-		/// <param name="body"></param>
+		/// <param name="exchange">交换器</param>
+		/// <param name="routingKey">路由</param>
+		/// <param name="basicProperties">属性</param>
+		/// <param name="body">内容</param>
 		public void Publish(string exchange, string routingKey, IBasicProperties basicProperties, ReadOnlyMemory<byte> body)
 		{
 			RabbitMQ.Helper.Publish(exchange, routingKey, basicProperties, body, Config);
@@ -79,10 +80,10 @@ namespace Adai.Standard.Services
 		/// <summary>
 		/// 发布消息
 		/// </summary>
-		/// <param name="exchange"></param>
-		/// <param name="routingKey"></param>
-		/// <param name="basicProperties"></param>
-		/// <param name="body"></param>
+		/// <param name="exchange">交换器</param>
+		/// <param name="routingKey">路由</param>
+		/// <param name="basicProperties">属性</param>
+		/// <param name="body">内容</param>
 		public void Publish(string exchange, string routingKey, IBasicProperties basicProperties, string body)
 		{
 			RabbitMQ.Helper.Publish(exchange, routingKey, basicProperties, body, Config);

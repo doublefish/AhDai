@@ -17,7 +17,7 @@ namespace Adai.Standard.Utils
 		public const int DbCount = 16;
 
 		/// <summary>
-		/// Config
+		/// 配置
 		/// </summary>
 		public static Models.RedisConfig Config { get; private set; }
 
@@ -33,14 +33,14 @@ namespace Adai.Standard.Utils
 		/// <summary>
 		/// 初始化
 		/// </summary>
-		/// <param name="config"></param>
+		/// <param name="config">配置</param>
 		public static void Init(Models.RedisConfig config)
 		{
 			Config = config;
 		}
 
 		/// <summary>
-		/// CreateConfiguration
+		/// 创建连接配置
 		/// </summary>
 		/// <param name="host"></param>
 		/// <param name="port"></param>
@@ -52,19 +52,20 @@ namespace Adai.Standard.Utils
 		}
 
 		/// <summary>
-		/// CreateConfiguration
+		/// 创建连接配置
 		/// </summary>
-		/// <param name="config"></param>
+		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
-		public static string CreateConfiguration(Models.RedisConfig config)
+		public static string CreateConfiguration(Models.RedisConfig config = null)
 		{
-			return CreateConfiguration(config.Host, config.Port, config.Password);
+			var c = config ?? Config;
+			return CreateConfiguration(c.Host, c.Port, c.Password);
 		}
 
 		/// <summary>
 		/// 获取连接实例
 		/// </summary>
-		/// <param name="config"></param>
+		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
 		public static IConnectionMultiplexer GetConnectionMultiplexer(Models.RedisConfig config = null)
 		{
@@ -95,7 +96,7 @@ namespace Adai.Standard.Utils
 		/// </summary>
 		/// <param name="db"></param>
 		/// <param name="asyncState"></param>
-		/// <param name="config"></param>
+		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
 		public static IDatabase GetDatabase(int db = -1, object asyncState = null, Models.RedisConfig config = null)
 		{
@@ -111,7 +112,7 @@ namespace Adai.Standard.Utils
 		/// <summary>
 		/// GetDatabase
 		/// </summary>
-		/// <param name="config"></param>
+		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
 		public static IDatabase GetDatabase(Models.RedisConfig config = null)
 		{
