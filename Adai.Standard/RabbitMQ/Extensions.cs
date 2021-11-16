@@ -1,4 +1,5 @@
 ﻿using RabbitMQ.Client;
+using System.Text;
 
 namespace Adai.Standard.RabbitMQ
 {
@@ -101,6 +102,19 @@ namespace Adai.Standard.RabbitMQ
 				default:
 					goto case ResultType.Fail;
 			}
+		}
+
+		/// <summary>
+		/// 发布消息
+		/// </summary>
+		/// <param name="model">amqp</param>
+		/// <param name="exchange">交换器</param>
+		/// <param name="routingKey">路由</param>
+		/// <param name="basicProperties">属性</param>
+		/// <param name="body">内容</param>
+		public static void BasicPublish(this IModel model, string exchange, string routingKey, IBasicProperties basicProperties, string body)
+		{
+			model.BasicPublish(exchange, routingKey, basicProperties, Encoding.UTF8.GetBytes(body));
 		}
 	}
 }
