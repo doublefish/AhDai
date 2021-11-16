@@ -136,10 +136,9 @@ namespace Adai.Standard.RabbitMQ
 		/// </summary>
 		/// <param name="queue">队列</param>
 		/// <param name="received">接收消息处理方法</param>
-		/// <param name="autoStart">自动启动</param>
 		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
-		public static string Subscribe(string queue, Func<object, BasicDeliverEventArgs, ResultType> received, bool autoStart = true, Config config = null)
+		public static string Subscribe(string queue, Func<object, BasicDeliverEventArgs, ResultType> received, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
 			var connection = factory.CreateConnection();
@@ -158,32 +157,8 @@ namespace Adai.Standard.RabbitMQ
 				{
 					result = ResultType.Exception;
 				}
-				switch (result)
-				{
-					case ResultType.Success:
-						// 业务处理成功，从队列中移除
-						channel.BasicAck(eventArgs.DeliveryTag, false);
-						break;
-					case ResultType.Fail:
-						// 从队列中移除
-						channel.BasicNack(eventArgs.DeliveryTag, false, false);
-						break;
-					case ResultType.Retry:
-						// 添加到队列尾部
-						channel.BasicNack(eventArgs.DeliveryTag, false, true);
-						break;
-					case ResultType.Exception:
-						// 从队列中移除
-						channel.BasicNack(eventArgs.DeliveryTag, false, false);
-						break;
-					default:
-						goto case ResultType.Fail;
-				}
+				channel.Ack(eventArgs.DeliveryTag, result);
 			};
-			if (!autoStart)
-			{
-				return null;
-			}
 			return channel.BasicConsume(queue, false, consumer);
 		}
 

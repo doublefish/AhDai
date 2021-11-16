@@ -26,9 +26,8 @@ namespace Adai.Standard.Interfaces
 		/// </summary>
 		/// <param name="queue">队列</param>
 		/// <param name="recived">接收消息处理方法</param>
-		/// <param name="autoStart">自动启动</param>
 		/// <returns></returns>
-		public string Subscribe(string queue, Func<object, BasicDeliverEventArgs, RabbitMQ.ResultType> recived, bool autoStart = true);
+		public string Subscribe(string queue, Func<object, BasicDeliverEventArgs, RabbitMQ.ResultType> recived);
 
 		/// <summary>
 		/// 发布消息

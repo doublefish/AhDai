@@ -71,5 +71,36 @@ namespace Adai.Standard.RabbitMQ
 			model.QueueDeclare(queue);
 			model.QueueBind(queue.Name, exchange.Name, routingKey);
 		}
+
+		/// <summary>
+		/// 确认消息
+		/// </summary>
+		/// <param name="model">amqp</param>
+		/// <param name="deliveryTag">交货标签</param>
+		/// <param name="result">结果</param>
+		public static void Ack(this IModel model, ulong deliveryTag, ResultType result)
+		{
+			switch (result)
+			{
+				case ResultType.Success:
+					// 业务处理成功，从队列中移除
+					model.BasicAck(deliveryTag, false);
+					break;
+				case ResultType.Fail:
+					// 从队列中移除
+					model.BasicNack(deliveryTag, false, false);
+					break;
+				case ResultType.Retry:
+					// 添加到队列尾部
+					model.BasicNack(deliveryTag, false, true);
+					break;
+				case ResultType.Exception:
+					// 从队列中移除
+					model.BasicNack(deliveryTag, false, false);
+					break;
+				default:
+					goto case ResultType.Fail;
+			}
+		}
 	}
 }
