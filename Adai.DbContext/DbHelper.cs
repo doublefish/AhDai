@@ -12,12 +12,11 @@ namespace Adai.DbContext
 	/// </summary>
 	public static class DbHelper
 	{
-		static object Locker { get; set; }
-
 		/// <summary>
 		/// 表特性
 		/// </summary>
-		public static IDictionary<string, Attributes.TableAttribute> TableAttributes { get; private set; }
+		static readonly IDictionary<string, Attributes.TableAttribute> TableAttributes;
+		static readonly object Locker;
 
 		/// <summary>
 		/// 数据库配置
@@ -34,6 +33,7 @@ namespace Adai.DbContext
 		/// </summary>
 		static DbHelper()
 		{
+			TableAttributes = new Dictionary<string, Attributes.TableAttribute>();
 			Locker = new object();
 		}
 
@@ -67,10 +67,6 @@ namespace Adai.DbContext
 		{
 			lock (Locker)
 			{
-				if (TableAttributes == null)
-				{
-					TableAttributes = new Dictionary<string, Attributes.TableAttribute>();
-				}
 				if (!TableAttributes.TryGetValue(type.FullName, out var data))
 				{
 					var typeA = typeof(Attributes.TableAttribute);
@@ -78,8 +74,8 @@ namespace Adai.DbContext
 					if (attrs != null && attrs.Length > 0)
 					{
 						data = attrs.FirstOrDefault() as Attributes.TableAttribute;
+						data.ColumnAttributes = type.GetColumnAttributes<Attributes.ColumnAttribute>();
 					}
-					data.ColumnAttributes = type.GetColumnAttributes<Attributes.ColumnAttribute>();
 					TableAttributes.Add(type.FullName, data);
 				}
 				return data;
