@@ -44,6 +44,14 @@ namespace Adai.DbContext
 		/// <param name="beforeExecute">执行之前执行，可用于记录SQL，第一个参数是初始化时传入的EventId</param>
 		public static void Init(ICollection<Models.DbConfig> dbConfigs, Action<string, IDbCommand> beforeExecute = null)
 		{
+			var names = new HashSet<string>();
+			foreach (var dbConfig in dbConfigs)
+			{
+				if (!names.Add(dbConfig.Name))
+				{
+					throw new ArgumentException($"存在重复的别名：{dbConfig.Name}", nameof(dbConfigs));
+				}
+			}
 			DbConfigs = dbConfigs;
 			BeforeExecuteAction = beforeExecute;
 		}
