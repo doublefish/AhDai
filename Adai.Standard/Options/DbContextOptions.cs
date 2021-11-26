@@ -10,6 +10,6 @@ namespace Adai.Standard.Options
 		/// <summary>
 		/// 数据库配置
 		/// </summary>
-		public ICollection<DbContext.Models.DbConfig> Configs { get; set; } = new List<DbContext.Models.DbConfig>();
+		public ICollection<DbContext.Models.DbConfig> Configs { get; set; }
 	}
 }

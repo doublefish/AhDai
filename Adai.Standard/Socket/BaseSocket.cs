@@ -61,7 +61,7 @@ namespace Adai.Standard.Socket1
 		/// <param name="remote"></param>
 		/// <param name="state"></param>
 		/// <param name="message"></param>
-		public delegate void StateChangeHandler(Socket remote, Config.SocketState state, string message);
+		public delegate void StateChangeHandler(Socket remote, Socket1.SocketState state, string message);
 
 		/// <summary>
 		/// 接收消息事件
@@ -99,7 +99,7 @@ namespace Adai.Standard.Socket1
 		/// <param name="remote"></param>
 		protected void Open(Socket remote)
 		{
-			ChangeState(remote, Config.SocketState.Open, "开启连接");
+			ChangeState(remote, Socket1.SocketState.Open, "开启连接");
 		}
 
 		/// <summary>
@@ -109,7 +109,7 @@ namespace Adai.Standard.Socket1
 		/// <param name="reason"></param>
 		protected void Close(Socket remote, string reason = "close")
 		{
-			ChangeState(remote, Config.SocketState.Closed, reason);
+			ChangeState(remote, Socket1.SocketState.Closed, reason);
 			remote.Shutdown(SocketShutdown.Both);
 			if (remote.Connected)
 			{
@@ -184,7 +184,7 @@ namespace Adai.Standard.Socket1
 		/// <param name="remote"></param>
 		/// <param name="state"></param>
 		/// <param name="message"></param>
-		protected void ChangeState(Socket remote, Config.SocketState state, string message)
+		protected void ChangeState(Socket remote, Socket1.SocketState state, string message)
 		{
 			Send(message, remote);
 			Utils.Log4netHelper.Info($"【{remote.RemoteEndPoint}】的连接状态变为=>[{state}],{message}");

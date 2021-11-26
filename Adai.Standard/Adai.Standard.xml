@@ -99,29 +99,134 @@
             Person
             </summary>
         </member>
-        <member name="T:Adai.Standard.Config.SocketState">
+        <member name="T:Adai.Standard.Config.Db">
             <summary>
-            SocketState
+            数据库相关
             </summary>
         </member>
-        <member name="F:Adai.Standard.Config.SocketState.Connecting">
+        <member name="M:Adai.Standard.Config.Db.#cctor">
             <summary>
-            连接中
+            构造函数
             </summary>
         </member>
-        <member name="F:Adai.Standard.Config.SocketState.Open">
+        <member name="F:Adai.Standard.Config.Db.Master">
             <summary>
-            已连接
+            主库
             </summary>
         </member>
-        <member name="F:Adai.Standard.Config.SocketState.Closing">
+        <member name="F:Adai.Standard.Config.Db.Product">
             <summary>
-            关闭中
+            产品库
             </summary>
         </member>
-        <member name="F:Adai.Standard.Config.SocketState.Closed">
+        <member name="F:Adai.Standard.Config.Db.Report">
             <summary>
-            已关闭
+            报表库
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.Db.Digital">
+            <summary>
+            数码库
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.Db.Foreign">
+            <summary>
+            外码库
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.Db.Marketing">
+            <summary>
+            营销库
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.Config.Mail">
+            <summary>
+            邮件相关
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Config.Mail.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.Mail.SmtpHost">
+            <summary>
+            Smtp主机
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.Mail.SmtpPort">
+            <summary>
+            Smtp端口
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.Mail.SmtpUsername">
+            <summary>
+            Smtp用户名
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.Mail.SmtpPassword">
+            <summary>
+            Smtp密码
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.Config.RabbitMQ">
+            <summary>
+            RabbitMQ相关
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Config.RabbitMQ.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.RabbitMQ.Host">
+            <summary>
+            主机
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.RabbitMQ.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.RabbitMQ.VirtualHost">
+            <summary>
+            虚拟主机
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.RabbitMQ.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.RabbitMQ.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:Adai.Standard.Config.Redis">
+            <summary>
+            Redis相关
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Config.Redis.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.Redis.Host">
+            <summary>
+            主机
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.Redis.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Config.Redis.Password">
+            <summary>
+            密码
             </summary>
         </member>
         <member name="T:Adai.Standard.Const">
@@ -215,16 +320,37 @@
             <param name="builder"></param>
             <returns></returns>
         </member>
-        <member name="T:Adai.Standard.Extensions.ConfigExtensions">
+        <member name="T:Adai.Standard.Extensions.ConfigurationExtensions">
             <summary>
-            ConfigExt
+            ConfigurationExtensions
             </summary>
         </member>
-        <member name="M:Adai.Standard.Extensions.ConfigExtensions.GetNote(Adai.Standard.Config.SocketState)">
+        <member name="M:Adai.Standard.Extensions.ConfigurationExtensions.GetDbConfigs(Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
-            获取说明
+            获取数据库配置
             </summary>
-            <param name="state"></param>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Extensions.ConfigurationExtensions.GetMailConfig(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取邮件配置
+            </summary>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Extensions.ConfigurationExtensions.GetRedisConfig(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取Redis配置
+            </summary>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Extensions.ConfigurationExtensions.GetRabbitMQConfig(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取RabbitMQ配置
+            </summary>
+            <param name="configuration"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.Standard.Extensions.HttpRequestExtensions">
@@ -892,7 +1018,7 @@
             数据库服务
             </summary>
         </member>
-        <member name="M:Adai.Standard.Interfaces.IDbService.GetDbContext(System.String,System.String)">
+        <member name="M:Adai.Standard.Interfaces.IDbService.GetMySqlDbContext(System.String,System.String)">
             <summary>
             GetDbContext
             </summary>
@@ -908,6 +1034,31 @@
             <param name="fileName"></param>
             <param name="version"></param>
             <returns></returns>
+        </member>
+        <member name="T:Adai.Standard.Interfaces.IPublishService">
+            <summary>
+            发布服务
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Interfaces.IPublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.ReadOnlyMemory{System.Byte})">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="messageId">消息Id</param>
+            <param name="headers">头</param>
+            <param name="body">内容</param>
+        </member>
+        <member name="M:Adai.Standard.Interfaces.IPublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="messageId">消息Id</param>
+            <param name="headers">头</param>
+            <param name="body">内容</param>
         </member>
         <member name="T:Adai.Standard.Interfaces.IRabbitMQService">
             <summary>
@@ -926,32 +1077,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Interfaces.IRabbitMQService.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Standard.RabbitMQ.ResultType})">
-            <summary>
-            订阅队列
-            </summary>
-            <param name="queue"></param>
-            <param name="excute"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Interfaces.IRabbitMQService.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.ReadOnlyMemory{System.Byte})">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange"></param>
-            <param name="routingKey"></param>
-            <param name="basicProperties"></param>
-            <param name="body"></param>
-        </member>
-        <member name="M:Adai.Standard.Interfaces.IRabbitMQService.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.String)">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange"></param>
-            <param name="routingKey"></param>
-            <param name="basicProperties"></param>
-            <param name="body"></param>
-        </member>
         <member name="T:Adai.Standard.Interfaces.IRedisService">
             <summary>
             Redis服务
@@ -963,6 +1088,19 @@
             </summary>
             <param name="db"></param>
             <param name="asyncState"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Standard.Interfaces.ISubscribeService">
+            <summary>
+            订阅服务
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Interfaces.ISubscribeService.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Standard.RabbitMQ.ResultType})">
+            <summary>
+            订阅队列
+            </summary>
+            <param name="queue">队列</param>
+            <param name="received">接收消息处理方法</param>
             <returns></returns>
         </member>
         <member name="T:Adai.Standard.Language">
@@ -1691,27 +1829,27 @@
         </member>
         <member name="P:Adai.Standard.RabbitMQ.Config.Host">
             <summary>
-            Host
+            主机
             </summary>
         </member>
         <member name="P:Adai.Standard.RabbitMQ.Config.Port">
             <summary>
-            Port
+            端口
             </summary>
         </member>
         <member name="P:Adai.Standard.RabbitMQ.Config.VirtualHost">
             <summary>
-            VirtualHost
+            虚拟主机
             </summary>
         </member>
         <member name="P:Adai.Standard.RabbitMQ.Config.Username">
             <summary>
-            Username
+            用户名
             </summary>
         </member>
         <member name="P:Adai.Standard.RabbitMQ.Config.Password">
             <summary>
-            Password
+            密码
             </summary>
         </member>
         <member name="T:Adai.Standard.RabbitMQ.Exchange">
@@ -1744,11 +1882,6 @@
         <member name="P:Adai.Standard.RabbitMQ.Exchange.AutoDelete">
             <summary>
             自动删除
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.RabbitMQ.Exchange.Internal">
-            <summary>
-            内部的
             </summary>
         </member>
         <member name="P:Adai.Standard.RabbitMQ.Exchange.Arguments">
@@ -1812,6 +1945,15 @@
             <param name="model">amqp</param>
             <param name="queue">队列</param>
         </member>
+        <member name="M:Adai.Standard.RabbitMQ.Extensions.QueueBind(RabbitMQ.Client.IModel,Adai.Standard.RabbitMQ.Queue,System.String,System.String)">
+            <summary>
+            绑定队列
+            </summary>
+            <param name="model">amqp</param>
+            <param name="queue">队列</param>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+        </member>
         <member name="M:Adai.Standard.RabbitMQ.Extensions.QueueDeclareAndBind(RabbitMQ.Client.IModel,Adai.Standard.RabbitMQ.Queue,System.String,System.String)">
             <summary>
             声明队列并绑定到已存在的交换器
@@ -1829,6 +1971,33 @@
             <param name="exchange">交换器</param>
             <param name="queue">队列</param>
             <param name="routingKey">路由</param>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Extensions.Ack(RabbitMQ.Client.IModel,System.UInt64,Adai.Standard.RabbitMQ.ResultType)">
+            <summary>
+            确认消息
+            </summary>
+            <param name="model">amqp</param>
+            <param name="deliveryTag">交货标签</param>
+            <param name="result">结果</param>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Extensions.BasicConsume(RabbitMQ.Client.IModel,System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Standard.RabbitMQ.ResultType})">
+            <summary>
+            订阅队列
+            </summary>
+            <param name="model">amqp</param>
+            <param name="queue">队列</param>
+            <param name="received">接收消息处理方法</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Extensions.BasicPublish(RabbitMQ.Client.IModel,System.String,System.String,RabbitMQ.Client.IBasicProperties,System.String)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="model">amqp</param>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="basicProperties">属性</param>
+            <param name="body">内容</param>
         </member>
         <member name="T:Adai.Standard.RabbitMQ.Helper">
             <summary>
@@ -1877,6 +2046,15 @@
             声明队列
             </summary>
             <param name="queue"></param>
+            <param name="config">自定义配置</param>
+        </member>
+        <member name="M:Adai.Standard.RabbitMQ.Helper.QueueBind(Adai.Standard.RabbitMQ.Queue,System.String,System.String,Adai.Standard.RabbitMQ.Config)">
+            <summary>
+            声明队列并绑定到已存在的交换器
+            </summary>
+            <param name="queue">队列</param>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
             <param name="config">自定义配置</param>
         </member>
         <member name="M:Adai.Standard.RabbitMQ.Helper.QueueDeclareAndBind(Adai.Standard.RabbitMQ.Queue,System.String,System.String,Adai.Standard.RabbitMQ.Config)">
@@ -1992,15 +2170,20 @@
             数据库服务
             </summary>
         </member>
+        <member name="P:Adai.Standard.Services.DbService.Configs">
+            <summary>
+            配置
+            </summary>
+        </member>
         <member name="M:Adai.Standard.Services.DbService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             构造函数
             </summary>
             <param name="configuration"></param>
         </member>
-        <member name="M:Adai.Standard.Services.DbService.GetDbContext(System.String,System.String)">
+        <member name="M:Adai.Standard.Services.DbService.GetMySqlDbContext(System.String,System.String)">
             <summary>
-            GetDbContext
+            GetMySqlDbContext
             </summary>
             <param name="eventId"></param>
             <param name="dbName"></param>
@@ -2018,11 +2201,6 @@
         <member name="T:Adai.Standard.Services.LoggerService">
             <summary>
             LoggerService
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Services.LoggerService.EventId">
-            <summary>
-            EventId
             </summary>
         </member>
         <member name="M:Adai.Standard.Services.LoggerService.#ctor">
@@ -2056,6 +2234,37 @@
             <param name="logLevel"></param>
             <returns></returns>
         </member>
+        <member name="T:Adai.Standard.Services.PublishService">
+            <summary>
+            RabbitMQ发布服务
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Services.PublishService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Adai.Standard.Services.PublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.ReadOnlyMemory{System.Byte})">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="messageId">消息Id</param>
+            <param name="headers">头</param>
+            <param name="body">内容</param>
+        </member>
+        <member name="M:Adai.Standard.Services.PublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="messageId">消息Id</param>
+            <param name="headers">头</param>
+            <param name="body">内容</param>
+        </member>
         <member name="T:Adai.Standard.Services.RabbitMQService">
             <summary>
             RabbitMQ服务
@@ -2084,32 +2293,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Services.RabbitMQService.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Standard.RabbitMQ.ResultType})">
-            <summary>
-            订阅队列
-            </summary>
-            <param name="queue"></param>
-            <param name="excute"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.Standard.Services.RabbitMQService.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.ReadOnlyMemory{System.Byte})">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange"></param>
-            <param name="routingKey"></param>
-            <param name="basicProperties"></param>
-            <param name="body"></param>
-        </member>
-        <member name="M:Adai.Standard.Services.RabbitMQService.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.String)">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange"></param>
-            <param name="routingKey"></param>
-            <param name="basicProperties"></param>
-            <param name="body"></param>
-        </member>
         <member name="T:Adai.Standard.Services.RedisService">
             <summary>
             Redis服务
@@ -2126,12 +2309,42 @@
             </summary>
             <param name="configuration"></param>
         </member>
+        <member name="M:Adai.Standard.Services.RedisService.#ctor(Adai.Standard.Models.RedisConfig)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="config"></param>
+        </member>
         <member name="M:Adai.Standard.Services.RedisService.GetDatabase(System.Int32,System.Object)">
             <summary>
             GetDatabase
             </summary>
             <param name="db"></param>
             <param name="asyncState"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Standard.Services.SubscribeService">
+            <summary>
+            RabbitMQ订阅服务
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Services.SubscribeService.Channel">
+            <summary>
+            通道
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Services.SubscribeService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Adai.Standard.Services.SubscribeService.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Standard.RabbitMQ.ResultType})">
+            <summary>
+            订阅队列
+            </summary>
+            <param name="queue">队列</param>
+            <param name="received">接收消息处理方法</param>
             <returns></returns>
         </member>
         <member name="T:Adai.Standard.Socket1.BaseSocket">
@@ -2262,7 +2475,7 @@
             <param name="remote"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Socket1.BaseSocket.ChangeState(System.Net.Sockets.Socket,Adai.Standard.Config.SocketState,System.String)">
+        <member name="M:Adai.Standard.Socket1.BaseSocket.ChangeState(System.Net.Sockets.Socket,Adai.Standard.Socket1.SocketState,System.String)">
             <summary>
             改变状态
             </summary>
@@ -2275,6 +2488,18 @@
             监听消息
             </summary>
             <param name="client"></param>
+        </member>
+        <member name="T:Adai.Standard.Socket1.Extensions">
+            <summary>
+            ConfigExt
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Socket1.Extensions.GetNote(Adai.Standard.Socket1.SocketState)">
+            <summary>
+            获取说明
+            </summary>
+            <param name="state"></param>
+            <returns></returns>
         </member>
         <member name="T:Adai.Standard.Socket1.SocketClient">
             <summary>
@@ -2303,6 +2528,31 @@
             <param name="port"></param>
             <param name="name"></param>
             <param name="log"></param>
+        </member>
+        <member name="T:Adai.Standard.Socket1.SocketState">
+            <summary>
+            SocketState
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Socket1.SocketState.Connecting">
+            <summary>
+            连接中
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Socket1.SocketState.Open">
+            <summary>
+            已连接
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Socket1.SocketState.Closing">
+            <summary>
+            关闭中
+            </summary>
+        </member>
+        <member name="F:Adai.Standard.Socket1.SocketState.Closed">
+            <summary>
+            已关闭
+            </summary>
         </member>
         <member name="T:Adai.Standard.Utils.ComputerHelper">
             <summary>

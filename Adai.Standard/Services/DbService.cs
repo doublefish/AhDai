@@ -1,4 +1,5 @@
 ﻿using Adai.DbContext;
+using Adai.Standard.Extensions;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
@@ -10,32 +11,27 @@ namespace Adai.Standard.Services
 	public class DbService : Interfaces.IDbService
 	{
 		/// <summary>
+		/// 配置
+		/// </summary>
+		public ICollection<DbContext.Models.DbConfig> Configs { get; private set; }
+
+		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="configuration"></param>
 		public DbService(IConfiguration configuration)
 		{
-			var dbs = new string[] { "db0", "db1" };
-			var dbConfigs = new List<DbContext.Models.DbConfig>();
-			foreach (var db in dbs)
-			{
-				dbConfigs.Add(new DbContext.Models.DbConfig()
-				{
-					DbType = DbContext.Config.DbType.MySQL,
-					Name = db,
-					ConnectionString = configuration.GetSection($"db:{db}").Value
-				});
-			}
-			Utils.DbContextHelper.Init(dbConfigs);
+			Configs = configuration.GetDbConfigs();
+			Utils.DbContextHelper.Init(Configs);
 		}
 
 		/// <summary>
-		/// GetDbContext
+		/// GetMySqlDbContext
 		/// </summary>
 		/// <param name="eventId"></param>
 		/// <param name="dbName"></param>
 		/// <returns></returns>
-		public IDbContext GetDbContext(string eventId, string dbName = null)
+		public IDbContext GetMySqlDbContext(string eventId, string dbName = null)
 		{
 			return Utils.DbContextHelper.GetMySqlDbContext(eventId, dbName);
 		}

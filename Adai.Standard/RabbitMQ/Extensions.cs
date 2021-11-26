@@ -1,4 +1,6 @@
 ﻿using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System;
 using System.Text;
 
 namespace Adai.Standard.RabbitMQ
@@ -44,6 +46,18 @@ namespace Adai.Standard.RabbitMQ
 		public static QueueDeclareOk QueueDeclare(this IModel model, Queue queue)
 		{
 			return model.QueueDeclare(queue.Name, queue.Durable, queue.Exclusive, queue.AutoDelete, queue.Arguments);
+		}
+
+		/// <summary>
+		/// 绑定队列
+		/// </summary>
+		/// <param name="model">amqp</param>
+		/// <param name="queue">队列</param>
+		/// <param name="exchange">交换器</param>
+		/// <param name="routingKey">路由</param>
+		public static void QueueBind(this IModel model, Queue queue, string exchange, string routingKey)
+		{
+			model.QueueBind(queue.Name, exchange, routingKey);
 		}
 
 		/// <summary>
@@ -102,6 +116,33 @@ namespace Adai.Standard.RabbitMQ
 				default:
 					goto case ResultType.Fail;
 			}
+		}
+
+		/// <summary>
+		/// 订阅队列
+		/// </summary>
+		/// <param name="model">amqp</param>
+		/// <param name="queue">队列</param>
+		/// <param name="received">接收消息处理方法</param>
+		/// <returns></returns>
+		public static string BasicConsume(this IModel model, string queue, Func<object, BasicDeliverEventArgs, ResultType> received)
+		{
+			// 消费者
+			var consumer = new EventingBasicConsumer(model);
+			consumer.Received += (sender, eventArgs) =>
+			{
+				ResultType result;
+				try
+				{
+					result = received.Invoke(sender, eventArgs);
+				}
+				catch
+				{
+					result = ResultType.Exception;
+				}
+				model.Ack(eventArgs.DeliveryTag, result);
+			};
+			return model.BasicConsume(queue, false, consumer);
 		}
 
 		/// <summary>

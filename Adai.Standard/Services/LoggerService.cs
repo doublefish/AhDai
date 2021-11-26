@@ -10,17 +10,11 @@ namespace Adai.Standard.Services
 	public class LoggerService : ILogger
 	{
 		/// <summary>
-		/// EventId
-		/// </summary>
-		public string EventId { get; private set; }
-
-		/// <summary>
 		/// 构造函数
 		/// </summary>
 		public LoggerService()
 		{
-			EventId = Guid.NewGuid().ToString();
-			this.LogInformation($"初始化=>{EventId}");
+			//Console.WriteLine($"new LoggerService=>{EventId}");
 		}
 
 		/// <summary>
@@ -34,13 +28,22 @@ namespace Adai.Standard.Services
 		/// <param name="formatter"></param>
 		public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
 		{
-			var st = new StackTrace(6, true);
+			var st = new StackTrace(3, true);
 			var sfs = st.GetFrames();
 			var trace = string.Empty;
-			if (StackFrame.OFFSET_UNKNOWN != sfs[0].GetILOffset())
+			var offset = sfs[0].GetILOffset();
+			foreach (var sf in sfs)
 			{
-				var methodInfo = sfs[0].GetMethod();
-				trace = $"{methodInfo?.ReflectedType?.FullName}.{methodInfo?.Name}:{sfs[0].GetFileLineNumber()}";
+				var method = sf.GetMethod();
+				var fullName = method.DeclaringType.FullName;
+				if (StackFrame.OFFSET_UNKNOWN == offset ||
+					fullName.StartsWith("Microsoft.Extensions.Logging")
+					|| fullName == "Adai.Standard.Extensions.LoggerExtensions")
+				{
+					continue;
+				}
+				trace = $"{method?.ReflectedType?.FullName}.{method?.Name}:{sf.GetFileLineNumber()}";
+				break;
 			}
 
 			var levelName = logLevel switch

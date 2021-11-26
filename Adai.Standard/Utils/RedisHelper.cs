@@ -48,7 +48,7 @@ namespace Adai.Standard.Utils
 		/// <returns></returns>
 		public static string CreateConfiguration(string host = "127.0.0.1", int port = 6379, string password = null)
 		{
-			return $"{host}:{port},password={password}";
+			return $"{host}:{port},password={password},abortConnect=false";
 		}
 
 		/// <summary>

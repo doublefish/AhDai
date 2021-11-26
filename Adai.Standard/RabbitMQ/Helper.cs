@@ -108,6 +108,21 @@ namespace Adai.Standard.RabbitMQ
 		/// <param name="exchange">交换器</param>
 		/// <param name="routingKey">路由</param>
 		/// <param name="config">自定义配置</param>
+		public static void QueueBind(Queue queue, string exchange, string routingKey, Config config = null)
+		{
+			var factory = GetConnectionFactory(config);
+			using var connection = factory.CreateConnection();
+			using var channel = connection.CreateModel();
+			channel.QueueBind(queue, exchange, routingKey);
+		}
+
+		/// <summary>
+		/// 声明队列并绑定到已存在的交换器
+		/// </summary>
+		/// <param name="queue">队列</param>
+		/// <param name="exchange">交换器</param>
+		/// <param name="routingKey">路由</param>
+		/// <param name="config">自定义配置</param>
 		public static void QueueDeclareAndBind(Queue queue, string exchange, string routingKey, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
@@ -141,25 +156,9 @@ namespace Adai.Standard.RabbitMQ
 		public static string Subscribe(string queue, Func<object, BasicDeliverEventArgs, ResultType> received, Config config = null)
 		{
 			var factory = GetConnectionFactory(config);
-			var connection = factory.CreateConnection();
-			var channel = connection.CreateModel();
-
-			// 消费者
-			var consumer = new EventingBasicConsumer(channel);
-			consumer.Received += (sender, eventArgs) =>
-			{
-				ResultType result;
-				try
-				{
-					result = received.Invoke(sender, eventArgs);
-				}
-				catch
-				{
-					result = ResultType.Exception;
-				}
-				channel.Ack(eventArgs.DeliveryTag, result);
-			};
-			return channel.BasicConsume(queue, false, consumer);
+			using var connection = factory.CreateConnection();
+			using var channel = connection.CreateModel();
+			return channel.BasicConsume(queue, received);
 		}
 
 		/// <summary>

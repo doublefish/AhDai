@@ -1,4 +1,4 @@
-﻿namespace Adai.Standard.Config
+﻿namespace Adai.Standard.Socket1
 {
 	/// <summary>
 	/// SocketState

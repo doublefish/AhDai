@@ -1,5 +1,4 @@
-﻿using Adai.Base.Extensions;
-using Adai.Standard.Extensions;
+﻿using Adai.Standard.Extensions;
 using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
 
@@ -21,12 +20,17 @@ namespace Adai.Standard.Services
 		/// <param name="configuration"></param>
 		public RedisService(IConfiguration configuration)
 		{
-			Config = new Models.RedisConfig()
-			{
-				Host = configuration.GetSection("redis:host").Value,
-				Port = configuration.GetSection("redis:port").Value.ToInt32(),
-				Password = configuration.GetSection("redis:password").Value
-			};
+			Config = configuration.GetRedisConfig();
+			Utils.RedisHelper.Init(Config);
+		}
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="config"></param>
+		public RedisService(Models.RedisConfig config)
+		{
+			Config = config;
 			Utils.RedisHelper.Init(Config);
 		}
 

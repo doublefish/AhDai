@@ -35,10 +35,6 @@ namespace Adai.Standard.RabbitMQ
 		/// </summary>
 		public bool AutoDelete { get; set; }
 		/// <summary>
-		/// 内部的
-		/// </summary>
-		public bool Internal { get; set; }
-		/// <summary>
 		/// 参数（无效）
 		/// </summary>
 		public IDictionary<string, object> Arguments { get; set; }

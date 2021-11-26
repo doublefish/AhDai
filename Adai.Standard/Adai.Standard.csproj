@@ -52,7 +52,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Http\" />
 	  <Folder Include="Middlewares\" />
 	</ItemGroup>
 

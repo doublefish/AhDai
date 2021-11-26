@@ -165,11 +165,11 @@ namespace Adai.WebApi
 			});
 
 			// 注册DbContext
-			services.AddDbContext(AddDbContextConfig);
+			services.AddDbContext(options => { options.Configs = Configuration.GetDbConfigs(); });
 			// 注册Redis
-			services.AddRedis(AddRedisConfig);
+			services.AddRedis(options => { options.Config = Configuration.GetRedisConfig(); });
 			// 注册RabbitMQ
-			services.AddRabbitMQ(AddRabbitMQConfig);
+			services.AddRabbitMQ(options => { options.Config = Configuration.GetRabbitMQConfig(); });
 
 			// 注册Swagger生成器，定义一个和多个Swagger 文档
 			services.AddSwaggerGen(options =>
@@ -335,58 +335,6 @@ namespace Adai.WebApi
 			{
 				options.AddConfig(DbContext.Config.DbType.MySQL, db, Configuration.GetSection($"db:{db}").Value);
 			}
-		}
-
-		/// <summary>
-		/// AddRedisConfig
-		/// </summary>
-		/// <param name="options"></param>
-		public virtual void AddRedisConfig(Standard.Options.RedisOptions options)
-		{
-			options.Config = new Standard.Models.RedisConfig()
-			{
-				Host = Configuration.GetSection("redis:host").Value,
-				Port = Configuration.GetSection("redis:port").Value.ToInt32(),
-				Password = Configuration.GetSection("redis:password").Value
-			};
-			options.Config.ConfigurationChangedBroadcast = StartupRedis.ConfigurationChangedBroadcast;
-			options.Config.ConfigurationChanged = StartupRedis.ConfigurationChanged;
-			options.Config.HashSlotMoved = StartupRedis.HashSlotMoved;
-			options.Config.ErrorMessage = StartupRedis.ErrorMessage;
-			options.Config.InternalError = StartupRedis.InternalError;
-			options.Config.ConnectionFailed = StartupRedis.ConnectionFailed;
-			options.Config.ConnectionRestored = StartupRedis.ConnectionRestored;
-		}
-
-		/// <summary>
-		/// AddRabbitMQConfig
-		/// </summary>
-		/// <param name="options"></param>
-		public virtual void AddRabbitMQConfig(Standard.Options.RabbitMQOptions options)
-		{
-			options.Config = new Standard.RabbitMQ.Config()
-			{
-				Host = Configuration.GetSection("rabbitmq:host").Value,
-				Port = Configuration.GetSection("rabbitmq:port").Value.ToInt32(),
-				VirtualHost = Configuration.GetSection("rabbitmq:vhost").Value,
-				Username = Configuration.GetSection("rabbitmq:username").Value,
-				Password = Configuration.GetSection("rabbitmq:password").Value
-			};
-		}
-
-		/// <summary>
-		/// AddMailConfig
-		/// </summary>
-		/// <param name="options"></param>
-		public virtual void AddMailConfig(Standard.Options.MailOptions options)
-		{
-			options.Config = new Standard.Models.MailConfig()
-			{
-				SmtpHost = Configuration.GetSection("mail:smtp:host").Value,
-				SmtpPort = Configuration.GetSection("mail:smtp:port").Value.ToInt32(),
-				SmtpUsername = Configuration.GetSection("mail:smtp:username").Value,
-				SmtpPassword = Configuration.GetSection("mail:smtp:password").Value
-			};
 		}
 
 		/// <summary>

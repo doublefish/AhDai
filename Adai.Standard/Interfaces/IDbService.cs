@@ -13,7 +13,7 @@ namespace Adai.Standard.Interfaces
 		/// <param name="eventId"></param>
 		/// <param name="dbName"></param>
 		/// <returns></returns>
-		public IDbContext GetDbContext(string eventId, string dbName = null);
+		public IDbContext GetMySqlDbContext(string eventId, string dbName = null);
 
 		/// <summary>
 		/// GetSQLiteDbContext
