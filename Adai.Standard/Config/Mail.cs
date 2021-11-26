@@ -24,18 +24,18 @@ namespace Adai.Standard.Config
 		/// <summary>
 		/// Smtp主机
 		/// </summary>
-		public static string SmtpHost = "mail:smtp:host";
+		public static readonly string SmtpHost = "mail:smtp:host";
 		/// <summary>
 		/// Smtp端口
 		/// </summary>
-		public static string SmtpPort = "mail:smtp:port";
+		public static readonly string SmtpPort = "mail:smtp:port";
 		/// <summary>
 		/// Smtp用户名
 		/// </summary>
-		public static string SmtpUsername = "mail:smtp:username";
+		public static readonly string SmtpUsername = "mail:smtp:username";
 		/// <summary>
 		/// Smtp密码
 		/// </summary>
-		public static string SmtpPassword = "mail:smtp:password";
+		public static readonly string SmtpPassword = "mail:smtp:password";
 	}
 }

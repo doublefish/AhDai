@@ -24,14 +24,14 @@ namespace Adai.Standard.Config
 		/// <summary>
 		/// 主机
 		/// </summary>
-		public static string Host = "redis:host";
+		public static readonly string Host = "redis:host";
 		/// <summary>
 		/// 端口
 		/// </summary>
-		public static string Port = "redis:port";
+		public static readonly string Port = "redis:port";
 		/// <summary>
 		/// 密码
 		/// </summary>
-		public static string Password = "redis:password";
+		public static readonly string Password = "redis:password";
 	}
 }

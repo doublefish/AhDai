@@ -28,26 +28,26 @@ namespace Adai.Standard.Config
 		/// <summary>
 		/// 主库
 		/// </summary>
-		public static string Master = "db:master";
+		public static readonly string Master = "db:master";
 		/// <summary>
 		/// 产品库
 		/// </summary>
-		public static string Product = "db:product";
+		public static readonly string Product = "db:product";
 		/// <summary>
 		/// 报表库
 		/// </summary>
-		public static string Report = "db:report";
+		public static readonly string Report = "db:report";
 		/// <summary>
 		/// 数码库
 		/// </summary>
-		public static string Digital = "db:digital";
+		public static readonly string Digital = "db:digital";
 		/// <summary>
 		/// 外码库
 		/// </summary>
-		public static string Foreign = "db:foreign";
+		public static readonly string Foreign = "db:foreign";
 		/// <summary>
 		/// 营销库
 		/// </summary>
-		public static string Marketing = "db:marketing";
+		public static readonly string Marketing = "db:marketing";
 	}
 }
