@@ -6,19 +6,19 @@
 	public class MailConfig
 	{
 		/// <summary>
-		/// SmtpHost
+		/// Smtp主机
 		/// </summary>
 		public string SmtpHost { get; set; }
 		/// <summary>
-		/// SmtpPort
+		/// Smtp端口
 		/// </summary>
 		public int SmtpPort { get; set; }
 		/// <summary>
-		/// SmtpUsername
+		/// Smtp用户名
 		/// </summary>
 		public string SmtpUsername { get; set; }
 		/// <summary>
-		/// SmtpPassword
+		/// Smtp密码
 		/// </summary>
 		public string SmtpPassword { get; set; }
 	}

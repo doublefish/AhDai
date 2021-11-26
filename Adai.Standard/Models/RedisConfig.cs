@@ -9,19 +9,19 @@ namespace Adai.Standard.Models
 	public class RedisConfig
 	{
 		/// <summary>
-		/// Host
+		/// 主机
 		/// </summary>
 		public string Host { get; set; }
 		/// <summary>
-		/// Port
+		/// 端口
 		/// </summary>
 		public int Port { get; set; }
 		/// <summary>
-		/// Password
+		/// 密码
 		/// </summary>
 		public string Password { get; set; }
 		/// <summary>
-		/// Database
+		/// 默认库
 		/// </summary>
 		public int Database { get; set; }
 
