@@ -55,57 +55,8 @@ namespace Adai.DbContext.Extensions
 					pi.SetValue(obj, value);
 					continue;
 				}
-
-				switch (pi.PropertyType.FullName)
-				{
-					case "System.Byte":
-						pi.SetValue(obj, byte.MinValue);
-						break;
-					case "System.SByte":
-						pi.SetValue(obj, sbyte.MinValue);
-						break;
-					case "System.Char":
-						pi.SetValue(obj, char.MinValue);
-						break;
-					case "System.String":
-						pi.SetValue(obj, string.Empty);
-						break;
-					case "System.Int16":
-						pi.SetValue(obj, short.MinValue);
-						break;
-					case "System.Int32":
-						pi.SetValue(obj, int.MinValue);
-						break;
-					case "System.Int64":
-						pi.SetValue(obj, long.MinValue);
-						break;
-					case "System.UInt16":
-						pi.SetValue(obj, ushort.MinValue);
-						break;
-					case "System.UInt32":
-						pi.SetValue(obj, uint.MinValue);
-						break;
-					case "System.UInt64":
-						pi.SetValue(obj, ulong.MinValue);
-						break;
-					case "System.Boolean":
-						pi.SetValue(obj, false);
-						break;
-					case "System.Single":
-						pi.SetValue(obj, float.MinValue);
-						break;
-					case "System.Double":
-						pi.SetValue(obj, double.MinValue);
-						break;
-					case "System.Decimal":
-						pi.SetValue(obj, decimal.MinValue);
-						break;
-					case "System.DateTime":
-						pi.SetValue(obj, DateTime.MinValue);
-						break;
-					default:
-						break;
-				}
+				var min = obj.GetMinValue(pi.PropertyType);
+				pi.SetValue(obj, min);
 			}
 		}
 
@@ -113,30 +64,42 @@ namespace Adai.DbContext.Extensions
 		/// 是否最小值
 		/// </summary>
 		/// <param name="obj"></param>
+		/// <param name="type"></param>
 		/// <returns></returns>
-		public static bool IsMinValue(this object obj)
+		public static bool IsMinValue(this object obj, Type type = null)
 		{
-			var type = obj.GetType();
-			var res = type.FullName switch
+			var min = obj.GetMinValue(type);
+			return obj.Equals(min);
+		}
+
+		/// <summary>
+		/// 获取最小值
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		public static object GetMinValue(this object obj, Type type = null)
+		{
+			type ??= obj.GetType();
+			return type.FullName switch
 			{
-				"System.Byte" => obj.Equals(byte.MinValue),
-				"System.SByte" => obj.Equals(sbyte.MinValue),
-				"System.Char" => obj.Equals(char.MinValue),
-				"System.String" => obj.Equals(string.Empty),
-				"System.Int16" => obj.Equals(short.MinValue),
-				"System.Int32" => obj.Equals(int.MinValue),
-				"System.Int64" => obj.Equals(long.MinValue),
-				"System.UInt16" => obj.Equals(ushort.MinValue),
-				"System.UInt32" => obj.Equals(uint.MinValue),
-				"System.UInt64" => obj.Equals(ulong.MinValue),
-				"System.Boolean" => obj.Equals(false),
-				"System.Single" => obj.Equals(float.MinValue),
-				"System.Double" => obj.Equals(double.MinValue),
-				"System.Decimal" => obj.Equals(decimal.MinValue),
-				"System.DateTime" => obj.Equals(DateTime.MinValue),
-				_ => false,
+				"System.Byte" => byte.MinValue,
+				"System.SByte" => sbyte.MinValue,
+				"System.Char" => char.MinValue,
+				"System.String" => string.Empty,
+				"System.Int16" => short.MinValue,
+				"System.Int32" => int.MinValue,
+				"System.Int64" => long.MinValue,
+				"System.UInt16" => ushort.MinValue,
+				"System.UInt32" => uint.MinValue,
+				"System.UInt64" => ulong.MinValue,
+				"System.Boolean" => false,
+				"System.Single" => float.MinValue,
+				"System.Double" => double.MinValue,
+				"System.Decimal" => decimal.MinValue,
+				"System.DateTime" => DateTime.MinValue,
+				_ => null,
 			};
-			return res;
 		}
 	}
 }

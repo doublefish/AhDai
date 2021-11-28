@@ -31,6 +31,7 @@ namespace Adai.DbContext.Extensions
 			var sourceType = value.GetType();
 			if (targetType.FullName != sourceType.FullName)
 			{
+				// System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 				if (targetType.FullName.StartsWith("System.Nullable"))
 				{
 					//有值不需要处理

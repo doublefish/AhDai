@@ -642,9 +642,18 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQuery(Adai.DbContext.IDbContext,System.String,System.Data.IDbCommand[])">
+        <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQuery(Adai.DbContext.IDbContext,System.String,System.Data.IDbCommand)">
             <summary>
             执行
+            </summary>
+            <param name="dbContext"></param>
+            <param name="dbName"></param>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQuery(Adai.DbContext.IDbContext,System.String,System.Data.IDbCommand[])">
+            <summary>
+            批量执行
             </summary>
             <param name="dbContext"></param>
             <param name="dbName"></param>
@@ -656,7 +665,7 @@
             跨库执行
             </summary>
             <param name="dbContext"></param>
-            <param name="dict">connStr-cmds</param>
+            <param name="dictCmds">connStr-cmds</param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.DbContextExtensions.ExecuteNonQueryByDbName(Adai.DbContext.IDbContext,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.ICollection{System.Data.IDbCommand}})">
@@ -664,7 +673,7 @@
             跨库执行
             </summary>
             <param name="dbContext"></param>
-            <param name="dict">dbName-cmds</param>
+            <param name="dictCmds">dbName-cmds</param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.DbContextExtensions.CreateQueryCondition``1(Adai.DbContext.IDbContext,Adai.DbContext.IFilter{``0},System.String,System.Data.IDbDataParameter[]@)">
@@ -741,7 +750,7 @@
             DbHelper
             </summary>
         </member>
-        <member name="P:Adai.DbContext.DbHelper.TableAttributes">
+        <member name="F:Adai.DbContext.DbHelper.TableAttributes">
             <summary>
             表特性
             </summary>
@@ -972,11 +981,20 @@
             <param name="obj"></param>
             <param name="values">例外的默认值，格式：属性名称-值</param>
         </member>
-        <member name="M:Adai.DbContext.Extensions.ObjectExtensions.IsMinValue(System.Object)">
+        <member name="M:Adai.DbContext.Extensions.ObjectExtensions.IsMinValue(System.Object,System.Type)">
             <summary>
             是否最小值
             </summary>
             <param name="obj"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.Extensions.ObjectExtensions.GetMinValue(System.Object,System.Type)">
+            <summary>
+            获取最小值
+            </summary>
+            <param name="obj"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.DbContext.Extensions.ReflectionExtensions">
@@ -1160,6 +1178,19 @@
             <summary>
             数据库配置
             </summary>
+        </member>
+        <member name="M:Adai.DbContext.Models.DbConfig.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.Models.DbConfig.#ctor(Adai.DbContext.Config.DbType,System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="dbType">数据库类型</param>
+            <param name="name">别名</param>
+            <param name="connectionString">连接字符串</param>
         </member>
         <member name="P:Adai.DbContext.Models.DbConfig.DbType">
             <summary>
