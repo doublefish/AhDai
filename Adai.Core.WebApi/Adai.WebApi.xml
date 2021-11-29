@@ -342,24 +342,6 @@
             </summary>
             <param name="options"></param>
         </member>
-        <member name="M:Adai.WebApi.Startup.AddRedisConfig(Adai.Standard.Options.RedisOptions)">
-            <summary>
-            AddRedisConfig
-            </summary>
-            <param name="options"></param>
-        </member>
-        <member name="M:Adai.WebApi.Startup.AddRabbitMqConfig(Adai.Standard.Options.RabbitMQOptions)">
-            <summary>
-            AddRabbitMqConfig
-            </summary>
-            <param name="options"></param>
-        </member>
-        <member name="M:Adai.WebApi.Startup.AddMailConfig(Adai.Standard.Options.MailOptions)">
-            <summary>
-            AddMailConfig
-            </summary>
-            <param name="options"></param>
-        </member>
         <member name="M:Adai.WebApi.Startup.AddSwaggerGen(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
             <summary>
             AddSwaggerGen
