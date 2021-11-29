@@ -1456,22 +1456,22 @@
         </member>
         <member name="P:Adai.Standard.Models.MailConfig.SmtpHost">
             <summary>
-            SmtpHost
+            Smtp主机
             </summary>
         </member>
         <member name="P:Adai.Standard.Models.MailConfig.SmtpPort">
             <summary>
-            SmtpPort
+            Smtp端口
             </summary>
         </member>
         <member name="P:Adai.Standard.Models.MailConfig.SmtpUsername">
             <summary>
-            SmtpUsername
+            Smtp用户名
             </summary>
         </member>
         <member name="P:Adai.Standard.Models.MailConfig.SmtpPassword">
             <summary>
-            SmtpPassword
+            Smtp密码
             </summary>
         </member>
         <member name="T:Adai.Standard.Models.PageArg`1">
@@ -1576,22 +1576,22 @@
         </member>
         <member name="P:Adai.Standard.Models.RedisConfig.Host">
             <summary>
-            Host
+            主机
             </summary>
         </member>
         <member name="P:Adai.Standard.Models.RedisConfig.Port">
             <summary>
-            Port
+            端口
             </summary>
         </member>
         <member name="P:Adai.Standard.Models.RedisConfig.Password">
             <summary>
-            Password
+            密码
             </summary>
         </member>
         <member name="P:Adai.Standard.Models.RedisConfig.Database">
             <summary>
-            Database
+            默认库
             </summary>
         </member>
         <member name="F:Adai.Standard.Models.RedisConfig.ConfigurationChangedBroadcast">

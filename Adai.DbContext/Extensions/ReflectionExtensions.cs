@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace Adai.DbContext.Extensions
@@ -16,6 +17,10 @@ namespace Adai.DbContext.Extensions
 		/// <param name="value"></param>
 		public static void SetValueExt(this PropertyInfo propertyInfo, object obj, object value)
 		{
+			if (propertyInfo.Name.StartsWith("E4"))
+			{
+
+			}
 			if (value == null || value == DBNull.Value)
 			{
 				propertyInfo.SetValue(obj, default);
@@ -31,14 +36,11 @@ namespace Adai.DbContext.Extensions
 			var sourceType = value.GetType();
 			if (targetType.FullName != sourceType.FullName)
 			{
-				// System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
-				if (targetType.FullName.StartsWith("System.Nullable"))
+				// Nullable类型和数据源类型和目标类型不一致
+				var type = targetType.GenericTypeArguments.FirstOrDefault();
+				if (type == null || type.FullName != sourceType.FullName)
 				{
-					//有值不需要处理
-				}
-				else
-				{
-					value = Convert.ChangeType(value, targetType);
+					value = Convert.ChangeType(value, type);
 				}
 			}
 			propertyInfo.SetValue(obj, value);

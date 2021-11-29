@@ -202,11 +202,20 @@
             <param name="obj"></param>
             <param name="values">例外的默认值，格式：属性名称-值</param>
         </member>
-        <member name="M:Adai.Base.Extensions.ObjectExtensions.IsMinValue(System.Object)">
+        <member name="M:Adai.Base.Extensions.ObjectExtensions.IsMinValue(System.Object,System.Type)">
             <summary>
             是否最小值
             </summary>
             <param name="obj"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Base.Extensions.ObjectExtensions.GetMinValue(System.Object,System.Type)">
+            <summary>
+            获取最小值
+            </summary>
+            <param name="obj"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.Base.Extensions.ReflectionExtensions">

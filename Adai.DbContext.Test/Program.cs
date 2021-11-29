@@ -15,7 +15,8 @@ Class1.InitDbConfig();
 var eventId = Guid.NewGuid().ToString();
 var dbContext = new MySqlDbContext(eventId);
 
-var sql = $"select * from Test";
-var list = dbContext.GetList<Adai.DbContext.Test.Models.Test>("db", sql);
+var sql = $"select * from User";
+var list = dbContext.GetList<Adai.DbContext.Test.Models.User>("db", sql);
 
 Console.WriteLine(list.Count);
+

@@ -3,22 +3,40 @@
 namespace Adai.DbContext.Test.Models
 {
 	/// <summary>
-	/// Test
+	/// User
 	/// </summary>
-	[Table("Test")]
-	internal class Test
+	[Table("User")]
+	internal class User
 	{
 		[Column("Id")]
 		public int Id { get; set; }
 
-		[Column("Code")]
-		public string Code { get; set; }
+		[Column("Username")]
+		public string Username { get; set; } = "";
 
-		[Column("Name")]
-		public string Name { get; set; }
+		[Column("Nickname")]
+		public string? Nickname { get; set; }
 
-		[Column("Age")]
-		public int Age { get; set; }
+		[Column("Avatar")]
+		public string? Avatar { get; set; }
+
+		[Column("FirstName")]
+		public string? FirstName { get; set; }
+
+		[Column("LastName")]
+		public string? LastName { get; set; }
+
+		[Column("Email")]
+		public string? Email { get; set; }
+
+		[Column("Mobile")]
+		public string? Mobile { get; set; }
+
+		[Column("Tel")]
+		public string? Tel { get; set; }
+
+		[Column("Status")]
+		public int Status { get; set; }
 
 		[Column("CreateTime")]
 		public DateTime CreateTime { get; set; }
@@ -29,14 +47,16 @@ namespace Adai.DbContext.Test.Models
 		[Column("Note")]
 		public string? Note { get; set; }
 
-		[Column("C1")]
-		public int? C1 { get; set; }
+		[Column("E1")]
+		public int? E1 { get; set; }
 
-		[Column("C2")]
-		public decimal C2 { get; set; }
+		[Column("E2")]
+		public decimal? E2 { get; set; }
 
-		[Column("C3")]
-		public string C3 { get; set; }
+		[Column("E3")]
+		public DateTime? E3 { get; set; }
 
+		[Column("E4")]
+		public string? E4 { get; set; }
 	}
 }
