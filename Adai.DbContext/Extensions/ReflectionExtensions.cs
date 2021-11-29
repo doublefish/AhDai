@@ -17,10 +17,6 @@ namespace Adai.DbContext.Extensions
 		/// <param name="value"></param>
 		public static void SetValueExt(this PropertyInfo propertyInfo, object obj, object value)
 		{
-			if (propertyInfo.Name.StartsWith("E4"))
-			{
-
-			}
 			if (value == null || value == DBNull.Value)
 			{
 				propertyInfo.SetValue(obj, default);
