@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.Base", "Adai.Base\Adai
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{C249D1F5-861F-4654-9353-655C82444F07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adai.DbContext.Test", "Adai.DbContext.Test\Adai.DbContext.Test.csproj", "{4557666F-0224-4DD6-8B40-5C6B9DAB207E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.DbContext.Test", "Adai.DbContext.Test\Adai.DbContext.Test.csproj", "{4557666F-0224-4DD6-8B40-5C6B9DAB207E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
