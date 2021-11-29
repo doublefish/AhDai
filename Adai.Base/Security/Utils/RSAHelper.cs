@@ -393,10 +393,6 @@ namespace Adai.Base.Security.Utils
 				};
 				return parameters;
 			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
 			finally
 			{
 				br.Dispose();
@@ -469,10 +465,6 @@ namespace Adai.Base.Security.Utils
 					Modulus = modulus,
 					Exponent = exponent
 				};
-			}
-			catch (Exception ex)
-			{
-				throw ex;
 			}
 			finally
 			{

@@ -37,7 +37,7 @@ namespace Adai.Base.Security.Utils
 			var bytes = encryptor.TransformFinalBlock(buffer, 0, buffer.Length);
 			return stringType switch
 			{
-				StringType.Hex => Adai.Base.Utils.HexHelper.ToHexString(bytes),
+				StringType.Hex => Base.Utils.HexHelper.ToHexString(bytes),
 				_ => Convert.ToBase64String(bytes),
 			};
 		}
@@ -61,8 +61,8 @@ namespace Adai.Base.Security.Utils
 
 			var buffer = stringType switch
 			{
-				StringType.Hex => Adai.Base.Utils.HexHelper.ToBytes(ciphertext),
-				_ => Adai.Base.Utils.Base64Helper.ToBytes(ciphertext),
+				StringType.Hex => Base.Utils.HexHelper.ToBytes(ciphertext),
+				_ => Base.Utils.Base64Helper.ToBytes(ciphertext),
 			};
 			using var rm = new RijndaelManaged()
 			{

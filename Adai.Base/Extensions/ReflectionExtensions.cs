@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace Adai.Base.Extensions
 {
 	/// <summary>
-	/// ReflectionExt
+	/// ReflectionExtensions
 	/// </summary>
 	public static class ReflectionExtensions
 	{
@@ -31,13 +32,11 @@ namespace Adai.Base.Extensions
 			var sourceType = value.GetType();
 			if (targetType.FullName != sourceType.FullName)
 			{
-				if (targetType.FullName.StartsWith("System.Nullable"))
+				// Nullable类型和数据源类型和目标类型不一致
+				var type = targetType.GenericTypeArguments.FirstOrDefault();
+				if (type == null || type.FullName != sourceType.FullName)
 				{
-					//有值不需要处理
-				}
-				else
-				{
-					value = Convert.ChangeType(value, targetType);
+					value = Convert.ChangeType(value, type);
 				}
 			}
 			propertyInfo.SetValue(obj, value);

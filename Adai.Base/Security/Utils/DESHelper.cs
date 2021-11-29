@@ -55,7 +55,7 @@ namespace Adai.Base.Security.Utils
 			{
 				encode = Encoding.UTF8;
 			}
-			var buffer = Adai.Base.Utils.Base64Helper.ToBytes(ciphertext);
+			var buffer = Base.Utils.Base64Helper.ToBytes(ciphertext);
 			using var des = new TripleDESCryptoServiceProvider()
 			{
 				Key = encode.GetBytes(key),

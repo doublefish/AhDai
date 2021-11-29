@@ -12,7 +12,7 @@ namespace Adai.Test
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			Console.WriteLine($"Hello World!=>{args}");
 
 			// 初始化数据库配置
 			CommonHelper.InitDbConfig();

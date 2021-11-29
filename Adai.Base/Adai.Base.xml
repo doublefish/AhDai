@@ -220,7 +220,7 @@
         </member>
         <member name="T:Adai.Base.Extensions.ReflectionExtensions">
             <summary>
-            ReflectionExt
+            ReflectionExtensions
             </summary>
         </member>
         <member name="M:Adai.Base.Extensions.ReflectionExtensions.SetValueExt(System.Reflection.PropertyInfo,System.Object,System.Object)">
