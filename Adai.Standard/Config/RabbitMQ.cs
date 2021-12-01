@@ -23,23 +23,23 @@ namespace Adai.Standard.Config
 			}
 		}
 		/// <summary>
-		/// 主机
+		/// 主机 默认：rabbitmq:host
 		/// </summary>
 		public static readonly string Host = "rabbitmq:host";
 		/// <summary>
-		/// 端口
+		/// 端口 默认：rabbitmq:port
 		/// </summary>
 		public static readonly string Port = "rabbitmq:port";
 		/// <summary>
-		/// 虚拟主机
+		/// 虚拟主机 默认：rabbitmq:virtualhost
 		/// </summary>
-		public static readonly string VirtualHost = "rabbitmq:vhost";
+		public static readonly string VirtualHost = "rabbitmq:virtualhost";
 		/// <summary>
-		/// 用户名
+		/// 用户名 默认：rabbitmq:username
 		/// </summary>
 		public static readonly string Username = "rabbitmq:username";
 		/// <summary>
-		/// 密码
+		/// 密码 默认：rabbitmq:password
 		/// </summary>
 		public static readonly string Password = "rabbitmq:password";
 	}

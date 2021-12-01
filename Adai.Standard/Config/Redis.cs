@@ -22,15 +22,15 @@ namespace Adai.Standard.Config
 		}
 
 		/// <summary>
-		/// 主机
+		/// 主机 默认：redis:host
 		/// </summary>
 		public static readonly string Host = "redis:host";
 		/// <summary>
-		/// 端口
+		/// 端口 默认：redis:port
 		/// </summary>
 		public static readonly string Port = "redis:port";
 		/// <summary>
-		/// 密码
+		/// 密码 默认：redis:password
 		/// </summary>
 		public static readonly string Password = "redis:password";
 	}
