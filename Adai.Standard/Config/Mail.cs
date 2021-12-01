@@ -22,20 +22,20 @@ namespace Adai.Standard.Config
 			}
 		}
 		/// <summary>
-		/// Smtp主机 默认：mail:smtp:host
+		/// Smtp主机 默认：Mail:SmtpHost
 		/// </summary>
-		public static readonly string SmtpHost = "mail:smtp:host";
+		public static readonly string SmtpHost = "Mail:SmtpHost";
 		/// <summary>
-		/// Smtp端口 默认：mail:smtp:port
+		/// Smtp端口 默认：Mail:SmtpPort
 		/// </summary>
-		public static readonly string SmtpPort = "mail:smtp:port";
+		public static readonly string SmtpPort = "Mail:SmtpPort";
 		/// <summary>
-		/// Smtp用户名 默认：mail:smtp:username
+		/// Smtp用户名 默认：Mail:SmtpUsername
 		/// </summary>
-		public static readonly string SmtpUsername = "mail:smtp:username";
+		public static readonly string SmtpUsername = "Mail:SmtpUsername";
 		/// <summary>
-		/// Smtp密码 默认：mail:smtp:password
+		/// Smtp密码 默认：Mail:SmtpPassword
 		/// </summary>
-		public static readonly string SmtpPassword = "mail:smtp:password";
+		public static readonly string SmtpPassword = "Mail:SmtpPassword";
 	}
 }

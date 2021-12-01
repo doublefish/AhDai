@@ -22,25 +22,26 @@ namespace Adai.Standard.Config
 				Password = ConfigurationManager.AppSettings["RabbitMQ.Password"];
 			}
 		}
+
 		/// <summary>
-		/// 主机 默认：rabbitmq:host
+		/// 主机 默认：RabbitMQ:Host
 		/// </summary>
-		public static readonly string Host = "rabbitmq:host";
+		public static readonly string Host = "RabbitMQ:Host";
 		/// <summary>
-		/// 端口 默认：rabbitmq:port
+		/// 端口 默认：RabbitMQ:Port
 		/// </summary>
-		public static readonly string Port = "rabbitmq:port";
+		public static readonly string Port = "RabbitMQ:Port";
 		/// <summary>
-		/// 虚拟主机 默认：rabbitmq:virtualhost
+		/// 虚拟主机 默认：RabbitMQ:VirtualHost
 		/// </summary>
-		public static readonly string VirtualHost = "rabbitmq:virtualhost";
+		public static readonly string VirtualHost = "RabbitMQ:VirtualHost";
 		/// <summary>
-		/// 用户名 默认：rabbitmq:username
+		/// 用户名 默认：RabbitMQ:Username
 		/// </summary>
-		public static readonly string Username = "rabbitmq:username";
+		public static readonly string Username = "RabbitMQ:Username";
 		/// <summary>
-		/// 密码 默认：rabbitmq:password
+		/// 密码 默认：RabbitMQ:Password
 		/// </summary>
-		public static readonly string Password = "rabbitmq:password";
+		public static readonly string Password = "RabbitMQ:Password";
 	}
 }

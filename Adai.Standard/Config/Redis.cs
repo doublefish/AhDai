@@ -22,16 +22,16 @@ namespace Adai.Standard.Config
 		}
 
 		/// <summary>
-		/// 主机 默认：redis:host
+		/// 主机 默认：Redis:Host
 		/// </summary>
-		public static readonly string Host = "redis:host";
+		public static readonly string Host = "Redis:Host";
 		/// <summary>
-		/// 端口 默认：redis:port
+		/// 端口 默认：Redis:Port
 		/// </summary>
-		public static readonly string Port = "redis:port";
+		public static readonly string Port = "Redis:Port";
 		/// <summary>
-		/// 密码 默认：redis:password
+		/// 密码 默认：Redis:Password
 		/// </summary>
-		public static readonly string Password = "redis:password";
+		public static readonly string Password = "Redis:Password";
 	}
 }

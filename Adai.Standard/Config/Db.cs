@@ -26,28 +26,28 @@ namespace Adai.Standard.Config
 		}
 
 		/// <summary>
-		/// 主库
+		/// 主库 默认：Db:Master
 		/// </summary>
-		public static readonly string Master = "db:master";
+		public static readonly string Master = "Db:Master";
 		/// <summary>
-		/// 产品库
+		/// 产品库 默认：Db:Product
 		/// </summary>
-		public static readonly string Product = "db:product";
+		public static readonly string Product = "Db:Product";
 		/// <summary>
-		/// 报表库
+		/// 报表库 默认：Db:Report
 		/// </summary>
-		public static readonly string Report = "db:report";
+		public static readonly string Report = "Db:Report";
 		/// <summary>
-		/// 数码库
+		/// 数码库 默认：Db:Digital
 		/// </summary>
-		public static readonly string Digital = "db:digital";
+		public static readonly string Digital = "Db:Digital";
 		/// <summary>
-		/// 外码库
+		/// 外码库 默认：Db:Foreign
 		/// </summary>
-		public static readonly string Foreign = "db:foreign";
+		public static readonly string Foreign = "Db:Foreign";
 		/// <summary>
-		/// 营销库
+		/// 营销库 默认：Db:Marketing
 		/// </summary>
-		public static readonly string Marketing = "db:marketing";
+		public static readonly string Marketing = "Db:Marketing";
 	}
 }
