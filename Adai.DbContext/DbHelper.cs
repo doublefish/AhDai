@@ -73,9 +73,9 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public static Attributes.TableAttribute GetTableAttribute(Type type)
 		{
-			lock (Locker)
+			if (!TableAttributes.TryGetValue(type.FullName, out var data))
 			{
-				if (!TableAttributes.TryGetValue(type.FullName, out var data))
+				lock (Locker)
 				{
 					var typeA = typeof(Attributes.TableAttribute);
 					var attrs = type.GetCustomAttributes(typeA, true);
@@ -86,8 +86,8 @@ namespace Adai.DbContext
 					}
 					TableAttributes.Add(type.FullName, data);
 				}
-				return data;
 			}
+			return data;
 		}
 
 		/// <summary>

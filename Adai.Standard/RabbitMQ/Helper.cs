@@ -46,9 +46,9 @@ namespace Adai.Standard.RabbitMQ
 		{
 			var c = config ?? Config;
 			var str = $"{c.Host}-{c.Port}-{c.VirtualHost}-{c.Username}-{c.Password}";
-			lock (Locker)
+			if (!Factories.TryGetValue(str, out var factory))
 			{
-				if (!Factories.TryGetValue(str, out var factory))
+				lock (Locker)
 				{
 					factory = new ConnectionFactory()
 					{
@@ -60,8 +60,8 @@ namespace Adai.Standard.RabbitMQ
 					};
 					Factories.Add(str, factory);
 				}
-				return factory;
 			}
+			return factory;
 		}
 
 		/// <summary>

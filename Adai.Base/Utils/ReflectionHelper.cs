@@ -40,15 +40,15 @@ namespace Adai.Base.Utils
 		/// <returns></returns>
 		public static ICollection<PropertyInfo> GetProperties(Type type)
 		{
-			lock (Locker)
+			if (!Properties.TryGetValue(type.FullName, out var properties))
 			{
-				if (!Properties.TryGetValue(type.FullName, out var properties))
+				lock (Locker)
 				{
 					properties = type.GetProperties();
 					Properties.Add(type.FullName, properties);
 				}
-				return properties;
 			}
+			return properties;
 		}
 
 		/// <summary>

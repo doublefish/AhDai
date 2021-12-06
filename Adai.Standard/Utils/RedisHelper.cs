@@ -45,10 +45,11 @@ namespace Adai.Standard.Utils
 		/// <param name="host"></param>
 		/// <param name="port"></param>
 		/// <param name="password"></param>
+		/// <param name="abortConnect"></param>
 		/// <returns></returns>
-		public static string CreateConfiguration(string host = "127.0.0.1", int port = 6379, string password = null)
+		public static string CreateConfiguration(string host = "127.0.0.1", int port = 6379, string password = null, bool abortConnect = false)
 		{
-			return $"{host}:{port},password={password},abortConnect=false";
+			return $"{host}:{port},password={password},abortConnect={abortConnect}";
 		}
 
 		/// <summary>
@@ -59,7 +60,40 @@ namespace Adai.Standard.Utils
 		public static string CreateConfiguration(Models.RedisConfig config = null)
 		{
 			var c = config ?? Config;
-			return CreateConfiguration(c.Host, c.Port, c.Password);
+			return CreateConfiguration(c.Host, c.Port, c.Password, c.AbortConnect);
+		}
+
+		/// <summary>
+		/// 创建连接器
+		/// </summary>
+		/// <param name="configuration">配置</param>
+		/// <returns></returns>
+		public static IConnectionMultiplexer CreateConnectionMultiplexer(string configuration)
+		{
+			var options = ConfigurationOptions.Parse(configuration);
+			var multiplexer = ConnectionMultiplexer.Connect(options);
+			return multiplexer;
+		}
+
+		/// <summary>
+		/// 创建连接器
+		/// </summary>
+		/// <param name="config">自定义配置</param>
+		/// <returns></returns>
+		public static IConnectionMultiplexer CreateConnectionMultiplexer(Models.RedisConfig config = null)
+		{
+			var c = config ?? Config;
+			var configString = CreateConfiguration(c);
+			var multiplexer = CreateConnectionMultiplexer(configString);
+			// 注册事件
+			multiplexer.ConfigurationChangedBroadcast += c.ConfigurationChangedBroadcast;
+			multiplexer.ConfigurationChanged += c.ConfigurationChanged;
+			multiplexer.HashSlotMoved += c.HashSlotMoved;
+			multiplexer.ErrorMessage += c.ErrorMessage;
+			multiplexer.InternalError += c.InternalError;
+			multiplexer.ConnectionFailed += c.ConnectionFailed;
+			multiplexer.ConnectionRestored += c.ConnectionRestored;
+			return multiplexer;
 		}
 
 		/// <summary>
@@ -70,25 +104,16 @@ namespace Adai.Standard.Utils
 		public static IConnectionMultiplexer GetConnectionMultiplexer(Models.RedisConfig config = null)
 		{
 			var c = config ?? Config;
-			var str = CreateConfiguration(c);
-			lock (Locker)
+			var configString = CreateConfiguration(c);
+			if (!ConnectionMultiplexers.TryGetValue(configString, out var multiplexer) || !multiplexer.IsConnected)
 			{
-				if (!ConnectionMultiplexers.TryGetValue(str, out var multiplexer) || !multiplexer.IsConnected)
+				lock (Locker)
 				{
-					multiplexer = ConnectionMultiplexer.Connect(str);
-
-					// 注册事件
-					multiplexer.ConfigurationChangedBroadcast += c.ConfigurationChangedBroadcast;
-					multiplexer.ConfigurationChanged += c.ConfigurationChanged;
-					multiplexer.HashSlotMoved += c.HashSlotMoved;
-					multiplexer.ErrorMessage += c.ErrorMessage;
-					multiplexer.InternalError += c.InternalError;
-					multiplexer.ConnectionFailed += c.ConnectionFailed;
-					multiplexer.ConnectionRestored += c.ConnectionRestored;
-					ConnectionMultiplexers.Add(str, multiplexer);
+					multiplexer = CreateConnectionMultiplexer(c);
+					ConnectionMultiplexers[configString] = multiplexer;
 				}
-				return multiplexer;
 			}
+			return multiplexer;
 		}
 
 		/// <summary>
@@ -114,7 +139,7 @@ namespace Adai.Standard.Utils
 		/// </summary>
 		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
-		public static IDatabase GetDatabase(Models.RedisConfig config = null)
+		public static IDatabase GetDatabase(Models.RedisConfig config)
 		{
 			return GetDatabase(-1, null, config);
 		}
