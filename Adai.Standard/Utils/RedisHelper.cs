@@ -126,22 +126,7 @@ namespace Adai.Standard.Utils
 		public static IDatabase GetDatabase(int db = -1, object asyncState = null, Models.RedisConfig config = null)
 		{
 			var multiplexer = GetConnectionMultiplexer(config);
-			if (db == -1)
-			{
-				var c = config ?? Config;
-				db = c.Database;
-			}
 			return multiplexer.GetDatabase(db, asyncState);
-		}
-
-		/// <summary>
-		/// GetDatabase
-		/// </summary>
-		/// <param name="config">自定义配置</param>
-		/// <returns></returns>
-		public static IDatabase GetDatabase(Models.RedisConfig config)
-		{
-			return GetDatabase(-1, null, config);
 		}
 	}
 }

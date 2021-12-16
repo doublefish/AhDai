@@ -1046,6 +1046,11 @@
             ResourceHelper
             </summary>
         </member>
+        <member name="M:Adai.Base.Utils.ResourceHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
         <member name="M:Adai.Base.Utils.ResourceHelper.Get``1">
             <summary>
             获取资源文件

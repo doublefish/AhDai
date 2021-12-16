@@ -18,7 +18,7 @@ namespace Adai.WebApi
 		public static void ConfigurationChangedBroadcast(object sender, EndPointEventArgs e)
 		{
 			var logger = GetLogger();
-			logger.LogDebug($"ConfigurationChangedBroadcast=>=>EndPoint={e.EndPoint}");
+			logger?.LogDebug($"ConfigurationChangedBroadcast=>=>EndPoint={e.EndPoint}");
 		}
 
 		/// <summary>
@@ -29,7 +29,7 @@ namespace Adai.WebApi
 		public static void ConfigurationChanged(object sender, EndPointEventArgs e)
 		{
 			var logger = GetLogger();
-			logger.LogDebug($"ConfigurationChanged=>EndPoint={e.EndPoint}");
+			logger?.LogDebug($"ConfigurationChanged=>EndPoint={e.EndPoint}");
 		}
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace Adai.WebApi
 		public static void HashSlotMoved(object sender, HashSlotMovedEventArgs e)
 		{
 			var logger = GetLogger();
-			logger.LogDebug($"HashSlotMoved=>NewEndPoint={e.NewEndPoint},OldEndPoint={e.OldEndPoint}");
+			logger?.LogDebug($"HashSlotMoved=>NewEndPoint={e.NewEndPoint},OldEndPoint={e.OldEndPoint}");
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace Adai.WebApi
 		public static void ErrorMessage(object sender, RedisErrorEventArgs e)
 		{
 			var logger = GetLogger();
-			logger.LogDebug($"ErrorMessage=>{e.Message}");
+			logger?.LogDebug($"ErrorMessage=>{e.Message}");
 		}
 
 		/// <summary>
@@ -62,7 +62,7 @@ namespace Adai.WebApi
 		public static void InternalError(object sender, InternalErrorEventArgs e)
 		{
 			var logger = GetLogger();
-			logger.LogDebug($"InternalError=>{e.Exception.Message}", e.Exception);
+			logger?.LogDebug(e.Exception, $"InternalError=>{e.Exception.Message}");
 		}
 
 		/// <summary>
@@ -73,7 +73,7 @@ namespace Adai.WebApi
 		public static void ConnectionFailed(object sender, ConnectionFailedEventArgs e)
 		{
 			var logger = GetLogger();
-			logger.LogDebug($"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}", e.Exception);
+			logger?.LogDebug(e.Exception, $"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}");
 		}
 
 		/// <summary>
@@ -84,7 +84,7 @@ namespace Adai.WebApi
 		public static void ConnectionRestored(object sender, ConnectionFailedEventArgs e)
 		{
 			var logger = GetLogger();
-			logger.LogDebug($"ConnectionRestored=>EndPoint={e.EndPoint}");
+			logger?.LogDebug($"ConnectionRestored=>EndPoint={e.EndPoint}");
 		}
 		#endregion
 
