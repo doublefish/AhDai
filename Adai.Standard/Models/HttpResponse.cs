@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Net.Http.Headers;
 
 namespace Adai.Standard.Models
 {
@@ -9,53 +11,36 @@ namespace Adai.Standard.Models
 	public class HttpResponse
 	{
 		/// <summary>
-		/// StatusCode
-		/// </summary>
-		public HttpStatusCode StatusCode { get; private set; }
-		/// <summary>
 		/// ResponseUri
 		/// </summary>
-		public Uri ResponseUri { get; private set; }
+		public Uri ResponseUri { get; set; }
 		/// <summary>
-		/// StatusDescription
+		/// StatusCode
 		/// </summary>
-		public string StatusDescription { get; private set; }
+		public HttpStatusCode StatusCode { get; set; }
 		/// <summary>
-		/// ContentLength
+		/// ReasonPhrase
 		/// </summary>
-		public long ContentLength { get; private set; }
-		/// <summary>
-		/// ContentEncoding
-		/// </summary>
-		public string ContentEncoding { get; private set; }
-		/// <summary>
-		/// CharacterSet
-		/// </summary>
-		public string CharacterSet { get; private set; }
+		public string ReasonPhrase { get; set; }
 		/// <summary>
 		/// ContentType
 		/// </summary>
-		public string ContentType { get; private set; }
+		public MediaTypeHeaderValue ContentType { get; set; }
+		/// <summary>
+		/// ContentLength
+		/// </summary>
+		public long ContentLength { get; set; }
+		/// <summary>
+		/// ContentEncoding
+		/// </summary>
+		public ICollection<string> ContentEncoding { get; set; }
+		/// <summary>
+		/// ContentLanguage
+		/// </summary>
+		public ICollection<string> ContentLanguage { get; set; }
 		/// <summary>
 		/// Content
 		/// </summary>
-		public string Content { get; private set; }
-
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="httpWebResponse"></param>
-		/// <param name="content"></param>
-		public HttpResponse(HttpWebResponse httpWebResponse, string content = null)
-		{
-			StatusCode = httpWebResponse.StatusCode;
-			ResponseUri = httpWebResponse.ResponseUri;
-			StatusDescription = httpWebResponse.StatusDescription;
-			ContentLength = httpWebResponse.ContentLength;
-			ContentEncoding = httpWebResponse.ContentEncoding;
-			CharacterSet = httpWebResponse.CharacterSet;
-			ContentType = httpWebResponse.ContentType;
-			Content = content;
-		}
+		public string Content { get; set; }
 	}
 }

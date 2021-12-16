@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 
 namespace Adai.Standard.Models
 {
@@ -8,13 +9,13 @@ namespace Adai.Standard.Models
 	public class HttpRequest
 	{
 		/// <summary>
-		/// Url
+		/// 类型
+		/// </summary>
+		public HttpMethod Method { get; set; }
+		/// <summary>
+		/// 地址
 		/// </summary>
 		public string Url { get; set; }
-		/// <summary>
-		/// 方法
-		/// </summary>
-		public string Method { get; set; }
 		/// <summary>
 		/// 内容类型
 		/// </summary>
@@ -24,24 +25,24 @@ namespace Adai.Standard.Models
 		/// </summary>
 		public string Content { get; set; }
 		/// <summary>
-		/// 请求头
+		/// 头
 		/// </summary>
 		public IDictionary<string, string> Headers { get; set; }
 		/// <summary>
-		/// 内容参数
+		/// 内容
 		/// </summary>
-		public IDictionary<string, string> Body { get; set; }
+		public IDictionary<string, object> Body { get; set; }
 
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		/// <param name="url"></param>
 		/// <param name="method"></param>
+		/// <param name="url"></param>
 		/// <param name="contentType"></param>
-		public HttpRequest(string url = "", string method = HttpMethod.Get, string contentType = HttpContentType.Url)
+		public HttpRequest(HttpMethod method, string url, string contentType = HttpContentType.Url)
 		{
-			Url = url;
 			Method = method;
+			Url = url;
 			ContentType = contentType;
 		}
 	}

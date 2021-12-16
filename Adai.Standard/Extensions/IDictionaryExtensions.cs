@@ -136,7 +136,7 @@ namespace Adai.Standard.Extensions
 		/// <param name="ignoreNullOrEmpty"></param>
 		/// <param name="ignores"></param>
 		/// <returns></returns>
-		public static string ToQueryString(this IDictionary<string, string> parameters, bool ignoreNullOrEmpty = false, params string[] ignores)
+		public static string ToQueryString<T>(this IDictionary<string, T> parameters, bool ignoreNullOrEmpty = false, params string[] ignores)
 		{
 			if (parameters == null || parameters.Count == 0)
 			{
@@ -145,7 +145,7 @@ namespace Adai.Standard.Extensions
 			var builder = new StringBuilder();
 			foreach (var kv in parameters)
 			{
-				if ((ignoreNullOrEmpty == true && string.IsNullOrEmpty(kv.Value)) || (ignores != null && ignores.Contains(kv.Key)))
+				if ((ignoreNullOrEmpty == true && (kv.Value == null || kv.Value.Equals(""))) || (ignores != null && ignores.Contains(kv.Key)))
 				{
 					continue;
 				}

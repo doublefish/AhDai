@@ -1,13 +1,15 @@
 ﻿using Adai.Standard.Extensions;
-using Adai.Base.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Adai.Standard.Utils
@@ -18,48 +20,179 @@ namespace Adai.Standard.Utils
 	public static class HttpHelper
 	{
 		/// <summary>
-		/// 发送参数类型为Url的GET请求
+		/// 发送内容类型为Url的Get请求
 		/// </summary>
 		/// <param name="url"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static Models.HttpResponse SendGet(string url, IDictionary<string, string> parameters = null)
+		public static Models.HttpResponse Get(string url, IDictionary<string, object> parameters = null)
 		{
-			var data = new Models.HttpRequest(url, HttpMethod.Get, HttpContentType.Url)
-			{
-				Body = parameters
-			};
-			return SendRequest(data);
+			var task = GetAsync(url, parameters);
+			task.Wait();
+			return task.Result;
 		}
 
 		/// <summary>
-		/// 发送参数类型为Url的POST请求
+		/// 发送内容类型为Url的Get请求
 		/// </summary>
 		/// <param name="url"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static Models.HttpResponse SendPost(string url, IDictionary<string, string> parameters = null)
+		public static async Task<Models.HttpResponse> GetAsync(string url, IDictionary<string, object> parameters = null)
 		{
-			var data = new Models.HttpRequest(url, HttpMethod.Post, HttpContentType.Url)
-			{
-				Body = parameters
-			};
-			return SendRequest(data);
+			return await SendAsync(HttpMethod.Get, url, parameters, HttpContentType.Url);
 		}
 
 		/// <summary>
-		/// 发送参数类型为Json的POST请求
+		/// 发送内容类型为Url的Post请求
 		/// </summary>
 		/// <param name="url"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static Models.HttpResponse SendPostByJson<TValue>(string url, IDictionary<string, TValue> parameters)
+		public static Models.HttpResponse Post(string url, IDictionary<string, object> parameters = null)
 		{
-			var data = new Models.HttpRequest(url, HttpMethod.Post, HttpContentType.Json)
+			var task = PostAsync(url, parameters);
+			task.Wait();
+			return task.Result;
+		}
+
+		/// <summary>
+		/// 发送内容类型为Url的Post请求
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static async Task<Models.HttpResponse> PostAsync(string url, IDictionary<string, object> parameters = null)
+		{
+			return await SendAsync(HttpMethod.Post, url, parameters, HttpContentType.Url);
+		}
+
+		/// <summary>
+		/// 发送内容类型为Json的Post请求
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static Models.HttpResponse PostJson(string url, IDictionary<string, object> parameters = null)
+		{
+			var task = PostJsonAsync(url, parameters);
+			task.Wait();
+			return task.Result;
+		}
+
+		/// <summary>
+		/// 发送内容类型为Json的Post请求
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static async Task<Models.HttpResponse> PostJsonAsync(string url, IDictionary<string, object> parameters = null)
+		{
+			return await SendAsync(HttpMethod.Post, url, parameters, HttpContentType.Json);
+		}
+
+		/// <summary>
+		/// 发送内容类型为Url的Put请求
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static Models.HttpResponse Put(string url, IDictionary<string, object> parameters = null)
+		{
+			var task = PutAsync(url, parameters);
+			task.Wait();
+			return task.Result;
+		}
+
+		/// <summary>
+		/// 发送内容类型为Url的Put请求
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static async Task<Models.HttpResponse> PutAsync(string url, IDictionary<string, object> parameters = null)
+		{
+			return await SendAsync(HttpMethod.Put, url, parameters, HttpContentType.Url);
+		}
+
+		/// <summary>
+		/// 发送内容类型为Json的Put请求
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static Models.HttpResponse PutJson(string url, IDictionary<string, object> parameters = null)
+		{
+			var task = PutJsonAsync(url, parameters);
+			task.Wait();
+			return task.Result;
+		}
+
+		/// <summary>
+		/// 发送内容类型为Json的Put请求
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static async Task<Models.HttpResponse> PutJsonAsync(string url, IDictionary<string, object> parameters = null)
+		{
+			return await SendAsync(HttpMethod.Put, url, parameters, HttpContentType.Json);
+		}
+
+		/// <summary>
+		/// 发送内容类型为Url的Delete请求
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static Models.HttpResponse Delete(string url, IDictionary<string, object> parameters = null)
+		{
+			var task = DeleteAsync(url, parameters);
+			task.Wait();
+			return task.Result;
+		}
+
+		/// <summary>
+		/// 发送内容类型为Url的Delete请求
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static async Task<Models.HttpResponse> DeleteAsync(string url, IDictionary<string, object> parameters = null)
+		{
+			return await SendAsync(HttpMethod.Delete, url, parameters, HttpContentType.Url);
+		}
+
+		/// <summary>
+		/// 发送请求
+		/// </summary>
+		/// <param name="method"></param>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <param name="contentType"></param>
+		/// <returns></returns>
+		public static Models.HttpResponse Send(HttpMethod method, string url, IDictionary<string, object> parameters = null, string contentType = HttpContentType.Json)
+		{
+			var task = SendAsync(method, url, parameters, contentType);
+			task.Wait();
+			return task.Result;
+		}
+
+		/// <summary>
+		/// 发送请求
+		/// </summary>
+		/// <param name="method"></param>
+		/// <param name="url"></param>
+		/// <param name="parameters"></param>
+		/// <param name="contentType"></param>
+		/// <returns></returns>
+		public static async Task<Models.HttpResponse> SendAsync(HttpMethod method, string url, IDictionary<string, object> parameters = null, string contentType = HttpContentType.Json)
+		{
+			var data = new Models.HttpRequest(method, url, contentType)
 			{
-				Content = JsonHelper.SerializeObject(parameters)
+				Body = parameters
 			};
-			return SendRequest(data);
+			return await SendAsync(data);
 		}
 
 		/// <summary>
@@ -67,11 +200,10 @@ namespace Adai.Standard.Utils
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		public static HttpWebRequest CreateRequest(Models.HttpRequest data)
+		public static HttpRequestMessage CreateRequest(Models.HttpRequest data)
 		{
 			if (data.ContentType == HttpContentType.Json)
 			{
-				data.ContentType += ";charset=utf-8";
 				if (data.Body != null)
 				{
 					data.Content = JsonHelper.SerializeObject(data.Body);
@@ -89,58 +221,93 @@ namespace Adai.Standard.Utils
 			{
 				if (!string.IsNullOrEmpty(data.Content))
 				{
-					data.Url += (data.Url.IndexOf('?') == -1 ? '?' : '&') + data.Content;
+					data.Url += (data.Url.Contains('?') ? '&' : '?') + data.Content;
 					data.Content = null;
 				}
 			}
 
-			var request = (HttpWebRequest)WebRequest.Create(data.Url);
-			//request.Proxy = null;
-			//request.Referer = "";
-			request.Accept = "application/json,text/javascript,*/*;q=0.01";
-			//request.Headers["Accept-Encoding"] = "gzip, deflate";
-			request.Headers["Accept-Language"] = "zh-Hans-CN,zh-Hans;q=0.8,zh-Hant-TW;q=0.7,zh-Hant;q=0.5,en-GB;q=0.3,en;q=0.2";
+			var requestMessage = new HttpRequestMessage(data.Method, data.Url);
 			if (data.Headers != null)
 			{
 				foreach (var kv in data.Headers)
 				{
-					request.Headers[kv.Key] = kv.Value;
+					requestMessage.Headers.Add(kv.Key, kv.Value);
 				}
 			}
-			//Edge
-			request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36 Edge/17.17134";
-			request.KeepAlive = true;
-			request.ContentType = data.ContentType;
-			request.Method = data.Method;
-			request.ReadWriteTimeout = 3000;
+			if (!requestMessage.Headers.Contains("Accept"))
+			{
+				requestMessage.Headers.Add("Accept", "*/*");
+			}
+			if (!requestMessage.Headers.Contains("Accept-Language"))
+			{
+				requestMessage.Headers.Add("Accept-Language", "zh-CN,zh;q=0.9,zh-TW;q=0.8,en-US;q=0.7,en;q=0.6");
+			}
+			if (!requestMessage.Headers.Contains("User-Agent"))
+			{
+				requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36");
+			}
+			if (!requestMessage.Headers.Contains("Keep-Alive"))
+			{
+				requestMessage.Headers.Add("Keep-Alive", "true");
+			}
 
+			//async
 			//写入请求参数
 			if (!string.IsNullOrEmpty(data.Content))
 			{
 				var bytes = Encoding.UTF8.GetBytes(data.Content);
-				request.ContentLength = bytes.Length;
-				using var stream = request.GetRequestStream();
-				stream.Write(bytes, 0, bytes.Length);
+				requestMessage.Content = new ByteArrayContent(bytes);
+				requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(data.ContentType) { CharSet = "utf-8" };
+				//requestMessage.Content.Headers.ContentLength = bytes.Length;
+				//requestMessage.Content.Headers.ContentType.CharSet = "utf-8";
 			}
 
-			return request;
+			return requestMessage;
 		}
 
 		/// <summary>
-		/// 发送POST请求
+		/// 发送请求
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		public static Models.HttpResponse SendRequest(Models.HttpRequest data)
+		public static async Task<Models.HttpResponse> SendAsync(Models.HttpRequest data)
 		{
-			//创建请求
+			// 创建请求
 			var httpWebRequest = CreateRequest(data);
 
-			//获取请求结果
-			WebResponse webResponse;
 			try
 			{
-				webResponse = httpWebRequest.GetResponse();
+				using var client = new HttpClient();
+				using var httpResponse = await client.SendAsync(httpWebRequest);
+				var response = new Models.HttpResponse()
+				{
+					ResponseUri = null,
+					StatusCode = httpResponse.StatusCode,
+					ReasonPhrase = httpResponse.ReasonPhrase
+				};
+				if (httpResponse.Content.Headers.ContentType != null)
+				{
+					response.ContentType = httpResponse.Content.Headers.ContentType;
+					response.ContentLength = httpResponse.Content.Headers.ContentLength ?? 0;
+					response.ContentEncoding = httpResponse.Content.Headers.ContentEncoding;
+					response.ContentLanguage = httpResponse.Content.Headers.ContentLanguage;
+				}
+
+				var charSet = httpResponse.Content.Headers.ContentType?.CharSet;
+				var encoding = Base.Utils.TextHelper.GetEncoding(charSet);
+				using var stream = await httpResponse.Content.ReadAsStreamAsync();
+				if (charSet == "gzip")
+				{
+					using var gzStream = new GZipStream(stream, CompressionMode.Decompress);
+					using var reader = new StreamReader(gzStream, encoding);
+					response.Content = reader.ReadToEnd();
+				}
+				else
+				{
+					using var reader = new StreamReader(stream, encoding);
+					response.Content = reader.ReadToEnd();
+				}
+				return response;
 			}
 			catch (WebException ex)
 			{
@@ -158,36 +325,23 @@ namespace Adai.Standard.Utils
 				}
 				throw new Exception(error);
 			}
+		}
 
-			//读取响应内容
-			Models.HttpResponse response;
-			using (var httpWebResponse = (HttpWebResponse)webResponse)
+		/// <summary>
+		/// 类型转换
+		/// </summary>
+		/// <param name="method"></param>
+		/// <returns></returns>
+		public static HttpMethod ConvertHttpMethod(string method)
+		{
+			return method.ToUpper() switch
 			{
-				var content = string.Empty;
-				if (httpWebResponse.StatusCode != HttpStatusCode.OK)
-				{
-					content = httpWebResponse.StatusDescription;
-				}
-				else
-				{
-					var encoding = TextHelper.GetEncoding(httpWebResponse.CharacterSet);
-					using var stream = httpWebResponse.GetResponseStream();
-					var content_encoding = httpWebResponse.Headers.Get("Content-Encoding");
-					if (content_encoding == "gzip")
-					{
-						using var zipStream = new GZipStream(stream, CompressionMode.Decompress);
-						using var reader = new StreamReader(zipStream, encoding);
-						content = reader.ReadToEnd();
-					}
-					else
-					{
-						using var reader = new StreamReader(stream, encoding);
-						content = reader.ReadToEnd();
-					}
-				}
-				response = new Models.HttpResponse(httpWebResponse, content);
-			}
-			return response;
+				"GET" => HttpMethod.Get,
+				"POST" => HttpMethod.Post,
+				"PUT" => HttpMethod.Put,
+				"DELETE" => HttpMethod.Delete,
+				_ => throw new NotImplementedException(),
+			};
 		}
 
 		/// <summary>

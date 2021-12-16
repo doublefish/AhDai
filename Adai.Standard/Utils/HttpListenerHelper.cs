@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 
@@ -50,7 +51,7 @@ namespace Adai.Standard.Utils
 						httpContext.Response.ContentType = $"{contentType}; charset=utf-8";
 
 						IDictionary<string, string> parameters;
-						if (httpContext.Request.HttpMethod == HttpMethod.Get)
+						if (httpContext.Request.HttpMethod == HttpMethod.Get.Method)
 						{
 							parameters = httpContext.Request.QueryString.ToDictionary();
 						}

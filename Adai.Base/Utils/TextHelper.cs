@@ -10,17 +10,17 @@ namespace Adai.Base.Utils
 		/// <summary>
 		/// GetEncoding
 		/// </summary>
-		/// <param name="charset"></param>
+		/// <param name="charSet"></param>
 		/// <returns></returns>
-		public static Encoding GetEncoding(string charset)
+		public static Encoding GetEncoding(string charSet)
 		{
-			switch (charset.ToLower())
+			switch (charSet.ToLower())
 			{
 				case "":
 				case "utf8":
 				case "utf-8":
 					return Encoding.UTF8;
-				default: return Encoding.GetEncoding(charset);
+				default: return Encoding.GetEncoding(charSet);
 			}
 		}
 	}

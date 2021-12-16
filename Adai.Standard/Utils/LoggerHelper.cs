@@ -39,6 +39,12 @@ namespace Adai.Standard.Utils
 		/// <returns></returns>
 		public static ILogger GetLogger(string categoryName = null, int type = 0)
 		{
+			if (ServiceHelper.Instance == null)
+			{
+				var factory = LoggerFactory.Create(builder => { builder.AddProvider(new Providers.LoggerProvider()); });
+				// 复用同名对象
+				return factory.CreateLogger(categoryName ?? "");
+			}
 			if (type == 1)
 			{
 				var factory = ServiceHelper.Instance.GetService<ILoggerFactory>();
