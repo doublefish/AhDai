@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -97,11 +98,12 @@ namespace Adai.Standard.Utils
 		/// <param name="rootPath"></param>
 		/// <param name="files"></param>
 		/// <returns></returns>
+		[SupportedOSPlatform("windows")]
 		public static string Compress(string rootPath, IDictionary<string, string> files)
 		{
 			if (files == null)
 			{
-				throw new ArgumentNullException("参数不能为空。");
+				throw new ArgumentNullException(nameof(files));
 			}
 			var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
 
@@ -161,7 +163,7 @@ namespace Adai.Standard.Utils
 		{
 			if (bytes == null)
 			{
-				throw new ArgumentNullException("参数不能为空。");
+				throw new ArgumentNullException(nameof(bytes));
 			}
 			var response = new HttpResponseMessage(HttpStatusCode.OK)
 			{

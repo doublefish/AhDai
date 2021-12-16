@@ -26,14 +26,12 @@ namespace Adai.Base.Security.Utils
 				encode = Encoding.UTF8;
 			}
 			var buffer = encode.GetBytes(original);
-			using var rm = new RijndaelManaged()
-			{
-				Key = encode.GetBytes(key),
-				IV = encode.GetBytes(iv),
-				Mode = CipherMode.CBC,
-				Padding = paddingMode
-			};
-			var encryptor = rm.CreateEncryptor();
+			using var aes = Aes.Create();
+			aes.Key = encode.GetBytes(key);
+			aes.IV = encode.GetBytes(iv);
+			aes.Mode = CipherMode.CBC;
+			aes.Padding = paddingMode;
+			var encryptor = aes.CreateEncryptor();
 			var bytes = encryptor.TransformFinalBlock(buffer, 0, buffer.Length);
 			return stringType switch
 			{
@@ -64,14 +62,12 @@ namespace Adai.Base.Security.Utils
 				StringType.Hex => Base.Utils.HexHelper.ToBytes(ciphertext),
 				_ => Base.Utils.Base64Helper.ToBytes(ciphertext),
 			};
-			using var rm = new RijndaelManaged()
-			{
-				Key = encode.GetBytes(key),
-				IV = encode.GetBytes(iv),
-				Mode = CipherMode.CBC,
-				Padding = paddingMode
-			};
-			var decryptor = rm.CreateDecryptor();
+			using var aes = Aes.Create();
+			aes.Key = encode.GetBytes(key);
+			aes.IV = encode.GetBytes(iv);
+			aes.Mode = CipherMode.CBC;
+			aes.Padding = paddingMode;
+			var decryptor = aes.CreateDecryptor();
 			var cipher = decryptor.TransformFinalBlock(buffer, 0, buffer.Length);
 			return encode.GetString(cipher);
 		}

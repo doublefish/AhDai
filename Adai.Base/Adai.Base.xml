@@ -1109,7 +1109,7 @@
             <summary>
             GetEncoding
             </summary>
-            <param name="charset"></param>
+            <param name="charSet"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.Base.Utils.XmlHelper">

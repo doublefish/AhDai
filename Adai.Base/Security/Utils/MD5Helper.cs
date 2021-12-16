@@ -21,8 +21,8 @@ namespace Adai.Base.Security.Utils
 				encode = Encoding.UTF8;
 			}
 			var buffer = encode.GetBytes(original);
-			using var provider = new MD5CryptoServiceProvider();
-			var hash = provider.ComputeHash(buffer);
+			using var md5 = MD5.Create();
+			var hash = md5.ComputeHash(buffer);
 			var builder = new StringBuilder();
 			foreach (var b in hash)
 			{

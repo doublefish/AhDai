@@ -2,12 +2,14 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.Versioning;
 
 namespace Adai.Standard.Utils
 {
 	/// <summary>
 	/// RARHelper
 	/// </summary>
+	[SupportedOSPlatform("windows")]
 	public static class RARHelper
 	{
 		/// <summary>

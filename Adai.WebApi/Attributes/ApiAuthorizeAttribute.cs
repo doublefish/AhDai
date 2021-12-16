@@ -148,7 +148,7 @@ namespace Adai.WebApi.Attributes
 		/// <summary>
 		/// 验证Excel导出
 		/// </summary>
-		/// <param name="httpRequest"></param>
+		/// <param name="httpContext"></param>
 		/// <returns></returns>
 		protected virtual void VerifyExcel(HttpContext httpContext)
 		{

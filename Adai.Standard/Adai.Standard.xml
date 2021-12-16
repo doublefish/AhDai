@@ -478,7 +478,7 @@
             <param name="keys"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extensions.IDictionaryExtensions.ToQueryString(System.Collections.Generic.IDictionary{System.String,System.String},System.Boolean,System.String[])">
+        <member name="M:Adai.Standard.Extensions.IDictionaryExtensions.ToQueryString``1(System.Collections.Generic.IDictionary{System.String,``0},System.Boolean,System.String[])">
             <summary>
             转换为QueryString
             </summary>
@@ -957,31 +957,6 @@
             Xml
             </summary>
         </member>
-        <member name="T:Adai.Standard.HttpMethod">
-            <summary>
-            HttpMethod
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.HttpMethod.Get">
-            <summary>
-            Get
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.HttpMethod.Post">
-            <summary>
-            Post
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.HttpMethod.Put">
-            <summary>
-            Put
-            </summary>
-        </member>
-        <member name="F:Adai.Standard.HttpMethod.Delete">
-            <summary>
-            Delete
-            </summary>
-        </member>
         <member name="T:Adai.Standard.Interfaces.IActionResult`1">
             <summary>
             IActionResult
@@ -1339,14 +1314,14 @@
             Http请求数据
             </summary>
         </member>
-        <member name="P:Adai.Standard.Models.HttpRequest.Url">
-            <summary>
-            Url
-            </summary>
-        </member>
         <member name="P:Adai.Standard.Models.HttpRequest.Method">
             <summary>
-            方法
+            类型
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Models.HttpRequest.Url">
+            <summary>
+            地址
             </summary>
         </member>
         <member name="P:Adai.Standard.Models.HttpRequest.ContentType">
@@ -1361,20 +1336,20 @@
         </member>
         <member name="P:Adai.Standard.Models.HttpRequest.Headers">
             <summary>
-            请求头
+            头
             </summary>
         </member>
         <member name="P:Adai.Standard.Models.HttpRequest.Body">
             <summary>
-            内容参数
+            内容
             </summary>
         </member>
-        <member name="M:Adai.Standard.Models.HttpRequest.#ctor(System.String,System.String,System.String)">
+        <member name="M:Adai.Standard.Models.HttpRequest.#ctor(System.Net.Http.HttpMethod,System.String,System.String)">
             <summary>
             构造函数
             </summary>
-            <param name="url"></param>
             <param name="method"></param>
+            <param name="url"></param>
             <param name="contentType"></param>
         </member>
         <member name="T:Adai.Standard.Models.HttpResponse">
@@ -1382,19 +1357,24 @@
             Http响应数据
             </summary>
         </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.StatusCode">
-            <summary>
-            StatusCode
-            </summary>
-        </member>
         <member name="P:Adai.Standard.Models.HttpResponse.ResponseUri">
             <summary>
             ResponseUri
             </summary>
         </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.StatusDescription">
+        <member name="P:Adai.Standard.Models.HttpResponse.StatusCode">
             <summary>
-            StatusDescription
+            StatusCode
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Models.HttpResponse.ReasonPhrase">
+            <summary>
+            ReasonPhrase
+            </summary>
+        </member>
+        <member name="P:Adai.Standard.Models.HttpResponse.ContentType">
+            <summary>
+            ContentType
             </summary>
         </member>
         <member name="P:Adai.Standard.Models.HttpResponse.ContentLength">
@@ -1407,27 +1387,15 @@
             ContentEncoding
             </summary>
         </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.CharacterSet">
+        <member name="P:Adai.Standard.Models.HttpResponse.ContentLanguage">
             <summary>
-            CharacterSet
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Models.HttpResponse.ContentType">
-            <summary>
-            ContentType
+            ContentLanguage
             </summary>
         </member>
         <member name="P:Adai.Standard.Models.HttpResponse.Content">
             <summary>
             Content
             </summary>
-        </member>
-        <member name="M:Adai.Standard.Models.HttpResponse.#ctor(System.Net.HttpWebResponse,System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="httpWebResponse"></param>
-            <param name="content"></param>
         </member>
         <member name="T:Adai.Standard.Models.JsonPropertyContractResolver">
             <summary>
@@ -2703,28 +2671,120 @@
             HttpHelper
             </summary>
         </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.SendGet(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Adai.Standard.Utils.HttpHelper.Get(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
-            发送参数类型为Url的GET请求
+            发送内容类型为Url的Get请求
             </summary>
             <param name="url"></param>
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.SendPost(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Adai.Standard.Utils.HttpHelper.GetAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
-            发送参数类型为Url的POST请求
+            发送内容类型为Url的Get请求
             </summary>
             <param name="url"></param>
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.SendPostByJson``1(System.String,System.Collections.Generic.IDictionary{System.String,``0})">
+        <member name="M:Adai.Standard.Utils.HttpHelper.Post(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
-            发送参数类型为Json的POST请求
+            发送内容类型为Url的Post请求
             </summary>
             <param name="url"></param>
             <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.PostAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Post请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.PostJson(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Json的Post请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.PostJsonAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Json的Post请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.Put(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Put请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.PutAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Put请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.PutJson(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Json的Put请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.PutJsonAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Json的Put请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.Delete(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Delete请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.DeleteAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Delete请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.Send(System.Net.Http.HttpMethod,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            发送请求
+            </summary>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <param name="contentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.SendAsync(System.Net.Http.HttpMethod,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            发送请求
+            </summary>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <param name="contentType"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.Standard.Utils.HttpHelper.CreateRequest(Adai.Standard.Models.HttpRequest)">
@@ -2734,11 +2794,18 @@
             <param name="data"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Utils.HttpHelper.SendRequest(Adai.Standard.Models.HttpRequest)">
+        <member name="M:Adai.Standard.Utils.HttpHelper.SendAsync(Adai.Standard.Models.HttpRequest)">
             <summary>
-            发送POST请求
+            发送请求
             </summary>
             <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Utils.HttpHelper.ConvertHttpMethod(System.String)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="method"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.Standard.Utils.HttpHelper.ParseQueryString(System.String)">

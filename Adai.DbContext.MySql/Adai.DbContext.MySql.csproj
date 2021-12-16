@@ -5,6 +5,7 @@
 		<Description>数据库访问基础类库-MySql</Description>
 		<Authors>Shuang Yu</Authors>
 		<Company>Adai</Company>
+		<Copyright>Shuang Yu</Copyright>
 		<Version>2.1.0.1</Version>
 		<AssemblyVersion>2.1.0.1</AssemblyVersion>
 		<FileVersion>2.1.0.1</FileVersion>

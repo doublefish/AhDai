@@ -160,7 +160,8 @@ namespace Adai.Standard.Extensions
 		{
 			// 删除所有 ILoggerProvider 实例
 			builder.ClearProviders();
-			return builder.AddProvider(new Providers.LoggerProvider());
+			builder.AddProvider(new Providers.LoggerProvider());
+			return builder;
 		}
 	}
 }

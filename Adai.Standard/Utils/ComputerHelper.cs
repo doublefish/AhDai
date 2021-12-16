@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Management;
 using System.Net.NetworkInformation;
+using System.Runtime.Versioning;
 
 namespace Adai.Standard.Utils
 {
@@ -43,21 +44,20 @@ namespace Adai.Standard.Utils
 		/// 获取Mac地址
 		/// </summary>
 		/// <returns></returns>
+		[SupportedOSPlatform("windows")]
 		public static ICollection<string> GetMacAddressesByWin32()
 		{
 			var addresses = new List<string>();
-			using (var mc = new ManagementClass("Win32_NetworkAdapterConfiguration"))
+			using var mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+			var moc = mc.GetInstances();
+			foreach (var mo in moc)
 			{
-				var moc = mc.GetInstances();
-				foreach (var mo in moc)
+				if ((bool)mo["IPEnabled"])
 				{
-					if ((bool)mo["IPEnabled"])
-					{
-						var address = mo["MacAddress"].ToString();
-						addresses.Add(address);
-					}
-					mo.Dispose();
+					var address = mo["MacAddress"].ToString();
+					addresses.Add(address);
 				}
+				mo.Dispose();
 			}
 			return addresses;
 		}

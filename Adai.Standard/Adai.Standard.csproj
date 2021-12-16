@@ -5,6 +5,7 @@
 		<Description>常用方法封装</Description>
 		<Authors>Shuang Yu</Authors>
 		<Company>Adai.Standard</Company>
+		<Copyright>Shuang Yu</Copyright>
 		<Version>2.1.0.1</Version>
 		<AssemblyVersion>2.1.0.1</AssemblyVersion>
 		<FileVersion>2.1.0.1</FileVersion>
@@ -51,16 +52,6 @@
 		<PackageReference Include="System.Drawing.Common" Version="5.0.2" />
 		<PackageReference Include="System.Management" Version="5.0.0" />
 		<PackageReference Include="System.Net.NetworkInformation" Version="4.3.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="log4net.config">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Middlewares\" />
 	</ItemGroup>
 
 	<ItemGroup>

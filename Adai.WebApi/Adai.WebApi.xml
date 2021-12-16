@@ -67,7 +67,7 @@
             <summary>
             验证Excel导出
             </summary>
-            <param name="httpRequest"></param>
+            <param name="httpContext"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.WebApi.Attributes.ApiAuthorizeAttribute.WriteLog(Microsoft.AspNetCore.Http.HttpContext)">
@@ -194,6 +194,18 @@
             </summary>
             <param name="viewName"></param>
             <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.WebApi.Extensions.HostExtensions">
+            <summary>
+            HostExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.WebApi.Extensions.HostExtensions.ConfigureHostBuilder(Microsoft.Extensions.Hosting.IHostBuilder)">
+            <summary>
+            ConfigureHostBuilder
+            </summary>
+            <param name="builder"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.WebApi.Filters.SwaggerDocumentFilter">

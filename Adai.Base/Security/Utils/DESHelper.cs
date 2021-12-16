@@ -25,12 +25,10 @@ namespace Adai.Base.Security.Utils
 				encode = Encoding.UTF8;
 			}
 			var buffer = encode.GetBytes(original);
-			using var des = new TripleDESCryptoServiceProvider()
-			{
-				Key = encode.GetBytes(key),
-				Mode = mode,
-				Padding = PaddingMode.PKCS7
-			};
+			using var des = TripleDES.Create();
+			des.Key = encode.GetBytes(key);
+			des.Mode = mode;
+			des.Padding = PaddingMode.PKCS7;
 			if (des.Mode == CipherMode.CBC && !string.IsNullOrEmpty(iv))
 			{
 				des.IV = encode.GetBytes(iv);
@@ -56,11 +54,9 @@ namespace Adai.Base.Security.Utils
 				encode = Encoding.UTF8;
 			}
 			var buffer = Base.Utils.Base64Helper.ToBytes(ciphertext);
-			using var des = new TripleDESCryptoServiceProvider()
-			{
-				Key = encode.GetBytes(key),
-				Mode = mode
-			};
+			using var des = TripleDES.Create();
+			des.Key = encode.GetBytes(key);
+			des.Mode = mode;
 			if (des.Mode == CipherMode.CBC && !string.IsNullOrEmpty(iv))
 			{
 				des.IV = encode.GetBytes(iv);
