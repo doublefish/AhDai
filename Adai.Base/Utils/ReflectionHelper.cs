@@ -159,10 +159,17 @@ namespace Adai.Base.Utils
 		/// <returns></returns>
 		public static PropertyInfo GetPropertyInfo<S, T>(this Expression<Func<S, T>> propertySelector)
 		{
+#if NET5_0_OR_GREATER
+			if (propertySelector.Body is not MemberExpression body)
+			{
+				throw new MissingMemberException("Something went wrong.");
+			}
+#else
 			if (!(propertySelector.Body is MemberExpression body))
 			{
 				throw new MissingMemberException("Something went wrong.");
 			}
+#endif
 			return body.Member as PropertyInfo;
 		}
 	}

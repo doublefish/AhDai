@@ -2,10 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-		<Description>常用方法封装 - WebApi</Description>
 		<Authors>Shuang Yu</Authors>
 		<Company>Adai</Company>
-		<Copyright>Shuang Yu</Copyright>
 		<Version>2.1.0.1</Version>
 		<AssemblyVersion>2.1.0.1</AssemblyVersion>
 		<FileVersion>2.1.0.1</FileVersion>
@@ -14,6 +12,10 @@
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/doublefish/Adai.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
+		<Description>常用方法封装 - WebApi</Description>
+		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
+		<PackageProjectUrl>https://github.com/doublefish/Adai/</PackageProjectUrl>
+		<PackageIcon></PackageIcon>
 		<PackageTags>Adai.WebApi</PackageTags>
 		<OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
 	</PropertyGroup>

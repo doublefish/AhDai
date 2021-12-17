@@ -2,10 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.1;net5.0;net6.0</TargetFrameworks>
-		<Description>数据库访问基础类库-MySql</Description>
 		<Authors>Shuang Yu</Authors>
 		<Company>Adai</Company>
-		<Copyright>Shuang Yu</Copyright>
 		<Version>2.1.0.1</Version>
 		<AssemblyVersion>2.1.0.1</AssemblyVersion>
 		<FileVersion>2.1.0.1</FileVersion>
@@ -14,6 +12,10 @@
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/doublefish/Adai.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
+		<Description>数据库访问基础类库-MySql</Description>
+		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
+		<PackageProjectUrl>https://github.com/doublefish/Adai/</PackageProjectUrl>
+		<PackageIcon></PackageIcon>
 		<PackageTags>Adai.DbContext.MySql</PackageTags>
 	</PropertyGroup>
 
@@ -24,10 +26,10 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<DocumentationFile>Adai.DbContext.MySql.xml</DocumentationFile>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
 		<PackageReference Include="Adai.DbContext" Version="2.1.0.1" />
-		<PackageReference Include="MySql.Data" Version="8.0.25" />
+		<PackageReference Include="MySql.Data" Version="8.0.27" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' ">
@@ -36,8 +38,10 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1' ">
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net452' ">
-		<PackageReference Include="MySql.Data" Version="6.9.12" />
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0' ">
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0' ">
 	</ItemGroup>
 
 </Project>

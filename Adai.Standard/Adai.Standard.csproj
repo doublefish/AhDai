@@ -2,10 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-		<Description>常用方法封装</Description>
 		<Authors>Shuang Yu</Authors>
-		<Company>Adai.Standard</Company>
-		<Copyright>Shuang Yu</Copyright>
+		<Company>Adai</Company>
 		<Version>2.1.0.1</Version>
 		<AssemblyVersion>2.1.0.1</AssemblyVersion>
 		<FileVersion>2.1.0.1</FileVersion>
@@ -14,6 +12,10 @@
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/doublefish/Adai.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
+		<Description>常用方法封装</Description>
+		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
+		<PackageProjectUrl>https://github.com/doublefish/Adai/</PackageProjectUrl>
+		<PackageIcon></PackageIcon>
 		<PackageTags>Adai.Standard</PackageTags>
 	</PropertyGroup>
 
