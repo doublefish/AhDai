@@ -155,6 +155,35 @@
             <param name="dataReader"></param>
             <returns></returns>
         </member>
+        <member name="T:Adai.Base.Extensions.EnumExtensions">
+            <summary>
+            EnumExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Base.Extensions.EnumExtensions.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Base.Extensions.EnumExtensions.GetValueDescription``1(``0)">
+            <summary>
+            获取枚举值的描述
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Base.Extensions.EnumExtensions.GetValues``1">
+            <summary>
+            获取枚举的值的集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Base.Extensions.EnumExtensions.GetValuesAndDescriptions``1">
+            <summary>
+            获取枚举的值的集合
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Adai.Base.Extensions.ExceptionExtensions">
             <summary>
             ExceptionExt
