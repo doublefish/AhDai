@@ -231,7 +231,7 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// 创建查询条件
+		/// 生成查询条件
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="dbContext"></param>
@@ -239,7 +239,7 @@ namespace Adai.DbContext
 		/// <param name="alias"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static string CreateQueryCondition<T>(this IDbContext dbContext, IFilter<T> filter, string alias, out IDbDataParameter[] parameters) where T : class
+		public static string GenerateQueryCondition<T>(this IDbContext dbContext, IFilter<T> filter, string alias, out IDbDataParameter[] parameters) where T : class
 		{
 			var tableAttr = DbHelper.GetTableAttribute(filter.Self.GetType());
 			if (tableAttr == null)
@@ -317,9 +317,9 @@ namespace Adai.DbContext
 		/// <param name="data"></param>
 		/// <param name="tableName">可为空，读取实体特性</param>
 		/// <returns></returns>
-		public static IDbCommand CreateInsertCommand<T>(this IDbContext dbContext, T data, string tableName = null) where T : class
+		public static IDbCommand GenerateInsertCommand<T>(this IDbContext dbContext, T data, string tableName = null) where T : class
 		{
-			var sql = dbContext.CreateInsertSql(data, tableName, out var paras);
+			var sql = dbContext.GenerateInsertSql(data, tableName, out var paras);
 			var cmd = dbContext.CreateCommand();
 			cmd.CommandText = sql;
 			if (paras?.Length > 0)
@@ -339,9 +339,9 @@ namespace Adai.DbContext
 		/// <param name="whereColumn"></param>
 		/// <param name="tableName">可为空，读取实体特性</param>
 		/// <returns></returns>
-		public static IDbCommand CreateUpdateCommand<T>(this IDbContext dbContext, T data, string[] updateColumns, string whereColumn, string tableName = null) where T : class
+		public static IDbCommand GenerateUpdateCommand<T>(this IDbContext dbContext, T data, string[] updateColumns, string whereColumn, string tableName = null) where T : class
 		{
-			return dbContext.CreateUpdateCommand(data, updateColumns, new string[] { whereColumn }, tableName);
+			return dbContext.GenerateUpdateCommand(data, updateColumns, new string[] { whereColumn }, tableName);
 		}
 
 		/// <summary>
@@ -354,9 +354,9 @@ namespace Adai.DbContext
 		/// <param name="whereColumns"></param>
 		/// <param name="tableName"></param>
 		/// <returns></returns>
-		public static IDbCommand CreateUpdateCommand<T>(this IDbContext dbContext, T data, string[] updateColumns, string[] whereColumns, string tableName = null) where T : class
+		public static IDbCommand GenerateUpdateCommand<T>(this IDbContext dbContext, T data, string[] updateColumns, string[] whereColumns, string tableName = null) where T : class
 		{
-			var sql = dbContext.CreateUpdateSql(data, tableName, updateColumns, whereColumns, out var paras);
+			var sql = dbContext.GenerateUpdateSql(data, tableName, updateColumns, whereColumns, out var paras);
 			var cmd = dbContext.CreateCommand();
 			cmd.CommandText = sql;
 			if (paras?.Length > 0)
@@ -375,7 +375,7 @@ namespace Adai.DbContext
 		/// <param name="tableName">可为空，读取实体特性</param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static string CreateInsertSql<T>(this IDbContext dbContext, T data, string tableName, out IDbDataParameter[] parameters) where T : class
+		public static string GenerateInsertSql<T>(this IDbContext dbContext, T data, string tableName, out IDbDataParameter[] parameters) where T : class
 		{
 			var tableAttr = DbHelper.GetTableAttribute<T>();
 			if (tableAttr == null)
@@ -428,7 +428,7 @@ namespace Adai.DbContext
 		/// <param name="whereColumns"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static string CreateUpdateSql<T>(this IDbContext dbContext, T data, string tableName, string[] updateColumns, string[] whereColumns, out IDbDataParameter[] parameters) where T : class
+		public static string GenerateUpdateSql<T>(this IDbContext dbContext, T data, string tableName, string[] updateColumns, string[] whereColumns, out IDbDataParameter[] parameters) where T : class
 		{
 			var tableAttr = DbHelper.GetTableAttribute<T>();
 			if (tableAttr == null)

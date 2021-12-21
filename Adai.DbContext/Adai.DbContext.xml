@@ -676,9 +676,9 @@
             <param name="dictCmds">dbName-cmds</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExtensions.CreateQueryCondition``1(Adai.DbContext.IDbContext,Adai.DbContext.IFilter{``0},System.String,System.Data.IDbDataParameter[]@)">
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateQueryCondition``1(Adai.DbContext.IDbContext,Adai.DbContext.IFilter{``0},System.String,System.Data.IDbDataParameter[]@)">
             <summary>
-            创建查询条件
+            生成查询条件
             </summary>
             <typeparam name="T"></typeparam>
             <param name="dbContext"></param>
@@ -687,7 +687,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExtensions.CreateInsertCommand``1(Adai.DbContext.IDbContext,``0,System.String)">
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateInsertCommand``1(Adai.DbContext.IDbContext,``0,System.String)">
             <summary>
             生成InsertCommand
             </summary>
@@ -697,7 +697,7 @@
             <param name="tableName">可为空，读取实体特性</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExtensions.CreateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String[],System.String,System.String)">
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String[],System.String,System.String)">
             <summary>
             生成UpdateCommand（根据主键修改）
             </summary>
@@ -709,7 +709,7 @@
             <param name="tableName">可为空，读取实体特性</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExtensions.CreateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String[],System.String[],System.String)">
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String[],System.String[],System.String)">
             <summary>
             生成UpdateCommand
             </summary>
@@ -721,7 +721,7 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExtensions.CreateInsertSql``1(Adai.DbContext.IDbContext,``0,System.String,System.Data.IDbDataParameter[]@)">
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateInsertSql``1(Adai.DbContext.IDbContext,``0,System.String,System.Data.IDbDataParameter[]@)">
             <summary>
             生成Insert语句
             </summary>
@@ -732,7 +732,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExtensions.CreateUpdateSql``1(Adai.DbContext.IDbContext,``0,System.String,System.String[],System.String[],System.Data.IDbDataParameter[]@)">
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateUpdateSql``1(Adai.DbContext.IDbContext,``0,System.String,System.String[],System.String[],System.Data.IDbDataParameter[]@)">
             <summary>
             生成Update语句
             </summary>
@@ -799,14 +799,32 @@
             <param name="dbName"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbHelper.CreateInSql``1(System.String,``0[],System.Boolean)">
+        <member name="M:Adai.DbContext.DbHelper.GenerateInSql``1(System.String,``0[],System.Boolean)">
             <summary>
-            生成 In 语句，一千条一个In
+            生成 In/ Not In 语句，一千个值一组
             </summary>
             <typeparam name="T"></typeparam>
             <param name="column"></param>
             <param name="values"></param>
             <param name="notIn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbHelper.GenerateInSql``1(System.String,``0[])">
+            <summary>
+            生成 In 语句，一千个值一组
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="column"></param>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbHelper.GenerateNotInSql``1(System.String,``0[])">
+            <summary>
+            生成 Not In 语句，一千个值一组
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="column"></param>
+            <param name="values"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.DbContext.Extensions.AttributeExtensions">

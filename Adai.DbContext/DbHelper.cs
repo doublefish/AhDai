@@ -111,21 +111,25 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// 生成 In 语句，一千条一个In
+		/// 生成 In/ Not In 语句，一千个值一组
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="column"></param>
 		/// <param name="values"></param>
 		/// <param name="notIn"></param>
 		/// <returns></returns>
-		public static string CreateInSql<T>(string column, T[] values, bool notIn = false)
+		static string GenerateInSql<T>(string column, T[] values, bool notIn = false)
 		{
-			var key_word0 = "OR";
-			var key_word1 = "IN";
+			string key_word0, key_word1;
 			if (notIn)
 			{
 				key_word0 = "AND";
 				key_word1 = "NOT IN";
+			}
+			else
+			{
+				key_word0 = "OR";
+				key_word1 = "IN";
 			}
 			var type = typeof(T);
 			var builder = new StringBuilder();
@@ -158,6 +162,30 @@ namespace Adai.DbContext
 				}
 			}
 			return sql;
+		}
+
+		/// <summary>
+		/// 生成 In 语句，一千个值一组
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="column"></param>
+		/// <param name="values"></param>
+		/// <returns></returns>
+		public static string GenerateInSql<T>(string column, T[] values)
+		{
+			return GenerateInSql(column, values, false);
+		}
+
+		/// <summary>
+		/// 生成 Not In 语句，一千个值一组
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="column"></param>
+		/// <param name="values"></param>
+		/// <returns></returns>
+		public static string GenerateNotInSql<T>(string column, T[] values)
+		{
+			return GenerateInSql(column, values, true);
 		}
 
 		#region 复杂方法

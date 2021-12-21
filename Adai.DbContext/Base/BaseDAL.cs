@@ -138,7 +138,7 @@ namespace Adai.DbContext
 			{
 				paras.AddRange(paras1);
 			}
-			sql += DbContext.CreateQueryCondition(filter, Alias, out var paras0);
+			sql += DbContext.GenerateQueryCondition(filter, Alias, out var paras0);
 			if (paras0 != null)
 			{
 				paras.AddRange(paras0);
@@ -166,7 +166,7 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public virtual int Add(Model data)
 		{
-			var cmd = DbContext.CreateInsertCommand(data, TableName);
+			var cmd = DbContext.GenerateInsertCommand(data, TableName);
 			return DbContext.ExecuteNonQuery(cmd);
 		}
 
@@ -183,7 +183,7 @@ namespace Adai.DbContext
 			{
 				whereColumns = new string[] { PrimaryKey };
 			}
-			var cmd = DbContext.CreateUpdateCommand(data, updateColumns, whereColumns, TableName);
+			var cmd = DbContext.GenerateUpdateCommand(data, updateColumns, whereColumns, TableName);
 			return DbContext.ExecuteNonQuery(cmd);
 		}
 
@@ -227,7 +227,7 @@ namespace Adai.DbContext
 		public virtual ICollection<Model> ListByColumn<T>(string column, T[] values)
 		{
 			var sql = SelectSql;
-			var sql_in = DbHelper.CreateInSql($"{Alias}.{column}", values);
+			var sql_in = DbHelper.GenerateInSql($"{Alias}.{column}", values);
 			sql += $" AND {sql_in}";
 			return GetList(sql);
 		}
@@ -294,7 +294,7 @@ namespace Adai.DbContext
 				{
 					var tableName = _kv.Key;
 					var values = _kv.Value;
-					var sql_in = DbHelper.CreateInSql(column, values.ToArray());
+					var sql_in = DbHelper.GenerateInSql(column, values.ToArray());
 					sqls.Append($"SELECT * FROM {tableName} WHERE {sql_in};\r\n");
 				}
 				var sql = sqls.ToString();
