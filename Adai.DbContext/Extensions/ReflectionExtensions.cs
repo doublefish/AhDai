@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 
 namespace Adai.DbContext.Extensions
@@ -33,10 +32,17 @@ namespace Adai.DbContext.Extensions
 			if (targetType.FullName != sourceType.FullName)
 			{
 				// Nullable类型和数据源类型和目标类型不一致
-				var type = targetType.GenericTypeArguments.FirstOrDefault();
-				if (type == null || type.FullName != sourceType.FullName)
+				if (targetType.GenericTypeArguments.Length > 0)
 				{
-					value = Convert.ChangeType(value, type);
+					var type = targetType.GenericTypeArguments[0];
+					if (type.FullName != sourceType.FullName)
+					{
+						value = Convert.ChangeType(value, type);
+					}
+				}
+				else
+				{
+					value = Convert.ChangeType(value, targetType);
 				}
 			}
 			propertyInfo.SetValue(obj, value);
