@@ -184,7 +184,10 @@ namespace Adai.Standard.Extensions
 		/// <param name="args"></param>
 		public static void Log(this ILogger logger, LogLevel logLevel, string eventId, Exception exception, string message, params object[] args)
 		{
-			message = string.Format(message, args);
+			if (args != null && args.Length > 0)
+			{
+				message = string.Format(message, args);
+			}
 			var date = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
 			//message = $"[{dateStr}][{Environment.ProcessId}][{eventId}]{message}";
 			//logger.Log(logLevel, exception, message, args);
