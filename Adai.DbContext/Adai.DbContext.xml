@@ -1207,5 +1207,34 @@
             连接字符串
             </summary>
         </member>
+        <member name="T:Adai.DbContext.Utils.EnumHelper">
+            <summary>
+            EnumExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.Utils.EnumHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.DbContext.Utils.EnumHelper.GetValueDescription``1(``0)">
+            <summary>
+            获取枚举值的描述
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.Utils.EnumHelper.GetValues``1">
+            <summary>
+            获取枚举的值的集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.Utils.EnumHelper.GetValuesAndDescriptions``1">
+            <summary>
+            获取枚举的值的集合
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

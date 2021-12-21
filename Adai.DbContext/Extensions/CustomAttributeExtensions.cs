@@ -24,13 +24,12 @@ namespace Adai.DbContext.Extensions
 			foreach (var pi in properties)
 			{
 				var attrs = pi.GetCustomAttributes(typeA, true);
-				if (attrs == null || attrs.Length == 0)
+				if (attrs.Length > 0)
 				{
-					continue;
+					var attr = attrs[0] as T;
+					attr.Property = pi;
+					list.Add(attr);
 				}
-				var attr = attrs[0] as T;
-				attr.Property = pi;
-				list.Add(attr);
 			}
 			return list.ToArray();
 		}

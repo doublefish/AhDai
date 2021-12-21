@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace Adai.Base.Extensions
+namespace Adai.DbContext.Utils
 {
 	/// <summary>
 	/// EnumExtensions
 	/// </summary>
-	public static class EnumExtensions
+	public static class EnumHelper
 	{
 		readonly static Type DescriptionType;
 
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		static EnumExtensions()
+		static EnumHelper()
 		{
 			DescriptionType = typeof(DescriptionAttribute);
 		}
