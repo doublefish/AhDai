@@ -183,7 +183,7 @@ namespace Adai.DbContext
 			{
 				whereColumns = new string[] { PrimaryKey };
 			}
-			var cmd = DbContext.GenerateUpdateCommand(data, updateColumns, whereColumns, TableName);
+			var cmd = DbContext.GenerateUpdateCommand(data, TableName, updateColumns, whereColumns);
 			return DbContext.ExecuteNonQuery(cmd);
 		}
 

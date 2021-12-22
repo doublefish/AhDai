@@ -697,28 +697,16 @@
             <param name="tableName">可为空，读取实体特性</param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.DbContextExtensions.GenerateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String[],System.String,System.String)">
-            <summary>
-            生成UpdateCommand（根据主键修改）
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="dbContext"></param>
-            <param name="data"></param>
-            <param name="updateColumns"></param>
-            <param name="whereColumn"></param>
-            <param name="tableName">可为空，读取实体特性</param>
-            <returns></returns>
-        </member>
-        <member name="M:Adai.DbContext.DbContextExtensions.GenerateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String[],System.String[],System.String)">
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateUpdateCommand``1(Adai.DbContext.IDbContext,``0,System.String,System.String[],System.String[])">
             <summary>
             生成UpdateCommand
             </summary>
             <typeparam name="T"></typeparam>
             <param name="dbContext"></param>
             <param name="data"></param>
+            <param name="tableName">可为空，读取实体特性</param>
             <param name="updateColumns"></param>
             <param name="whereColumns"></param>
-            <param name="tableName"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.DbContextExtensions.GenerateInsertSql``1(Adai.DbContext.IDbContext,``0,System.String,System.Data.IDbDataParameter[]@)">
@@ -730,6 +718,27 @@
             <param name="data"></param>
             <param name="tableName">可为空，读取实体特性</param>
             <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateInsertSql``1(Adai.DbContext.IDbContext,``0[],System.String,System.Data.IDbDataParameter[]@)">
+            <summary>
+            生成Insert语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbContext"></param>
+            <param name="datas"></param>
+            <param name="tableName">可为空，读取实体特性</param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateInsertSql``1(Adai.DbContext.IDbContext,``0[],System.String)">
+            <summary>
+            生成Insert语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbContext"></param>
+            <param name="datas"></param>
+            <param name="tableName">可为空，读取实体特性</param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.DbContextExtensions.GenerateUpdateSql``1(Adai.DbContext.IDbContext,``0,System.String,System.String[],System.String[],System.Data.IDbDataParameter[]@)">

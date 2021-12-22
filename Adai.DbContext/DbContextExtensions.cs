@@ -239,7 +239,7 @@ namespace Adai.DbContext
 		/// <param name="alias"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static string GenerateQueryCondition<T>(this IDbContext dbContext, IFilter<T> filter, string alias, out IDbDataParameter[] parameters) where T : class
+		public static string GenerateQueryCondition<T>(this IDbContext dbContext, IFilter<T> filter, string alias, out IDbDataParameter[] parameters) where T : class, new()
 		{
 			var tableAttr = DbHelper.GetTableAttribute(filter.Self.GetType());
 			if (tableAttr == null)
@@ -317,7 +317,7 @@ namespace Adai.DbContext
 		/// <param name="data"></param>
 		/// <param name="tableName">可为空，读取实体特性</param>
 		/// <returns></returns>
-		public static IDbCommand GenerateInsertCommand<T>(this IDbContext dbContext, T data, string tableName = null) where T : class
+		public static IDbCommand GenerateInsertCommand<T>(this IDbContext dbContext, T data, string tableName = null) where T : class, new()
 		{
 			var sql = dbContext.GenerateInsertSql(data, tableName, out var paras);
 			var cmd = dbContext.CreateCommand();
@@ -330,31 +330,16 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// 生成UpdateCommand（根据主键修改）
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="dbContext"></param>
-		/// <param name="data"></param>
-		/// <param name="updateColumns"></param>
-		/// <param name="whereColumn"></param>
-		/// <param name="tableName">可为空，读取实体特性</param>
-		/// <returns></returns>
-		public static IDbCommand GenerateUpdateCommand<T>(this IDbContext dbContext, T data, string[] updateColumns, string whereColumn, string tableName = null) where T : class
-		{
-			return dbContext.GenerateUpdateCommand(data, updateColumns, new string[] { whereColumn }, tableName);
-		}
-
-		/// <summary>
 		/// 生成UpdateCommand
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="dbContext"></param>
 		/// <param name="data"></param>
+		/// <param name="tableName">可为空，读取实体特性</param>
 		/// <param name="updateColumns"></param>
 		/// <param name="whereColumns"></param>
-		/// <param name="tableName"></param>
 		/// <returns></returns>
-		public static IDbCommand GenerateUpdateCommand<T>(this IDbContext dbContext, T data, string[] updateColumns, string[] whereColumns, string tableName = null) where T : class
+		public static IDbCommand GenerateUpdateCommand<T>(this IDbContext dbContext, T data, string tableName, string[] updateColumns, params string[] whereColumns) where T : class, new()
 		{
 			var sql = dbContext.GenerateUpdateSql(data, tableName, updateColumns, whereColumns, out var paras);
 			var cmd = dbContext.CreateCommand();
@@ -375,7 +360,7 @@ namespace Adai.DbContext
 		/// <param name="tableName">可为空，读取实体特性</param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static string GenerateInsertSql<T>(this IDbContext dbContext, T data, string tableName, out IDbDataParameter[] parameters) where T : class
+		public static string GenerateInsertSql<T>(this IDbContext dbContext, T data, string tableName, out IDbDataParameter[] parameters) where T : class, new()
 		{
 			var tableAttr = DbHelper.GetTableAttribute<T>();
 			if (tableAttr == null)
@@ -386,34 +371,160 @@ namespace Adai.DbContext
 			{
 				tableName = tableAttr.Name;
 			}
-			var columns = tableAttr.ColumnAttributes;
-			var builder0 = new StringBuilder();
-			var builder1 = new StringBuilder();
+			var columnAttrs = tableAttr.ColumnAttributes;
+			var columns = new StringBuilder();
+			var values = new StringBuilder();
 			var paras = new List<IDbDataParameter>();
-			foreach (var column in columns)
+			foreach (var columnAttr in columnAttrs)
 			{
-				if (column.Type == Attributes.ColumnType.External)
+				if (columnAttr.Type == Attributes.ColumnType.External)
 				{
 					continue;
 				}
-				var pi = column.Property;
+				var pi = columnAttr.Property;
 				var value = pi.GetValue(data);
-				if (value == null)
-				{
-					continue;
-				}
-				if (value.IsMinValue())
-				{
-					continue;
-				}
-				builder0.Append($",{column.Name}");
-				builder1.Append($",@{column.Name}");
-				paras.Add(dbContext.CreateParameter(column.Name, value));
+				//if (value == null || value.IsMinValue())
+				//{
+				//	continue;
+				//}
+				columns.Append($",{columnAttr.Name}");
+				values.Append($",@{columnAttr.Name}");
+				paras.Add(dbContext.CreateParameter(columnAttr.Name, value));
 			}
-			builder0 = builder0.Remove(0, 1);
-			builder1 = builder1.Remove(0, 1);
+			columns = columns.Remove(0, 1);
+			values = values.Remove(0, 1);
+
 			parameters = paras.ToArray();
-			var sql = $"INSERT INTO {tableName} ({builder0}) VALUES ({builder1})";
+			var sql = $"INSERT INTO {tableName} ({columns}) VALUES ({values})";
+			return sql;
+		}
+
+		/// <summary>
+		/// 生成Insert语句
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="dbContext"></param>
+		/// <param name="datas"></param>
+		/// <param name="tableName">可为空，读取实体特性</param>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		public static string GenerateInsertSql<T>(this IDbContext dbContext, T[] datas, string tableName, out IDbDataParameter[] parameters) where T : class, new()
+		{
+			if (dbContext.DbType == Config.DbType.MSSQL || dbContext.DbType == Config.DbType.MySQL)
+			{
+			}
+			else
+			{
+				throw new NotImplementedException("此方法不支持当前数据库类型");
+			}
+			var tableAttr = DbHelper.GetTableAttribute<T>();
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
+			if (string.IsNullOrEmpty(tableName))
+			{
+				tableName = tableAttr.Name;
+			}
+			var columnAttrs = tableAttr.ColumnAttributes;
+			var columns = new StringBuilder();
+			var values = new StringBuilder();
+			var paras = new List<IDbDataParameter>();
+			foreach (var columnAttr in columnAttrs)
+			{
+				if (columnAttr.Type == Attributes.ColumnType.External)
+				{
+					continue;
+				}
+				columns.Append($",{columnAttr.Name}");
+				values.Append($",@{columnAttr.Name}_{{0}}");
+			}
+			columns = columns.Remove(0, 1);
+			values = values.Remove(0, 1);
+
+			var format = values.ToString();
+			values = new StringBuilder();
+			for (var i = 0; i < datas.Length; i++)
+			{
+				values.Append($",\r\n({string.Format(format, i)})");
+				var data = datas[i];
+				foreach (var columnAttr in columnAttrs)
+				{
+					if (columnAttr.Type == Attributes.ColumnType.External)
+					{
+						continue;
+					}
+					var pi = columnAttr.Property;
+					var value = pi.GetValue(data);
+					paras.Add(dbContext.CreateParameter($"{columnAttr.Name}_{i}", value));
+				}
+			}
+			values = values.Remove(0, 1);
+
+			parameters = paras.ToArray();
+			var sql = $"INSERT INTO {tableName} ({columns}) VALUES {values}";
+			return sql;
+		}
+
+		/// <summary>
+		/// 生成Insert语句
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="dbContext"></param>
+		/// <param name="datas"></param>
+		/// <param name="tableName">可为空，读取实体特性</param>
+		/// <returns></returns>
+		public static string GenerateInsertSql<T>(this IDbContext dbContext, T[] datas, string tableName) where T : class, new()
+		{
+			if (dbContext.DbType == Config.DbType.MSSQL || dbContext.DbType == Config.DbType.MySQL)
+			{
+			}
+			else
+			{
+				throw new NotImplementedException("此方法不支持当前数据库类型");
+			}
+			var tableAttr = DbHelper.GetTableAttribute<T>();
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
+			if (string.IsNullOrEmpty(tableName))
+			{
+				tableName = tableAttr.Name;
+			}
+			var columnAttrs = tableAttr.ColumnAttributes;
+			var columns = new StringBuilder();
+			foreach (var columnAttr in columnAttrs)
+			{
+				if (columnAttr.Type == Attributes.ColumnType.External)
+				{
+					continue;
+				}
+				columns.Append($",{columnAttr.Name}");
+			}
+			columns = columns.Remove(0, 1);
+
+			var values = new StringBuilder();
+			for (var i = 0; i < datas.Length; i++)
+			{
+				var data = datas[i];
+				var builder = new StringBuilder();
+				foreach (var columnAttr in columnAttrs)
+				{
+					if (columnAttr.Type == Attributes.ColumnType.External)
+					{
+						continue;
+					}
+					var pi = columnAttr.Property;
+					var value = pi.GetValue(data);
+					builder.Append($",'{value}'");
+				}
+				builder = builder.Remove(0, 1);
+				values.Append($",\r\n({builder})");
+			}
+			values = values.Remove(0, 1);
+
+			var sql = $"INSERT INTO {tableName} ({columns}) VALUES {values}";
 			return sql;
 		}
 
@@ -428,7 +539,7 @@ namespace Adai.DbContext
 		/// <param name="whereColumns"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		public static string GenerateUpdateSql<T>(this IDbContext dbContext, T data, string tableName, string[] updateColumns, string[] whereColumns, out IDbDataParameter[] parameters) where T : class
+		public static string GenerateUpdateSql<T>(this IDbContext dbContext, T data, string tableName, string[] updateColumns, string[] whereColumns, out IDbDataParameter[] parameters) where T : class, new()
 		{
 			var tableAttr = DbHelper.GetTableAttribute<T>();
 			if (tableAttr == null)
@@ -442,11 +553,10 @@ namespace Adai.DbContext
 			var columns = tableAttr.ColumnAttributes;
 			if (whereColumns == null || whereColumns.Length == 0)
 			{
-				//throw new Exception("未指定参数whereColumns");
 				throw new ArgumentNullException(nameof(whereColumns));
 			}
-			var builderSet = new StringBuilder();
-			var builderWhere = new StringBuilder();
+			var set = new StringBuilder();
+			var where = new StringBuilder();
 			var paras = new List<IDbDataParameter>();
 			foreach (var updateColumn in updateColumns)
 			{
@@ -465,10 +575,10 @@ namespace Adai.DbContext
 				{
 					continue;
 				}
-				builderSet.Append($",{column.Name}=@{column.Name}");
+				set.Append($",{column.Name}=@{column.Name}");
 				paras.Add(dbContext.CreateParameter(column.Name, value));
 			}
-			builderSet = builderSet.Remove(0, 1);
+			set = set.Remove(0, 1);
 
 			foreach (var whereColumn in whereColumns)
 			{
@@ -483,13 +593,13 @@ namespace Adai.DbContext
 				{
 					throw new ArgumentNullException(whereColumn);
 				}
-				builderWhere.Append($"AND {column.Name}=@{column.Name}");
+				where.Append($"AND {column.Name}=@{column.Name}");
 				paras.Add(dbContext.CreateParameter(column.Name, value));
 			}
-			builderWhere = builderWhere.Remove(0, 4);
+			where = where.Remove(0, 4);
 
 			parameters = paras.ToArray();
-			var sql = $"UPDATE {tableName} SET {builderSet} WHERE {builderWhere}";
+			var sql = $"UPDATE {tableName} SET {set} WHERE {where}";
 			return sql;
 		}
 
