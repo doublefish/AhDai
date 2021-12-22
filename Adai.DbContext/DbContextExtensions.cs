@@ -381,12 +381,7 @@ namespace Adai.DbContext
 				{
 					continue;
 				}
-				var pi = columnAttr.Property;
-				var value = pi.GetValue(data);
-				//if (value == null || value.IsMinValue())
-				//{
-				//	continue;
-				//}
+				var value = columnAttr.Property.GetValue(data);
 				columns.Append($",{columnAttr.Name}");
 				values.Append($",@{columnAttr.Name}");
 				paras.Add(dbContext.CreateParameter(columnAttr.Name, value));
@@ -454,8 +449,7 @@ namespace Adai.DbContext
 					{
 						continue;
 					}
-					var pi = columnAttr.Property;
-					var value = pi.GetValue(data);
+					var value = columnAttr.Property.GetValue(data);
 					paras.Add(dbContext.CreateParameter($"{columnAttr.Name}_{i}", value));
 				}
 			}
@@ -515,8 +509,7 @@ namespace Adai.DbContext
 					{
 						continue;
 					}
-					var pi = columnAttr.Property;
-					var value = pi.GetValue(data);
+					var value = columnAttr.Property.GetValue(data);
 					builder.Append($",'{value}'");
 				}
 				builder = builder.Remove(0, 1);
@@ -550,7 +543,7 @@ namespace Adai.DbContext
 			{
 				tableName = tableAttr.Name;
 			}
-			var columns = tableAttr.ColumnAttributes;
+			var columnAttrs = tableAttr.ColumnAttributes;
 			if (whereColumns == null || whereColumns.Length == 0)
 			{
 				throw new ArgumentNullException(nameof(whereColumns));
@@ -560,41 +553,27 @@ namespace Adai.DbContext
 			var paras = new List<IDbDataParameter>();
 			foreach (var updateColumn in updateColumns)
 			{
-				var column = columns.Find(updateColumn);
-				if (column == null || column.Type == Attributes.ColumnType.External)
+				var columnAttr = columnAttrs.Find(updateColumn);
+				if (columnAttr == null || columnAttr.Type == Attributes.ColumnType.External)
 				{
 					continue;
 				}
-				var pi = column.Property;
-				var value = pi.GetValue(data);
-				if (value == null)
-				{
-					continue;
-				}
-				if (value.IsMinValue())
-				{
-					continue;
-				}
-				set.Append($",{column.Name}=@{column.Name}");
-				paras.Add(dbContext.CreateParameter(column.Name, value));
+				var value = columnAttr.Property.GetValue(data);
+				set.Append($",{columnAttr.Name}=@{columnAttr.Name}");
+				paras.Add(dbContext.CreateParameter(columnAttr.Name, value));
 			}
 			set = set.Remove(0, 1);
 
 			foreach (var whereColumn in whereColumns)
 			{
-				var column = columns.Find(whereColumn);
-				if (column == null || column.Type == Attributes.ColumnType.External)
+				var columnAttr = columnAttrs.Find(whereColumn);
+				if (columnAttr == null || columnAttr.Type == Attributes.ColumnType.External)
 				{
 					throw new ArgumentException($"找不到{whereColumn}对应的列");
 				}
-				var pi = column.Property;
-				var value = pi.GetValue(data);
-				if (value == null || value.IsMinValue())
-				{
-					throw new ArgumentNullException(whereColumn);
-				}
-				where.Append($"AND {column.Name}=@{column.Name}");
-				paras.Add(dbContext.CreateParameter(column.Name, value));
+				var value = columnAttr.Property.GetValue(data);
+				where.Append($"AND {columnAttr.Name}=@{columnAttr.Name}");
+				paras.Add(dbContext.CreateParameter(columnAttr.Name, value));
 			}
 			where = where.Remove(0, 4);
 
