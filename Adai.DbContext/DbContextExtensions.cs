@@ -412,6 +412,45 @@ namespace Adai.DbContext
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="dbContext"></param>
+		/// <param name="data"></param>
+		/// <param name="tableName">可为空，读取实体特性</param>
+		/// <returns></returns>
+		public static string GenerateInsertSql<T>(this IDbContext dbContext, T data, string tableName) where T : class, new()
+		{
+			var tableAttr = DbHelper.GetTableAttribute<T>();
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
+			if (string.IsNullOrEmpty(tableName))
+			{
+				tableName = tableAttr.Name;
+			}
+			var columnAttrs = tableAttr.ColumnAttributes;
+			var columns = new StringBuilder();
+			var values = new StringBuilder();
+			foreach (var columnAttr in columnAttrs)
+			{
+				if (columnAttr.Type == Attributes.ColumnType.External)
+				{
+					continue;
+				}
+				var value = columnAttr.Property.GetValue(data);
+				columns.Append($",{columnAttr.Name}");
+				values.Append($",'{value}'");
+			}
+			columns = columns.Remove(0, 1);
+			values = values.Remove(0, 1);
+
+			var sql = $"INSERT INTO {tableName} ({columns}) VALUES ({values})";
+			return sql;
+		}
+
+		/// <summary>
+		/// 生成Insert语句
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="dbContext"></param>
 		/// <param name="datas"></param>
 		/// <param name="tableName">可为空，读取实体特性</param>
 		/// <param name="parameters"></param>
