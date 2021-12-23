@@ -79,13 +79,26 @@ namespace Adai.DbContext
 		public static ICollection<T> GetList<T>(this IDbContext dbContext, string sql, params IDbDataParameter[] parameters) where T : class, new()
 		{
 			var ds = dbContext.GetDataSet(sql, parameters);
+			var list = new List<T>();
 			var tableAttr = DbHelper.GetTableAttribute<T>();
 			if (tableAttr == null)
 			{
-				return ds.Tables[0].ToList<T>();
+				for (var i = 0; i < ds.Tables.Count; i++)
+				{
+					var _list = ds.Tables[i].ToList<T>();
+					list.AddRange(_list);
+				}
 			}
-			var mappings = tableAttr.ColumnAttributes.GetMappings();
-			return ds.Tables[0].ToList<T>(mappings);
+			else
+			{
+				var mappings = tableAttr.ColumnAttributes.GetMappings();
+				for (var i = 0; i < ds.Tables.Count; i++)
+				{
+					var _list = ds.Tables[i].ToList<T>(mappings);
+					list.AddRange(_list);
+				}
+			}
+			return list;
 		}
 
 		/// <summary>

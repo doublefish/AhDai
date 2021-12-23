@@ -11,10 +11,13 @@ namespace Adai.DbContext
 	/// BaseDAL
 	/// </summary>
 	/// <typeparam name="Model"></typeparam>
-	public abstract class BaseDAL<Model>
-		where Model : BaseModel, new()
+	public abstract class BaseDAL<Model> where Model : BaseModel, new()
 	{
 		string selectSql;
+		/// <summary>
+		/// 实体特性
+		/// </summary>
+		public Attributes.TableAttribute TableAttribute { get; private set; }
 
 		/// <summary>
 		/// 数据库名
@@ -71,22 +74,21 @@ namespace Adai.DbContext
 			DbName = dbName;
 			TableName = tableName;
 			Alias = "t";
-			var tableAttr = DbHelper.GetTableAttribute<Model>();
-			if (tableAttr == null)
+			TableAttribute = DbHelper.GetTableAttribute<Model>();
+			if (TableAttribute == null)
 			{
 				throw new Exception("未设置表特性");
 			}
 			if (string.IsNullOrEmpty(tableName))
 			{
-				TableName = tableAttr.Name;
+				TableName = TableAttribute.Name;
 			}
-			var primaryAttr = tableAttr.ColumnAttributes.Where(o => o.Type == Attributes.ColumnType.Primary).FirstOrDefault();
+			var primaryAttr = TableAttribute.ColumnAttributes.Where(o => o.Type == Attributes.ColumnType.Primary).FirstOrDefault();
 			if (primaryAttr != null)
 			{
 				PrimaryKey = primaryAttr.Name;
 			}
 			DbContext = InitDbContext();
-			//SelectSql = InitSelectSql();
 		}
 
 		/// <summary>
@@ -251,12 +253,7 @@ namespace Adai.DbContext
 			var sql = sqls.ToString();
 			var para = DbContext.CreateParameter(column, value);
 			var ds = DbContext.GetDataSet(dbName, sql, para);
-			var tableAttr = DbHelper.GetTableAttribute<Model>();
-			if (tableAttr == null)
-			{
-				throw new Exception("未设置表特性");
-			}
-			var mappings = tableAttr.ColumnAttributes.GetMappings();
+			var mappings = TableAttribute.ColumnAttributes.GetMappings();
 			var list = new List<Model>();
 			for (var i = 0; i < ds.Tables.Count; i++)
 			{
@@ -279,12 +276,7 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		protected ICollection<Model> ListByColumn<T>(IDictionary<string, IDictionary<string, ICollection<T>>> dict, string column)
 		{
-			var tableAttr = DbHelper.GetTableAttribute<Model>();
-			if (tableAttr == null)
-			{
-				throw new Exception("未设置表特性");
-			}
-			var mappings = tableAttr.ColumnAttributes.GetMappings();
+			var mappings = TableAttribute.ColumnAttributes.GetMappings();
 			var list = new List<Model>();
 			foreach (var kv in dict)
 			{

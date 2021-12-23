@@ -84,7 +84,7 @@ namespace Adai.DbContext
 						data = attrs.FirstOrDefault() as Attributes.TableAttribute;
 						data.ColumnAttributes = type.GetColumnAttributes<Attributes.ColumnAttribute>();
 					}
-					TableAttributes.Add(type.FullName, data);
+					TableAttributes[type.FullName] = data;
 				}
 			}
 			return data;
