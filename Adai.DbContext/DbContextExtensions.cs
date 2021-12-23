@@ -454,7 +454,7 @@ namespace Adai.DbContext
 			values = new StringBuilder();
 			for (var i = 0; i < datas.Length; i++)
 			{
-				values.Append($",\r\n({string.Format(format, i)})");
+				values.AppendLine($",({string.Format(format, i)})");
 				var data = datas[i];
 				foreach (var columnAttr in columnAttrs)
 				{
@@ -526,7 +526,7 @@ namespace Adai.DbContext
 					builder.Append($",'{value}'");
 				}
 				builder = builder.Remove(0, 1);
-				values.Append($",\r\n({builder})");
+				values.AppendLine($",({builder})");
 			}
 			values = values.Remove(0, 1);
 

@@ -248,7 +248,7 @@ namespace Adai.DbContext
 			var sqls = new StringBuilder();
 			foreach (var tableName in tableNames)
 			{
-				sqls.Append($"SELECT * FROM {tableName} WHERE {column}=@{column};\r\n");
+				sqls.AppendLine($"SELECT * FROM {tableName} WHERE {column}=@{column};");
 			}
 			var sql = sqls.ToString();
 			var para = DbContext.CreateParameter(column, value);
@@ -287,7 +287,7 @@ namespace Adai.DbContext
 					var tableName = _kv.Key;
 					var values = _kv.Value;
 					var sql_in = DbHelper.GenerateInSql(column, values.ToArray());
-					sqls.Append($"SELECT * FROM {tableName} WHERE {sql_in};\r\n");
+					sqls.AppendLine($"SELECT * FROM {tableName} WHERE {sql_in};");
 				}
 				var sql = sqls.ToString();
 				var ds = DbContext.GetDataSet(dbName, sql);
