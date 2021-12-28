@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Adai.Standard.Extensions;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
 
@@ -9,11 +10,15 @@ namespace Adai.Standard.Services
 	/// </summary>
 	public class LoggerService : ILogger
 	{
+		readonly Action<LogLevel, string, Exception> OnExecuted;
+
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		public LoggerService()
+		/// <param name="onExecuted"></param>
+		public LoggerService(Action<LogLevel, string, Exception> onExecuted = null)
 		{
+			OnExecuted = onExecuted;
 			//Console.WriteLine($"new LoggerService=>{EventId}");
 		}
 
@@ -46,20 +51,13 @@ namespace Adai.Standard.Services
 				break;
 			}
 
-			var levelName = logLevel switch
-			{
-				LogLevel.Trace => "trce",
-				LogLevel.Debug => "dbug",
-				LogLevel.Information => "info",
-				LogLevel.Warning => "warn",
-				LogLevel.Error => "fail",
-				LogLevel.Critical => "crit",
-				_ => string.Empty
-			};
-			var msg = $"{levelName}: {trace}[{eventId.Id}]"
+			var levelName = logLevel.GetName();
+			var message = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [{Environment.ProcessId}][{Environment.CurrentManagedThreadId}] {levelName}: {trace}[{eventId.Id}]"
 				+ $"\r\n      {formatter(state, exception)}"
 				+ $"\r\n      {exception}";
-			Console.WriteLine(msg);
+
+			Console.WriteLine(message);
+			OnExecuted?.Invoke(logLevel, message, exception);
 		}
 
 		/// <summary>

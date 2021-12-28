@@ -88,7 +88,7 @@ namespace Adai.Standard.Utils
 			}
 
 			var logger = LoggerHelper.GetLogger();
-			logger.LogDebug(eventId, message);
+			logger.Debug(eventId, message);
 		}
 	}
 }

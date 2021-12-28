@@ -155,12 +155,13 @@ namespace Adai.Standard.Extensions
 		/// AddLoggerProvider
 		/// </summary>
 		/// <param name="builder"></param>
+		/// <param name="onExecuted"></param>
 		/// <returns></returns>
-		public static ILoggingBuilder AddLoggerProvider(this ILoggingBuilder builder)
+		public static ILoggingBuilder AddLoggerProvider(this ILoggingBuilder builder, Action<LogLevel, string, Exception> onExecuted = null)
 		{
 			// 删除所有 ILoggerProvider 实例
 			builder.ClearProviders();
-			builder.AddProvider(new Providers.LoggerProvider());
+			builder.AddProvider(new Providers.LoggerProvider(onExecuted));
 			return builder;
 		}
 	}

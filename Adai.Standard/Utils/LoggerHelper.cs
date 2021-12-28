@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace Adai.Standard.Utils
 {
@@ -8,11 +9,6 @@ namespace Adai.Standard.Utils
 	/// </summary>
 	public static class LoggerHelper
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		public static ILoggerProvider Provider { get; private set; }
-
 		/// <summary>
 		/// 构造函数
 		/// </summary>
@@ -41,9 +37,7 @@ namespace Adai.Standard.Utils
 		{
 			if (ServiceHelper.Instance == null)
 			{
-				var factory = LoggerFactory.Create(builder => { builder.AddProvider(new Providers.LoggerProvider()); });
-				// 复用同名对象
-				return factory.CreateLogger(categoryName ?? "");
+				throw new Exception("未初始化ServiceHelper.Instance");
 			}
 			if (type == 1)
 			{

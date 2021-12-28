@@ -8,6 +8,17 @@ namespace Adai.Standard.Providers
 	/// </summary>
 	public class LoggerProvider : ILoggerProvider
 	{
+		readonly Action<LogLevel, string, Exception> OnExecuted;
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="onExecuted"></param>
+		public LoggerProvider(Action<LogLevel, string, Exception> onExecuted = null)
+		{
+			OnExecuted = onExecuted;
+		}
+
 		/// <summary>
 		/// CreateLogger
 		/// </summary>
@@ -15,7 +26,7 @@ namespace Adai.Standard.Providers
 		/// <returns></returns>
 		public ILogger CreateLogger(string categoryName)
 		{
-			var logger = new Services.LoggerService();
+			var logger = new Services.LoggerService(OnExecuted);
 			//Console.WriteLine($"CreateLogger=>{logger.EventId}");
 			return logger;
 		}

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
-using System.Diagnostics;
 
 namespace Adai.Standard.Extensions
 {
@@ -16,9 +15,9 @@ namespace Adai.Standard.Extensions
 		/// <param name="eventId"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogTrace(this ILogger logger, string eventId, string message, params object[] args)
+		public static void Trace(this ILogger logger, string eventId, string message, params object[] args)
 		{
-			logger.LogTrace(eventId, null, message, args);
+			logger.Trace(eventId, null, message, args);
 		}
 
 		/// <summary>
@@ -29,7 +28,7 @@ namespace Adai.Standard.Extensions
 		/// <param name="exception"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogTrace(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
+		public static void Trace(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
 		{
 			logger.Log(LogLevel.Trace, eventId, exception, message, args);
 		}
@@ -41,9 +40,9 @@ namespace Adai.Standard.Extensions
 		/// <param name="eventId"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogDebug(this ILogger logger, string eventId, string message, params object[] args)
+		public static void Debug(this ILogger logger, string eventId, string message, params object[] args)
 		{
-			logger.LogDebug(eventId, null, message, args);
+			logger.Debug(eventId, null, message, args);
 		}
 
 		/// <summary>
@@ -54,7 +53,7 @@ namespace Adai.Standard.Extensions
 		/// <param name="exception"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogDebug(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
+		public static void Debug(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
 		{
 			logger.Log(LogLevel.Debug, eventId, exception, message, args);
 		}
@@ -66,9 +65,9 @@ namespace Adai.Standard.Extensions
 		/// <param name="eventId"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogInformation(this ILogger logger, string eventId, string message, params object[] args)
+		public static void Information(this ILogger logger, string eventId, string message, params object[] args)
 		{
-			logger.LogInformation(eventId, null, message, args);
+			logger.Information(eventId, null, message, args);
 		}
 
 		/// <summary>
@@ -79,7 +78,7 @@ namespace Adai.Standard.Extensions
 		/// <param name="exception"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogInformation(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
+		public static void Information(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
 		{
 			logger.Log(LogLevel.Information, eventId, exception, message, args);
 		}
@@ -91,9 +90,9 @@ namespace Adai.Standard.Extensions
 		/// <param name="eventId"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogWarning(this ILogger logger, string eventId, string message, params object[] args)
+		public static void Warning(this ILogger logger, string eventId, string message, params object[] args)
 		{
-			logger.LogWarning(eventId, null, message, args);
+			logger.Warning(eventId, null, message, args);
 		}
 
 		/// <summary>
@@ -104,7 +103,7 @@ namespace Adai.Standard.Extensions
 		/// <param name="exception"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogWarning(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
+		public static void Warning(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
 		{
 			logger.Log(LogLevel.Warning, eventId, exception, message, args);
 		}
@@ -116,9 +115,9 @@ namespace Adai.Standard.Extensions
 		/// <param name="eventId"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogError(this ILogger logger, string eventId, string message, params object[] args)
+		public static void Error(this ILogger logger, string eventId, string message, params object[] args)
 		{
-			logger.LogError(eventId, null, message, args);
+			logger.Error(eventId, null, message, args);
 		}
 
 		/// <summary>
@@ -129,7 +128,7 @@ namespace Adai.Standard.Extensions
 		/// <param name="exception"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogError(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
+		public static void Error(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
 		{
 			logger.Log(LogLevel.Error, eventId, exception, message, args);
 		}
@@ -141,9 +140,9 @@ namespace Adai.Standard.Extensions
 		/// <param name="eventId"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogCritical(this ILogger logger, string eventId, string message, params object[] args)
+		public static void Critical(this ILogger logger, string eventId, string message, params object[] args)
 		{
-			logger.LogCritical(eventId, null, message, args);
+			logger.Critical(eventId, null, message, args);
 		}
 
 		/// <summary>
@@ -154,7 +153,7 @@ namespace Adai.Standard.Extensions
 		/// <param name="exception"></param>
 		/// <param name="message"></param>
 		/// <param name="args"></param>
-		public static void LogCritical(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
+		public static void Critical(this ILogger logger, string eventId, Exception exception, string message, params object[] args)
 		{
 			logger.Log(LogLevel.Critical, eventId, exception, message, args);
 		}
@@ -188,12 +187,26 @@ namespace Adai.Standard.Extensions
 			{
 				message = string.Format(message, args);
 			}
-			var date = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
-			//message = $"[{dateStr}][{Environment.ProcessId}][{eventId}]{message}";
-			//logger.Log(logLevel, exception, message, args);
-			logger.Log(logLevel, exception, Format, date, Environment.ProcessId, eventId, message);
+			logger.Log(logLevel, exception, "[{eventId}]{message}", eventId, message);
 		}
 
-		const string Format = "[{date}][{process}][{eventId}]{message}";
+		/// <summary>
+		/// GetName
+		/// </summary>
+		/// <param name="logLevel"></param>
+		/// <returns></returns>
+		public static string GetName(this LogLevel logLevel)
+		{
+			return logLevel switch
+			{
+				LogLevel.Trace => "Trace",
+				LogLevel.Debug => "Debug",
+				LogLevel.Information => "Info",
+				LogLevel.Warning => "Warn",
+				LogLevel.Error => "Error",
+				LogLevel.Critical => "Critical",
+				_ => string.Empty
+			};
+		}
 	}
 }

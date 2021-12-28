@@ -313,11 +313,12 @@
             <param name="setupAction"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.Standard.Extensions.BuilderExtensions.AddLoggerProvider(Microsoft.Extensions.Logging.ILoggingBuilder)">
+        <member name="M:Adai.Standard.Extensions.BuilderExtensions.AddLoggerProvider(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception})">
             <summary>
             AddLoggerProvider
             </summary>
             <param name="builder"></param>
+            <param name="afterLog"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.Standard.Extensions.ConfigurationExtensions">
@@ -351,6 +352,26 @@
             获取RabbitMQ配置
             </summary>
             <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Standard.Extensions.HostExtensions">
+            <summary>
+            HostExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Standard.Extensions.HostExtensions.ConfigureHostBuilder(Microsoft.Extensions.Hosting.IHostBuilder)">
+            <summary>
+            ConfigureHostBuilder
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Standard.Extensions.HostExtensions.ConfigureLogging(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception})">
+            <summary>
+            ConfigureLogging
+            </summary>
+            <param name="builder"></param>
+            <param name="afterLog"></param>
             <returns></returns>
         </member>
         <member name="T:Adai.Standard.Extensions.HttpRequestExtensions">
@@ -519,7 +540,7 @@
             LoggerExtensions
             </summary>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogTrace(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Trace(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
             <summary>
             LogTrace
             </summary>
@@ -528,7 +549,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogTrace(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Trace(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
             <summary>
             LogTrace
             </summary>
@@ -538,7 +559,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogDebug(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Debug(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
             <summary>
             LogDebug
             </summary>
@@ -547,7 +568,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogDebug(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Debug(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
             <summary>
             LogDebug
             </summary>
@@ -557,7 +578,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogInformation(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Information(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
             <summary>
             LogInformation
             </summary>
@@ -566,7 +587,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogInformation(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Information(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
             <summary>
             LogInformation
             </summary>
@@ -576,7 +597,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogWarning(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Warning(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
             <summary>
             LogWarning
             </summary>
@@ -585,7 +606,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogWarning(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Warning(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
             <summary>
             LogWarning
             </summary>
@@ -595,7 +616,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogError(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Error(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
             <summary>
             LogError
             </summary>
@@ -604,7 +625,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogError(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Error(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
             <summary>
             LogError
             </summary>
@@ -614,7 +635,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogCritical(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Critical(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
             <summary>
             LogCritical
             </summary>
@@ -623,7 +644,7 @@
             <param name="message"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Adai.Standard.Extensions.LoggerExtensions.LogCritical(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.Critical(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
             <summary>
             LogCritical
             </summary>
@@ -653,6 +674,13 @@
             <param name="exception"></param>
             <param name="message"></param>
             <param name="args"></param>
+        </member>
+        <member name="M:Adai.Standard.Extensions.LoggerExtensions.GetName(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            GetName
+            </summary>
+            <param name="logLevel"></param>
+            <returns></returns>
         </member>
         <member name="T:Adai.Standard.Extensions.OptionsExtensions">
             <summary>
@@ -1784,6 +1812,12 @@
             LoggerProvider
             </summary>
         </member>
+        <member name="M:Adai.Standard.Providers.LoggerProvider.#ctor(System.Action{Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="afterLog"></param>
+        </member>
         <member name="M:Adai.Standard.Providers.LoggerProvider.CreateLogger(System.String)">
             <summary>
             CreateLogger
@@ -2177,10 +2211,11 @@
             LoggerService
             </summary>
         </member>
-        <member name="M:Adai.Standard.Services.LoggerService.#ctor">
+        <member name="M:Adai.Standard.Services.LoggerService.#ctor(System.Action{Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception})">
             <summary>
             构造函数
             </summary>
+            <param name="afterLog"></param>
         </member>
         <member name="M:Adai.Standard.Services.LoggerService.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
             <summary>
@@ -3071,11 +3106,6 @@
         <member name="T:Adai.Standard.Utils.LoggerHelper">
             <summary>
             LoggerHelper
-            </summary>
-        </member>
-        <member name="P:Adai.Standard.Utils.LoggerHelper.Provider">
-            <summary>
-            
             </summary>
         </member>
         <member name="M:Adai.Standard.Utils.LoggerHelper.#cctor">
