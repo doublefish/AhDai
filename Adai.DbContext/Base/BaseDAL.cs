@@ -169,7 +169,7 @@ namespace Adai.DbContext
 		public virtual int Add(Model data)
 		{
 			var cmd = DbContext.GenerateInsertCommand(data, TableName);
-			return DbContext.ExecuteNonQuery(cmd);
+			return DbContext.ExecuteNonQuery(DbName, cmd);
 		}
 
 		/// <summary>
@@ -186,7 +186,7 @@ namespace Adai.DbContext
 				whereColumns = new string[] { PrimaryKey };
 			}
 			var cmd = DbContext.GenerateUpdateCommand(data, TableName, updateColumns, whereColumns);
-			return DbContext.ExecuteNonQuery(cmd);
+			return DbContext.ExecuteNonQuery(DbName, cmd);
 		}
 
 		/// <summary>
