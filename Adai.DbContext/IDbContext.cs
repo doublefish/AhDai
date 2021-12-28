@@ -24,6 +24,13 @@ namespace Adai.DbContext
 		IDbConnection CreateConnection();
 
 		/// <summary>
+		/// CreateConnection
+		/// </summary>
+		/// <param name="connectionString"></param>
+		/// <returns></returns>
+		IDbConnection CreateConnection(string connectionString);
+
+		/// <summary>
 		/// CreateDataAdapter
 		/// </summary>
 		/// <returns></returns>
