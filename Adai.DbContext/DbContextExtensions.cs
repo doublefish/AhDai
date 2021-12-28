@@ -624,10 +624,10 @@ namespace Adai.DbContext
 					throw new ArgumentException($"找不到{whereColumn}对应的列");
 				}
 				var value = columnAttr.Property.GetValue(data);
-				where.Append($"AND {columnAttr.Name}=@{columnAttr.Name}");
+				where.Append($" AND {columnAttr.Name}=@{columnAttr.Name}");
 				paras.Add(dbContext.CreateParameter(columnAttr.Name, value));
 			}
-			where = where.Remove(0, 4);
+			where = where.Remove(0, 5);
 
 			parameters = paras.ToArray();
 			var sql = $"UPDATE {tableName} SET {set} WHERE {where}";
