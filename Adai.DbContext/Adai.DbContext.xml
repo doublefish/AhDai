@@ -171,6 +171,11 @@
             </summary>
             <typeparam name="Model"></typeparam>
         </member>
+        <member name="P:Adai.DbContext.BaseDAL`1.TableAttribute">
+            <summary>
+            实体特性
+            </summary>
+        </member>
         <member name="P:Adai.DbContext.BaseDAL`1.DbName">
             <summary>
             数据库名
@@ -720,6 +725,16 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateInsertSql``1(Adai.DbContext.IDbContext,``0,System.String)">
+            <summary>
+            生成Insert语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbContext"></param>
+            <param name="data"></param>
+            <param name="tableName">可为空，读取实体特性</param>
+            <returns></returns>
+        </member>
         <member name="M:Adai.DbContext.DbContextExtensions.GenerateInsertSql``1(Adai.DbContext.IDbContext,``0[],System.String,System.Data.IDbDataParameter[]@)">
             <summary>
             生成Insert语句
@@ -1056,6 +1071,13 @@
             <summary>
             CreateConnection
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.IDbContext.CreateConnection(System.String)">
+            <summary>
+            CreateConnection
+            </summary>
+            <param name="connectionString"></param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.IDbContext.CreateDataAdapter">

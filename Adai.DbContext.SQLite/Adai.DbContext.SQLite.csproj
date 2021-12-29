@@ -32,9 +32,6 @@
 		<PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.115.5" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' ">
-	</ItemGroup>
-
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1' ">
 	</ItemGroup>
 
