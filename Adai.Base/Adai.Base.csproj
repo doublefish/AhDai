@@ -9,7 +9,7 @@
 		<FileVersion>2.1.0.2</FileVersion>
 		<PackageReleaseNotes>无</PackageReleaseNotes>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/doublefish/Adai.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<Description>常用方法封装</Description>
