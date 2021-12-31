@@ -20,7 +20,7 @@ namespace Adai.Standard.Extensions
 		/// <returns></returns>
 		public static IHostBuilder ConfigureHostBuilder(this IHostBuilder builder)
 		{
-			return builder.ConfigureAppConfiguration((hostingContext, builder) =>
+			return builder.ConfigureAppConfiguration((context, builder) =>
 			{
 
 			});
