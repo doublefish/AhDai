@@ -43,7 +43,7 @@ namespace Adai.Standard.Services
 				var fullName = method.DeclaringType.FullName;
 				if (StackFrame.OFFSET_UNKNOWN == offset ||
 					fullName.StartsWith("Microsoft.Extensions.Logging")
-					|| fullName == "Adai.Standard.Extensions.LoggerExtensions")
+					|| fullName == "Adai.Standard.Extensions.LoggingExtensions")
 				{
 					continue;
 				}

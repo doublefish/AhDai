@@ -4,9 +4,9 @@ using System;
 namespace Adai.Standard.Extensions
 {
 	/// <summary>
-	/// LoggerExtensions
+	/// LoggingExtensions
 	/// </summary>
-	public static class LoggerExtensions
+	public static class LoggingExtensions
 	{
 		/// <summary>
 		/// LogTrace
