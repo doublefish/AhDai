@@ -209,7 +209,10 @@ namespace Adai.DbContext
 			{
 				foreach (var tran in trans)
 				{
-					tran.Rollback();
+					if (tran.Connection.State == ConnectionState.Open)
+					{
+						tran.Rollback();
+					}
 				}
 				throw;
 			}
