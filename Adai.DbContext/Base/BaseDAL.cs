@@ -198,8 +198,7 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public virtual Model GetByColumn<T>(string column, T value)
 		{
-			var sql = SelectSql;
-			sql += $" AND {Alias}.{column}=@{column} LIMIT 0,1";
+			var sql = $"{SelectSql} AND {Alias}.{column}=@{column} LIMIT 0,1";
 			var para = DbContext.CreateParameter(column, value);
 			return GetList(sql, para).FirstOrDefault();
 		}
@@ -213,8 +212,7 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public virtual ICollection<Model> ListByColumn<T>(string column, T value)
 		{
-			var sql = SelectSql;
-			sql += $" AND {Alias}.{column}=@{column}";
+			var sql = $"{SelectSql} AND {Alias}.{column}=@{column}";
 			var para = DbContext.CreateParameter(column, value);
 			return GetList(sql, para);
 		}
@@ -228,9 +226,8 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public virtual ICollection<Model> ListByColumn<T>(string column, T[] values)
 		{
-			var sql = SelectSql;
 			var sql_in = DbHelper.GenerateInSql($"{Alias}.{column}", values);
-			sql += $" AND {sql_in}";
+			var sql = $"{SelectSql} AND {sql_in}";
 			return GetList(sql);
 		}
 
@@ -311,7 +308,7 @@ namespace Adai.DbContext
 		/// <param name="sql"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		ICollection<Model> GetList(string sql, params IDbDataParameter[] parameters)
+		protected ICollection<Model> GetList(string sql, params IDbDataParameter[] parameters)
 		{
 			var list = DbContext.GetList<Model>(DbName, sql, parameters);
 			foreach (var data in list)
