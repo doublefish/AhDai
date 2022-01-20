@@ -187,9 +187,9 @@ namespace Adai.DbContext
 				{
 					var conn = dbContext.CreateConnection();
 					conn.ConnectionString = kv.Key;
-					var cmds = kv.Value;
 					conn.Open();
 					conns.Add(conn);
+					var cmds = kv.Value;
 					var tran = conn.BeginTransaction();
 					trans.Add(tran);
 					foreach (var cmd in cmds)
@@ -420,6 +420,13 @@ namespace Adai.DbContext
 		/// <returns></returns>
 		public static string GenerateInsertSql<T>(this IDbContext dbContext, T data, string tableName) where T : class, new()
 		{
+			if (dbContext.DbType == Config.DbType.MSSQL || dbContext.DbType == Config.DbType.MySQL)
+			{
+			}
+			else
+			{
+				throw new NotImplementedException("此方法不支持当前数据库类型");
+			}
 			var tableAttr = DbHelper.GetTableAttribute<T>();
 			if (tableAttr == null)
 			{

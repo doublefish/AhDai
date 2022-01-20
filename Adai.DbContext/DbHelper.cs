@@ -57,17 +57,17 @@ namespace Adai.DbContext
 		}
 
 		/// <summary>
-		/// 获取映射
+		/// 获取表特性
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public static Attributes.TableAttribute GetTableAttribute<T>() where T : class
+		public static Attributes.TableAttribute GetTableAttribute<T>() where T : class, new()
 		{
 			return GetTableAttribute(typeof(T));
 		}
 
 		/// <summary>
-		/// 获取属性
+		/// 获取表特性
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
@@ -88,6 +88,34 @@ namespace Adai.DbContext
 				}
 			}
 			return data;
+		}
+
+		/// <summary>
+		/// 获取列特性
+		/// </summary>
+		/// <param name="column">列名或对应的属性名</param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
+		public static Attributes.ColumnAttribute GetColumnAttribute<T>(string column) where T : class, new()
+		{
+			return GetColumnAttribute(column, typeof(T));
+		}
+
+		/// <summary>
+		/// 获取列特性
+		/// </summary>
+		/// <param name="column">列名或对应的属性名</param>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		public static Attributes.ColumnAttribute GetColumnAttribute(string column, Type type)
+		{
+			var tableAttr = GetTableAttribute(type);
+			if (tableAttr == null)
+			{
+				return null;
+			}
+			var columnAttrs = tableAttr.ColumnAttributes;
+			return columnAttrs.Find(column);
 		}
 
 		/// <summary>
@@ -168,7 +196,7 @@ namespace Adai.DbContext
 		/// 生成 In 语句，一千个值一组
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="column"></param>
+		/// <param name="column">列名</param>
 		/// <param name="values"></param>
 		/// <returns></returns>
 		public static string GenerateInSql<T>(string column, T[] values)
@@ -180,7 +208,7 @@ namespace Adai.DbContext
 		/// 生成 Not In 语句，一千个值一组
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="column"></param>
+		/// <param name="column">列名</param>
 		/// <param name="values"></param>
 		/// <returns></returns>
 		public static string GenerateNotInSql<T>(string column, T[] values)
@@ -189,6 +217,7 @@ namespace Adai.DbContext
 		}
 
 		#region 复杂方法
+
 		#endregion
 	}
 }

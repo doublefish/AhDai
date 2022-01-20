@@ -281,7 +281,7 @@
             查询
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="column"></param>
+            <param name="column">列名或对应的属性名</param>
             <param name="value"></param>
             <returns></returns>
         </member>
@@ -290,7 +290,7 @@
             查询
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="column"></param>
+            <param name="column">列名或对应的属性名</param>
             <param name="value"></param>
             <returns></returns>
         </member>
@@ -299,7 +299,7 @@
             查询
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="column"></param>
+            <param name="column">列名或对应的属性名</param>
             <param name="values"></param>
             <returns></returns>
         </member>
@@ -310,7 +310,7 @@
             <typeparam name="T"></typeparam>
             <param name="dbName"></param>
             <param name="tableNames"></param>
-            <param name="column"></param>
+            <param name="column">列名或对应的属性名</param>
             <param name="value"></param>
             <returns></returns>
         </member>
@@ -319,7 +319,7 @@
             跨库跨表查询
             </summary>
             <param name="dict">dbName-tableName-values</param>
-            <param name="column"></param>
+            <param name="column">列名或对应的属性名</param>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.BaseDAL`1.GetList(System.String,System.Data.IDbDataParameter[])">
@@ -803,15 +803,31 @@
         </member>
         <member name="M:Adai.DbContext.DbHelper.GetTableAttribute``1">
             <summary>
-            获取映射
+            获取表特性
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
         <member name="M:Adai.DbContext.DbHelper.GetTableAttribute(System.Type)">
             <summary>
-            获取属性
+            获取表特性
             </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbHelper.GetColumnAttribute``1(System.String)">
+            <summary>
+            获取列特性
+            </summary>
+            <param name="column">列名或对应的属性名</param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.DbContext.DbHelper.GetColumnAttribute(System.String,System.Type)">
+            <summary>
+            获取列特性
+            </summary>
+            <param name="column">列名或对应的属性名</param>
             <param name="type"></param>
             <returns></returns>
         </member>
@@ -838,7 +854,7 @@
             生成 In 语句，一千个值一组
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="column"></param>
+            <param name="column">列名</param>
             <param name="values"></param>
             <returns></returns>
         </member>
@@ -847,7 +863,7 @@
             生成 Not In 语句，一千个值一组
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="column"></param>
+            <param name="column">列名</param>
             <param name="values"></param>
             <returns></returns>
         </member>

@@ -193,12 +193,14 @@ namespace Adai.DbContext
 		/// 查询
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="column"></param>
+		/// <param name="column">列名或对应的属性名</param>
 		/// <param name="value"></param>
 		/// <returns></returns>
 		public virtual Model GetByColumn<T>(string column, T value)
 		{
-			var sql = $"{SelectSql} AND {Alias}.{column}=@{column} LIMIT 0,1";
+			var columnAttr = DbHelper.GetColumnAttribute<Model>(column);
+			var columnName = columnAttr != null ? columnAttr.Name : column;
+			var sql = $"{SelectSql} AND {Alias}.{columnName}=@{column} LIMIT 0,1";
 			var para = DbContext.CreateParameter(column, value);
 			return GetList(sql, para).FirstOrDefault();
 		}
@@ -207,12 +209,14 @@ namespace Adai.DbContext
 		/// 查询
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="column"></param>
+		/// <param name="column">列名或对应的属性名</param>
 		/// <param name="value"></param>
 		/// <returns></returns>
 		public virtual ICollection<Model> ListByColumn<T>(string column, T value)
 		{
-			var sql = $"{SelectSql} AND {Alias}.{column}=@{column}";
+			var columnAttr = DbHelper.GetColumnAttribute<Model>(column);
+			var columnName = columnAttr != null ? columnAttr.Name : column;
+			var sql = $"{SelectSql} AND {Alias}.{columnName}=@{column}";
 			var para = DbContext.CreateParameter(column, value);
 			return GetList(sql, para);
 		}
@@ -221,12 +225,14 @@ namespace Adai.DbContext
 		/// 查询
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="column"></param>
+		/// <param name="column">列名或对应的属性名</param>
 		/// <param name="values"></param>
 		/// <returns></returns>
 		public virtual ICollection<Model> ListByColumn<T>(string column, T[] values)
 		{
-			var sql_in = DbHelper.GenerateInSql($"{Alias}.{column}", values);
+			var columnAttr = DbHelper.GetColumnAttribute<Model>(column);
+			var columnName = columnAttr != null ? columnAttr.Name : column;
+			var sql_in = DbHelper.GenerateInSql($"{Alias}.{columnName}", values);
 			var sql = $"{SelectSql} AND {sql_in}";
 			return GetList(sql);
 		}
@@ -237,15 +243,17 @@ namespace Adai.DbContext
 		/// <typeparam name="T"></typeparam>
 		/// <param name="dbName"></param>
 		/// <param name="tableNames"></param>
-		/// <param name="column"></param>
+		/// <param name="column">列名或对应的属性名</param>
 		/// <param name="value"></param>
 		/// <returns></returns>
 		public ICollection<Model> ListByColumn<T>(string dbName, string[] tableNames, string column, T value)
 		{
+			var columnAttr = DbHelper.GetColumnAttribute<Model>(column);
+			var columnName = columnAttr != null ? columnAttr.Name : column;
 			var sqls = new StringBuilder();
 			foreach (var tableName in tableNames)
 			{
-				sqls.AppendLine($"SELECT * FROM {tableName} WHERE {column}=@{column};");
+				sqls.AppendLine($"SELECT * FROM {tableName} WHERE {columnName}=@{column};");
 			}
 			var sql = sqls.ToString();
 			var para = DbContext.CreateParameter(column, value);
@@ -269,10 +277,12 @@ namespace Adai.DbContext
 		/// 跨库跨表查询
 		/// </summary>
 		/// <param name="dict">dbName-tableName-values</param>
-		/// <param name="column"></param>
+		/// <param name="column">列名或对应的属性名</param>
 		/// <returns></returns>
 		protected ICollection<Model> ListByColumn<T>(IDictionary<string, IDictionary<string, ICollection<T>>> dict, string column)
 		{
+			var columnAttr = DbHelper.GetColumnAttribute<Model>(column);
+			var columnName = columnAttr != null ? columnAttr.Name : column;
 			var mappings = TableAttribute.ColumnAttributes.GetMappings();
 			var list = new List<Model>();
 			foreach (var kv in dict)
@@ -283,7 +293,7 @@ namespace Adai.DbContext
 				{
 					var tableName = _kv.Key;
 					var values = _kv.Value;
-					var sql_in = DbHelper.GenerateInSql(column, values.ToArray());
+					var sql_in = DbHelper.GenerateInSql(columnName, values.ToArray());
 					sqls.AppendLine($"SELECT * FROM {tableName} WHERE {sql_in};");
 				}
 				var sql = sqls.ToString();
