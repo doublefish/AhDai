@@ -37,7 +37,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Adai.Core\Adai.Core.csproj" />
-	  <ProjectReference Include="..\Adai.DbContext.MySql\Adai.DbContext.MySql.csproj" />
 	</ItemGroup>
 
 </Project>
