@@ -251,9 +251,9 @@
             <param name="filter"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.DbContext.BaseDAL`1.CreateExtendQueryCondition``1(``0,System.Data.IDbDataParameter[]@)">
+        <member name="M:Adai.DbContext.BaseDAL`1.GenerateExtendQueryCondition``1(``0,System.Data.IDbDataParameter[]@)">
             <summary>
-            创建扩展查询条件扩展
+            生成扩展查询条件
             </summary>
             <typeparam name="T"></typeparam>
             <param name="filter"></param>
@@ -690,7 +690,27 @@
             <param name="filter"></param>
             <param name="alias"></param>
             <param name="parameters"></param>
-            <returns></returns>
+            <returns>查询条件部分SQL语句</returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContextExtensions.GenerateSortCondition``1(Adai.DbContext.IDbContext,Adai.DbContext.IFilter{``0},System.String)">
+            <summary>
+            生成排序条件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbContext"></param>
+            <param name="filter"></param>
+            <param name="alias"></param>
+            <returns>排序条件部分SQL语句</returns>
+        </member>
+        <member name="M:Adai.DbContext.DbContextExtensions.GeneratePaginationCondition(Adai.DbContext.IDbContext,System.Int32,System.Int32,System.String)">
+            <summary>
+            生成排序条件
+            </summary>
+            <param name="dbContext"></param>
+            <param name="take"></param>
+            <param name="skip"></param>
+            <param name="sql"></param>
+            <returns>完整SQL语句</returns>
         </member>
         <member name="M:Adai.DbContext.DbContextExtensions.GenerateInsertCommand``1(Adai.DbContext.IDbContext,``0,System.String)">
             <summary>

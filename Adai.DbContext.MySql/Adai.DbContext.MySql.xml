@@ -4,6 +4,116 @@
         <name>Adai.DbContext.MySql</name>
     </assembly>
     <members>
+        <member name="T:Adai.DbContext.MySql.Models.COLUMNS">
+            <summary>
+            列
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.TABLE_CATALOG">
+            <summary>
+            TABLE_CATALOG
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.TABLE_SCHEMA">
+            <summary>
+            TABLE_SCHEMA
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.TABLE_NAME">
+            <summary>
+            TABLE_NAME
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.COLUMN_NAME">
+            <summary>
+            COLUMN_NAME
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.ORDINAL_POSITION">
+            <summary>
+            ORDINAL_POSITION
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.COLUMN_DEFAULT">
+            <summary>
+            COLUMN_DEFAULT
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.IS_NULLABLE">
+            <summary>
+            IS_NULLABLE
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.DATA_TYPE">
+            <summary>
+            DATA_TYPE
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.CHARACTER_MAXIMUM_LENGTH">
+            <summary>
+            CHARACTER_MAXIMUM_LENGTH
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.CHARACTER_OCTET_LENGTH">
+            <summary>
+            CHARACTER_OCTET_LENGTH
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.NUMERIC_PRECISION">
+            <summary>
+            NUMERIC_PRECISION
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.NUMERIC_SCALE">
+            <summary>
+            NUMERIC_SCALE
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.DATETIME_PRECISION">
+            <summary>
+            DATETIME_PRECISION
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.CHARACTER_SET_NAME">
+            <summary>
+            CHARACTER_SET_NAME
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.COLLATION_NAME">
+            <summary>
+            COLLATION_NAME
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.COLUMN_TYPE">
+            <summary>
+            COLUMN_TYPE
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.COLUMN_KEY">
+            <summary>
+            COLUMN_KEY
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.EXTRA">
+            <summary>
+            EXTRA
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.PRIVILEGES">
+            <summary>
+            PRIVILEGES
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.COLUMN_COMMENT">
+            <summary>
+            COLUMN_COMMENT
+            </summary>
+        </member>
+        <member name="P:Adai.DbContext.MySql.Models.COLUMNS.GENERATION_EXPRESSION">
+            <summary>
+            GENERATION_EXPRESSION
+            </summary>
+        </member>
         <member name="T:Adai.DbContext.MySql.Models.TABLES">
             <summary>
             表

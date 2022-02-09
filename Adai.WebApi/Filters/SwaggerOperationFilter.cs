@@ -30,7 +30,7 @@ namespace Adai.WebApi.Filters
 			});
 			operation.Parameters.Add(new OpenApiParameter()
 			{
-				Name = "x-version",
+				Name = "api-version",
 				In = ParameterLocation.Header,
 				Required = true,
 				Schema = new OpenApiSchema() { Type = "string", Default = new OpenApiString("1.0") },
@@ -38,7 +38,7 @@ namespace Adai.WebApi.Filters
 			});
 			operation.Parameters.Add(new OpenApiParameter()
 			{
-				Name = Const.RequestId,
+				Name = Core.Const.RequestId,
 				In = ParameterLocation.Header,
 				Required = true,
 				Schema = new OpenApiSchema() { Type = "string", Default = new OpenApiString(Guid.NewGuid().ToString("N")) },

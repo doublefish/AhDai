@@ -167,6 +167,85 @@
             <param name="ex"></param>
             <returns></returns>
         </member>
+        <member name="T:Adai.Base.Extensions.IDictionaryExtensions">
+            <summary>
+            IDictionaryExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Base.Extensions.IDictionaryExtensions.Sort``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IComparer{``0})">
+            <summary>
+            排序
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dic"></param>
+            <param name="comparer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Base.Extensions.IDictionaryExtensions.SortByASCII``1(System.Collections.Generic.IDictionary{System.String,``0})">
+            <summary>
+            ASCII排序
+            </summary>
+            <typeparam name="TValue"></typeparam>
+            <param name="dic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Base.Extensions.IDictionaryExtensions.ToSortedDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            类型转换
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Base.Extensions.IDictionaryExtensions.FilterSort``2(System.Collections.Generic.IDictionary{``0,``1},``0[])">
+            <summary>
+            按指定键值筛选并排序
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dic"></param>
+            <param name="keys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Base.Extensions.IDictionaryExtensions.Remove``2(System.Collections.Generic.IDictionary{``0,``1},``0[])">
+            <summary>
+            删除指定键
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dic"></param>
+            <param name="keys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Base.Extensions.IDictionaryExtensions.ToQueryString``1(System.Collections.Generic.IDictionary{System.String,``0},System.Boolean,System.String[])">
+            <summary>
+            转换为QueryString
+            </summary>
+            <param name="parameters"></param>
+            <param name="ignoreNullOrEmpty"></param>
+            <param name="ignores"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Base.Extensions.IDictionaryExtensions.ToJoinString(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.Boolean,System.String[])">
+            <summary>
+            转换为连接字符串
+            </summary>
+            <param name="parameters"></param>
+            <param name="separator"></param>
+            <param name="ignoreNullOrEmpty"></param>
+            <param name="ignores"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Base.Extensions.IDictionaryExtensions.ToXmlString(System.Collections.Generic.IDictionary{System.String,System.String},System.String[])">
+            <summary>
+            转换为Xml字符串
+            </summary>
+            <param name="parameters"></param>
+            <param name="ignores"></param>
+            <returns></returns>
+        </member>
         <member name="T:Adai.Base.Extensions.LinqExtensions">
             <summary>
             LinqExt

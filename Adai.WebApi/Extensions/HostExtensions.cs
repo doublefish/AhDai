@@ -14,15 +14,16 @@ namespace Adai.WebApi.Extensions
 		/// <returns></returns>
 		public static IHostBuilder ConfigureHostBuilder(this IHostBuilder builder)
 		{
-			//Standard.Extensions.HostExtensions.ConfigureHostBuilder(builder);
+			Core.Extensions.HostExtensions.ConfigureHostBuilder(builder);
 			builder.ConfigureLogging((context, builder) =>
 			{
-				Standard.Extensions.BuilderExtensions.AddLoggerProvider(builder);
+				Core.Extensions.BuilderExtensions.AddLoggerProvider(builder);
 			});
-			return builder.ConfigureAppConfiguration((hostingContext, builder) =>
+			builder.ConfigureAppConfiguration((hostingContext, builder) =>
 			{
 
 			});
+			return builder;
 		}
 	}
 }

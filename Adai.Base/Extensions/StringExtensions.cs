@@ -81,7 +81,7 @@ namespace Adai.Base.Extensions
 			if (!string.IsNullOrEmpty(s))
 			{
 				s = s.ToLower();
-				if (s.Contains("e"))
+				if (s.Contains('e'))
 				{
 					if (int.TryParse(s, NumberStyles.Float, null, out int result))
 					{
@@ -107,7 +107,7 @@ namespace Adai.Base.Extensions
 			if (!string.IsNullOrEmpty(s))
 			{
 				s = s.ToLower();
-				if (s.Contains("e"))
+				if (s.Contains('e'))
 				{
 					if (long.TryParse(s, NumberStyles.Float, null, out long result))
 					{
@@ -136,7 +136,7 @@ namespace Adai.Base.Extensions
 			if (!string.IsNullOrEmpty(s))
 			{
 				s = s.ToLower();
-				if (s.Contains("e"))
+				if (s.Contains('e'))
 				{
 					if (ulong.TryParse(s, NumberStyles.Float, null, out ulong result))
 					{
@@ -165,7 +165,7 @@ namespace Adai.Base.Extensions
 			if (!string.IsNullOrEmpty(s))
 			{
 				s = s.ToLower();
-				if (s.Contains("e"))
+				if (s.Contains('e'))
 				{
 					if (float.TryParse(s, NumberStyles.Float, null, out float result))
 					{
@@ -194,7 +194,7 @@ namespace Adai.Base.Extensions
 			if (!string.IsNullOrEmpty(s))
 			{
 				s = s.ToLower();
-				if (s.Contains("e"))
+				if (s.Contains('e'))
 				{
 					if (double.TryParse(s, NumberStyles.Float, null, out double result))
 					{
@@ -223,7 +223,7 @@ namespace Adai.Base.Extensions
 			if (!string.IsNullOrEmpty(s))
 			{
 				s = s.ToLower();
-				if (s.Contains("e"))
+				if (s.Contains('e'))
 				{
 					if (decimal.TryParse(s, NumberStyles.Float, null, out decimal result))
 					{

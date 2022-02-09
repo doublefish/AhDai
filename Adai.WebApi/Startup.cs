@@ -1,3 +1,4 @@
+using Adai.Core.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,10 +21,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Adai.Base.Extensions;
-using Adai.Standard.Extensions;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.Mvc.Versioning;
 using System.Threading.Tasks;
 
 namespace Adai.WebApi
@@ -91,19 +90,19 @@ namespace Adai.WebApi
 			services.Configure<RequestLocalizationOptions>(options =>
 			{
 				var supportedCultures = new List<CultureInfo> { new CultureInfo("en-US"), new CultureInfo("zh-CN") };
-				options.DefaultRequestCulture = new RequestCulture("en-US", "en-US");
+				options.DefaultRequestCulture = new RequestCulture("zh-CN", "zh-CN");
 				options.SupportedCultures = supportedCultures;
 				options.SupportedUICultures = supportedCultures;
 			});
 
+
 			// 添加单例服务
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			// 添加数据库服务
-			//services.AddSingleton<Standard.Interfaces.IDbService, Standard.Services.DbService>();
+			//services.AddSingleton<Core.Interfaces.IDbService, Core.Services.DbService>();
 			// 添加Redis服务
-			//services.AddSingleton<Standard.Interfaces.IRedisService, Standard.Services.RedisService>();
+			//services.AddSingleton<Core.Interfaces.IRedisService, Core.Services.RedisService>();
 
-			//services.AddAuthorization();
 			// 添加认证
 			services.AddAuthentication(options =>
 			{
@@ -111,9 +110,9 @@ namespace Adai.WebApi
 				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 			}).AddJwtBearer(options =>
 			{
-				var issuer = Configuration.GetSection("jwt:issuer").Value;
-				var audience = Configuration.GetSection("jwt:audience").Value;
-				var key = Configuration.GetSection("jwt:key").Value;
+				var issuer = Configuration.GetSection(Config.WebApi.JwtIssuer).Value;
+				var audience = Configuration.GetSection(Config.WebApi.JwtAudience).Value;
+				var key = Configuration.GetSection(Config.WebApi.JwtKey).Value;
 				var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
 				options.TokenValidationParameters = new TokenValidationParameters
 				{
@@ -144,8 +143,8 @@ namespace Adai.WebApi
 						context.HandleResponse();
 
 						// 自定义返回内容
-						var requestId = context.Request.Headers[Const.RequestId];
-						var result = new Standard.Models.ActionResult<string>(requestId, StatusCodes.Status401Unauthorized, "Unauthorized");
+						var requestId = context.Request.Headers[Core.Const.RequestId];
+						var result = new Core.Models.ActionResult<string>(requestId, StatusCodes.Status401Unauthorized, "Unauthorized");
 
 						context.Response.WriteObjectAsync(result);
 						return Task.FromResult(0);
@@ -153,7 +152,7 @@ namespace Adai.WebApi
 				};
 			});
 
-			//跨域
+			// 跨域
 			services.AddCors(options =>
 			{
 				options.AddPolicy(MyAllowOrigins, builder =>
@@ -174,8 +173,6 @@ namespace Adai.WebApi
 			// 注册Swagger生成器，定义一个和多个Swagger 文档
 			services.AddSwaggerGen(options =>
 			{
-				AddSwaggerGen(options);
-
 				var securityScheme = new OpenApiSecurityScheme
 				{
 					Name = "JWT Authentication",
@@ -200,7 +197,7 @@ namespace Adai.WebApi
 
 				// 此处替换成所生成的XML的文件名
 				//var basePath = AppDomain.CurrentDomain.BaseDirectory;
-				var types = new Type[] { GetType()/*, typeof(Startup), typeof(Core.Const)*/ };
+				var types = new Type[] { GetType()/*, typeof(Startup)*/ };
 				foreach (var type in types)
 				{
 					var xmlPath = type.Assembly.Location.Replace(".dll", ".xml");
@@ -212,7 +209,7 @@ namespace Adai.WebApi
 			});
 
 			// 另存服务实例
-			//Standard.Utils.ServiceHelper.Init(services);
+			//Core.Utils.ServiceHelper.Init(services);
 		}
 
 		/// <summary>
@@ -223,7 +220,7 @@ namespace Adai.WebApi
 		public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			// 另存服务实例
-			Standard.Utils.ServiceHelper.Init(app.ApplicationServices);
+			Core.Utils.ServiceHelper.Init(app.ApplicationServices);
 
 			// 允许多次读取body
 			app.Use(next => context =>
@@ -238,7 +235,7 @@ namespace Adai.WebApi
 				env.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 			}
 
-			//启用转接头中间件
+			// 启用转接头中间件
 			app.UseForwardedHeaders();
 
 			if (env.IsDevelopment())
@@ -250,22 +247,21 @@ namespace Adai.WebApi
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
-			app.UseMiddleware<Standard.Middlewares.ExceptionHandlerMiddleware>();
 
 			// 启用异常处理
-			app.UseExceptionHandler();
+			app.UseMiddleware<Core.Middlewares.ExceptionHandlerMiddleware>();
 
-			//启用Https
+			// 启用Https
 			app.UseHttpsRedirection();
-			//启用Session
+			// 启用Session
 			//app.UseSession();
-			//启用Routing
+			// 启用Routing
 			app.UseRouting();
-			//启用跨域
+			// 启用跨域
 			app.UseCors(MyAllowOrigins);
-			//启用StaticFiles
+			// 启用StaticFiles
 			app.UseStaticFiles();
-			//启用CookiePolicy
+			// 启用CookiePolicy
 			//app.UseCookiePolicy();
 
 			// 先开启认证
@@ -276,7 +272,7 @@ namespace Adai.WebApi
 			app.UseApiVersioning();
 
 			// 启用DbContext
-			//app.UseDbContext();
+			app.UseDbContext();
 			// 启用Redis
 			//app.UseRedis();
 			// 启用RabbitMQ
@@ -289,7 +285,12 @@ namespace Adai.WebApi
 			// 启用中间件以提供用户界面（HTML、js、CSS等），特别是指定JSON端点
 			app.UseSwaggerUI(options =>
 			{
-				UseSwaggerUI(options);
+				var root = Configuration.GetSection(Config.WebApi.ContextPath).Value;
+#if DEBUG
+				Console.WriteLine($"调试模式下把配置{Config.WebApi.ContextPath}={root}改为空字符串");
+				root = "";
+#endif
+				UseSwaggerUI(options, root);
 				options.ShowExtensions();
 				//options.RoutePrefix = string.Empty;
 			});
@@ -320,15 +321,18 @@ namespace Adai.WebApi
 				//endpoints.MapHealthChecks("/health", new HealthCheckOptions() { });
 			});
 
-			//注册编码
+			// 注册编码
 			Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+			// 输出配置
+			PrintConfigs();
 		}
 
 		/// <summary>
 		/// AddDbContextConfig
 		/// </summary>
 		/// <param name="options"></param>
-		public virtual void AddDbContextConfig(Standard.Options.DbContextOptions options)
+		public virtual void AddDbContextConfig(Core.Options.DbContextOptions options)
 		{
 			var dbs = new string[] { "db0", "db1" };
 			foreach (var db in dbs)
@@ -343,8 +347,8 @@ namespace Adai.WebApi
 		/// <param name="options"></param>
 		public virtual void AddSwaggerGen(SwaggerGenOptions options)
 		{
-			options.SwaggerDoc("common", new OpenApiInfo { Title = "Common v1.0", Version = "1.0", Description = "By CCN" });
-			var provider = Standard.Utils.ServiceHelper.GetRequiredService<IApiVersionDescriptionProvider>();
+			options.SwaggerDoc("common", new OpenApiInfo { Title = "Common v1.0", Version = "1.0", Description = "by Double Fish" });
+			var provider = Core.Utils.ServiceHelper.GetRequiredService<IApiVersionDescriptionProvider>();
 			// add a swagger document for each discovered API version
 			// note: you might choose to skip or document deprecated API versions differently
 			foreach (var description in provider.ApiVersionDescriptions)
@@ -355,7 +359,7 @@ namespace Adai.WebApi
 					Title = $"v{description.ApiVersion}",
 					Version = description.ApiVersion.ToString(),
 					Description = "多版本管理（点右上角版本切换）<br/>",
-					Contact = new OpenApiContact() { Name = "test", Email = "test@yesno.com" }
+					Contact = new OpenApiContact() { Name = "test", Email = "doublefish1989@live.com" }
 				};
 				if (description.IsDeprecated)
 				{
@@ -373,12 +377,18 @@ namespace Adai.WebApi
 		public virtual void UseSwaggerUI(SwaggerUIOptions options, string root = null)
 		{
 			options.SwaggerEndpoint($"{root}/swagger/common/swagger.json", "Common v1.0");
-			var provider = Standard.Utils.ServiceHelper.GetRequiredService<IApiVersionDescriptionProvider>();
+			var provider = Core.Utils.ServiceHelper.GetRequiredService<IApiVersionDescriptionProvider>();
 			foreach (var description in provider.ApiVersionDescriptions)
 			{
 				//options.SwaggerEndpoint($"{root}/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
 			}
 		}
 
+		/// <summary>
+		/// 打印配置信息
+		/// </summary>
+		public virtual void PrintConfigs()
+		{
+		}
 	}
 }

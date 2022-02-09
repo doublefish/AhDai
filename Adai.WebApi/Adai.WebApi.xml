@@ -47,7 +47,7 @@
             <param name="next"></param>
             <returns></returns>
         </member>
-        <member name="M:Adai.WebApi.Attributes.ApiAuthorizeAttribute.VerifyLogin(System.String,Adai.Standard.Models.Token{Adai.Standard.Models.TokenData}@)">
+        <member name="M:Adai.WebApi.Attributes.ApiAuthorizeAttribute.VerifyLogin(System.String,Adai.Core.Models.Token{Adai.Core.Models.TokenData}@)">
             <summary>
             验证登录
             </summary>
@@ -76,14 +76,34 @@
             </summary>
             <param name="httpContext"></param>
         </member>
-        <member name="T:Adai.WebApi.Const">
+        <member name="T:Adai.WebApi.Config.WebApi">
             <summary>
-            Const
+            WebApi
             </summary>
         </member>
-        <member name="F:Adai.WebApi.Const.RequestId">
+        <member name="M:Adai.WebApi.Config.WebApi.#cctor">
             <summary>
-            RequestId
+            构造函数
+            </summary>
+        </member>
+        <member name="F:Adai.WebApi.Config.WebApi.ContextPath">
+            <summary>
+            ContextPath
+            </summary>
+        </member>
+        <member name="F:Adai.WebApi.Config.WebApi.JwtIssuer">
+            <summary>
+            JwtIssuer
+            </summary>
+        </member>
+        <member name="F:Adai.WebApi.Config.WebApi.JwtAudience">
+            <summary>
+            JwtAudience
+            </summary>
+        </member>
+        <member name="F:Adai.WebApi.Config.WebApi.JwtKey">
+            <summary>
+            JwtKey
             </summary>
         </member>
         <member name="T:Adai.WebApi.ControllerApi">
@@ -91,9 +111,32 @@
             ControllerApi
             </summary>
         </member>
+        <member name="M:Adai.WebApi.ControllerApi.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.WebApi.ControllerApi.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Adai.WebApi.ControllerApi.#ctor(Microsoft.Extensions.Logging.ILogger,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="logger"></param>
+            <param name="webHostEnvironment"></param>
+        </member>
         <member name="F:Adai.WebApi.ControllerApi.WebHostEnvironment">
             <summary>
             HostingEnvironment
+            </summary>
+        </member>
+        <member name="F:Adai.WebApi.ControllerApi.Logger">
+            <summary>
+            Logger
             </summary>
         </member>
         <member name="P:Adai.WebApi.ControllerApi.SharedLocalizer">
@@ -110,17 +153,6 @@
             <summary>
             用户Id
             </summary>
-        </member>
-        <member name="M:Adai.WebApi.ControllerApi.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:Adai.WebApi.ControllerApi.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="webHostEnvironment"></param>
         </member>
         <member name="M:Adai.WebApi.ControllerApi.Json``1(``0,System.String)">
             <summary>
@@ -348,7 +380,7 @@
             <param name="app"></param>
             <param name="env"></param>
         </member>
-        <member name="M:Adai.WebApi.Startup.AddDbContextConfig(Adai.Standard.Options.DbContextOptions)">
+        <member name="M:Adai.WebApi.Startup.AddDbContextConfig(Adai.Core.Options.DbContextOptions)">
             <summary>
             AddDbContextConfig
             </summary>
@@ -367,65 +399,10 @@
             <param name="options"></param>
             <param name="root"></param>
         </member>
-        <member name="T:Adai.WebApi.StartupRedis">
+        <member name="M:Adai.WebApi.Startup.PrintConfigs">
             <summary>
-            StartupRedis
+            打印配置信息
             </summary>
-        </member>
-        <member name="M:Adai.WebApi.StartupRedis.ConfigurationChangedBroadcast(System.Object,StackExchange.Redis.EndPointEventArgs)">
-            <summary>
-            当节点被明确请求通过广播重新配置时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.WebApi.StartupRedis.ConfigurationChanged(System.Object,StackExchange.Redis.EndPointEventArgs)">
-            <summary>
-            检测到配置更改时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.WebApi.StartupRedis.HashSlotMoved(System.Object,StackExchange.Redis.HashSlotMovedEventArgs)">
-            <summary>
-            当哈希槽被重新定位时/更改集群
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.WebApi.StartupRedis.ErrorMessage(System.Object,StackExchange.Redis.RedisErrorEventArgs)">
-            <summary>
-            发生错误时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.WebApi.StartupRedis.InternalError(System.Object,StackExchange.Redis.InternalErrorEventArgs)">
-            <summary>
-            发生内部错误时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.WebApi.StartupRedis.ConnectionFailed(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
-            <summary>
-            连接失败，如果重新连接成功将不会收到这个通知
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.WebApi.StartupRedis.ConnectionRestored(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
-            <summary>
-            建立物理连接时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:Adai.WebApi.StartupRedis.GetLogger">
-            <summary>
-            GetLogger
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Adai.WebApi.Utils.JwtHelper">
             <summary>

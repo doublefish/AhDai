@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Adai.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Resources;
@@ -101,12 +102,12 @@ namespace Adai.WebApi
 			{
 				var value = (context.Result as ObjectResult).Value;
 				// 重写输出内容
-				var result = new Standard.Models.ActionResult<object>(RequestId, 0, null, value);
+				var result = new Core.Models.ActionResult<object>(RequestId, 0, null, value);
 				context.Result = new ContentResult()
 				{
 					StatusCode = StatusCodes.Status200OK,
-					Content = Standard.Utils.JsonHelper.SerializeObject(result),
-					ContentType = Standard.HttpContentType.Json
+					Content = Core.Utils.JsonHelper.SerializeObject(result),
+					ContentType = HttpContentType.Json
 				};
 			}
 			else

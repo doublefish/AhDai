@@ -4,9 +4,9 @@
 		<TargetFrameworks>netstandard2.1;net5.0;net6.0</TargetFrameworks>
 		<Authors>Shuang Yu</Authors>
 		<Company>Adai</Company>
-		<Version>2.1.0.2</Version>
-		<AssemblyVersion>2.1.0.2</AssemblyVersion>
-		<FileVersion>2.1.0.2</FileVersion>
+		<Version>1.0.1</Version>
+		<AssemblyVersion>1.0.1</AssemblyVersion>
+		<FileVersion>1.0.1</FileVersion>
 		<PackageReleaseNotes>无</PackageReleaseNotes>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>

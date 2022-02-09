@@ -1,7 +1,7 @@
 ﻿using Adai.Base.Extensions;
-using Adai.Standard.Extensions;
-using Adai.Standard.Models;
-using Adai.Standard.Utils;
+using Adai.Core.Extensions;
+using Adai.Core.Models;
+using Adai.Core.Utils;
 using Adai.Base.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;

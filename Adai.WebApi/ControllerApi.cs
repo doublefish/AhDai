@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Adai.Core;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Resources;
 
 namespace Adai.WebApi
@@ -15,9 +17,39 @@ namespace Adai.WebApi
 		ResourceManager _SharedLocalizer;
 
 		/// <summary>
+		/// 构造函数
+		/// </summary>
+		public ControllerApi() : this(null, null)
+		{
+		}
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="logger"></param>
+		public ControllerApi(ILogger logger) : this(logger, null)
+		{
+		}
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		/// <param name="logger"></param>
+		/// <param name="webHostEnvironment"></param>
+		public ControllerApi(ILogger logger, IWebHostEnvironment webHostEnvironment)
+		{
+			Logger = logger;
+			WebHostEnvironment = webHostEnvironment;
+		}
+
+		/// <summary>
 		/// HostingEnvironment
 		/// </summary>
 		protected readonly IWebHostEnvironment WebHostEnvironment;
+		/// <summary>
+		/// Logger
+		/// </summary>
+		protected readonly ILogger Logger;
 
 		/// <summary>
 		/// 共享本地语言
@@ -59,26 +91,10 @@ namespace Adai.WebApi
 			{
 				if (string.IsNullOrEmpty(_UserId))
 				{
-					_UserId = Utils.JwtHelper.GetClaimValue(HttpContext.Request, "open-id");
+					_UserId = Utils.JwtHelper.GetClaimValue(HttpContext.Request, Const.UserId);
 				}
 				return _UserId;
 			}
-		}
-
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		public ControllerApi() : this(null)
-		{
-		}
-
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="webHostEnvironment"></param>
-		public ControllerApi(IWebHostEnvironment webHostEnvironment)
-		{
-			WebHostEnvironment = webHostEnvironment;
 		}
 
 		/// <summary>
@@ -88,9 +104,9 @@ namespace Adai.WebApi
 		/// <param name="content">内容</param>
 		/// <param name="message">消息</param>
 		/// <returns></returns>
-		protected Standard.Interfaces.IActionResult<T> Json<T>(T content = default, string message = null)
+		protected Core.Interfaces.IActionResult<T> Json<T>(T content = default, string message = null)
 		{
-			return Content(content, Standard.HttpContentType.Json, message);
+			return Content(content, HttpContentType.Json, message);
 		}
 
 		/// <summary>
@@ -101,14 +117,14 @@ namespace Adai.WebApi
 		/// <param name="contentType">内容类型</param>
 		/// <param name="message">消息</param>
 		/// <returns></returns>
-		protected Standard.Interfaces.IActionResult<T> Content<T>(T content, string contentType, string message = "success")
+		protected Core.Interfaces.IActionResult<T> Content<T>(T content, string contentType, string message = "success")
 		{
 			if (string.IsNullOrEmpty(message))
 			{
 				message = "success";
 			}
 			var code = message == "success" ? 0 : 1;
-			return new Standard.Models.ActionResult<T>(RequestId, code, message, content, contentType);
+			return new Core.Models.ActionResult<T>(RequestId, code, message, content, contentType);
 		}
 	}
 }

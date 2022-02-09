@@ -1,5 +1,5 @@
 oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu
 
 # อฦหอ
-dotnet nuget push bin/Release/Adai.DbContext.2.1.0.2.nupkg -k oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu -s https://www.nuget.org/
+dotnet nuget push Adai.Base/bin/Release/Adai.Base.1.0.1.nupkg -k oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu -s https://www.nuget.org/
 

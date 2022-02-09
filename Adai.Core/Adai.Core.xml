@@ -1,0 +1,3431 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Adai.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Adai.Core.Accessor`1">
+            <summary>
+            Accessor
+            </summary>
+            <typeparam name="S"></typeparam>
+        </member>
+        <member name="M:Adai.Core.Accessor`1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Accessor`1.Create``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Create
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="memberSelector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Accessor`1.Get``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="memberSelector"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Accessor`1.GetterSetter`1">
+            <summary>
+            GetterSetter
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Adai.Core.Accessor`1.GetterSetter`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`1}})">
+            <summary>
+            GetterSetter
+            </summary>
+            <param name="memberSelector"></param>
+        </member>
+        <member name="T:Adai.Core.Accessor`2">
+            <summary>
+            Accessor
+            </summary>
+            <typeparam name="S"></typeparam>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Adai.Core.Accessor`2.Getter">
+            <summary>
+            Getter
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Accessor`2.Setter">
+            <summary>
+            Setter
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Accessor`2.CanRead">
+            <summary>
+            IsReadable
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Accessor`2.CanWrite">
+            <summary>
+            IsWritable
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Accessor`2.Item(`0)">
+            <summary>
+            T
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Accessor`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`1}})">
+            <summary>
+            Accessor
+            access not given to outside world
+            </summary>
+            <param name="memberSelector"></param>
+        </member>
+        <member name="T:Adai.Core.AccessorExample">
+            <summary>
+            AccessorExample
+            </summary>
+        </member>
+        <member name="M:Adai.Core.AccessorExample.Example">
+            <summary>
+            Example
+            </summary>
+        </member>
+        <member name="T:Adai.Core.AccessorExample.Person">
+            <summary>
+            Person
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Config.Db">
+            <summary>
+            数据库相关
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Config.Db.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Db.Master">
+            <summary>
+            主库 默认：Db:Master
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Db.Product">
+            <summary>
+            产品库 默认：Db:Product
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Db.Report">
+            <summary>
+            报表库 默认：Db:Report
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Db.Digital">
+            <summary>
+            数码库 默认：Db:Digital
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Db.Foreign">
+            <summary>
+            外码库 默认：Db:Foreign
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Db.Marketing">
+            <summary>
+            营销库 默认：Db:Marketing
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Config.Mail">
+            <summary>
+            邮件相关
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Config.Mail.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Mail.SmtpHost">
+            <summary>
+            Smtp主机 默认：Mail:SmtpHost
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Mail.SmtpPort">
+            <summary>
+            Smtp端口 默认：Mail:SmtpPort
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Mail.SmtpUsername">
+            <summary>
+            Smtp用户名 默认：Mail:SmtpUsername
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Mail.SmtpPassword">
+            <summary>
+            Smtp密码 默认：Mail:SmtpPassword
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Config.RabbitMQ">
+            <summary>
+            RabbitMQ相关
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Config.RabbitMQ.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.RabbitMQ.Host">
+            <summary>
+            主机 默认：RabbitMQ:Host
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.RabbitMQ.Port">
+            <summary>
+            端口 默认：RabbitMQ:Port
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.RabbitMQ.VirtualHost">
+            <summary>
+            虚拟主机 默认：RabbitMQ:VirtualHost
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.RabbitMQ.Username">
+            <summary>
+            用户名 默认：RabbitMQ:Username
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.RabbitMQ.Password">
+            <summary>
+            密码 默认：RabbitMQ:Password
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Config.Redis">
+            <summary>
+            Redis相关
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Config.Redis.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Redis.Host">
+            <summary>
+            主机 默认：Redis:Host
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Redis.Port">
+            <summary>
+            端口 默认：Redis:Port
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Config.Redis.Password">
+            <summary>
+            密码 默认：Redis:Password
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Const">
+            <summary>
+            Const
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Const.DateTimeFormat">
+            <summary>
+            时间格式
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Const.RequestId">
+            <summary>
+            请求Id
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Const.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Extensions.BuilderExtensions">
+            <summary>
+            BuilderExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Extensions.BuilderExtensions.UseDbContext(Microsoft.AspNetCore.Builder.IApplicationBuilder,Adai.Core.Options.DbContextOptions)">
+            <summary>
+            UseDbContext
+            </summary>
+            <param name="app"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.BuilderExtensions.UseDbContext(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Adai.Core.Options.DbContextOptions})">
+            <summary>
+            UseDbContext
+            </summary>
+            <param name="app"></param>
+            <param name="setupAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.BuilderExtensions.UseRedis(Microsoft.AspNetCore.Builder.IApplicationBuilder,Adai.Core.Options.RedisOptions)">
+            <summary>
+            UseRedis
+            </summary>
+            <param name="app"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.BuilderExtensions.UseRedis(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Adai.Core.Options.RedisOptions})">
+            <summary>
+            UseRedis
+            </summary>
+            <param name="app"></param>
+            <param name="setupAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.BuilderExtensions.UseRabbitMQ(Microsoft.AspNetCore.Builder.IApplicationBuilder,Adai.Core.Options.RabbitMQOptions)">
+            <summary>
+            UseRabbitMQ
+            </summary>
+            <param name="app"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.BuilderExtensions.UseRabbitMQ(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Adai.Core.Options.RabbitMQOptions})">
+            <summary>
+            UseRabbitMQ
+            </summary>
+            <param name="app"></param>
+            <param name="setupAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.BuilderExtensions.UseMail(Microsoft.AspNetCore.Builder.IApplicationBuilder,Adai.Core.Options.MailOptions)">
+            <summary>
+            UseMail
+            </summary>
+            <param name="app"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.BuilderExtensions.UseMail(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Adai.Core.Options.MailOptions})">
+            <summary>
+            UseMail
+            </summary>
+            <param name="app"></param>
+            <param name="setupAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.BuilderExtensions.AddLoggerProvider(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception})">
+            <summary>
+            AddLoggerProvider
+            </summary>
+            <param name="builder"></param>
+            <param name="onExecuted"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Extensions.ConfigurationExtensions">
+            <summary>
+            ConfigurationExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Extensions.ConfigurationExtensions.GetDbConfigs(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取数据库配置
+            </summary>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ConfigurationExtensions.GetMailConfig(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取邮件配置
+            </summary>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ConfigurationExtensions.GetRedisConfig(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取Redis配置
+            </summary>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ConfigurationExtensions.GetRabbitMQConfig(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取RabbitMQ配置
+            </summary>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Extensions.HostExtensions">
+            <summary>
+            HostExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Extensions.HostExtensions.ConfigureHostBuilder(Microsoft.Extensions.Hosting.IHostBuilder)">
+            <summary>
+            ConfigureHostBuilder
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.HostExtensions.ConfigureLogging(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception})">
+            <summary>
+            ConfigureLogging
+            </summary>
+            <param name="builder"></param>
+            <param name="onExecuted"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Extensions.HttpRequestExtensions">
+            <summary>
+            HttpRequestExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Extensions.HttpRequestExtensions.GetFullPath(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            GetFullPath
+            </summary>
+            <param name="httpRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.HttpRequestExtensions.GetPath(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            获取请求路径
+            </summary>
+            <param name="httpRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.HttpRequestExtensions.VerifyRequestFrequencyLimit(Microsoft.AspNetCore.Http.HttpRequest,System.Double,System.String)">
+            <summary>
+            验证请求频率
+            </summary>
+            <param name="httpRequest"></param>
+            <param name="limit"></param>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.HttpRequestExtensions.GetParameters(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            获取请求参数
+            </summary>
+            <param name="httpRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.HttpRequestExtensions.ReadBody(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            读取内容
+            </summary>
+            <param name="httpRequest"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.HttpRequestExtensions.ReadBodyAsync(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            读取内容
+            </summary>
+            <param name="httpRequest"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.HttpRequestExtensions.IsMobileDevice(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            是否移动设备
+            </summary>
+            <param name="httpRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.HttpRequestExtensions.GetValue(Microsoft.AspNetCore.Http.IHeaderDictionary,System.String)">
+            <summary>
+            获取值
+            </summary>
+            <param name="headers"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Extensions.HttpResponseExtensions">
+            <summary>
+            HttpResponseExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Extensions.HttpResponseExtensions.WriteObjectAsync``1(Microsoft.AspNetCore.Http.HttpResponse,``0,System.Threading.CancellationToken)">
+            <summary>
+            写返回值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="response"></param>
+            <param name="data"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Extensions.IDictionaryExtensions">
+            <summary>
+            IDictionaryExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Extensions.IDictionaryExtensions.ToQueryString(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Microsoft.Extensions.Primitives.StringValues}},System.String[])">
+            <summary>
+            ToQueryString
+            </summary>
+            <param name="pairs"></param>
+            <param name="ignores"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Extensions.LoggingExtensions">
+            <summary>
+            LoggingExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Trace(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogTrace
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Trace(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogTrace
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Debug(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogDebug
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Debug(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogDebug
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Information(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogInformation
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Information(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogInformation
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Warning(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogWarning
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Warning(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogWarning
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Error(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogError
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Error(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogError
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Critical(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
+            <summary>
+            LogCritical
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Critical(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            LogCritical
+            </summary>
+            <param name="logger"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Log(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,System.String,System.String,System.Object[])">
+            <summary>
+            Log
+            </summary>
+            <param name="logger"></param>
+            <param name="logLevel"></param>
+            <param name="eventId"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.Log(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception,System.String,System.Object[])">
+            <summary>
+            Log
+            </summary>
+            <param name="logger"></param>
+            <param name="logLevel"></param>
+            <param name="eventId"></param>
+            <param name="exception"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.LoggingExtensions.GetName(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            GetName
+            </summary>
+            <param name="logLevel"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Extensions.OptionsExtensions">
+            <summary>
+            OptionsExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Extensions.OptionsExtensions.AddConfig(Adai.Core.Options.DbContextOptions,Adai.DbContext.Config.DbType,System.String,System.String)">
+            <summary>
+            AddConfig
+            </summary>
+            <param name="options"></param>
+            <param name="dbType"></param>
+            <param name="name"></param>
+            <param name="connectionString"></param>
+        </member>
+        <member name="T:Adai.Core.Extensions.ProviderExtensions">
+            <summary>
+            ProviderExtensions
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Extensions.RedisExtensions">
+            <summary>
+            RedisExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.Get``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.CommandFlags)">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <param name="key"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.Set``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,``0,System.Nullable{System.TimeSpan},StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
+            <summary>
+            Get
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="expiry"></param>
+            <param name="when"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.HashGet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue,StackExchange.Redis.CommandFlags)">
+            <summary>
+            HashGet
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <param name="key"></param>
+            <param name="hashField"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.HashGet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue[],StackExchange.Redis.CommandFlags)">
+            <summary>
+            HashGet
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <param name="key"></param>
+            <param name="hashFields"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.HashSet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisValue,StackExchange.Redis.RedisValue,``0,StackExchange.Redis.When,StackExchange.Redis.CommandFlags)">
+            <summary>
+            HashSet
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <param name="key"></param>
+            <param name="hashField"></param>
+            <param name="value"></param>
+            <param name="when"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.HashSet``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,System.Collections.Generic.IDictionary{StackExchange.Redis.RedisValue,``0},StackExchange.Redis.CommandFlags)">
+            <summary>
+            HashSet
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <param name="key"></param>
+            <param name="hash"></param>
+            <param name="flags"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.HashGetAll``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.CommandFlags)">
+            <summary>
+            HashGetAll
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <param name="key"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.HashValues``1(StackExchange.Redis.IDatabase,StackExchange.Redis.RedisKey,StackExchange.Redis.CommandFlags)">
+            <summary>
+            HashValues
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <param name="key"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.ToInt32(StackExchange.Redis.RedisValue,System.Int32)">
+            <summary>
+            转换为整形
+            </summary>
+            <param name="value"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.ToInt64(StackExchange.Redis.RedisValue,System.Int64)">
+            <summary>
+            转换为长整形
+            </summary>
+            <param name="value"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.ToInt32Array(StackExchange.Redis.RedisValue[])">
+            <summary>
+            从RedisValue数组创建一个整形数组
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.ToInt64Array(StackExchange.Redis.RedisValue[])">
+            <summary>
+            从RedisValue数组创建一个长整型数组
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.ToStringArray(StackExchange.Redis.RedisValue[])">
+            <summary>
+            从RedisValue数组创建一个长整型数组
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.ToObjectArray``1(StackExchange.Redis.RedisValue[])">
+            <summary>
+            从RedisValue数组（Json字符串）创建一个指定类型的对象数组
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.RedisExtensions.ToObjectDictionary``1(StackExchange.Redis.HashEntry[])">
+            <summary>
+            从HashEntry数组（value的类型是Json字符串）创建一个字典（value的类型是指定对象）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hash"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Extensions.ServiceCollectionExtensions">
+            <summary>
+            ServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.AddDbService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加数据库服务 - 依赖注入单例
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.AddRedisService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加Redis服务 - 依赖注入单例
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.AddRabbitMQService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加RabbitMQ服务 - 依赖注入单例
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.AddSubscribeService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加订阅服务 - 依赖注入单例
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.AddPublishService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加发布服务 - 依赖注入瞬时
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.AddDbContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Adai.Core.Options.DbContextOptions})">
+            <summary>
+            注册数据库服务
+            </summary>
+            <param name="services"></param>
+            <param name="setupAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.ConfigureDbContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Adai.Core.Options.DbContextOptions})">
+            <summary>
+            注册数据库服务
+            </summary>
+            <param name="services"></param>
+            <param name="setupAction"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.AddRedis(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Adai.Core.Options.RedisOptions})">
+            <summary>
+            注册Redis服务
+            </summary>
+            <param name="services"></param>
+            <param name="setupAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.ConfigureRedis(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Adai.Core.Options.RedisOptions})">
+            <summary>
+            配置Redis服务
+            </summary>
+            <param name="services"></param>
+            <param name="setupAction"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.AddRabbitMQ(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Adai.Core.Options.RabbitMQOptions})">
+            <summary>
+            注册RabbitMQ服务
+            </summary>
+            <param name="services"></param>
+            <param name="setupAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.ConfigureRabbitMQ(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Adai.Core.Options.RabbitMQOptions})">
+            <summary>
+            配置RabbitMQ服务
+            </summary>
+            <param name="services"></param>
+            <param name="setupAction"></param>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.AddMail(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Adai.Core.Options.MailOptions})">
+            <summary>
+            注册邮箱服务
+            </summary>
+            <param name="services"></param>
+            <param name="setupAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Extensions.ServiceCollectionExtensions.ConfigureMail(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Adai.Core.Options.MailOptions})">
+            <summary>
+            配置邮箱服务
+            </summary>
+            <param name="services"></param>
+            <param name="setupAction"></param>
+        </member>
+        <member name="T:Adai.Core.Extensions.X509CertificateExtensions">
+            <summary>
+            X509CertificateExt
+            </summary>
+        </member>
+        <member name="T:Adai.Core.HttpContentType">
+            <summary>
+            HttpContentType
+            </summary>
+        </member>
+        <member name="F:Adai.Core.HttpContentType.Text">
+            <summary>
+            Text
+            </summary>
+        </member>
+        <member name="F:Adai.Core.HttpContentType.TextHtml">
+            <summary>
+            TextHtml
+            </summary>
+        </member>
+        <member name="F:Adai.Core.HttpContentType.TextXml">
+            <summary>
+            TextXml
+            </summary>
+        </member>
+        <member name="F:Adai.Core.HttpContentType.Url">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="F:Adai.Core.HttpContentType.FormData">
+            <summary>
+            Form
+            </summary>
+        </member>
+        <member name="F:Adai.Core.HttpContentType.Json">
+            <summary>
+            Json
+            </summary>
+        </member>
+        <member name="F:Adai.Core.HttpContentType.Xml">
+            <summary>
+            Xml
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Interfaces.IActionResult`1">
+            <summary>
+            IActionResult
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Adai.Core.Interfaces.IActionResult`1.ActionId">
+            <summary>
+            动作Id
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Interfaces.IActionResult`1.Code">
+            <summary>
+            状态代码
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Interfaces.IActionResult`1.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Interfaces.IActionResult`1.Content">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Interfaces.IActionResult`1.ContentType">
+            <summary>
+            内容类型
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Interfaces.IDbService">
+            <summary>
+            数据库服务
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Interfaces.IDbService.GetMySqlDbContext(System.String,System.String)">
+            <summary>
+            GetDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Interfaces.IDbService.GetSQLiteDbContext(System.String,System.String,System.String)">
+            <summary>
+            GetSQLiteDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="fileName"></param>
+            <param name="version"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Interfaces.IPublishService">
+            <summary>
+            发布服务
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Interfaces.IPublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.ReadOnlyMemory{System.Byte})">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="messageId">消息Id</param>
+            <param name="headers">头</param>
+            <param name="body">内容</param>
+        </member>
+        <member name="M:Adai.Core.Interfaces.IPublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="messageId">消息Id</param>
+            <param name="headers">头</param>
+            <param name="body">内容</param>
+        </member>
+        <member name="T:Adai.Core.Interfaces.IRabbitMQService">
+            <summary>
+            RabbitMQ服务
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Interfaces.IRabbitMQService.GetConnectionFactory">
+            <summary>
+            获取连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Interfaces.IRabbitMQService.GetConnection">
+            <summary>
+            获取连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Interfaces.IRedisService">
+            <summary>
+            Redis服务
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Interfaces.IRedisService.GetDatabase(System.Int32,System.Object)">
+            <summary>
+            GetDatabase
+            </summary>
+            <param name="db"></param>
+            <param name="asyncState"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Interfaces.ISubscribeService">
+            <summary>
+            订阅服务
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Interfaces.ISubscribeService.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Core.RabbitMQ.ResultType})">
+            <summary>
+            订阅队列
+            </summary>
+            <param name="queue">队列</param>
+            <param name="received">接收消息处理方法</param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Language">
+            <summary>
+            Language
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Language.ZH_CN">
+            <summary>
+            中文（简体）
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Language.EN_US">
+            <summary>
+            英文（美国）
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Middlewares.ExceptionHandlerMiddleware">
+            <summary>
+            ExceptionHandlerMiddleware
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Middlewares.ExceptionHandlerMiddleware.next">
+            <summary>
+            _Next
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Middlewares.ExceptionHandlerMiddleware.logger">
+            <summary>
+            _Logger
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Middlewares.ExceptionHandlerMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{Adai.Core.Middlewares.ExceptionHandlerMiddleware})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="next"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Adai.Core.Middlewares.ExceptionHandlerMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Middlewares.ExceptionHandlerMiddleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            HandleExceptionAsync
+            </summary>
+            <param name="context"></param>
+            <param name="exception"></param>
+            <param name="logger"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Models.ActionResult`1">
+            <summary>
+            动作结果
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.ActionResult`1.ActionId">
+            <summary>
+            动作Id
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.ActionResult`1.Code">
+            <summary>
+            状态代码
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.ActionResult`1.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.ActionResult`1.Content">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.ActionResult`1.ContentType">
+            <summary>
+            内容类型
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Models.ActionResult`1.#ctor(System.String,`0,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="actionId">动作Id</param>
+            <param name="content">内容</param>
+            <param name="contentType">内容类型</param>
+        </member>
+        <member name="M:Adai.Core.Models.ActionResult`1.#ctor(System.String,System.Int32,System.String,`0,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="actionId">动作Id</param>
+            <param name="code">结果代码</param>
+            <param name="message">消息</param>
+            <param name="content">内容</param>
+            <param name="contentType">内容类型</param>
+        </member>
+        <member name="M:Adai.Core.Models.ActionResult`1.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            ExecuteResultAsync
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Models.ApiException">
+            <summary>
+            ApiException
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Models.ApiException.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Models.ApiException.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Adai.Core.Models.ApiException.#ctor(System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message"></param>
+            <param name="inner"></param>
+        </member>
+        <member name="T:Adai.Core.Models.CustomException">
+            <summary>
+            CustomException
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.CustomException.Code">
+            <summary>
+            Code
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Models.CustomException.#ctor(System.Int32,System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="code">建议使用1000-2000之间的值</param>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:Adai.Core.Models.FileConfig">
+            <summary>
+            文件配置
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileConfig.UploadDirectory">
+            <summary>
+            上传根目录
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileConfig.DownloadDirectory">
+            <summary>
+            下载根目录
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileConfig.MaxSize">
+            <summary>
+            大小限制
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileConfig.Extensions">
+            <summary>
+            扩展名
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileConfig.MaxSizeNote">
+            <summary>
+            大小限制说明
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Models.FileConfig.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="uploadDirectory"></param>
+            <param name="downloadDirectory"></param>
+        </member>
+        <member name="T:Adai.Core.Models.FileData">
+            <summary>
+            上传文件
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileData.Guid">
+            <summary>
+            唯一标识
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileData.Name">
+            <summary>
+            文件名
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileData.Extension">
+            <summary>
+            后缀名
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileData.Length">
+            <summary>
+            大小
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileData.PhysicalPath">
+            <summary>
+            物理路径
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileData.VirtualPath">
+            <summary>
+            虚拟路径
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.FileData.FullName">
+            <summary>
+            扩展.文件全名
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Models.FileData.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Models.HttpRequest">
+            <summary>
+            Http请求数据
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpRequest.Method">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpRequest.Url">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpRequest.ContentType">
+            <summary>
+            内容类型
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpRequest.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpRequest.Headers">
+            <summary>
+            头
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpRequest.Body">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Models.HttpRequest.#ctor(System.Net.Http.HttpMethod,System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="contentType"></param>
+        </member>
+        <member name="T:Adai.Core.Models.HttpResponse">
+            <summary>
+            Http响应数据
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpResponse.ResponseUri">
+            <summary>
+            ResponseUri
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpResponse.StatusCode">
+            <summary>
+            StatusCode
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpResponse.ReasonPhrase">
+            <summary>
+            ReasonPhrase
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpResponse.ContentType">
+            <summary>
+            ContentType
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpResponse.ContentLength">
+            <summary>
+            ContentLength
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpResponse.ContentEncoding">
+            <summary>
+            ContentEncoding
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpResponse.ContentLanguage">
+            <summary>
+            ContentLanguage
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.HttpResponse.Content">
+            <summary>
+            Content
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Models.JsonPropertyContractResolver">
+            <summary>
+            JsonPropertyContractResolver
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Models.JsonPropertyContractResolver.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="includeProperties"></param>
+            <param name="excludeProperties"></param>
+        </member>
+        <member name="M:Adai.Core.Models.JsonPropertyContractResolver.CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            CreateProperties
+            </summary>
+            <param name="type"></param>
+            <param name="memberSerialization"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Models.MailConfig">
+            <summary>
+            MailConfig
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.MailConfig.SmtpHost">
+            <summary>
+            Smtp主机
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.MailConfig.SmtpPort">
+            <summary>
+            Smtp端口
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.MailConfig.SmtpUsername">
+            <summary>
+            Smtp用户名
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.MailConfig.SmtpPassword">
+            <summary>
+            Smtp密码
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Models.PageArg`1">
+            <summary>
+            查询条件
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.TotalCount">
+            <summary>
+            总记录条数，如果此属性预设值大于零则表示不需要从数据库获取。
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.Results">
+            <summary>
+            分页结果集。
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.Filter">
+            <summary>
+            筛选
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.PageSize">
+            <summary>
+            每页条数
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.PageNumber">
+            <summary>
+            页码（从0开始）
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.SortName">
+            <summary>
+            排序字段
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.SortType">
+            <summary>
+            排序方式：ASC/DESC
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.OnlyCount">
+            <summary>
+            只统计总数
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.CountFlag">
+            <summary>
+            统计数量标识
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.SumFlag">
+            <summary>
+            统计总和标识
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.SumResults">
+            <summary>
+            计算结果
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.Keyword">
+            <summary>
+            关键词
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.Keywords">
+            <summary>
+            关键词组
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.PageArg`1.Platform">
+            <summary>
+            平台标识
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Models.PageArg`1.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,Adai.Core.Models.SortType)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortName"></param>
+            <param name="sortType"></param>
+        </member>
+        <member name="T:Adai.Core.Models.RedisConfig">
+            <summary>
+            Config
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.RedisConfig.Host">
+            <summary>
+            主机
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.RedisConfig.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.RedisConfig.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.RedisConfig.AbortConnect">
+            <summary>
+            连接失败时放弃连接
+            如果为 true，则 Connect 不会在没有可用服务器时创建连接
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.RedisConfig.Database">
+            <summary>
+            默认库
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.RedisConfig.ConfigurationChangedBroadcast">
+            <summary>
+            当节点被明确请求通过广播重新配置时
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.RedisConfig.ConfigurationChanged">
+            <summary>
+            检测到配置更改时
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.RedisConfig.HashSlotMoved">
+            <summary>
+            当哈希槽被重新定位时/更改集群
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.RedisConfig.ErrorMessage">
+            <summary>
+            发生错误时
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.RedisConfig.InternalError">
+            <summary>
+            发生内部错误时
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.RedisConfig.ConnectionFailed">
+            <summary>
+            连接失败，如果重新连接成功将不会收到这个通知
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.RedisConfig.ConnectionRestored">
+            <summary>
+            建立物理连接时
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Models.SortType">
+            <summary>
+            排序方式
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.SortType.Desc">
+            <summary>
+            降序
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.SortType.Asc">
+            <summary>
+            升序
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Models.StatisticFlag">
+            <summary>
+            统计标识
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.StatisticFlag.Not">
+            <summary>
+            不统计
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.StatisticFlag.General">
+            <summary>
+            一般统计
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Models.StatisticFlag.Only">
+            <summary>
+            只统计
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Models.Token`1">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.Token`1.Id">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.Token`1.Signature">
+            <summary>
+            用户名对应签名Token
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.Token`1.Expiry">
+            <summary>
+            Token过期时间
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.Token`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Models.TokenData">
+            <summary>
+            TokenData
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.Id">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.Nickname">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.FirstName">
+            <summary>
+            名
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.LastName">
+            <summary>
+            姓
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.Email">
+            <summary>
+            电子邮箱
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.Mobile">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.RoleIds">
+            <summary>
+            角色Id
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.AgentId">
+            <summary>
+            代理商Id
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.IsAdminOfAgent">
+            <summary>
+            是否代理商管理员
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Models.TokenData.Platform">
+            <summary>
+            平台
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Models.TokenData.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="type">类型</param>
+        </member>
+        <member name="T:Adai.Core.Options.DbContextOptions">
+            <summary>
+            DbContextOptions
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Options.DbContextOptions.Configs">
+            <summary>
+            数据库配置
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Options.MailOptions">
+            <summary>
+            MailOptions
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Options.MailOptions.Config">
+            <summary>
+            邮箱配置
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Options.RabbitMQOptions">
+            <summary>
+            RabbitMQOptions
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Options.RabbitMQOptions.Config">
+            <summary>
+            RabbitMQ配置
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Options.RedisOptions">
+            <summary>
+            RedisOptions
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Options.RedisOptions.Config">
+            <summary>
+            Redis配置
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Providers.LoggerProvider">
+            <summary>
+            LoggerProvider
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Providers.LoggerProvider.#ctor(System.Action{Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="onExecuted"></param>
+        </member>
+        <member name="M:Adai.Core.Providers.LoggerProvider.CreateLogger(System.String)">
+            <summary>
+            CreateLogger
+            </summary>
+            <param name="categoryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Providers.LoggerProvider.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="T:Adai.Core.RabbitMQ.Config">
+            <summary>
+            RabbitMQConfig
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Config.Host">
+            <summary>
+            主机
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Config.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Config.VirtualHost">
+            <summary>
+            虚拟主机
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Config.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Config.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:Adai.Core.RabbitMQ.Exchange">
+            <summary>
+            交换器
+            </summary>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Exchange.#ctor(System.String,Adai.Core.RabbitMQ.ExchangeType)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name"></param>
+            <param name="type"></param>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Exchange.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Exchange.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Exchange.Durable">
+            <summary>
+            持久的（Durable/Transient）默认：true
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Exchange.AutoDelete">
+            <summary>
+            自动删除
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Exchange.Arguments">
+            <summary>
+            参数（无效）
+            </summary>
+        </member>
+        <member name="T:Adai.Core.RabbitMQ.ExchangeType">
+            <summary>
+            交换器类型
+            </summary>
+        </member>
+        <member name="F:Adai.Core.RabbitMQ.ExchangeType.Fanout">
+            <summary>
+            fanout
+            </summary>
+        </member>
+        <member name="F:Adai.Core.RabbitMQ.ExchangeType.Direct">
+            <summary>
+            direct
+            </summary>
+        </member>
+        <member name="F:Adai.Core.RabbitMQ.ExchangeType.Topic">
+            <summary>
+            topic
+            </summary>
+        </member>
+        <member name="F:Adai.Core.RabbitMQ.ExchangeType.Headers">
+            <summary>
+            headers
+            </summary>
+        </member>
+        <member name="F:Adai.Core.RabbitMQ.ExchangeType.Delayed">
+            <summary>
+            x-delayed-message
+            </summary>
+        </member>
+        <member name="T:Adai.Core.RabbitMQ.Extensions">
+            <summary>
+            RabbitMQExtensions
+            </summary>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Extensions.GetString(Adai.Core.RabbitMQ.ExchangeType)">
+            <summary>
+            GetString
+            </summary>
+            <param name="exchangeType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Extensions.ExchangeDeclare(RabbitMQ.Client.IModel,Adai.Core.RabbitMQ.Exchange)">
+            <summary>
+            声明交换器
+            </summary>
+            <param name="model">amqp</param>
+            <param name="exchange">交换器</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Extensions.QueueDeclare(RabbitMQ.Client.IModel,Adai.Core.RabbitMQ.Queue)">
+            <summary>
+            声明队列
+            </summary>
+            <param name="model">amqp</param>
+            <param name="queue">队列</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Extensions.QueueBind(RabbitMQ.Client.IModel,Adai.Core.RabbitMQ.Queue,System.String,System.String)">
+            <summary>
+            绑定队列
+            </summary>
+            <param name="model">amqp</param>
+            <param name="queue">队列</param>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Extensions.QueueDeclareAndBind(RabbitMQ.Client.IModel,Adai.Core.RabbitMQ.Queue,System.String,System.String)">
+            <summary>
+            声明队列并绑定到已存在的交换器
+            </summary>
+            <param name="model">amqp</param>
+            <param name="queue">队列</param>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Extensions.DeclareAndBind(RabbitMQ.Client.IModel,Adai.Core.RabbitMQ.Exchange,Adai.Core.RabbitMQ.Queue,System.String)">
+            <summary>
+            声明交换器和队列并绑定
+            </summary>
+            <param name="model">amqp</param>
+            <param name="exchange">交换器</param>
+            <param name="queue">队列</param>
+            <param name="routingKey">路由</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Extensions.Ack(RabbitMQ.Client.IModel,System.UInt64,Adai.Core.RabbitMQ.ResultType)">
+            <summary>
+            确认消息
+            </summary>
+            <param name="model">amqp</param>
+            <param name="deliveryTag">交货标签</param>
+            <param name="result">结果</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Extensions.BasicConsume(RabbitMQ.Client.IModel,System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Core.RabbitMQ.ResultType})">
+            <summary>
+            订阅队列
+            </summary>
+            <param name="model">amqp</param>
+            <param name="queue">队列</param>
+            <param name="received">接收消息处理方法</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Extensions.BasicPublish(RabbitMQ.Client.IModel,System.String,System.String,RabbitMQ.Client.IBasicProperties,System.String)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="model">amqp</param>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="basicProperties">属性</param>
+            <param name="body">内容</param>
+        </member>
+        <member name="T:Adai.Core.RabbitMQ.Helper">
+            <summary>
+            RabbitMQHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Helper.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.Init(Adai.Core.RabbitMQ.Config)">
+            <summary>
+            初始化
+            </summary>
+            <param name="config">配置</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.GetConnectionFactory(Adai.Core.RabbitMQ.Config)">
+            <summary>
+            获取连接工厂
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.GetConnection(Adai.Core.RabbitMQ.Config)">
+            <summary>
+            获取连接工厂
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.ExchangeDeclare(Adai.Core.RabbitMQ.Exchange,Adai.Core.RabbitMQ.Config)">
+            <summary>
+            声明交换器
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="config">自定义配置</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.QueueDeclare(Adai.Core.RabbitMQ.Queue,Adai.Core.RabbitMQ.Config)">
+            <summary>
+            声明队列
+            </summary>
+            <param name="queue"></param>
+            <param name="config">自定义配置</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.QueueBind(Adai.Core.RabbitMQ.Queue,System.String,System.String,Adai.Core.RabbitMQ.Config)">
+            <summary>
+            声明队列并绑定到已存在的交换器
+            </summary>
+            <param name="queue">队列</param>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="config">自定义配置</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.QueueDeclareAndBind(Adai.Core.RabbitMQ.Queue,System.String,System.String,Adai.Core.RabbitMQ.Config)">
+            <summary>
+            声明队列并绑定到已存在的交换器
+            </summary>
+            <param name="queue">队列</param>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="config">自定义配置</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.DeclareAndBind(Adai.Core.RabbitMQ.Exchange,Adai.Core.RabbitMQ.Queue,System.String,Adai.Core.RabbitMQ.Config)">
+            <summary>
+            声明交换器和队列并绑定
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="queue">队列</param>
+            <param name="routingKey">路由</param>
+            <param name="config">自定义配置</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Core.RabbitMQ.ResultType},Adai.Core.RabbitMQ.Config)">
+            <summary>
+            订阅队列
+            </summary>
+            <param name="queue">队列</param>
+            <param name="received">接收消息处理方法</param>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.ReadOnlyMemory{System.Byte},Adai.Core.RabbitMQ.Config)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="basicProperties">属性</param>
+            <param name="body">内容</param>
+            <param name="config">自定义配置</param>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Helper.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.String,Adai.Core.RabbitMQ.Config)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="basicProperties">属性</param>
+            <param name="body">内容</param>
+            <param name="config">自定义配置</param>
+        </member>
+        <member name="T:Adai.Core.RabbitMQ.Queue">
+            <summary>
+            队列
+            </summary>
+        </member>
+        <member name="M:Adai.Core.RabbitMQ.Queue.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Queue.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Queue.Durable">
+            <summary>
+            持久的（Durable/Transient）默认：true
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Queue.Exclusive">
+            <summary>
+            独占
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Queue.AutoDelete">
+            <summary>
+            自动删除
+            </summary>
+        </member>
+        <member name="P:Adai.Core.RabbitMQ.Queue.Arguments">
+            <summary>
+            参数（无效）
+            </summary>
+        </member>
+        <member name="T:Adai.Core.RabbitMQ.ResultType">
+            <summary>
+            处理结果类型
+            </summary>
+        </member>
+        <member name="F:Adai.Core.RabbitMQ.ResultType.Success">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:Adai.Core.RabbitMQ.ResultType.Fail">
+            <summary>
+            失败（把消息从队列中移除）
+            </summary>
+        </member>
+        <member name="F:Adai.Core.RabbitMQ.ResultType.Retry">
+            <summary>
+            重试（把消息追加到队尾）
+            </summary>
+        </member>
+        <member name="F:Adai.Core.RabbitMQ.ResultType.Exception">
+            <summary>
+            异常
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Services.DbService">
+            <summary>
+            数据库服务
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Services.DbService.Configs">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Services.DbService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Adai.Core.Services.DbService.GetMySqlDbContext(System.String,System.String)">
+            <summary>
+            GetMySqlDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Services.DbService.GetSQLiteDbContext(System.String,System.String,System.String)">
+            <summary>
+            GetSQLiteDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="fileName"></param>
+            <param name="version"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Services.LoggerService">
+            <summary>
+            LoggerService
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Services.LoggerService.#ctor(System.Action{Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="onExecuted"></param>
+        </member>
+        <member name="M:Adai.Core.Services.LoggerService.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+            <summary>
+            Log
+            </summary>
+            <typeparam name="TState"></typeparam>
+            <param name="logLevel"></param>
+            <param name="eventId"></param>
+            <param name="state"></param>
+            <param name="exception"></param>
+            <param name="formatter"></param>
+        </member>
+        <member name="M:Adai.Core.Services.LoggerService.BeginScope``1(``0)">
+            <summary>
+            BeginScope
+            </summary>
+            <typeparam name="TState"></typeparam>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Services.LoggerService.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            IsEnabled
+            </summary>
+            <param name="logLevel"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Services.PublishService">
+            <summary>
+            RabbitMQ发布服务
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Services.PublishService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Adai.Core.Services.PublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.ReadOnlyMemory{System.Byte})">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="messageId">消息Id</param>
+            <param name="headers">头</param>
+            <param name="body">内容</param>
+        </member>
+        <member name="M:Adai.Core.Services.PublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="exchange">交换器</param>
+            <param name="routingKey">路由</param>
+            <param name="messageId">消息Id</param>
+            <param name="headers">头</param>
+            <param name="body">内容</param>
+        </member>
+        <member name="T:Adai.Core.Services.RabbitMQService">
+            <summary>
+            RabbitMQ服务
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Services.RabbitMQService.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Services.RabbitMQService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Adai.Core.Services.RabbitMQService.GetConnectionFactory">
+            <summary>
+            获取连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Services.RabbitMQService.GetConnection">
+            <summary>
+            获取连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Services.RedisService">
+            <summary>
+            Redis服务
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Services.RedisService.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Services.RedisService.Logger">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Services.RedisService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{Adai.Core.Services.RedisService})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Adai.Core.Services.RedisService.#ctor(Adai.Core.Models.RedisConfig)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="M:Adai.Core.Services.RedisService.GetDatabase(System.Int32,System.Object)">
+            <summary>
+            GetDatabase
+            </summary>
+            <param name="db"></param>
+            <param name="asyncState"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Services.RedisService.ConfigurationChangedBroadcast(System.Object,StackExchange.Redis.EndPointEventArgs)">
+            <summary>
+            当节点被明确请求通过广播重新配置时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Core.Services.RedisService.ConfigurationChanged(System.Object,StackExchange.Redis.EndPointEventArgs)">
+            <summary>
+            检测到配置更改时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Core.Services.RedisService.HashSlotMoved(System.Object,StackExchange.Redis.HashSlotMovedEventArgs)">
+            <summary>
+            当哈希槽被重新定位时/更改集群
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Core.Services.RedisService.ErrorMessage(System.Object,StackExchange.Redis.RedisErrorEventArgs)">
+            <summary>
+            发生错误时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Core.Services.RedisService.InternalError(System.Object,StackExchange.Redis.InternalErrorEventArgs)">
+            <summary>
+            发生内部错误时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Core.Services.RedisService.ConnectionFailed(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            连接失败，如果重新连接成功将不会收到这个通知
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Adai.Core.Services.RedisService.ConnectionRestored(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            建立物理连接时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:Adai.Core.Services.SubscribeService">
+            <summary>
+            RabbitMQ订阅服务
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Services.SubscribeService.Channel">
+            <summary>
+            通道
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Services.SubscribeService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Adai.Core.Services.SubscribeService.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,Adai.Core.RabbitMQ.ResultType})">
+            <summary>
+            订阅队列
+            </summary>
+            <param name="queue">队列</param>
+            <param name="received">接收消息处理方法</param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Socket1.BaseSocket">
+            <summary>
+            BaseSocket
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Socket1.BaseSocket.Encoding">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Socket1.BaseSocket.Host">
+            <summary>
+            主机
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Socket1.BaseSocket.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Socket1.BaseSocket.IPAddress">
+            <summary>
+            IPAddress
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Socket1.BaseSocket.IPEndPoint">
+            <summary>
+            IPEndPoint
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Socket1.BaseSocket.Remotes">
+            <summary>
+            远程
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Socket1.BaseSocket.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Socket1.BaseSocket.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Socket1.BaseSocket.Log">
+            <summary>
+            是否记录日志
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Socket1.BaseSocket.MessageHandler">
+            <summary>
+            接收消息委托
+            </summary>
+            <param name="remote"></param>
+            <param name="message"></param>
+        </member>
+        <member name="T:Adai.Core.Socket1.BaseSocket.StateChangeHandler">
+            <summary>
+            连接状态改变委托
+            </summary>
+            <param name="remote"></param>
+            <param name="state"></param>
+            <param name="message"></param>
+        </member>
+        <member name="E:Adai.Core.Socket1.BaseSocket.MessageEvent">
+            <summary>
+            接收消息事件
+            </summary>
+        </member>
+        <member name="E:Adai.Core.Socket1.BaseSocket.StateChangeEvent">
+            <summary>
+            连接状态改变事件
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Socket1.BaseSocket.#ctor(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+            <param name="name"></param>
+            <param name="log"></param>
+        </member>
+        <member name="M:Adai.Core.Socket1.BaseSocket.Open(System.Net.Sockets.Socket)">
+            <summary>
+            开启连接
+            </summary>
+            <param name="remote"></param>
+        </member>
+        <member name="M:Adai.Core.Socket1.BaseSocket.Close(System.Net.Sockets.Socket,System.String)">
+            <summary>
+            关闭连接
+            </summary>
+            <param name="remote"></param>
+            <param name="reason"></param>
+        </member>
+        <member name="M:Adai.Core.Socket1.BaseSocket.Receive(System.Net.Sockets.Socket,System.Byte[],System.Int32)">
+            <summary>
+            接收消息
+            </summary>
+            <param name="remote"></param>
+            <param name="bytes"></param>
+            <param name="size"></param>
+        </member>
+        <member name="M:Adai.Core.Socket1.BaseSocket.Send(System.String)">
+            <summary>
+            客户端发送消息给服务端
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Socket1.BaseSocket.Send(System.String,System.Net.Sockets.Socket[])">
+            <summary>
+            服务端发送消息给客户端
+            </summary>
+            <param name="message"></param>
+            <param name="remotes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Socket1.BaseSocket.Send(System.String,System.Net.Sockets.Socket)">
+            <summary>
+            客户端发送消息给服务端
+            </summary>
+            <param name="message"></param>
+            <param name="remote"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Socket1.BaseSocket.ChangeState(System.Net.Sockets.Socket,Adai.Core.Socket1.SocketState,System.String)">
+            <summary>
+            改变状态
+            </summary>
+            <param name="remote"></param>
+            <param name="state"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:Adai.Core.Socket1.BaseSocket.ListenReceive(System.Net.Sockets.Socket)">
+            <summary>
+            监听消息
+            </summary>
+            <param name="client"></param>
+        </member>
+        <member name="T:Adai.Core.Socket1.Extensions">
+            <summary>
+            ConfigExt
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Socket1.Extensions.GetNote(Adai.Core.Socket1.SocketState)">
+            <summary>
+            获取说明
+            </summary>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Socket1.SocketClient">
+            <summary>
+            SocketClient
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Socket1.SocketClient.#ctor(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+            <param name="name"></param>
+            <param name="log"></param>
+        </member>
+        <member name="T:Adai.Core.Socket1.SocketService">
+            <summary>
+            SocketService
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Socket1.SocketService.#ctor(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+            <param name="name"></param>
+            <param name="log"></param>
+        </member>
+        <member name="T:Adai.Core.Socket1.SocketState">
+            <summary>
+            SocketState
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Socket1.SocketState.Connecting">
+            <summary>
+            连接中
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Socket1.SocketState.Open">
+            <summary>
+            已连接
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Socket1.SocketState.Closing">
+            <summary>
+            关闭中
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Socket1.SocketState.Closed">
+            <summary>
+            已关闭
+            </summary>
+        </member>
+        <member name="T:Adai.Core.Utils.ComputerHelper">
+            <summary>
+            ComputerHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.ComputerHelper.GetMacAddress">
+            <summary>
+            获取Mac地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.ComputerHelper.GetMacAddresses">
+            <summary>
+            获取Mac地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.ComputerHelper.GetMacAddressesByWin32">
+            <summary>
+            获取Mac地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Utils.ConfigurationHelper">
+            <summary>
+            ConfigurationHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.ConfigurationHelper.GetAll(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取所有
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.ConfigurationHelper.GetAll(Microsoft.Extensions.Configuration.IConfigurationSection[])">
+            <summary>
+            获取所有
+            </summary>
+            <param name="sections"></param>
+        </member>
+        <member name="T:Adai.Core.Utils.DbContextHelper">
+            <summary>
+            DbContextHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.DbContextHelper.Init(System.Collections.Generic.ICollection{Adai.DbContext.Models.DbConfig})">
+            <summary>
+            初始化
+            </summary>
+            <param name="configs"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.DbContextHelper.GetMySqlDbContext(System.String,System.String)">
+            <summary>
+            GetMySqlDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.DbContextHelper.GetSQLiteDbContext(System.String,System.String)">
+            <summary>
+            GetMySqlDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.DbContextHelper.GetSQLiteDbContext(System.String,System.String,System.String)">
+            <summary>
+            GetSQLiteDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="fileName"></param>
+            <param name="version"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.DbContextHelper.BeforeExecute(System.String,System.Data.IDbCommand)">
+            <summary>
+            执行前执行
+            </summary>
+            <param name="eventId"></param>
+            <param name="command"></param>
+        </member>
+        <member name="T:Adai.Core.Utils.FileHelper">
+            <summary>
+            FileHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Utils.FileHelper.Config">
+            <summary>
+            Config
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.FileHelper.Init(Adai.Core.Models.FileConfig)">
+            <summary>
+            初始化
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.FileHelper.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
+            <summary>
+            上传
+            </summary>
+            <param name="rootPath"></param>
+            <param name="formFiles"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.FileHelper.Compress(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            批量压缩
+            </summary>
+            <param name="rootPath"></param>
+            <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.FileHelper.OutputImage(System.String)">
+            <summary>
+            输出图片
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.FileHelper.Output(System.Byte[],System.String,System.String)">
+            <summary>
+            输出文件
+            </summary>
+            <param name="bytes"></param>
+            <param name="type"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.FileHelper.Output(System.IO.Stream,System.String,System.String)">
+            <summary>
+            输出文件
+            </summary>
+            <param name="stream"></param>
+            <param name="type"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.FileHelper.ToPhysicalPath(System.String,System.Char)">
+            <summary>
+            转换为物理路径
+            </summary>
+            <param name="path"></param>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.FileHelper.GetFileSize(System.Int64)">
+            <summary>
+            换算文件大小
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Utils.HttpHelper">
+            <summary>
+            HttpHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.Get(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Get请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.GetAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Get请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.Post(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Post请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.PostAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Post请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.PostJson(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Json的Post请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.PostJsonAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Json的Post请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.Put(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Put请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.PutAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Put请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.PutJson(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Json的Put请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.PutJsonAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Json的Put请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.Delete(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Delete请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.DeleteAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            发送内容类型为Url的Delete请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.Send(System.Net.Http.HttpMethod,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            发送请求
+            </summary>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <param name="contentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.SendAsync(System.Net.Http.HttpMethod,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            发送请求
+            </summary>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <param name="contentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.CreateRequest(Adai.Core.Models.HttpRequest)">
+            <summary>
+            创建请求
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.SendAsync(Adai.Core.Models.HttpRequest)">
+            <summary>
+            发送请求
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.ConvertHttpMethod(System.String)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.ParseQueryString(System.String)">
+            <summary>
+            ParseQueryString
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.UrlEncode``1(``0)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.UrlEncode``1(``0,System.Text.Encoding)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.UrlEncodeUpper``1(``0)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.UrlEncodeUpper``1(``0,System.Text.Encoding)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.UrlEncodeUpper(System.String)">
+            <summary>
+            转换Url编码为大写
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.UrlEncodeUpper(System.String,System.Text.Encoding)">
+            <summary>
+            转换Url编码为大写
+            </summary>
+            <param name="str"></param>
+            <param name="encoding">编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.UrlDecode``1(``0)">
+            <summary>
+            UrlDecode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.UrlDecode``1(``0,System.Text.Encoding)">
+            <summary>
+            UrlDecode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpHelper.IsIp(System.String)">
+            <summary>
+            IsIp
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Utils.HttpListenerHelper">
+            <summary>
+            HttpListenerHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpListenerHelper.Start(System.String,System.Func{System.Net.HttpListenerRequest,System.Collections.Generic.IDictionary{System.String,System.String},System.String},System.String)">
+            <summary>
+            开启服务
+            </summary>
+            <param name="uriPrefix"></param>
+            <param name="contentType"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="T:Adai.Core.Utils.HttpRequestHelper">
+            <summary>
+            HttpRequestHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.HttpRequestHelper.VerifyFrequencyLimit(System.String,System.String,System.Double)">
+            <summary>
+            验证请求频率限制
+            </summary>
+            <param name="ipAddress">IP地址</param>
+            <param name="path">请求路径</param>
+            <param name="limit">每秒限制次数</param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Utils.DatetimeJsonConverter">
+            <summary>
+            JsonConverter
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Utils.DatetimeJsonConverter.Format">
+            <summary>
+            格式
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.DatetimeJsonConverter.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="format"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.DatetimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Read
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.DatetimeJsonConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateTime,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Write
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:Adai.Core.Utils.JsonHelper">
+            <summary>
+            JsonHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Utils.JsonHelper.Options">
+            <summary>
+            Options
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.JsonHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.JsonHelper.Serialize``1(``0,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            序列化
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.JsonHelper.Deserialize``1(System.String,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            反序列化
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="json"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Adai.Core.Utils.JsonHelper.Settings">
+            <summary>
+            Settings
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.JsonHelper.SerializeObject``1(``0,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            序列化
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.JsonHelper.SerializeObject(System.Object,System.String[],System.String[])">
+            <summary>
+            SerializeObject
+            </summary>
+            <param name="value"></param>
+            <param name="includeProperties"></param>
+            <param name="excludeProperties"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.JsonHelper.DeserializeObject``1(System.String,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            反序列化
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="json"></param>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Utils.Log4netHelper">
+            <summary>
+            Log4netHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Utils.Log4netHelper.Repository">
+            <summary>
+            Repository
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.Log4netHelper.Info(System.String,System.Exception)">
+            <summary>
+            Info
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.Log4netHelper.Info(System.String,System.String,System.Exception)">
+            <summary>
+            Info
+            </summary>
+            <param name="eventId">事件Id</param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.Log4netHelper.Error(System.String,System.Exception)">
+            <summary>
+            Error
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.Log4netHelper.Error(System.String,System.String,System.Exception)">
+            <summary>
+            Error
+            </summary>
+            <param name="eventId">事件Id</param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.Log4netHelper.Debug(System.String,System.Exception)">
+            <summary>
+            Error
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.Log4netHelper.Debug(System.String,System.String,System.Exception)">
+            <summary>
+            Error
+            </summary>
+            <param name="eventId">事件Id</param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="T:Adai.Core.Utils.LoggerHelper">
+            <summary>
+            LoggerHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.LoggerHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.LoggerHelper.GetLogger``1">
+            <summary>
+            GetLogger
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.LoggerHelper.GetLogger(System.String,System.Int32)">
+            <summary>
+            GetLogger
+            </summary>
+            <param name="categoryName"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Utils.MailHelper">
+            <summary>
+            MailHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Utils.MailHelper.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.MailHelper.Init(Adai.Core.Models.MailConfig)">
+            <summary>
+            初始化
+            </summary>
+            <param name="config">配置</param>
+        </member>
+        <member name="M:Adai.Core.Utils.MailHelper.CreateSmtpClient(Adai.Core.Models.MailConfig)">
+            <summary>
+            创建客户端
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.MailHelper.Send(System.String,System.String,System.String,Adai.Core.Models.MailConfig)">
+            <summary>
+            发送
+            </summary>
+            <param name="recipients">接收人</param>
+            <param name="subject">标题</param>
+            <param name="body">内容</param>
+            <param name="config">自定义配置</param>
+        </member>
+        <member name="T:Adai.Core.Utils.RARHelper">
+            <summary>
+            RARHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Utils.RARHelper.ApplicationPath">
+            <summary>
+            WinRAR.exe路径
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.RARHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.RARHelper.SetApplicationPath(System.String)">
+            <summary>
+            初始化
+            </summary>
+            <param name="applicationPath"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.RARHelper.Compress(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            利用WinRAR进行压缩
+            </summary>
+            <param name="sourcePath">要压缩的文件夹（绝对路径）</param>
+            <param name="rarPath">压缩后的.rar文件的存放目录（绝对路径）</param>
+            <param name="rarName">压缩文件的名称（包括后缀）</param>
+            <param name="level">压缩级别（0-5）</param>
+        </member>
+        <member name="M:Adai.Core.Utils.RARHelper.UnCompress(System.String,System.String,System.String)">
+            <summary>
+            利用WinRAR进行解压缩
+            </summary>
+            <param name="path">文件解压路径（绝对）</param>
+            <param name="rarPath">要解压缩的.rar文件的存放目录（绝对路径）</param>
+            <param name="rarName">要解压缩的.rar文件名（包括后缀）</param>
+        </member>
+        <member name="T:Adai.Core.Utils.RedisHelper">
+            <summary>
+            RedisHelper
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Utils.RedisHelper.DbCount">
+            <summary>
+            DbCount
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Utils.RedisHelper.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.RedisHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.RedisHelper.Init(Adai.Core.Models.RedisConfig)">
+            <summary>
+            初始化
+            </summary>
+            <param name="config">配置</param>
+        </member>
+        <member name="M:Adai.Core.Utils.RedisHelper.CreateConfiguration(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            创建连接配置
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+            <param name="password"></param>
+            <param name="abortConnect"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.RedisHelper.CreateConfiguration(Adai.Core.Models.RedisConfig)">
+            <summary>
+            创建连接配置
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.RedisHelper.CreateConnectionMultiplexer(System.String)">
+            <summary>
+            创建连接器
+            </summary>
+            <param name="configuration">配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.RedisHelper.CreateConnectionMultiplexer(Adai.Core.Models.RedisConfig)">
+            <summary>
+            创建连接器
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.RedisHelper.GetConnectionMultiplexer(Adai.Core.Models.RedisConfig)">
+            <summary>
+            获取连接实例
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.RedisHelper.GetDatabase(System.Int32,System.Object,Adai.Core.Models.RedisConfig)">
+            <summary>
+            GetDatabase
+            </summary>
+            <param name="db"></param>
+            <param name="asyncState"></param>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Utils.ServiceHelper">
+            <summary>
+            ServiceHelper
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Utils.ServiceHelper.Instance">
+            <summary>
+            服务实例
+            </summary>
+        </member>
+        <member name="P:Adai.Core.Utils.ServiceHelper.HttpContextAccessor">
+            <summary>
+            HttpContextAccessor
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.ServiceHelper.Init(System.IServiceProvider)">
+            <summary>
+            初始化
+            </summary>
+            <param name="instance"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.ServiceHelper.Init(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            初始化
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.ServiceHelper.GetScopedService``1">
+            <summary>
+            获取指定类型的范围服务的实例（通过 AddScoped 添加的）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.ServiceHelper.GetService``1">
+            <summary>
+            获取注入的（范围或单例）服务的实例
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.ServiceHelper.GetRequiredService``1">
+            <summary>
+            获取注入的（范围或单例）服务的实例
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Utils.TokenHelper">
+            <summary>
+            TokenHelper
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Utils.TokenHelper.CacheKey">
+            <summary>
+            CacheKey
+            </summary>
+        </member>
+        <member name="F:Adai.Core.Utils.TokenHelper.Expiry">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.TokenHelper.Set``1(``0,System.String)">
+            <summary>
+            设置
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <param name="suffix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.TokenHelper.Get``1(System.String,System.String)">
+            <summary>
+            获取
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="signature"></param>
+            <param name="suffix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.TokenHelper.Verify``1(System.String,Adai.Core.Models.Token{``0}@,System.String)">
+            <summary>
+            验证
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="signature"></param>
+            <param name="token"></param>
+            <param name="suffix"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Adai.Core.Utils.VerifyCodeHelper">
+            <summary>
+            VerifyCodeHelper
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.VerifyCodeHelper.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Adai.Core.Utils.VerifyCodeHelper.GenerateImageCode(System.String,System.Int32)">
+            <summary>
+            生成图片验证码
+            </summary>
+            <param name="guid"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.VerifyCodeHelper.VerifyImageCode(System.String,System.String)">
+            <summary>
+            验证图片验证码
+            </summary>
+            <param name="guid"></param>
+            <param name="code"></param>
+        </member>
+        <member name="M:Adai.Core.Utils.VerifyCodeHelper.GenerateImageCode(System.Int32,System.String@)">
+            <summary>
+            生成指定长度的图片验证码
+            </summary>
+            <param name="length"></param>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.VerifyCodeHelper.GenerateImageCode(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int32)">
+            <summary>
+            生成图片验证码
+            </summary>
+            <param name="httpResponse"></param>
+            <param name="guid"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.VerifyCodeHelper.VerifyImageCode(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            验证图片验证码
+            </summary>
+            <param name="httpRequest"></param>
+        </member>
+    </members>
+</doc>
