@@ -26,6 +26,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.DbContext.Test", "Adai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.WebApi", "Adai.WebApi\Adai.WebApi.csproj", "{7958EBC8-3B93-4A63-A8CE-D10978ECEB9E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.DbContext.SqlClient", "Adai.DbContext.SqlClient\Adai.DbContext.SqlClient.csproj", "{A14E79F3-6B5A-472E-AD87-2A63C4873A53}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adai.DbContext.Oracle", "Adai.DbContext.Oracle\Adai.DbContext.Oracle.csproj", "{3E1C98FF-88C3-48DA-B26C-F5EB637D6113}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +68,14 @@ Global
 		{7958EBC8-3B93-4A63-A8CE-D10978ECEB9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7958EBC8-3B93-4A63-A8CE-D10978ECEB9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7958EBC8-3B93-4A63-A8CE-D10978ECEB9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14E79F3-6B5A-472E-AD87-2A63C4873A53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14E79F3-6B5A-472E-AD87-2A63C4873A53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14E79F3-6B5A-472E-AD87-2A63C4873A53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14E79F3-6B5A-472E-AD87-2A63C4873A53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E1C98FF-88C3-48DA-B26C-F5EB637D6113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E1C98FF-88C3-48DA-B26C-F5EB637D6113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E1C98FF-88C3-48DA-B26C-F5EB637D6113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E1C98FF-88C3-48DA-B26C-F5EB637D6113}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
