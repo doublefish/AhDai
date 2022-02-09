@@ -254,7 +254,7 @@ namespace Adai.DbContext
 		/// <param name="filter"></param>
 		/// <param name="alias"></param>
 		/// <param name="parameters"></param>
-		/// <returns></returns>
+		/// <returns>查询条件部分SQL语句</returns>
 		public static string GenerateQueryCondition<T>(this IDbContext dbContext, IFilter<T> filter, string alias, out IDbDataParameter[] parameters) where T : class, new()
 		{
 			var tableAttr = DbHelper.GetTableAttribute(filter.Self.GetType());
@@ -263,7 +263,7 @@ namespace Adai.DbContext
 				throw new Exception("未设置表特性");
 			}
 			var columns = tableAttr.ColumnAttributes;
-			var sql = new StringBuilder();
+			var builder = new StringBuilder();
 			var paras = new List<IDbDataParameter>();
 			foreach (var column in columns)
 			{
@@ -281,9 +281,34 @@ namespace Adai.DbContext
 				{
 					continue;
 				}
-				sql.Append($" AND {alias}.{column.Name}=@{column.Name}");
+				builder.Append($" AND {alias}.{column.Name}=@{column.Name}");
 				paras.Add(dbContext.CreateParameter(column.Name, value));
 			}
+			parameters = paras.ToArray();
+			return builder.ToString();
+		}
+
+		/// <summary>
+		/// 生成排序条件
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="dbContext"></param>
+		/// <param name="filter"></param>
+		/// <param name="alias"></param>
+		/// <returns>排序条件部分SQL语句</returns>
+		public static string GenerateSortCondition<T>(this IDbContext dbContext, IFilter<T> filter, string alias) where T : class, new()
+		{
+			if (dbContext == null)
+			{
+				throw new Exception("未初始化");
+			}
+			var tableAttr = DbHelper.GetTableAttribute(filter.Self.GetType());
+			if (tableAttr == null)
+			{
+				throw new Exception("未设置表特性");
+			}
+			var columns = tableAttr.ColumnAttributes;
+			var builder = new StringBuilder();
 			if (!string.IsNullOrEmpty(filter.SortName))
 			{
 				var sortName = filter.SortName;
@@ -297,32 +322,42 @@ namespace Adai.DbContext
 					// 主表外的字段需要是实际的字段名，后面有空看怎么扩展成自动获取的吧
 				}
 				var sortType = filter.SortType == Config.SortType.DESC ? "DESC" : "ASC";
-				sql.Append($" ORDER BY {sortName} {sortType}");
+				builder.Append($" ORDER BY {sortName} {sortType}");
 			}
-			if (filter.Take > 0)
+			return builder.ToString();
+		}
+
+		/// <summary>
+		/// 生成排序条件
+		/// </summary>
+		/// <param name="dbContext"></param>
+		/// <param name="take"></param>
+		/// <param name="skip"></param>
+		/// <param name="sql"></param>
+		/// <returns>完整SQL语句</returns>
+		public static string GeneratePaginationCondition(this IDbContext dbContext, int take, int skip, string sql)
+		{
+			var builder = new StringBuilder(sql);
+			switch (dbContext.DbType)
 			{
-				switch (dbContext.DbType)
-				{
-					case Config.DbType.MSSQL:
-						// 2012版本以上
-						sql.Append($" OFFSET {filter.Skip} ROWS FETCH NEXT {filter.Take} ROWS ONLY");
-						break;
-					case Config.DbType.MySQL:
-					case Config.DbType.SQLite:
-						//sql.Append($" LIMIT {filter.Skip},{filter.Take}");
-						sql.Append($" LIMIT {filter.Take} OFFSET {filter.Skip}");
-						break;
-					case Config.DbType.Oracle:
-						//select a.* from ( select t.*,rownum rowno from test t where rownum <= 20 ) a where a.rowno >= 11;
-						sql.Insert(0, $"SELECT t1.* FROM (SELECT t0.*,ROWNUM ROWNO FROM (");
-						sql.Append($") t0 WHERE ROWNUM <= {filter.Take + filter.Skip} ) t1 WHERE t1.ROWNO > {filter.Skip}");
-						break;
-					default:
-						throw new Exception("无法识别的数据库类型");
-				}
+				case Config.DbType.MSSQL:
+					// 2012版本以上
+					builder.Append($" OFFSET {skip} ROWS FETCH NEXT {take} ROWS ONLY");
+					break;
+				case Config.DbType.MySQL:
+				case Config.DbType.SQLite:
+					//sql.Append($" LIMIT {filter.Skip},{filter.Take}");
+					builder.Append($" LIMIT {take} OFFSET {skip}");
+					break;
+				case Config.DbType.Oracle:
+					//select a.* from ( select t.*,rownum rowno from test t where rownum <= 20 ) a where a.rowno >= 11;
+					builder.Insert(0, $"SELECT t1.* FROM (SELECT t0.*,ROWNUM ROWNO FROM (");
+					builder.Append($") t0 WHERE ROWNUM <= {take + skip} ) t1 WHERE t1.ROWNO > {skip}");
+					break;
+				default:
+					throw new Exception("无法识别的数据库类型");
 			}
-			parameters = paras.ToArray();
-			return sql.ToString();
+			return builder.ToString();
 		}
 
 		/// <summary>

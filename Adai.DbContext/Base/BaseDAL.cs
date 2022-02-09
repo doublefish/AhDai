@@ -135,7 +135,7 @@ namespace Adai.DbContext
 		{
 			var sql = SelectSql;
 			var paras = new List<IDbDataParameter>();
-			sql += CreateExtendQueryCondition(filter, out var paras1);
+			sql += GenerateExtendQueryCondition(filter, out var paras1);
 			if (paras1 != null)
 			{
 				paras.AddRange(paras1);
@@ -145,17 +145,34 @@ namespace Adai.DbContext
 			{
 				paras.AddRange(paras0);
 			}
-			return GetList(sql, paras.ToArray());
+			sql += DbContext.GenerateSortCondition(filter, Alias);
+			if (filter.Take > 0)
+			{
+				var countSql = $"SELECT COUNT(1) FROM ({sql}) t";
+				var objCount = DbContext.ExecuteScalar(DbName, countSql, paras.ToArray());
+				if (objCount != null && objCount != DBNull.Value)
+				{
+					filter.Count = Convert.ToInt32(objCount);
+				}
+				sql = DbContext.GeneratePaginationCondition(filter.Take, filter.Skip, sql);
+				filter.Results = GetList(sql, paras.ToArray());
+			}
+			else
+			{
+				filter.Results = GetList(sql, paras.ToArray());
+				filter.Count = filter.Results.Count;
+			}
+			return filter.Results;
 		}
 
 		/// <summary>
-		/// 创建扩展查询条件扩展
+		/// 生成扩展查询条件
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="filter"></param>
 		/// <param name="parameters"></param>
 		/// <returns></returns>
-		protected virtual string CreateExtendQueryCondition<T>(T filter, out IDbDataParameter[] parameters) where T : IFilter<Model>
+		protected virtual string GenerateExtendQueryCondition<T>(T filter, out IDbDataParameter[] parameters) where T : IFilter<Model>
 		{
 			parameters = null;
 			return null;
