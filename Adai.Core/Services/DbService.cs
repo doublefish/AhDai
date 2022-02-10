@@ -26,6 +26,17 @@ namespace Adai.Core.Services
 		}
 
 		/// <summary>
+		/// GetSqlDbContext
+		/// </summary>
+		/// <param name="eventId"></param>
+		/// <param name="dbName"></param>
+		/// <returns></returns>
+		public IDbContext GetSqlDbContext(string eventId, string dbName = null)
+		{
+			return Utils.DbContextHelper.GetSqlDbContext(eventId, dbName);
+		}
+
+		/// <summary>
 		/// GetMySqlDbContext
 		/// </summary>
 		/// <param name="eventId"></param>
@@ -37,13 +48,35 @@ namespace Adai.Core.Services
 		}
 
 		/// <summary>
+		/// GetOracleDbContext
+		/// </summary>
+		/// <param name="eventId"></param>
+		/// <param name="dbName"></param>
+		/// <returns></returns>
+		public IDbContext GetOracleDbContext(string eventId, string dbName = null)
+		{
+			return Utils.DbContextHelper.GetOracleDbContext(eventId, dbName);
+		}
+
+		/// <summary>
+		/// GetSQLiteDbContext
+		/// </summary>
+		/// <param name="eventId"></param>
+		/// <param name="dbName"></param>
+		/// <returns></returns>
+		public IDbContext GetSQLiteDbContext(string eventId, string dbName = null)
+		{
+			return Utils.DbContextHelper.GetSQLiteDbContext(eventId, dbName);
+		}
+
+		/// <summary>
 		/// GetSQLiteDbContext
 		/// </summary>
 		/// <param name="eventId"></param>
 		/// <param name="fileName"></param>
 		/// <param name="version"></param>
 		/// <returns></returns>
-		public IDbContext GetSQLiteDbContext(string eventId, string fileName = null, string version = "3")
+		public IDbContext GetSQLiteDbContext(string eventId, string fileName, string version)
 		{
 			return Utils.DbContextHelper.GetSQLiteDbContext(eventId, fileName, version);
 		}

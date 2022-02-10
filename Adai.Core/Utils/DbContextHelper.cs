@@ -20,6 +20,27 @@ namespace Adai.Core.Utils
 		}
 
 		/// <summary>
+		/// GetSqlDbContext
+		/// </summary>
+		/// <param name="eventId"></param>
+		/// <param name="dbName"></param>
+		/// <returns></returns>
+		public static DbContext.IDbContext GetSqlDbContext(string eventId, string dbName = null)
+		{
+			var connStr = "";
+			if (!string.IsNullOrEmpty(dbName))
+			{
+				var dbConfig = DbContext.DbHelper.GetDbConfig(DbContext.Config.DbType.MSSQL, dbName);
+				if (dbConfig != null)
+				{
+					throw new ArgumentException($"未配置类型是MSSQL，别名是{dbName}的连接字符串");
+				}
+				connStr = dbConfig.ConnectionString;
+			}
+			return new DbContext.SqlClient.SqlDbContext(eventId, connStr);
+		}
+
+		/// <summary>
 		/// GetMySqlDbContext
 		/// </summary>
 		/// <param name="eventId"></param>
@@ -41,6 +62,27 @@ namespace Adai.Core.Utils
 		}
 
 		/// <summary>
+		/// GetOracleDbContext
+		/// </summary>
+		/// <param name="eventId"></param>
+		/// <param name="dbName"></param>
+		/// <returns></returns>
+		public static DbContext.IDbContext GetOracleDbContext(string eventId, string dbName = null)
+		{
+			var connStr = "";
+			if (!string.IsNullOrEmpty(dbName))
+			{
+				var dbConfig = DbContext.DbHelper.GetDbConfig(DbContext.Config.DbType.Oracle, dbName);
+				if (dbConfig != null)
+				{
+					throw new ArgumentException($"未配置类型是Oracle，别名是{dbName}的连接字符串");
+				}
+				connStr = dbConfig.ConnectionString;
+			}
+			return new DbContext.Oracle.OracleDbContext(eventId, connStr);
+		}
+
+		/// <summary>
 		/// GetMySqlDbContext
 		/// </summary>
 		/// <param name="eventId"></param>
@@ -58,7 +100,7 @@ namespace Adai.Core.Utils
 				}
 				connStr = dbConfig.ConnectionString;
 			}
-			return new DbContext.MySql.MySqlDbContext(eventId, connStr);
+			return new DbContext.SQLite.SQLiteDbContext(eventId, connStr);
 		}
 
 		/// <summary>
@@ -68,9 +110,9 @@ namespace Adai.Core.Utils
 		/// <param name="fileName"></param>
 		/// <param name="version"></param>
 		/// <returns></returns>
-		public static DbContext.IDbContext GetSQLiteDbContext(string eventId, string fileName = null, string version = "3")
+		public static DbContext.IDbContext GetSQLiteDbContext(string eventId, string fileName, string version)
 		{
-			var connStr = $"Data Source={fileName}\\{{0}};Version={version};Pooling=true;";
+			var connStr = $"Data Source={fileName};Version={version};Pooling=true;";
 			return new DbContext.SQLite.SQLiteDbContext(eventId, connStr);
 		}
 

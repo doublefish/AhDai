@@ -966,9 +966,33 @@
             数据库服务
             </summary>
         </member>
+        <member name="M:Adai.Core.Interfaces.IDbService.GetSqlDbContext(System.String,System.String)">
+            <summary>
+            GetSqlDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
         <member name="M:Adai.Core.Interfaces.IDbService.GetMySqlDbContext(System.String,System.String)">
             <summary>
-            GetDbContext
+            GetMySqlDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Interfaces.IDbService.GetOracleDbContext(System.String,System.String)">
+            <summary>
+            GetOracleDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Interfaces.IDbService.GetSQLiteDbContext(System.String,System.String)">
+            <summary>
+            GetSQLiteDbContext
             </summary>
             <param name="eventId"></param>
             <param name="dbName"></param>
@@ -2134,9 +2158,33 @@
             </summary>
             <param name="configuration"></param>
         </member>
+        <member name="M:Adai.Core.Services.DbService.GetSqlDbContext(System.String,System.String)">
+            <summary>
+            GetSqlDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
         <member name="M:Adai.Core.Services.DbService.GetMySqlDbContext(System.String,System.String)">
             <summary>
             GetMySqlDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Services.DbService.GetOracleDbContext(System.String,System.String)">
+            <summary>
+            GetOracleDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Services.DbService.GetSQLiteDbContext(System.String,System.String)">
+            <summary>
+            GetSQLiteDbContext
             </summary>
             <param name="eventId"></param>
             <param name="dbName"></param>
@@ -2614,9 +2662,25 @@
             </summary>
             <param name="configs"></param>
         </member>
+        <member name="M:Adai.Core.Utils.DbContextHelper.GetSqlDbContext(System.String,System.String)">
+            <summary>
+            GetSqlDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
         <member name="M:Adai.Core.Utils.DbContextHelper.GetMySqlDbContext(System.String,System.String)">
             <summary>
             GetMySqlDbContext
+            </summary>
+            <param name="eventId"></param>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Adai.Core.Utils.DbContextHelper.GetOracleDbContext(System.String,System.String)">
+            <summary>
+            GetOracleDbContext
             </summary>
             <param name="eventId"></param>
             <param name="dbName"></param>
