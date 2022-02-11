@@ -7,16 +7,16 @@
 		<Version>1.1.0.2</Version>
 		<AssemblyVersion>1.1.0.2</AssemblyVersion>
 		<FileVersion>1.1.0.2</FileVersion>
+		<PackageProjectUrl>https://github.com/doublefish/Adai/</PackageProjectUrl>
+		<Description>常用方法封装</Description>
 		<PackageReleaseNotes>无</PackageReleaseNotes>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<RepositoryUrl>https://github.com/doublefish/Adai.git</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<Description>常用方法封装</Description>
 		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
-		<PackageProjectUrl>https://github.com/doublefish/Adai/</PackageProjectUrl>
 		<PackageIcon></PackageIcon>
 		<PackageTags>Adai.Base</PackageTags>
+		<RepositoryUrl>https://github.com/doublefish/Adai.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
