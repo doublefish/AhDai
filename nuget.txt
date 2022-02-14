@@ -1,8 +1,9 @@
 oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu
 
 # อฦหอ
-dotnet nuget push Adai.Base/bin/Release/Adai.Base.1.1.0.2.nupkg -k oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu -s https://www.nuget.org/
+dotnet nuget push AhDai.Base/bin/Release/AhDai.Base.1.0.0.nupkg -k oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu -s https://www.nuget.org/
 
-dotnet nuget push Adai.Core/bin/Release/Adai.Core.1.0.0.nupkg -k oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu -s https://www.nuget.org/
+dotnet nuget push AhDai.Core/bin/Release/AhDai.Core.1.0.0.nupkg -k oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu -s https://www.nuget.org/
 
+dotnet nuget push AhDai.WebApi/bin/Release/AhDai.WebApi.1.0.0.nupkg -k oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu -s https://www.nuget.org/
 

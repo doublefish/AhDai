@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+		<Authors>Shuang Yu</Authors>
+		<Company>AhDai</Company>
+		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
+		<PackageProjectUrl>https://github.com/doublefish/AhDai</PackageProjectUrl>
+		<Description>常用方法封装 - Core</Description>
+		<PackageReleaseNotes>无</PackageReleaseNotes>
+		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
+		<PackageIcon></PackageIcon>
+		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageTags>AhDai;Core</PackageTags>
+		<RepositoryUrl>https://github.com/doublefish/AhDai</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>AhDai.Core.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>AhDai.Core.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AhDai.Base" Version="1.0.0" />
+		<PackageReference Include="AhDai.DbContext.MySql" Version="1.0.0" />
+		<PackageReference Include="AhDai.DbContext.Oracle" Version="1.0.0" />
+		<PackageReference Include="AhDai.DbContext.SqlClient" Version="1.0.0" />
+		<PackageReference Include="AhDai.DbContext.SQLite" Version="1.0.0" />
+		<PackageReference Include="log4net" Version="2.0.13" />
+		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Primitives" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
+		<PackageReference Include="StackExchange.Redis" Version="2.2.88" />
+		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+		<PackageReference Include="System.Management" Version="6.0.0" />
+		<PackageReference Include="System.Net.NetworkInformation" Version="4.3.0" />
+		<PackageReference Include="System.Text.Json" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0' ">
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0' ">
+	</ItemGroup>
+
+</Project>
