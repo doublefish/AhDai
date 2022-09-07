@@ -33,7 +33,7 @@ namespace AhDai.Core.Test.Service
 						services.AddRedisService();
 						services.AddSubscribeService();
 						services.AddPublishService();
-						//services.AddHostedService<Worker>();
+						services.AddHostedService<Worker>();
 						ServiceHelper.Init(services.BuildServiceProvider());
 					})
 					.Build();
