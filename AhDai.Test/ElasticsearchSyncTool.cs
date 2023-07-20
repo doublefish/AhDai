@@ -69,6 +69,11 @@ namespace AhDai.Test
 
 					time = DateTime.Now;
 					var indexManyResponse = targetClient.IndexMany(list);
+					if (!indexManyResponse.IsValid)
+					{
+						Console.WriteLine($"Failed to index document");
+						break;
+					}
 					if (indexManyResponse.Errors)
 					{
 						foreach (var itemWithError in indexManyResponse.ItemsWithErrors)

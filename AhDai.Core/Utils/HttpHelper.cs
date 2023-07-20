@@ -279,7 +279,8 @@ namespace AhDai.Core.Utils
 			try
 			{
 				using var client = new HttpClient();
-				using var httpResponse = await client.SendAsync(httpWebRequest);
+				//using var httpResponse = await client.SendAsync(httpWebRequest);
+				using var httpResponse = client.SendAsync(httpWebRequest).Result.EnsureSuccessStatusCode();
 				var response = new Models.HttpResponse()
 				{
 					ResponseUri = null,
