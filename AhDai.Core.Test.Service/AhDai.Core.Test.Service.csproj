@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-AhDai.Core.Test.Service-055C48D3-F9B4-4C13-84FB-90BF0440EBBE</UserSecretsId>
   </PropertyGroup>
 

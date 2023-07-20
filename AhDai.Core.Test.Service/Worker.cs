@@ -2,7 +2,6 @@ using AhDai.Core.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
@@ -16,7 +15,6 @@ namespace AhDai.Core.Test.Service
 	/// </summary>
 	public class Worker : BackgroundService
 	{
-		readonly IConfiguration Configuration;
 		readonly ILogger<Worker> Logger;
 		readonly Interfaces.ISubscribeService Service;
 		readonly Interfaces.IRedisService RedisService;
@@ -28,7 +26,6 @@ namespace AhDai.Core.Test.Service
 		/// <param name="logger"></param>
 		public Worker(IConfiguration configuration, ILogger<Worker> logger, Interfaces.ISubscribeService service, Interfaces.IRedisService redisService)
 		{
-			Configuration = configuration;
 			Logger = logger;
 			Service = service;
 			RedisService = redisService;
