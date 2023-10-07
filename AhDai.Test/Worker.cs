@@ -2,6 +2,8 @@ using AhDai.Core.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Net.NetworkInformation;
+using System.Text;
 
 namespace AhDai.Test
 {
@@ -36,20 +38,42 @@ namespace AhDai.Test
 		/// </summary>
 		/// <param name="stoppingToken"></param>
 		/// <returns></returns>
-		protected override Task ExecuteAsync(CancellationToken stoppingToken)
+		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 		{
-			//while (!stoppingToken.IsCancellationRequested)
-			//{
-			//	Logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-			//	await Task.Delay(1000, stoppingToken);
-			//}
-
 			Logger.LogInformation("¿ªÊ¼Ö´ÐÐ£º{time}", DateTimeOffset.Now);
 			//ElasticsearchSyncTool.Start();
 
+			while (!stoppingToken.IsCancellationRequested)
+			{
+				Logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+				ComplexPing();
+				await Task.Delay(1000, stoppingToken);
+			}
+		}
 
+		public static void ComplexPing()
+		{
+			var pingSender = new Ping();
+			var data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			var buffer = Encoding.ASCII.GetBytes(data);
 
-			return Task.CompletedTask;
+			var timeout = 10000;
+			var options = new PingOptions(64, true);
+
+			var reply = pingSender.Send("www.contoso.com", timeout, buffer, options);
+
+			if (reply.Status == IPStatus.Success)
+			{
+				Console.WriteLine("Address: {0}", reply.Address.ToString());
+				Console.WriteLine("RoundTrip time: {0}", reply.RoundtripTime);
+				Console.WriteLine("Time to live: {0}", reply.Options.Ttl);
+				Console.WriteLine("Don't fragment: {0}", reply.Options.DontFragment);
+				Console.WriteLine("Buffer size: {0}", reply.Buffer.Length);
+			}
+			else
+			{
+				Console.WriteLine(reply.Status);
+			}
 		}
 
 	}
