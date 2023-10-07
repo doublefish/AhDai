@@ -44,7 +44,7 @@ namespace AhDai.Test
 				ComplexPing();
 
 
-				await Task.Delay(1000, stoppingToken);
+				await Task.Delay(3000, stoppingToken);
 			}
 		}
 
@@ -61,11 +61,13 @@ namespace AhDai.Test
 
 			if (reply.Status == IPStatus.Success)
 			{
-				Console.WriteLine("Address: {0}", reply.Address.ToString());
-				Console.WriteLine("RoundTrip time: {0}", reply.RoundtripTime);
-				Console.WriteLine("Time to live: {0}", reply.Options.Ttl);
-				Console.WriteLine("Don't fragment: {0}", reply.Options.DontFragment);
-				Console.WriteLine("Buffer size: {0}", reply.Buffer.Length);
+				Console.WriteLine($"来自 {reply.Address} 的回复: 字节={reply.Buffer.Length} 时间={reply.RoundtripTime}ms TTL={reply.Options.Ttl}");
+				
+				//Console.WriteLine("Address: {0}", reply.Address.ToString());
+				//Console.WriteLine("RoundTrip time: {0}", reply.RoundtripTime);
+				//Console.WriteLine("Time to live: {0}", reply.Options.Ttl);
+				//Console.WriteLine("Don't fragment: {0}", reply.Options.DontFragment);
+				//Console.WriteLine("Buffer size: {0}", reply.Buffer.Length);
 			}
 			else
 			{
