@@ -1,4 +1,5 @@
 ﻿using Nest;
+using System;
 
 namespace AhDai.Test.Models
 {

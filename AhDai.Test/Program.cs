@@ -1,3 +1,45 @@
-ï»¿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-await AhDai.Test.Startup.StartAsync();
+using AhDai.Core.Extensions;
+using AhDai.Core.Utils;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.Threading;
+
+namespace AhDai.Test
+{
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			ThreadPool.GetMinThreads(out int defaultMinThreads, out int completionPortThreads);
+			Console.WriteLine($"DefaultMinThreads: {defaultMinThreads}, completionPortThreads: {completionPortThreads}");
+			ThreadPool.SetMinThreads(48, 48);
+			ThreadPool.GetMinThreads(out defaultMinThreads, out completionPortThreads);
+			Console.WriteLine($"DefaultMinThreads: {defaultMinThreads}, completionPortThreads: {completionPortThreads}");
+
+			try
+			{
+				IHost host = Host.CreateDefaultBuilder(args)
+					.ConfigureHostBuilder()
+					.ConfigureLogging()
+					.ConfigureServices(services =>
+					{
+						services.AddDbService();
+						services.AddHostedService<Worker>();
+						ServiceHelper.Init(services.BuildServiceProvider());
+					})
+					.Build();
+				Console.WriteLine("·þÎñÆô¶¯¿ªÊ¼");
+				host.Run();
+				Console.WriteLine($"·þÎñÆô¶¯³É¹¦=>{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}");
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"·þÎñÆô¶¯Ê§°Ü=>{ex.Message}\r\n{ex.StackTrace}");
+			}
+
+			Console.WriteLine($"Press any key to continue...");
+			var input = Console.ReadKey();
+		}
+	}
+}

@@ -1,4 +1,6 @@
 ﻿using Nest;
+using System;
+using System.Collections.Generic;
 
 namespace AhDai.Test.Models
 {
@@ -59,7 +61,7 @@ namespace AhDai.Test.Models
 		/// 应销区域代码
 		/// </summary>
 		[Keyword]
-		public IList<string> SalesDistrictCodes { get; set; }
+		public ICollection<string> SalesDistrictCodes { get; set; }
 		/// <summary>
 		/// 查询用户所在地代码
 		/// </summary>
@@ -129,6 +131,6 @@ namespace AhDai.Test.Models
 		/// 稽查记录
 		/// </summary>
 		[Nested]
-		public IList<BugsellRecord> Records { get; set; }
+		public ICollection<BugsellRecord> Records { get; set; }
 	}
 }

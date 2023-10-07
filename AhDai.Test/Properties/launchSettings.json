@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "AhDai.Service.Test": {
+    "AhDai.Test": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {
