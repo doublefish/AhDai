@@ -1,10 +1,10 @@
 # http://download.redis.io/redis-stable/redis.conf
 
-bind 127.0.0.1 # ÕâĞĞÒª×¢ÊÍµô£¬½â³ı±¾µØÁ¬½ÓÏŞÖÆ¡£¿ÉÒÔĞŞ¸ÄÎª0.0.0.0
-protected-mode no # Ä¬ÈÏyes£¬Èç¹ûÉèÖÃÎªyes£¬ÔòÖ»ÔÊĞíÔÚ±¾»úµÄ»Ø»·Á¬½Ó£¬ÆäËû»úÆ÷ÎŞ·¨Á¬½Ó¡£
-daemonize no # Ä¬ÈÏno Îª²»ÊØ»¤½ø³ÌÄ£Ê½£¬docker²¿Êğ²»ĞèÒª¸ÄÎªyes£¬docker run -d±¾Éí¾ÍÊÇºóÌ¨Æô¶¯£¬²»È»»á³åÍ»
-requirepass redis # ÉèÖÃÃÜÂë
-appendonly yes # ³Ö¾Ã»¯
+bind 127.0.0.1 # è¿™è¡Œè¦æ³¨é‡Šæ‰ï¼Œè§£é™¤æœ¬åœ°è¿æ¥é™åˆ¶ã€‚å¯ä»¥ä¿®æ”¹ä¸º0.0.0.0
+protected-mode no # é»˜è®¤yesï¼Œå¦‚æœè®¾ç½®ä¸ºyesï¼Œåˆ™åªå…è®¸åœ¨æœ¬æœºçš„å›ç¯è¿æ¥ï¼Œå…¶ä»–æœºå™¨æ— æ³•è¿æ¥ã€‚
+daemonize no # é»˜è®¤no ä¸ºä¸å®ˆæŠ¤è¿›ç¨‹æ¨¡å¼ï¼Œdockeréƒ¨ç½²ä¸éœ€è¦æ”¹ä¸ºyesï¼Œdocker run -dæœ¬èº«å°±æ˜¯åå°å¯åŠ¨ï¼Œä¸ç„¶ä¼šå†²çª
+requirepass redis # è®¾ç½®å¯†ç 
+appendonly yes # æŒä¹…åŒ–
 
 
 docker run --name redis \
@@ -15,12 +15,12 @@ docker run --name redis \
 
 docker run --name redis -p 6379:6379 -v /D/app/docker/redis/redis.conf:/etc/redis/redis.conf -v /D/app/docker/redis/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes
 
-# ËµÃ÷
--p 6379:6379£º¶Ë¿ÚÓ³Éä£¬Ç°ÃæÊÇËŞÖ÷»ú£¬ºóÃæÊÇÈİÆ÷¡£
-¨Cname redis£ºÖ¸¶¨¸ÃÈİÆ÷Ãû³Æ¡£
--v ¹ÒÔØÎÄ¼ş»òÄ¿Â¼£ºÇ°ÃæÊÇËŞÖ÷»ú£¬ºóÃæÊÇÈİÆ÷¡£
--d redis redis-server /etc/redis/redis.conf£º±íÊ¾ºóÌ¨Æô¶¯redis£¬ÒÔÅäÖÃÎÄ¼şÆô¶¯redis£¬¼ÓÔØÈİÆ÷ÄÚµÄconfÎÄ¼ş¡£
-appendonly yes£º¿ªÆôredis ³Ö¾Ã»¯¡£
+# è¯´æ˜
+-p 6379:6379ï¼šç«¯å£æ˜ å°„ï¼Œå‰é¢æ˜¯å®¿ä¸»æœºï¼Œåé¢æ˜¯å®¹å™¨ã€‚
+â€“name redisï¼šæŒ‡å®šè¯¥å®¹å™¨åç§°ã€‚
+-v æŒ‚è½½æ–‡ä»¶æˆ–ç›®å½•ï¼šå‰é¢æ˜¯å®¿ä¸»æœºï¼Œåé¢æ˜¯å®¹å™¨ã€‚
+-d redis redis-server /etc/redis/redis.confï¼šè¡¨ç¤ºåå°å¯åŠ¨redisï¼Œä»¥é…ç½®æ–‡ä»¶å¯åŠ¨redisï¼ŒåŠ è½½å®¹å™¨å†…çš„confæ–‡ä»¶ã€‚
+appendonly yesï¼šå¼€å¯redis æŒä¹…åŒ–ã€‚
 
 
 
@@ -30,14 +30,14 @@ docker pull wurstmeister/kafka
 
 docker run -d --restart=always --log-driver json-file --log-opt max-size=100m --log-opt max-file=2 --name zookeeper -p 2181:2181 -v /etc/localtime:/etc/localtime wurstmeister/zookeeper
 
-# IPµØÖ·Òª»»
+# IPåœ°å€è¦æ¢
 docker run -d --log-driver json-file --log-opt max-size=100m --log-opt max-file=2 --name kafka -p 9092:9092 -e KAFKA_BROKER_ID=0 -e KAFKA_ZOOKEEPER_CONNECT=172.21.64.1:2181/kafka -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://172.21.64.1:9092 -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -v /etc/localtime:/etc/localtime wurstmeister/kafka
 
--e KAFKA_BROKER_ID=0  ÔÚkafka¼¯ÈºÖĞ£¬Ã¿¸ökafka¶¼ÓĞÒ»¸öBROKER_IDÀ´Çø·Ö×Ô¼º
--e KAFKA_ZOOKEEPER_CONNECT=172.21.64.1:2181/kafka ÅäÖÃzookeeper¹ÜÀíkafkaµÄÂ·¾¶
--e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://172.21.64.1:9092  °ÑkafkaµÄµØÖ·¶Ë¿Ú×¢²á¸øzookeeper
--e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 ÅäÖÃkafkaµÄ¼àÌı¶Ë¿Ú
--v /etc/localtime:/etc/localtime ÈİÆ÷Ê±¼äÍ¬²½ĞéÄâ»úµÄÊ±¼ä
+-e KAFKA_BROKER_ID=0  åœ¨kafkaé›†ç¾¤ä¸­ï¼Œæ¯ä¸ªkafkaéƒ½æœ‰ä¸€ä¸ªBROKER_IDæ¥åŒºåˆ†è‡ªå·±
+-e KAFKA_ZOOKEEPER_CONNECT=172.21.64.1:2181/kafka é…ç½®zookeeperç®¡ç†kafkaçš„è·¯å¾„
+-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://172.21.64.1:9092  æŠŠkafkaçš„åœ°å€ç«¯å£æ³¨å†Œç»™zookeeper
+-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 é…ç½®kafkaçš„ç›‘å¬ç«¯å£
+-v /etc/localtime:/etc/localtime å®¹å™¨æ—¶é—´åŒæ­¥è™šæ‹Ÿæœºçš„æ—¶é—´
 
 
 docker pull sheepkiller/kafka-manager

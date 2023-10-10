@@ -1,6 +1,6 @@
 oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu
 
-# Õ∆ÀÕ
+# Êé®ÈÄÅ
 dotnet nuget push AhDai.Base/bin/Release/AhDai.Base.1.0.0.nupkg -k oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu -s https://www.nuget.org/
 
 dotnet nuget push AhDai.Core/bin/Release/AhDai.Core.1.0.0.nupkg -k oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu -s https://www.nuget.org/
