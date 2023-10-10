@@ -5,6 +5,7 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73142106-B90E-4618-947F-E633F9624E33}"
 	ProjectSection(SolutionItems) = preProject
+		note.txt = note.txt
 		nuget.txt = nuget.txt
 	EndProjectSection
 EndProject
