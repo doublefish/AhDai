@@ -41,12 +41,21 @@ namespace AhDai.Test
 			{
 				Logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
-				ComplexPing();
+				//ComplexPing();
 
+				TestKafka();
 
 				await Task.Delay(3000, stoppingToken);
 			}
 		}
+
+
+		public static void TestKafka()
+		{
+
+
+		}
+
 
 		public static void ComplexPing()
 		{
@@ -54,15 +63,14 @@ namespace AhDai.Test
 			var data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 			var buffer = Encoding.ASCII.GetBytes(data);
 
-			var timeout = 10000;
 			var options = new PingOptions(64, true);
 
-			var reply = pingSender.Send("www.contoso.com", timeout, buffer, options);
+			var reply = pingSender.Send("www.contoso.com", 5000, buffer, options);
 
 			if (reply.Status == IPStatus.Success)
 			{
 				Console.WriteLine($"来自 {reply.Address} 的回复: 字节={reply.Buffer.Length} 时间={reply.RoundtripTime}ms TTL={reply.Options.Ttl}");
-				
+
 				//Console.WriteLine("Address: {0}", reply.Address.ToString());
 				//Console.WriteLine("RoundTrip time: {0}", reply.RoundtripTime);
 				//Console.WriteLine("Time to live: {0}", reply.Options.Ttl);

@@ -1,3 +1,7 @@
+# 查看端口占用
+netstat -aon|findstr "6379"
+
+
 # http://download.redis.io/redis-stable/redis.conf
 
 bind 127.0.0.1 # 这行要注释掉，解除本地连接限制。可以修改为0.0.0.0
@@ -28,20 +32,100 @@ docker pull wurstmeister/zookeeper
 
 docker pull wurstmeister/kafka
 
-docker run -d --restart=always --log-driver json-file --log-opt max-size=100m --log-opt max-file=2 --name zookeeper -p 2181:2181 -v /etc/localtime:/etc/localtime wurstmeister/zookeeper
+docker run -d --log-driver json-file --log-opt max-size=100m --log-opt max-file=2 --name zookeeper -p 2181:2181 -v /etc/localtime:/etc/localtime wurstmeister/zookeeper --restart=always
 
 # IP地址要换
 docker run -d --log-driver json-file --log-opt max-size=100m --log-opt max-file=2 --name kafka -p 9092:9092 -e KAFKA_BROKER_ID=0 -e KAFKA_ZOOKEEPER_CONNECT=172.21.64.1:2181/kafka -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://172.21.64.1:9092 -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -v /etc/localtime:/etc/localtime wurstmeister/kafka
 
--e KAFKA_BROKER_ID=0  在kafka集群中，每个kafka都有一个BROKER_ID来区分自己
+-e KAFKA_BROKER_ID=0 在kafka集群中，每个kafka都有一个BROKER_ID来区分自己
 -e KAFKA_ZOOKEEPER_CONNECT=172.21.64.1:2181/kafka 配置zookeeper管理kafka的路径
 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://172.21.64.1:9092  把kafka的地址端口注册给zookeeper
 -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 配置kafka的监听端口
 -v /etc/localtime:/etc/localtime 容器时间同步虚拟机的时间
 
+# 进入kafka
+docker exec -it kafka /bin/bash
 
-docker pull sheepkiller/kafka-manager
+# 进入目录
+进入kafka的bin目录下：cd /opt/kafka_2.13-2.8.1/bin
 
-docker run -d --name kfk-manager --restart always -p 9000:9000 -e ZK_HOSTS=172.21.64.1:2181 sheepkiller/kafka-manager
+# 创建测试主题
+./kafka-topics.sh --create --topic test-kafka --bootstrap-server localhost:9092
 
+# 显示主题
+./kafka-topics.sh --describe --topic test-kafka --bootstrap-server localhost:9092
+
+# 运行生产者
+./kafka-console-producer.sh --broker-list localhost:9092 --topic test-kafka
+
+# 运行消费者
+./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-kafka --from-beginning
+
+docker pull vimagick/cmak
+
+docker run -p 9000:9000 -e ZK_HOSTS="127.0.0.1:2181" --name cmak -d vimagick/cmak
+
+
+
+# elasticsearch/es
+docker pull elasticsearch:8.10.2
+
+docker run -d --name elasticsearch `
+-p 9200:9200 -p 9300:9300 `
+-e "discovery.type=single-node" `
+-e ES_JAVA_OPTS="-Xms512m -Xmx1024m" `
+-v /D/app/docker/elasticsearch/data:/usr/share/elasticsearch/data `
+-v /D/app/docker/elasticsearch/logs:/usr/share/elasticsearch/logs `
+elasticsearch:8.10.2
+
+
+
+elastic@123456
+
+#设置密码
+docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive
+
+# 修改指定用户的密码
+docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+
+# 复制证书
+docker cp elasticsearch:/usr/share/elasticsearch/config/certs/http_ca.crt D:/app/docker/elasticsearch/config/certs/
+
+# 生成token
+docker exec -u 0 -it elasticsearch /bin/bash
+bin/elasticsearch-create-enrollment-token -scope kibana
+
+eyJ2ZXIiOiI4LjEwLjIiLCJhZHIiOlsiMTcyLjE3LjAuNDo5MjAwIl0sImZnciI6IjMzZGQ0NDYzNDM2NDEwMTE2NmI1MTI0ZWE5M2Q5M2MyN2YxOTQ5OTM2NWRjNjlkMDNjMzA3MGEwZmUzZTVhNjUiLCJrZXkiOiIzeVNQTzRzQjlYYkJWOUlWVGVzVTo3V3E0c1o5QlNCbWY4Z0stb0lxYnlnIn0=
+
+# kibana
+docker pull kibana:8.10.2
+docker run -d --name kibana -p 5601:5601 kibana:8.10.2
+docker run -d --name kibana -p 5601:5601 --link=elasticsearch:8.10.2 kibana:8.10.2
+
+
+docker exec -u 0 -it kibana /bin/bash
+bin/kibana-verification-code
+
+
+
+# 进入容器修改配置文件
+/usr/share/kibana/config/kibana.yml
+# 设置中文
+i18n.locale: "zh-CN"
+# 关闭CSP
+csp.strict: false
+
+
+
+
+# oracle
+
+docker run -d --name oracle23c_free \
+-P | -p 1521:1521 \
+-e ORACLE_PWD=oracle@123456 \
+-e ORACLE_CHARACTERSET=AL32UTF8 \
+-v /D/app/docker/oracle/oradata:/opt/oracle/oradata \
+container-registry.oracle.com/database/free:latest
+
+docker run -d --name oracle23c_free -p | -p 1521:1521 -e ORACLE_PWD=oracle@123456 -v /D/app/docker/oracle/oradata:/opt/oracle/oradata container-registry.oracle.com/database/free:latest
 
