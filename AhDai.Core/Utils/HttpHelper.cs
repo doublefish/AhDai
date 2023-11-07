@@ -1,4 +1,5 @@
 ﻿using AhDai.Base.Extensions;
+using AhDai.Base.Utils;
 using AhDai.Core.Extensions;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,33 @@ namespace AhDai.Core.Utils
 	/// </summary>
 	public static class HttpHelper
 	{
+		/// <summary>
+		/// Client
+		/// </summary>
+		public static HttpClient Client { get; private set; }
+
+		static HttpHelper()
+		{
+			var handler = new SocketsHttpHandler()
+			{
+				AllowAutoRedirect = true,
+				MaxAutomaticRedirections = 50,
+				// 每个请求连接的最大数量，默认是int.MaxValue
+				//MaxConnectionsPerServer = 100,
+				// 连接池中TCP连接最多可以闲置多久，默认2分钟
+				//PooledConnectionIdleTimeout = TimeSpan.FromMinutes(2),
+				// 连接最长的存活时间，默认是不限制的，一般不用设置
+				PooledConnectionLifetime = TimeSpan.FromMinutes(2),
+				// 响应头最大字节数，单位: KB，默认64
+				//MaxResponseHeadersLength = 64, 
+				UseCookies = false, //是否自动处理cookie
+			};
+			Client = new HttpClient(handler)
+			{
+				Timeout = TimeSpan.FromSeconds(60)
+			};
+		}
+
 		/// <summary>
 		/// 发送内容类型为Url的Get请求
 		/// </summary>
@@ -207,7 +235,7 @@ namespace AhDai.Core.Utils
 			{
 				if (data.Body != null)
 				{
-					data.Content = JsonHelper.SerializeObject(data.Body);
+					data.Content = JsonUtil.Serialize(data.Body);
 				}
 			}
 			else if (data.Body != null)
@@ -245,11 +273,11 @@ namespace AhDai.Core.Utils
 			}
 			if (!requestMessage.Headers.Contains("User-Agent"))
 			{
-				requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36");
+				requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.76");
 			}
-			if (!requestMessage.Headers.Contains("Keep-Alive"))
+			if (!requestMessage.Headers.Contains("Connection"))
 			{
-				requestMessage.Headers.Add("Keep-Alive", "true");
+				requestMessage.Headers.Add("Connection", "keep-alive");
 			}
 
 			//async
@@ -259,8 +287,8 @@ namespace AhDai.Core.Utils
 				var bytes = Encoding.UTF8.GetBytes(data.Content);
 				requestMessage.Content = new ByteArrayContent(bytes);
 				requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(data.ContentType) { CharSet = "utf-8" };
-				//requestMessage.Content.Headers.ContentLength = bytes.Length;
-				//requestMessage.Content.Headers.ContentType.CharSet = "utf-8";
+				//requestMessage.Data.Headers.ContentLength = bytes.Length;
+				//requestMessage.Data.Headers.ContentType.CharSet = "utf-8";
 			}
 
 			return requestMessage;
@@ -273,43 +301,41 @@ namespace AhDai.Core.Utils
 		/// <returns></returns>
 		public static async Task<Models.HttpResponse> SendAsync(Models.HttpRequest data)
 		{
-			// 创建请求
-			var httpWebRequest = CreateRequest(data);
-
+			var request = CreateRequest(data);
 			try
 			{
-				using var client = new HttpClient();
-				//using var httpResponse = await client.SendAsync(httpWebRequest);
-				using var httpResponse = client.SendAsync(httpWebRequest).Result.EnsureSuccessStatusCode();
-				var response = new Models.HttpResponse()
+				using var response = await Client.SendAsync(request);
+				response.EnsureSuccessStatusCode();
+
+				var result = new Models.HttpResponse()
 				{
 					ResponseUri = null,
-					StatusCode = httpResponse.StatusCode,
-					ReasonPhrase = httpResponse.ReasonPhrase
+					StatusCode = response.StatusCode,
+					ReasonPhrase = response.ReasonPhrase
 				};
-				if (httpResponse.Content.Headers.ContentType != null)
+				if (response.Content.Headers.ContentType != null)
 				{
-					response.ContentType = httpResponse.Content.Headers.ContentType;
-					response.ContentLength = httpResponse.Content.Headers.ContentLength ?? 0;
-					response.ContentEncoding = httpResponse.Content.Headers.ContentEncoding;
-					response.ContentLanguage = httpResponse.Content.Headers.ContentLanguage;
+					result.ContentType = response.Content.Headers.ContentType;
+					result.ContentLength = response.Content.Headers.ContentLength ?? 0;
+					result.ContentEncoding = response.Content.Headers.ContentEncoding;
+					result.ContentLanguage = response.Content.Headers.ContentLanguage;
 				}
 
-				var charSet = httpResponse.Content.Headers.ContentType?.CharSet;
-				var encoding = Base.Utils.TextHelper.GetEncoding(charSet);
-				using var stream = await httpResponse.Content.ReadAsStreamAsync();
+				var charSet = response.Content.Headers.ContentType?.CharSet;
+				var encoding = TextHelper.GetEncoding(charSet);
 				if (charSet == "gzip")
 				{
+					using var stream = await response.Content.ReadAsStreamAsync();
 					using var gzStream = new GZipStream(stream, CompressionMode.Decompress);
 					using var reader = new StreamReader(gzStream, encoding);
-					response.Content = reader.ReadToEnd();
+					result.Content = reader.ReadToEnd();
 				}
 				else
 				{
-					using var reader = new StreamReader(stream, encoding);
-					response.Content = reader.ReadToEnd();
+					//using var reader = new StreamReader(stream, encoding);
+					result.Content = await response.Content.ReadAsStringAsync();
 				}
-				return response;
+				return result;
 			}
 			catch (WebException ex)
 			{

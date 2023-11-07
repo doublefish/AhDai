@@ -59,4 +59,8 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0' ">
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Interfaces\" />
+	</ItemGroup>
+
 </Project>

@@ -1,25 +1,27 @@
-﻿using System.Net;
+﻿using AhDai.Core.Extensions;
+using Microsoft.Extensions.Configuration;
+using System.Net;
 using System.Net.Mail;
 
-namespace AhDai.Core.Utils
+namespace AhDai.Core.Services
 {
 	/// <summary>
-	/// MailHelper
+	/// MailService
 	/// </summary>
-	public static class MailHelper
+	public class MailService : IMailService
 	{
 		/// <summary>
 		/// 配置
 		/// </summary>
-		public static Models.MailConfig Config { get; private set; }
+		public Configs.MailConfig Config { get; private set; }
 
 		/// <summary>
-		/// 初始化
+		/// 构造函数
 		/// </summary>
-		/// <param name="config">配置</param>
-		public static void Init(Models.MailConfig config)
+		/// <param name="configuration">配置</param>
+		public MailService(IConfiguration configuration)
 		{
-			Config = config;
+			Config = configuration.GetMailConfig();
 		}
 
 		/// <summary>
@@ -27,7 +29,7 @@ namespace AhDai.Core.Utils
 		/// </summary>
 		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
-		public static SmtpClient CreateSmtpClient(Models.MailConfig config = null)
+		public SmtpClient CreateSmtpClient(Configs.MailConfig config = null)
 		{
 			var c = config ?? Config;
 			return new SmtpClient()
@@ -47,7 +49,7 @@ namespace AhDai.Core.Utils
 		/// <param name="subject">标题</param>
 		/// <param name="body">内容</param>
 		/// <param name="config">自定义配置</param>
-		public static void Send(string recipients, string subject, string body, Models.MailConfig config = null)
+		public void Send(string recipients, string subject, string body, Configs.MailConfig config = null)
 		{
 			var c = config ?? Config;
 			using (var client = CreateSmtpClient(c))

@@ -1,5 +1,6 @@
 ﻿using AhDai.Base.Extensions;
 using AhDai.Base.Utils;
+using AhDai.Core.Services;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Drawing;
@@ -47,7 +48,8 @@ namespace AhDai.Core.Utils
 			}
 			var dateTime = DateTime.Now;
 			var time = dateTime.TimeOfDay;
-			var redis = RedisHelper.GetDatabase(15);
+			var redisService = ServiceUtil.GetRequiredService<IRedisService>();
+			var redis = redisService.GetDatabase(15);
 			var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 			var hashField = guid;
 			if (redis.HashExists(key, hashField))
@@ -81,7 +83,8 @@ namespace AhDai.Core.Utils
 			}
 			var dateTime = DateTime.Now;
 			var time = dateTime.TimeOfDay;
-			var redis = RedisHelper.GetDatabase(15);
+			var redisService = ServiceUtil.GetRequiredService<IRedisService>();
+			var redis = redisService.GetDatabase(15);
 			var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 			var hashField = guid;
 			var value = redis.HashGet(key, hashField);

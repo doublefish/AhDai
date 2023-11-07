@@ -1,13 +1,13 @@
 ﻿namespace AhDai.Core.Options
 {
-	/// <summary>
-	/// RedisOptions
-	/// </summary>
-	public class RedisOptions
+    /// <summary>
+    /// RedisOptions
+    /// </summary>
+    public class RedisOptions
 	{
 		/// <summary>
 		/// Redis配置
 		/// </summary>
-		public Models.RedisConfig Config { get; set; }
+		public Configs.RedisConfig Config { get; set; }
 	}
 }

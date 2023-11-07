@@ -1,8 +1,12 @@
 # 查看端口占用
 netstat -aon|findstr "6379"
 
+--privileged=true
 
-# http://download.redis.io/redis-stable/redis.conf
+
+wget http://download.redis.io/redis-stable/redis.conf
+chmod 777 redis.conf
+
 
 bind 127.0.0.1 # 这行要注释掉，解除本地连接限制。可以修改为0.0.0.0
 protected-mode no # 默认yes，如果设置为yes，则只允许在本机的回环连接，其他机器无法连接。
@@ -13,11 +17,10 @@ appendonly yes # 持久化
 
 docker run --name redis \
    -p 6379:6379 \
-   -v /D/app/docker/redis/redis.conf:/etc/redis/redis.conf \
-   -v /D/app/docker/redis/data:/data \
+   -v /usr/local/docker/redis/redis.conf:/etc/redis/redis.conf \
+   -v /usr/local/docker/redis/data:/data \
    -d redis redis-server /etc/redis/redis.conf --appendonly yes
 
-docker run --name redis -p 6379:6379 -v /D/app/docker/redis/redis.conf:/etc/redis/redis.conf -v /D/app/docker/redis/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes
 
 # 说明
 -p 6379:6379：端口映射，前面是宿主机，后面是容器。
@@ -26,7 +29,28 @@ docker run --name redis -p 6379:6379 -v /D/app/docker/redis/redis.conf:/etc/redi
 -d redis redis-server /etc/redis/redis.conf：表示后台启动redis，以配置文件启动redis，加载容器内的conf文件。
 appendonly yes：开启redis 持久化。
 
+---------------------------------------------------------------------------------------------------------------------
 
+
+docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+
+mkdir /usr/local/docker/mssql -p
+chmod 777 /usr/local/docker/mssql
+
+#Chinese_PRC_CI_AS/Chinese_PRC_BIN
+docker run -d --name sqlserver --hostname  sqlserver \
+   -p 1433:1433 \
+   -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=mssql@123456" \
+   -e "TZ=Asia/Shanghai" \
+   -e "MSSQL_PID=Enterprise" \
+   -e "MSSQL_COLLATION=Chinese_PRC_BIN" \
+   -v /usr/local/docker/mssql:/var/opt/mssql \
+   --restart=always \
+   mcr.microsoft.com/mssql/server:2022-latest
+
+
+---------------------------------------------------------------------------------------------------------------------
 
 docker pull wurstmeister/zookeeper
 
@@ -65,17 +89,17 @@ docker pull vimagick/cmak
 
 docker run -p 9000:9000 -e ZK_HOSTS="127.0.0.1:2181" --name cmak -d vimagick/cmak
 
-
+---------------------------------------------------------------------------------------------------------------------
 
 # elasticsearch/es
 docker pull elasticsearch:8.10.2
 
-docker run -d --name elasticsearch `
--p 9200:9200 -p 9300:9300 `
--e "discovery.type=single-node" `
--e ES_JAVA_OPTS="-Xms512m -Xmx1024m" `
--v /D/app/docker/elasticsearch/data:/usr/share/elasticsearch/data `
--v /D/app/docker/elasticsearch/logs:/usr/share/elasticsearch/logs `
+docker run -d --name elasticsearch \
+-p 9200:9200 -p 9300:9300 \
+-e "discovery.type=single-node" \
+-e ES_JAVA_OPTS="-Xms512m -Xmx1024m" \
+-v /usr/local/docker/elasticsearch/data:/usr/share/elasticsearch/data \
+-v /usr/local/docker/elasticsearch/logs:/usr/share/elasticsearch/logs \
 elasticsearch:8.10.2
 
 
@@ -97,6 +121,7 @@ bin/elasticsearch-create-enrollment-token -scope kibana
 
 eyJ2ZXIiOiI4LjEwLjIiLCJhZHIiOlsiMTcyLjE3LjAuNDo5MjAwIl0sImZnciI6IjMzZGQ0NDYzNDM2NDEwMTE2NmI1MTI0ZWE5M2Q5M2MyN2YxOTQ5OTM2NWRjNjlkMDNjMzA3MGEwZmUzZTVhNjUiLCJrZXkiOiIzeVNQTzRzQjlYYkJWOUlWVGVzVTo3V3E0c1o5QlNCbWY4Z0stb0lxYnlnIn0=
 
+
 # kibana
 docker pull kibana:8.10.2
 docker run -d --name kibana -p 5601:5601 kibana:8.10.2
@@ -107,7 +132,6 @@ docker exec -u 0 -it kibana /bin/bash
 bin/kibana-verification-code
 
 
-
 # 进入容器修改配置文件
 /usr/share/kibana/config/kibana.yml
 # 设置中文
@@ -116,16 +140,23 @@ i18n.locale: "zh-CN"
 csp.strict: false
 
 
+---------------------------------------------------------------------------------------------------------------------
+
+# filebeat
+docker pull elastic/filebeat:8.10.3
+
+
 
 
 # oracle
 
-docker run -d --name oracle23c_free \
--P | -p 1521:1521 \
+docker run -d --name oracle23c \
+-p 1521:1521 \
 -e ORACLE_PWD=oracle@123456 \
 -e ORACLE_CHARACTERSET=AL32UTF8 \
--v /D/app/docker/oracle/oradata:/opt/oracle/oradata \
+-v /docker/oracle/oradata:/opt/oracle/oradata \
 container-registry.oracle.com/database/free:latest
 
-docker run -d --name oracle23c_free -p | -p 1521:1521 -e ORACLE_PWD=oracle@123456 -v /D/app/docker/oracle/oradata:/opt/oracle/oradata container-registry.oracle.com/database/free:latest
+
+
 

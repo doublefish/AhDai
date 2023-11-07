@@ -7,10 +7,10 @@ using System.Runtime.Versioning;
 namespace AhDai.Core.Utils
 {
 	/// <summary>
-	/// RARHelper
+	/// RARUtil
 	/// </summary>
 	[SupportedOSPlatform("windows")]
-	public static class RARHelper
+	public static class RARUtil
 	{
 		/// <summary>
 		/// WinRAR.exe路径
@@ -20,7 +20,7 @@ namespace AhDai.Core.Utils
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		static RARHelper()
+		static RARUtil()
 		{
 			try
 			{

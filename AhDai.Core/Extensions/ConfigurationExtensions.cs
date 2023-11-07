@@ -4,11 +4,21 @@ using System.Collections.Generic;
 
 namespace AhDai.Core.Extensions
 {
-	/// <summary>
-	/// ConfigurationExtensions
-	/// </summary>
-	public static class ConfigurationExtensions
+    /// <summary>
+    /// ConfigurationExtensions
+    /// </summary>
+    public static class ConfigurationExtensions
 	{
+		/// <summary>
+		/// 获取Jwt配置
+		/// </summary>
+		/// <param name="configuration"></param>
+		/// <returns></returns>
+		public static Configs.JwtConfig GetJwtConfig(this IConfiguration configuration)
+		{
+			return configuration.GetSection("Jwt").Get<Configs.JwtConfig>();
+		}
+
 		/// <summary>
 		/// 获取数据库配置
 		/// </summary>
@@ -17,15 +27,14 @@ namespace AhDai.Core.Extensions
 		public static ICollection<DbContext.Models.DbConfig> GetDbConfigs(this IConfiguration configuration)
 		{
 			var configs = new List<DbContext.Models.DbConfig>();
-			var dbs = new string[] { Config.Db.Master, Config.Db.Product, Config.Db.Report, Config.Db.Digital, Config.Db.Foreign, Config.Db.Marketing };
-			foreach (var db in dbs)
+			var children = configuration.GetSection("Database").GetChildren();
+			foreach (var child in children)
 			{
-				var config = new DbContext.Models.DbConfig()
+				var config = child.Get<DbContext.Models.DbConfig>();
+				if (string.IsNullOrEmpty(config.Name) || string.IsNullOrEmpty(config.ConnectionString))
 				{
-					DbType = DbContext.Config.DbType.MySQL,
-					Name = db,
-					ConnectionString = configuration.GetSection(db).Value
-				};
+					throw new Exception("数据库连接字符串或名称不能为空");
+				}
 				configs.Add(config);
 			}
 			return configs;
@@ -36,16 +45,9 @@ namespace AhDai.Core.Extensions
 		/// </summary>
 		/// <param name="configuration"></param>
 		/// <returns></returns>
-		public static Models.MailConfig GetMailConfig(this IConfiguration configuration)
+		public static Configs.MailConfig GetMailConfig(this IConfiguration configuration)
 		{
-			var config = new Models.MailConfig()
-			{
-				SmtpHost = configuration.GetSection(Config.Mail.SmtpHost).Value,
-				SmtpPort = Convert.ToInt32(configuration.GetSection(Config.Mail.SmtpPort).Value),
-				SmtpUsername = configuration.GetSection(Config.Mail.SmtpUsername).Value,
-				SmtpPassword = configuration.GetSection(Config.Mail.SmtpPassword).Value
-			};
-			return config;
+			return configuration.GetSection("Mail").Get<Configs.MailConfig>();
 		}
 
 		/// <summary>
@@ -53,15 +55,19 @@ namespace AhDai.Core.Extensions
 		/// </summary>
 		/// <param name="configuration"></param>
 		/// <returns></returns>
-		public static Models.RedisConfig GetRedisConfig(this IConfiguration configuration)
+		public static Configs.RedisConfig GetRedisConfig(this IConfiguration configuration)
 		{
-			var config = new Models.RedisConfig()
-			{
-				Host = configuration.GetSection(Config.Redis.Host).Value,
-				Port = Convert.ToInt32(configuration.GetSection(Config.Redis.Port).Value),
-				Password = configuration.GetSection(Config.Redis.Password).Value
-			};
-			return config;
+			return configuration.GetSection("Redis").Get<Configs.RedisConfig>();
+		}
+
+		/// <summary>
+		/// 获取File配置
+		/// </summary>
+		/// <param name="configuration"></param>
+		/// <returns></returns>
+		public static Configs.FileConfig GetFileConfig(this IConfiguration configuration)
+		{
+			return configuration.GetSection("File").Get<Configs.FileConfig>();
 		}
 
 		/// <summary>
@@ -71,15 +77,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static RabbitMQ.Config GetRabbitMQConfig(this IConfiguration configuration)
 		{
-			var config = new RabbitMQ.Config()
-			{
-				Host = configuration.GetSection(Config.RabbitMQ.Host).Value,
-				Port = Convert.ToInt32(configuration.GetSection(Config.RabbitMQ.Port).Value),
-				VirtualHost = configuration.GetSection(Config.RabbitMQ.VirtualHost).Value,
-				Username = configuration.GetSection(Config.RabbitMQ.Username).Value,
-				Password = configuration.GetSection(Config.RabbitMQ.Password).Value
-			};
-			return config;
+			return configuration.GetSection("RabbitMQ").Get<RabbitMQ.Config>();
 		}
 	}
 }

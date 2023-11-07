@@ -6,10 +6,10 @@ using System;
 
 namespace AhDai.Core.Extensions
 {
-	/// <summary>
-	/// BuilderExtensions
-	/// </summary>
-	public static class BuilderExtensions
+    /// <summary>
+    /// BuilderExtensions
+    /// </summary>
+    public static class BuilderExtensions
 	{
 		#region UseDbContext
 		/// <summary>
@@ -57,7 +57,7 @@ namespace AhDai.Core.Extensions
 		{
 			if (options != null)
 			{
-				Utils.RedisHelper.Init(options.Config);
+				//Utils.RedisHelper.Init(options.Config);
 			}
 			return app;
 		}
@@ -127,7 +127,7 @@ namespace AhDai.Core.Extensions
 		{
 			if (options != null)
 			{
-				Utils.MailHelper.Init(options.Config);
+				//Services.MailService.Init(options.Config);
 			}
 			return app;
 		}

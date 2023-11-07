@@ -24,7 +24,7 @@ namespace AhDai.Core.Extensions
 			{
 				return default;
 			}
-			return Utils.JsonHelper.Deserialize<T>(value);
+			return Utils.JsonUtil.Deserialize<T>(value);
 		}
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static bool Set<T>(this IDatabase db, RedisKey key, T value, TimeSpan? expiry = null, When when = When.Always, CommandFlags flags = CommandFlags.None) where T : class
 		{
-			var json = Utils.JsonHelper.Serialize(value);
+			var json = Utils.JsonUtil.Serialize(value);
 			return db.StringSet(key, json, expiry, when, flags);
 		}
 
@@ -60,7 +60,7 @@ namespace AhDai.Core.Extensions
 			{
 				return default;
 			}
-			return Utils.JsonHelper.Deserialize<T>(value);
+			return Utils.JsonUtil.Deserialize<T>(value);
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static bool HashSet<T>(this IDatabase db, RedisValue key, RedisValue hashField, T value, When when = When.Always, CommandFlags flags = CommandFlags.None) where T : class
 		{
-			var json = Utils.JsonHelper.Serialize(value);
+			var json = Utils.JsonUtil.Serialize(value);
 			return db.HashSet(key, hashField, json, when, flags);
 		}
 
@@ -108,7 +108,7 @@ namespace AhDai.Core.Extensions
 			var i = 0;
 			foreach (var kv in hash)
 			{
-				array[i] = new HashEntry(kv.Key, Utils.JsonHelper.Serialize(kv.Value));
+				array[i] = new HashEntry(kv.Key, Utils.JsonUtil.Serialize(kv.Value));
 				i++;
 			}
 			db.HashSet(key, array, flags);
@@ -233,7 +233,7 @@ namespace AhDai.Core.Extensions
 			var array = new T[values.Length];
 			for (var i = 0; i < values.Length; i++)
 			{
-				array[i] = Utils.JsonHelper.Deserialize<T>(values[i]);
+				array[i] = Utils.JsonUtil.Deserialize<T>(values[i]);
 			}
 			return array;
 		}
@@ -259,7 +259,7 @@ namespace AhDai.Core.Extensions
 			var dict = new Dictionary<string, T>();
 			foreach (var item in hash)
 			{
-				dict.Add(item.Name, Utils.JsonHelper.Deserialize<T>(item.Value));
+				dict.Add(item.Name, Utils.JsonUtil.Deserialize<T>(item.Value));
 			}
 			return dict;
 		}

@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 
 namespace AhDai.Core.Models
 {
-	/// <summary>
-	/// 动作结果
-	/// </summary>
-	public class ActionResult<T> : Interfaces.IActionResult<T>
+    /// <summary>
+    /// 动作结果
+    /// </summary>
+    public class ActionResult<T> : Services.IActionResult<T>
 	{
 		/// <summary>
 		/// 动作Id
@@ -68,7 +68,7 @@ namespace AhDai.Core.Models
 			{
 				HttpContentType.Xml => AhDai.Base.Utils.XmlHelper.SerializeObject(this),
 				HttpContentType.TextXml => AhDai.Base.Utils.XmlHelper.SerializeObject(this),
-				_ => Utils.JsonHelper.Serialize(this),
+				_ => Utils.JsonUtil.Serialize(this),
 			};
 			//var bytes = Encoding.Default.GetBytes(text);
 			context.HttpContext.Response.StatusCode = StatusCodes.Status200OK;

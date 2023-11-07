@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AhDai.Core.Interfaces
+namespace AhDai.Core.Services
 {
 	/// <summary>
 	/// 发布服务

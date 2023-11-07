@@ -42,9 +42,10 @@ namespace AhDai.Core.Middlewares
 			try
 			{
 				var requestId = context.Request.Headers[Const.RequestId];
-				logger.LogDebug(requestId, $"收到请求=>{context.Request.Path}{context.Request.QueryString}");
+				var eventId = new EventId(0, requestId);
+				logger.LogDebug(eventId, $"收到请求=>{context.Request.Method} {context.Request.Path} {context.Request.QueryString}");
 				await next(context);
-				//logger.LogDebug(requestId, $"返回结果=>{context.Response}");
+				logger.LogDebug(eventId, $"返回结果=>{context.Response}");
 			}
 			catch (Exception ex)
 			{
@@ -61,7 +62,6 @@ namespace AhDai.Core.Middlewares
 		/// <returns></returns>
 		static async Task HandleExceptionAsync(HttpContext context, Exception exception, ILogger logger)
 		{
-			exception = exception.GetInner();
 			var requestId = context.Request.Headers[Const.RequestId];
 			var result = new Models.ActionResult<string>(requestId, 1, exception.Message);
 			if (exception is Models.CustomException)
@@ -71,7 +71,8 @@ namespace AhDai.Core.Middlewares
 			}
 			else
 			{
-				logger.LogError(requestId, exception, "请求发生异常");
+				var eventId = new EventId(0, requestId);
+				logger.LogError(eventId, exception, $"请求发生异常=>{exception.Message}");
 			}
 
 			await context.Response.WriteObjectAsync(result).ConfigureAwait(false);

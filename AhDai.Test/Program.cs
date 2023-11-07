@@ -26,7 +26,7 @@ namespace AhDai.Test
 					{
 						services.AddDbService();
 						services.AddHostedService<Worker>();
-						ServiceHelper.Init(services.BuildServiceProvider());
+						ServiceUtil.Init(services.BuildServiceProvider());
 					})
 					.Build();
 				Console.WriteLine("服务启动开始");

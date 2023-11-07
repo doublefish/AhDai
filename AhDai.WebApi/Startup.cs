@@ -99,7 +99,7 @@ namespace AhDai.WebApi
 			// 添加单例服务
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			// 添加数据库服务
-			//services.AddSingleton<Core.Interfaces.IDbService, Core.Services.DbService>();
+			services.AddSingleton<Core.Interfaces.IDbService, Core.Services.DbService>();
 			// 添加Redis服务
 			//services.AddSingleton<Core.Interfaces.IRedisService, Core.Services.RedisService>();
 

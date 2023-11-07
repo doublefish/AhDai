@@ -28,7 +28,7 @@ namespace AhDai.Core.Extensions
 			else
 			{
 				response.ContentType = HttpContentType.Json;
-				return response.WriteAsync(Utils.JsonHelper.Serialize(data), cancellationToken);
+				return response.WriteAsync(Utils.JsonUtil.Serialize(data), cancellationToken);
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using AhDai.Base.Security.Utils;
 using AhDai.Core.Extensions;
+using AhDai.Core.Services;
 using System;
 
 namespace AhDai.Core.Utils
@@ -37,7 +38,9 @@ namespace AhDai.Core.Utils
 				Expiry = DateTime.UtcNow.Add(Expiry),
 				Data = data
 			};
-			RedisHelper.GetDatabase(15).HashSet(key, token.Signature, token);
+			var redisService = ServiceUtil.GetRequiredService<IRedisService>();
+			var redis = redisService.GetDatabase(15);
+			redis.HashSet(key, token.Signature, token);
 			return token;
 		}
 
@@ -55,7 +58,9 @@ namespace AhDai.Core.Utils
 				return null;
 			}
 			var key = $"{CacheKey}-{suffix}";
-			return RedisHelper.GetDatabase(15).HashGet<Models.Token<T>>(key, signature);
+			var redisService = ServiceUtil.GetRequiredService<IRedisService>();
+			var redis = redisService.GetDatabase(15);
+			return redis.HashGet<Models.Token<T>>(key, signature);
 		}
 
 		/// <summary>
@@ -73,7 +78,8 @@ namespace AhDai.Core.Utils
 				token = null;
 				return false;
 			}
-			var redis = RedisHelper.GetDatabase(15);
+			var redisService = ServiceUtil.GetRequiredService<IRedisService>();
+			var redis = redisService.GetDatabase(15);
 			var key = $"{CacheKey}-{suffix}";
 			token = redis.HashGet<Models.Token<T>>(key, signature);
 			if (token == null || token.Expiry < DateTime.UtcNow)

@@ -7,7 +7,7 @@ namespace AhDai.Core.Utils
 	/// <summary>
 	/// ServiceHelper
 	/// </summary>
-	public static class ServiceHelper
+	public static class ServiceUtil
 	{
 		/// <summary>
 		/// 服务实例

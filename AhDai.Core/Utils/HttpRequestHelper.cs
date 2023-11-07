@@ -1,4 +1,5 @@
 ﻿using AhDai.Base.Extensions;
+using AhDai.Core.Services;
 using System;
 
 namespace AhDai.Core.Utils
@@ -22,7 +23,8 @@ namespace AhDai.Core.Utils
 			path = path.ToLower();
 			var dateTime = DateTime.Now;
 			var time = dateTime.TimeOfDay;
-			var redis = RedisHelper.GetDatabase(15);
+			var redisService = ServiceUtil.GetRequiredService<IRedisService>();
+			var redis = redisService.GetDatabase(15);
 			var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 			var hashField = $"{ipAddress}-{path}";
 			if (redis.KeyExists(key))

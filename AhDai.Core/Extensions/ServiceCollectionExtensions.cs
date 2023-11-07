@@ -3,10 +3,10 @@ using System;
 
 namespace AhDai.Core.Extensions
 {
-	/// <summary>
-	/// ServiceCollectionExtensions
-	/// </summary>
-	public static class ServiceCollectionExtensions
+    /// <summary>
+    /// ServiceCollectionExtensions
+    /// </summary>
+    public static class ServiceCollectionExtensions
 	{
 		/// <summary>
 		/// 添加数据库服务 - 依赖注入单例
@@ -15,7 +15,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static IServiceCollection AddDbService(this IServiceCollection services)
 		{
-			services.AddSingleton<Interfaces.IDbService, Services.DbService>();
+			services.AddSingleton<Services.IDbService, Services.Impl.DbService>();
 			return services;
 		}
 
@@ -26,7 +26,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static IServiceCollection AddRedisService(this IServiceCollection services)
 		{
-			services.AddSingleton<Interfaces.IRedisService, Services.RedisService>();
+			services.AddSingleton<Services.IRedisService, Services.Impl.RedisService>();
 			return services;
 		}
 
@@ -37,7 +37,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static IServiceCollection AddRabbitMQService(this IServiceCollection services)
 		{
-			services.AddSingleton<Interfaces.IRabbitMQService, Services.RabbitMQService>();
+			services.AddSingleton<Services.IRabbitMQService, Services.Impl.RabbitMQService>();
 			return services;
 		}
 
@@ -48,7 +48,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static IServiceCollection AddSubscribeService(this IServiceCollection services)
 		{
-			services.AddSingleton<Interfaces.ISubscribeService, Services.SubscribeService>();
+			services.AddSingleton<Services.ISubscribeService, Services.Impl.SubscribeService>();
 			return services;
 		}
 
@@ -59,7 +59,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static IServiceCollection AddPublishService(this IServiceCollection services)
 		{
-			services.AddTransient<Interfaces.IPublishService, Services.PublishService>();
+			services.AddTransient<Services.IPublishService, Services.Impl.PublishService>();
 			return services;
 		}
 

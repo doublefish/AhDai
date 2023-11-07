@@ -6,9 +6,9 @@ using System.Text.Unicode;
 namespace AhDai.Core.Utils
 {
 	/// <summary>
-	/// JsonHelper
+	/// JsonUtil
 	/// </summary>
-	public static class JsonHelper
+	public static class JsonUtil
 	{
 		/// <summary>
 		/// Options
@@ -18,7 +18,7 @@ namespace AhDai.Core.Utils
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		static JsonHelper()
+		static JsonUtil()
 		{
 			Options = new JsonSerializerOptions()
 			{

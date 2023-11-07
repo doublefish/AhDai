@@ -26,7 +26,7 @@ namespace AhDai.Core.Providers
 		/// <returns></returns>
 		public ILogger CreateLogger(string categoryName)
 		{
-			var logger = new Services.LoggerService(OnExecuted);
+			var logger = new Services.Impl.LoggerService(OnExecuted);
 			//Console.WriteLine($"CreateLogger=>{logger.EventId}");
 			return logger;
 		}
