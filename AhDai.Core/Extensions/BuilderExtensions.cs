@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -164,5 +165,32 @@ namespace AhDai.Core.Extensions
 			builder.AddProvider(new Providers.LoggerProvider(onExecuted));
 			return builder;
 		}
+
+		/// <summary>
+		/// 配置实体验证错误返回结果
+		/// </summary>
+		/// <param name="options"></param>
+		public static void ConfigInvalidModelStateResponse(this ApiBehaviorOptions options)
+		{
+			options.InvalidModelStateResponseFactory = context =>
+			{
+				var messageBuilder = new StringBuilder();
+				foreach (var item in context.ModelState)
+				{
+					if (item.Value.Errors.Count == 0)
+					{
+						continue;
+					}
+					messageBuilder.AppendLine($"{item.Value.Errors[0].ErrorMessage}");
+				}
+				var message = messageBuilder.ToString();
+				var res = ApiResult.Error<string>(500, message);
+				return new OkObjectResult(res)
+				{
+					ContentTypes = { System.Net.Mime.MediaTypeNames.Application.Json }
+				};
+			};
+		}
+
 	}
 }

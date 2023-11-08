@@ -80,6 +80,14 @@ namespace AhDai.Core.Services.Impl
 		{
 			var options = ConfigurationOptions.Parse(configuration);
 			var multiplexer = ConnectionMultiplexer.Connect(options);
+			// 注册事件
+			multiplexer.ConfigurationChangedBroadcast += ConfigurationChangedBroadcast;
+			multiplexer.ConfigurationChanged += ConfigurationChanged;
+			multiplexer.HashSlotMoved += HashSlotMoved;
+			multiplexer.ErrorMessage += ErrorMessage;
+			multiplexer.InternalError += InternalError;
+			multiplexer.ConnectionFailed += ConnectionFailed;
+			multiplexer.ConnectionRestored += ConnectionRestored;
 			return multiplexer;
 		}
 
@@ -92,16 +100,7 @@ namespace AhDai.Core.Services.Impl
 		{
 			var c = config ?? Config;
 			var configString = CreateConfiguration(c);
-			var multiplexer = CreateConnectionMultiplexer(configString);
-			// 注册事件
-			multiplexer.ConfigurationChangedBroadcast += c.ConfigurationChangedBroadcast ?? ConfigurationChangedBroadcast;
-			multiplexer.ConfigurationChanged += c.ConfigurationChanged ?? ConfigurationChanged;
-			multiplexer.HashSlotMoved += c.HashSlotMoved ?? HashSlotMoved;
-			multiplexer.ErrorMessage += c.ErrorMessage ?? ErrorMessage;
-			multiplexer.InternalError += c.InternalError ?? InternalError;
-			multiplexer.ConnectionFailed += c.ConnectionFailed ?? ConnectionFailed;
-			multiplexer.ConnectionRestored += c.ConnectionRestored ?? ConnectionRestored;
-			return multiplexer;
+			return CreateConnectionMultiplexer(configString);
 		}
 
 		/// <summary>
@@ -117,7 +116,7 @@ namespace AhDai.Core.Services.Impl
 			{
 				lock (Locker)
 				{
-					multiplexer = CreateConnectionMultiplexer(c);
+					multiplexer = CreateConnectionMultiplexer(configString);
 					ConnectionMultiplexers[configString] = multiplexer;
 				}
 			}
@@ -143,67 +142,67 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		void ConfigurationChangedBroadcast(object sender, EndPointEventArgs e)
+		protected virtual void ConfigurationChangedBroadcast(object sender, EndPointEventArgs e)
         {
             Logger.Debug("", $"ConfigurationChangedBroadcast=>EndPoint={e.EndPoint}");
         }
 
-        /// <summary>
-        /// 检测到配置更改时
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void ConfigurationChanged(object sender, EndPointEventArgs e)
+		/// <summary>
+		/// 检测到配置更改时
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void ConfigurationChanged(object sender, EndPointEventArgs e)
         {
             Logger.Debug("", $"ConfigurationChanged=>EndPoint={e.EndPoint}");
         }
 
-        /// <summary>
-        /// 当哈希槽被重新定位时/更改集群
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void HashSlotMoved(object sender, HashSlotMovedEventArgs e)
+		/// <summary>
+		/// 当哈希槽被重新定位时/更改集群
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void HashSlotMoved(object sender, HashSlotMovedEventArgs e)
         {
             Logger.Debug("", $"HashSlotMoved=>NewEndPoint={e.NewEndPoint},OldEndPoint={e.OldEndPoint}");
         }
 
-        /// <summary>
-        /// 发生错误时
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void ErrorMessage(object sender, RedisErrorEventArgs e)
+		/// <summary>
+		/// 发生错误时
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void ErrorMessage(object sender, RedisErrorEventArgs e)
         {
             Logger.Debug("", $"ErrorMessage=>{e.Message}");
         }
 
-        /// <summary>
-        /// 发生内部错误时
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void InternalError(object sender, InternalErrorEventArgs e)
+		/// <summary>
+		/// 发生内部错误时
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void InternalError(object sender, InternalErrorEventArgs e)
         {
             Logger.Debug("", e.Exception, $"InternalError=>{e.Exception.Message}");
         }
 
-        /// <summary>
-        /// 连接失败，如果重新连接成功将不会收到这个通知
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void ConnectionFailed(object sender, ConnectionFailedEventArgs e)
+		/// <summary>
+		/// 连接失败，如果重新连接成功将不会收到这个通知
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void ConnectionFailed(object sender, ConnectionFailedEventArgs e)
         {
             Logger.Debug("", e.Exception, $"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}");
         }
 
-        /// <summary>
-        /// 建立物理连接时
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void ConnectionRestored(object sender, ConnectionFailedEventArgs e)
+		/// <summary>
+		/// 建立物理连接时
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void ConnectionRestored(object sender, ConnectionFailedEventArgs e)
         {
             Logger.Debug("", $"ConnectionRestored=>EndPoint={e.EndPoint}");
         }

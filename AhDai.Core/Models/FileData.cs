@@ -18,6 +18,14 @@
 		/// </summary>
 		public string Extension { get; set; }
 		/// <summary>
+		/// 文件全名
+		/// </summary>
+		public string FullName => $"{Guid}{Extension}";
+		/// <summary>
+		/// 类型
+		/// </summary>
+		public string Type { get; set; }
+		/// <summary>
 		/// 大小
 		/// </summary>
 		public long Length { get; set; }
@@ -29,11 +37,10 @@
 		/// 虚拟路径
 		/// </summary>
 		public string VirtualPath { get; set; }
-
 		/// <summary>
-		/// 扩展.文件全名
+		/// 哈希
 		/// </summary>
-		public string FullName => $"{Guid}.{Extension}";
+		public string Hash { get; set; }
 
 		/// <summary>
 		/// 构造函数

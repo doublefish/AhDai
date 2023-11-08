@@ -70,6 +70,7 @@ namespace AhDai.Core.Services.Impl
 				Directory.CreateDirectory(physicalPath);
 			}
 			var datas = new HashSet<Models.FileData>();
+			var temps = new List<Tuple<Models.FileData, IFormFile>>();
 			foreach (var formFile in formFiles)
 			{
 				var data = new Models.FileData()
@@ -79,14 +80,12 @@ namespace AhDai.Core.Services.Impl
 					Extension = Path.GetExtension(formFile.FileName).ToLowerInvariant(),
 					Length = formFile.Length
 				};
-				foreach (var kv in Config.Extensions)
+				var extensions = Config.Extensions.Where(o => o.Value.Contains(data.Extension)).FirstOrDefault();
+				if (extensions.Key == null)
 				{
-					if (kv.Value.Contains(data.Extension))
-					{
-						break;
-					}
-					throw new Exception("不支持的文件类型");
+					throw new Exception("不支持的文件类型：" + data.Extension);
 				}
+				data.Type = extensions.Key;
 				if (formFile.Length > Config.MaxSize)
 				{
 					throw new Exception($"超出文件大小限制：{Config.MaxSizeNote}");
@@ -95,12 +94,18 @@ namespace AhDai.Core.Services.Impl
 				data.PhysicalPath = Path.Combine(physicalPath, data.FullName);
 				//虚拟路径
 				data.VirtualPath = $"{virtualDir.Replace("\\", "/")}/{data.FullName}";
-				using (var stream = new FileStream(data.PhysicalPath, FileMode.Create))
-				{
-					//await formFile.CopyToAsync(stream).ConfigureAwait(false);
-					await formFile.CopyToAsync(stream);
-				}
 				datas.Add(data);
+				temps.Add(new Tuple<Models.FileData, IFormFile>(data, formFile));
+			}
+			foreach (var temp in temps)
+			{
+				var data = temp.Item1;
+				var formFile = temp.Item2;
+				using var stream = new FileStream(data.PhysicalPath, FileMode.Create);
+				//await formFile.CopyToAsync(stream).ConfigureAwait(false);
+				await formFile.CopyToAsync(stream);
+				//var hashBytes = System.Security.Cryptography.SHA1.HashData(stream);
+				//data.Hash = BitConverter.ToString(hashBytes).Replace("-", "");
 			}
 			return datas;
 		}
