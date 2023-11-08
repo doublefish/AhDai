@@ -37,13 +37,6 @@ namespace AhDai.Core.Services.Impl
 
 			Config = configuration.GetRedisConfig();
 			Logger = logger;
-			Config.ConfigurationChangedBroadcast += ConfigurationChangedBroadcast;
-			Config.ConfigurationChanged += ConfigurationChanged;
-			Config.HashSlotMoved += HashSlotMoved;
-			Config.ErrorMessage += ErrorMessage;
-			Config.InternalError += InternalError;
-			Config.ConnectionFailed += ConnectionFailed;
-			Config.ConnectionRestored += ConnectionRestored;
 			Logger.Debug("", $"Init=>Config={JsonUtil.Serialize(Config)}");
 		}
 
