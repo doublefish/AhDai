@@ -116,10 +116,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static async Task<string> ReadBodyAsync(this HttpRequest httpRequest, Encoding encoding = null)
 		{
-			if (encoding == null)
-			{
-				encoding = Encoding.UTF8;
-			}
+			encoding ??= Encoding.UTF8;
 			httpRequest.EnableBuffering();
 			httpRequest.Body.Seek(0L, SeekOrigin.Begin);
 			using var reader = new StreamReader(httpRequest.Body, encoding);

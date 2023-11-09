@@ -72,7 +72,7 @@ namespace AhDai.Core.Utils
 								}
 								else
 								{
-									parameters = HttpHelper.ParseQueryString(body);
+									parameters = HttpUtil.ParseQueryString(body);
 								}
 							}
 							else

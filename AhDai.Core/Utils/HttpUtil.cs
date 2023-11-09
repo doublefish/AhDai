@@ -19,14 +19,14 @@ namespace AhDai.Core.Utils
 	/// <summary>
 	/// HttpHelper
 	/// </summary>
-	public static class HttpHelper
+	public static class HttpUtil
 	{
 		/// <summary>
 		/// Client
 		/// </summary>
 		public static HttpClient Client { get; private set; }
 
-		static HttpHelper()
+		static HttpUtil()
 		{
 			var handler = new SocketsHttpHandler()
 			{

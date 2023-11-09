@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 
 namespace AhDai.Core.Utils
 {
@@ -65,6 +66,21 @@ namespace AhDai.Core.Utils
 		public static T GetRequiredService<T>()
 		{
 			return Instance.GetRequiredService<T>();
+		}
+
+		/// <summary>
+		/// 获取当前Token数据
+		/// </summary>
+		/// <returns></returns>
+		public static Models.TokenData GetCurrentTokenData()
+		{
+			var httpContext = HttpContextAccessor.HttpContext;
+			if (httpContext != null && httpContext.User != null)
+			{
+				var jwtService = GetRequiredService<Services.IJwtService>();
+				return jwtService.ToTokenData(httpContext.User.Claims.ToArray());
+			}
+			return null;
 		}
 	}
 }

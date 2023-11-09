@@ -18,7 +18,7 @@ namespace AhDai.Core.Utils
 		/// <summary>
 		/// 过期时间
 		/// </summary>
-		public static readonly TimeSpan Expiry = new TimeSpan(0, 30, 0);
+		public static readonly TimeSpan Expiry = new(0, 30, 0);
 
 		/// <summary>
 		/// 设置
@@ -33,7 +33,7 @@ namespace AhDai.Core.Utils
 			var sign = $"{data.Username}-{data.Platform}";
 			var token = new Models.Token<T>()
 			{
-				Id = data.Id,
+				//Id = data.Id,
 				Signature = MD5Helper.Encrypt(sign),
 				Expiry = DateTime.UtcNow.Add(Expiry),
 				Data = data
