@@ -25,6 +25,10 @@ namespace AhDai.Core.Models
 		/// </summary>
 		public string Content { get; set; }
 		/// <summary>
+		/// Query
+		/// </summary>
+		public IDictionary<string, object> Query { get; set; }
+		/// <summary>
 		/// 头
 		/// </summary>
 		public IDictionary<string, string> Headers { get; set; }

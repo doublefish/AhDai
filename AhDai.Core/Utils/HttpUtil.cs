@@ -49,182 +49,6 @@ namespace AhDai.Core.Utils
 		}
 
 		/// <summary>
-		/// 发送内容类型为Url的Get请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static Models.HttpResponse Get(string url, IDictionary<string, object> parameters = null)
-		{
-			var task = GetAsync(url, parameters);
-			task.Wait();
-			return task.Result;
-		}
-
-		/// <summary>
-		/// 发送内容类型为Url的Get请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static async Task<Models.HttpResponse> GetAsync(string url, IDictionary<string, object> parameters = null)
-		{
-			return await SendAsync(HttpMethod.Get, url, parameters, HttpContentType.Url);
-		}
-
-		/// <summary>
-		/// 发送内容类型为Url的Post请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static Models.HttpResponse Post(string url, IDictionary<string, object> parameters = null)
-		{
-			var task = PostAsync(url, parameters);
-			task.Wait();
-			return task.Result;
-		}
-
-		/// <summary>
-		/// 发送内容类型为Url的Post请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static async Task<Models.HttpResponse> PostAsync(string url, IDictionary<string, object> parameters = null)
-		{
-			return await SendAsync(HttpMethod.Post, url, parameters, HttpContentType.Url);
-		}
-
-		/// <summary>
-		/// 发送内容类型为Json的Post请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static Models.HttpResponse PostJson(string url, IDictionary<string, object> parameters = null)
-		{
-			var task = PostJsonAsync(url, parameters);
-			task.Wait();
-			return task.Result;
-		}
-
-		/// <summary>
-		/// 发送内容类型为Json的Post请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static async Task<Models.HttpResponse> PostJsonAsync(string url, IDictionary<string, object> parameters = null)
-		{
-			return await SendAsync(HttpMethod.Post, url, parameters, HttpContentType.Json);
-		}
-
-		/// <summary>
-		/// 发送内容类型为Url的Put请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static Models.HttpResponse Put(string url, IDictionary<string, object> parameters = null)
-		{
-			var task = PutAsync(url, parameters);
-			task.Wait();
-			return task.Result;
-		}
-
-		/// <summary>
-		/// 发送内容类型为Url的Put请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static async Task<Models.HttpResponse> PutAsync(string url, IDictionary<string, object> parameters = null)
-		{
-			return await SendAsync(HttpMethod.Put, url, parameters, HttpContentType.Url);
-		}
-
-		/// <summary>
-		/// 发送内容类型为Json的Put请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static Models.HttpResponse PutJson(string url, IDictionary<string, object> parameters = null)
-		{
-			var task = PutJsonAsync(url, parameters);
-			task.Wait();
-			return task.Result;
-		}
-
-		/// <summary>
-		/// 发送内容类型为Json的Put请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static async Task<Models.HttpResponse> PutJsonAsync(string url, IDictionary<string, object> parameters = null)
-		{
-			return await SendAsync(HttpMethod.Put, url, parameters, HttpContentType.Json);
-		}
-
-		/// <summary>
-		/// 发送内容类型为Url的Delete请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static Models.HttpResponse Delete(string url, IDictionary<string, object> parameters = null)
-		{
-			var task = DeleteAsync(url, parameters);
-			task.Wait();
-			return task.Result;
-		}
-
-		/// <summary>
-		/// 发送内容类型为Url的Delete请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
-		public static async Task<Models.HttpResponse> DeleteAsync(string url, IDictionary<string, object> parameters = null)
-		{
-			return await SendAsync(HttpMethod.Delete, url, parameters, HttpContentType.Url);
-		}
-
-		/// <summary>
-		/// 发送请求
-		/// </summary>
-		/// <param name="method"></param>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <param name="contentType"></param>
-		/// <returns></returns>
-		public static Models.HttpResponse Send(HttpMethod method, string url, IDictionary<string, object> parameters = null, string contentType = HttpContentType.Json)
-		{
-			var task = SendAsync(method, url, parameters, contentType);
-			task.Wait();
-			return task.Result;
-		}
-
-		/// <summary>
-		/// 发送请求
-		/// </summary>
-		/// <param name="method"></param>
-		/// <param name="url"></param>
-		/// <param name="parameters"></param>
-		/// <param name="contentType"></param>
-		/// <returns></returns>
-		public static async Task<Models.HttpResponse> SendAsync(HttpMethod method, string url, IDictionary<string, object> parameters = null, string contentType = HttpContentType.Json)
-		{
-			var data = new Models.HttpRequest(method, url, contentType)
-			{
-				Body = parameters
-			};
-			return await SendAsync(data);
-		}
-
-		/// <summary>
 		/// 创建请求
 		/// </summary>
 		/// <param name="data"></param>
@@ -238,20 +62,12 @@ namespace AhDai.Core.Utils
 					data.Content = JsonUtil.Serialize(data.Body);
 				}
 			}
-			else if (data.Body != null)
-			{
-				data.Content = data.Body.ToQueryString();
-			}
-			else
-			{
-			}
 
 			if (data.Method == HttpMethod.Get)
 			{
-				if (!string.IsNullOrEmpty(data.Content))
+				if (data.Query != null)
 				{
-					data.Url += (data.Url.Contains('?') ? '&' : '?') + data.Content;
-					data.Content = null;
+					data.Url += (data.Url.Contains('?') ? '&' : '?') + data.Query.ToQueryString();
 				}
 			}
 
@@ -295,6 +111,44 @@ namespace AhDai.Core.Utils
 		}
 
 		/// <summary>
+		/// 转换响应
+		/// </summary>
+		/// <param name="response"></param>
+		/// <returns></returns>
+		public static async Task<Models.HttpResponse> ConvertResponseAsync(HttpResponseMessage response)
+		{
+			var result = new Models.HttpResponse()
+			{
+				ResponseUri = null,
+				StatusCode = response.StatusCode,
+				ReasonPhrase = response.ReasonPhrase
+			};
+			if (response.Content.Headers.ContentType != null)
+			{
+				result.ContentType = response.Content.Headers.ContentType;
+				result.ContentLength = response.Content.Headers.ContentLength ?? 0;
+				result.ContentEncoding = response.Content.Headers.ContentEncoding;
+				result.ContentLanguage = response.Content.Headers.ContentLanguage;
+			}
+
+			var charSet = response.Content.Headers.ContentType?.CharSet;
+			var encoding = TextHelper.GetEncoding(charSet);
+			if (charSet == "gzip")
+			{
+				using var stream = await response.Content.ReadAsStreamAsync();
+				using var gzStream = new GZipStream(stream, CompressionMode.Decompress);
+				using var reader = new StreamReader(gzStream, encoding);
+				result.Content = reader.ReadToEnd();
+			}
+			else
+			{
+				//using var reader = new StreamReader(stream, encoding);
+				result.Content = await response.Content.ReadAsStringAsync();
+			}
+			return result;
+		}
+
+		/// <summary>
 		/// 发送请求
 		/// </summary>
 		/// <param name="data"></param>
@@ -302,57 +156,24 @@ namespace AhDai.Core.Utils
 		public static async Task<Models.HttpResponse> SendAsync(Models.HttpRequest data)
 		{
 			var request = CreateRequest(data);
-			try
-			{
-				using var response = await Client.SendAsync(request);
-				response.EnsureSuccessStatusCode();
+			var response = await SendAsync(request);
+			return await ConvertResponseAsync(response);
+		}
 
-				var result = new Models.HttpResponse()
-				{
-					ResponseUri = null,
-					StatusCode = response.StatusCode,
-					ReasonPhrase = response.ReasonPhrase
-				};
-				if (response.Content.Headers.ContentType != null)
-				{
-					result.ContentType = response.Content.Headers.ContentType;
-					result.ContentLength = response.Content.Headers.ContentLength ?? 0;
-					result.ContentEncoding = response.Content.Headers.ContentEncoding;
-					result.ContentLanguage = response.Content.Headers.ContentLanguage;
-				}
-
-				var charSet = response.Content.Headers.ContentType?.CharSet;
-				var encoding = TextHelper.GetEncoding(charSet);
-				if (charSet == "gzip")
-				{
-					using var stream = await response.Content.ReadAsStreamAsync();
-					using var gzStream = new GZipStream(stream, CompressionMode.Decompress);
-					using var reader = new StreamReader(gzStream, encoding);
-					result.Content = reader.ReadToEnd();
-				}
-				else
-				{
-					//using var reader = new StreamReader(stream, encoding);
-					result.Content = await response.Content.ReadAsStringAsync();
-				}
-				return result;
-			}
-			catch (WebException ex)
+		/// <summary>
+		/// 发送请求
+		/// </summary>
+		/// <param name="request"></param>
+		/// <returns></returns>
+		public static async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
+		{
+			using var response = await Client.SendAsync(request);
+			if (!response.IsSuccessStatusCode)
 			{
-				var error = ex.Message;
-				if (ex.Response != null)
-				{
-					using (var reader = new StreamReader(ex.Response.GetResponseStream(), Encoding.UTF8))
-					{
-						error = reader.ReadToEnd();
-					}
-					if (string.IsNullOrEmpty(error))
-					{
-						error = ex.Message;
-					}
-				}
-				throw new Exception(error);
+				var content = await response.Content.ReadAsStringAsync();
+				throw new Exception($"[{(int)response.StatusCode}]{content}");
 			}
+			return response;
 		}
 
 		/// <summary>

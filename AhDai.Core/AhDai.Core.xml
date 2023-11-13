@@ -99,6 +99,84 @@
             Person
             </summary>
         </member>
+        <member name="T:AhDai.Core.ApiResult">
+            <summary>
+            ApiResult
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.ApiResult.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.ApiResult.Success">
+            <summary>
+            返回成功
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.ApiResult.Success``1(``0)">
+            <summary>
+            返回成功
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.ApiResult.Error``1(System.Int32,System.String,``0)">
+            <summary>
+            返回错误
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="code"></param>
+            <param name="message"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.ApiResult`1">
+            <summary>
+            接口结果
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.ApiResult`1.Code">
+            <summary>
+            状态代码
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.ApiResult`1.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.ApiResult`1.Data">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.ApiResult`1.TraceId">
+            <summary>
+            追踪Id
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.ApiResult`1.Success">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.ApiResult`1.#ctor(`0)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="data">内容</param>
+        </member>
+        <member name="M:AhDai.Core.ApiResult`1.#ctor(System.Int32,System.String,`0)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="code">结果代码</param>
+            <param name="message">消息</param>
+            <param name="data">内容</param>
+        </member>
         <member name="T:AhDai.Core.Configs.FileConfig">
             <summary>
             文件配置
@@ -222,41 +300,6 @@
             默认库
             </summary>
         </member>
-        <member name="F:AhDai.Core.Configs.RedisConfig.ConfigurationChangedBroadcast">
-            <summary>
-            当节点被明确请求通过广播重新配置时
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Configs.RedisConfig.ConfigurationChanged">
-            <summary>
-            检测到配置更改时
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Configs.RedisConfig.HashSlotMoved">
-            <summary>
-            当哈希槽被重新定位时/更改集群
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Configs.RedisConfig.ErrorMessage">
-            <summary>
-            发生错误时
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Configs.RedisConfig.InternalError">
-            <summary>
-            发生内部错误时
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Configs.RedisConfig.ConnectionFailed">
-            <summary>
-            连接失败，如果重新连接成功将不会收到这个通知
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Configs.RedisConfig.ConnectionRestored">
-            <summary>
-            建立物理连接时
-            </summary>
-        </member>
         <member name="T:AhDai.Core.Const">
             <summary>
             Const
@@ -353,6 +396,12 @@
             <param name="builder"></param>
             <param name="onExecuted"></param>
             <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.BuilderExtensions.ConfigInvalidModelStateResponse(Microsoft.AspNetCore.Mvc.ApiBehaviorOptions)">
+            <summary>
+            配置实体验证错误返回结果
+            </summary>
+            <param name="options"></param>
         </member>
         <member name="T:AhDai.Core.Extensions.ConfigurationExtensions">
             <summary>
@@ -1141,6 +1190,16 @@
             后缀名
             </summary>
         </member>
+        <member name="P:AhDai.Core.Models.FileData.FullName">
+            <summary>
+            文件全名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.FileData.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
         <member name="P:AhDai.Core.Models.FileData.Length">
             <summary>
             大小
@@ -1156,9 +1215,9 @@
             虚拟路径
             </summary>
         </member>
-        <member name="P:AhDai.Core.Models.FileData.FullName">
+        <member name="P:AhDai.Core.Models.FileData.Hash">
             <summary>
-            扩展.文件全名
+            哈希
             </summary>
         </member>
         <member name="M:AhDai.Core.Models.FileData.#ctor">
@@ -1189,6 +1248,11 @@
         <member name="P:AhDai.Core.Models.HttpRequest.Content">
             <summary>
             内容
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.HttpRequest.Query">
+            <summary>
+            Query
             </summary>
         </member>
         <member name="P:AhDai.Core.Models.HttpRequest.Headers">
@@ -1444,49 +1508,9 @@
             用户名
             </summary>
         </member>
-        <member name="P:AhDai.Core.Models.TokenData.Nickname">
+        <member name="P:AhDai.Core.Models.TokenData.Name">
             <summary>
-            昵称
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.Avatar">
-            <summary>
-            头像
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.FirstName">
-            <summary>
-            名
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.LastName">
-            <summary>
-            姓
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.Email">
-            <summary>
-            电子邮箱
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.Mobile">
-            <summary>
-            手机号码
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.RoleIds">
-            <summary>
-            角色Id
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.AgentId">
-            <summary>
-            代理商Id
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.IsAdminOfAgent">
-            <summary>
-            是否代理商管理员
+            姓名
             </summary>
         </member>
         <member name="P:AhDai.Core.Models.TokenData.Type">
@@ -1499,11 +1523,46 @@
             平台
             </summary>
         </member>
+        <member name="P:AhDai.Core.Models.TokenData.Extensions">
+            <summary>
+            扩展数据：存储键为 Ext-{key}
+            </summary>
+        </member>
         <member name="M:AhDai.Core.Models.TokenData.#ctor(System.String)">
             <summary>
             构造函数
             </summary>
             <param name="type">类型</param>
+        </member>
+        <member name="T:AhDai.Core.Models.TokenResult">
+            <summary>
+            TokenResult
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.TokenResult.Id">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.TokenResult.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.TokenResult.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.TokenResult.Expiration">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.TokenResult.Type">
+            <summary>
+            认证类型：Bearer
+            </summary>
         </member>
         <member name="T:AhDai.Core.Options.DbContextOptions">
             <summary>
@@ -2009,6 +2068,53 @@
             <param name="formFiles"></param>
             <returns></returns>
         </member>
+        <member name="T:AhDai.Core.Services.IJwtService">
+            <summary>
+            Jwt服务
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Services.IJwtService.GenerateToken(AhDai.Core.Models.TokenData)">
+            <summary>
+            GenerateToken
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.IJwtService.GenerateToken(System.Security.Claims.Claim[])">
+            <summary>
+            GenerateToken
+            </summary>
+            <param name="claims"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.IJwtService.GetClaims(System.String)">
+            <summary>
+            获取声明的数据
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.IJwtService.GetTokenData(System.String)">
+            <summary>
+            获取声明的数据
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.IJwtService.RefreshToken(System.String)">
+            <summary>
+            刷新Token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.IJwtService.ToTokenData(System.Security.Claims.Claim[])">
+            <summary>
+            转数据
+            </summary>
+            <param name="claims"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Core.Services.IMailService">
             <summary>
             IMailService
@@ -2125,6 +2231,70 @@
             </summary>
             <param name="rootPath"></param>
             <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Services.Impl.JwtService">
+            <summary>
+            Jwt服务
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.Impl.JwtService.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.Impl.JwtService.Logger">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.JwtService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.Impl.JwtService})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.JwtService.GenerateToken(AhDai.Core.Models.TokenData)">
+            <summary>
+            GenerateToken
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.JwtService.GenerateToken(System.Security.Claims.Claim[])">
+            <summary>
+            GenerateToken
+            </summary>
+            <param name="claims"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.JwtService.GetClaims(System.String)">
+            <summary>
+            获取声明的数据
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.JwtService.GetTokenData(System.String)">
+            <summary>
+            获取声明的数据
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.JwtService.RefreshToken(System.String)">
+            <summary>
+            刷新Token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.JwtService.ToTokenData(System.Security.Claims.Claim[])">
+            <summary>
+            转数据
+            </summary>
+            <param name="claims"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Services.Impl.LoggerService">
@@ -2862,233 +3032,6 @@
             <param name="b"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Utils.HttpHelper">
-            <summary>
-            HttpHelper
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Utils.HttpHelper.Client">
-            <summary>
-            Client
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.Get(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Url的Get请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.GetAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Url的Get请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.Post(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Url的Post请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.PostAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Url的Post请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.PostJson(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Json的Post请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.PostJsonAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Json的Post请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.Put(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Url的Put请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.PutAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Url的Put请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.PutJson(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Json的Put请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.PutJsonAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Json的Put请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.Delete(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Url的Delete请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.DeleteAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            发送内容类型为Url的Delete请求
-            </summary>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.Send(System.Net.Http.HttpMethod,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
-            <summary>
-            发送请求
-            </summary>
-            <param name="method"></param>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <param name="contentType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.SendAsync(System.Net.Http.HttpMethod,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
-            <summary>
-            发送请求
-            </summary>
-            <param name="method"></param>
-            <param name="url"></param>
-            <param name="parameters"></param>
-            <param name="contentType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.CreateRequest(AhDai.Core.Models.HttpRequest)">
-            <summary>
-            创建请求
-            </summary>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.SendAsync(AhDai.Core.Models.HttpRequest)">
-            <summary>
-            发送请求
-            </summary>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.ConvertHttpMethod(System.String)">
-            <summary>
-            类型转换
-            </summary>
-            <param name="method"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.ParseQueryString(System.String)">
-            <summary>
-            ParseQueryString
-            </summary>
-            <param name="query"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.UrlEncode``1(``0)">
-            <summary>
-            UrlEncode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.UrlEncode``1(``0,System.Text.Encoding)">
-            <summary>
-            UrlEncode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.UrlEncodeUpper``1(``0)">
-            <summary>
-            UrlEncode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.UrlEncodeUpper``1(``0,System.Text.Encoding)">
-            <summary>
-            UrlEncode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.UrlEncodeUpper(System.String)">
-            <summary>
-            转换Url编码为大写
-            </summary>
-            <param name="str"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.UrlEncodeUpper(System.String,System.Text.Encoding)">
-            <summary>
-            转换Url编码为大写
-            </summary>
-            <param name="str"></param>
-            <param name="encoding">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.UrlDecode``1(``0)">
-            <summary>
-            UrlDecode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.UrlDecode``1(``0,System.Text.Encoding)">
-            <summary>
-            UrlDecode
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="parameters"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpHelper.IsIp(System.String)">
-            <summary>
-            IsIp
-            </summary>
-            <param name="ip"></param>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Core.Utils.HttpListenerHelper">
             <summary>
             HttpListenerHelper
@@ -3114,6 +3057,131 @@
             <param name="ipAddress">IP地址</param>
             <param name="path">请求路径</param>
             <param name="limit">每秒限制次数</param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Utils.HttpUtil">
+            <summary>
+            HttpHelper
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Utils.HttpUtil.Client">
+            <summary>
+            Client
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.CreateRequest(AhDai.Core.Models.HttpRequest)">
+            <summary>
+            创建请求
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.ConvertResponseAsync(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            转换响应
+            </summary>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.SendAsync(AhDai.Core.Models.HttpRequest)">
+            <summary>
+            发送请求
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.SendAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            发送请求
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.ConvertHttpMethod(System.String)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.ParseQueryString(System.String)">
+            <summary>
+            ParseQueryString
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.UrlEncode``1(``0)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.UrlEncode``1(``0,System.Text.Encoding)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.UrlEncodeUpper``1(``0)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.UrlEncodeUpper``1(``0,System.Text.Encoding)">
+            <summary>
+            UrlEncode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.UrlEncodeUpper(System.String)">
+            <summary>
+            转换Url编码为大写
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.UrlEncodeUpper(System.String,System.Text.Encoding)">
+            <summary>
+            转换Url编码为大写
+            </summary>
+            <param name="str"></param>
+            <param name="encoding">编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.UrlDecode``1(``0)">
+            <summary>
+            UrlDecode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.UrlDecode``1(``0,System.Text.Encoding)">
+            <summary>
+            UrlDecode
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.HttpUtil.IsIp(System.String)">
+            <summary>
+            IsIp
+            </summary>
+            <param name="ip"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Utils.DatetimeJsonConverter">
@@ -3378,6 +3446,12 @@
             获取注入的（范围或单例）服务的实例
             </summary>
             <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.ServiceUtil.GetCurrentTokenData">
+            <summary>
+            获取当前Token数据
+            </summary>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Utils.TokenHelper">
