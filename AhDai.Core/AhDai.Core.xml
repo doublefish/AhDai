@@ -99,6 +99,46 @@
             Person
             </summary>
         </member>
+        <member name="T:AhDai.Core.ApiException">
+            <summary>
+            ApiException
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.ApiException.Code">
+            <summary>
+            Code
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.ApiException.#ctor(System.Int32,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="code"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:AhDai.Core.ApiException.#ctor(System.Int32,System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="code"></param>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:AhDai.Core.ApiException.Throw``1(``0,System.Object[])">
+            <summary>
+            抛出异常
+            </summary>
+            <param name="code"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:AhDai.Core.ApiException.Throw``1(System.Exception,``0,System.Object[])">
+            <summary>
+            抛出异常
+            </summary>
+            <param name="innerException"></param>
+            <param name="code"></param>
+            <param name="args"></param>
+        </member>
         <member name="T:AhDai.Core.ApiResult">
             <summary>
             ApiResult
@@ -177,6 +217,22 @@
             <param name="message">消息</param>
             <param name="data">内容</param>
         </member>
+        <member name="T:AhDai.Core.Attributes.ErrorCodeAttribute">
+            <summary>
+            ErrorCodeAttribute
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Attributes.ErrorCodeAttribute.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Attributes.ErrorCodeAttribute.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">消息</param>
+        </member>
         <member name="T:AhDai.Core.Configs.FileConfig">
             <summary>
             文件配置
@@ -242,6 +298,16 @@
         <member name="P:AhDai.Core.Configs.JwtConfig.ClockSkew">
             <summary>
             允许服务器时间偏移量（秒）
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Configs.LogRequestConfig">
+            <summary>
+            LogRequestConfig
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Configs.LogRequestConfig.Methods">
+            <summary>
+            方法
             </summary>
         </member>
         <member name="T:AhDai.Core.Configs.MailConfig">
@@ -562,6 +628,18 @@
             </summary>
             <param name="pairs"></param>
             <param name="ignores"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Extensions.Log4netExtensions">
+            <summary>
+            Log4netExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Extensions.Log4netExtensions.ToLog4netLevel(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            
+            </summary>
+            <param name="logLevel"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Extensions.LoggingExtensions">
@@ -1036,42 +1114,35 @@
             英文（美国）
             </summary>
         </member>
-        <member name="T:AhDai.Core.Middlewares.ExceptionHandlerMiddleware">
+        <member name="T:AhDai.Core.Middlewares.RequestHandlerMiddleware">
             <summary>
-            ExceptionHandlerMiddleware
+            RequestHandlerMiddleware
             </summary>
         </member>
-        <member name="F:AhDai.Core.Middlewares.ExceptionHandlerMiddleware.next">
+        <member name="F:AhDai.Core.Middlewares.RequestHandlerMiddleware._next">
             <summary>
             _Next
             </summary>
         </member>
-        <member name="F:AhDai.Core.Middlewares.ExceptionHandlerMiddleware.logger">
+        <member name="F:AhDai.Core.Middlewares.RequestHandlerMiddleware._logger">
             <summary>
             _Logger
             </summary>
         </member>
-        <member name="M:AhDai.Core.Middlewares.ExceptionHandlerMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Middlewares.ExceptionHandlerMiddleware})">
+        <member name="M:AhDai.Core.Middlewares.RequestHandlerMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Middlewares.RequestHandlerMiddleware},Microsoft.Extensions.Configuration.IConfiguration,AhDai.Core.Configs.LogRequestConfig)">
             <summary>
             构造函数
             </summary>
             <param name="next"></param>
             <param name="logger"></param>
+            <param name="configuration"></param>
+            <param name="config"></param>
         </member>
-        <member name="M:AhDai.Core.Middlewares.ExceptionHandlerMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+        <member name="M:AhDai.Core.Middlewares.RequestHandlerMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
-            Invoke
+            InvokeAsync
             </summary>
             <param name="context"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Middlewares.ExceptionHandlerMiddleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception,Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-            HandleExceptionAsync
-            </summary>
-            <param name="context"></param>
-            <param name="exception"></param>
-            <param name="logger"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Models.ActionResult`1">
@@ -1128,29 +1199,6 @@
             </summary>
             <param name="context"></param>
             <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Models.ApiException">
-            <summary>
-            ApiException
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Models.ApiException.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Models.ApiException.#ctor(System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="message"></param>
-        </member>
-        <member name="M:AhDai.Core.Models.ApiException.#ctor(System.String,System.Exception)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="message"></param>
-            <param name="inner"></param>
         </member>
         <member name="T:AhDai.Core.Models.CustomException">
             <summary>
@@ -1603,6 +1651,41 @@
             <summary>
             Redis配置
             </summary>
+        </member>
+        <member name="T:AhDai.Core.Providers.Log4NetProvider">
+            <summary>
+            Log4NetProvider
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Providers.Log4NetProvider.ExternalScopeProvider">
+            <summary>
+            ExternalScopeProvider
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Providers.Log4NetProvider.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configFile"></param>
+            <param name="repository"></param>
+        </member>
+        <member name="M:AhDai.Core.Providers.Log4NetProvider.CreateLogger(System.String)">
+            <summary>
+            CreateLogger
+            </summary>
+            <param name="categoryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Providers.Log4NetProvider.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Providers.Log4NetProvider.SetScopeProvider(Microsoft.Extensions.Logging.IExternalScopeProvider)">
+            <summary>
+            SetScopeProvider
+            </summary>
+            <param name="scopeProvider"></param>
         </member>
         <member name="T:AhDai.Core.Providers.LoggerProvider">
             <summary>
@@ -2132,8 +2215,8 @@
             发送
             </summary>
             <param name="recipients">接收人</param>
-            <param name="subject">标题</param>
-            <param name="body">内容</param>
+            <param name="subject">主题</param>
+            <param name="body">正文</param>
             <param name="config">自定义配置</param>
         </member>
         <member name="T:AhDai.Core.Services.Impl.DbService">
@@ -2333,6 +2416,38 @@
             </summary>
             <param name="logLevel"></param>
             <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Services.Impl.MailService">
+            <summary>
+            MailService
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.Impl.MailService.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.MailService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration">配置</param>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.MailService.CreateSmtpClient(AhDai.Core.Configs.MailConfig)">
+            <summary>
+            创建客户端
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.MailService.Send(System.String,System.String,System.String,AhDai.Core.Configs.MailConfig)">
+            <summary>
+            发送
+            </summary>
+            <param name="recipients">接收人</param>
+            <param name="subject">主题</param>
+            <param name="body">正文</param>
+            <param name="config">自定义配置</param>
         </member>
         <member name="T:AhDai.Core.Services.Impl.PublishService">
             <summary>
@@ -2642,37 +2757,50 @@
             <param name="received">接收消息处理方法</param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Services.MailService">
+        <member name="T:AhDai.Core.Services.Log4NetLogger">
             <summary>
-            MailService
+            Log4NetLogger
             </summary>
         </member>
-        <member name="P:AhDai.Core.Services.MailService.Config">
+        <member name="P:AhDai.Core.Services.Log4NetLogger.Name">
             <summary>
-            配置
+            Name
             </summary>
         </member>
-        <member name="M:AhDai.Core.Services.MailService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:AhDai.Core.Services.Log4NetLogger.#ctor(System.String,System.String,Microsoft.Extensions.Logging.IExternalScopeProvider)">
             <summary>
             构造函数
             </summary>
-            <param name="configuration">配置</param>
+            <param name="repository"></param>
+            <param name="name"></param>
+            <param name="externalScopeProvider"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:AhDai.Core.Services.MailService.CreateSmtpClient(AhDai.Core.Configs.MailConfig)">
+        <member name="M:AhDai.Core.Services.Log4NetLogger.BeginScope``1(``0)">
             <summary>
-            创建客户端
+            BeginScope
             </summary>
-            <param name="config">自定义配置</param>
+            <typeparam name="TState"></typeparam>
+            <param name="state"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.MailService.Send(System.String,System.String,System.String,AhDai.Core.Configs.MailConfig)">
+        <member name="M:AhDai.Core.Services.Log4NetLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
             <summary>
-            发送
+            IsEnabled
             </summary>
-            <param name="recipients">接收人</param>
-            <param name="subject">标题</param>
-            <param name="body">内容</param>
-            <param name="config">自定义配置</param>
+            <param name="logLevel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.Log4NetLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+            <summary>
+            Log
+            </summary>
+            <typeparam name="TState"></typeparam>
+            <param name="logLevel"></param>
+            <param name="eventId"></param>
+            <param name="state"></param>
+            <param name="exception"></param>
+            <param name="formatter"></param>
         </member>
         <member name="T:AhDai.Core.Socket1.BaseSocket">
             <summary>
