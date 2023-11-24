@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp1", "WpfApp1\WpfApp1.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhDai.Test", "AhDai.Test\AhDai.Test.csproj", "{005B604C-8656-4BF9-AAF3-D7F389257917}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhDai.LeetCode", "AhDai.LeetCode\AhDai.LeetCode.csproj", "{B35EA7D9-6DA8-4D9F-86B4-72CB1DA0878E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{005B604C-8656-4BF9-AAF3-D7F389257917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{005B604C-8656-4BF9-AAF3-D7F389257917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{005B604C-8656-4BF9-AAF3-D7F389257917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B35EA7D9-6DA8-4D9F-86B4-72CB1DA0878E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B35EA7D9-6DA8-4D9F-86B4-72CB1DA0878E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B35EA7D9-6DA8-4D9F-86B4-72CB1DA0878E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B35EA7D9-6DA8-4D9F-86B4-72CB1DA0878E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
