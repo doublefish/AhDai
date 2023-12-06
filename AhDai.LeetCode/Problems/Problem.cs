@@ -109,10 +109,31 @@ namespace AhDai.LeetCode.Problems
 		}
 
 
+		public bool IsPalindrome(int x)
+		{
+			if (x < 0) return false;
+			else if (x < 10) return true;
+			else
+			{
+				var str0 = x.ToString();
+				var str1 = new string(str0.ToCharArray().Reverse().ToArray());
+				return string.Compare(str0, str1) == 0;
+			}
+		}
+
+		public void RunIsPalindrome()
+		{
+			Console.WriteLine($"RunIsPalindrome=>121 -> {IsPalindrome(121)}");
+			Console.WriteLine($"RunIsPalindrome=>121 -> {IsPalindrome(-121)}");
+			Console.WriteLine($"RunIsPalindrome=>121 -> {IsPalindrome(10)}");
+		}
+
+
 		public void Run()
 		{
 			RunBubbleSort();
 			RunAddTwoNumbers();
+			RunIsPalindrome();
 		}
 
 	}
