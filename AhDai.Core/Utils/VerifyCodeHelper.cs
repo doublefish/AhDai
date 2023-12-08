@@ -119,7 +119,7 @@ namespace AhDai.Core.Utils
 		[SupportedOSPlatform("Windows")]
 		public static byte[] GenerateImageCode(int length, out string code)
 		{
-			code = StringHelper.GenerateRandom(length);
+			code = StringUtil.GenerateRandom(length);
 			var width = code.Length * 22;
 
 			var bitmap = new Bitmap(width + 6, 38);

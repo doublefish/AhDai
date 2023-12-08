@@ -132,7 +132,7 @@ namespace AhDai.Core.Utils
 			}
 
 			var charSet = response.Content.Headers.ContentType?.CharSet;
-			var encoding = TextHelper.GetEncoding(charSet);
+			var encoding = TextUtil.GetEncoding(charSet);
 			if (charSet == "gzip")
 			{
 				using var stream = await response.Content.ReadAsStreamAsync();

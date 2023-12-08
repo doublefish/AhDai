@@ -19,7 +19,7 @@ namespace AhDai.Core
 				Place = "Hefei"
 			};
 
-			var access = ReflectionHelper.BuildSetter((Person t) => t.Age);
+			var access = ReflectionUtil.BuildSetter((Person t) => t.Age);
 
 			var accessor = new Accessor<Person>();
 			var accessorAge = accessor.Get(x => x.Age);

@@ -66,8 +66,8 @@ namespace AhDai.Core.Models
 		{
 			var text = ContentType switch
 			{
-				HttpContentType.Xml => AhDai.Base.Utils.XmlHelper.SerializeObject(this),
-				HttpContentType.TextXml => AhDai.Base.Utils.XmlHelper.SerializeObject(this),
+				HttpContentType.Xml => AhDai.Base.Utils.XmlUtil.SerializeObject(this),
+				HttpContentType.TextXml => AhDai.Base.Utils.XmlUtil.SerializeObject(this),
 				_ => Utils.JsonUtil.Serialize(this),
 			};
 			//var bytes = Encoding.Default.GetBytes(text);

@@ -34,7 +34,7 @@ namespace AhDai.Core.Utils
 			var token = new Models.Token<T>()
 			{
 				//Id = data.Id,
-				Signature = MD5Helper.Encrypt(sign),
+				Signature = MD5Util.Encrypt(sign),
 				Expiry = DateTime.UtcNow.Add(Expiry),
 				Data = data
 			};
