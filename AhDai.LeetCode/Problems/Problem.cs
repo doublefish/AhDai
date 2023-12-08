@@ -1,17 +1,17 @@
 ﻿using AhDai.LeetCode.Problems.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AhDai.LeetCode.Problems
 {
 	/// <summary>
 	/// Problem
 	/// </summary>
-	public class Problem : IProblem
+	public class Problem
 	{
 		/// <summary>
 		/// 冒泡排序
@@ -32,14 +32,6 @@ namespace AhDai.LeetCode.Problems
 				}
 			}
 		}
-
-		public void RunBubbleSort()
-		{
-			var array = new int[] { 2, 6, 8, 4, 3, 7, 5, 1 };
-			BubbleSort(array);
-			Console.WriteLine($"BubbleSort=>{string.Join(",", array)}");
-		}
-
 
 		/// <summary>
 		/// AddTwoNumbers
@@ -85,30 +77,11 @@ namespace AhDai.LeetCode.Problems
 			return l3;
 		}
 
-
-		public void RunAddTwoNumbers()
-		{
-			/**
-			 * Input: l1 = [2,4,3], l2 = [5,6,4]
-			 * Output: [7,0,8]
-			 * Explanation: 342 + 465 = 807.
-			 */
-			var l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
-			var l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
-			var l3 = AddTwoNumbers(l1, l2);
-			var builder = new StringBuilder();
-			var n3 = l3;
-			do
-			{
-				builder.Append(n3.val);
-				n3 = n3.next;
-			}
-			while (n3 != null);
-			var res = builder.ToString();
-			Console.WriteLine($"AddTwoNumbers=>{res}");
-		}
-
-
+		/// <summary>
+		/// 是否回文数
+		/// </summary>
+		/// <param name="x"></param>
+		/// <returns></returns>
 		public bool IsPalindrome(int x)
 		{
 			if (x < 0) return false;
@@ -121,19 +94,70 @@ namespace AhDai.LeetCode.Problems
 			}
 		}
 
-		public void RunIsPalindrome()
+		/// <summary>
+		/// 最大奇数
+		/// </summary>
+		/// <param name="num"></param>
+		/// <returns></returns>
+		public string LargestOddNumber(string num)
 		{
-			Console.WriteLine($"RunIsPalindrome=>121 -> {IsPalindrome(121)}");
-			Console.WriteLine($"RunIsPalindrome=>121 -> {IsPalindrome(-121)}");
-			Console.WriteLine($"RunIsPalindrome=>121 -> {IsPalindrome(10)}");
+			var cs = num.ToCharArray();
+			for (var i = cs.Length - 1; i >= 0; i--)
+			{
+				if (Convert.ToInt32(cs[i]) % 2 != 0)
+				{
+					return num[..(i + 1)];
+				}
+			}
+			return "";
 		}
 
-
-		public void Run()
+		/// <summary>
+		/// 找出中位数
+		/// </summary>
+		/// <param name="nums1"></param>
+		/// <param name="nums2"></param>
+		/// <returns></returns>
+		public double FindMedianSortedArrays(int[] nums1, int[] nums2)
 		{
-			RunBubbleSort();
-			RunAddTwoNumbers();
-			RunIsPalindrome();
+			var nums = new int[nums1.Length + nums2.Length];
+			var j = 0;
+			var k = 0;
+			for (var i = 0; i < nums.Length; i++)
+			{
+				if (j == nums1.Length)
+				{
+					nums[i] = nums2[k++];
+				}
+				else if (k == nums2.Length)
+				{
+					nums[i] = nums1[j++];
+				}
+				else
+				{
+					var num1 = nums1[j];
+					var num2 = nums2[k];
+					if (num1 <= num2)
+					{
+						nums[i] = num1;
+						j++;
+					}
+					else
+					{
+						nums[i] = num2;
+						k++;
+					}
+				}
+			}
+			var medianIndex = nums.Length / 2;
+			if (nums.Length % 2 == 0)
+			{
+				return (nums[medianIndex - 1] + nums[medianIndex]) / 2D;
+			}
+			else
+			{
+				return nums[medianIndex];
+			}
 		}
 
 	}

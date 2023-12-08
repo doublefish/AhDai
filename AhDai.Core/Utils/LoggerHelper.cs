@@ -35,19 +35,19 @@ namespace AhDai.Core.Utils
 		/// <returns></returns>
 		public static ILogger GetLogger(string categoryName = null, int type = 0)
 		{
-			if (ServiceUtil.Instance == null)
+			if (ServiceUtil.Services == null)
 			{
-				throw new Exception("未初始化ServiceHelper.Instance");
+				throw new Exception("未初始化ServiceHelper.Services");
 			}
 			if (type == 1)
 			{
-				var factory = ServiceUtil.Instance.GetService<ILoggerFactory>();
+				var factory = ServiceUtil.Services.GetService<ILoggerFactory>();
 				// 复用同名对象
 				return factory.CreateLogger(categoryName ?? "");
 			}
 			else
 			{
-				var provider = ServiceUtil.Instance.GetService<ILoggerProvider>();
+				var provider = ServiceUtil.Services.GetService<ILoggerProvider>();
 				var logger = provider.CreateLogger(categoryName);
 				return logger;
 			}

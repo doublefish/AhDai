@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AhDai.Core.Extensions;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Linq;
 
@@ -13,29 +17,46 @@ namespace AhDai.Core.Utils
 		/// <summary>
 		/// 服务实例
 		/// </summary>
-		public static IServiceProvider Instance { get; private set; }
+		public static IServiceProvider Services { get; private set; }
+		/// <summary>
+		/// Configuration
+		/// </summary>
+		public static IConfiguration Configuration { get; private set; }
 		/// <summary>
 		/// HttpContextAccessor
 		/// </summary>
 		public static IHttpContextAccessor HttpContextAccessor { get; private set; }
+		/// <summary>
+		/// HostEnvironment
+		/// </summary>
+		public static IHostEnvironment HostEnvironment { get; private set; }
+		/// <summary>
+		/// HostEnvironment
+		/// </summary>
+		public static IWebHostEnvironment WebHostEnvironment { get; private set; }
 
 		/// <summary>
 		/// 初始化
 		/// </summary>
-		/// <param name="instance"></param>
-		public static void Init(IServiceProvider instance)
+		/// <param name="services"></param>
+		/// <param name="configuration"></param>
+		public static void Init(IServiceCollection services, IConfiguration configuration)
 		{
-			Instance = instance;
-			HttpContextAccessor = GetService<IHttpContextAccessor>();
+			Init(services.BuildServiceProvider(), configuration);
 		}
 
 		/// <summary>
 		/// 初始化
 		/// </summary>
 		/// <param name="services"></param>
-		public static void Init(IServiceCollection services)
+		/// <param name="configuration"></param>
+		public static void Init(IServiceProvider services, IConfiguration configuration)
 		{
-			Init(services.BuildServiceProvider());
+			Services = services;
+			Configuration = configuration;
+			HttpContextAccessor = GetService<IHttpContextAccessor>();
+			HostEnvironment = GetService<IHostEnvironment>();
+			WebHostEnvironment = GetService<IWebHostEnvironment>();
 		}
 
 		/// <summary>
@@ -55,7 +76,7 @@ namespace AhDai.Core.Utils
 		/// <returns></returns>
 		public static T GetService<T>()
 		{
-			return Instance.GetService<T>();
+			return Services.GetService<T>();
 		}
 
 		/// <summary>
@@ -65,7 +86,7 @@ namespace AhDai.Core.Utils
 		/// <returns></returns>
 		public static T GetRequiredService<T>()
 		{
-			return Instance.GetRequiredService<T>();
+			return Services.GetRequiredService<T>();
 		}
 
 		/// <summary>

@@ -38,7 +38,7 @@ namespace AhDai.Base.Security.Extensions
 		{
 			var length = ciphertext.Length % 4;
 			ciphertext += "===="[..length];
-			var buffer = Base.Utils.Base64Helper.ToBytes(ciphertext);
+			var buffer = Base.Utils.Base64Util.ToBytes(ciphertext);
 			return rsa.Decrypt(buffer);
 		}
 

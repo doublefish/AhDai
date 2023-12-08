@@ -25,5 +25,13 @@
         /// 允许服务器时间偏移量（秒）
         /// </summary>
         public int ClockSkew { get; set; }
-    }
+		/// <summary>
+		/// 启用Redis
+		/// </summary>
+		public bool EnableRedis { get; set; }
+		/// <summary>
+		/// RedisKey
+		/// </summary>
+		public string RedisKey { get; set; }
+	}
 }

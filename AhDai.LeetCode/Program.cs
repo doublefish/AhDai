@@ -24,7 +24,7 @@ namespace AhDai.LeetCode
 			}
 			
 
-			var problem = new Problem();
+			var problem = new ProblemTest();
 			problem.Run();
 		}
 

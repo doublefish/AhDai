@@ -62,7 +62,7 @@ namespace AhDai.Core.Services
 			{
 				return false;
 			}
-			throw new ArgumentOutOfRangeException("logLevel");
+			throw new ArgumentOutOfRangeException(nameof(logLevel));
 		}
 
 		/// <summary>

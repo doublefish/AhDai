@@ -32,13 +32,5 @@ namespace AhDai.Core.Models
 		/// </summary>
 		public IDictionary<string, string> Extensions { get; set; }
 
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="type">类型</param>
-		public TokenData(string type = null)
-		{
-			Type = type;
-		}
 	}
 }

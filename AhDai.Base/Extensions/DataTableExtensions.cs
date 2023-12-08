@@ -38,10 +38,7 @@ namespace AhDai.Base.Extensions
 		/// <returns></returns>
 		public static T ToModel<T>(this DataRow dataRow, PropertyInfo[] propertyInfos = null) where T : class, new()
 		{
-			if (propertyInfos == null)
-			{
-				propertyInfos = typeof(T).GetProperties();
-			}
+			propertyInfos ??= typeof(T).GetProperties();
 			var data = Activator.CreateInstance<T>();
 			foreach (DataColumn dataColumn in dataRow.Table.Columns)
 			{

@@ -13,6 +13,7 @@ namespace AhDai.Core.Extensions
     /// </summary>
     public static class BuilderExtensions
 	{
+
 		#region UseDbContext
 		/// <summary>
 		/// UseDbContext
@@ -165,6 +166,19 @@ namespace AhDai.Core.Extensions
 			builder.ClearProviders();
 			builder.AddProvider(new Providers.LoggerProvider(onExecuted));
 			return builder;
+		}
+
+
+		/// <summary>
+		/// AddLog4Net
+		/// </summary>
+		/// <param name="builder"></param>
+		/// <param name="configFile"></param>
+		/// <param name="repository"></param>
+		/// <returns></returns>
+		public static ILoggingBuilder AddLog4Net(this ILoggingBuilder builder, string configFile = "log4net.config", string repository = "log4net")
+		{
+			return builder.AddProvider(new Providers.Log4NetProvider(configFile, repository));
 		}
 
 		/// <summary>

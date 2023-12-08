@@ -93,7 +93,7 @@ namespace AhDai.Core.Services.Impl
 				//物理路径
 				data.PhysicalPath = Path.Combine(physicalPath, data.FullName);
 				//虚拟路径
-				data.VirtualPath = $"{virtualDir.Replace("\\", "/")}/{data.FullName}";
+				data.VirtualPath = $"{virtualDir}/{data.FullName}";
 				datas.Add(data);
 				temps.Add(new Tuple<Models.FileData, IFormFile>(data, formFile));
 			}

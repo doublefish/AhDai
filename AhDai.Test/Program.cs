@@ -20,13 +20,15 @@ namespace AhDai.Test
 			try
 			{
 				IHost host = Host.CreateDefaultBuilder(args)
-					.ConfigureHostBuilder()
-					.ConfigureLogging()
+					.ConfigureLogging((context, builder) =>
+					{
+						builder.AddLog4Net();
+					})
 					.ConfigureServices(services =>
 					{
 						services.AddDbService();
 						services.AddHostedService<Worker>();
-						ServiceUtil.Init(services.BuildServiceProvider());
+						ServiceUtil.Init(services.BuildServiceProvider(), null);
 					})
 					.Build();
 				Console.WriteLine("服务启动开始");

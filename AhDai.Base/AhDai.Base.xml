@@ -178,7 +178,7 @@
             </summary>
             <typeparam name="TKey"></typeparam>
             <typeparam name="TValue"></typeparam>
-            <param name="dic"></param>
+            <param name="dict"></param>
             <param name="comparer"></param>
             <returns></returns>
         </member>
@@ -187,7 +187,7 @@
             ASCII排序
             </summary>
             <typeparam name="TValue"></typeparam>
-            <param name="dic"></param>
+            <param name="dict"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Base.Extensions.IDictionaryExtensions.ToSortedDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
@@ -196,7 +196,7 @@
             </summary>
             <typeparam name="TKey"></typeparam>
             <typeparam name="TValue"></typeparam>
-            <param name="dic"></param>
+            <param name="dict"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Base.Extensions.IDictionaryExtensions.FilterSort``2(System.Collections.Generic.IDictionary{``0,``1},``0[])">
@@ -205,7 +205,7 @@
             </summary>
             <typeparam name="TKey"></typeparam>
             <typeparam name="TValue"></typeparam>
-            <param name="dic"></param>
+            <param name="dict"></param>
             <param name="keys"></param>
             <returns></returns>
         </member>
@@ -215,7 +215,7 @@
             </summary>
             <typeparam name="TKey"></typeparam>
             <typeparam name="TValue"></typeparam>
-            <param name="dic"></param>
+            <param name="dict"></param>
             <param name="keys"></param>
             <returns></returns>
         </member>
@@ -223,7 +223,7 @@
             <summary>
             转换为QueryString
             </summary>
-            <param name="parameters"></param>
+            <param name="dict"></param>
             <param name="ignoreNullOrEmpty"></param>
             <param name="ignores"></param>
             <returns></returns>
@@ -232,7 +232,7 @@
             <summary>
             转换为连接字符串
             </summary>
-            <param name="parameters"></param>
+            <param name="dict"></param>
             <param name="separator"></param>
             <param name="ignoreNullOrEmpty"></param>
             <param name="ignores"></param>
@@ -242,7 +242,7 @@
             <summary>
             转换为Xml字符串
             </summary>
-            <param name="parameters"></param>
+            <param name="dict"></param>
             <param name="ignores"></param>
             <returns></returns>
         </member>
@@ -631,12 +631,12 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Security.Utils.AESHelper">
+        <member name="T:AhDai.Base.Security.Utils.AESUtil">
             <summary>
             AESHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.AESHelper.RijndaelEncrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.AESUtil.RijndaelEncrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -649,7 +649,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.AESHelper.RijndaelDecrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.AESUtil.RijndaelDecrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             解密
             </summary>
@@ -662,12 +662,12 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Security.Utils.DESHelper">
+        <member name="T:AhDai.Base.Security.Utils.DESUtil">
             <summary>
             DESExt
             </summary>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.DESHelper.TripleEncrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.DESUtil.TripleEncrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -679,7 +679,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.DESHelper.TripleDecrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.DESUtil.TripleDecrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,System.Text.Encoding)">
             <summary>
             解密
             </summary>
@@ -691,12 +691,12 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Security.Utils.HMACHelper">
+        <member name="T:AhDai.Base.Security.Utils.HMACUtil">
             <summary>
             HMACHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.HMACHelper.Encrypt(System.String,System.String,System.String,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.HMACUtil.Encrypt(System.String,System.String,System.String,System.Text.Encoding)">
             <summary>
             MD5
             </summary>
@@ -706,7 +706,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.HMACHelper.Verify(System.String,System.String,System.String,System.String,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.HMACUtil.Verify(System.String,System.String,System.String,System.String,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -717,12 +717,12 @@
             <param name="encode"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Security.Utils.MD5Helper">
+        <member name="T:AhDai.Base.Security.Utils.MD5Util">
             <summary>
             MD5Helper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.MD5Helper.Encrypt(System.String,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.MD5Util.Encrypt(System.String,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -730,7 +730,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.MD5Helper.Verify(System.String,System.String,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.MD5Util.Verify(System.String,System.String,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -739,12 +739,12 @@
             <param name="encode"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Security.Utils.RSAHelper">
+        <member name="T:AhDai.Base.Security.Utils.RSAUtil">
             <summary>
             RSAHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.EncryptByXml(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.EncryptByXml(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -754,7 +754,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.DecryptByXml(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.DecryptByXml(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             解密
             </summary>
@@ -764,7 +764,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.SignByXml(System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.SignByXml(System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             签名
             </summary>
@@ -775,7 +775,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.VerifyByXml(System.String,System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.VerifyByXml(System.String,System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -787,7 +787,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.EncryptByPKCS8(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.EncryptByPKCS8(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -797,7 +797,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.DecryptByPKCS8(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.DecryptByPKCS8(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             解密
             </summary>
@@ -807,7 +807,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.SignByPKCS8(System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.SignByPKCS8(System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             签名
             </summary>
@@ -818,7 +818,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.VerifyByPKCS8(System.String,System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.VerifyByPKCS8(System.String,System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -830,7 +830,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.VerifyByX509Certificate(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate,System.String,AhDai.Base.StringType,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.VerifyByX509Certificate(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate,System.String,AhDai.Base.StringType,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -842,42 +842,42 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.ConvertPKCS8PublicKey(System.String)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.ConvertPKCS8PublicKey(System.String)">
             <summary>
             转换公钥PEM
             </summary>
             <param name="publicKey"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.ConvertPKCS8PrivateKey(System.String)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.ConvertPKCS8PrivateKey(System.String)">
             <summary>
             转换私钥PKCS8
             </summary>
             <param name="privateKey"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.ConvertX509PublicKey(System.String)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.ConvertX509PublicKey(System.String)">
             <summary>
             转换公钥X509
             </summary>
             <param name="publicKey"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.GetRSAParameters(System.Security.Cryptography.X509Certificates.X509Certificate)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.GetRSAParameters(System.Security.Cryptography.X509Certificates.X509Certificate)">
             <summary>
             从x509格式的证书中,提取公钥,并转换成xml格式
             </summary>
             <param name="certificate"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.GetIntegerSize(System.IO.BinaryReader)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.GetIntegerSize(System.IO.BinaryReader)">
             <summary>
             GetIntegerSize
             </summary>
             <param name="binaryReader"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.FromPKCS8PublicKey(System.Security.Cryptography.RSA,System.String)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.FromPKCS8PublicKey(System.Security.Cryptography.RSA,System.String)">
             <summary>
             FromPKCS8PublicKey
             </summary>
@@ -885,7 +885,7 @@
             <param name="pkcs8String"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAHelper.FromPKCS8PrivateKey(System.Security.Cryptography.RSA,System.String)">
+        <member name="M:AhDai.Base.Security.Utils.RSAUtil.FromPKCS8PrivateKey(System.Security.Cryptography.RSA,System.String)">
             <summary>
             FromPKCS8PrivateKey
             </summary>
@@ -893,12 +893,12 @@
             <param name="pkcs8String"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Security.Utils.SHAHelper">
+        <member name="T:AhDai.Base.Security.Utils.SHAUtil">
             <summary>
             SHAHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.SHAHelper.Encrypt(System.String,System.String,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.SHAUtil.Encrypt(System.String,System.String,System.Text.Encoding)">
             <summary>
             加密
             </summary>
@@ -907,7 +907,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.SHAHelper.Verify(System.String,System.String,System.String,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Security.Utils.SHAUtil.Verify(System.String,System.String,System.String,System.Text.Encoding)">
             <summary>
             验证
             </summary>
@@ -917,12 +917,12 @@
             <param name="encode"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Security.Utils.X509CertificateHelper">
+        <member name="T:AhDai.Base.Security.Utils.X509CertificateUtil">
             <summary>
             X509CertificateHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.X509CertificateHelper.VerifyCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Collections.Generic.IEnumerable{System.Security.Cryptography.X509Certificates.X509Certificate2})">
+        <member name="M:AhDai.Base.Security.Utils.X509CertificateUtil.VerifyCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Collections.Generic.IEnumerable{System.Security.Cryptography.X509Certificates.X509Certificate2})">
             <summary>
             验证证书链
             </summary>
@@ -930,7 +930,7 @@
             <param name="additionalCertificates">它预计链的顺序为： ...，INTERMEDIATE2，INTERMEDIATE1（INTERMEDIATE2的签名者），CA（INTERMEDIATE1的签名者）</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Security.Utils.X509CertificateHelper.VerifyCertificate(System.Byte[],System.Collections.Generic.IEnumerable{System.Byte[]})">
+        <member name="M:AhDai.Base.Security.Utils.X509CertificateUtil.VerifyCertificate(System.Byte[],System.Collections.Generic.IEnumerable{System.Byte[]})">
             <summary>
             验证证书链
             </summary>
@@ -969,12 +969,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Utils.Base64Helper">
+        <member name="T:AhDai.Base.Utils.Base64Util">
             <summary>
             Base64Helper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.Base64Helper.ToBase64String(System.String,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Utils.Base64Util.ToBase64String(System.String,System.Text.Encoding)">
             <summary>
             字符串转Base64字符串
             </summary>
@@ -982,7 +982,7 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.Base64Helper.ToString(System.String,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Utils.Base64Util.ToString(System.String,System.Text.Encoding)">
             <summary>
             Base64字符串转字符串
             </summary>
@@ -990,68 +990,68 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.Base64Helper.ToBytes(System.String)">
+        <member name="M:AhDai.Base.Utils.Base64Util.ToBytes(System.String)">
             <summary>
             Base64字符串转字节数组
             </summary>
             <param name="s"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Utils.DateTimeHelper">
+        <member name="T:AhDai.Base.Utils.DateTimeUtil">
             <summary>
-            DateTimeHelper
+            DateTimeUtil
             </summary>
         </member>
-        <member name="P:AhDai.Base.Utils.DateTimeHelper.Timestamp">
+        <member name="P:AhDai.Base.Utils.DateTimeUtil.Timestamp">
             <summary>
             时间戳
             </summary>
         </member>
-        <member name="P:AhDai.Base.Utils.DateTimeHelper.TimestampOfMilliseconds">
+        <member name="P:AhDai.Base.Utils.DateTimeUtil.TimestampOfMilliseconds">
             <summary>
             时间戳（距1970-01-01的毫秒数）
             </summary>
         </member>
-        <member name="P:AhDai.Base.Utils.DateTimeHelper.TimestampOfSeconds">
+        <member name="P:AhDai.Base.Utils.DateTimeUtil.TimestampOfSeconds">
             <summary>
             时间戳（距1970-01-01的秒数）
             </summary>
         </member>
-        <member name="T:AhDai.Base.Utils.EnumHelper">
+        <member name="T:AhDai.Base.Utils.EnumUtil">
             <summary>
             EnumExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.EnumHelper.#cctor">
+        <member name="M:AhDai.Base.Utils.EnumUtil.#cctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.EnumHelper.GetValueDescription``1(``0)">
+        <member name="M:AhDai.Base.Utils.EnumUtil.GetValueDescription``1(``0)">
             <summary>
             获取枚举值的描述
             </summary>
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.EnumHelper.GetValues``1">
+        <member name="M:AhDai.Base.Utils.EnumUtil.GetValues``1">
             <summary>
             获取枚举的值的集合
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.EnumHelper.GetValuesAndDescriptions``1">
+        <member name="M:AhDai.Base.Utils.EnumUtil.GetValuesAndDescriptions``1">
             <summary>
             获取枚举的值的集合
             </summary>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Utils.HashAlgorithmHelper">
+        <member name="T:AhDai.Base.Utils.HashAlgorithmUtil">
             <summary>
             HashAlgorithmHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.HashAlgorithmHelper.ComputeHashByUsing``1(System.Byte[])">
+        <member name="M:AhDai.Base.Utils.HashAlgorithmUtil.ComputeHashByUsing``1(System.Byte[])">
             <summary>
             使用using调用ComputeHash
             </summary>
@@ -1059,12 +1059,12 @@
             <param name="buffer"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Utils.HexHelper">
+        <member name="T:AhDai.Base.Utils.HexUtil">
             <summary>
             HexHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.HexHelper.ToHexString(System.String,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Utils.HexUtil.ToHexString(System.String,System.Text.Encoding)">
             <summary>
             字符串转16进制字符串
             </summary>
@@ -1072,14 +1072,14 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.HexHelper.ToHexString(System.Byte[])">
+        <member name="M:AhDai.Base.Utils.HexUtil.ToHexString(System.Byte[])">
             <summary>
             字节数组转16进制字符串
             </summary>
             <param name="bytes"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.HexHelper.ToString(System.String,System.Text.Encoding)">
+        <member name="M:AhDai.Base.Utils.HexUtil.ToString(System.String,System.Text.Encoding)">
             <summary>
             16进制字符串转字符串
             </summary>
@@ -1087,38 +1087,38 @@
             <param name="encode">编码</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.HexHelper.ToBytes(System.String)">
+        <member name="M:AhDai.Base.Utils.HexUtil.ToBytes(System.String)">
             <summary>
             16进制字符串转字节数组
             </summary>
             <param name="hex"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Utils.ReflectionHelper">
+        <member name="T:AhDai.Base.Utils.ReflectionUtil">
             <summary>
             ReflectionHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.ReflectionHelper.#cctor">
+        <member name="M:AhDai.Base.Utils.ReflectionUtil.#cctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.ReflectionHelper.GetProperties``1">
+        <member name="M:AhDai.Base.Utils.ReflectionUtil.GetProperties``1">
             <summary>
             获取属性
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.ReflectionHelper.GetProperties(System.Type)">
+        <member name="M:AhDai.Base.Utils.ReflectionUtil.GetProperties(System.Type)">
             <summary>
             获取属性
             </summary>
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.ReflectionHelper.ConvertTo``2(``1,System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:AhDai.Base.Utils.ReflectionUtil.ConvertTo``2(``1,System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
             类型转换
             </summary>
@@ -1128,7 +1128,7 @@
             <param name="mappings">属性名不同的映射关系（k=目标属性名，v=源属性名）</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.ReflectionHelper.ConvertTo``2(System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:AhDai.Base.Utils.ReflectionUtil.ConvertTo``2(System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
             类型转换
             </summary>
@@ -1138,7 +1138,7 @@
             <param name="mappings">属性名不同的映射关系（k=目标属性名，v=源属性名）</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.ReflectionHelper.BuildGetter``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+        <member name="M:AhDai.Base.Utils.ReflectionUtil.BuildGetter``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
             <summary>
             BuildGetter
             </summary>
@@ -1147,7 +1147,7 @@
             <param name="propertySelector"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.ReflectionHelper.BuildSetter``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+        <member name="M:AhDai.Base.Utils.ReflectionUtil.BuildSetter``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
             <summary>
             BuildSet
             </summary>
@@ -1156,7 +1156,7 @@
             <param name="propertySelector"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.ReflectionHelper.CreateDelegate``1(System.Reflection.MethodInfo)">
+        <member name="M:AhDai.Base.Utils.ReflectionUtil.CreateDelegate``1(System.Reflection.MethodInfo)">
             <summary>
             CreateDelegate
             </summary>
@@ -1164,7 +1164,7 @@
             <param name="method"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.ReflectionHelper.GetPropertyInfo``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+        <member name="M:AhDai.Base.Utils.ReflectionUtil.GetPropertyInfo``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
             <summary>
             GetPropertyInfo
             </summary>
@@ -1173,31 +1173,31 @@
             <param name="propertySelector"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Utils.ResourceHelper">
+        <member name="T:AhDai.Base.Utils.ResourceUtil">
             <summary>
             ResourceHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.ResourceHelper.#cctor">
+        <member name="M:AhDai.Base.Utils.ResourceUtil.#cctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.ResourceHelper.Get``1">
+        <member name="M:AhDai.Base.Utils.ResourceUtil.Get``1">
             <summary>
             获取资源文件
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.ResourceHelper.Get(System.Type)">
+        <member name="M:AhDai.Base.Utils.ResourceUtil.Get(System.Type)">
             <summary>
             获取资源文件
             </summary>
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.ResourceHelper.Get(System.String,System.Reflection.Assembly)">
+        <member name="M:AhDai.Base.Utils.ResourceUtil.Get(System.String,System.Reflection.Assembly)">
             <summary>
             获取指定类型的属性
             </summary>
@@ -1205,26 +1205,26 @@
             <param name="assembly"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Utils.StringHelper">
+        <member name="T:AhDai.Base.Utils.StringUtil">
             <summary>
             StringHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.StringHelper.GenerateRandomDigital(System.Int32)">
+        <member name="M:AhDai.Base.Utils.StringUtil.GenerateRandomDigital(System.Int32)">
             <summary>
             生成指定长度的随机数字字符串
             </summary>
             <param name="length"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.StringHelper.GenerateRandom(System.Int32)">
+        <member name="M:AhDai.Base.Utils.StringUtil.GenerateRandom(System.Int32)">
             <summary>
             生成指定长度的随机字符串
             </summary>
             <param name="length"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Utils.StringHelper.GenerateRandom(System.String,System.Int32)">
+        <member name="M:AhDai.Base.Utils.StringUtil.GenerateRandom(System.String,System.Int32)">
             <summary>
             生成验指定长度的随机字符串
             </summary>
@@ -1232,24 +1232,24 @@
             <param name="length"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Utils.TextHelper">
+        <member name="T:AhDai.Base.Utils.TextUtil">
             <summary>
             TextHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.TextHelper.GetEncoding(System.String)">
+        <member name="M:AhDai.Base.Utils.TextUtil.GetEncoding(System.String)">
             <summary>
             GetEncoding
             </summary>
             <param name="charSet"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Base.Utils.XmlHelper">
+        <member name="T:AhDai.Base.Utils.XmlUtil">
             <summary>
             XmlHelper
             </summary>
         </member>
-        <member name="M:AhDai.Base.Utils.XmlHelper.SerializeObject``1(``0)">
+        <member name="M:AhDai.Base.Utils.XmlUtil.SerializeObject``1(``0)">
             <summary>
             序列化
             </summary>
