@@ -22,7 +22,7 @@ namespace AhDai.Core.Services.Impl
         public DbService(IConfiguration configuration)
         {
             Configs = configuration.GetDbConfigs();
-            Utils.DbContextHelper.Init(Configs);
+            Utils.DbContextUtil.Init(Configs);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace AhDai.Core.Services.Impl
         /// <returns></returns>
         public IDbContext GetSqlDbContext(string eventId, string dbName = null)
         {
-            return Utils.DbContextHelper.GetSqlDbContext(eventId, dbName);
+            return Utils.DbContextUtil.GetSqlDbContext(eventId, dbName);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace AhDai.Core.Services.Impl
         /// <returns></returns>
         public IDbContext GetMySqlDbContext(string eventId, string dbName = null)
         {
-            return Utils.DbContextHelper.GetMySqlDbContext(eventId, dbName);
+            return Utils.DbContextUtil.GetMySqlDbContext(eventId, dbName);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace AhDai.Core.Services.Impl
         /// <returns></returns>
         public IDbContext GetOracleDbContext(string eventId, string dbName = null)
         {
-            return Utils.DbContextHelper.GetOracleDbContext(eventId, dbName);
+            return Utils.DbContextUtil.GetOracleDbContext(eventId, dbName);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace AhDai.Core.Services.Impl
         /// <returns></returns>
         public IDbContext GetSQLiteDbContext(string eventId, string dbName = null)
         {
-            return Utils.DbContextHelper.GetSQLiteDbContext(eventId, dbName);
+            return Utils.DbContextUtil.GetSQLiteDbContext(eventId, dbName);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace AhDai.Core.Services.Impl
         /// <returns></returns>
         public IDbContext GetSQLiteDbContext(string eventId, string fileName, string version)
         {
-            return Utils.DbContextHelper.GetSQLiteDbContext(eventId, fileName, version);
+            return Utils.DbContextUtil.GetSQLiteDbContext(eventId, fileName, version);
         }
     }
 }

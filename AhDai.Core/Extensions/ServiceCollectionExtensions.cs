@@ -83,11 +83,10 @@ namespace AhDai.Core.Extensions
 				{
 					OnTokenValidated = context =>
 					{
-
 						var token = context.Request.Headers.Authorization.ToString();
 						if (!string.IsNullOrEmpty(token) && config.EnableRedis)
 						{
-							var jwtService = ServiceUtil.GetRequiredService<Services.IJwtService>();
+							var jwtService = ServiceUtil.Services.GetRequiredService<Services.IJwtService>();
 							var exists = jwtService.ExistsTokenAsync(token).Result;
 							if (!exists)
 							{

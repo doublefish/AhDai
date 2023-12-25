@@ -217,6 +217,67 @@
             <param name="message">消息</param>
             <param name="data">内容</param>
         </member>
+        <member name="T:AhDai.Core.Attributes.ApiAuthorizeAttribute">
+            <summary>
+            ApiAuthorizeAttribute
+            </summary>
+        </member>
+        <member name="F:AhDai.Core.Attributes.ApiAuthorizeAttribute._logger">
+            <summary>
+            _logger
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Attributes.ApiAuthorizeAttribute.Frequency">
+            <summary>
+            访问频率
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Attributes.ApiAuthorizeAttribute.VerifyToken">
+            <summary>
+            是否验证Token
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Attributes.ApiAuthorizeAttribute.VerifyRight">
+            <summary>
+            是否验证权限
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Attributes.ApiAuthorizeAttribute.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Attributes.ApiAuthorizeAttribute})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Attributes.ApiAuthorizeAttribute.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
+            <summary>
+            OnActionExecutionAsync
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Attributes.ApiAuthorizeAttribute.VerifyLogin(System.String,AhDai.Core.Models.TokenResult@)">
+            <summary>
+            验证登录
+            </summary>
+            <param name="token"></param>
+            <param name="login"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Attributes.ApiAuthorizeAttribute.VerifyRequestRight(System.String,System.String)">
+            <summary>
+            验证权限
+            </summary>
+            <param name="userId"></param>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Attributes.ApiAuthorizeAttribute.WriteLog(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            记录日志
+            </summary>
+            <param name="httpContext"></param>
+        </member>
         <member name="T:AhDai.Core.Attributes.ErrorCodeAttribute">
             <summary>
             ErrorCodeAttribute
@@ -394,6 +455,11 @@
         <member name="F:AhDai.Core.Const.UserId">
             <summary>
             用户Id
+            </summary>
+        </member>
+        <member name="F:AhDai.Core.Const.Authorization">
+            <summary>
+            Authorization
             </summary>
         </member>
         <member name="T:AhDai.Core.Extensions.BuilderExtensions">
@@ -1386,100 +1452,28 @@
             <param name="memberSerialization"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Models.PageArg`1">
+        <member name="T:AhDai.Core.Models.PageData`1">
             <summary>
-            查询条件
+            分页数据
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.TotalCount">
+        <member name="P:AhDai.Core.Models.PageData`1.Count">
             <summary>
-            总记录条数，如果此属性预设值大于零则表示不需要从数据库获取。
+            总数
             </summary>
         </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.Results">
+        <member name="P:AhDai.Core.Models.PageData`1.List">
             <summary>
-            分页结果集。
+            数据
             </summary>
         </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.Filter">
-            <summary>
-            筛选
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.PageSize">
-            <summary>
-            每页条数
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.PageNumber">
-            <summary>
-            页码（从0开始）
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.SortName">
-            <summary>
-            排序字段
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.SortType">
-            <summary>
-            排序方式：ASC/DESC
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.OnlyCount">
-            <summary>
-            只统计总数
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.CountFlag">
-            <summary>
-            统计数量标识
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.SumFlag">
-            <summary>
-            统计总和标识
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.SumResults">
-            <summary>
-            计算结果
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.Keyword">
-            <summary>
-            关键词
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.Keywords">
-            <summary>
-            关键词组
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.UserId">
-            <summary>
-            用户Id
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.Username">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageArg`1.Platform">
-            <summary>
-            平台标识
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Models.PageArg`1.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,AhDai.Core.Models.SortType)">
+        <member name="M:AhDai.Core.Models.PageData`1.#ctor(System.Int32,System.Collections.Generic.ICollection{`0})">
             <summary>
             构造函数
             </summary>
-            <param name="pageNumber"></param>
-            <param name="pageSize"></param>
-            <param name="sortName"></param>
-            <param name="sortType"></param>
+            <param name="count"></param>
+            <param name="list"></param>
         </member>
         <member name="T:AhDai.Core.Models.SortType">
             <summary>
@@ -3037,58 +3031,75 @@
             已关闭
             </summary>
         </member>
-        <member name="T:AhDai.Core.Utils.ComputerHelper">
+        <member name="T:AhDai.Core.Utils.ComputerUtil">
             <summary>
-            ComputerHelper
+            ComputerUtil
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.ComputerHelper.GetMacAddress">
-            <summary>
-            获取Mac地址
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.ComputerHelper.GetMacAddresses">
+        <member name="M:AhDai.Core.Utils.ComputerUtil.GetMacAddress">
             <summary>
             获取Mac地址
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.ComputerHelper.GetMacAddressesByWin32">
+        <member name="M:AhDai.Core.Utils.ComputerUtil.GetMacAddresses">
             <summary>
             获取Mac地址
             </summary>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Utils.ConfigurationHelper">
+        <member name="M:AhDai.Core.Utils.ComputerUtil.GetMacAddressesByWin32">
             <summary>
-            ConfigurationHelper
+            获取Mac地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Utils.ConfigurationUtil">
+            <summary>
+            ConfigurationUtil
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.ConfigurationHelper.GetAll(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:AhDai.Core.Utils.ConfigurationUtil.GetAll(Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             获取所有
             </summary>
             <param name="configuration"></param>
         </member>
-        <member name="M:AhDai.Core.Utils.ConfigurationHelper.GetAll(Microsoft.Extensions.Configuration.IConfigurationSection[])">
+        <member name="M:AhDai.Core.Utils.ConfigurationUtil.GetAll(Microsoft.Extensions.Configuration.IConfigurationSection[])">
             <summary>
             获取所有
             </summary>
             <param name="sections"></param>
         </member>
-        <member name="T:AhDai.Core.Utils.DbContextHelper">
+        <member name="T:AhDai.Core.Utils.DbContextUtil">
             <summary>
-            DbContextHelper
+            DbContextUtil
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.DbContextHelper.Init(System.Collections.Generic.ICollection{AhDai.DbContext.Models.DbConfig})">
+        <member name="P:AhDai.Core.Utils.DbContextUtil.Configs">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Utils.DbContextUtil.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Utils.DbContextUtil.Init(System.Collections.Generic.ICollection{AhDai.DbContext.Models.DbConfig})">
             <summary>
             初始化
             </summary>
             <param name="configs"></param>
         </member>
-        <member name="M:AhDai.Core.Utils.DbContextHelper.GetSqlDbContext(System.String,System.String)">
+        <member name="M:AhDai.Core.Utils.DbContextUtil.GetConfig(System.String)">
+            <summary>
+            获取配置
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.DbContextUtil.GetSqlDbContext(System.String,System.String)">
             <summary>
             GetSqlDbContext
             </summary>
@@ -3096,7 +3107,7 @@
             <param name="dbName"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.DbContextHelper.GetMySqlDbContext(System.String,System.String)">
+        <member name="M:AhDai.Core.Utils.DbContextUtil.GetMySqlDbContext(System.String,System.String)">
             <summary>
             GetMySqlDbContext
             </summary>
@@ -3104,7 +3115,7 @@
             <param name="dbName"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.DbContextHelper.GetOracleDbContext(System.String,System.String)">
+        <member name="M:AhDai.Core.Utils.DbContextUtil.GetOracleDbContext(System.String,System.String)">
             <summary>
             GetOracleDbContext
             </summary>
@@ -3112,7 +3123,7 @@
             <param name="dbName"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.DbContextHelper.GetSQLiteDbContext(System.String,System.String)">
+        <member name="M:AhDai.Core.Utils.DbContextUtil.GetSQLiteDbContext(System.String,System.String)">
             <summary>
             GetMySqlDbContext
             </summary>
@@ -3120,7 +3131,7 @@
             <param name="dbName"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.DbContextHelper.GetSQLiteDbContext(System.String,System.String,System.String)">
+        <member name="M:AhDai.Core.Utils.DbContextUtil.GetSQLiteDbContext(System.String,System.String,System.String)">
             <summary>
             GetSQLiteDbContext
             </summary>
@@ -3129,12 +3140,61 @@
             <param name="version"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.DbContextHelper.BeforeExecute(System.String,System.Data.IDbCommand)">
+        <member name="M:AhDai.Core.Utils.DbContextUtil.BeforeExecute(System.String,System.Data.IDbCommand)">
             <summary>
             执行前执行
             </summary>
             <param name="eventId"></param>
             <param name="command"></param>
+        </member>
+        <member name="M:AhDai.Core.Utils.DbContextUtil.ExecuteNonQuery(System.Data.IDbConnection,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            执行
+            </summary>
+            <param name="connection"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.DbContextUtil.ExecuteReader``1(System.Data.IDbConnection,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Func{System.Data.IDataReader,``0})">
+            <summary>
+            查询
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connection"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <param name="converter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.DbContextUtil.ExecuteScalar(System.Data.IDbConnection,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            查询
+            </summary>
+            <param name="connection"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.DbContextUtil.ExecuteScalar``1(System.Data.IDbConnection,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Func{System.Object,``0})">
+            <summary>
+            查询
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connection"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <param name="converter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.DbContextUtil.CreateCommand(System.Data.IDbConnection,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            CreateCommand
+            </summary>
+            <param name="connection"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
         </member>
         <member name="T:AhDai.Core.Utils.FileUtil">
             <summary>
@@ -3188,12 +3248,12 @@
             <param name="b"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Utils.HttpListenerHelper">
+        <member name="T:AhDai.Core.Utils.HttpListenerUtil">
             <summary>
-            HttpListenerHelper
+            HttpListenerUtil
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.HttpListenerHelper.Start(System.String,System.Func{System.Net.HttpListenerRequest,System.Collections.Generic.IDictionary{System.String,System.String},System.String},System.String)">
+        <member name="M:AhDai.Core.Utils.HttpListenerUtil.Start(System.String,System.Func{System.Net.HttpListenerRequest,System.Collections.Generic.IDictionary{System.String,System.String},System.String},System.String)">
             <summary>
             开启服务
             </summary>
@@ -3201,12 +3261,12 @@
             <param name="contentType"></param>
             <param name="callback"></param>
         </member>
-        <member name="T:AhDai.Core.Utils.HttpRequestHelper">
+        <member name="T:AhDai.Core.Utils.HttpRequestUtil">
             <summary>
-            HttpRequestHelper
+            HttpRequestUtil
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.HttpRequestHelper.VerifyFrequencyLimit(System.String,System.String,System.Double)">
+        <member name="M:AhDai.Core.Utils.HttpRequestUtil.VerifyFrequencyLimit(System.String,System.String,System.Double)">
             <summary>
             验证请求频率限制
             </summary>
@@ -3438,24 +3498,24 @@
             <param name="settings"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Utils.Log4netHelper">
+        <member name="T:AhDai.Core.Utils.Log4netUtil">
             <summary>
-            Log4netHelper
+            Log4netUtil
             </summary>
         </member>
-        <member name="P:AhDai.Core.Utils.Log4netHelper.Repository">
+        <member name="P:AhDai.Core.Utils.Log4netUtil.Repository">
             <summary>
             Repository
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.Log4netHelper.Info(System.String,System.Exception)">
+        <member name="M:AhDai.Core.Utils.Log4netUtil.Info(System.String,System.Exception)">
             <summary>
             Info
             </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:AhDai.Core.Utils.Log4netHelper.Info(System.String,System.String,System.Exception)">
+        <member name="M:AhDai.Core.Utils.Log4netUtil.Info(System.String,System.String,System.Exception)">
             <summary>
             Info
             </summary>
@@ -3463,29 +3523,14 @@
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:AhDai.Core.Utils.Log4netHelper.Error(System.String,System.Exception)">
+        <member name="M:AhDai.Core.Utils.Log4netUtil.Error(System.String,System.Exception)">
             <summary>
             Error
             </summary>
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="M:AhDai.Core.Utils.Log4netHelper.Error(System.String,System.String,System.Exception)">
-            <summary>
-            Error
-            </summary>
-            <param name="eventId">事件Id</param>
-            <param name="message"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:AhDai.Core.Utils.Log4netHelper.Debug(System.String,System.Exception)">
-            <summary>
-            Error
-            </summary>
-            <param name="message"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:AhDai.Core.Utils.Log4netHelper.Debug(System.String,System.String,System.Exception)">
+        <member name="M:AhDai.Core.Utils.Log4netUtil.Error(System.String,System.String,System.Exception)">
             <summary>
             Error
             </summary>
@@ -3493,24 +3538,39 @@
             <param name="message"></param>
             <param name="exception"></param>
         </member>
-        <member name="T:AhDai.Core.Utils.LoggerHelper">
+        <member name="M:AhDai.Core.Utils.Log4netUtil.Debug(System.String,System.Exception)">
             <summary>
-            LoggerHelper
+            Error
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:AhDai.Core.Utils.Log4netUtil.Debug(System.String,System.String,System.Exception)">
+            <summary>
+            Error
+            </summary>
+            <param name="eventId">事件Id</param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="T:AhDai.Core.Utils.LoggerUtil">
+            <summary>
+            LoggerUtil
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.LoggerHelper.#cctor">
+        <member name="M:AhDai.Core.Utils.LoggerUtil.#cctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.LoggerHelper.GetLogger``1">
+        <member name="M:AhDai.Core.Utils.LoggerUtil.GetLogger``1">
             <summary>
             GetLogger
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.LoggerHelper.GetLogger(System.String,System.Int32)">
+        <member name="M:AhDai.Core.Utils.LoggerUtil.GetLogger(System.String,System.Int32)">
             <summary>
             GetLogger
             </summary>
@@ -3600,49 +3660,28 @@
             <param name="services"></param>
             <param name="configuration"></param>
         </member>
-        <member name="M:AhDai.Core.Utils.ServiceUtil.GetScopedService``1">
-            <summary>
-            获取指定类型的范围服务的实例（通过 AddScoped 添加的）
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.ServiceUtil.GetService``1">
-            <summary>
-            获取注入的（范围或单例）服务的实例
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.ServiceUtil.GetRequiredService``1">
-            <summary>
-            获取注入的（范围或单例）服务的实例
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
         <member name="M:AhDai.Core.Utils.ServiceUtil.GetCurrentTokenData">
             <summary>
             获取当前Token数据
             </summary>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Utils.TokenHelper">
+        <member name="T:AhDai.Core.Utils.TokenUtil">
             <summary>
-            TokenHelper
+            TokenUtil
             </summary>
         </member>
-        <member name="F:AhDai.Core.Utils.TokenHelper.CacheKey">
+        <member name="F:AhDai.Core.Utils.TokenUtil.CacheKey">
             <summary>
             CacheKey
             </summary>
         </member>
-        <member name="F:AhDai.Core.Utils.TokenHelper.Expiry">
+        <member name="F:AhDai.Core.Utils.TokenUtil.Expiry">
             <summary>
             过期时间
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.TokenHelper.Set``1(``0,System.String)">
+        <member name="M:AhDai.Core.Utils.TokenUtil.Set``1(``0,System.String)">
             <summary>
             设置
             </summary>
@@ -3651,7 +3690,7 @@
             <param name="suffix"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.TokenHelper.Get``1(System.String,System.String)">
+        <member name="M:AhDai.Core.Utils.TokenUtil.Get``1(System.String,System.String)">
             <summary>
             获取
             </summary>
@@ -3660,7 +3699,7 @@
             <param name="suffix"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.TokenHelper.Verify``1(System.String,AhDai.Core.Models.Token{``0}@,System.String)">
+        <member name="M:AhDai.Core.Utils.TokenUtil.Verify``1(System.String,AhDai.Core.Models.Token{``0}@,System.String)">
             <summary>
             验证
             </summary>
@@ -3670,17 +3709,17 @@
             <param name="suffix"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Utils.VerifyCodeHelper">
+        <member name="T:AhDai.Core.Utils.VerifyCodeUtil">
             <summary>
-            VerifyCodeHelper
+            VerifyCodeUtil
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.VerifyCodeHelper.#cctor">
+        <member name="M:AhDai.Core.Utils.VerifyCodeUtil.#cctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.VerifyCodeHelper.GenerateImageCode(System.String,System.Int32)">
+        <member name="M:AhDai.Core.Utils.VerifyCodeUtil.GenerateImageCode(System.String,System.Int32)">
             <summary>
             生成图片验证码
             </summary>
@@ -3688,14 +3727,14 @@
             <param name="length"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.VerifyCodeHelper.VerifyImageCode(System.String,System.String)">
+        <member name="M:AhDai.Core.Utils.VerifyCodeUtil.VerifyImageCode(System.String,System.String)">
             <summary>
             验证图片验证码
             </summary>
             <param name="guid"></param>
             <param name="code"></param>
         </member>
-        <member name="M:AhDai.Core.Utils.VerifyCodeHelper.GenerateImageCode(System.Int32,System.String@)">
+        <member name="M:AhDai.Core.Utils.VerifyCodeUtil.GenerateImageCode(System.Int32,System.String@)">
             <summary>
             生成指定长度的图片验证码
             </summary>
@@ -3703,7 +3742,7 @@
             <param name="code"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.VerifyCodeHelper.GenerateImageCode(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int32)">
+        <member name="M:AhDai.Core.Utils.VerifyCodeUtil.GenerateImageCode(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int32)">
             <summary>
             生成图片验证码
             </summary>
@@ -3712,7 +3751,7 @@
             <param name="length"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.VerifyCodeHelper.VerifyImageCode(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:AhDai.Core.Utils.VerifyCodeUtil.VerifyImageCode(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             验证图片验证码
             </summary>

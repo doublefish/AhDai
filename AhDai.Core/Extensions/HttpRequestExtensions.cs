@@ -65,7 +65,7 @@ namespace AhDai.Core.Extensions
 			var ipAddress = httpRequest.HttpContext.Connection.RemoteIpAddress;
 			try
 			{
-				Utils.HttpRequestHelper.VerifyFrequencyLimit(ipAddress.ToString(), path, limit);
+				Utils.HttpRequestUtil.VerifyFrequencyLimit(ipAddress.ToString(), path, limit);
 			}
 			catch (Exception ex)
 			{

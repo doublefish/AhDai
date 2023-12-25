@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace AhDai.Test
 {
-    /// <summary>
-    /// Worker
-    /// </summary>
-    public class Worker : BackgroundService
+	/// <summary>
+	/// Worker
+	/// </summary>
+	public class Worker : BackgroundService
 	{
 		private readonly ILogger<Worker> Logger;
 		readonly IDbService DbService;
@@ -22,8 +22,7 @@ namespace AhDai.Test
 		{
 			Logger = logger;
 			DbService = dbService;
-			var temp = Core.Utils.ServiceUtil.GetService<IDbService>();
-			var dict = Core.Utils.ConfigurationHelper.GetAll(configuration);
+			var dict = Core.Utils.ConfigurationUtil.GetAll(configuration);
 			foreach (var kv in dict)
 			{
 				Console.WriteLine($"{kv.Key}={kv.Value}");

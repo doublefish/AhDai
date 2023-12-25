@@ -11,7 +11,7 @@ namespace AhDai.Test
 {
 	internal class ElasticsearchSyncTool
 	{
-		readonly static ILogger Logger = Core.Utils.LoggerHelper.GetLogger<ElasticsearchSyncTool>();
+		readonly static ILogger Logger = Core.Utils.LoggerUtil.GetLogger<ElasticsearchSyncTool>();
 
 		public static void Start()
 		{

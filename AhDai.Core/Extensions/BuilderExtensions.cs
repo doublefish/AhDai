@@ -25,7 +25,7 @@ namespace AhDai.Core.Extensions
 		{
 			if (options != null)
 			{
-				Utils.DbContextHelper.Init(options.Configs);
+				Utils.DbContextUtil.Init(options.Configs);
 			}
 			return app;
 		}

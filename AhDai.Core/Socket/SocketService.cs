@@ -21,7 +21,7 @@ namespace AhDai.Core.Socket1
 			Bind(IPEndPoint);
 			// 设定最多10个排队连接请求
 			Listen(10);
-			Utils.Log4netHelper.Info($"服务启动成功=>{LocalEndPoint}");
+			Utils.Log4netUtil.Info($"服务启动成功=>{LocalEndPoint}");
 
 			// 监听客户端消息
 			var thread = new Thread(() =>

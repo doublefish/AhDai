@@ -17,5 +17,9 @@
 		/// 用户Id
 		/// </summary>
 		public const string UserId = "open-id";
+		/// <summary>
+		/// Authorization
+		/// </summary>
+		public const string Authorization = "Authorization";
 	}
 }
