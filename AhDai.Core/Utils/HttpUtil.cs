@@ -30,17 +30,19 @@ public static class HttpUtil
 	{
 		var handler = new SocketsHttpHandler()
 		{
+			UseProxy = false,
 			AllowAutoRedirect = true,
 			MaxAutomaticRedirections = 50,
 			// 每个请求连接的最大数量，默认是int.MaxValue
-			//MaxConnectionsPerServer = 100,
+			MaxConnectionsPerServer = 100,
 			// 连接池中TCP连接最多可以闲置多久，默认2分钟
 			//PooledConnectionIdleTimeout = TimeSpan.FromMinutes(2),
 			// 连接最长的存活时间，默认是不限制的，一般不用设置
 			PooledConnectionLifetime = TimeSpan.FromMinutes(2),
 			// 响应头最大字节数，单位: KB，默认64
 			//MaxResponseHeadersLength = 64, 
-			UseCookies = false, //是否自动处理cookie
+			//是否自动处理cookie
+			UseCookies = false,
 		};
 		Client = new HttpClient(handler)
 		{

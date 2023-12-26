@@ -7,6 +7,23 @@ namespace AhDai.Service.Converters;
 internal static class RoleConverter
 {
 	/// <summary>
+	/// ToModel
+	/// </summary>
+	/// <param name="input"></param>
+	/// <returns></returns>
+	public static Role ToModel(this RoleInput input)
+	{
+		var model = new Role()
+		{
+			Code = input.Code,
+			Name = input.Name,
+			Remark = input.Remark,
+			Status = input.Status
+		};
+		return model;
+	}
+
+	/// <summary>
 	/// ToOutput
 	/// </summary>
 	/// <param name="model"></param>
@@ -37,22 +54,5 @@ internal static class RoleConverter
 			outputs.Add(model.ToOutput());
 		}
 		return outputs;
-	}
-
-	/// <summary>
-	/// ToModel
-	/// </summary>
-	/// <param name="input"></param>
-	/// <returns></returns>
-	public static Role ToModel(this RoleInput input)
-	{
-		var model = new Role()
-		{
-			Code = input.Code,
-			Name = input.Name,
-			Remark = input.Remark,
-			Status = input.Status
-		};
-		return model;
 	}
 }

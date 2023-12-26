@@ -5,7 +5,7 @@ namespace AhDai.Service.Models;
 /// <summary>
 /// BaseOutput
 /// </summary>
-public class BaseOutput : BaseOutput<int>
+public class BaseOutput : BaseOutput<long>
 {
 }
 

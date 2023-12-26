@@ -8,6 +8,24 @@ namespace AhDai.Service.Converters;
 internal static class DictConverter
 {
 	/// <summary>
+	/// ToModel
+	/// </summary>
+	/// <param name="input"></param>
+	/// <returns></returns>
+	public static Dict ToModel(this DictInput input)
+	{
+		var model = new Dict()
+		{
+			Code = input.Code,
+			Name = input.Name,
+			Remark = input.Remark,
+			Status = input.Status,
+			Data = input.Data.ToModels()
+		};
+		return model;
+	}
+
+	/// <summary>
 	/// ToOutput
 	/// </summary>
 	/// <param name="model"></param>
@@ -78,23 +96,5 @@ internal static class DictConverter
 			inputs.Add(output.ToInput());
 		}
 		return inputs.ToArray();
-	}
-
-	/// <summary>
-	/// ToModel
-	/// </summary>
-	/// <param name="input"></param>
-	/// <returns></returns>
-	public static Dict ToModel(this DictInput input)
-	{
-		var model = new Dict()
-		{
-			Code = input.Code,
-			Name = input.Name,
-			Remark = input.Remark,
-			Status = input.Status,
-			Data = input.Data.ToModels()
-		};
-		return model;
 	}
 }

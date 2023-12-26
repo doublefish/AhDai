@@ -7,7 +7,7 @@ namespace AhDai.Service;
 /// <summary>
 /// IInterfaceService
 /// </summary>
-public interface IInterfaceService : IBaseService<InterfaceOutput, InterfaceQueryInput>
+public interface IInterfaceService : IBaseService<InterfaceInput, InterfaceOutput, InterfaceQueryInput>
 {
 
 }

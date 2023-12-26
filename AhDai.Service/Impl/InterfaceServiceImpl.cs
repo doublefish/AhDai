@@ -12,8 +12,18 @@ namespace AhDai.Service.Impl;
 /// <summary>
 /// InterfaceServiceImpl
 /// </summary>
-internal class InterfaceServiceImpl : BaseServiceImpl<Interface, InterfaceOutput, InterfaceQueryInput>, IInterfaceService
+internal class InterfaceServiceImpl : BaseServiceImpl<Interface, InterfaceInput, InterfaceOutput, InterfaceQueryInput>, IInterfaceService
 {
+	protected override async Task UpdateAsync(DefaultDbContext db, Interface model, InterfaceInput input)
+	{
+		model.Name = input.Name;
+		model.Method = input.Method;
+		model.Url = input.Url;
+		model.Remark = input.Remark;
+		model.Status = input.Status;
+		await db.SaveChangesAsync();
+	}
+
 	protected override IQueryable<Interface> GenerateQuery(DefaultDbContext db, IQueryable<Interface> query, InterfaceQueryInput input)
 	{
 		if (!string.IsNullOrEmpty(input.Name))
@@ -33,6 +43,11 @@ internal class InterfaceServiceImpl : BaseServiceImpl<Interface, InterfaceOutput
 			query = query.Where(o => o.Status == input.Status.Value);
 		}
 		return query;
+	}
+
+	protected override Interface ToModel(InterfaceInput input)
+	{
+		return input.ToModel();
 	}
 
 	protected override InterfaceOutput ToOutput(Interface model)

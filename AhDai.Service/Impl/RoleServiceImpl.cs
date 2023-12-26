@@ -1,4 +1,5 @@
 ﻿using AhDai.Db;
+using AhDai.Db.Models;
 using AhDai.Service.Converters;
 using AhDai.Service.Models;
 using Microsoft.EntityFrameworkCore;
@@ -12,32 +13,46 @@ namespace AhDai.Service.Impl;
 /// <summary>
 /// RoleServiceImpl
 /// </summary>
-internal class RoleServiceImpl : BaseServiceImpl, IRoleService
+internal class RoleServiceImpl : BaseServiceImpl<Role, RoleInput, RoleOutput, RoleQueryInput>, IRoleService
 {
-	/// <summary>
-	/// 获取
-	/// </summary>
-	/// <returns></returns>
-	public async Task<ICollection<RoleOutput>> GetAsync()
-	{
-		using var db = new DefaultDbContext();
-		var list = await db.Roles.Where(o => o.RowDeleted == false).ToListAsync();
-		return list.ToOutputs();
-	}
 
-	public async Task AddAsync(RoleInput input)
+	protected override async Task UpdateAsync(DefaultDbContext db, Role model, RoleInput input)
 	{
-		var model = input.ToModel();
-		using var db = new DefaultDbContext();
-		db.Roles.Add(model);
+		model.Code = input.Code;
+		model.Name = input.Name;
+		model.Remark = input.Remark;
+		model.Status = input.Status;
 		await db.SaveChangesAsync();
 	}
 
-	public async Task UpdateAsync(int id, RoleInput input)
+	protected override IQueryable<Role> GenerateQuery(DefaultDbContext db, IQueryable<Role> query, RoleQueryInput input)
 	{
-		await Task.Run(() =>
+		if (!string.IsNullOrEmpty(input.Code))
 		{
-			throw new NotImplementedException();
-		});
+			query = query.Where(o => o.Code == input.Code);
+		}
+		if (input.Codes != null && input.Codes.Length > 0)
+		{
+			query = query.Where(o => input.Codes.Contains(o.Code));
+		}
+		if (!string.IsNullOrEmpty(input.Name))
+		{
+			query = query.Where(o => o.Name.Contains(input.Name));
+		}
+		if (input.Status.HasValue)
+		{
+			query = query.Where(o => o.Status == input.Status.Value);
+		}
+		return query;
+	}
+
+	protected override Role ToModel(RoleInput input)
+	{
+		return input.ToModel();
+	}
+
+	protected override RoleOutput ToOutput(Role model)
+	{
+		return model.ToOutput();
 	}
 }

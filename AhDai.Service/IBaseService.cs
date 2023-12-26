@@ -14,8 +14,41 @@ public interface IBaseService
 /// <summary>
 /// IBaseService
 /// </summary>
-public interface IBaseService<Output, QueryInput> : IBaseService
+/// <typeparam name="PK"></typeparam>
+/// <typeparam name="Input"></typeparam>
+/// <typeparam name="Output"></typeparam>
+/// <typeparam name="QueryInput"></typeparam>
+public interface IBaseService<PK, Input, Output, QueryInput> : IBaseService
 {
+	/// <summary>
+	/// 新增
+	/// </summary>
+	/// <param name="input"></param>
+	/// <returns></returns>
+	Task AddAsync(Input input);
+
+	/// <summary>
+	/// 修改
+	/// </summary>
+	/// <param name="id"></param>
+	/// <param name="input"></param>
+	/// <returns></returns>
+	Task UpdateAsync(PK id, Input input);
+
+	/// <summary>
+	/// 查询
+	/// </summary>
+	/// <param name="id"></param>
+	/// <returns></returns>
+	Task<Output> GetByIdAsync(PK id);
+
+	/// <summary>
+	/// 查询
+	/// </summary>
+	/// <param name="ids"></param>
+	/// <returns></returns>
+	Task<ICollection<Output>> GetByIdsAsync(PK[] ids);
+
 	/// <summary>
 	/// 查询
 	/// </summary>
@@ -34,19 +67,10 @@ public interface IBaseService<Output, QueryInput> : IBaseService
 /// <summary>
 /// IBaseService
 /// </summary>
-public interface IBaseService<PK, Output, QueryInput> : IBaseService<Output, QueryInput>
+/// <typeparam name="Input"></typeparam>
+/// <typeparam name="Output"></typeparam>
+/// <typeparam name="QueryInput"></typeparam>
+public interface IBaseService<Input, Output, QueryInput> : IBaseService<long, Input, Output, QueryInput>
 {
-	/// <summary>
-	/// 查询
-	/// </summary>
-	/// <param name="id"></param>
-	/// <returns></returns>
-	Task<Output> GetByIdAsync(PK id);
-
-	/// <summary>
-	/// 查询
-	/// </summary>
-	/// <param name="ids"></param>
-	/// <returns></returns>
-	Task<ICollection<Output>> GetByIdsAsync(PK[] ids);
+	
 }

@@ -5,7 +5,7 @@ namespace AhDai.Db.Models;
 /// <summary>
 /// BaseModel
 /// </summary>
-public class BaseModel : BaseModel<int>
+public class BaseModel : BaseModel<long>
 {
 }
 

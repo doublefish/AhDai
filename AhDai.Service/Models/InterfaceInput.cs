@@ -1,18 +1,22 @@
 ﻿namespace AhDai.Service.Models;
 
 /// <summary>
-/// 角色
+/// 接口
 /// </summary>
-public class RoleInput : BaseInput
+public class InterfaceInput : BaseInput
 {
-	/// <summary>
-	/// 编码
-	/// </summary>
-	public string Code { get; set; }
 	/// <summary>
 	/// 名称
 	/// </summary>
 	public string Name { get; set; }
+	/// <summary>
+	/// 方法
+	/// </summary>
+	public string Method { get; set; }
+	/// <summary>
+	/// Url
+	/// </summary>
+	public string Url { get; set; }
 	/// <summary>
 	/// 备注
 	/// </summary>

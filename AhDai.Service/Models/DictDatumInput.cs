@@ -10,12 +10,12 @@ public class DictDatumInput
 	/// <summary>
 	/// Id
 	/// </summary>
-	public int Id { get; set; }
+	public long Id { get; set; }
 	/// <summary>
 	/// 字典Id
 	/// </summary>
 	[Required]
-	public int DictId { get; set; }
+	public long DictId { get; set; }
 	/// <summary>
 	/// 编码
 	/// </summary>

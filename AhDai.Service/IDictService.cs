@@ -8,26 +8,13 @@ namespace AhDai.Service;
 /// <summary>
 /// IDictService
 /// </summary>
-public interface IDictService : IBaseService
+public interface IDictService : IBaseService<DictInput, DictOutput, DictQueryInput>
 {
-	/// <summary>
-	/// 新增
-	/// </summary>
-	/// <returns></returns>
-	Task AddAsync(DictInput input);
-
-	/// <summary>
-	/// 修改
-	/// </summary>
-	/// <returns></returns>
-	Task UpdateAsync(int id, DictInput input);
-
 	/// <summary>
 	/// 查询
 	/// </summary>
 	/// <param name="code"></param>
 	/// <returns></returns>
-	/// <exception cref="Exception"></exception>
 	Task<DictOutput> GetByCodeAsync(string code);
 
 	/// <summary>

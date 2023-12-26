@@ -3,7 +3,7 @@
 /// <summary>
 /// 字典
 /// </summary>
-public class DictInput
+public class DictInput : BaseInput
 {
 	/// <summary>
 	/// 编码

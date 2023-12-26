@@ -1,6 +1,4 @@
-﻿using AhDai.Core.Services;
-using AhDai.Core.Utils;
-using AhDai.Db;
+﻿using AhDai.Db;
 using AhDai.Db.Models;
 using AhDai.Service.Converters;
 using AhDai.Service.Models;
@@ -14,7 +12,7 @@ namespace AhDai.Service.Impl;
 /// <summary>
 /// FileServiceImpl
 /// </summary>
-internal class FileServiceImpl : BaseServiceImpl<File, FileOutput, FileQueryInput>, IFileService
+internal class FileServiceImpl : BaseServiceImpl<File, FileInput, FileOutput, FileQueryInput>, IFileService
 {
 	readonly Core.Services.IFileService _fileService;
 
@@ -47,26 +45,6 @@ internal class FileServiceImpl : BaseServiceImpl<File, FileOutput, FileQueryInpu
 		return models.ToOutputs();
 	}
 
-	/// <summary>
-	/// 查询
-	/// </summary>
-	/// <param name="id"></param>
-	/// <returns></returns>
-	public override async Task<FileOutput> GetByIdAsync(int id)
-	{
-		return await base.GetByIdAsync(id);
-	}
-
-	/// <summary>
-	/// 查询
-	/// </summary>
-	/// <param name="ids"></param>
-	/// <returns></returns>
-	public override async Task<ICollection<FileOutput>> GetByIdsAsync(int[] ids)
-	{
-		return await base.GetByIdsAsync(ids);
-	}
-
 	protected override IQueryable<File> GenerateQuery(DefaultDbContext db, IQueryable<File> query, FileQueryInput input)
 	{
 		if (!string.IsNullOrEmpty(input.Name))
@@ -82,6 +60,11 @@ internal class FileServiceImpl : BaseServiceImpl<File, FileOutput, FileQueryInpu
 			query = query.Where(o => o.Type == input.Type);
 		}
 		return query;
+	}
+
+	protected override File ToModel(FileInput input)
+	{
+		return input.ToModel();
 	}
 
 	protected override FileOutput ToOutput(File model)

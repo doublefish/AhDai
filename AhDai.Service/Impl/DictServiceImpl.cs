@@ -16,7 +16,7 @@ namespace AhDai.Service.Impl;
 /// <summary>
 /// DictServiceImpl
 /// </summary>
-internal class DictServiceImpl : BaseServiceImpl, IDictService
+internal class DictServiceImpl : BaseServiceImpl<Dict, DictInput, DictOutput, DictQueryInput>, IDictService
 {
 	readonly IRedisService _redisService;
 
@@ -25,11 +25,8 @@ internal class DictServiceImpl : BaseServiceImpl, IDictService
 		_redisService = redisService;
 	}
 
-	public async Task AddAsync(DictInput input)
+	protected override async Task AddAsync(DefaultDbContext db, Dict model, DictInput input)
 	{
-		var model = input.ToModel();
-		using var db = new DefaultDbContext();
-		await db.Dicts.AddAsync(model);
 		foreach (var d in model.Data)
 		{
 			d.DictId = model.Id;
@@ -38,16 +35,15 @@ internal class DictServiceImpl : BaseServiceImpl, IDictService
 		await db.SaveChangesAsync();
 	}
 
-	public async Task UpdateAsync(int id, DictInput input)
+	protected override async Task UpdateAsync(DefaultDbContext db, Dict model, DictInput input)
 	{
-		using var db = new DefaultDbContext();
-		var model = await db.Dicts.Where(o => o.Id == id && o.RowDeleted == false).SingleOrDefaultAsync();
 		model.Data = await db.DictData.Where(o => o.DictId == model.Id && o.RowDeleted == false).ToArrayAsync();
 		model.Code = input.Code;
 		model.Name = input.Name;
 		model.Remark = input.Remark;
 		model.Status = input.Status;
-		var ids = new List<int>();
+
+		var ids = new List<long>();
 		foreach (var item in input.Data)
 		{
 			if (item.Id == 0)
@@ -110,6 +106,38 @@ internal class DictServiceImpl : BaseServiceImpl, IDictService
 		var dict = await SelectByCodeAsync(code);
 		var datum = dict.Data.Where(o => o.Value == value).FirstOrDefault();
 		return datum.ToOutput();
+	}
+
+
+	protected override IQueryable<Dict> GenerateQuery(DefaultDbContext db, IQueryable<Dict> query, DictQueryInput input)
+	{
+		if (!string.IsNullOrEmpty(input.Code))
+		{
+			query = query.Where(o => o.Code == input.Code);
+		}
+		if (input.Codes != null && input.Codes.Length > 0)
+		{
+			query = query.Where(o => input.Codes.Contains(o.Code));
+		}
+		if (!string.IsNullOrEmpty(input.Name))
+		{
+			query = query.Where(o => o.Name.Contains(input.Name));
+		}
+		if (input.Status.HasValue)
+		{
+			query = query.Where(o => o.Status == input.Status.Value);
+		}
+		return query;
+	}
+
+	protected override Dict ToModel(DictInput input)
+	{
+		return input.ToModel();
+	}
+
+	protected override DictOutput ToOutput(Dict model)
+	{
+		return model.ToOutput();
 	}
 
 

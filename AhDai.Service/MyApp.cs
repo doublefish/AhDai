@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace AhDai.Service
 {
@@ -22,7 +23,14 @@ namespace AhDai.Service
 		/// <returns></returns>
 		public static IServiceCollection AddServices(IServiceCollection services)
 		{
-			services.AddHttpClient();
+			services.AddHttpClient("", c =>
+			{
+				c.DefaultRequestHeaders.Connection.Add("keep-alive");
+				// 启用保活机制：保持活动超时设置为 2 小时，并将保持活动间隔设置为 1 秒。
+				ServicePointManager.SetTcpKeepAlive(true, 7200000, 1000);
+				// 默认连接数限制为2，增加连接数限制
+				ServicePointManager.DefaultConnectionLimit = 512;
+			});
 
 			services.AddJwtService();
 			services.AddSingleton<IRedisService, RedisService>();

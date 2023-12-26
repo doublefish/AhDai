@@ -3,7 +3,7 @@
 /// <summary>
 /// 文件
 /// </summary>
-public class FileInput
+public class FileInput : BaseInput
 {
 	/// <summary>
 	/// 名称

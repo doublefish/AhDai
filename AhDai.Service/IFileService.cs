@@ -8,7 +8,7 @@ namespace AhDai.Service;
 /// <summary>
 /// IFileService
 /// </summary>
-public interface IFileService : IBaseService<int, FileOutput, FileQueryInput>
+public interface IFileService : IBaseService<FileInput, FileOutput, FileQueryInput>
 {
 	/// <summary>
 	/// 上传

@@ -8,6 +8,42 @@ namespace AhDai.Service.Converters;
 internal static class DictDatumConverter
 {
 	/// <summary>
+	/// ToModel
+	/// </summary>
+	/// <param name="input"></param>
+	/// <returns></returns>
+	public static DictDatum ToModel(this DictDatumInput input)
+	{
+		var model = new DictDatum()
+		{
+			Id = input.Id,
+			DictId = input.DictId,
+			Code = input.Code,
+			Name = input.Name,
+			Value = input.Value,
+			Remark = input.Remark,
+			Sort = input.Sort,
+			Status = input.Status
+		};
+		return model;
+	}
+
+	/// <summary>
+	/// ToModels
+	/// </summary>
+	/// <param name="inputs"></param>
+	/// <returns></returns>
+	public static ICollection<DictDatum> ToModels(this ICollection<DictDatumInput> inputs)
+	{
+		var models = new List<DictDatum>();
+		foreach (var input in inputs)
+		{
+			models.Add(input.ToModel());
+		}
+		return models.ToArray();
+	}
+
+	/// <summary>
 	/// ToOutput
 	/// </summary>
 	/// <param name="model"></param>
@@ -77,42 +113,6 @@ internal static class DictDatumConverter
 			inputs.Add(output.ToInput());
 		}
 		return inputs.ToArray();
-	}
-
-	/// <summary>
-	/// ToModel
-	/// </summary>
-	/// <param name="input"></param>
-	/// <returns></returns>
-	public static DictDatum ToModel(this DictDatumInput input)
-	{
-		var model = new DictDatum()
-		{
-			Id = input.Id,
-			DictId = input.DictId,
-			Code = input.Code,
-			Name = input.Name,
-			Value = input.Value,
-			Remark = input.Remark,
-			Sort = input.Sort,
-			Status = input.Status
-		};
-		return model;
-	}
-
-	/// <summary>
-	/// ToModels
-	/// </summary>
-	/// <param name="inputs"></param>
-	/// <returns></returns>
-	public static ICollection<DictDatum> ToModels(this ICollection<DictDatumInput> inputs)
-	{
-		var models = new List<DictDatum>();
-		foreach (var input in inputs)
-		{
-			models.Add(input.ToModel());
-		}
-		return models.ToArray();
 	}
 
 

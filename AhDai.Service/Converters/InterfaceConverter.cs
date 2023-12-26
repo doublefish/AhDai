@@ -7,6 +7,24 @@ namespace AhDai.Service.Converters;
 internal static class InterfaceConverter
 {
 	/// <summary>
+	/// ToModel
+	/// </summary>
+	/// <param name="input"></param>
+	/// <returns></returns>
+	public static Interface ToModel(this InterfaceInput input)
+	{
+		var model = new Interface()
+		{
+			Name = input.Name,
+			Method = input.Method,
+			Url = input.Url,
+			Remark = input.Remark,
+			Status = input.Status
+		};
+		return model;
+	}
+
+	/// <summary>
 	/// ToOutput
 	/// </summary>
 	/// <param name="model"></param>

@@ -8,7 +8,7 @@ public class DictDatumOutput : BaseOutput
 	/// <summary>
 	/// 字典Id
 	/// </summary>
-	public int DictId { get; set; }
+	public long DictId { get; set; }
 	/// <summary>
 	/// 编码
 	/// </summary>
