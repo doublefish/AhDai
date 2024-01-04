@@ -115,13 +115,10 @@ public class Program
 		// 启用控制器
 		app.MapControllers();
 		// 启用静态资源
-		var fileConfig = builder.Configuration.GetFileConfig();
-		var root = Path.Combine(app.Environment.WebRootPath, fileConfig.UploadDirectory);
-		if (!Directory.Exists(root)) Directory.CreateDirectory(root);
 		app.UseStaticFiles(new StaticFileOptions()
 		{
-			FileProvider = new PhysicalFileProvider(root),
-			RequestPath = new PathString("/" + fileConfig.UploadDirectory)
+			FileProvider = new PhysicalFileProvider(app.Environment.WebRootPath),
+			//RequestPath = new PathString("/" + fileConfig.UploadDirectory)
 		});
 		// 启用跨域
 		app.UseCors("MyAllowOrigins");
