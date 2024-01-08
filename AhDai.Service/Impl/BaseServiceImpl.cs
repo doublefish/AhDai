@@ -108,10 +108,10 @@ internal abstract class BaseServiceImpl<PK, Model, Input, Output, QueryInput> : 
 	{
 		using var db = new DefaultDbContext();
 		var query = db.Set<Model>().Where(o => ids.Contains(o.Id) && o.RowDeleted == false);
-		var model = await query.ToArrayAsync();
-		var output = ToOutputs(model);
-		await SetAssociateDataAsync(output);
-		return output;
+		var models = await query.ToArrayAsync();
+		var outputs = ToOutputs(models);
+		await SetAssociateDataAsync(outputs);
+		return outputs;
 	}
 
 	/// <summary>
@@ -124,8 +124,8 @@ internal abstract class BaseServiceImpl<PK, Model, Input, Output, QueryInput> : 
 		using var db = new DefaultDbContext();
 		var query = db.Set<Model>().Where(o => o.RowDeleted == false);
 		query = GenerateQuery(db, query, input);
-		var list = await query.Take(input.PageSize ?? 1000).ToListAsync();
-		var outputs = ToOutputs(list);
+		var models = await query.Take(input.PageSize ?? 1000).ToListAsync();
+		var outputs = ToOutputs(models);
 		await SetAssociateDataAsync(outputs);
 		return outputs;
 	}
@@ -147,8 +147,8 @@ internal abstract class BaseServiceImpl<PK, Model, Input, Output, QueryInput> : 
 			var pageNumber = input.PageNumber ?? 1;
 			var pageSize = input.PageSize ?? 10;
 			query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
-			var list = await query.ToListAsync();
-			data.List = ToOutputs(list);
+			var models = await query.ToListAsync();
+			data.List = ToOutputs(models);
 			await SetAssociateDataAsync(data.List);
 		}
 		return data;
