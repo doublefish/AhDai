@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -29,6 +30,7 @@ public class Program
 		builder.Services.AddControllers(options =>
 		{
 			//options.Filters.Add<HttpResponseExceptionFilter>();
+			options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory());
 		}).ConfigureApiBehaviorOptions(options =>
 		{
 			options.ConfigInvalidModelStateResponse();
