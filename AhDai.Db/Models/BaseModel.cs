@@ -50,6 +50,4 @@ public class BaseModel<PK>
 	/// 删除标识
 	/// </summary>
 	public bool RowDeleted { get; set; }
-
-	//public bool EnableAutoSetValue { get; set; } = true;
 }

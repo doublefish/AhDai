@@ -4,10 +4,7 @@ using AhDai.Service.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AhDai.WebApi.Controllers;
@@ -15,22 +12,17 @@ namespace AhDai.WebApi.Controllers;
 /// <summary>
 /// 文件
 /// </summary>
+/// <remarks>
+/// 构造函数
+/// </remarks>
+/// <param name="logger"></param>
+/// <param name="service"></param>
 [ApiExplorerSettings(GroupName = Configs.SwaggerConfig.System)]
 [Authorize]
 [Route("api/file")]
-public class FileController : ControllerBase
+public class FileController(IFileService service) : ControllerBase
 {
-	readonly IFileService _service;
-
-	/// <summary>
-	/// 构造函数
-	/// </summary>
-	/// <param name="logger"></param>
-	/// <param name="service"></param>
-	public FileController(ILogger<FileController> logger, IFileService service)
-	{
-		_service = service;
-	}
+	readonly IFileService _service = service;
 
 	/// <summary>
 	/// 上传

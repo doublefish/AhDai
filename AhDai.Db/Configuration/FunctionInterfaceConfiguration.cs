@@ -8,7 +8,6 @@ internal class FunctionInterfaceConfiguration : BaseModelConfiguration<FunctionI
 {
     public override void Configure(EntityTypeBuilder<FunctionInterface> builder)
     {
-        Sequence = "SEQ_FUNCTION_INTERFACE_ID";
         builder.HasKey(e => e.Id).HasName("PK_FUNCTION_INTERFACE_ID");
         builder.ToTable("FUNCTION_INTERFACE");
         builder.Property(e => e.FunctionId).HasPrecision(10).HasColumnName("FUNCTION_ID");

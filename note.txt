@@ -1,5 +1,5 @@
 # 查看端口占用
-netstat -aon|findstr "6379"
+netstat -aon|grep "6379"
 
 --privileged=true
 
@@ -38,15 +38,14 @@ docker pull mcr.microsoft.com/mssql/server:2022-latest
 mkdir /usr/local/docker/mssql -p
 chmod 777 /usr/local/docker/mssql
 
-#Chinese_PRC_CI_AS/Chinese_PRC_BIN
 docker run -d --name sqlserver --hostname  sqlserver \
    -p 1433:1433 \
-   -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=mssql@123456" \
-   -e "TZ=Asia/Shanghai" \
-   -e "MSSQL_PID=Enterprise" \
-   -e "MSSQL_COLLATION=Chinese_PRC_BIN" \
+   -e ACCEPT_EULA=Y -e MSSQL_SA_PASSWORD=mssql@123456 \
+   -e TZ=Asia/Shanghai \
+   -e MSSQL_PID=Developer \
+   -e MSSQL_COLLATION=Chinese_PRC_CI_AS \
    -v /usr/local/docker/mssql:/var/opt/mssql \
-   --restart=always \
+   -m 2G \
    mcr.microsoft.com/mssql/server:2022-latest
 
 

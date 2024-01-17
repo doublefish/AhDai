@@ -8,7 +8,6 @@ internal class UserFunctionConfiguration : BaseModelConfiguration<UserFunction>
 {
     public override void Configure(EntityTypeBuilder<UserFunction> builder)
     {
-        Sequence = "SEQ_USER_FUNCTION_ID";
         builder.HasKey(e => e.Id).HasName("PK_USER_FUNCTION_ID");
         builder.ToTable("USER_FUNCTION");
         builder.Property(e => e.UserId).HasPrecision(10).HasColumnName("USER_ID");

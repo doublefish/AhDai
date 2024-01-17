@@ -8,7 +8,6 @@ internal class InterfaceConfiguration : BaseModelConfiguration<Interface>
 {
     public override void Configure(EntityTypeBuilder<Interface> builder)
     {
-        Sequence = "SEQ_INTERFACE_ID";
         builder.HasKey(e => e.Id).HasName("PK_INTERFACE_ID");
         builder.ToTable("INTERFACE");
         builder.Property(e => e.Name).HasMaxLength(128).IsUnicode(false).HasColumnName("NAME");

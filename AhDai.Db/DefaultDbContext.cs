@@ -66,8 +66,7 @@ public partial class DefaultDbContext : Microsoft.EntityFrameworkCore.DbContext
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		var schema = "dbo";
-		modelBuilder.HasDefaultSchema(schema);
+		modelBuilder.UseCollation("Chinese_PRC_CI_AS");
 
 		modelBuilder.ApplyConfiguration(new Configuration.DictConfiguration());
 		modelBuilder.ApplyConfiguration(new Configuration.DictDatumConfiguration());

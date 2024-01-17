@@ -8,7 +8,6 @@ internal class OrganizationConfiguration : BaseModelConfiguration<Organization>
 {
     public override void Configure(EntityTypeBuilder<Organization> builder)
     {
-        Sequence = "SEQ_ORGANIZATION_ID";
         builder.HasKey(e => e.Id).HasName("PK_ORGANIZATION_ID");
         builder.ToTable("ORGANIZATION");
         builder.Property(e => e.Code).HasMaxLength(128).IsUnicode(false).HasColumnName("CODE");

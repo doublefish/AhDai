@@ -8,7 +8,6 @@ internal class UserConfiguration : BaseModelConfiguration<User>
 {
     public override void Configure(EntityTypeBuilder<User> builder)
     {
-        Sequence = "SEQ_USER_ID";
         builder.HasKey(e => e.Id).HasName("PK_USER_ID");
         builder.ToTable("USER");
         builder.HasIndex(e => e.Username, "UNQ_USER_USERNAME").IsUnique();

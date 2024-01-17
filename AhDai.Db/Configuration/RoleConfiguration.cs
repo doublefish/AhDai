@@ -8,7 +8,6 @@ internal class RoleConfiguration : BaseModelConfiguration<Role>
 {
     public override void Configure(EntityTypeBuilder<Role> builder)
     {
-        Sequence = "SEQ_ROLE_ID";
         builder.HasKey(e => e.Id).HasName("PK_ROLE_ID");
         builder.ToTable("ROLE");
         builder.Property(e => e.Code).HasMaxLength(128).IsUnicode(false).HasColumnName("CODE");

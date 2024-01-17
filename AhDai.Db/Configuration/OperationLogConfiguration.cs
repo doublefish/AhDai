@@ -8,7 +8,6 @@ internal class OperationLogConfiguration : BaseModelConfiguration<OperationLog>
 {
     public override void Configure(EntityTypeBuilder<OperationLog> builder)
     {
-        Sequence = "SEQ_OPERATION_LOG_ID";
         builder.HasKey(e => e.Id).HasName("PK_OPERATION_LOG_ID");
         builder.ToTable("OPERATION_LOG");
         builder.Property(e => e.MenuName).HasMaxLength(128).IsUnicode(false).HasColumnName("MENU_NAME");

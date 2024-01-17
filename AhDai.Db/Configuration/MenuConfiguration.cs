@@ -8,7 +8,6 @@ internal class MenuConfiguration : BaseModelConfiguration<Menu>
 {
     public override void Configure(EntityTypeBuilder<Menu> builder)
     {
-        Sequence = "SEQ_MENU_ID";
         builder.HasKey(e => e.Id).HasName("PK_MENU_ID");
         builder.ToTable("MENU");
         builder.Property(e => e.Name).HasMaxLength(128).IsUnicode(false).HasColumnName("NAME");

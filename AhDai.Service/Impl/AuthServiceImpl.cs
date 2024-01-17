@@ -13,20 +13,14 @@ namespace AhDai.Service.Impl;
 /// <summary>
 /// AuthServiceImpl
 /// </summary>
-internal class AuthServiceImpl : IAuthService
+/// <remarks>
+/// 构造函数
+/// </remarks>
+/// <param name="serviceProvider"></param>
+internal class AuthServiceImpl(IServiceProvider serviceProvider) : IAuthService
 {
-	readonly IJwtService JwtService;
-	readonly IDictService DictService;
-
-	/// <summary>
-	/// 构造函数
-	/// </summary>
-	/// <param name="serviceProvider"></param>
-	public AuthServiceImpl(IServiceProvider serviceProvider)
-	{
-		JwtService = serviceProvider.GetRequiredService<IJwtService>();
-		DictService = serviceProvider.GetRequiredService<IDictService>();
-	}
+	readonly IJwtService JwtService = serviceProvider.GetRequiredService<IJwtService>();
+	readonly IDictService DictService = serviceProvider.GetRequiredService<IDictService>();
 
 	/// <summary>
 	/// 生成验证码

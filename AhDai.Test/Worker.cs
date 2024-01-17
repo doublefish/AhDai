@@ -1,8 +1,11 @@
+using AhDai.Core.Extensions;
 using AhDai.Core.Services;
+using AhDai.Core.Services.Impl;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Configuration;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
@@ -15,48 +18,58 @@ namespace AhDai.Test
 	/// </summary>
 	public class Worker : BackgroundService
 	{
-		private readonly ILogger<Worker> Logger;
-		readonly IDbService DbService;
+		readonly ILogger<Worker> _logger;
+		readonly IConfiguration _configuration;
+		readonly IDbService _dbService;
 
-		public Worker(IConfiguration configuration, ILogger<Worker> logger, IDbService dbService)
+		public Worker(ILogger<Worker> logger, IConfiguration configuration, IDbService dbService)
 		{
-			Logger = logger;
-			DbService = dbService;
+			_logger = logger;
+			_configuration = configuration;
+			_dbService = dbService;
 			var dict = Core.Utils.ConfigurationUtil.GetAll(configuration);
 			foreach (var kv in dict)
 			{
 				Console.WriteLine($"{kv.Key}={kv.Value}");
 			}
-			var esConfig = configuration.GetSection("Elasticsearch");
-
 		}
 
 		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 		{
-			Logger.LogInformation("开始执行：{time}", DateTimeOffset.Now);
-			//ElasticsearchSyncTool.Start();
+			_logger.LogInformation("开始执行：{time}", DateTimeOffset.Now);
 
 			while (!stoppingToken.IsCancellationRequested)
 			{
-				Logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+				_logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
 				//ComplexPing();
-
-				TestKafka();
+				//TestKafka();
+				TestDb();
 
 				await Task.Delay(3000, stoppingToken);
 			}
 		}
 
 
-		public static void TestKafka()
+		protected virtual void TestDb()
 		{
+			var dbConfigs = _configuration.GetDbConfigs();
+			var dbContext = _dbService.GetSqlDbContext("");
+		}
 
+		protected virtual void TestEs()
+		{
+			var esConfig = _configuration.GetSection("Elasticsearch");
+			ElasticsearchSyncTool.Start();
+		}
+
+		protected virtual void TestKafka()
+		{
 
 		}
 
 
-		public static void ComplexPing()
+		protected virtual void ComplexPing()
 		{
 			var pingSender = new Ping();
 			var data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";

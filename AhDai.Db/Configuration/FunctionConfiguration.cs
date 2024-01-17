@@ -8,7 +8,6 @@ internal class FunctionConfiguration : BaseModelConfiguration<Function>
 {
     public override void Configure(EntityTypeBuilder<Function> builder)
     {
-        Sequence = "SEQ_FUNCTION_ID";
         builder.HasKey(e => e.Id).HasName("PK_FUNCTION_ID");
         builder.ToTable("FUNCTION");
         builder.Property(e => e.MenuId).HasPrecision(10).HasColumnName("MENU_ID");

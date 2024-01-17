@@ -3,7 +3,6 @@ using AhDai.Service;
 using AhDai.Service.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,21 +11,12 @@ namespace AhDai.WebApi.Controllers;
 /// <summary>
 /// 认证
 /// </summary>
+/// <param name="service"></param>
 [ApiExplorerSettings(GroupName = Configs.SwaggerConfig.Auth)]
 [Route("api/auth")]
-public class AuthController : ControllerBase
+public class AuthController(IAuthService service) : ControllerBase
 {
-	readonly IAuthService _service;
-
-	/// <summary>
-	/// 构造函数
-	/// </summary>
-	/// <param name="logger"></param>
-	/// <param name="service"></param>
-	public AuthController(ILogger<InterfaceController> logger, IAuthService service)
-	{
-		_service = service;
-	}
+	readonly IAuthService _service = service;
 
 	/// <summary>
 	/// 获取验证码

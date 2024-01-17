@@ -19,8 +19,15 @@ using System.IO;
 
 namespace AhDai.WebApi;
 
+/// <summary>
+/// Program
+/// </summary>
 public class Program
 {
+	/// <summary>
+	/// Main
+	/// </summary>
+	/// <param name="args"></param>
 	public static void Main(string[] args)
 	{
 		var builder = WebApplication.CreateBuilder(args);

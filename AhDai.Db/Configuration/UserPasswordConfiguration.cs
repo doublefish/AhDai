@@ -8,7 +8,6 @@ internal class UserPasswordConfiguration : BaseModelConfiguration<UserPassword>
 {
     public override void Configure(EntityTypeBuilder<UserPassword> builder)
     {
-        Sequence = "SEQ_USER_PASSWOED_ID";
         builder.HasKey(e => e.Id).HasName("PK_USER_PASSWORD_ID");
         builder.ToTable("USER_PASSWORD");
         builder.Property(e => e.UserId).HasPrecision(10).HasColumnName("USER_ID");

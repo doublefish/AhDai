@@ -8,13 +8,11 @@ internal class DictConfiguration : BaseModelConfiguration<Dict>
 {
     public override void Configure(EntityTypeBuilder<Dict> builder)
     {
-        Sequence = "SEQ_DICT_ID";
-        builder.HasKey(e => e.Id).HasName("PK_DICT_ID");
-        builder.ToTable("DICT");
-        builder.Property(e => e.Code).HasMaxLength(128).IsUnicode(false).HasColumnName("CODE");
-        builder.Property(e => e.Name).HasMaxLength(128).IsUnicode(false).HasColumnName("NAME");
-        builder.Property(e => e.Remark).HasMaxLength(512).IsUnicode(false).HasColumnName("REMARK");
-        builder.Property(e => e.Status).HasPrecision(10).HasColumnName("STATUS");
+        builder.ToTable("Dict", tb => tb.HasComment("字典"));
+        builder.Property(e => e.Code).IsRequired().HasMaxLength(64).HasColumnName("Code").HasComment("编码");
+        builder.Property(e => e.Name).IsRequired().HasMaxLength(64).HasColumnName("Name").HasComment("名称");
+        builder.Property(e => e.Remark).HasMaxLength(512).HasColumnName("Remark").HasComment("备注");
+        builder.Property(e => e.Status).HasColumnName("Status").HasComment("状态");
         base.Configure(builder);
     }
 }
