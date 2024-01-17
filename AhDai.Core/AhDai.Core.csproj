@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
 		<Version>1.0.0</Version>
@@ -37,20 +37,20 @@
 		<PackageReference Include="AhDai.DbContext.SqlClient" Version="1.0.0" />
 		<PackageReference Include="AhDai.DbContext.SQLite" Version="1.0.0" />
 		<PackageReference Include="log4net" Version="2.0.15" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.14" />
-		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.14" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.14" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.1" />
 		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="RabbitMQ.Client" Version="6.8.0" />
-		<PackageReference Include="StackExchange.Redis" Version="2.7.4" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+		<PackageReference Include="StackExchange.Redis" Version="2.7.17" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
-		<PackageReference Include="System.Management" Version="7.0.2" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.1" />
+		<PackageReference Include="System.Management" Version="8.0.0" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0' ">
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0' ">
 	</ItemGroup>
 
 	<ItemGroup>

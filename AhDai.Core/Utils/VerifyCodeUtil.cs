@@ -179,8 +179,8 @@ public static class VerifyCodeUtil
 	public static void GenerateImageCode(this HttpResponse httpResponse, string guid, int length = 4)
 	{
 		var bytes = GenerateImageCode(guid, length);
-		httpResponse.Headers.Add("Access-Control-Expose-Headers", "X-VGuid");
-		httpResponse.Headers.Add("X-VGuid", guid);
+		httpResponse.Headers.Append("Access-Control-Expose-Headers", "X-VGuid");
+		httpResponse.Headers.Append("X-VGuid", guid);
 		httpResponse.ContentType = "image/png";
 		httpResponse.StatusCode = StatusCodes.Status200OK;
 		httpResponse.Body.WriteAsync(bytes, 0, bytes.Length);

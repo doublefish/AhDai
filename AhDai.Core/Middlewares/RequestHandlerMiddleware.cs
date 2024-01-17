@@ -73,7 +73,7 @@ namespace AhDai.Core.Middlewares
 			if (string.IsNullOrEmpty(requestId))
 			{
 				requestId = Guid.NewGuid().ToString();
-				context.Request.Headers.Add(Const.RequestId, requestId);
+				context.Request.Headers.Append(Const.RequestId, requestId);
 			}
 			var eventId = new EventId(0, requestId);
 
