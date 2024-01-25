@@ -113,17 +113,6 @@ namespace AhDai.Core.Extensions
 			return services;
 		}
 
-		/// <summary>
-		/// 添加RabbitMQ服务 - 依赖注入单例
-		/// </summary>
-		/// <param name="services"></param>
-		/// <returns></returns>
-		public static IServiceCollection AddRabbitMQ(this IServiceCollection services)
-		{
-			services.AddSingleton<Services.IRabbitMQService, Services.Impl.RabbitMQService>();
-			return services;
-		}
-
 
 		#region DbContext
 		/// <summary>
@@ -174,33 +163,6 @@ namespace AhDai.Core.Extensions
 		/// <param name="services"></param>
 		/// <param name="setupAction"></param>
 		public static void ConfigureRedis(this IServiceCollection services, Action<Options.RedisOptions> setupAction)
-		{
-			services.Configure(setupAction);
-		}
-		#endregion
-
-		#region RabbitMQ
-		/// <summary>
-		/// 注册RabbitMQ服务
-		/// </summary>
-		/// <param name="services"></param>
-		/// <param name="setupAction"></param>
-		/// <returns></returns>
-		public static IServiceCollection AddRabbitMQ(this IServiceCollection services, Action<Options.RabbitMQOptions> setupAction = null)
-		{
-			if (setupAction != null)
-			{
-				services.ConfigureRabbitMQ(setupAction);
-			}
-			return services;
-		}
-
-		/// <summary>
-		/// 配置RabbitMQ服务
-		/// </summary>
-		/// <param name="services"></param>
-		/// <param name="setupAction"></param>
-		public static void ConfigureRabbitMQ(this IServiceCollection services, Action<Options.RabbitMQOptions> setupAction)
 		{
 			services.Configure(setupAction);
 		}

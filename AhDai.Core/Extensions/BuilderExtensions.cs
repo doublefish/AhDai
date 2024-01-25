@@ -84,41 +84,6 @@ namespace AhDai.Core.Extensions
 		}
 		#endregion
 
-		#region UseRabbitMQ
-		/// <summary>
-		/// UseRabbitMQ
-		/// </summary>
-		/// <param name="app"></param>
-		/// <param name="options"></param>
-		/// <returns></returns>
-		public static IApplicationBuilder UseRabbitMQ(this IApplicationBuilder app, Options.RabbitMQOptions options)
-		{
-			if (options != null)
-			{
-				RabbitMQ.Helper.Init(options.Config);
-			}
-			return app;
-		}
-
-		/// <summary>
-		/// UseRabbitMQ
-		/// </summary>
-		/// <param name="app"></param>
-		/// <param name="setupAction"></param>
-		/// <returns></returns>
-		public static IApplicationBuilder UseRabbitMQ(this IApplicationBuilder app, Action<Options.RabbitMQOptions> setupAction = null)
-		{
-			Options.RabbitMQOptions options;
-			using (var scope = app.ApplicationServices.CreateScope())
-			{
-				// 这里才会执行添加配置时传入的action
-				options = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<Options.RabbitMQOptions>>().Value;
-				setupAction?.Invoke(options);
-			}
-			return app.UseRabbitMQ(options);
-		}
-		#endregion
-
 		#region UseMail
 		/// <summary>
 		/// UseMail

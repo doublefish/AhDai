@@ -499,22 +499,6 @@
             <param name="setupAction"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.UseRabbitMQ(Microsoft.AspNetCore.Builder.IApplicationBuilder,AhDai.Core.Options.RabbitMQOptions)">
-            <summary>
-            UseRabbitMQ
-            </summary>
-            <param name="app"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.UseRabbitMQ(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{AhDai.Core.Options.RabbitMQOptions})">
-            <summary>
-            UseRabbitMQ
-            </summary>
-            <param name="app"></param>
-            <param name="setupAction"></param>
-            <returns></returns>
-        </member>
         <member name="M:AhDai.Core.Extensions.BuilderExtensions.UseMail(Microsoft.AspNetCore.Builder.IApplicationBuilder,AhDai.Core.Options.MailOptions)">
             <summary>
             UseMail
@@ -590,13 +574,6 @@
         <member name="M:AhDai.Core.Extensions.ConfigurationExtensions.GetFileConfig(Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             获取File配置
-            </summary>
-            <param name="configuration"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ConfigurationExtensions.GetRabbitMQConfig(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            获取RabbitMQ配置
             </summary>
             <param name="configuration"></param>
             <returns></returns>
@@ -1053,13 +1030,6 @@
             <param name="config"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddRabbitMQ(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            添加RabbitMQ服务 - 依赖注入单例
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
         <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddDbContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.DbContextOptions})">
             <summary>
             注册数据库服务
@@ -1086,21 +1056,6 @@
         <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.ConfigureRedis(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.RedisOptions})">
             <summary>
             配置Redis服务
-            </summary>
-            <param name="services"></param>
-            <param name="setupAction"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddRabbitMQ(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.RabbitMQOptions})">
-            <summary>
-            注册RabbitMQ服务
-            </summary>
-            <param name="services"></param>
-            <param name="setupAction"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.ConfigureRabbitMQ(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.RabbitMQOptions})">
-            <summary>
-            配置RabbitMQ服务
             </summary>
             <param name="services"></param>
             <param name="setupAction"></param>
@@ -1620,16 +1575,6 @@
             邮箱配置
             </summary>
         </member>
-        <member name="T:AhDai.Core.Options.RabbitMQOptions">
-            <summary>
-            RabbitMQOptions
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.RabbitMQOptions.Config">
-            <summary>
-            RabbitMQ配置
-            </summary>
-        </member>
         <member name="T:AhDai.Core.Options.RedisOptions">
             <summary>
             RedisOptions
@@ -1696,349 +1641,6 @@
         <member name="M:AhDai.Core.Providers.LoggerProvider.Dispose">
             <summary>
             Dispose
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.RabbitMQ.Config">
-            <summary>
-            RabbitMQConfig
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Config.Host">
-            <summary>
-            主机
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Config.Port">
-            <summary>
-            端口
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Config.VirtualHost">
-            <summary>
-            虚拟主机
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Config.Username">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Config.Password">
-            <summary>
-            密码
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.RabbitMQ.Exchange">
-            <summary>
-            交换器
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Exchange.#ctor(System.String,AhDai.Core.RabbitMQ.ExchangeType)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="name"></param>
-            <param name="type"></param>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Exchange.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Exchange.Type">
-            <summary>
-            类型
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Exchange.Durable">
-            <summary>
-            持久的（Durable/Transient）默认：true
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Exchange.AutoDelete">
-            <summary>
-            自动删除
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Exchange.Arguments">
-            <summary>
-            参数（无效）
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.RabbitMQ.ExchangeType">
-            <summary>
-            交换器类型
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.RabbitMQ.ExchangeType.Fanout">
-            <summary>
-            fanout
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.RabbitMQ.ExchangeType.Direct">
-            <summary>
-            direct
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.RabbitMQ.ExchangeType.Topic">
-            <summary>
-            topic
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.RabbitMQ.ExchangeType.Headers">
-            <summary>
-            headers
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.RabbitMQ.ExchangeType.Delayed">
-            <summary>
-            x-delayed-message
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.RabbitMQ.Extensions">
-            <summary>
-            RabbitMQExtensions
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Extensions.GetString(AhDai.Core.RabbitMQ.ExchangeType)">
-            <summary>
-            GetString
-            </summary>
-            <param name="exchangeType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Extensions.ExchangeDeclare(RabbitMQ.Client.IModel,AhDai.Core.RabbitMQ.Exchange)">
-            <summary>
-            声明交换器
-            </summary>
-            <param name="model">amqp</param>
-            <param name="exchange">交换器</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Extensions.QueueDeclare(RabbitMQ.Client.IModel,AhDai.Core.RabbitMQ.Queue)">
-            <summary>
-            声明队列
-            </summary>
-            <param name="model">amqp</param>
-            <param name="queue">队列</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Extensions.QueueBind(RabbitMQ.Client.IModel,AhDai.Core.RabbitMQ.Queue,System.String,System.String)">
-            <summary>
-            绑定队列
-            </summary>
-            <param name="model">amqp</param>
-            <param name="queue">队列</param>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Extensions.QueueDeclareAndBind(RabbitMQ.Client.IModel,AhDai.Core.RabbitMQ.Queue,System.String,System.String)">
-            <summary>
-            声明队列并绑定到已存在的交换器
-            </summary>
-            <param name="model">amqp</param>
-            <param name="queue">队列</param>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Extensions.DeclareAndBind(RabbitMQ.Client.IModel,AhDai.Core.RabbitMQ.Exchange,AhDai.Core.RabbitMQ.Queue,System.String)">
-            <summary>
-            声明交换器和队列并绑定
-            </summary>
-            <param name="model">amqp</param>
-            <param name="exchange">交换器</param>
-            <param name="queue">队列</param>
-            <param name="routingKey">路由</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Extensions.Ack(RabbitMQ.Client.IModel,System.UInt64,AhDai.Core.RabbitMQ.ResultType)">
-            <summary>
-            确认消息
-            </summary>
-            <param name="model">amqp</param>
-            <param name="deliveryTag">交货标签</param>
-            <param name="result">结果</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Extensions.BasicConsume(RabbitMQ.Client.IModel,System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,AhDai.Core.RabbitMQ.ResultType})">
-            <summary>
-            订阅队列
-            </summary>
-            <param name="model">amqp</param>
-            <param name="queue">队列</param>
-            <param name="received">接收消息处理方法</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Extensions.BasicPublish(RabbitMQ.Client.IModel,System.String,System.String,RabbitMQ.Client.IBasicProperties,System.String)">
-            <summary>
-            发布消息
-            </summary>
-            <param name="model">amqp</param>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-            <param name="basicProperties">属性</param>
-            <param name="body">内容</param>
-        </member>
-        <member name="T:AhDai.Core.RabbitMQ.Helper">
-            <summary>
-            RabbitMQHelper
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Helper.Config">
-            <summary>
-            配置
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.#cctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.Init(AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            初始化
-            </summary>
-            <param name="config">配置</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.GetConnectionFactory(AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            获取连接工厂
-            </summary>
-            <param name="config">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.GetConnection(AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            获取连接工厂
-            </summary>
-            <param name="config">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.ExchangeDeclare(AhDai.Core.RabbitMQ.Exchange,AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            声明交换器
-            </summary>
-            <param name="exchange">交换器</param>
-            <param name="config">自定义配置</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.QueueDeclare(AhDai.Core.RabbitMQ.Queue,AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            声明队列
-            </summary>
-            <param name="queue"></param>
-            <param name="config">自定义配置</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.QueueBind(AhDai.Core.RabbitMQ.Queue,System.String,System.String,AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            声明队列并绑定到已存在的交换器
-            </summary>
-            <param name="queue">队列</param>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-            <param name="config">自定义配置</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.QueueDeclareAndBind(AhDai.Core.RabbitMQ.Queue,System.String,System.String,AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            声明队列并绑定到已存在的交换器
-            </summary>
-            <param name="queue">队列</param>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-            <param name="config">自定义配置</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.DeclareAndBind(AhDai.Core.RabbitMQ.Exchange,AhDai.Core.RabbitMQ.Queue,System.String,AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            声明交换器和队列并绑定
-            </summary>
-            <param name="exchange">交换器</param>
-            <param name="queue">队列</param>
-            <param name="routingKey">路由</param>
-            <param name="config">自定义配置</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,AhDai.Core.RabbitMQ.ResultType},AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            订阅队列
-            </summary>
-            <param name="queue">队列</param>
-            <param name="received">接收消息处理方法</param>
-            <param name="config">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.ReadOnlyMemory{System.Byte},AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-            <param name="basicProperties">属性</param>
-            <param name="body">内容</param>
-            <param name="config">自定义配置</param>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Helper.Publish(System.String,System.String,RabbitMQ.Client.IBasicProperties,System.String,AhDai.Core.RabbitMQ.Config)">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-            <param name="basicProperties">属性</param>
-            <param name="body">内容</param>
-            <param name="config">自定义配置</param>
-        </member>
-        <member name="T:AhDai.Core.RabbitMQ.Queue">
-            <summary>
-            队列
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.RabbitMQ.Queue.#ctor(System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="name"></param>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Queue.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Queue.Durable">
-            <summary>
-            持久的（Durable/Transient）默认：true
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Queue.Exclusive">
-            <summary>
-            独占
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Queue.AutoDelete">
-            <summary>
-            自动删除
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.RabbitMQ.Queue.Arguments">
-            <summary>
-            参数（无效）
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.RabbitMQ.ResultType">
-            <summary>
-            处理结果类型
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.RabbitMQ.ResultType.Success">
-            <summary>
-            成功
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.RabbitMQ.ResultType.Fail">
-            <summary>
-            失败（把消息从队列中移除）
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.RabbitMQ.ResultType.Retry">
-            <summary>
-            重试（把消息追加到队尾）
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.RabbitMQ.ResultType.Exception">
-            <summary>
-            异常
             </summary>
         </member>
         <member name="T:AhDai.Core.Services.IActionResult`1">
@@ -2471,65 +2073,6 @@
             <param name="body">正文</param>
             <param name="config">自定义配置</param>
         </member>
-        <member name="T:AhDai.Core.Services.Impl.PublishService">
-            <summary>
-            RabbitMQ发布服务
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.PublishService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="configuration"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.PublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.ReadOnlyMemory{System.Byte})">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-            <param name="messageId">消息Id</param>
-            <param name="headers">头</param>
-            <param name="body">内容</param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.PublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-            <param name="messageId">消息Id</param>
-            <param name="headers">头</param>
-            <param name="body">内容</param>
-        </member>
-        <member name="T:AhDai.Core.Services.Impl.RabbitMQService">
-            <summary>
-            RabbitMQ服务
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.RabbitMQService.Config">
-            <summary>
-            配置
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.RabbitMQService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="configuration"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.RabbitMQService.GetConnectionFactory">
-            <summary>
-            获取连接
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.RabbitMQService.GetConnection">
-            <summary>
-            获取连接
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Core.Services.Impl.RedisService">
             <summary>
             Redis服务
@@ -2648,72 +2191,6 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="T:AhDai.Core.Services.Impl.SubscribeService">
-            <summary>
-            RabbitMQ订阅服务
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.SubscribeService.Channel">
-            <summary>
-            通道
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.SubscribeService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="configuration"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.SubscribeService.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,AhDai.Core.RabbitMQ.ResultType})">
-            <summary>
-            订阅队列
-            </summary>
-            <param name="queue">队列</param>
-            <param name="received">接收消息处理方法</param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Services.IPublishService">
-            <summary>
-            发布服务
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.IPublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.ReadOnlyMemory{System.Byte})">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-            <param name="messageId">消息Id</param>
-            <param name="headers">头</param>
-            <param name="body">内容</param>
-        </member>
-        <member name="M:AhDai.Core.Services.IPublishService.Publish(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
-            <summary>
-            发布消息
-            </summary>
-            <param name="exchange">交换器</param>
-            <param name="routingKey">路由</param>
-            <param name="messageId">消息Id</param>
-            <param name="headers">头</param>
-            <param name="body">内容</param>
-        </member>
-        <member name="T:AhDai.Core.Services.IRabbitMQService">
-            <summary>
-            RabbitMQ服务
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.IRabbitMQService.GetConnectionFactory">
-            <summary>
-            获取连接
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.IRabbitMQService.GetConnection">
-            <summary>
-            获取连接
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Core.Services.IRedisService">
             <summary>
             Redis服务
@@ -2764,19 +2241,6 @@
             <param name="db"></param>
             <param name="asyncState"></param>
             <param name="config">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Services.ISubscribeService">
-            <summary>
-            订阅服务
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.ISubscribeService.Subscribe(System.String,System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,AhDai.Core.RabbitMQ.ResultType})">
-            <summary>
-            订阅队列
-            </summary>
-            <param name="queue">队列</param>
-            <param name="received">接收消息处理方法</param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Services.Log4NetLogger">

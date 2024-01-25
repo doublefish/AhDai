@@ -69,15 +69,5 @@ namespace AhDai.Core.Extensions
 		{
 			return configuration.GetSection("File").Get<Configs.FileConfig>();
 		}
-
-		/// <summary>
-		/// 获取RabbitMQ配置
-		/// </summary>
-		/// <param name="configuration"></param>
-		/// <returns></returns>
-		public static RabbitMQ.Config GetRabbitMQConfig(this IConfiguration configuration)
-		{
-			return configuration.GetSection("RabbitMQ").Get<RabbitMQ.Config>();
-		}
 	}
 }
