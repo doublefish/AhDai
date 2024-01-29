@@ -1,9 +1,8 @@
 oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu
 
 # 推送
-dotnet nuget push AhDai.Base/bin/Release/AhDai.Base.1.0.1.nupkg -k oy2avq72ok53pomj27wqmdwtgknhqayuzfubd7gshnxiye -s https://www.nuget.org/
+dotnet nuget push AhDai.Base/bin/Release/AhDai.Base.1.0.1.nupkg -k oy2lxnrpsbwmxr4altcal2pbzzrojrde5k6dnycqqqisli -s https://www.nuget.org/
 
-dotnet nuget push AhDai.Core/bin/Release/AhDai.Core.1.0.0.nupkg -k oy2avq72ok53pomj27wqmdwtgknhqayuzfubd7gshnxiye -s https://www.nuget.org/
+dotnet nuget push AhDai.Core/bin/Release/AhDai.Core.1.0.2.nupkg -k oy2lxnrpsbwmxr4altcal2pbzzrojrde5k6dnycqqqisli -s https://www.nuget.org/
 
-dotnet nuget push AhDai.WebApi/bin/Release/AhDai.WebApi.1.0.0.nupkg -k oy2avq72ok53pomj27wqmdwtgknhqayuzfubd7gshnxiye -s https://www.nuget.org/
 

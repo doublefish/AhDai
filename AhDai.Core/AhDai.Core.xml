@@ -144,6 +144,21 @@
             ApiResult
             </summary>
         </member>
+        <member name="P:AhDai.Core.ApiResult.Code">
+            <summary>
+            状态代码
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.ApiResult.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.ApiResult.TraceId">
+            <summary>
+            追踪Id
+            </summary>
+        </member>
         <member name="M:AhDai.Core.ApiResult.#ctor">
             <summary>
             构造函数
@@ -178,29 +193,14 @@
             接口结果
             </summary>
         </member>
-        <member name="P:AhDai.Core.ApiResult`1.Code">
-            <summary>
-            状态代码
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.ApiResult`1.Message">
-            <summary>
-            消息
-            </summary>
-        </member>
         <member name="P:AhDai.Core.ApiResult`1.Data">
             <summary>
             结果
             </summary>
         </member>
-        <member name="P:AhDai.Core.ApiResult`1.TraceId">
+        <member name="P:AhDai.Core.ApiResult`1.ExtraData">
             <summary>
-            追踪Id
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.ApiResult`1.Success">
-            <summary>
-            是否成功
+            扩展数据
             </summary>
         </member>
         <member name="M:AhDai.Core.ApiResult`1.#ctor(`0)">
@@ -1118,6 +1118,42 @@
         <member name="F:AhDai.Core.HttpContentType.Xml">
             <summary>
             Xml
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.IApiResult">
+            <summary>
+            IApiResult
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.IApiResult.Code">
+            <summary>
+            状态代码
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.IApiResult.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.IApiResult.TraceId">
+            <summary>
+            追踪Id
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.IApiResult`1">
+            <summary>
+            IApiResult
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AhDai.Core.IApiResult`1.Data">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.IApiResult`1.ExtraData">
+            <summary>
+            扩展数据
             </summary>
         </member>
         <member name="T:AhDai.Core.Language">

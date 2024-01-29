@@ -4,9 +4,9 @@
 		<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
-		<Version>1.0.0</Version>
-		<AssemblyVersion>1.0.0</AssemblyVersion>
-		<FileVersion>1.0.0</FileVersion>
+		<Version>1.0.2</Version>
+		<AssemblyVersion>1.0.2</AssemblyVersion>
+		<FileVersion>1.0.2</FileVersion>
 		<PackageProjectUrl>https://github.com/doublefish/AhDai</PackageProjectUrl>
 		<Description>常用方法封装 - Core</Description>
 		<PackageReleaseNotes>无</PackageReleaseNotes>
@@ -19,6 +19,7 @@
 		<RepositoryUrl>https://github.com/doublefish/AhDai</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<OpenApiGenerateDocuments>False</OpenApiGenerateDocuments>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
