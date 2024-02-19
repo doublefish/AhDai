@@ -2548,12 +2548,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.ComputerUtil.GetMacAddressesByWin32">
-            <summary>
-            获取Mac地址
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Core.Utils.ConfigurationUtil">
             <summary>
             ConfigurationUtil

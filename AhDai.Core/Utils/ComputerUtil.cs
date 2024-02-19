@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Management;
 using System.Net.NetworkInformation;
-using System.Runtime.Versioning;
 
 namespace AhDai.Core.Utils;
 
@@ -36,28 +34,6 @@ public static class ComputerUtil
 				var address = string.Join(":", physicalAddress.GetAddressBytes().Select(b => b.ToString("X2")));
 				addresses.Add(address);
 			}
-		}
-		return addresses;
-	}
-
-	/// <summary>
-	/// 获取Mac地址
-	/// </summary>
-	/// <returns></returns>
-	[SupportedOSPlatform("windows")]
-	public static ICollection<string> GetMacAddressesByWin32()
-	{
-		var addresses = new List<string>();
-		using var mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-		var moc = mc.GetInstances();
-		foreach (var mo in moc)
-		{
-			if ((bool)mo["IPEnabled"])
-			{
-				var address = mo["MacAddress"].ToString();
-				addresses.Add(address);
-			}
-			mo.Dispose();
 		}
 		return addresses;
 	}

@@ -8,10 +8,10 @@ using System.Collections.Generic;
 
 namespace AhDai.Core.Services.Impl
 {
-    /// <summary>
-    /// Redis服务
-    /// </summary>
-    public class RedisService : IRedisService
+	/// <summary>
+	/// Redis服务
+	/// </summary>
+	public class RedisService : IRedisService
 	{
 		readonly IDictionary<string, IConnectionMultiplexer> ConnectionMultiplexers;
 		readonly object Locker;
@@ -20,10 +20,10 @@ namespace AhDai.Core.Services.Impl
 		/// 配置
 		/// </summary>
 		public RedisConfig Config { get; private set; }
-        /// <summary>
-        /// 日志
-        /// </summary>
-        public ILogger<RedisService> Logger { get; private set; }
+		/// <summary>
+		/// 日志
+		/// </summary>
+		public ILogger<RedisService> Logger { get; private set; }
 
 		/// <summary>
 		/// 构造函数
@@ -125,8 +125,9 @@ namespace AhDai.Core.Services.Impl
 		/// <returns></returns>
 		public IDatabase GetDatabase(int db = -1, object asyncState = null, RedisConfig config = null)
 		{
-			var multiplexer = GetConnectionMultiplexer(config);
-			return multiplexer.GetDatabase(db, asyncState);
+			var c = config ?? Config;
+			var multiplexer = GetConnectionMultiplexer(c);
+			return multiplexer.GetDatabase(db > -1 ? db : c.Database, asyncState);
 		}
 
 		#region 接收通知事件
@@ -136,9 +137,9 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected virtual void ConfigurationChangedBroadcast(object sender, EndPointEventArgs e)
-        {
-            Logger.Debug("", $"ConfigurationChangedBroadcast=>EndPoint={e.EndPoint}");
-        }
+		{
+			Logger.Debug("", $"ConfigurationChangedBroadcast=>EndPoint={e.EndPoint}");
+		}
 
 		/// <summary>
 		/// 检测到配置更改时
@@ -146,9 +147,9 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected virtual void ConfigurationChanged(object sender, EndPointEventArgs e)
-        {
-            Logger.Debug("", $"ConfigurationChanged=>EndPoint={e.EndPoint}");
-        }
+		{
+			Logger.Debug("", $"ConfigurationChanged=>EndPoint={e.EndPoint}");
+		}
 
 		/// <summary>
 		/// 当哈希槽被重新定位时/更改集群
@@ -156,9 +157,9 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected virtual void HashSlotMoved(object sender, HashSlotMovedEventArgs e)
-        {
-            Logger.Debug("", $"HashSlotMoved=>NewEndPoint={e.NewEndPoint},OldEndPoint={e.OldEndPoint}");
-        }
+		{
+			Logger.Debug("", $"HashSlotMoved=>NewEndPoint={e.NewEndPoint},OldEndPoint={e.OldEndPoint}");
+		}
 
 		/// <summary>
 		/// 发生错误时
@@ -166,9 +167,9 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected virtual void ErrorMessage(object sender, RedisErrorEventArgs e)
-        {
-            Logger.Debug("", $"ErrorMessage=>{e.Message}");
-        }
+		{
+			Logger.Debug("", $"ErrorMessage=>{e.Message}");
+		}
 
 		/// <summary>
 		/// 发生内部错误时
@@ -176,9 +177,9 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected virtual void InternalError(object sender, InternalErrorEventArgs e)
-        {
-            Logger.Debug("", e.Exception, $"InternalError=>{e.Exception.Message}");
-        }
+		{
+			Logger.Debug("", e.Exception, $"InternalError=>{e.Exception.Message}");
+		}
 
 		/// <summary>
 		/// 连接失败，如果重新连接成功将不会收到这个通知
@@ -186,9 +187,9 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected virtual void ConnectionFailed(object sender, ConnectionFailedEventArgs e)
-        {
-            Logger.Debug("", e.Exception, $"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}");
-        }
+		{
+			Logger.Debug("", e.Exception, $"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}");
+		}
 
 		/// <summary>
 		/// 建立物理连接时
@@ -196,9 +197,9 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected virtual void ConnectionRestored(object sender, ConnectionFailedEventArgs e)
-        {
-            Logger.Debug("", $"ConnectionRestored=>EndPoint={e.EndPoint}");
-        }
-        #endregion
-    }
+		{
+			Logger.Debug("", $"ConnectionRestored=>EndPoint={e.EndPoint}");
+		}
+		#endregion
+	}
 }
