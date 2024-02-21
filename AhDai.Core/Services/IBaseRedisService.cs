@@ -6,7 +6,7 @@ namespace AhDai.Core.Services
     /// <summary>
     /// Redis服务
     /// </summary>
-    public interface IRedisService
+    public interface IBaseRedisService
     {
 		/// <summary>
 		/// 创建连接配置

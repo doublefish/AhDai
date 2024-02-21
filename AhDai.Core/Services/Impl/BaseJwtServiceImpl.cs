@@ -19,12 +19,12 @@ namespace AhDai.Core.Services.Impl
 	/// <summary>
 	/// Jwt服务
 	/// </summary>
-	public class JwtService : IJwtService
+	public class BaseJwtServiceImpl : IBaseJwtService
     {
 		/// <summary>
 		/// RedisService
 		/// </summary>
-		public IRedisService RedisService { get; private set; }
+		public IBaseRedisService RedisService { get; private set; }
 		/// <summary>
 		/// 配置
 		/// </summary>
@@ -32,7 +32,7 @@ namespace AhDai.Core.Services.Impl
 		/// <summary>
 		/// 日志
 		/// </summary>
-		public ILogger<JwtService> Logger { get; private set; }
+		public ILogger<BaseJwtServiceImpl> Logger { get; private set; }
 
 		/// <summary>
 		/// 构造函数
@@ -40,12 +40,12 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="configuration"></param>
 		/// <param name="serviceProvider"></param>
 		/// <param name="logger"></param>
-		public JwtService(IConfiguration configuration, IServiceProvider serviceProvider, ILogger<JwtService> logger)
+		public BaseJwtServiceImpl(IConfiguration configuration, IServiceProvider serviceProvider, ILogger<BaseJwtServiceImpl> logger)
 		{
 			Config = configuration.GetJwtConfig();
 			if (Config.EnableRedis)
 			{
-				RedisService = serviceProvider.GetRequiredService<IRedisService>();
+				RedisService = serviceProvider.GetRequiredService<IBaseRedisService>();
 			}
 			Logger = logger;
 			Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
@@ -56,7 +56,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		public async Task<TokenResult> GenerateTokenAsync(TokenData data)
+		public virtual async Task<TokenResult> GenerateTokenAsync(TokenData data)
 		{
 			var claims = new List<Claim>();
 			if (data.Id != null)
@@ -97,7 +97,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="claims"></param>
 		/// <returns></returns>
-		public async Task<TokenResult> GenerateTokenAsync(params Claim[] claims)
+		public virtual async Task<TokenResult> GenerateTokenAsync(params Claim[] claims)
 		{
 			var expires = DateTime.UtcNow.AddMinutes(Config.Expiration);
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.SigningKey));
@@ -132,7 +132,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="token"></param>
 		/// <returns></returns>
-		public IEnumerable<Claim> GetClaims(string token)
+		public virtual IEnumerable<Claim> GetClaims(string token)
 		{
 			var data = token.Split(' ')[1];
 			var jwt = new JwtSecurityTokenHandler().ReadJwtToken(data);
@@ -144,7 +144,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="token"></param>
 		/// <returns></returns>
-		public TokenData GetTokenData(string token)
+		public virtual TokenData GetTokenData(string token)
 		{
 			var claims = GetClaims(token);
 			return ToTokenData(claims.ToArray());
@@ -155,7 +155,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="token"></param>
 		/// <returns></returns>
-		public async Task<TokenResult> RefreshTokenAsync(string token)
+		public virtual async Task<TokenResult> RefreshTokenAsync(string token)
 		{
 			var claims = GetClaims(token);
 			var data = ToTokenData(claims.ToArray());
@@ -167,7 +167,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="token"></param>
 		/// <returns></returns>
-		public async Task<bool> ExistsTokenAsync(string token)
+		public virtual async Task<bool> ExistsTokenAsync(string token)
 		{
 			if (Config.EnableRedis && !string.IsNullOrEmpty(token))
 			{
@@ -183,7 +183,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="token"></param>
 		/// <returns></returns>
-		public async Task<bool> RemoveTokenAsync(string token)
+		public virtual async Task<bool> RemoveTokenAsync(string token)
 		{
 			if (Config.EnableRedis && !string.IsNullOrEmpty(token))
 			{
@@ -199,7 +199,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="claims"></param>
 		/// <returns></returns>
-		public TokenData ToTokenData(Claim[] claims)
+		public virtual TokenData ToTokenData(Claim[] claims)
 		{
 			var data = new TokenData()
 			{

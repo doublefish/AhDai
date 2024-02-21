@@ -19,7 +19,7 @@ namespace AhDai.Service.Impl;
 /// <param name="serviceProvider"></param>
 internal class AuthServiceImpl(IServiceProvider serviceProvider) : IAuthService
 {
-	readonly IJwtService JwtService = serviceProvider.GetRequiredService<IJwtService>();
+	readonly IBaseJwtService JwtService = serviceProvider.GetRequiredService<IBaseJwtService>();
 	readonly IDictService DictService = serviceProvider.GetRequiredService<IDictService>();
 
 	/// <summary>

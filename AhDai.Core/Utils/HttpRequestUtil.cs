@@ -24,7 +24,7 @@ public static class HttpRequestUtil
 		path = path.ToLower();
 		var dateTime = DateTime.Now;
 		var time = dateTime.TimeOfDay;
-		var redisService = ServiceUtil.Services.GetRequiredService<IRedisService>();
+		var redisService = ServiceUtil.Services.GetRequiredService<IBaseRedisService>();
 		var redis = redisService.GetDatabase(15);
 		var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 		var hashField = $"{ipAddress}-{path}";

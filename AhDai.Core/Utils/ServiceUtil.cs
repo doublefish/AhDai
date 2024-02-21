@@ -67,7 +67,7 @@ public static class ServiceUtil
 		var httpContext = HttpContextAccessor.HttpContext;
 		if (httpContext != null && httpContext.User != null)
 		{
-			var jwtService = Services.GetRequiredService<Services.IJwtService>();
+			var jwtService = Services.GetRequiredService<Services.IBaseJwtService>();
 			return jwtService.ToTokenData(httpContext.User.Claims.ToArray());
 		}
 		return null;

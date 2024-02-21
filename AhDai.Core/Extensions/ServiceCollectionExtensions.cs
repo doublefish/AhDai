@@ -21,7 +21,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static IServiceCollection AddDbService(this IServiceCollection services)
 		{
-			services.AddSingleton<Services.IDbService, Services.Impl.DbService>();
+			services.AddSingleton<Services.IBaseDbService, Services.Impl.BaseDbServiceImpl>();
 			return services;
 		}
 
@@ -32,7 +32,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static IServiceCollection AddRedisService(this IServiceCollection services)
 		{
-			services.AddSingleton<Services.IRedisService, Services.Impl.RedisService>();
+			services.AddSingleton<Services.IBaseRedisService, Services.Impl.BaseRedisServiceImpl>();
 			return services;
 		}
 
@@ -43,7 +43,7 @@ namespace AhDai.Core.Extensions
 		/// <returns></returns>
 		public static IServiceCollection AddJwtService(this IServiceCollection services)
 		{
-			return services.AddSingleton<Services.IJwtService, Services.Impl.JwtService>();
+			return services.AddSingleton<Services.IBaseJwtService, Services.Impl.BaseJwtServiceImpl>();
 		}
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace AhDai.Core.Extensions
 						var token = context.Request.Headers.Authorization.ToString();
 						if (!string.IsNullOrEmpty(token) && config.EnableRedis)
 						{
-							var jwtService = ServiceUtil.Services.GetRequiredService<Services.IJwtService>();
+							var jwtService = ServiceUtil.Services.GetRequiredService<Services.IBaseJwtService>();
 							var exists = jwtService.ExistsTokenAsync(token).Result;
 							if (!exists)
 							{

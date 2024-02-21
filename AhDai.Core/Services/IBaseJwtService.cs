@@ -8,7 +8,7 @@ namespace AhDai.Core.Services
     /// <summary>
     /// Jwt服务
     /// </summary>
-    public interface IJwtService
+    public interface IBaseJwtService
 	{
 		/// <summary>
 		/// GenerateToken

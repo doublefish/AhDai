@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace AhDai.Service;
 
 /// <summary>
-/// IFileService
+/// IBaseFileService
 /// </summary>
 public interface IFileService : IBaseService<FileInput, FileOutput, FileQueryInput>
 {

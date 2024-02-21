@@ -14,9 +14,9 @@ namespace AhDai.Service.Impl;
 /// </summary>
 internal class FileServiceImpl : BaseServiceImpl<File, FileInput, FileOutput, FileQueryInput>, IFileService
 {
-	readonly Core.Services.IFileService _fileService;
+	readonly Core.Services.IBaseFileService _fileService;
 
-	public FileServiceImpl(Core.Services.IFileService fileService)
+	public FileServiceImpl(Core.Services.IBaseFileService fileService)
 	{
 		_fileService = fileService;
 	}

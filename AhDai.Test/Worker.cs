@@ -20,9 +20,9 @@ namespace AhDai.Test
 	{
 		readonly ILogger<Worker> _logger;
 		readonly IConfiguration _configuration;
-		readonly IDbService _dbService;
+		readonly IBaseDbService _dbService;
 
-		public Worker(ILogger<Worker> logger, IConfiguration configuration, IDbService dbService)
+		public Worker(ILogger<Worker> logger, IConfiguration configuration, IBaseDbService dbService)
 		{
 			_logger = logger;
 			_configuration = configuration;

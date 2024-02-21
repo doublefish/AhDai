@@ -5,10 +5,10 @@ using System.Net.Mail;
 
 namespace AhDai.Core.Services.Impl
 {
-    /// <summary>
-    /// MailService
-    /// </summary>
-    public class MailService : IMailService
+	/// <summary>
+	/// 邮件服务
+	/// </summary>
+	public class BaseMailServiceImpl : IBaseMailService
     {
         /// <summary>
         /// 配置
@@ -19,17 +19,17 @@ namespace AhDai.Core.Services.Impl
         /// 构造函数
         /// </summary>
         /// <param name="configuration">配置</param>
-        public MailService(IConfiguration configuration)
+        public BaseMailServiceImpl(IConfiguration configuration)
         {
             Config = configuration.GetMailConfig();
         }
 
-        /// <summary>
-        /// 创建客户端
-        /// </summary>
-        /// <param name="config">自定义配置</param>
-        /// <returns></returns>
-        public SmtpClient CreateSmtpClient(Configs.MailConfig config = null)
+		/// <summary>
+		/// 创建客户端
+		/// </summary>
+		/// <param name="config">自定义配置</param>
+		/// <returns></returns>
+		public virtual SmtpClient CreateSmtpClient(Configs.MailConfig config = null)
         {
             var c = config ?? Config;
             return new SmtpClient()
@@ -42,14 +42,14 @@ namespace AhDai.Core.Services.Impl
             };
         }
 
-        /// <summary>
-        /// 发送
-        /// </summary>
-        /// <param name="recipients">接收人</param>
-        /// <param name="subject">主题</param>
-        /// <param name="body">正文</param>
-        /// <param name="config">自定义配置</param>
-        public void Send(string recipients, string subject, string body, Configs.MailConfig config = null)
+		/// <summary>
+		/// 发送
+		/// </summary>
+		/// <param name="recipients">接收人</param>
+		/// <param name="subject">主题</param>
+		/// <param name="body">正文</param>
+		/// <param name="config">自定义配置</param>
+		public virtual void Send(string recipients, string subject, string body, Configs.MailConfig config = null)
         {
             var c = config ?? Config;
             using (var client = CreateSmtpClient(c))

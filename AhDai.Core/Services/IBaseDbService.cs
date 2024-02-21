@@ -5,7 +5,7 @@ namespace AhDai.Core.Services
 	/// <summary>
 	/// 数据库服务
 	/// </summary>
-	public interface IDbService
+	public interface IBaseDbService
 	{
 		/// <summary>
 		/// GetSqlDbContext

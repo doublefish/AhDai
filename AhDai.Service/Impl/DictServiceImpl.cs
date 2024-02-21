@@ -18,9 +18,9 @@ namespace AhDai.Service.Impl;
 /// </summary>
 internal class DictServiceImpl : BaseServiceImpl<Dict, DictInput, DictOutput, DictQueryInput>, IDictService
 {
-	readonly IRedisService _redisService;
+	readonly IBaseRedisService _redisService;
 
-	public DictServiceImpl(IRedisService redisService)
+	public DictServiceImpl(IBaseRedisService redisService)
 	{
 		_redisService = redisService;
 	}

@@ -13,7 +13,7 @@ namespace AhDai.Core.Services.Impl
 	/// <summary>
 	/// FileService
 	/// </summary>
-	public class FileService : IFileService
+	public class BaseFileServiceImpl : IBaseFileService
 	{
 		/// <summary>
 		/// Config
@@ -24,7 +24,7 @@ namespace AhDai.Core.Services.Impl
 		/// 构造函数
 		/// </summary>
 		/// <param name="configuration"></param>
-		public FileService(IConfiguration configuration)
+		public BaseFileServiceImpl(IConfiguration configuration)
 		{
 			Config = configuration.GetFileConfig();
 		}
@@ -35,7 +35,7 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="rootPath"></param>
 		/// <param name="formFiles"></param>
 		/// <returns></returns>
-		public ICollection<Models.FileData> Upload(string rootPath, params IFormFile[] formFiles)
+		public virtual ICollection<Models.FileData> Upload(string rootPath, params IFormFile[] formFiles)
 		{
 			var task = Task.Run(() =>
 			{
@@ -51,7 +51,7 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="rootPath"></param>
 		/// <param name="formFiles"></param>
 		/// <returns></returns>
-		public async Task<ICollection<Models.FileData>> UploadAsync(string rootPath, params IFormFile[] formFiles)
+		public virtual async Task<ICollection<Models.FileData>> UploadAsync(string rootPath, params IFormFile[] formFiles)
 		{
 			formFiles = formFiles.Where(o => o != null).ToArray();
 			//If the request is correct, the binary data will be extracted from content and IIS stores files in specified location.
@@ -117,7 +117,7 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="files"></param>
 		/// <returns></returns>
 		[SupportedOSPlatform("windows")]
-		public string Compress(string rootPath, IDictionary<string, string> files)
+		public virtual string Compress(string rootPath, IDictionary<string, string> files)
 		{
 			if (files == null)
 			{

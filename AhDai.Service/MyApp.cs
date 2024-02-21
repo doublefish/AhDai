@@ -33,7 +33,7 @@ namespace AhDai.Service
 			});
 
 			services.AddJwtService();
-			services.AddSingleton<IRedisService, RedisService>();
+			services.AddSingleton<IBaseRedisService, BaseRedisServiceImpl>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddScoped<IDictService, DictServiceImpl>();
@@ -53,7 +53,7 @@ namespace AhDai.Service
 			var httpContext = ServiceUtil.HttpContextAccessor.HttpContext;
 			if (httpContext != null && httpContext.User != null)
 			{
-				var jwtService = ServiceUtil.Services.GetRequiredService<IJwtService>();
+				var jwtService = ServiceUtil.Services.GetRequiredService<IBaseJwtService>();
 				return jwtService.ToTokenData(httpContext.User.Claims.ToArray());
 			}
 			return null;

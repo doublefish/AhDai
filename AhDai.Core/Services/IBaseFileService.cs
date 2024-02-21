@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 namespace AhDai.Core.Services
 {
 	/// <summary>
-	/// IFileService
+	/// IBaseFileService
 	/// </summary>
-	public interface IFileService
+	public interface IBaseFileService
 	{
 		/// <summary>
 		/// 上传

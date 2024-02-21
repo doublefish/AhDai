@@ -39,7 +39,7 @@ public static class TokenUtil
 			Expiry = DateTime.UtcNow.Add(Expiry),
 			Data = data
 		};
-		var redisService = ServiceUtil.Services.GetRequiredService<IRedisService>();
+		var redisService = ServiceUtil.Services.GetRequiredService<IBaseRedisService>();
 		var redis = redisService.GetDatabase(15);
 		redis.HashSet(key, token.Signature, token);
 		return token;
@@ -59,7 +59,7 @@ public static class TokenUtil
 			return null;
 		}
 		var key = $"{CacheKey}-{suffix}";
-		var redisService = ServiceUtil.Services.GetRequiredService<IRedisService>();
+		var redisService = ServiceUtil.Services.GetRequiredService<IBaseRedisService>();
 		var redis = redisService.GetDatabase(15);
 		return redis.HashGet<Models.Token<T>>(key, signature);
 	}
@@ -79,7 +79,7 @@ public static class TokenUtil
 			token = null;
 			return false;
 		}
-		var redisService = ServiceUtil.Services.GetRequiredService<IRedisService>();
+		var redisService = ServiceUtil.Services.GetRequiredService<IBaseRedisService>();
 		var redis = redisService.GetDatabase(15);
 		var key = $"{CacheKey}-{suffix}";
 		token = redis.HashGet<Models.Token<T>>(key, signature);

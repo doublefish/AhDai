@@ -5,7 +5,7 @@ namespace AhDai.Core.Services
 	/// <summary>
 	/// IMailService
 	/// </summary>
-	public interface IMailService
+	public interface IBaseMailService
 	{
 		/// <summary>
 		/// 创建客户端

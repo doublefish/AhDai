@@ -1,14 +1,10 @@
-﻿using log4net.Config;
+﻿using log4net;
+using log4net.Config;
 using log4net.Repository;
-using log4net;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AhDai.Core.Providers
 {

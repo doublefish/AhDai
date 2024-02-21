@@ -11,7 +11,7 @@ namespace AhDai.Core.Services.Impl
 	/// <summary>
 	/// Redis服务
 	/// </summary>
-	public class RedisService : IRedisService
+	public class BaseRedisServiceImpl : IBaseRedisService
 	{
 		readonly IDictionary<string, IConnectionMultiplexer> ConnectionMultiplexers;
 		readonly object Locker;
@@ -23,14 +23,14 @@ namespace AhDai.Core.Services.Impl
 		/// <summary>
 		/// 日志
 		/// </summary>
-		public ILogger<RedisService> Logger { get; private set; }
+		public ILogger<BaseRedisServiceImpl> Logger { get; private set; }
 
 		/// <summary>
 		/// 构造函数
 		/// </summary>
 		/// <param name="configuration"></param>
 		/// <param name="logger"></param>
-		public RedisService(IConfiguration configuration, ILogger<RedisService> logger)
+		public BaseRedisServiceImpl(IConfiguration configuration, ILogger<BaseRedisServiceImpl> logger)
 		{
 			ConnectionMultiplexers = new Dictionary<string, IConnectionMultiplexer>();
 			Locker = new object();
@@ -48,7 +48,7 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="password"></param>
 		/// <param name="abortConnect"></param>
 		/// <returns></returns>
-		public string CreateConfiguration(string host, int port = 6379, string password = null, bool abortConnect = false)
+		public virtual string CreateConfiguration(string host, int port = 6379, string password = null, bool abortConnect = false)
 		{
 			return $"{host}:{port},password={password},abortConnect={abortConnect}";
 		}
@@ -58,7 +58,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
-		public string CreateConfiguration(RedisConfig config = null)
+		public virtual string CreateConfiguration(RedisConfig config = null)
 		{
 			var c = config ?? Config;
 			return CreateConfiguration(c.Host, c.Port, c.Password, c.AbortConnect);
@@ -69,7 +69,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="configuration">配置</param>
 		/// <returns></returns>
-		public IConnectionMultiplexer CreateConnectionMultiplexer(string configuration)
+		public virtual IConnectionMultiplexer CreateConnectionMultiplexer(string configuration)
 		{
 			var options = ConfigurationOptions.Parse(configuration);
 			var multiplexer = ConnectionMultiplexer.Connect(options);
@@ -89,7 +89,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
-		public IConnectionMultiplexer CreateConnectionMultiplexer(RedisConfig config = null)
+		public virtual IConnectionMultiplexer CreateConnectionMultiplexer(RedisConfig config = null)
 		{
 			var c = config ?? Config;
 			var configString = CreateConfiguration(c);
@@ -101,7 +101,7 @@ namespace AhDai.Core.Services.Impl
 		/// </summary>
 		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
-		public IConnectionMultiplexer GetConnectionMultiplexer(RedisConfig config = null)
+		public virtual IConnectionMultiplexer GetConnectionMultiplexer(RedisConfig config = null)
 		{
 			var c = config ?? Config;
 			var configString = CreateConfiguration(c);
@@ -123,7 +123,7 @@ namespace AhDai.Core.Services.Impl
 		/// <param name="asyncState"></param>
 		/// <param name="config">自定义配置</param>
 		/// <returns></returns>
-		public IDatabase GetDatabase(int db = -1, object asyncState = null, RedisConfig config = null)
+		public virtual IDatabase GetDatabase(int db = -1, object asyncState = null, RedisConfig config = null)
 		{
 			var c = config ?? Config;
 			var multiplexer = GetConnectionMultiplexer(c);

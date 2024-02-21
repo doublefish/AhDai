@@ -49,7 +49,7 @@ public static class VerifyCodeUtil
 		}
 		var dateTime = DateTime.Now;
 		var time = dateTime.TimeOfDay;
-		var redisService = ServiceUtil.Services.GetRequiredService<IRedisService>();
+		var redisService = ServiceUtil.Services.GetRequiredService<IBaseRedisService>();
 		var redis = redisService.GetDatabase(15);
 		var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 		var hashField = guid;
@@ -84,7 +84,7 @@ public static class VerifyCodeUtil
 		}
 		var dateTime = DateTime.Now;
 		var time = dateTime.TimeOfDay;
-		var redisService = ServiceUtil.Services.GetRequiredService<IRedisService>();
+		var redisService = ServiceUtil.Services.GetRequiredService<IBaseRedisService>();
 		var redis = redisService.GetDatabase(15);
 		var key = $"{CacheKey}-{dateTime:yyMMddHH}";
 		var hashField = guid;
