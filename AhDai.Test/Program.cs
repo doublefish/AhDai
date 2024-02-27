@@ -1,8 +1,10 @@
 using AhDai.Core.Extensions;
 using AhDai.Core.Utils;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 using System.Threading;
 
 namespace AhDai.Test
@@ -19,18 +21,28 @@ namespace AhDai.Test
 
 			try
 			{
-				IHost host = Host.CreateDefaultBuilder(args)
-					.ConfigureLogging((context, builder) =>
-					{
-						builder.AddLog4Net();
-					})
-					.ConfigureServices(services =>
-					{
-						services.AddDbService();
-						services.AddHostedService<Worker>();
-						ServiceUtil.Init(services.BuildServiceProvider(), null);
-					})
-					.Build();
+				var builder = Host.CreateApplicationBuilder(args);
+
+				var configuration = new ConfigurationBuilder()
+					.SetBasePath(Directory.GetCurrentDirectory())
+					.AddJsonFile("appsettings.json")
+					.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json").Build();
+
+				builder.Services.AddSingleton<IConfiguration>(configuration);
+
+				builder.Logging.AddLog4Net();
+
+				// 添加业务服务
+				builder.Services.AddDbService();
+				//Service.Startup.ConfigureServices(builder.Services);
+
+				builder.Services.AddHostedService<Worker>();
+
+				var host = builder.Build();
+
+				// 
+				ServiceUtil.Init(host.Services, host.Services.GetRequiredService<IConfiguration>());
+
 				Console.WriteLine("服务启动开始");
 				host.Run();
 				Console.WriteLine($"服务启动成功=>{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}");

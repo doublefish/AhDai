@@ -41,15 +41,14 @@ public static class LoggerUtil
 		}
 		if (type == 1)
 		{
-			var factory = ServiceUtil.Services.GetService<ILoggerFactory>();
-			// 复用同名对象
-			return factory.CreateLogger(categoryName ?? "");
+			var provider = ServiceUtil.Services.GetService<ILoggerProvider>();
+			return provider.CreateLogger(categoryName);
 		}
 		else
 		{
-			var provider = ServiceUtil.Services.GetService<ILoggerProvider>();
-			var logger = provider.CreateLogger(categoryName);
-			return logger;
+			var factory = ServiceUtil.Services.GetService<ILoggerFactory>();
+			// 复用同名对象
+			return factory.CreateLogger(categoryName ?? "");
 		}
 	}
 }
