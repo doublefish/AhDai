@@ -19,6 +19,9 @@ namespace AhDai.Test
 			ThreadPool.GetMinThreads(out defaultMinThreads, out completionPortThreads);
 			Console.WriteLine($"DefaultMinThreads: {defaultMinThreads}, completionPortThreads: {completionPortThreads}");
 
+
+			var mac = "00-CF-E0-45-8B-F3";
+
 			try
 			{
 				var builder = Host.CreateApplicationBuilder(args);

@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhDai.Core", "AhDai.Core\Ah
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhDai.WebApi", "AhDai.WebApi\AhDai.WebApi.csproj", "{5F2FE8E7-F5D1-4CAE-AA78-0B5BF17E6827}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhDai.Service", "AhDai.Service\AhDai.Service.csproj", "{C8031F08-D76E-4691-B5ED-21BB5D7E4736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhDai.Service", "AhDai.Service\AhDai.Service.csproj", "{C8031F08-D76E-4691-B5ED-21BB5D7E4736}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhDai.Db", "AhDai.Db\AhDai.Db.csproj", "{C7EEAD32-4AA4-4D2D-8002-03B4437F16A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhDai.Db", "AhDai.Db\AhDai.Db.csproj", "{C7EEAD32-4AA4-4D2D-8002-03B4437F16A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhDai.Tool", "AhDai.Tool\AhDai.Tool.csproj", "{FD03B362-A270-459E-85F5-5BA25B9A84A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{C7EEAD32-4AA4-4D2D-8002-03B4437F16A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7EEAD32-4AA4-4D2D-8002-03B4437F16A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7EEAD32-4AA4-4D2D-8002-03B4437F16A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD03B362-A270-459E-85F5-5BA25B9A84A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD03B362-A270-459E-85F5-5BA25B9A84A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD03B362-A270-459E-85F5-5BA25B9A84A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD03B362-A270-459E-85F5-5BA25B9A84A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

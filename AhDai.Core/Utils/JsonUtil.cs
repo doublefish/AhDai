@@ -22,6 +22,7 @@ public static class JsonUtil
 	{
 		Options = new JsonSerializerOptions()
 		{
+			PropertyNameCaseInsensitive = true,
 			Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
 			Converters = { new DatetimeJsonConverter(Const.DateTimeFormat) }
 		};
