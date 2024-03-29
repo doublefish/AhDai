@@ -20,7 +20,7 @@ namespace AhDai.Core.Services.Impl
 	/// Jwt服务
 	/// </summary>
 	public class BaseJwtServiceImpl : IBaseJwtService
-    {
+	{
 		/// <summary>
 		/// RedisService
 		/// </summary>
@@ -116,8 +116,8 @@ namespace AhDai.Core.Services.Impl
 				dict.Add("Issuer", Config.Issuer);
 				dict.Add("IssueTime", DateTime.Now.ToString(Const.DateTimeFormat));
 				dict.Add("Expiration", expires.ToLocalTime().ToString(Const.DateTimeFormat));
-				var redisDb = RedisService.GetDatabase();
-				await redisDb.StringSetAsync($"{Config.RedisKey}:{token}", JsonUtil.Serialize(dict), TimeSpan.FromMinutes(Config.Expiration));
+				var rdb = RedisService.GetDatabase();
+				await rdb.StringSetAsync($"{Config.RedisKey}:{token}", JsonUtil.Serialize(dict), TimeSpan.FromMinutes(Config.Expiration));
 			}
 			return new TokenResult()
 			{
@@ -172,8 +172,8 @@ namespace AhDai.Core.Services.Impl
 			if (Config.EnableRedis && !string.IsNullOrEmpty(token))
 			{
 				var data = token.Split(' ')[1];
-				var redisDb = RedisService.GetDatabase();
-				return await redisDb.KeyExistsAsync($"{Config.RedisKey}:{data}");
+				var rdb = RedisService.GetDatabase();
+				return await rdb.KeyExistsAsync($"{Config.RedisKey}:{data}");
 			}
 			return false;
 		}
@@ -188,8 +188,8 @@ namespace AhDai.Core.Services.Impl
 			if (Config.EnableRedis && !string.IsNullOrEmpty(token))
 			{
 				var data = token.Split(' ')[1];
-				var redisDb = RedisService.GetDatabase();
-				return await redisDb.KeyDeleteAsync($"{Config.RedisKey}:{data}");
+				var rdb = RedisService.GetDatabase();
+				return await rdb.KeyDeleteAsync($"{Config.RedisKey}:{data}");
 			}
 			return false;
 		}

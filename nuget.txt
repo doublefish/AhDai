@@ -3,6 +3,6 @@ oy2eyiafikjo2ivlkyyqlud7fsjqroxevgwwdzlnviduiu
 # 推送
 dotnet nuget push AhDai.Base/bin/Release/AhDai.Base.1.0.1.nupkg -k {key} -s https://www.nuget.org/
 
-dotnet nuget push AhDai.Core/bin/Release/AhDai.Core.1.0.5.nupkg -k {key} -s https://www.nuget.org/
+dotnet nuget push AhDai.Core/bin/Release/AhDai.Core.1.0.6.nupkg -k {key} -s https://www.nuget.org/
 
 

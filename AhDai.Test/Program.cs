@@ -37,6 +37,7 @@ namespace AhDai.Test
 
 				// 添加业务服务
 				builder.Services.AddDbService();
+				builder.Services.AddRedisService();
 				//Service.Startup.ConfigureServices(builder.Services);
 
 				builder.Services.AddHostedService<Worker>();
