@@ -1,53 +1,78 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
-namespace AhDai.Service.Models;
-
-/// <summary>
-/// BaseOutput
-/// </summary>
-public class BaseOutput : BaseOutput<long>
-{
-}
+namespace AhDai.Service;
 
 /// <summary>
 /// BaseOutput
 /// </summary>
-public class BaseOutput<PK>
+public abstract class BaseOutput : IBaseOutput
 {
 	/// <summary>
 	/// 主键
 	/// </summary>
-	public PK Id { get; set; }
+	public long Id { get; set; }
 	/// <summary>
 	/// 版本
 	/// </summary>
-	public int RowVersion { get; set; }
-	/// <summary>
-	/// 创建用户
-	/// </summary>
-	public int RowCreateUser { get; set; }
-	/// <summary>
-	/// 创建用户名
-	/// </summary>
-	public string RowCreateUsername { get; set; }
+	public int Version { get; set; }
 	/// <summary>
 	/// 创建时间
 	/// </summary>
-	public DateTime RowCreateTime { get; set; }
+	public DateTime CreationTime { get; set; }
 	/// <summary>
-	/// 更新用户
+	/// 创建者Id
 	/// </summary>
-	public int RowUpdateUser { get; set; }
+	public long CreatorId { get; set; }
 	/// <summary>
-	/// 更新用户名
+	/// 创建者用户名
 	/// </summary>
-	public string RowUpdateUsername { get; set; }
+	public string CreatorUsername { get; set; } = "";
 	/// <summary>
-	/// 更新时间
+	/// 创建者姓名
 	/// </summary>
-	public DateTime RowUpdateTime { get; set; }
+	public string CreatorName { get; set; } = "";
+	/// <summary>
+	/// 修改时间
+	/// </summary>
+	public DateTime? ModificationTime { get; set; }
+	/// <summary>
+	/// 修改者Id
+	/// </summary>
+	public long? ModifierId { get; set; }
+	/// <summary>
+	/// 修改者用户名
+	/// </summary>
+	public string? ModifierUsername { get; set; }
+	/// <summary>
+	/// 修改者姓名
+	/// </summary>
+	public string? ModifierName { get; set; } = "";
 	/// <summary>
 	/// 删除标识
 	/// </summary>
-	public bool RowDeleted { get; set; }
+	public bool IsDeleted { get; set; }
+	/// <summary>
+	/// 删除时间
+	/// </summary>
+	[JsonIgnore]
+	public DateTime? DeletionTime { get; set; }
+	/// <summary>
+	/// 删除者Id
+	/// </summary>
+	[JsonIgnore]
+	public long? DeleterId { get; set; }
+	/// <summary>
+	/// 删除者用户名
+	/// </summary>
+	[JsonIgnore]
+	public string? DeleterUsername { get; set; }
+	/// <summary>
+	/// 租戶Id
+	/// </summary>
+	public long TenantId { get; set; }
+	/// <summary>
+	/// 是否可以修改
+	/// </summary>
+	public bool CanModify { get; set; }
 }

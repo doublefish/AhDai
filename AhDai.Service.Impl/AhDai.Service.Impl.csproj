@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+		<PackageReference Include="NPOI" Version="2.6.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AhDai.Core\AhDai.Core.csproj" />
+		<ProjectReference Include="..\AhDai.Db\AhDai.Db.csproj" />
+		<ProjectReference Include="..\AhDai.Service\AhDai.Service.csproj" />
+	</ItemGroup>
+
+</Project>

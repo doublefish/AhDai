@@ -49,7 +49,7 @@ public class Program
 		builder.Services.AddRouting(options =>
 		{
 			//options.LowercaseUrls = true;
-			//options.LowercaseQueryStrings = true;
+			options.LowercaseQueryStrings = true;
 		});
 
 		// 添加日志中间件

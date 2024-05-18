@@ -1,9 +1,9 @@
-﻿namespace AhDai.Service.Models
+﻿namespace AhDai.Service;
+
+/// <summary>
+/// BaseInput
+/// </summary>
+public abstract class BaseInput : IBaseInput
 {
-	/// <summary>
-	/// BaseInput
-	/// </summary>
-	public class BaseInput
-	{
-	}
+	
 }

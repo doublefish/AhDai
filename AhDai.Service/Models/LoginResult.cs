@@ -1,24 +1,31 @@
 ﻿using AhDai.Core.Models;
-using System.Collections.Generic;
+using System;
 
 namespace AhDai.Service.Models;
 
 /// <summary>
 /// 登录结果
 /// </summary>
-public class LoginResult : TokenResult
+public class LoginResult
 {
 	/// <summary>
-	/// 公司编码
+	/// Token
 	/// </summary>
-	public string CompanyCode { get; set; }
+	public string Token { get; set; } = "";
+	/// <summary>
+	/// 过期时间
+	/// </summary>
+	public DateTime Expiration { get; set; }
+	/// <summary>
+	/// 认证类型：Bearer
+	/// </summary>
+	public string Type { get; set; } = "";
 
 	/// <summary>
 	/// 构造函数
 	/// </summary>
 	public LoginResult()
 	{
-
 	}
 
 	/// <summary>
@@ -27,8 +34,6 @@ public class LoginResult : TokenResult
 	/// <param name="result"></param>
 	public LoginResult(TokenResult result)
 	{
-		Id = result.Id;
-		Username = result.Username;
 		Token = result.Token;
 		Expiration = result.Expiration;
 		Type = result.Type;

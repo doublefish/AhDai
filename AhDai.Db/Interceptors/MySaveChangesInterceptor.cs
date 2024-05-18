@@ -1,56 +1,102 @@
-﻿using AhDai.Core.Models;
-using AhDai.Db.Models;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace AhDai.Db.Interceptors;
 
-internal class MySaveChangesInterceptor : SaveChangesInterceptor
+/// <summary>
+/// MySaveChangesInterceptor
+/// </summary>
+public class MySaveChangesInterceptor : SaveChangesInterceptor
 {
+	readonly Func<OperatingUser>? GetOperatorHandler;
+	readonly Func<Task<OperatingUser>>? GetOperatorHandlerAsync;
+
+	async Task<OperatingUser?> GetOperatorAsync()
+	{
+		if (GetOperatorHandler != null)
+		{
+			return GetOperatorHandler.Invoke();
+		}
+		if (GetOperatorHandlerAsync != null)
+		{
+			return await GetOperatorHandlerAsync.Invoke();
+		}
+		return null;
+	}
+
+	/// <summary>
+	/// 构造函数
+	/// </summary>
+	public MySaveChangesInterceptor()
+	{
+
+	}
+
+	public MySaveChangesInterceptor(Func<OperatingUser> handler)
+	{
+		GetOperatorHandler = handler;
+	}
+
+	public MySaveChangesInterceptor(Func<Task<OperatingUser>> handler)
+	{
+		GetOperatorHandlerAsync = handler;
+	}
 
 	public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
 	{
-		BeforeSavingChanges(eventData);
+		BeforeSavingChangesAsync(eventData).Wait();
 		return base.SavingChanges(eventData, result);
 	}
 
-	public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+	public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
 	{
-		BeforeSavingChanges(eventData);
-		return base.SavingChangesAsync(eventData, result, cancellationToken);
+		await BeforeSavingChangesAsync(eventData);
+		return await base.SavingChangesAsync(eventData, result, cancellationToken);
 	}
 
 
-	protected void BeforeSavingChanges(DbContextEventData eventData)
+	protected async Task BeforeSavingChangesAsync(DbContextEventData eventData)
 	{
-		// TODO
-		var token = new TokenData();
+		if (eventData.Context == null)
+		{
+			return;
+		}
 		foreach (var entry in eventData.Context.ChangeTracker.Entries())
 		{
-			if (entry.State is Microsoft.EntityFrameworkCore.EntityState.Added)
+			if (entry.Entity is Entity.IBaseEntity entity)
 			{
-				if (entry.Entity is BaseModel model)
+				var user = await GetOperatorAsync() ?? throw new InvalidOperationException("未读取到用户信息");
+				if (entry.State is Microsoft.EntityFrameworkCore.EntityState.Added)
 				{
-					Extensions.ModelExtensions.SetCreateInfo(model, token);
+					Extensions.EntityExtensions.SetCreateInfo(entity, user);
 				}
-			}
-			else if (entry.State == Microsoft.EntityFrameworkCore.EntityState.Modified)
-			{
-				if (entry.Entity is BaseModel model)
+				else if (entry.State == Microsoft.EntityFrameworkCore.EntityState.Modified)
 				{
-					Extensions.ModelExtensions.SetUpdateInfo(model, token);
+					Extensions.EntityExtensions.SetModifyInfo(entity, user);
 				}
-			}
-			else if (entry.State == Microsoft.EntityFrameworkCore.EntityState.Deleted)
-			{
-				if (entry.Entity is BaseModel model)
+				else if (entry.State == Microsoft.EntityFrameworkCore.EntityState.Deleted)
 				{
-					Extensions.ModelExtensions.SetUpdateInfo(model, token);
-					model.RowDeleted = true;
+					Extensions.EntityExtensions.SetDeleteInfo(entity, user);
 					entry.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 				}
 			}
+
+			//if (entry.State is Microsoft.EntityFrameworkCore.EntityState.Added)
+			//{
+			//	foreach (var pi in entry.Properties)
+			//	{
+			//		if (pi == null)
+			//		{
+			//			continue;
+			//		}
+			//		if (pi.Metadata.Name == "TenantId")
+			//		{
+			//			pi.CurrentValue = user != null ? user.TenantId : 0;
+			//		}
+			//	}
+			//}
 		}
 	}
 }
