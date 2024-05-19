@@ -13,12 +13,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="wwwroot\" />
+		<ProjectReference Include="..\AhDai.Service.Impl\AhDai.Service.Impl.csproj" />
+		<ProjectReference Include="..\AhDai.Service\AhDai.Service.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\AhDai.Service.Impl\AhDai.Service.Impl.csproj" />
-		<ProjectReference Include="..\AhDai.Service\AhDai.Service.csproj" />
+	  <Folder Include="wwwroot\" />
 	</ItemGroup>
 
 </Project>
