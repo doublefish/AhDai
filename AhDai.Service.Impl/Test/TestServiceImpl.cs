@@ -2,10 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Org.BouncyCastle.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace AhDai.Service.Impl.Test;
@@ -48,35 +48,55 @@ internal class TestServiceImpl(ILogger<TestServiceImpl> logger)
             if (line == null) break;
             if (line.StartsWith("INSERT INTO `ask_info`"))
             {
-                var temps = line.Split("),");
-                sqls1.Add(temps[0].Replace("`ask_info`", "[askinfo]") + ");");
+                var temps = line.Split("),(");
+                sqls1.Add(temps[0].Replace("`ask_info`", "[askinfo]") + ")");
                 for (var i = 1; i < temps.Length - 1; i++)
                 {
-                    sqls1.Add("INSERT INTO [askinfo] VALUES " + temps[i] + ");");
+                    sqls1.Add("INSERT INTO [askinfo] VALUES (" + temps[i] + ")");
                 }
-                sqls1.Add("INSERT INTO [askinfo] VALUES " + temps[^1]);
+                sqls1.Add("INSERT INTO [askinfo] VALUES (" + temps[^1]);
             }
             else if (line.StartsWith("INSERT INTO `good`"))
             {
-                var temps = line.Split("),");
-                sqls2.Add(temps[0].Replace("`good`", "[good]") + ");");
+                var temps = line.Split("),(");
+                sqls2.Add(temps[0].Replace("`good`", "[good]") + ")");
                 for (var i = 1; i < temps.Length - 1; i++)
                 {
-                    sqls2.Add("INSERT INTO [good] VALUES " + temps[i] + ");");
+                    sqls2.Add("INSERT INTO [good] VALUES (" + temps[i] + ")");
                 }
-                sqls1.Add("INSERT INTO [good] VALUES " + temps[^1]);
+                sqls2.Add("INSERT INTO [good] VALUES (" + temps[^1]);
             }
         }
         using var db = await MyApp.GetDefaultDbAsync();
         for (var i = 0; i < sqls1.Count; i++)
         {
-            //Console.WriteLine(sqls1[i]);
-            await db.Database.ExecuteSqlRawAsync(sqls1[0]);
+            try
+            {
+                //await db.Database.ExecuteSqlRawAsync(sqls1[i]);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
+
+
+        using var writer = new StreamWriter("C:\\Users\\shuang\\Desktop\\sqls.txt");
         for (var i = 0; i < sqls2.Count; i++)
         {
-            //Console.WriteLine(sqls1[i]);
-            await db.Database.ExecuteSqlRawAsync(sqls2[0]);
+            if (i < 47153) continue;
+            try
+            {
+                var sql = sqls2[i].Replace("\\'", "''");
+                //await db.Database.ExecuteSqlRawAsync(sql);
+                await writer.WriteLineAsync(sql);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
 
         //await db.SaveChangesAsync();
