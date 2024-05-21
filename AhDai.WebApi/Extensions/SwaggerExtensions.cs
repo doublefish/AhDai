@@ -2,12 +2,14 @@
 using AhDai.WebApi.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace AhDai.WebApi.Extensions;
 
@@ -61,7 +63,10 @@ public static class SwaggerExtensions
             options.SwaggerDoc(SwaggerConfig.System, new OpenApiInfo { Title = "系统", Description = "by AhDai", Version = "v1" });
             options.DocInclusionPredicate((docName, apiDesc) =>
             {
-                return true;
+                if (!apiDesc.TryGetMethodInfo(out var methodInfo)) return false;
+                var attrs = methodInfo.ReflectedType?.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().ToArray();
+                var groupNames = attrs?.Select(attr => attr.GroupName).ToArray();
+                return groupNames != null && groupNames.Contains(docName);
             });
 
             var baseDirectory = AppContext.BaseDirectory;

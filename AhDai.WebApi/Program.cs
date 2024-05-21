@@ -127,7 +127,6 @@ public class Program
         app.UseStaticFiles(new StaticFileOptions()
         {
             FileProvider = new PhysicalFileProvider(app.Environment.WebRootPath),
-            //RequestPath = new PathString("/" + fileConfig.UploadDirectory)
         });
         // ∆Ù”√øÁ”Ú
         app.UseCors("MyAllowOrigins");
