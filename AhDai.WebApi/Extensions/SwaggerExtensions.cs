@@ -10,6 +10,7 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace AhDai.WebApi.Extensions;
 
@@ -64,7 +65,7 @@ public static class SwaggerExtensions
             options.DocInclusionPredicate((docName, apiDesc) =>
             {
                 if (!apiDesc.TryGetMethodInfo(out var methodInfo)) return false;
-                var attrs = methodInfo.ReflectedType?.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().ToArray();
+                var attrs = methodInfo.ReflectedType?.GetCustomAttributes<ApiExplorerSettingsAttribute>(true).ToArray();
                 var groupNames = attrs?.Select(attr => attr.GroupName).ToArray();
                 return groupNames != null && groupNames.Contains(docName);
             });

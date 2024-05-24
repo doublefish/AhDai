@@ -40,7 +40,7 @@ public static class JsonUtil
 	/// <param name="obj"></param>
 	/// <param name="options"></param>
 	/// <returns></returns>
-	public static string Serialize<T>(T obj, JsonSerializerOptions options = null)
+	public static string Serialize<T>(T obj, JsonSerializerOptions? options = null)
 	{
 		return System.Text.Json.JsonSerializer.Serialize(obj, options ?? Options);
 	}
@@ -52,7 +52,7 @@ public static class JsonUtil
 	/// <param name="json"></param>
 	/// <param name="options"></param>
 	/// <returns></returns>
-	public static T Deserialize<T>(string json, JsonSerializerOptions options = null)
+	public static T? Deserialize<T>(string json, JsonSerializerOptions? options = null)
 	{
 		return System.Text.Json.JsonSerializer.Deserialize<T>(json, options ?? Options);
 	}
@@ -70,7 +70,7 @@ public static class JsonUtil
 	/// <param name="obj"></param>
 	/// <param name="settings"></param>
 	/// <returns></returns>
-	public static string SerializeObject<T>(T obj, JsonSerializerSettings settings = null)
+	public static string SerializeObject<T>(T obj, JsonSerializerSettings? settings = null)
 	{
 		return JsonConvert.SerializeObject(obj, settings ?? Settings);
 	}
@@ -99,7 +99,7 @@ public static class JsonUtil
 	/// <param name="json"></param>
 	/// <param name="settings"></param>
 	/// <returns></returns>
-	public static T DeserializeObject<T>(string json, JsonSerializerSettings settings = null)
+	public static T? DeserializeObject<T>(string json, JsonSerializerSettings? settings = null)
 	{
 		return JsonConvert.DeserializeObject<T>(json, settings ?? Settings);
 	}

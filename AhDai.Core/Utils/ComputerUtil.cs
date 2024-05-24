@@ -13,7 +13,7 @@ public static class ComputerUtil
 	/// 获取Mac地址
 	/// </summary>
 	/// <returns></returns>
-	public static string GetMacAddress()
+	public static string? GetMacAddress()
 	{
 		return GetMacAddresses().FirstOrDefault();
 	}
@@ -22,7 +22,7 @@ public static class ComputerUtil
 	/// 获取Mac地址
 	/// </summary>
 	/// <returns></returns>
-	public static ICollection<string> GetMacAddresses()
+	public static string[] GetMacAddresses()
 	{
 		var addresses = new List<string>();
 		var networks = NetworkInterface.GetAllNetworkInterfaces();
@@ -35,6 +35,6 @@ public static class ComputerUtil
 				addresses.Add(address);
 			}
 		}
-		return addresses;
+		return [.. addresses];
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AhDai.Core.Configs;
+﻿namespace AhDai.Core.Configs;
 
 /// <summary>
 /// LogRequestConfig
@@ -10,5 +8,5 @@ public class LogRequestConfig
 	/// <summary>
 	/// 方法
 	/// </summary>
-	public string[] Methods { get; set; }
+	public string[] Methods { get; set; } = default!;
 }

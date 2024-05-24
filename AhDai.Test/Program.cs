@@ -20,7 +20,7 @@ namespace AhDai.Test
 			Console.WriteLine($"DefaultMinThreads: {defaultMinThreads}, completionPortThreads: {completionPortThreads}");
 
 
-			var mac = "00-CF-E0-45-8B-F3";
+			//var mac = "00-CF-E0-45-8B-F3";
 
 			try
 			{

@@ -1,5 +1,6 @@
 ﻿using AhDai.Entity.Sys;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace AhDai.Db;
 
@@ -62,6 +63,20 @@ public partial class DefaultDbContext(DbContextOptions<DefaultDbContext> options
 
         OnSysModelCreating(modelBuilder);
         OnModelCreatingPartial(modelBuilder);
+
+        var allProperties = modelBuilder.Model.GetEntityTypes().SelectMany(t => t.GetProperties()).ToArray();
+
+        // 设置全局精度和小数位数
+        var decimalType = typeof(decimal);
+        var decimalType2 = typeof(decimal?);
+        foreach (var property in allProperties)
+        {
+            if (property.ClrType == decimalType || property.ClrType == decimalType2)
+            {
+                property.SetPrecision(18);
+                property.SetScale(2);
+            }
+        }
     }
 
     /// <summary>

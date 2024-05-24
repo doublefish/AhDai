@@ -33,5 +33,5 @@ public interface IApiResult<T> : IApiResult
 	/// <summary>
 	/// 扩展数据
 	/// </summary>
-	public object ExtraData { get; set; }
+	public object? ExtraData { get; set; }
 }

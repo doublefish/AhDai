@@ -11,7 +11,7 @@ namespace AhDai.Core.Utils;
 /// </summary>
 public static class Log4netUtil
 {
-	static ILoggerRepository repository;
+	static ILoggerRepository? repository;
 	static readonly ILog Log = LogManager.GetLogger(Repository.Name, "Log");
 
 	/// <summary>
@@ -35,7 +35,7 @@ public static class Log4netUtil
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="exception"></param>
-	public static void Info(string message, Exception exception = null)
+	public static void Info(string message, Exception? exception = null)
 	{
 		Log.Info(message, exception);
 	}
@@ -46,7 +46,7 @@ public static class Log4netUtil
 	/// <param name="eventId">事件Id</param>
 	/// <param name="message"></param>
 	/// <param name="exception"></param>
-	public static void Info(string eventId, string message, Exception exception = null)
+	public static void Info(string eventId, string message, Exception? exception = null)
 	{
 		Log.Info($"[{eventId}]{message}", exception);
 	}
@@ -56,7 +56,7 @@ public static class Log4netUtil
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="exception"></param>
-	public static void Error(string message, Exception exception = null)
+	public static void Error(string message, Exception? exception = null)
 	{
 		Log.Error(message, exception);
 	}
@@ -67,7 +67,7 @@ public static class Log4netUtil
 	/// <param name="eventId">事件Id</param>
 	/// <param name="message"></param>
 	/// <param name="exception"></param>
-	public static void Error(string eventId, string message, Exception exception = null)
+	public static void Error(string eventId, string message, Exception? exception = null)
 	{
 		Log.Error($"[{eventId}]{message}", exception);
 	}
@@ -77,7 +77,7 @@ public static class Log4netUtil
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="exception"></param>
-	public static void Debug(string message, Exception exception = null)
+	public static void Debug(string message, Exception? exception = null)
 	{
 		Log.Debug(message, exception);
 	}
@@ -88,7 +88,7 @@ public static class Log4netUtil
 	/// <param name="eventId">事件Id</param>
 	/// <param name="message"></param>
 	/// <param name="exception"></param>
-	public static void Debug(string eventId, string message, Exception exception = null)
+	public static void Debug(string eventId, string message, Exception? exception = null)
 	{
 		Log.Debug($"[{eventId}]{message}", exception);
 	}

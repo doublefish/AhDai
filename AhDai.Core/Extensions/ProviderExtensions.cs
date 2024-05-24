@@ -1,10 +1,9 @@
-﻿namespace AhDai.Core.Extensions
+﻿namespace AhDai.Core.Extensions;
+
+/// <summary>
+/// ProviderExtensions
+/// </summary>
+public static class ProviderExtensions
 {
-	/// <summary>
-	/// ProviderExtensions
-	/// </summary>
-	public static class ProviderExtensions
-	{
-		
-	}
+
 }

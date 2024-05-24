@@ -2,59 +2,58 @@
 using Microsoft.OpenApi.Extensions;
 using System;
 
-namespace AhDai.Core
+namespace AhDai.Core;
+
+/// <summary>
+/// ApiException
+/// </summary>
+public class ApiException : Exception
 {
-	/// <summary>
-	/// ApiException
-	/// </summary>
-	public class ApiException : Exception
-	{
-		/// <summary>
-		/// Code
-		/// </summary>
-		public int Code { get; protected set; }
+    /// <summary>
+    /// Code
+    /// </summary>
+    public int Code { get; protected set; }
 
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="code"></param>
-		/// <param name="message"></param>
-		public ApiException(int code, string message) : this(code, message, null)
-		{
-		}
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    /// <param name="code"></param>
+    /// <param name="message"></param>
+    public ApiException(int code, string? message) : this(code, message, null)
+    {
+    }
 
-		/// <summary>
-		/// 构造函数
-		/// </summary>
-		/// <param name="code"></param>
-		/// <param name="message"></param>
-		/// <param name="innerException"></param>
-		public ApiException(int code, string message, Exception innerException) : base(message, innerException)
-		{
-			Code = code;
-		}
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    /// <param name="code"></param>
+    /// <param name="message"></param>
+    /// <param name="innerException"></param>
+    public ApiException(int code, string? message, Exception? innerException) : base(message, innerException)
+    {
+        Code = code;
+    }
 
-		/// <summary>
-		/// 抛出异常
-		/// </summary>
-		/// <param name="code"></param>
-		/// <param name="args"></param>
-		public static ApiException Throw<E>(E code, params object[] args) where E : Enum
-		{
-			return Throw(null, code, args);
-		}
+    /// <summary>
+    /// 抛出异常
+    /// </summary>
+    /// <param name="code"></param>
+    /// <param name="args"></param>
+    public static ApiException Throw<E>(E code, params object[] args) where E : Enum
+    {
+        return Throw(null, code, args);
+    }
 
-		/// <summary>
-		/// 抛出异常
-		/// </summary>
-		/// <param name="innerException"></param>
-		/// <param name="code"></param>
-		/// <param name="args"></param>
-		public static ApiException Throw<E>(Exception innerException, E code, params object[] args) where E : Enum
-		{
-			var attr = code.GetAttributeOfType<ErrorCodeAttribute>();
-			var message = attr != null ? string.Format(attr.Message, args) : null;
-			return new ApiException(Convert.ToInt32(code), message, innerException);
-		}
-	}
+    /// <summary>
+    /// 抛出异常
+    /// </summary>
+    /// <param name="innerException"></param>
+    /// <param name="code"></param>
+    /// <param name="args"></param>
+    public static ApiException Throw<E>(Exception? innerException, E code, params object[] args) where E : Enum
+    {
+        var attr = code.GetAttributeOfType<ErrorCodeAttribute>();
+        var message = attr != null ? string.Format(attr.Message, args) : null;
+        return new ApiException(Convert.ToInt32(code), message, innerException);
+    }
 }

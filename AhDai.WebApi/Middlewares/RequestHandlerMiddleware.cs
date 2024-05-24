@@ -144,7 +144,7 @@ namespace AhDai.WebApi.Middlewares
             }
             catch (Exception ex)
             {
-                var result = new ApiResult<string>((int)HttpStatusCode.InternalServerError, ex.Message);
+                var result = ApiResult.Error((int)HttpStatusCode.InternalServerError, ex.Message);
                 if (ex is ApiException ae)
                 {
                     result.Code = ae.Code;

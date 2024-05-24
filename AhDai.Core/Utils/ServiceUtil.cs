@@ -16,30 +16,30 @@ public static class ServiceUtil
 	/// <summary>
 	/// 服务实例
 	/// </summary>
-	public static IServiceProvider Services { get; private set; }
-	/// <summary>
-	/// Configuration
-	/// </summary>
-	public static IConfiguration Configuration { get; private set; }
+	public static IServiceProvider Services { get; private set; } = default!;
+    /// <summary>
+    /// Configuration
+    /// </summary>
+    public static IConfiguration Configuration { get; private set; } = default!;
 	/// <summary>
 	/// HttpContextAccessor
 	/// </summary>
-	public static IHttpContextAccessor HttpContextAccessor { get; private set; }
-	/// <summary>
-	/// HostEnvironment
-	/// </summary>
-	public static IHostEnvironment HostEnvironment { get; private set; }
-	/// <summary>
-	/// HostEnvironment
-	/// </summary>
-	public static IWebHostEnvironment WebHostEnvironment { get; private set; }
+	public static IHttpContextAccessor HttpContextAccessor { get; private set; } = default!;
+    /// <summary>
+    /// HostEnvironment
+    /// </summary>
+    public static IHostEnvironment HostEnvironment { get; private set; } = default!;
+    /// <summary>
+    /// HostEnvironment
+    /// </summary>
+    public static IWebHostEnvironment WebHostEnvironment { get; private set; } = default!;
 
-	/// <summary>
-	/// 初始化
-	/// </summary>
-	/// <param name="services"></param>
-	/// <param name="configuration"></param>
-	public static void Init(IServiceCollection services, IConfiguration configuration)
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    public static void Init(IServiceCollection services, IConfiguration configuration)
 	{
 		Init(services.BuildServiceProvider(), configuration);
 	}
@@ -53,16 +53,16 @@ public static class ServiceUtil
 	{
 		Services = services;
 		Configuration = configuration;
-		HttpContextAccessor = services.GetService<IHttpContextAccessor>();
-		HostEnvironment = services.GetService<IHostEnvironment>();
-		WebHostEnvironment = services.GetService<IWebHostEnvironment>();
+		HttpContextAccessor = services.GetRequiredService<IHttpContextAccessor>();
+		HostEnvironment = services.GetRequiredService<IHostEnvironment>();
+		WebHostEnvironment = services.GetRequiredService<IWebHostEnvironment>();
 	}
 
 	/// <summary>
 	/// 获取当前Token数据
 	/// </summary>
 	/// <returns></returns>
-	public static Models.TokenData GetCurrentTokenData()
+	public static Models.TokenData? GetCurrentTokenData()
 	{
 		var httpContext = HttpContextAccessor.HttpContext;
 		if (httpContext != null && httpContext.User != null)

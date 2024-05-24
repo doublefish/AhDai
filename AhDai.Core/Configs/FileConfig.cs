@@ -22,7 +22,7 @@ public class FileConfig
     /// <summary>
     /// 扩展名
     /// </summary>
-    public IDictionary<string, string[]> Extensions { get; set; }
+    public IDictionary<string, string[]>? Extensions { get; set; }
 
     /// <summary>
     /// 大小限制说明

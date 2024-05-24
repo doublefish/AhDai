@@ -2,6 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
 		<Version>1.0.6</Version>

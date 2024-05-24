@@ -1,13 +1,12 @@
-﻿namespace AhDai.Core.Options
+﻿namespace AhDai.Core.Options;
+
+/// <summary>
+/// MailOptions
+/// </summary>
+public class MailOptions
 {
     /// <summary>
-    /// MailOptions
+    /// 邮箱配置
     /// </summary>
-    public class MailOptions
-	{
-		/// <summary>
-		/// 邮箱配置
-		/// </summary>
-		public Configs.MailConfig Config { get; set; }
-	}
+    public Configs.MailConfig Config { get; set; } = default!;
 }

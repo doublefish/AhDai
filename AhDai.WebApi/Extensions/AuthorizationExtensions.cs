@@ -8,14 +8,15 @@ namespace AhDai.WebApi.Extensions;
 /// </summary>
 public static class AuthorizationExtensions
 {
-	/// <summary>
-	/// AddMyAuthorization
-	/// </summary>
-	/// <param name="services"></param>
-	/// <param name="configuration"></param>
-	/// <returns></returns>
-	public static IServiceCollection AddMyAuthorization(this IServiceCollection services, IConfiguration configuration)
-	{
-		return services;
-	}
+    /// <summary>
+    /// AddMyAuthorization
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddMyAuthorization(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAuthorization();
+        return services;
+    }
 }

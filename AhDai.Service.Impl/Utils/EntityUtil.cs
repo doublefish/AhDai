@@ -33,13 +33,14 @@ internal class EntityUtil
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="lastOrDefault"></param>
     /// <param name="prefix"></param>
+    /// <param name="suffix"></param>
     /// <param name="length"></param>
     /// <returns></returns>
-    static async Task<string> GenerateNumberAsync<TEntity>(Func<string, Task<string?>> lastOrDefault, string prefix = "", int length = 4) where TEntity : class
+    static async Task<string> GenerateNumberAsync<TEntity>(Func<string, Task<string?>> lastOrDefault, string prefix = "", string suffix = "", int length = 4) where TEntity : class
     {
         //var user = await MyApp.GetOperatingUserAsync();
         var date = DateTime.Now.ToString("yyyyMMdd");
-        var pref = prefix + date;
+        var pref = prefix + date + suffix;
 
         var redis = MyApp.Services.GetRequiredService<IBaseRedisService>();
         var rdb = redis.GetDatabase();
@@ -73,14 +74,15 @@ internal class EntityUtil
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="prefix">前缀</param>
+    /// <param name="suffix">前缀</param>
     /// <param name="length">流水号长度</param>
     /// <returns></returns>
-    public static async Task<string> GenerateCodeAsync<TEntity>(DefaultDbContext db, string prefix = "", int length = 4) where TEntity : class, ICodeEntity
+    public static async Task<string> GenerateCodeAsync<TEntity>(DefaultDbContext db, string prefix = "", string suffix = "", int length = 4) where TEntity : class, ICodeEntity
     {
         return await GenerateNumberAsync<TEntity>(async (_prefix) =>
         {
             return await db.Set<TEntity>().Where(x => x.Code.StartsWith(_prefix)).OrderByDescending(x => x.Code).Select(x => x.Code).FirstOrDefaultAsync();
-        }, prefix, length);
+        }, prefix, suffix, length);
     }
 
     /// <summary>
@@ -88,33 +90,51 @@ internal class EntityUtil
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="prefix">前缀</param>
+    /// <param name="suffix">前缀</param>
     /// <param name="length">流水号长度</param>
     /// <returns></returns>
-    public static async Task<string> GenerateNumberAsync<TEntity>(DefaultDbContext db, string prefix = "", int length = 4) where TEntity : class, INumberEntity
+    public static async Task<string> GenerateNumberAsync<TEntity>(DefaultDbContext db, string prefix = "", string suffix = "", int length = 4) where TEntity : class, INumberEntity
     {
         return await GenerateNumberAsync<TEntity>(async (_prefix) =>
         {
             return await db.Set<TEntity>().Where(x => x.Number.StartsWith(_prefix)).OrderByDescending(x => x.Number).Select(x => x.Number).FirstOrDefaultAsync();
-        }, prefix, length);
+        }, prefix, suffix, length);
     }
 
     /// <summary>
     /// 查询所有上级
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    /// <param name="id"></param>
+    /// <param name="db"></param>
+    /// <param name="parentId"></param>
     /// <returns></returns>
-    public static async Task<TEntity[]> GetSuperiorsAsync<TEntity>(DefaultDbContext db, long id) where TEntity : class, IParentIdEntity
+    public static async Task<TEntity[]> GetSuperiorsAsync<TEntity>(DefaultDbContext db, long parentId) where TEntity : class, IParentIdEntity
     {
-        var list = new List<TEntity>();
-        var entity = await db.Set<TEntity>().Where(x => x.Id == id).FirstOrDefaultAsync();
-        if (entity != null)
+        var superiors = new List<TEntity>();
+        var superiorId = parentId;
+        var times = 0;
+        while (times < 9)
         {
-            list.Add(entity);
-            var superiors = await GetSuperiorsAsync<TEntity>(db, entity.ParentId);
-            list.AddRange(superiors);
+            times++;
+            var superior = await db.Set<TEntity>().Where(x => x.Id == superiorId).FirstOrDefaultAsync();
+            if (superior == null) break;
+            superiorId = superior.ParentId;
+            superiors.Add(superior);
         }
-        return [.. list];
+        return [.. superiors];
+    }
+
+    /// <summary>
+    /// 查询顶级
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <param name="db"></param>
+    /// <param name="parentId"></param>
+    /// <returns></returns>
+    public static async Task<TEntity?> GetTopSuperiorAsync<TEntity>(DefaultDbContext db, long parentId) where TEntity : class, IParentIdEntity
+    {
+        var superiors = await GetSuperiorsAsync<TEntity>(db, parentId);
+        return superiors.LastOrDefault();
     }
 
     /// <summary>
