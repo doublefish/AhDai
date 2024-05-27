@@ -1,5 +1,6 @@
 ﻿using AhDai.Core.Extensions;
 using AhDai.DbContext.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -151,14 +152,14 @@ public static class DbContextUtil
     /// <param name="command"></param>
     static void BeforeExecute(string eventId, IDbCommand command)
     {
-        var message = $"SQL=>{command.CommandText};Paras=>";
+        var parameters = "";
         foreach (IDbDataParameter para in command.Parameters)
         {
-            message += $"{para.ParameterName}={para.Value},";
+            parameters += $"{para.ParameterName}={para.Value},";
         }
         var type = typeof(DbContextUtil);
         var logger = LoggerUtil.GetLogger(type.FullName ?? type.Name);
-        logger.Debug(eventId, message);
+        logger.LogDebug(new EventId(0, eventId), "SQL=>{CommandText};Parameters=>{Parameters}", command.CommandText, parameters);
     }
 
     /// <summary>

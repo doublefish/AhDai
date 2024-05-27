@@ -8,19 +8,10 @@ namespace AhDai.Core.Services;
 /// <summary>
 /// Logger
 /// </summary>
-public class Logger : ILogger
+/// <param name="onExecuted"></param>
+public class Logger(Action<LogLevel, string, Exception?>? onExecuted = null) : ILogger
 {
-    readonly Action<LogLevel, string, Exception?>? OnExecuted;
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="onExecuted"></param>
-    public Logger(Action<LogLevel, string, Exception?>? onExecuted = null)
-    {
-        OnExecuted = onExecuted;
-        //Console.WriteLine($"new LoggerService=>{EventId}");
-    }
+    readonly Action<LogLevel, string, Exception?>? OnExecuted = onExecuted;
 
     /// <summary>
     /// Log

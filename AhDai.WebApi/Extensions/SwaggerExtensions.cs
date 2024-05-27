@@ -60,8 +60,9 @@ public static class SwaggerExtensions
                 Name = "Example License",
                 Url = new Uri("https://example.com/license")
             };
-            options.SwaggerDoc(SwaggerConfig.Business, new OpenApiInfo { Title = "业务", Description = "by AhDai", Version = "v1" });
+            options.SwaggerDoc(SwaggerConfig.Auth, new OpenApiInfo { Title = "认证", Description = "by AhDai", Version = "v1" });
             options.SwaggerDoc(SwaggerConfig.System, new OpenApiInfo { Title = "系统", Description = "by AhDai", Version = "v1" });
+            options.SwaggerDoc(SwaggerConfig.Business, new OpenApiInfo { Title = "业务", Description = "by AhDai", Version = "v1" });
             options.DocInclusionPredicate((docName, apiDesc) =>
             {
                 if (!apiDesc.TryGetMethodInfo(out var methodInfo)) return false;
@@ -102,6 +103,7 @@ public static class SwaggerExtensions
         app.UseSwaggerUI(options =>
         {
             var root = "";
+            options.SwaggerEndpoint($"{root}/swagger/{SwaggerConfig.Auth}/swagger.json", "认证");
             options.SwaggerEndpoint($"{root}/swagger/{SwaggerConfig.Business}/swagger.json", "业务");
             options.SwaggerEndpoint($"{root}/swagger/{SwaggerConfig.System}/swagger.json", "系统");
             options.ShowExtensions();

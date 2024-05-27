@@ -1,7 +1,6 @@
 ﻿using AhDai.Base.Extensions;
 using AhDai.Core;
 using AhDai.Core.Configs;
-using AhDai.Core.Extensions;
 using AhDai.Core.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;

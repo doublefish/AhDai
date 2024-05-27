@@ -14,7 +14,7 @@ namespace AhDai.Core.Services.Impl;
 /// </summary>
 public class BaseRedisServiceImpl : IBaseRedisService
 {
-    readonly IDictionary<string, IConnectionMultiplexer> ConnectionMultiplexers;
+    readonly Dictionary<string, IConnectionMultiplexer> ConnectionMultiplexers;
     readonly object Locker;
 
     /// <summary>
@@ -33,12 +33,12 @@ public class BaseRedisServiceImpl : IBaseRedisService
     /// <param name="logger"></param>
     public BaseRedisServiceImpl(IConfiguration configuration, ILogger<BaseRedisServiceImpl> logger)
     {
-        ConnectionMultiplexers = new Dictionary<string, IConnectionMultiplexer>();
+        ConnectionMultiplexers = [];
         Locker = new object();
 
         Config = configuration.GetRedisConfig();
         Logger = logger;
-        Logger.Debug("", $"Init=>Config={JsonUtil.Serialize(Config)}");
+        Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
     }
 
     /// <summary>
@@ -141,7 +141,7 @@ public class BaseRedisServiceImpl : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void ConfigurationChangedBroadcast(object? sender, EndPointEventArgs e)
     {
-        Logger.Debug("", $"ConfigurationChangedBroadcast=>EndPoint={e.EndPoint}");
+        Logger.LogDebug("ConfigurationChangedBroadcast=>EndPoint={EndPoint}", e.EndPoint);
     }
 
     /// <summary>
@@ -151,7 +151,7 @@ public class BaseRedisServiceImpl : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void ConfigurationChanged(object? sender, EndPointEventArgs e)
     {
-        Logger.Debug("", $"ConfigurationChanged=>EndPoint={e.EndPoint}");
+        Logger.LogDebug("ConfigurationChanged=>EndPoint={EndPoint}", e.EndPoint);
     }
 
     /// <summary>
@@ -161,7 +161,7 @@ public class BaseRedisServiceImpl : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void HashSlotMoved(object? sender, HashSlotMovedEventArgs e)
     {
-        Logger.Debug("", $"HashSlotMoved=>NewEndPoint={e.NewEndPoint},OldEndPoint={e.OldEndPoint}");
+        Logger.LogDebug("HashSlotMoved=>NewEndPoint={NewEndPoint},OldEndPoint={OldEndPoint}", e.NewEndPoint, e.OldEndPoint);
     }
 
     /// <summary>
@@ -171,7 +171,7 @@ public class BaseRedisServiceImpl : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void ErrorMessage(object? sender, RedisErrorEventArgs e)
     {
-        Logger.Debug("", $"ErrorMessage=>{e.Message}");
+        Logger.LogError("ErrorMessage=>{Message}", e.Message);
     }
 
     /// <summary>
@@ -181,7 +181,7 @@ public class BaseRedisServiceImpl : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void InternalError(object? sender, InternalErrorEventArgs e)
     {
-        Logger.Debug("", e.Exception, $"InternalError=>{e.Exception.Message}");
+        Logger.LogError(e.Exception, "InternalError=>{Message}", e.Exception.Message);
     }
 
     /// <summary>
@@ -191,14 +191,7 @@ public class BaseRedisServiceImpl : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void ConnectionFailed(object? sender, ConnectionFailedEventArgs e)
     {
-        if (e.Exception != null)
-        {
-            Logger.Debug("", e.Exception, $"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}");
-        }
-        else
-        {
-            Logger.Debug("", $"ConnectionFailed=>EndPoint={e.EndPoint},FailureType={e.FailureType},Message={e.Exception?.Message}");
-        }
+        Logger.LogDebug(e.Exception, "ConnectionFailed=>EndPoint={EndPoint},FailureType={FailureType},Message={Message}", e.EndPoint, e.FailureType, e.Exception?.Message);
     }
 
     /// <summary>
@@ -208,7 +201,7 @@ public class BaseRedisServiceImpl : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void ConnectionRestored(object? sender, ConnectionFailedEventArgs e)
     {
-        Logger.Debug("", $"ConnectionRestored=>EndPoint={e.EndPoint}");
+        Logger.LogDebug("ConnectionRestored=>EndPoint={EndPoint}", e.EndPoint);
     }
     #endregion
 }

@@ -712,141 +712,6 @@
             LoggingExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Trace(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
-            <summary>
-            LogTrace
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Trace(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
-            <summary>
-            LogTrace
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="exception"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Debug(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
-            <summary>
-            LogDebug
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Debug(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
-            <summary>
-            LogDebug
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="exception"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Information(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
-            <summary>
-            LogInformation
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Information(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
-            <summary>
-            LogInformation
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="exception"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Warning(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
-            <summary>
-            LogWarning
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Warning(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
-            <summary>
-            LogWarning
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="exception"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Error(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
-            <summary>
-            LogError
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Error(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
-            <summary>
-            LogError
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="exception"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Critical(Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.Object[])">
-            <summary>
-            LogCritical
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Critical(Microsoft.Extensions.Logging.ILogger,System.String,System.Exception,System.String,System.Object[])">
-            <summary>
-            LogCritical
-            </summary>
-            <param name="logger"></param>
-            <param name="eventId"></param>
-            <param name="exception"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Log(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,System.String,System.String,System.Object[])">
-            <summary>
-            Log
-            </summary>
-            <param name="logger"></param>
-            <param name="logLevel"></param>
-            <param name="eventId"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.LoggingExtensions.Log(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception,System.String,System.Object[])">
-            <summary>
-            Log
-            </summary>
-            <param name="logger"></param>
-            <param name="logLevel"></param>
-            <param name="eventId"></param>
-            <param name="exception"></param>
-            <param name="message"></param>
-            <param name="args"></param>
-        </member>
         <member name="M:AhDai.Core.Extensions.LoggingExtensions.GetName(Microsoft.Extensions.Logging.LogLevel)">
             <summary>
             GetName
@@ -2168,10 +2033,11 @@
             <summary>
             Logger
             </summary>
+            <param name="onExecuted"></param>
         </member>
         <member name="M:AhDai.Core.Services.Logger.#ctor(System.Action{Microsoft.Extensions.Logging.LogLevel,System.String,System.Exception})">
             <summary>
-            构造函数
+            Logger
             </summary>
             <param name="onExecuted"></param>
         </member>
