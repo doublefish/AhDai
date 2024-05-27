@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -59,15 +60,11 @@ public class BaseJwtServiceImpl : IBaseJwtService
     /// <returns></returns>
     public virtual async Task<TokenResult> GenerateTokenAsync(TokenData data)
     {
-        var claims = new List<Claim>();
-        if (data.Id != null)
+        var claims = new List<Claim>()
         {
-            claims.Add(new Claim("Id", data.Id));
-        }
-        if (data.Username != null)
-        {
-            claims.Add(new Claim("Username", data.Username));
-        }
+            new("Id", data.Id),
+            new("Username", data.Username)
+        };
         if (data.Name != null)
         {
             claims.Add(new Claim("Name", data.Name));
@@ -88,8 +85,8 @@ public class BaseJwtServiceImpl : IBaseJwtService
             }
         }
         var result = await GenerateTokenAsync([.. claims]);
-        result.Id = data.Id ?? "";
-        result.Username = data.Username ?? "";
+        result.Id = data.Id;
+        result.Username = data.Username;
         return result;
     }
 
@@ -118,8 +115,21 @@ public class BaseJwtServiceImpl : IBaseJwtService
             dict.Add("Issuer", Config.Issuer);
             dict.Add("IssueTime", DateTime.Now.ToString(Const.DateTimeFormat));
             dict.Add("Expiration", expires.ToLocalTime().ToString(Const.DateTimeFormat));
+            dict.Add("Token", token);
+            var value = JsonUtil.Serialize(dict);
             var rdb = redis.GetDatabase();
-            await rdb.StringSetAsync($"{Config.RedisKey}:{token}", JsonUtil.Serialize(dict), TimeSpan.FromMinutes(Config.Expiration));
+            if (Config.Redis == 2)
+            {
+                //var entries = new HashEntry[] {
+                //    new(token, value),
+                //    new(id, value),
+                //};
+                await rdb.HashSetAsync($"{Config.RedisKey}", token, value);
+            }
+            else
+            {
+                await rdb.StringSetAsync($"{Config.RedisKey}:{token}", value, TimeSpan.FromMinutes(Config.Expiration));
+            }
         }
         return new TokenResult()
         {
@@ -171,14 +181,19 @@ public class BaseJwtServiceImpl : IBaseJwtService
     /// <returns></returns>
     public virtual async Task<bool> ExistsTokenAsync(string token)
     {
-        if (Config.Redis > 0 && !string.IsNullOrEmpty(token))
+        if (Config.Redis == 0 || string.IsNullOrEmpty(token)) return false;
+
+        var data = token.Split(' ')[1];
+        var redis = Services.GetRequiredService<IBaseRedisService>();
+        var rdb = redis.GetDatabase();
+        if (Config.Redis == 2)
         {
-            var data = token.Split(' ')[1];
-            var redis = Services.GetRequiredService<IBaseRedisService>();
-            var rdb = redis.GetDatabase();
+            return await rdb.HashExistsAsync($"{Config.RedisKey}", data);
+        }
+        else
+        {
             return await rdb.KeyExistsAsync($"{Config.RedisKey}:{data}");
         }
-        return false;
     }
 
     /// <summary>
@@ -188,14 +203,19 @@ public class BaseJwtServiceImpl : IBaseJwtService
     /// <returns></returns>
     public virtual async Task<bool> RemoveTokenAsync(string token)
     {
-        if (Config.Redis > 0 && !string.IsNullOrEmpty(token))
+        if (Config.Redis == 0 || string.IsNullOrEmpty(token)) return false;
+
+        var data = token.Split(' ')[1];
+        var redis = Services.GetRequiredService<IBaseRedisService>();
+        var rdb = redis.GetDatabase();
+        if (Config.Redis == 2)
         {
-            var data = token.Split(' ')[1];
-            var redis = Services.GetRequiredService<IBaseRedisService>();
-            var rdb = redis.GetDatabase();
+            return await rdb.HashDeleteAsync($"{Config.RedisKey}", data);
+        }
+        else
+        {
             return await rdb.KeyDeleteAsync($"{Config.RedisKey}:{data}");
         }
-        return false;
     }
 
     /// <summary>

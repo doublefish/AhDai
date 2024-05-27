@@ -9,13 +9,11 @@ namespace AhDai.WebApi.Controllers;
 /// 项目
 /// </summary>
 /// <param name="service"></param>
-/// <param name="dictService"></param>
 [ApiExplorerSettings(GroupName = Configs.SwaggerConfig.System)]
 [Route("api/v1/test")]
-public class TestController(ITestService service, IDictTestService dictService) : ControllerBase
+public class TestController(ITestService service) : ControllerBase
 {
 	readonly ITestService _service = service;
-	readonly IDictTestService _dictService = dictService;
 
 	/// <summary>
 	/// 测试
@@ -28,19 +26,5 @@ public class TestController(ITestService service, IDictTestService dictService) 
 		return result;
 	}
 
-	/// <summary>
-	/// 添加字典数据
-	/// </summary>
-	/// <returns></returns>
-	[HttpPost("dict")]
-	public async Task<object> AddDcitDataAsync()
-	{
-		var result = await _dictService.AddAsync();
-		return result;
-	}
-
-
-
-	
 
 }

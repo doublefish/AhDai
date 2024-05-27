@@ -4,101 +4,6 @@
         <name>AhDai.Core</name>
     </assembly>
     <members>
-        <member name="T:AhDai.Core.Accessor`1">
-            <summary>
-            Accessor
-            </summary>
-            <typeparam name="S"></typeparam>
-        </member>
-        <member name="M:AhDai.Core.Accessor`1.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Accessor`1.Create``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
-            <summary>
-            Create
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="memberSelector"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Accessor`1.Get``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
-            <summary>
-            Get
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="memberSelector"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Accessor`1.GetterSetter`1">
-            <summary>
-            GetterSetter
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:AhDai.Core.Accessor`1.GetterSetter`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`1}})">
-            <summary>
-            GetterSetter
-            </summary>
-            <param name="memberSelector"></param>
-        </member>
-        <member name="T:AhDai.Core.Accessor`2">
-            <summary>
-            Accessor
-            </summary>
-            <typeparam name="S"></typeparam>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:AhDai.Core.Accessor`2.Getter">
-            <summary>
-            Getter
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Accessor`2.Setter">
-            <summary>
-            Setter
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Accessor`2.CanRead">
-            <summary>
-            IsReadable
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Accessor`2.CanWrite">
-            <summary>
-            IsWritable
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Accessor`2.Item(`0)">
-            <summary>
-            T
-            </summary>
-            <param name="instance"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Accessor`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`1}})">
-            <summary>
-            Accessor
-            access not given to outside world
-            </summary>
-            <param name="memberSelector"></param>
-        </member>
-        <member name="T:AhDai.Core.AccessorExample">
-            <summary>
-            AccessorExample
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.AccessorExample.Example">
-            <summary>
-            Example
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.AccessorExample.Person">
-            <summary>
-            Person
-            </summary>
-        </member>
         <member name="T:AhDai.Core.ApiException">
             <summary>
             ApiException
@@ -164,12 +69,6 @@
             构造函数
             </summary>
         </member>
-        <member name="M:AhDai.Core.ApiResult.Success">
-            <summary>
-            返回成功
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:AhDai.Core.ApiResult.Success``1(``0)">
             <summary>
             返回成功
@@ -178,14 +77,19 @@
             <param name="data"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.ApiResult.Error``1(System.Int32,System.String,``0)">
+        <member name="M:AhDai.Core.ApiResult.Success">
+            <summary>
+            返回成功
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.ApiResult.Error(System.Int32,System.String,System.Object)">
             <summary>
             返回错误
             </summary>
-            <typeparam name="T"></typeparam>
             <param name="code"></param>
             <param name="message"></param>
-            <param name="data"></param>
+            <param name="extraData"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.ApiResult`1">
@@ -361,9 +265,9 @@
             允许服务器时间偏移量（秒）
             </summary>
         </member>
-        <member name="P:AhDai.Core.Configs.JwtConfig.EnableRedis">
+        <member name="P:AhDai.Core.Configs.JwtConfig.Redis">
             <summary>
-            启用Redis
+            启用Redis：1-存string，2-存hash，需要自己管理过期数据
             </summary>
         </member>
         <member name="P:AhDai.Core.Configs.JwtConfig.RedisKey">
@@ -583,6 +487,125 @@
             HttpRequestExtensions
             </summary>
         </member>
+        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.MobileDeviceRegex">
+            <remarks>
+            Pattern:<br/>
+            <code>(iemobile|iphone|ipod|android|nokia|sonyericsson|blackberry|samsung|sec\\-|windows ce|motorola|mot\\-|up.b|midp\\-)</code><br/>
+            Options:<br/>
+            <code>RegexOptions.IgnoreCase | RegexOptions.Compiled</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ 1st capture group.<br/>
+                ○ Match with 10 alternative expressions, atomically.<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Ii\u0130].<br/>
+                        ○ Match with 2 alternative expressions, atomically.<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [Ee].<br/>
+                                ○ Match a character in the set [Mm].<br/>
+                                ○ Match a character in the set [Oo].<br/>
+                                ○ Match a character in the set [Bb].<br/>
+                                ○ Match a character in the set [Ii\u0130].<br/>
+                                ○ Match a character in the set [Ll].<br/>
+                                ○ Match a character in the set [Ee].<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [Pp].<br/>
+                                ○ Match with 2 alternative expressions, atomically.<br/>
+                                    ○ Match a sequence of expressions.<br/>
+                                        ○ Match a character in the set [Hh].<br/>
+                                        ○ Match a character in the set [Oo].<br/>
+                                        ○ Match a character in the set [Nn].<br/>
+                                        ○ Match a character in the set [Ee].<br/>
+                                    ○ Match a sequence of expressions.<br/>
+                                        ○ Match a character in the set [Oo].<br/>
+                                        ○ Match a character in the set [Dd].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Aa].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                        ○ Match a character in the set [Rr].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Ii\u0130].<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Kk\u212A].<br/>
+                        ○ Match a character in the set [Ii\u0130].<br/>
+                        ○ Match a character in the set [Aa].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Ss].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Yy].<br/>
+                        ○ Match a character in the set [Ee].<br/>
+                        ○ Match a character in the set [Rr].<br/>
+                        ○ Match a character in the set [Ii\u0130].<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                        ○ Match a character in the set [Ss] exactly 2 times.<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Bb].<br/>
+                        ○ Match a character in the set [Ll].<br/>
+                        ○ Match a character in the set [Aa].<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                        ○ Match a character in the set [Kk\u212A].<br/>
+                        ○ Match a character in the set [Bb].<br/>
+                        ○ Match a character in the set [Ee].<br/>
+                        ○ Match a character in the set [Rr] exactly 2 times.<br/>
+                        ○ Match a character in the set [Yy].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Ss].<br/>
+                        ○ Match with 2 alternative expressions, atomically.<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [Aa].<br/>
+                                ○ Match a character in the set [Mm].<br/>
+                                ○ Match a character in the set [Ss].<br/>
+                                ○ Match a character in the set [Uu].<br/>
+                                ○ Match a character in the set [Nn].<br/>
+                                ○ Match a character in the set [Gg].<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [Ee].<br/>
+                                ○ Match a character in the set [Cc].<br/>
+                                ○ Match '-'.<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Ww].<br/>
+                        ○ Match a character in the set [Ii\u0130].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Ww].<br/>
+                        ○ Match a character in the set [Ss].<br/>
+                        ○ Match ' '.<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                        ○ Match a character in the set [Ee].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Mm].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Tt].<br/>
+                        ○ Match with 2 alternative expressions, atomically.<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [Oo].<br/>
+                                ○ Match a character in the set [Rr].<br/>
+                                ○ Match a character in the set [Oo].<br/>
+                                ○ Match a character in the set [Ll].<br/>
+                                ○ Match a character in the set [Aa].<br/>
+                            ○ Match '-'.<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Uu].<br/>
+                        ○ Match a character in the set [Pp].<br/>
+                        ○ Match any character other than '\n'.<br/>
+                        ○ Match a character in the set [Bb].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Mm].<br/>
+                        ○ Match a character in the set [Ii\u0130].<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                        ○ Match a character in the set [Pp].<br/>
+                        ○ Match '-'.<br/>
+            </code>
+            </remarks>
+        </member>
         <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.GetFullPath(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             GetFullPath
@@ -679,7 +702,7 @@
         </member>
         <member name="M:AhDai.Core.Extensions.Log4netExtensions.ToLog4netLevel(Microsoft.Extensions.Logging.LogLevel)">
             <summary>
-            
+            ToLog4netLevel
             </summary>
             <param name="logLevel"></param>
             <returns></returns>
@@ -1182,11 +1205,6 @@
         <member name="P:AhDai.Core.Models.FileData.Hash">
             <summary>
             哈希
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Models.FileData.#ctor">
-            <summary>
-            构造函数
             </summary>
         </member>
         <member name="T:AhDai.Core.Models.HttpRequest">
@@ -1872,11 +1890,6 @@
             Jwt服务
             </summary>
         </member>
-        <member name="P:AhDai.Core.Services.Impl.BaseJwtServiceImpl.RedisService">
-            <summary>
-            RedisService
-            </summary>
-        </member>
         <member name="P:AhDai.Core.Services.Impl.BaseJwtServiceImpl.Config">
             <summary>
             配置
@@ -1885,6 +1898,11 @@
         <member name="P:AhDai.Core.Services.Impl.BaseJwtServiceImpl.Logger">
             <summary>
             日志
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.Impl.BaseJwtServiceImpl.Services">
+            <summary>
+            Services
             </summary>
         </member>
         <member name="M:AhDai.Core.Services.Impl.BaseJwtServiceImpl.#ctor(Microsoft.Extensions.Configuration.IConfiguration,System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.Impl.BaseJwtServiceImpl})">
@@ -2183,213 +2201,6 @@
             <param name="logLevel"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Socket1.BaseSocket">
-            <summary>
-            BaseSocket
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Socket1.BaseSocket.Encoding">
-            <summary>
-            编码
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Socket1.BaseSocket.Host">
-            <summary>
-            主机
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Socket1.BaseSocket.Port">
-            <summary>
-            端口
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Socket1.BaseSocket.IPAddress">
-            <summary>
-            IPAddress
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Socket1.BaseSocket.IPEndPoint">
-            <summary>
-            IPEndPoint
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Socket1.BaseSocket.Remotes">
-            <summary>
-            远程
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Socket1.BaseSocket.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Socket1.BaseSocket.State">
-            <summary>
-            状态
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Socket1.BaseSocket.Log">
-            <summary>
-            是否记录日志
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Socket1.BaseSocket.MessageHandler">
-            <summary>
-            接收消息委托
-            </summary>
-            <param name="remote"></param>
-            <param name="message"></param>
-        </member>
-        <member name="T:AhDai.Core.Socket1.BaseSocket.StateChangeHandler">
-            <summary>
-            连接状态改变委托
-            </summary>
-            <param name="remote"></param>
-            <param name="state"></param>
-            <param name="message"></param>
-        </member>
-        <member name="E:AhDai.Core.Socket1.BaseSocket.MessageEvent">
-            <summary>
-            接收消息事件
-            </summary>
-        </member>
-        <member name="E:AhDai.Core.Socket1.BaseSocket.StateChangeEvent">
-            <summary>
-            连接状态改变事件
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Socket1.BaseSocket.#ctor(System.String,System.Int32,System.String,System.Boolean)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="host"></param>
-            <param name="port"></param>
-            <param name="name"></param>
-            <param name="log"></param>
-        </member>
-        <member name="M:AhDai.Core.Socket1.BaseSocket.Open(System.Net.Sockets.Socket)">
-            <summary>
-            开启连接
-            </summary>
-            <param name="remote"></param>
-        </member>
-        <member name="M:AhDai.Core.Socket1.BaseSocket.Close(System.Net.Sockets.Socket,System.String)">
-            <summary>
-            关闭连接
-            </summary>
-            <param name="remote"></param>
-            <param name="reason"></param>
-        </member>
-        <member name="M:AhDai.Core.Socket1.BaseSocket.Receive(System.Net.Sockets.Socket,System.Byte[],System.Int32)">
-            <summary>
-            接收消息
-            </summary>
-            <param name="remote"></param>
-            <param name="bytes"></param>
-            <param name="size"></param>
-        </member>
-        <member name="M:AhDai.Core.Socket1.BaseSocket.Send(System.String)">
-            <summary>
-            客户端发送消息给服务端
-            </summary>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Socket1.BaseSocket.Send(System.String,System.Net.Sockets.Socket[])">
-            <summary>
-            服务端发送消息给客户端
-            </summary>
-            <param name="message"></param>
-            <param name="remotes"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Socket1.BaseSocket.Send(System.String,System.Net.Sockets.Socket)">
-            <summary>
-            客户端发送消息给服务端
-            </summary>
-            <param name="message"></param>
-            <param name="remote"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Socket1.BaseSocket.ChangeState(System.Net.Sockets.Socket,AhDai.Core.Socket1.SocketState,System.String)">
-            <summary>
-            改变状态
-            </summary>
-            <param name="remote"></param>
-            <param name="state"></param>
-            <param name="message"></param>
-        </member>
-        <member name="M:AhDai.Core.Socket1.BaseSocket.ListenReceive(System.Net.Sockets.Socket)">
-            <summary>
-            监听消息
-            </summary>
-            <param name="client"></param>
-        </member>
-        <member name="T:AhDai.Core.Socket1.Extensions">
-            <summary>
-            ConfigExt
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Socket1.Extensions.GetNote(AhDai.Core.Socket1.SocketState)">
-            <summary>
-            获取说明
-            </summary>
-            <param name="state"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Socket1.SocketClient">
-            <summary>
-            SocketClient
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Socket1.SocketClient.#ctor(System.String,System.Int32,System.String,System.Boolean)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="host"></param>
-            <param name="port"></param>
-            <param name="name"></param>
-            <param name="log"></param>
-        </member>
-        <member name="T:AhDai.Core.Socket1.SocketService">
-            <summary>
-            SocketService
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Socket1.SocketService.#ctor(System.String,System.Int32,System.String,System.Boolean)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="host"></param>
-            <param name="port"></param>
-            <param name="name"></param>
-            <param name="log"></param>
-        </member>
-        <member name="T:AhDai.Core.Socket1.SocketState">
-            <summary>
-            SocketState
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Socket1.SocketState.Connecting">
-            <summary>
-            连接中
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Socket1.SocketState.Open">
-            <summary>
-            已连接
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Socket1.SocketState.Closing">
-            <summary>
-            关闭中
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Socket1.SocketState.Closed">
-            <summary>
-            已关闭
-            </summary>
-        </member>
         <member name="T:AhDai.Core.Utils.ComputerUtil">
             <summary>
             ComputerUtil
@@ -2600,19 +2411,6 @@
             </summary>
             <param name="b"></param>
             <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Utils.HttpListenerUtil">
-            <summary>
-            HttpListenerUtil
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Utils.HttpListenerUtil.Start(System.String,System.Func{System.Net.HttpListenerRequest,System.Collections.Generic.IDictionary{System.String,System.String},System.String},System.String)">
-            <summary>
-            开启服务
-            </summary>
-            <param name="uriPrefix"></param>
-            <param name="contentType"></param>
-            <param name="callback"></param>
         </member>
         <member name="T:AhDai.Core.Utils.HttpRequestUtil">
             <summary>
@@ -3066,6 +2864,50 @@
             验证图片验证码
             </summary>
             <param name="httpRequest"></param>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.MobileDeviceRegex_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the MobileDeviceRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.MobileDeviceRegex_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MobileDeviceRegex_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.MobileDeviceRegex_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MobileDeviceRegex_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.MobileDeviceRegex_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MobileDeviceRegex_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MobileDeviceRegex_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.MobileDeviceRegex_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout">
+            <summary>Default timeout value set in <see cref="T:System.AppContext"/>, or <see cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout"/> if none was set.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
+            <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_nonAscii_861D04F9611DABC0E32F99B97EE89E025E4FD09A6CA35C93A4DAD1C689E4B89C">
+            <summary>Supports searching for characters in or not in "ABIMNSUWabimnsuwİ".</summary>
         </member>
     </members>
 </doc>
