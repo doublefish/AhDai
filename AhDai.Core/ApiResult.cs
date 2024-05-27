@@ -52,10 +52,10 @@ public class ApiResult : IApiResult
     /// <returns></returns>
     public static ApiResult<string> Error(int code = 500, string message = "", object? extraData = null)
     {
-        var res = Error(code, message, "");
-        res.ExtraData = extraData;
-        return res;
-
+        return new ApiResult<string>(code, message, "")
+        {
+            ExtraData = extraData
+        };
     }
 }
 
