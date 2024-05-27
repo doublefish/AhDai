@@ -10,11 +10,11 @@ public class FileConfig
     /// <summary>
     /// 上传根目录
     /// </summary>
-    public string UploadDirectory { get; set; }
+    public string UploadDirectory { get; set; } = "upload";
     /// <summary>
     /// 下载根目录
     /// </summary>
-    public string DownloadDirectory { get; set; }
+    public string DownloadDirectory { get; set; } = "download";
     /// <summary>
     /// 大小限制
     /// </summary>
@@ -22,21 +22,10 @@ public class FileConfig
     /// <summary>
     /// 扩展名
     /// </summary>
-    public IDictionary<string, string[]>? Extensions { get; set; }
-
+    public IDictionary<string, string[]> Extensions { get; set; } = new Dictionary<string, string[]>();
     /// <summary>
     /// 大小限制说明
     /// </summary>
     public string MaxSizeNote => Utils.FileUtil.GetFileSize(MaxSize);
 
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="uploadDirectory"></param>
-    /// <param name="downloadDirectory"></param>
-    public FileConfig(string uploadDirectory = "upload", string downloadDirectory = "download")
-    {
-        UploadDirectory = uploadDirectory;
-        DownloadDirectory = downloadDirectory;
-    }
 }
