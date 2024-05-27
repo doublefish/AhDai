@@ -6,9 +6,9 @@
 		<Nullable>enable</Nullable>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
-		<Version>1.0.8</Version>
-		<AssemblyVersion>1.0.8</AssemblyVersion>
-		<FileVersion>1.0.8</FileVersion>
+		<Version>1.0.9</Version>
+		<AssemblyVersion>1.0.9</AssemblyVersion>
+		<FileVersion>1.0.9</FileVersion>
 		<PackageProjectUrl>https://github.com/doublefish/AhDai</PackageProjectUrl>
 		<Description>常用方法封装 - Core</Description>
 		<PackageReleaseNotes>无</PackageReleaseNotes>
@@ -39,7 +39,7 @@
 		<PackageReference Include="AhDai.DbContext.SqlClient" Version="1.0.0" />
 		<PackageReference Include="AhDai.DbContext.SQLite" Version="1.0.0" />
 		<PackageReference Include="log4net" Version="2.0.17" />
-		
+
 		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="StackExchange.Redis" Version="2.7.33" />
