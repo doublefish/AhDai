@@ -1,5 +1,4 @@
 using AhDai.Core;
-using AhDai.Service.Models;
 using AhDai.Service.Sys;
 using AhDai.Service.Sys.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +21,7 @@ public class DictController(IDictService service)
 	/// <param name="input"></param>
 	/// <returns></returns>
 	[HttpGet("exist/{id}")]
-	public async Task<IApiResult<bool>> ExistAsync([FromRoute] long id, [FromQuery] CodeExistInput input)
+	public async Task<IApiResult<bool>> ExistAsync([FromRoute] long id, [FromQuery] DicitCodeExistInput input)
 	{
 		var res = await _service.ExistAsync(id, input);
 		return ApiResult.Success(res);

@@ -1,6 +1,4 @@
-﻿using AhDai.Service.Models;
-using AhDai.Service.Sys.Models;
-using System;
+﻿using AhDai.Service.Sys.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,7 +11,7 @@ public interface IDictService
 	: IBaseService<DictInput, DictOutput, DictQueryInput>
 	, IEnableDisableService
 	, IGetByCodeService<DictOutput>
-	, ICodeExistService<CodeExistInput>
+	, ICodeExistService<DicitCodeExistInput>
 
 {
 	/// <summary>
