@@ -17,15 +17,16 @@ namespace AhDai.WebApi.Configs
 		public IModelBinder? GetBinder(ModelBinderProviderContext context)
 		{
 			ArgumentNullException.ThrowIfNull(context);
-			if (context.Metadata.ModelType.IsArray)
-			{
-				var elementType = context.Metadata.ModelType.GetElementType();
-				if (elementType == typeof(string) || elementType == typeof(long) || elementType == typeof(int) || elementType == typeof(decimal))
-				{
-					return new CommaSeparatedArrayModelBinder();
-				}
-			}
-			return null;
-		}
+            if (!context.Metadata.ModelType.IsArray) return null;
+            var elementType = context.Metadata.ModelType.GetElementType();
+            if (elementType == null) return null;
+            if (elementType.IsEnum || elementType == typeof(string)
+                || elementType == typeof(long) || elementType == typeof(int)
+                || elementType == typeof(decimal) || elementType == typeof(double))
+            {
+                return new CommaSeparatedArrayModelBinder();
+            }
+            return null;
+        }
 	}
 }

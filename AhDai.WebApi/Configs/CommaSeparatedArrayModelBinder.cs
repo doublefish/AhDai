@@ -25,19 +25,31 @@ public class CommaSeparatedArrayModelBinder : IModelBinder
 
 		bindingContext.ModelState.SetModelValue(bindingContext.ModelName, valueProviderResult);
 
-		var value = valueProviderResult.FirstValue;
-		if (string.IsNullOrEmpty(value)) return Task.CompletedTask;
+		var values = valueProviderResult.FirstValue;
+		if (string.IsNullOrEmpty(values)) return Task.CompletedTask;
 
 		var elementType = bindingContext.ModelType.GetElementType() ?? bindingContext.ModelType.GetGenericArguments()[0];
-		var array = value.Split(',', StringSplitOptions.RemoveEmptyEntries);
+		var array = values.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
 		var convertedArray = Array.CreateInstance(elementType, array.Length);
-		for (var i = 0; i < array.Length; i++)
-		{
-			convertedArray.SetValue(Convert.ChangeType(array[i], elementType, CultureInfo.InvariantCulture), i);
-		}
+        if (elementType.IsEnum)
+        {
+            for (var i = 0; i < array.Length; i++)
+            {
+                if (!int.TryParse(array[i], out var intValue)) continue;
+                var enumValue = Enum.ToObject(elementType, intValue);
+                convertedArray.SetValue(enumValue, i);
+            }
+        }
+        else
+        {
+            for (var i = 0; i < array.Length; i++)
+            {
+                convertedArray.SetValue(Convert.ChangeType(array[i], elementType, CultureInfo.InvariantCulture), i);
+            }
+        }
 
-		bindingContext.Result = ModelBindingResult.Success(convertedArray);
+        bindingContext.Result = ModelBindingResult.Success(convertedArray);
 		return Task.CompletedTask;
 	}
 }
