@@ -228,13 +228,6 @@
             大小限制说明
             </summary>
         </member>
-        <member name="M:AhDai.Core.Configs.FileConfig.#ctor(System.String,System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="uploadDirectory"></param>
-            <param name="downloadDirectory"></param>
-        </member>
         <member name="T:AhDai.Core.Configs.JwtConfig">
             <summary>
             JwtConfig
@@ -371,22 +364,6 @@
             BuilderExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.UseDbContext(Microsoft.AspNetCore.Builder.IApplicationBuilder,AhDai.Core.Options.DbContextOptions)">
-            <summary>
-            UseDbContext
-            </summary>
-            <param name="app"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.UseDbContext(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{AhDai.Core.Options.DbContextOptions})">
-            <summary>
-            UseDbContext
-            </summary>
-            <param name="app"></param>
-            <param name="setupAction"></param>
-            <returns></returns>
-        </member>
         <member name="M:AhDai.Core.Extensions.BuilderExtensions.UseRedis(Microsoft.AspNetCore.Builder.IApplicationBuilder,AhDai.Core.Options.RedisOptions)">
             <summary>
             UseRedis
@@ -450,13 +427,6 @@
         <member name="M:AhDai.Core.Extensions.ConfigurationExtensions.GetJwtConfig(Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             获取Jwt配置
-            </summary>
-            <param name="configuration"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ConfigurationExtensions.GetDbConfigs(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            获取数据库配置
             </summary>
             <param name="configuration"></param>
             <returns></returns>
@@ -724,15 +694,6 @@
             OptionsExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Core.Extensions.OptionsExtensions.AddConfig(AhDai.Core.Options.DbContextOptions,AhDai.DbContext.Config.DbType,System.String,System.String)">
-            <summary>
-            AddConfig
-            </summary>
-            <param name="options"></param>
-            <param name="dbType"></param>
-            <param name="name"></param>
-            <param name="connectionString"></param>
-        </member>
         <member name="T:AhDai.Core.Extensions.ProviderExtensions">
             <summary>
             ProviderExtensions
@@ -747,13 +708,6 @@
             <summary>
             ServiceCollectionExtensions
             </summary>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddDbService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            添加数据库服务 - 依赖注入单例
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
         </member>
         <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddRedisService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
@@ -776,21 +730,6 @@
             <param name="services"></param>
             <param name="config"></param>
             <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddDbContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.DbContextOptions})">
-            <summary>
-            注册数据库服务
-            </summary>
-            <param name="services"></param>
-            <param name="setupAction"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.ConfigureDbContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.DbContextOptions})">
-            <summary>
-            注册数据库服务
-            </summary>
-            <param name="services"></param>
-            <param name="setupAction"></param>
         </member>
         <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddRedis(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.RedisOptions})">
             <summary>
@@ -1333,16 +1272,6 @@
             认证类型：Bearer
             </summary>
         </member>
-        <member name="T:AhDai.Core.Options.DbContextOptions">
-            <summary>
-            DbContextOptions
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.DbContextOptions.Configs">
-            <summary>
-            数据库配置
-            </summary>
-        </member>
         <member name="T:AhDai.Core.Options.MailOptions">
             <summary>
             MailOptions
@@ -1451,52 +1380,6 @@
             <summary>
             内容类型
             </summary>
-        </member>
-        <member name="T:AhDai.Core.Services.IBaseDbService">
-            <summary>
-            数据库服务
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.IBaseDbService.GetSqlDbContext(System.String,System.String)">
-            <summary>
-            GetSqlDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.IBaseDbService.GetMySqlDbContext(System.String,System.String)">
-            <summary>
-            GetMySqlDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.IBaseDbService.GetOracleDbContext(System.String,System.String)">
-            <summary>
-            GetOracleDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.IBaseDbService.GetSQLiteDbContext(System.String,System.String)">
-            <summary>
-            GetSQLiteDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.IBaseDbService.GetSQLiteDbContext(System.String,System.String,System.String)">
-            <summary>
-            GetSQLiteDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="fileName"></param>
-            <param name="version"></param>
-            <returns></returns>
         </member>
         <member name="T:AhDai.Core.Services.IBaseFileService">
             <summary>
@@ -1653,78 +1536,22 @@
             <param name="config">自定义配置</param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Services.Impl.BaseDbServiceImpl">
+        <member name="T:AhDai.Core.Services.Impl.BaseFileServiceImpl">
             <summary>
-            数据库服务
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.BaseDbServiceImpl.Configs">
-            <summary>
-            配置
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseDbServiceImpl.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            构造函数
+            文件服务
             </summary>
             <param name="configuration"></param>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseDbServiceImpl.GetSqlDbContext(System.String,System.String)">
+        <member name="M:AhDai.Core.Services.Impl.BaseFileServiceImpl.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
-            GetSqlDbContext
+            文件服务
             </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseDbServiceImpl.GetMySqlDbContext(System.String,System.String)">
-            <summary>
-            GetMySqlDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseDbServiceImpl.GetOracleDbContext(System.String,System.String)">
-            <summary>
-            GetOracleDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseDbServiceImpl.GetSQLiteDbContext(System.String,System.String)">
-            <summary>
-            GetSQLiteDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseDbServiceImpl.GetSQLiteDbContext(System.String,System.String,System.String)">
-            <summary>
-            GetSQLiteDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="fileName"></param>
-            <param name="version"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Services.Impl.BaseFileServiceImpl">
-            <summary>
-            FileService
-            </summary>
+            <param name="configuration"></param>
         </member>
         <member name="P:AhDai.Core.Services.Impl.BaseFileServiceImpl.Config">
             <summary>
             Config
             </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileServiceImpl.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="configuration"></param>
         </member>
         <member name="M:AhDai.Core.Services.Impl.BaseFileServiceImpl.Upload(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
             <summary>
@@ -2100,131 +1927,6 @@
             获取所有
             </summary>
             <param name="sections"></param>
-        </member>
-        <member name="T:AhDai.Core.Utils.DbContextUtil">
-            <summary>
-            DbContextUtil
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Utils.DbContextUtil.Configs">
-            <summary>
-            配置
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.#cctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.Init(System.Collections.Generic.ICollection{AhDai.DbContext.Models.DbConfig})">
-            <summary>
-            初始化
-            </summary>
-            <param name="configs"></param>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.GetConfig(System.String)">
-            <summary>
-            获取配置
-            </summary>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.GetSqlDbContext(System.String,System.String)">
-            <summary>
-            GetSqlDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.GetMySqlDbContext(System.String,System.String)">
-            <summary>
-            GetMySqlDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.GetOracleDbContext(System.String,System.String)">
-            <summary>
-            GetOracleDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.GetSQLiteDbContext(System.String,System.String)">
-            <summary>
-            GetMySqlDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="dbName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.GetSQLiteDbContext(System.String,System.String,System.String)">
-            <summary>
-            GetSQLiteDbContext
-            </summary>
-            <param name="eventId"></param>
-            <param name="fileName"></param>
-            <param name="version"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.BeforeExecute(System.String,System.Data.IDbCommand)">
-            <summary>
-            执行前执行
-            </summary>
-            <param name="eventId"></param>
-            <param name="command"></param>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.ExecuteNonQuery(System.Data.IDbConnection,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            执行
-            </summary>
-            <param name="connection"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.ExecuteReader``1(System.Data.IDbConnection,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Func{System.Data.IDataReader,``0})">
-            <summary>
-            查询
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="connection"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <param name="converter"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.ExecuteScalar(System.Data.IDbConnection,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            查询
-            </summary>
-            <param name="connection"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.ExecuteScalar``1(System.Data.IDbConnection,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Func{System.Object,``0})">
-            <summary>
-            查询
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="connection"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <param name="converter"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Utils.DbContextUtil.CreateCommand(System.Data.IDbConnection,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            CreateCommand
-            </summary>
-            <param name="connection"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
         </member>
         <member name="T:AhDai.Core.Utils.FileUtil">
             <summary>

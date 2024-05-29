@@ -19,7 +19,7 @@ internal class UniqueHelper<TEntity> where TEntity : class, IBaseEntity
     /// <summary>
     /// Db
     /// </summary>
-    protected Microsoft.EntityFrameworkCore.DbContext Db { get; private set; }
+    protected DbContext Db { get; private set; }
     /// <summary>
     /// RedisDb
     /// </summary>
@@ -42,7 +42,7 @@ internal class UniqueHelper<TEntity> where TEntity : class, IBaseEntity
     /// </summary>
     /// <param name="db"></param>
     /// <param name="withTenant"></param>
-    public UniqueHelper(Microsoft.EntityFrameworkCore.DbContext db)
+    public UniqueHelper(DbContext db)
     {
         ArgumentNullException.ThrowIfNull(db);
         Db = db;
@@ -184,7 +184,7 @@ internal class TenantUniqueHelper<TEntity> : UniqueHelper<TEntity> where TEntity
     /// </summary>
     /// <param name="db"></param>
     /// <param name="tenantId"></param>
-    public TenantUniqueHelper(Microsoft.EntityFrameworkCore.DbContext db) : this(db, 0)
+    public TenantUniqueHelper(DbContext db) : this(db, 0)
     {
     }
 
@@ -193,7 +193,7 @@ internal class TenantUniqueHelper<TEntity> : UniqueHelper<TEntity> where TEntity
     /// </summary>
     /// <param name="db"></param>
     /// <param name="tenantId"></param>
-    public TenantUniqueHelper(Microsoft.EntityFrameworkCore.DbContext db, long tenantId) : base(db)
+    public TenantUniqueHelper(DbContext db, long tenantId) : base(db)
     {
         ArgumentNullException.ThrowIfNull(db);
         ArgumentNullException.ThrowIfNull(tenantId);

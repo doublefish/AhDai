@@ -11,23 +11,15 @@ using System.Threading.Tasks;
 namespace AhDai.Core.Services.Impl;
 
 /// <summary>
-/// FileService
+/// 文件服务
 /// </summary>
-public class BaseFileServiceImpl : IBaseFileService
+/// <param name="configuration"></param>
+public class BaseFileServiceImpl(IConfiguration configuration) : IBaseFileService
 {
     /// <summary>
     /// Config
     /// </summary>
-    public Configs.FileConfig Config { get; private set; }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="configuration"></param>
-    public BaseFileServiceImpl(IConfiguration configuration)
-    {
-        Config = configuration.GetFileConfig();
-    }
+    public Configs.FileConfig Config { get; private set; } = configuration.GetFileConfig();
 
     /// <summary>
     /// 上传
@@ -119,10 +111,7 @@ public class BaseFileServiceImpl : IBaseFileService
     [SupportedOSPlatform("windows")]
     public virtual string Compress(string rootPath, IDictionary<string, string> files)
     {
-        if (files == null)
-        {
-            throw new ArgumentNullException(nameof(files));
-        }
+        ArgumentNullException.ThrowIfNull(files);
         var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
 
         //文件目录

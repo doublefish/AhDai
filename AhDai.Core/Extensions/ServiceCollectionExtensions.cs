@@ -15,17 +15,6 @@ namespace AhDai.Core.Extensions;
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    /// 添加数据库服务 - 依赖注入单例
-    /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddDbService(this IServiceCollection services)
-    {
-        services.AddSingleton<Services.IBaseDbService, Services.Impl.BaseDbServiceImpl>();
-        return services;
-    }
-
-    /// <summary>
     /// 添加Redis服务 - 依赖注入单例
     /// </summary>
     /// <param name="services"></param>
@@ -112,34 +101,6 @@ public static class ServiceCollectionExtensions
         });
         return services;
     }
-
-
-    #region DbContext
-    /// <summary>
-    /// 注册数据库服务
-    /// </summary>
-    /// <param name="services"></param>
-    /// <param name="setupAction"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddDbContext(this IServiceCollection services, Action<Options.DbContextOptions>? setupAction = null)
-    {
-        if (setupAction != null)
-        {
-            services.ConfigureDbContext(setupAction);
-        }
-        return services;
-    }
-
-    /// <summary>
-    /// 注册数据库服务
-    /// </summary>
-    /// <param name="services"></param>
-    /// <param name="setupAction"></param>
-    public static void ConfigureDbContext(this IServiceCollection services, Action<Options.DbContextOptions> setupAction)
-    {
-        services.Configure(setupAction);
-    }
-    #endregion
 
     #region Redis
     /// <summary>

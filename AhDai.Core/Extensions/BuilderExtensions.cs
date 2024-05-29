@@ -13,42 +13,6 @@ namespace AhDai.Core.Extensions;
 /// </summary>
 public static class BuilderExtensions
 {
-
-    #region UseDbContext
-    /// <summary>
-    /// UseDbContext
-    /// </summary>
-    /// <param name="app"></param>
-    /// <param name="options"></param>
-    /// <returns></returns>
-    public static IApplicationBuilder UseDbContext(this IApplicationBuilder app, Options.DbContextOptions options)
-    {
-        if (options != null)
-        {
-            Utils.DbContextUtil.Init(options.Configs);
-        }
-        return app;
-    }
-
-    /// <summary>
-    /// UseDbContext
-    /// </summary>
-    /// <param name="app"></param>
-    /// <param name="setupAction"></param>
-    /// <returns></returns>
-    public static IApplicationBuilder UseDbContext(this IApplicationBuilder app, Action<Options.DbContextOptions>? setupAction = null)
-    {
-        Options.DbContextOptions options;
-        using (var scope = app.ApplicationServices.CreateScope())
-        {
-            // 这里才会执行添加配置时传入的action
-            options = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<Options.DbContextOptions>>().Value;
-            setupAction?.Invoke(options);
-        }
-        return app.UseDbContext(options);
-    }
-    #endregion
-
     #region UseRedis
     /// <summary>
     /// UseRedis
