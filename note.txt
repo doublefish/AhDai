@@ -91,7 +91,7 @@ docker run -p 9000:9000 -e ZK_HOSTS="127.0.0.1:2181" --name cmak -d vimagick/cma
 ---------------------------------------------------------------------------------------------------------------------
 
 # elasticsearch/es
-docker pull elasticsearch:8.10.2
+docker pull elasticsearch:8.13.4
 
 docker run -d --name elasticsearch \
 -p 9200:9200 -p 9300:9300 \
@@ -99,7 +99,7 @@ docker run -d --name elasticsearch \
 -e ES_JAVA_OPTS="-Xms512m -Xmx1024m" \
 -v /usr/local/docker/elasticsearch/data:/usr/share/elasticsearch/data \
 -v /usr/local/docker/elasticsearch/logs:/usr/share/elasticsearch/logs \
-elasticsearch:8.10.2
+elasticsearch:8.13.4
 
 
 
@@ -112,7 +112,7 @@ docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-setup-p
 docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
 
 # 复制证书
-docker cp elasticsearch:/usr/share/elasticsearch/config/certs/http_ca.crt D:/app/docker/elasticsearch/config/certs/
+docker cp elasticsearch:/usr/share/elasticsearch/config/certs/http_ca.crt / #D:/app/docker/elasticsearch/config/certs/
 
 # 生成token
 docker exec -u 0 -it elasticsearch /bin/bash
@@ -122,9 +122,9 @@ eyJ2ZXIiOiI4LjEwLjIiLCJhZHIiOlsiMTcyLjE3LjAuNDo5MjAwIl0sImZnciI6IjMzZGQ0NDYzNDM2
 
 
 # kibana
-docker pull kibana:8.10.2
-docker run -d --name kibana -p 5601:5601 kibana:8.10.2
-docker run -d --name kibana -p 5601:5601 --link=elasticsearch:8.10.2 kibana:8.10.2
+docker pull kibana:8.13.4
+docker run -d --name kibana -p 5601:5601 kibana:8.13.4
+docker run -d --name kibana -p 5601:5601 --link=elasticsearch:8.13.4 kibana:8.13.4
 
 
 docker exec -u 0 -it kibana /bin/bash
