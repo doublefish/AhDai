@@ -36,7 +36,6 @@ namespace AhDai.Test
 				builder.Logging.AddLog4Net();
 
 				// 添加业务服务
-				builder.Services.AddDbService();
 				builder.Services.AddRedisService();
 				//Service.Startup.ConfigureServices(builder.Services);
 

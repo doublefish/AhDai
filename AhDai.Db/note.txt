@@ -1,6 +1,0 @@
-﻿Scaffold-DbContext "Data Source=192.168.1.250;Initial Catalog=Basic;User ID=sa;Password=mssql@123456;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;Connection Timeout=120" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context DbContext
-
-
-Scaffold-DbContext "Data Source=192.168.1.250;Initial Catalog=Basic;User ID=sa;Password=mssql@123456;Trusted_Connection=False;TrustServerCertificate=True;MultipleActiveResultSets=True;Connection Timeout=120" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models1 -Context DbContext1
-
-
