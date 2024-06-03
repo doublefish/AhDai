@@ -80,19 +80,18 @@ public static class ServiceCollectionExtensions
             };
             options.Events = new JwtBearerEvents
             {
-                OnTokenValidated = context =>
+                OnTokenValidated = async context =>
                 {
                     var token = context.Request.Headers.Authorization.ToString();
                     if (!string.IsNullOrEmpty(token) && config.Redis > 0)
                     {
                         var jwtService = ServiceUtil.Services.GetRequiredService<Services.IBaseJwtService>();
-                        var exists = jwtService.ExistsTokenAsync(token).Result;
+                        var exists = await jwtService.ExistsTokenAsync(token);
                         if (!exists)
                         {
                             context.Fail(new Exception("认证失效"));
                         }
                     }
-                    return Task.CompletedTask;
                 },
                 // 此处为权限验证失败后触发的事件
                 OnChallenge = context =>
@@ -111,5 +110,5 @@ public static class ServiceCollectionExtensions
         });
         return services;
     }
-   
+
 }
