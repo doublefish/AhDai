@@ -2350,40 +2350,12 @@
             Configuration
             </summary>
         </member>
-        <member name="P:AhDai.Core.Utils.ServiceUtil.HttpContextAccessor">
-            <summary>
-            HttpContextAccessor
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Utils.ServiceUtil.HostEnvironment">
-            <summary>
-            HostEnvironment
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Utils.ServiceUtil.WebHostEnvironment">
-            <summary>
-            HostEnvironment
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Utils.ServiceUtil.Init(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            初始化
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-        </member>
         <member name="M:AhDai.Core.Utils.ServiceUtil.Init(System.IServiceProvider,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             初始化
             </summary>
             <param name="services"></param>
             <param name="configuration"></param>
-        </member>
-        <member name="M:AhDai.Core.Utils.ServiceUtil.GetCurrentTokenData">
-            <summary>
-            获取当前Token数据
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:AhDai.Core.Utils.VerifyCodeUtil">
             <summary>
