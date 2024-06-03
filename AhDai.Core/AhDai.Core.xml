@@ -723,6 +723,13 @@
             <param name="services"></param>
             <returns></returns>
         </member>
+        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddFileService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddFileService
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddJwtAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,AhDai.Core.Configs.JwtConfig)">
             <summary>
             添加Jwt认证服务
@@ -730,36 +737,6 @@
             <param name="services"></param>
             <param name="config"></param>
             <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddRedis(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.RedisOptions})">
-            <summary>
-            注册Redis服务
-            </summary>
-            <param name="services"></param>
-            <param name="setupAction"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.ConfigureRedis(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.RedisOptions})">
-            <summary>
-            配置Redis服务
-            </summary>
-            <param name="services"></param>
-            <param name="setupAction"></param>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddMail(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.MailOptions})">
-            <summary>
-            注册邮箱服务
-            </summary>
-            <param name="services"></param>
-            <param name="setupAction"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.ConfigureMail(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AhDai.Core.Options.MailOptions})">
-            <summary>
-            配置邮箱服务
-            </summary>
-            <param name="services"></param>
-            <param name="setupAction"></param>
         </member>
         <member name="T:AhDai.Core.Extensions.X509CertificateExtensions">
             <summary>

@@ -36,6 +36,16 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
+    /// AddFileService
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddFileService(this IServiceCollection services)
+    {
+        return services.AddSingleton<Services.IBaseFileService, Services.Impl.BaseFileServiceImpl>();
+    }
+
+    /// <summary>
     /// 添加Jwt认证服务
     /// </summary>
     /// <param name="services"></param>
@@ -101,58 +111,5 @@ public static class ServiceCollectionExtensions
         });
         return services;
     }
-
-    #region Redis
-    /// <summary>
-    /// 注册Redis服务
-    /// </summary>
-    /// <param name="services"></param>
-    /// <param name="setupAction"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddRedis(this IServiceCollection services, Action<Options.RedisOptions>? setupAction = null)
-    {
-        if (setupAction != null)
-        {
-            services.ConfigureRedis(setupAction);
-        }
-        return services;
-    }
-
-    /// <summary>
-    /// 配置Redis服务
-    /// </summary>
-    /// <param name="services"></param>
-    /// <param name="setupAction"></param>
-    public static void ConfigureRedis(this IServiceCollection services, Action<Options.RedisOptions> setupAction)
-    {
-        services.Configure(setupAction);
-    }
-    #endregion
-
-    #region 邮箱
-    /// <summary>
-    /// 注册邮箱服务
-    /// </summary>
-    /// <param name="services"></param>
-    /// <param name="setupAction"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddMail(this IServiceCollection services, Action<Options.MailOptions>? setupAction = null)
-    {
-        if (setupAction != null)
-        {
-            services.ConfigureMail(setupAction);
-        }
-        return services;
-    }
-
-    /// <summary>
-    /// 配置邮箱服务
-    /// </summary>
-    /// <param name="services"></param>
-    /// <param name="setupAction"></param>
-    public static void ConfigureMail(this IServiceCollection services, Action<Options.MailOptions> setupAction)
-    {
-        services.Configure(setupAction);
-    }
-    #endregion
+   
 }
