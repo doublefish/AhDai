@@ -24,12 +24,7 @@ namespace AhDai.Test
 
 			try
 			{
-				var builder = Host.CreateApplicationBuilder(args);
-
-				var configuration = new ConfigurationBuilder()
-					.SetBasePath(Directory.GetCurrentDirectory())
-					.AddJsonFile("appsettings.json")
-					.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json").Build();
+				var builder = Host.CreateDefaultBuilder(args);
 
 				builder.Services.AddSingleton<IConfiguration>(configuration);
 
