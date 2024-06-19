@@ -6,9 +6,9 @@
 		<Nullable>enable</Nullable>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
-		<Version>1.1.5</Version>
-		<AssemblyVersion>1.1.5</AssemblyVersion>
-		<FileVersion>1.1.5</FileVersion>
+		<Version>1.1.6</Version>
+		<AssemblyVersion>1.1.6</AssemblyVersion>
+		<FileVersion>1.1.6</FileVersion>
 		<PackageProjectUrl>https://github.com/doublefish/AhDai</PackageProjectUrl>
 		<Description>常用方法封装 - Core</Description>
 		<PackageReleaseNotes>无</PackageReleaseNotes>
