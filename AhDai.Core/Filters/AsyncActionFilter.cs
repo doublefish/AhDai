@@ -34,7 +34,7 @@ public class AsyncActionFilter(ILogger<AsyncActionFilter> logger) : IAsyncAction
             IApiResult result;
             if (executedContext.Exception is ApiException apiException)
             {
-                result = ApiResult.Error(apiException.Code, apiException.Message, apiException.Data);
+                result = ApiResult.Error(apiException.Code, apiException.Message, apiException.ExtraData);
                 context.HttpContext.Response.StatusCode = apiException.Code switch
                 {
                     StatusCodes.Status401Unauthorized => StatusCodes.Status401Unauthorized,

@@ -10,12 +10,17 @@ namespace AhDai.Core;
 /// <param name="code"></param>
 /// <param name="message"></param>
 /// <param name="innerException"></param>
-public class ApiException(int code, string? message, Exception? innerException) : Exception(message, innerException)
+/// <param name="extraData"></param>
+public class ApiException(int code, string? message, Exception? innerException, object? extraData = null) : Exception(message, innerException)
 {
     /// <summary>
     /// Code
     /// </summary>
     public int Code { get; protected set; } = code;
+    /// <summary>
+    /// 扩展数据
+    /// </summary>
+    public object? ExtraData { get; set; } = extraData;
 
     /// <summary>
     /// 构造函数
