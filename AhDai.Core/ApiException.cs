@@ -7,12 +7,15 @@ namespace AhDai.Core;
 /// <summary>
 /// ApiException
 /// </summary>
-public class ApiException : Exception
+/// <param name="code"></param>
+/// <param name="message"></param>
+/// <param name="innerException"></param>
+public class ApiException(int code, string? message, Exception? innerException) : Exception(message, innerException)
 {
     /// <summary>
     /// Code
     /// </summary>
-    public int Code { get; protected set; }
+    public int Code { get; protected set; } = code;
 
     /// <summary>
     /// 构造函数
@@ -21,17 +24,6 @@ public class ApiException : Exception
     /// <param name="message"></param>
     public ApiException(int code, string? message) : this(code, message, null)
     {
-    }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="code"></param>
-    /// <param name="message"></param>
-    /// <param name="innerException"></param>
-    public ApiException(int code, string? message, Exception? innerException) : base(message, innerException)
-    {
-        Code = code;
     }
 
     /// <summary>
