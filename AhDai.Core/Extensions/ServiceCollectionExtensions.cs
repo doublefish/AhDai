@@ -96,13 +96,13 @@ public static class ServiceCollectionExtensions
                 // 此处为权限验证失败后触发的事件
                 OnChallenge = context =>
                 {
-                    // 此处代码为终止.Net Core默认的返回类型和数据结果
+                    // 终止默认的返回类型和数据结果
                     context.HandleResponse();
 
                     // 自定义返回内容
-                    var requestId = context.Request.Headers[Const.RequestId];
                     var result = ApiResult.Error(StatusCodes.Status401Unauthorized, "未认证或认证失效");
-
+                    result.TraceId = context.HttpContext.TraceIdentifier;
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                     context.Response.WriteAsJsonAsync(result);
                     return Task.FromResult(0);
                 }
