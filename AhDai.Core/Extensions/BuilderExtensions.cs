@@ -5,9 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
-using System.Net.Mime;
 using System.Net;
-using System.Text;
 
 namespace AhDai.Core.Extensions;
 
@@ -127,10 +125,7 @@ public static class BuilderExtensions
             );
             var res = ApiResult.Error((int)HttpStatusCode.BadRequest, "实体验证失败", errors);
             res.TraceId = context.HttpContext.TraceIdentifier;
-            return new OkObjectResult(res)
-            {
-                ContentTypes = { MediaTypeNames.Application.Json }
-            };
+            return new BadRequestObjectResult(res);
         };
     }
 
