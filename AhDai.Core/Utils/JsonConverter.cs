@@ -7,30 +7,22 @@ namespace AhDai.Core.Utils;
 /// <summary>
 /// JsonConverter
 /// </summary>
-public class DatetimeJsonConverter : JsonConverter<DateTime>
+/// <param name="format"></param>
+public class DatetimeJsonConverter(string format) : JsonConverter<DateTime>
 {
-	/// <summary>
-	/// 格式
-	/// </summary>
-	public string Format { get; set; }
+    /// <summary>
+    /// 格式
+    /// </summary>
+    public string Format { get; set; } = format;
 
-	/// <summary>
-	/// 构造函数
-	/// </summary>
-	/// <param name="format"></param>
-	public DatetimeJsonConverter(string format)
-	{
-		Format = format;
-	}
-
-	/// <summary>
-	/// Read
-	/// </summary>
-	/// <param name="reader"></param>
-	/// <param name="typeToConvert"></param>
-	/// <param name="options"></param>
-	/// <returns></returns>
-	public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    /// <summary>
+    /// Read
+    /// </summary>
+    /// <param name="reader"></param>
+    /// <param name="typeToConvert"></param>
+    /// <param name="options"></param>
+    /// <returns></returns>
+    public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.String)
 		{

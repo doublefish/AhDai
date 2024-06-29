@@ -4,7 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
-using System.Text;
+using System.Linq;
+using System.Net;
 
 namespace AhDai.Core.Extensions;
 
@@ -118,21 +119,13 @@ public static class BuilderExtensions
     {
         options.InvalidModelStateResponseFactory = context =>
         {
-            var messageBuilder = new StringBuilder();
-            foreach (var item in context.ModelState)
-            {
-                if (item.Value.Errors.Count == 0)
-                {
-                    continue;
-                }
-                messageBuilder.AppendLine($"{item.Value.Errors[0].ErrorMessage}");
-            }
-            var message = messageBuilder.ToString();
-            var res = ApiResult.Error(500, message);
-            return new OkObjectResult(res)
-            {
-                ContentTypes = { System.Net.Mime.MediaTypeNames.Application.Json }
-            };
+            var errors = context.ModelState.Where(ms => ms.Value != null && ms.Value.Errors.Count > 0).ToDictionary(
+                kvp => kvp.Key,
+                kvp => kvp.Value?.Errors.Select(e => e.ErrorMessage).ToArray()
+            );
+            var res = ApiResult.Error((int)HttpStatusCode.BadRequest, "实体验证失败", errors);
+            res.TraceId = context.HttpContext.TraceIdentifier;
+            return new BadRequestObjectResult(res);
         };
     }
 
