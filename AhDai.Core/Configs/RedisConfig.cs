@@ -1,7 +1,7 @@
 ﻿namespace AhDai.Core.Configs;
 
 /// <summary>
-/// Config
+/// RedisConfig
 /// </summary>
 public class RedisConfig
 {

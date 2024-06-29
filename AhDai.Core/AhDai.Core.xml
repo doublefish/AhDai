@@ -208,6 +208,31 @@
             </summary>
             <param name="message">消息</param>
         </member>
+        <member name="T:AhDai.Core.Configs.ElasticConfig">
+            <summary>
+            ElasticConfig
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Configs.ElasticConfig.Host">
+            <summary>
+            主机
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Configs.ElasticConfig.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Configs.ElasticConfig.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Configs.ElasticConfig.DefaultIndex">
+            <summary>
+            默认索引
+            </summary>
+        </member>
         <member name="T:AhDai.Core.Configs.FileConfig">
             <summary>
             文件配置
@@ -315,7 +340,7 @@
         </member>
         <member name="T:AhDai.Core.Configs.RedisConfig">
             <summary>
-            Config
+            RedisConfig
             </summary>
         </member>
         <member name="P:AhDai.Core.Configs.RedisConfig.Host">
