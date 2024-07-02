@@ -151,8 +151,8 @@ public class BaseJwtService : IBaseJwtService
     /// <returns></returns>
     public virtual TokenData GetTokenData(string token)
     {
-        var jwt = ReadToken(token);
-        return ToTokenData(jwt.Claims.ToArray());
+        var securityToken = ReadToken(token);
+        return ToTokenData(securityToken.Claims.ToArray());
     }
 
     /// <summary>
@@ -162,13 +162,13 @@ public class BaseJwtService : IBaseJwtService
     /// <returns></returns>
     public virtual async Task<TokenResult> RefreshTokenAsync(string token)
     {
-        var jwt = ReadToken(token);
-        var data = ToTokenData(jwt.Claims.ToArray());
+        var securityToken = ReadToken(token);
+        var data = ToTokenData(securityToken.Claims.ToArray());
         return await GenerateTokenAsync(data);
     }
 
     /// <summary>
-    /// 验证Token
+    /// 从缓存验证Token
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
@@ -192,9 +192,9 @@ public class BaseJwtService : IBaseJwtService
     public virtual async Task<bool> RemoveTokenAsync(string token)
     {
         if (!Config.EnableRedis || string.IsNullOrEmpty(token)) return false;
-        var jwt = ReadToken(token);
-        var username = jwt.Claims.Where(x => x.Type == "Username").FirstOrDefault()?.Value;
-        var data = token.Split(' ')[1];
+        var securityToken = ReadToken(token);
+        var username = securityToken.Claims.Where(x => x.Type == "Username").FirstOrDefault()?.Value;
+        var data = securityToken.RawData; //token.Split(' ')[1];
         var redis = Services.GetRequiredService<IBaseRedisService>();
         var rdb = redis.GetDatabase();
         return await rdb.KeyDeleteAsync($"{Config.RedisKey}:{username}:{data}");

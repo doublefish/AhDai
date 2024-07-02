@@ -7,8 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AhDai.Core\AhDai.Core.csproj" />
-  </ItemGroup>
-
 </Project>

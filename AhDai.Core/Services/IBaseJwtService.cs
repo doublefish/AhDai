@@ -47,7 +47,7 @@ public interface IBaseJwtService
     Task<TokenResult> RefreshTokenAsync(string token);
 
     /// <summary>
-    /// 验证Token
+    /// 从缓存验证Token
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
