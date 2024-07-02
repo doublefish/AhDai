@@ -86,8 +86,9 @@ public static class ServiceCollectionExtensions
                 {
                     if (config.EnableRedis)
                     {
+                        var token = context.Request.Headers.Authorization.ToString();
                         var jwtService = ServiceUtil.Services.GetRequiredService<Services.IBaseJwtService>();
-                        var exists = await jwtService.ValidateTokenAsync(context);
+                        var exists = await jwtService.ValidateTokenAsync(token);
                         if (!exists) context.Fail(new Exception("认证失效"));
                     }
                 },

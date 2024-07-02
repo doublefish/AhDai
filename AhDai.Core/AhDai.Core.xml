@@ -1478,11 +1478,11 @@
             <param name="token"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.IBaseJwtService.ValidateTokenAsync(Microsoft.AspNetCore.Authentication.JwtBearer.TokenValidatedContext)">
+        <member name="M:AhDai.Core.Services.IBaseJwtService.ValidateTokenAsync(System.String)">
             <summary>
             从缓存验证Token
             </summary>
-            <param name="context"></param>
+            <param name="token"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.IBaseJwtService.RemoveTokenAsync(System.String)">
@@ -1676,11 +1676,11 @@
             <param name="token"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.ValidateTokenAsync(Microsoft.AspNetCore.Authentication.JwtBearer.TokenValidatedContext)">
+        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.ValidateTokenAsync(System.String)">
             <summary>
             从缓存验证Token
             </summary>
-            <param name="context"></param>
+            <param name="token"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.Impl.BaseJwtService.RemoveTokenAsync(System.String)">

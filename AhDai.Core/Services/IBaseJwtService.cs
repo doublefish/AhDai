@@ -49,9 +49,9 @@ public interface IBaseJwtService
     /// <summary>
     /// 从缓存验证Token
     /// </summary>
-    /// <param name="context"></param>
+    /// <param name="token"></param>
     /// <returns></returns>
-    Task<bool> ValidateTokenAsync(TokenValidatedContext context);
+    Task<bool> ValidateTokenAsync(string token);
 
     /// <summary>
     /// 从缓存中移除Token
