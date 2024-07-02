@@ -1,9 +1,11 @@
-﻿using AhDai.Core.Utils;
+﻿using AhDai.Core.Models;
+using AhDai.Core.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,7 +23,7 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddRedisService(this IServiceCollection services)
     {
-        services.AddSingleton<Services.IBaseRedisService, Services.Impl.BaseRedisServiceImpl>();
+        services.AddSingleton<Services.IBaseRedisService, Services.Impl.BaseRedisService>();
         return services;
     }
 
@@ -32,7 +34,7 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddJwtService(this IServiceCollection services)
     {
-        return services.AddSingleton<Services.IBaseJwtService, Services.Impl.BaseJwtServiceImpl>();
+        return services.AddSingleton<Services.IBaseJwtService, Services.Impl.BaseJwtService>();
     }
 
     /// <summary>
@@ -42,7 +44,7 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddFileService(this IServiceCollection services)
     {
-        return services.AddSingleton<Services.IBaseFileService, Services.Impl.BaseFileServiceImpl>();
+        return services.AddSingleton<Services.IBaseFileService, Services.Impl.BaseFileService>();
     }
 
     /// <summary>
@@ -82,15 +84,11 @@ public static class ServiceCollectionExtensions
             {
                 OnTokenValidated = async context =>
                 {
-                    var token = context.Request.Headers.Authorization.ToString();
-                    if (!string.IsNullOrEmpty(token) && config.Redis > 0)
+                    if (config.EnableRedis)
                     {
                         var jwtService = ServiceUtil.Services.GetRequiredService<Services.IBaseJwtService>();
-                        var exists = await jwtService.ExistsTokenAsync(token);
-                        if (!exists)
-                        {
-                            context.Fail(new Exception("认证失效"));
-                        }
+                        var exists = await jwtService.ValidateTokenAsync(context);
+                        if (!exists) context.Fail(new Exception("认证失效"));
                     }
                 },
                 // 此处为权限验证失败后触发的事件

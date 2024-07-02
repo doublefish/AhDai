@@ -2,6 +2,7 @@
 using AhDai.Core.Extensions;
 using AhDai.Core.Models;
 using AhDai.Core.Utils;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -20,7 +21,7 @@ namespace AhDai.Core.Services.Impl;
 /// <summary>
 /// Jwt服务
 /// </summary>
-public class BaseJwtServiceImpl : IBaseJwtService
+public class BaseJwtService : IBaseJwtService
 {
     /// <summary>
     /// 配置
@@ -29,7 +30,7 @@ public class BaseJwtServiceImpl : IBaseJwtService
     /// <summary>
     /// 日志
     /// </summary>
-    public ILogger<BaseJwtServiceImpl> Logger { get; private set; }
+    public ILogger<BaseJwtService> Logger { get; private set; }
     /// <summary>
     /// Services
     /// </summary>
@@ -41,11 +42,11 @@ public class BaseJwtServiceImpl : IBaseJwtService
     /// <param name="configuration"></param>
     /// <param name="serviceProvider"></param>
     /// <param name="logger"></param>
-    public BaseJwtServiceImpl(IConfiguration configuration, IServiceProvider serviceProvider, ILogger<BaseJwtServiceImpl> logger)
+    public BaseJwtService(IConfiguration configuration, IServiceProvider serviceProvider, ILogger<BaseJwtService> logger)
     {
         Config = configuration.GetJwtConfig();
         Services = serviceProvider;
-        if (Config.Redis > 0)
+        if (Config.EnableRedis)
         {
             serviceProvider.GetRequiredService<IBaseRedisService>();
         }
@@ -95,7 +96,7 @@ public class BaseJwtServiceImpl : IBaseJwtService
     /// </summary>
     /// <param name="claims"></param>
     /// <returns></returns>
-    public virtual async Task<TokenResult> GenerateTokenAsync(params Claim[] claims)
+    public virtual async Task<TokenResult> GenerateTokenAsync(Claim[] claims)
     {
         var expires = DateTime.UtcNow.AddMinutes(Config.Expiration);
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.SigningKey));
@@ -108,7 +109,7 @@ public class BaseJwtServiceImpl : IBaseJwtService
             expires: expires,
             signingCredentials: signingCredentials);
         var token = new JwtSecurityTokenHandler().WriteToken(jwt);
-        if (Config.Redis > 0)
+        if (Config.EnableRedis)
         {
             var redis = Services.GetRequiredService<IBaseRedisService>();
             var dict = claims.ToDictionary(o => o.Type, o => o.Value);
@@ -116,20 +117,13 @@ public class BaseJwtServiceImpl : IBaseJwtService
             dict.Add("IssueTime", DateTime.Now.ToString(Const.DateTimeFormat));
             dict.Add("Expiration", expires.ToLocalTime().ToString(Const.DateTimeFormat));
             dict.Add("Token", token);
+            if (!dict.TryGetValue("Username", out var username) || string.IsNullOrEmpty(username))
+            {
+                throw new ArgumentException("Username不可为空");
+            }
             var value = JsonUtil.Serialize(dict);
             var rdb = redis.GetDatabase();
-            if (Config.Redis == 2)
-            {
-                //var entries = new HashEntry[] {
-                //    new(token, value),
-                //    new(id, value),
-                //};
-                await rdb.HashSetAsync($"{Config.RedisKey}", token, value);
-            }
-            else
-            {
-                await rdb.StringSetAsync($"{Config.RedisKey}:{token}", value, TimeSpan.FromMinutes(Config.Expiration));
-            }
+            await rdb.StringSetAsync($"{Config.RedisKey}:{username}:{token}", value, TimeSpan.FromMinutes(Config.Expiration));
         }
         return new TokenResult()
         {
@@ -144,11 +138,10 @@ public class BaseJwtServiceImpl : IBaseJwtService
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
-    public virtual IEnumerable<Claim> GetClaims(string token)
+    public virtual JwtSecurityToken ReadToken(string token)
     {
         var data = token.Split(' ')[1];
-        var jwt = new JwtSecurityTokenHandler().ReadJwtToken(data);
-        return jwt.Claims;
+        return new JwtSecurityTokenHandler().ReadJwtToken(data);
     }
 
     /// <summary>
@@ -158,8 +151,8 @@ public class BaseJwtServiceImpl : IBaseJwtService
     /// <returns></returns>
     public virtual TokenData GetTokenData(string token)
     {
-        var claims = GetClaims(token);
-        return ToTokenData(claims.ToArray());
+        var jwt = ReadToken(token);
+        return ToTokenData(jwt.Claims.ToArray());
     }
 
     /// <summary>
@@ -169,31 +162,26 @@ public class BaseJwtServiceImpl : IBaseJwtService
     /// <returns></returns>
     public virtual async Task<TokenResult> RefreshTokenAsync(string token)
     {
-        var claims = GetClaims(token);
-        var data = ToTokenData(claims.ToArray());
+        var jwt = ReadToken(token);
+        var data = ToTokenData(jwt.Claims.ToArray());
         return await GenerateTokenAsync(data);
     }
 
     /// <summary>
-    /// 从缓存中判断Token是否存在
+    /// 验证Token
     /// </summary>
-    /// <param name="token"></param>
+    /// <param name="context"></param>
     /// <returns></returns>
-    public virtual async Task<bool> ExistsTokenAsync(string token)
+    public virtual async Task<bool> ValidateTokenAsync(TokenValidatedContext context)
     {
-        if (Config.Redis == 0 || string.IsNullOrEmpty(token)) return false;
-
+        if (!Config.EnableRedis) return false;
+        var username = context.Request.HttpContext.User.Claims.Where(x => x.Type == "Username").FirstOrDefault()?.Value;
+        if (string.IsNullOrEmpty(username)) return false;
+        var token = context.Request.Headers.Authorization.ToString();
         var data = token.Split(' ')[1];
         var redis = Services.GetRequiredService<IBaseRedisService>();
         var rdb = redis.GetDatabase();
-        if (Config.Redis == 2)
-        {
-            return await rdb.HashExistsAsync($"{Config.RedisKey}", data);
-        }
-        else
-        {
-            return await rdb.KeyExistsAsync($"{Config.RedisKey}:{data}");
-        }
+        return await rdb.KeyExistsAsync($"{Config.RedisKey}:{username}:{data}");
     }
 
     /// <summary>
@@ -203,19 +191,13 @@ public class BaseJwtServiceImpl : IBaseJwtService
     /// <returns></returns>
     public virtual async Task<bool> RemoveTokenAsync(string token)
     {
-        if (Config.Redis == 0 || string.IsNullOrEmpty(token)) return false;
-
+        if (!Config.EnableRedis || string.IsNullOrEmpty(token)) return false;
+        var jwt = ReadToken(token);
+        var username = jwt.Claims.Where(x => x.Type == "Username").FirstOrDefault()?.Value;
         var data = token.Split(' ')[1];
         var redis = Services.GetRequiredService<IBaseRedisService>();
         var rdb = redis.GetDatabase();
-        if (Config.Redis == 2)
-        {
-            return await rdb.HashDeleteAsync($"{Config.RedisKey}", data);
-        }
-        else
-        {
-            return await rdb.KeyDeleteAsync($"{Config.RedisKey}:{data}");
-        }
+        return await rdb.KeyDeleteAsync($"{Config.RedisKey}:{username}:{data}");
     }
 
     /// <summary>

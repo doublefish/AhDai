@@ -26,9 +26,9 @@ public class JwtConfig
     /// </summary>
     public int ClockSkew { get; set; }
     /// <summary>
-    /// 启用Redis：1-存string，2-存hash，需要自己管理过期数据
+    /// 启用Redis，声明数据里必须有 Username，且具有唯一性
     /// </summary>
-    public int Redis { get; set; }
+    public bool EnableRedis { get; set; }
     /// <summary>
     /// RedisKey
     /// </summary>

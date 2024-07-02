@@ -8,7 +8,7 @@ namespace AhDai.Core.Services.Impl;
 /// <summary>
 /// 邮件服务
 /// </summary>
-public class BaseMailServiceImpl : IBaseMailService
+public class BaseMailService : IBaseMailService
 {
     /// <summary>
     /// 配置
@@ -19,7 +19,7 @@ public class BaseMailServiceImpl : IBaseMailService
     /// 构造函数
     /// </summary>
     /// <param name="configuration">配置</param>
-    public BaseMailServiceImpl(IConfiguration configuration)
+    public BaseMailService(IConfiguration configuration)
     {
         Config = configuration.GetMailConfig();
     }

@@ -12,7 +12,7 @@ namespace AhDai.Core.Services.Impl;
 /// <summary>
 /// Redis服务
 /// </summary>
-public class BaseRedisServiceImpl : IBaseRedisService
+public class BaseRedisService : IBaseRedisService
 {
     readonly Dictionary<string, IConnectionMultiplexer> ConnectionMultiplexers;
     readonly object Locker;
@@ -24,14 +24,14 @@ public class BaseRedisServiceImpl : IBaseRedisService
     /// <summary>
     /// 日志
     /// </summary>
-    public ILogger<BaseRedisServiceImpl> Logger { get; private set; }
+    public ILogger<BaseRedisService> Logger { get; private set; }
 
     /// <summary>
     /// 构造函数
     /// </summary>
     /// <param name="configuration"></param>
     /// <param name="logger"></param>
-    public BaseRedisServiceImpl(IConfiguration configuration, ILogger<BaseRedisServiceImpl> logger)
+    public BaseRedisService(IConfiguration configuration, ILogger<BaseRedisService> logger)
     {
         ConnectionMultiplexers = [];
         Locker = new object();

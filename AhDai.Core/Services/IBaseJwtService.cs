@@ -1,5 +1,6 @@
 ﻿using AhDai.Core.Models;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -11,25 +12,25 @@ namespace AhDai.Core.Services;
 public interface IBaseJwtService
 {
     /// <summary>
-    /// GenerateToken
+    /// 生成Token
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>
     Task<TokenResult> GenerateTokenAsync(TokenData data);
 
     /// <summary>
-    /// GenerateToken
+    /// 生成Token
     /// </summary>
     /// <param name="claims"></param>
     /// <returns></returns>
-    Task<TokenResult> GenerateTokenAsync(params Claim[] claims);
+    Task<TokenResult> GenerateTokenAsync(Claim[] claims);
 
     /// <summary>
-    /// 获取声明的数据
+    /// 读取Token
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
-    IEnumerable<Claim> GetClaims(string token);
+    JwtSecurityToken ReadToken(string token);
 
     /// <summary>
     /// 获取声明的数据
@@ -46,11 +47,11 @@ public interface IBaseJwtService
     Task<TokenResult> RefreshTokenAsync(string token);
 
     /// <summary>
-    /// 从缓存中判断Token是否存在
+    /// 验证Token
     /// </summary>
-    /// <param name="token"></param>
+    /// <param name="context"></param>
     /// <returns></returns>
-    Task<bool> ExistsTokenAsync(string token);
+    Task<bool> ValidateTokenAsync(TokenValidatedContext context);
 
     /// <summary>
     /// 从缓存中移除Token

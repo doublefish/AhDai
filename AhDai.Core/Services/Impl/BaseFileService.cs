@@ -14,7 +14,7 @@ namespace AhDai.Core.Services.Impl;
 /// 文件服务
 /// </summary>
 /// <param name="configuration"></param>
-public class BaseFileServiceImpl(IConfiguration configuration) : IBaseFileService
+public class BaseFileService(IConfiguration configuration) : IBaseFileService
 {
     /// <summary>
     /// Config
