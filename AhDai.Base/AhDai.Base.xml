@@ -571,373 +571,6 @@
             SHA512
             </summary>
         </member>
-        <member name="T:AhDai.Base.Security.Extensions.RSAExtensions">
-            <summary>
-            RSAExt
-            </summary>
-        </member>
-        <member name="M:AhDai.Base.Security.Extensions.RSAExtensions.Encrypt(System.Security.Cryptography.RSACryptoServiceProvider,System.String,System.Text.Encoding)">
-            <summary>
-            加密
-            </summary>
-            <param name="rsa"></param>
-            <param name="original">原文</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Extensions.RSAExtensions.Decrypt(System.Security.Cryptography.RSACryptoServiceProvider,System.String)">
-            <summary>
-            解密
-            </summary>
-            <param name="rsa"></param>
-            <param name="ciphertext">密文</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Extensions.RSAExtensions.Encrypt(System.Security.Cryptography.RSACryptoServiceProvider,System.Byte[])">
-            <summary>
-            分段加密
-            </summary>
-            <param name="rsa"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Extensions.RSAExtensions.Decrypt(System.Security.Cryptography.RSACryptoServiceProvider,System.Byte[])">
-            <summary>
-            分段解密
-            </summary>
-            <param name="rsa"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Extensions.RSAExtensions.FromXmlString(System.Security.Cryptography.RSA,System.String)">
-            <summary>
-            FromXmlString
-            </summary>
-            <param name="rsa"></param>
-            <param name="xmlString"></param>
-        </member>
-        <member name="M:AhDai.Base.Security.Extensions.RSAExtensions.ToXmlString(System.Security.Cryptography.RSA,System.Boolean)">
-            <summary>
-            ToXmlString
-            </summary>
-            <param name="rsa"></param>
-            <param name="includePrivateParameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Extensions.RSAExtensions.ToXmlString(System.Security.Cryptography.RSAParameters)">
-            <summary>
-            ToXmlString
-            </summary>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Base.Security.Utils.AESUtil">
-            <summary>
-            AESHelper
-            </summary>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.AESUtil.RijndaelEncrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            加密
-            </summary>
-            <param name="original">原文</param>
-            <param name="key">密钥</param>
-            <param name="iv">加密矢量：只有在CBC加密模式下才适用</param>
-            <param name="mode">加密模式</param>
-            <param name="paddingMode">填充模式</param>
-            <param name="stringType">返回字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.AESUtil.RijndaelDecrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            解密
-            </summary>
-            <param name="ciphertext">密文</param>
-            <param name="key">密钥</param>
-            <param name="iv">加密矢量：只有在CBC加密模式下才适用</param>
-            <param name="mode">加密模式</param>
-            <param name="paddingMode">填充模式</param>
-            <param name="stringType">字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Base.Security.Utils.DESUtil">
-            <summary>
-            DESExt
-            </summary>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.DESUtil.TripleEncrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,System.Text.Encoding)">
-            <summary>
-            加密
-            </summary>
-            <param name="original">原文</param>
-            <param name="key">密钥</param>
-            <param name="iv">加密矢量：只有在CBC加密模式下才适用</param>
-            <param name="mode">运算模式</param>
-            <param name="paddingMode">填充模式</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.DESUtil.TripleDecrypt(System.String,System.String,System.String,System.Security.Cryptography.CipherMode,System.Security.Cryptography.PaddingMode,System.Text.Encoding)">
-            <summary>
-            解密
-            </summary>
-            <param name="ciphertext">密文</param>
-            <param name="key">密钥</param>
-            <param name="iv">加密矢量：只有在CBC加密模式下才适用</param>
-            <param name="mode">运算模式</param>
-            <param name="paddingMode">填充模式</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Base.Security.Utils.HMACUtil">
-            <summary>
-            HMACHelper
-            </summary>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.HMACUtil.Encrypt(System.String,System.String,System.String,System.Text.Encoding)">
-            <summary>
-            MD5
-            </summary>
-            <param name="original">原文</param>
-            <param name="key">密钥</param>
-            <param name="hashName">哈希算法名称</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.HMACUtil.Verify(System.String,System.String,System.String,System.String,System.Text.Encoding)">
-            <summary>
-            验证
-            </summary>
-            <param name="ciphertext">密文</param>
-            <param name="original">需要验证的数据</param>
-            <param name="key">密钥</param>
-            <param name="hashName">哈希算法名称</param>
-            <param name="encode"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Base.Security.Utils.MD5Util">
-            <summary>
-            MD5Helper
-            </summary>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.MD5Util.Encrypt(System.String,System.Text.Encoding)">
-            <summary>
-            加密
-            </summary>
-            <param name="original">原文</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.MD5Util.Verify(System.String,System.String,System.Text.Encoding)">
-            <summary>
-            验证
-            </summary>
-            <param name="ciphertext">密文</param>
-            <param name="original">需要验证的数据</param>
-            <param name="encode"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Base.Security.Utils.RSAUtil">
-            <summary>
-            RSAHelper
-            </summary>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.EncryptByXml(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            加密
-            </summary>
-            <param name="original">原文</param>
-            <param name="key">公钥/私钥</param>
-            <param name="stringType">返回字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.DecryptByXml(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            解密
-            </summary>
-            <param name="ciphertext">密文</param>
-            <param name="key">公钥/私钥</param>
-            <param name="stringType">密文字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.SignByXml(System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            签名
-            </summary>
-            <param name="original">原文</param>
-            <param name="privateKey">私钥</param>
-            <param name="hashName">哈希算法名称</param>
-            <param name="stringType">返回字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.VerifyByXml(System.String,System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            验证
-            </summary>
-            <param name="sign">签名</param>
-            <param name="data">需要验证的数据</param>
-            <param name="publicKey">公钥</param>
-            <param name="hashName">哈希算法名称</param>
-            <param name="stringType">签名字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.EncryptByPKCS8(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            加密
-            </summary>
-            <param name="original">原文</param>
-            <param name="publicKey">公钥</param>
-            <param name="stringType">返回字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.DecryptByPKCS8(System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            解密
-            </summary>
-            <param name="ciphertext">密文</param>
-            <param name="privateKey">私钥</param>
-            <param name="stringType">密文字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.SignByPKCS8(System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            签名
-            </summary>
-            <param name="original">原文</param>
-            <param name="privateKey">私钥</param>
-            <param name="hashName">哈希算法名称</param>
-            <param name="stringType">返回字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.VerifyByPKCS8(System.String,System.String,System.String,System.String,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            验证
-            </summary>
-            <param name="sign">签名</param>
-            <param name="data">需要验证的数据</param>
-            <param name="publicKey">公钥</param>
-            <param name="hashName">哈希算法名称</param>
-            <param name="stringType">签名字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.VerifyByX509Certificate(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate,System.String,AhDai.Base.StringType,System.Text.Encoding)">
-            <summary>
-            验证
-            </summary>
-            <param name="sign">签名</param>
-            <param name="data">需要验证的数据</param>
-            <param name="cert">公钥证书</param>
-            <param name="hashName">哈希算法名称</param>
-            <param name="stringType">签名字符串类型</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.ConvertPKCS8PublicKey(System.String)">
-            <summary>
-            转换公钥PEM
-            </summary>
-            <param name="publicKey"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.ConvertPKCS8PrivateKey(System.String)">
-            <summary>
-            转换私钥PKCS8
-            </summary>
-            <param name="privateKey"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.ConvertX509PublicKey(System.String)">
-            <summary>
-            转换公钥X509
-            </summary>
-            <param name="publicKey"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.GetRSAParameters(System.Security.Cryptography.X509Certificates.X509Certificate)">
-            <summary>
-            从x509格式的证书中,提取公钥,并转换成xml格式
-            </summary>
-            <param name="certificate"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.GetIntegerSize(System.IO.BinaryReader)">
-            <summary>
-            GetIntegerSize
-            </summary>
-            <param name="binaryReader"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.FromPKCS8PublicKey(System.Security.Cryptography.RSA,System.String)">
-            <summary>
-            FromPKCS8PublicKey
-            </summary>
-            <param name="rsa"></param>
-            <param name="pkcs8String"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.RSAUtil.FromPKCS8PrivateKey(System.Security.Cryptography.RSA,System.String)">
-            <summary>
-            FromPKCS8PrivateKey
-            </summary>
-            <param name="rsa"></param>
-            <param name="pkcs8String"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Base.Security.Utils.SHAUtil">
-            <summary>
-            SHAHelper
-            </summary>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.SHAUtil.Encrypt(System.String,System.String,System.Text.Encoding)">
-            <summary>
-            加密
-            </summary>
-            <param name="original">原文</param>
-            <param name="hashName">哈希算法名称</param>
-            <param name="encode">编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.SHAUtil.Verify(System.String,System.String,System.String,System.Text.Encoding)">
-            <summary>
-            验证
-            </summary>
-            <param name="ciphertext">密文</param>
-            <param name="original">需要验证的数据</param>
-            <param name="hashName">哈希算法名称</param>
-            <param name="encode"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Base.Security.Utils.X509CertificateUtil">
-            <summary>
-            X509CertificateHelper
-            </summary>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.X509CertificateUtil.VerifyCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Collections.Generic.IEnumerable{System.Security.Cryptography.X509Certificates.X509Certificate2})">
-            <summary>
-            验证证书链
-            </summary>
-            <param name="primaryCertificate"></param>
-            <param name="additionalCertificates">它预计链的顺序为： ...，INTERMEDIATE2，INTERMEDIATE1（INTERMEDIATE2的签名者），CA（INTERMEDIATE1的签名者）</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Security.Utils.X509CertificateUtil.VerifyCertificate(System.Byte[],System.Collections.Generic.IEnumerable{System.Byte[]})">
-            <summary>
-            验证证书链
-            </summary>
-            <param name="primaryCertificate"></param>
-            <param name="additionalCertificates">它预计链的顺序为： ...，INTERMEDIATE2，INTERMEDIATE1（INTERMEDIATE2的签名者），CA（INTERMEDIATE1的签名者）</param>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Base.StringType">
             <summary>
             字符串类型
@@ -1203,6 +836,59 @@
             </summary>
             <param name="baseName"></param>
             <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Base.Utils.RSAParametersUtils">
+            <summary>
+            RSAParametersUtils
+            </summary>
+        </member>
+        <member name="M:AhDai.Base.Utils.RSAParametersUtils.FromXmlString(System.String)">
+            <summary>
+            FromXmlString
+            </summary>
+            <param name="xmlString"></param>
+        </member>
+        <member name="M:AhDai.Base.Utils.RSAParametersUtils.ToXmlString(System.Security.Cryptography.RSAParameters)">
+            <summary>
+            ToXmlString
+            </summary>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Base.Utils.RSAParametersUtils.FromPemPublicKey(System.String)">
+            <summary>
+            FromPemPublicKey
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Base.Utils.RSAParametersUtils.FromPemPrivateKey(System.String)">
+            <summary>
+            FromPemPrivateKey
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Base.Utils.RSAParametersUtils.FromtX509PublicKey(System.String)">
+            <summary>
+            从x509格式的证书中提取公钥
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Base.Utils.RSAParametersUtils.FromtX509PublicKey(System.Security.Cryptography.X509Certificates.X509Certificate)">
+            <summary>
+            从x509格式的证书中提取公钥
+            </summary>
+            <param name="certificate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Base.Utils.RSAParametersUtils.GetIntegerSize(System.IO.BinaryReader)">
+            <summary>
+            GetIntegerSize
+            </summary>
+            <param name="binaryReader"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Base.Utils.StringUtil">
