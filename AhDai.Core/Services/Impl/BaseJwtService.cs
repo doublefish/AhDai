@@ -115,7 +115,7 @@ public class BaseJwtService : IBaseJwtService
             var dict = claims.ToDictionary(o => o.Type, o => o.Value);
             dict.Add("Issuer", Config.Issuer);
             dict.Add("IssueTime", DateTime.Now.ToString(Const.DateTimeFormat));
-            dict.Add("Expiration", expires.ToLocalTime().ToString(Const.DateTimeFormat));
+            dict.Add("ExpirationTime", expires.ToLocalTime().ToString(Const.DateTimeFormat));
             dict.Add("Token", token);
             if (!dict.TryGetValue("Username", out var username) || string.IsNullOrEmpty(username))
             {

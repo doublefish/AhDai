@@ -43,7 +43,8 @@ public class AsyncActionFilter(ILogger<AsyncActionFilter> logger) : IAsyncAction
             }
             else
             {
-                result = ApiResult.Error(StatusCodes.Status500InternalServerError, executedContext.Exception.Message);
+                var ex = executedContext.Exception.InnerException ?? executedContext.Exception;
+                result = ApiResult.Error(StatusCodes.Status500InternalServerError, ex.Message);
                 context.HttpContext.Response.StatusCode = StatusCodes.Status200OK;
             }
             result.TraceId = context.HttpContext.TraceIdentifier;
