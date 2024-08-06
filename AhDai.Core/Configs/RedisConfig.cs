@@ -16,7 +16,7 @@ public class RedisConfig
     /// <summary>
     /// 密码
     /// </summary>
-    public string? Password { get; set; } 
+    public string? Password { get; set; }
     /// <summary>
     /// 连接失败时放弃连接
     /// 如果为 true，则 Connect 不会在没有可用服务器时创建连接

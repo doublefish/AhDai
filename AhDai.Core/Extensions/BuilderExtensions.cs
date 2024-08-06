@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
@@ -83,33 +82,6 @@ public static class BuilderExtensions
         return app.UseMail(options);
     }
     #endregion
-
-    /// <summary>
-    /// AddLoggerProvider
-    /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="onExecuted"></param>
-    /// <returns></returns>
-    public static ILoggingBuilder AddLoggerProvider(this ILoggingBuilder builder, Action<LogLevel, string, Exception?>? onExecuted = null)
-    {
-        // 删除所有 ILoggerProvider 实例
-        builder.ClearProviders();
-        builder.AddProvider(new Providers.LoggerProvider(onExecuted));
-        return builder;
-    }
-
-
-    /// <summary>
-    /// AddLog4Net
-    /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="configFile"></param>
-    /// <param name="repository"></param>
-    /// <returns></returns>
-    public static ILoggingBuilder AddLog4Net(this ILoggingBuilder builder, string configFile = "log4net.config", string repository = "log4net")
-    {
-        return builder.AddProvider(new Providers.Log4NetProvider(configFile, repository));
-    }
 
     /// <summary>
     /// 配置实体验证错误返回结果

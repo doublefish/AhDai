@@ -6,14 +6,14 @@ using System;
 using System.Collections.Concurrent;
 using System.IO;
 
-namespace AhDai.Core.Providers;
+namespace AhDai.Core.Log4net;
 
 /// <summary>
-/// Log4NetProvider
+/// Log4netProvider
 /// </summary>
-public class Log4NetProvider : ILoggerProvider, IDisposable, ISupportExternalScope
+public class Log4netProvider : ILoggerProvider, IDisposable, ISupportExternalScope
 {
-    readonly ConcurrentDictionary<string, Services.Log4NetLogger> loggers = new();
+    readonly ConcurrentDictionary<string, Log4netLogger> loggers = new();
     readonly ILoggerRepository loggerRepository;
 
     /// <summary>
@@ -26,7 +26,7 @@ public class Log4NetProvider : ILoggerProvider, IDisposable, ISupportExternalSco
     /// </summary>
     /// <param name="configFile"></param>
     /// <param name="repository"></param>
-    public Log4NetProvider(string configFile = "log4net.config", string repository = "log4net")
+    public Log4netProvider(string configFile = "log4net.config", string repository = "log4net")
     {
         loggerRepository = LogManager.CreateRepository(repository);
         XmlConfigurator.Configure(loggerRepository, new FileInfo(configFile));
@@ -41,7 +41,7 @@ public class Log4NetProvider : ILoggerProvider, IDisposable, ISupportExternalSco
     {
         return loggers.GetOrAdd(categoryName, (name) =>
         {
-            return new Services.Log4NetLogger(loggerRepository.Name, name, ExternalScopeProvider);
+            return new Log4netLogger(loggerRepository.Name, name, ExternalScopeProvider);
         });
     }
 

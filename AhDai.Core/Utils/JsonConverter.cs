@@ -23,22 +23,22 @@ public class DatetimeJsonConverter(string format) : JsonConverter<DateTime>
     /// <param name="options"></param>
     /// <returns></returns>
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.String)
-		{
-			return reader.GetDateTime();
-		}
-		return DateTime.TryParse(reader.GetString(), out var date) ? date : reader.GetDateTime();
-	}
+    {
+        if (reader.TokenType != JsonTokenType.String)
+        {
+            return reader.GetDateTime();
+        }
+        return DateTime.TryParse(reader.GetString(), out var date) ? date : reader.GetDateTime();
+    }
 
-	/// <summary>
-	/// Write
-	/// </summary>
-	/// <param name="writer"></param>
-	/// <param name="value"></param>
-	/// <param name="options"></param>
-	public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
-	{
-		writer.WriteStringValue(value.ToString(Format));
-	}
+    /// <summary>
+    /// Write
+    /// </summary>
+    /// <param name="writer"></param>
+    /// <param name="value"></param>
+    /// <param name="options"></param>
+    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+    {
+        writer.WriteStringValue(value.ToString(Format));
+    }
 }

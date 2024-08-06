@@ -1,11 +1,9 @@
-﻿using AhDai.Core.Models;
-using AhDai.Core.Utils;
+﻿using AhDai.Core.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 

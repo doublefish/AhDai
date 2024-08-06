@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AhDai.Core.Log4net</name>
+    </assembly>
+    <members>
+        <member name="T:AhDai.Core.Log4net.BuilderExtensions">
+            <summary>
+            BuilderExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Log4net.BuilderExtensions.AddLog4Net(Microsoft.Extensions.Logging.ILoggingBuilder,System.String,System.String)">
+            <summary>
+            AddLog4Net
+            </summary>
+            <param name="builder"></param>
+            <param name="configFile"></param>
+            <param name="repository"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Log4net.Log4netExtensions">
+            <summary>
+            Log4netExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netExtensions.ToLog4netLevel(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            ToLog4netLevel
+            </summary>
+            <param name="logLevel"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Log4net.Log4netLogger">
+            <summary>
+            Log4netLogger
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Log4net.Log4netLogger.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netLogger.#ctor(System.String,System.String,Microsoft.Extensions.Logging.IExternalScopeProvider)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="repository"></param>
+            <param name="name"></param>
+            <param name="externalScopeProvider"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netLogger.BeginScope``1(``0)">
+            <summary>
+            BeginScope
+            </summary>
+            <typeparam name="TState"></typeparam>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            IsEnabled
+            </summary>
+            <param name="logLevel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+            <summary>
+            Log
+            </summary>
+            <typeparam name="TState"></typeparam>
+            <param name="logLevel"></param>
+            <param name="eventId"></param>
+            <param name="state"></param>
+            <param name="exception"></param>
+            <param name="formatter"></param>
+        </member>
+        <member name="T:AhDai.Core.Log4net.Log4netProvider">
+            <summary>
+            Log4netProvider
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Log4net.Log4netProvider.ExternalScopeProvider">
+            <summary>
+            ExternalScopeProvider
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netProvider.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configFile"></param>
+            <param name="repository"></param>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netProvider.CreateLogger(System.String)">
+            <summary>
+            CreateLogger
+            </summary>
+            <param name="categoryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netProvider.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netProvider.SetScopeProvider(Microsoft.Extensions.Logging.IExternalScopeProvider)">
+            <summary>
+            SetScopeProvider
+            </summary>
+            <param name="scopeProvider"></param>
+        </member>
+        <member name="T:AhDai.Core.Log4net.Log4netUtil">
+            <summary>
+            Log4netUtil
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Log4net.Log4netUtil.Repository">
+            <summary>
+            Repository
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netUtil.Info(System.String,System.Exception)">
+            <summary>
+            Info
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netUtil.Info(System.String,System.String,System.Exception)">
+            <summary>
+            Info
+            </summary>
+            <param name="eventId">事件Id</param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netUtil.Error(System.String,System.Exception)">
+            <summary>
+            Error
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netUtil.Error(System.String,System.String,System.Exception)">
+            <summary>
+            Error
+            </summary>
+            <param name="eventId">事件Id</param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netUtil.Debug(System.String,System.Exception)">
+            <summary>
+            Error
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:AhDai.Core.Log4net.Log4netUtil.Debug(System.String,System.String,System.Exception)">
+            <summary>
+            Error
+            </summary>
+            <param name="eventId">事件Id</param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+    </members>
+</doc>

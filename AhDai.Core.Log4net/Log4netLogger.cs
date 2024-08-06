@@ -1,16 +1,15 @@
-﻿using AhDai.Core.Extensions;
-using log4net;
+﻿using log4net;
 using log4net.Core;
 using Microsoft.Extensions.Logging;
 using System;
 
 
-namespace AhDai.Core.Services;
+namespace AhDai.Core.Log4net;
 
 /// <summary>
-/// Log4NetLogger
+/// Log4netLogger
 /// </summary>
-public class Log4NetLogger : Microsoft.Extensions.Logging.ILogger
+public class Log4netLogger : Microsoft.Extensions.Logging.ILogger
 {
     private readonly IExternalScopeProvider externalScopeProvider;
 
@@ -28,7 +27,7 @@ public class Log4NetLogger : Microsoft.Extensions.Logging.ILogger
     /// <param name="name"></param>
     /// <param name="externalScopeProvider"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public Log4NetLogger(string repository, string name, IExternalScopeProvider externalScopeProvider)
+    public Log4netLogger(string repository, string name, IExternalScopeProvider externalScopeProvider)
     {
         if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
         this.externalScopeProvider = externalScopeProvider ?? throw new ArgumentNullException(nameof(externalScopeProvider));

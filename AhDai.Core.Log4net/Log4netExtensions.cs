@@ -1,7 +1,7 @@
 ﻿using log4net.Core;
 using Microsoft.Extensions.Logging;
 
-namespace AhDai.Core.Extensions;
+namespace AhDai.Core.Log4net;
 
 /// <summary>
 /// Log4netExtensions

@@ -2,7 +2,6 @@
 using AhDai.Core.Extensions;
 using AhDai.Core.Models;
 using AhDai.Core.Utils;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
