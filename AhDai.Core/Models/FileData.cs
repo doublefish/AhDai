@@ -20,7 +20,7 @@ public class FileData
     /// <summary>
     /// 文件全名
     /// </summary>
-    public string FullName => $"{Guid}{Extension}";
+    public string FullName { get; set; } = default!;
     /// <summary>
     /// 类型
     /// </summary>

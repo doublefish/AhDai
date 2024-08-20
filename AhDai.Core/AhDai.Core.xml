@@ -1340,7 +1340,7 @@
             IBaseFileService
             </summary>
         </member>
-        <member name="M:AhDai.Core.Services.IBaseFileService.Upload(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
+        <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
             <summary>
             上传
             </summary>
@@ -1348,12 +1348,23 @@
             <param name="formFiles"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
+        <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAsync(System.String,System.String,System.String)">
             <summary>
-            上传
+            下载
             </summary>
             <param name="rootPath"></param>
-            <param name="formFiles"></param>
+            <param name="fileName"></param>
+            <param name="fileUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String)">
+            <summary>
+            下载
+            </summary>
+            <param name="httpClient"></param>
+            <param name="rootPath"></param>
+            <param name="fileName"></param>
+            <param name="fileUrl"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Services.IBaseJwtService">
@@ -1507,7 +1518,7 @@
             Config
             </summary>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.Upload(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
+        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
             <summary>
             上传
             </summary>
@@ -1515,12 +1526,23 @@
             <param name="formFiles"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[])">
+        <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.String,System.String,System.String)">
             <summary>
-            上传
+            下载
             </summary>
             <param name="rootPath"></param>
-            <param name="formFiles"></param>
+            <param name="fileName"></param>
+            <param name="fileUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String)">
+            <summary>
+            下载
+            </summary>
+            <param name="httpClient"></param>
+            <param name="rootPath"></param>
+            <param name="fileName"></param>
+            <param name="fileUrl"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.Impl.BaseFileService.Compress(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">

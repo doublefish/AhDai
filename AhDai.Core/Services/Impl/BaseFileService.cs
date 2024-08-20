@@ -1,10 +1,13 @@
 ﻿using AhDai.Core.Extensions;
+using AhDai.Core.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
@@ -27,22 +30,6 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// <param name="rootPath"></param>
     /// <param name="formFiles"></param>
     /// <returns></returns>
-    public virtual ICollection<Models.FileData> Upload(string rootPath, params IFormFile[] formFiles)
-    {
-        var task = Task.Run(() =>
-        {
-            return UploadAsync(rootPath, formFiles);
-        });
-        task.Wait();
-        return task.Result;
-    }
-
-    /// <summary>
-    /// 上传
-    /// </summary>
-    /// <param name="rootPath"></param>
-    /// <param name="formFiles"></param>
-    /// <returns></returns>
     public virtual async Task<ICollection<Models.FileData>> UploadAsync(string rootPath, params IFormFile[] formFiles)
     {
         formFiles = formFiles.Where(o => o != null).ToArray();
@@ -52,54 +39,104 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
             throw new Exception("没有需要上传的文件");
         }
 
-        //虚拟目录
         var dir = DateTime.Now.ToString("yyyy-MM-dd");
-        var virtualDir = $"{Config.UploadDirectory}/{dir}";
-        //物理路径
-        var physicalPath = Path.Combine(rootPath, Config.UploadDirectory, dir);
-        if (!Directory.Exists(physicalPath))
+        var virDir = $"{Config.UploadDirectory}/{dir}";
+        var phyDir = Path.Combine(rootPath, Config.UploadDirectory, dir);
+        if (!Directory.Exists(phyDir))
         {
-            Directory.CreateDirectory(physicalPath);
+            Directory.CreateDirectory(phyDir);
         }
-        var datas = new HashSet<Models.FileData>();
-        var temps = new List<Tuple<Models.FileData, IFormFile>>();
-        foreach (var formFile in formFiles)
+        var datas = new Models.FileData[formFiles.Length];
+        for (var i = 0; i < formFiles.Length; i++)
         {
-            var data = new Models.FileData()
+            var formFile = formFiles[i];
+            var ext = Path.GetExtension(formFile.FileName).ToLowerInvariant();
+            var exts = Config.Extensions.Where(o => o.Value.Contains(ext)).FirstOrDefault();
+            if (exts.Key == null) throw new Exception("不支持的文件类型：" + ext);
+            if (formFile.Length > Config.MaxSize) throw new Exception($"超出文件大小限制：{Config.MaxSizeNote}");
+
+            var guid = Guid.NewGuid().ToString();
+            var fullName = $"{guid}{ext}";
+            datas[i] = new Models.FileData()
             {
-                Guid = Guid.NewGuid().ToString(),
+                Guid = guid,
                 Name = Path.GetFileNameWithoutExtension(formFile.FileName),
-                Extension = Path.GetExtension(formFile.FileName).ToLowerInvariant(),
-                Length = formFile.Length
+                Extension = ext,
+                FullName = fullName,
+                Length = formFile.Length,
+                Type = exts.Key,
+                PhysicalPath = Path.Combine(phyDir, fullName),
+                VirtualPath = $"{virDir}/{fullName}",
             };
-            var extensions = Config.Extensions.Where(o => o.Value.Contains(data.Extension)).FirstOrDefault();
-            if (extensions.Key == null)
-            {
-                throw new Exception("不支持的文件类型：" + data.Extension);
-            }
-            data.Type = extensions.Key;
-            if (formFile.Length > Config.MaxSize)
-            {
-                throw new Exception($"超出文件大小限制：{Config.MaxSizeNote}");
-            }
-            //物理路径
-            data.PhysicalPath = Path.Combine(physicalPath, data.FullName);
-            //虚拟路径
-            data.VirtualPath = $"{virtualDir}/{data.FullName}";
-            datas.Add(data);
-            temps.Add(new Tuple<Models.FileData, IFormFile>(data, formFile));
         }
-        foreach (var temp in temps)
+        for (var i = 0; i < formFiles.Length; i++)
         {
-            var data = temp.Item1;
-            var formFile = temp.Item2;
+            var formFile = formFiles[i];
+            var data = datas[i];
             using var stream = new FileStream(data.PhysicalPath, FileMode.Create);
-            //await formFile.CopyToAsync(stream).ConfigureAwait(false);
             await formFile.CopyToAsync(stream);
             //var hashBytes = System.Security.Cryptography.SHA1.HashData(stream);
             //data.Hash = BitConverter.ToString(hashBytes).Replace("-", "");
         }
         return datas;
+    }
+
+    /// <summary>
+    /// 下载
+    /// </summary>
+    /// <param name="rootPath"></param>
+    /// <param name="fileName"></param>
+    /// <param name="fileUrl"></param>
+    /// <returns></returns>
+    public async Task<Models.FileData> DownloadAsync(string rootPath, string fileName, string fileUrl)
+    {
+        var httpClientFactory = ServiceUtil.Services.GetRequiredService<IHttpClientFactory>();
+        using var httpClient = httpClientFactory.CreateClient();
+        return await DownloadAsync(httpClient, rootPath, fileName, fileUrl);
+    }
+
+    /// <summary>
+    /// 下载
+    /// </summary>
+    /// <param name="httpClient"></param>
+    /// <param name="rootPath"></param>
+    /// <param name="fileName"></param>
+    /// <param name="fileUrl"></param>
+    /// <returns></returns>
+    public async Task<Models.FileData> DownloadAsync(HttpClient httpClient, string rootPath, string fileName, string fileUrl)
+    {
+        var dir = DateTime.Now.ToString("yyyy-MM-dd");
+        var virDir = $"{Config.DownloadDirectory}/{dir}";
+        var phyDir = Path.Combine(rootPath, Config.DownloadDirectory, dir);
+        if (!Directory.Exists(phyDir))
+        {
+            Directory.CreateDirectory(phyDir);
+        }
+        var ext = Path.GetExtension(fileName).ToLowerInvariant();
+        var exts = Config.Extensions.Where(o => o.Value.Contains(ext)).FirstOrDefault();
+        var guid = Guid.NewGuid().ToString();
+        var fullName = $"{guid}{ext}";
+        var data = new Models.FileData()
+        {
+            Guid = guid,
+            Name = Path.GetFileNameWithoutExtension(fileName),
+            Extension = ext,
+            FullName = fullName,
+            //Length = formFile.Length,
+            Type = exts.Key,
+            PhysicalPath = Path.Combine(phyDir, fullName),
+            VirtualPath = $"{virDir}/{fullName}",
+        };
+
+        using var res = await httpClient.GetAsync(fileUrl, HttpCompletionOption.ResponseHeadersRead);
+        res.EnsureSuccessStatusCode();
+        await using (var cs = await res.Content.ReadAsStreamAsync())
+        {
+            using var fs = new FileStream(data.PhysicalPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+            await cs.CopyToAsync(fs);
+            data.Length = cs.Length;
+        }
+        return data;
     }
 
     /// <summary>
