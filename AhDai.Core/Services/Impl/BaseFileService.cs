@@ -56,17 +56,17 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
             if (formFile.Length > Config.MaxSize) throw new Exception($"超出文件大小限制：{Config.MaxSizeNote}");
 
             var guid = Guid.NewGuid().ToString();
-            var fullName = $"{guid}{ext}";
+            var saveName = $"{guid}{ext}";
             datas[i] = new Models.FileData()
             {
                 Guid = guid,
                 Name = Path.GetFileNameWithoutExtension(formFile.FileName),
                 Extension = ext,
-                FullName = fullName,
+                FullName = Path.GetFileName(formFile.FileName),
                 Length = formFile.Length,
                 Type = exts.Key,
-                PhysicalPath = Path.Combine(phyDir, fullName),
-                VirtualPath = $"{virDir}/{fullName}",
+                PhysicalPath = Path.Combine(phyDir, saveName),
+                VirtualPath = $"{virDir}/{saveName}",
             };
         }
         for (var i = 0; i < formFiles.Length; i++)
@@ -115,17 +115,17 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
         var ext = Path.GetExtension(fileName).ToLowerInvariant();
         var exts = Config.Extensions.Where(o => o.Value.Contains(ext)).FirstOrDefault();
         var guid = Guid.NewGuid().ToString();
-        var fullName = $"{guid}{ext}";
+        var saveName = $"{guid}{ext}";
         var data = new Models.FileData()
         {
             Guid = guid,
             Name = Path.GetFileNameWithoutExtension(fileName),
             Extension = ext,
-            FullName = fullName,
+            FullName = fileName,
             //Length = formFile.Length,
             Type = exts.Key,
-            PhysicalPath = Path.Combine(phyDir, fullName),
-            VirtualPath = $"{virDir}/{fullName}",
+            PhysicalPath = Path.Combine(phyDir, saveName),
+            VirtualPath = $"{virDir}/{saveName}",
         };
 
         using var res = await httpClient.GetAsync(fileUrl, HttpCompletionOption.ResponseHeadersRead);
