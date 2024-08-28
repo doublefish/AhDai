@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -14,10 +13,19 @@ public interface IBaseFileService
     /// 上传
     /// </summary>
     /// <param name="rootPath"></param>
+    /// <param name="file"></param>
     /// <param name="fileType"></param>
-    /// <param name="files"></param>
     /// <returns></returns>
-    Task<ICollection<Models.FileData>> UploadAsync(string rootPath, string? fileType, params IFormFile[] files);
+    Task<Models.FileData> UploadAsync(string rootPath, IFormFile file, string? fileType = null);
+
+    /// <summary>
+    /// 上传
+    /// </summary>
+    /// <param name="rootPath"></param>
+    /// <param name="files"></param>
+    /// <param name="fileType"></param>
+    /// <returns></returns>
+    Task<Models.FileData[]> UploadAsync(string rootPath, IFormFile[] files, string? fileType = null);
 
     /// <summary>
     /// 下载

@@ -1340,13 +1340,22 @@
             IBaseFileService
             </summary>
         </member>
-        <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile[])">
+        <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             上传
             </summary>
             <param name="rootPath"></param>
+            <param name="file"></param>
             <param name="fileType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String)">
+            <summary>
+            上传
+            </summary>
+            <param name="rootPath"></param>
             <param name="files"></param>
+            <param name="fileType"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAsync(System.String,System.String,System.String)">
@@ -1519,13 +1528,22 @@
             Config
             </summary>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile[])">
+        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             上传
             </summary>
             <param name="rootPath"></param>
+            <param name="file"></param>
             <param name="fileType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String)">
+            <summary>
+            上传
+            </summary>
+            <param name="rootPath"></param>
             <param name="files"></param>
+            <param name="fileType"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.String,System.String,System.String)">

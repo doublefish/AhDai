@@ -28,10 +28,23 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// 上传
     /// </summary>
     /// <param name="rootPath"></param>
+    /// <param name="file"></param>
     /// <param name="fileType"></param>
-    /// <param name="files"></param>
     /// <returns></returns>
-    public virtual async Task<ICollection<Models.FileData>> UploadAsync(string rootPath, string? fileType, params IFormFile[] files)
+    public virtual async Task<Models.FileData> UploadAsync(string rootPath, IFormFile file, string? fileType = null)
+    {
+        var result = await UploadAsync(rootPath, [file], fileType);
+        return result[0];
+    }
+
+    /// <summary>
+    /// 上传
+    /// </summary>
+    /// <param name="rootPath"></param>
+    /// <param name="files"></param>
+    /// <param name="fileType"></param>
+    /// <returns></returns>
+    public virtual async Task<Models.FileData[]> UploadAsync(string rootPath, IFormFile[] files, string? fileType = null)
     {
         files = files.Where(o => o != null).ToArray();
         //If the request is correct, the binary data will be extracted from content and IIS stores files in specified location.
