@@ -28,15 +28,16 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// 上传
     /// </summary>
     /// <param name="rootPath"></param>
-    /// <param name="formFiles"></param>
+    /// <param name="fileType"></param>
+    /// <param name="files"></param>
     /// <returns></returns>
-    public virtual async Task<ICollection<Models.FileData>> UploadAsync(string rootPath, params IFormFile[] formFiles)
+    public virtual async Task<ICollection<Models.FileData>> UploadAsync(string rootPath, string? fileType, params IFormFile[] files)
     {
-        formFiles = formFiles.Where(o => o != null).ToArray();
+        files = files.Where(o => o != null).ToArray();
         //If the request is correct, the binary data will be extracted from content and IIS stores files in specified location.
-        if (formFiles.Length == 0)
+        if (files.Length == 0)
         {
-            throw new Exception("没有需要上传的文件");
+            throw new ArgumentException("没有需要上传的文件");
         }
 
         var dir = DateTime.Now.ToString("yyyy-MM-dd");
@@ -46,35 +47,46 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
         {
             Directory.CreateDirectory(phyDir);
         }
-        var datas = new Models.FileData[formFiles.Length];
-        for (var i = 0; i < formFiles.Length; i++)
+        var datas = new Models.FileData[files.Length];
+        for (var i = 0; i < files.Length; i++)
         {
-            var formFile = formFiles[i];
-            var ext = Path.GetExtension(formFile.FileName).ToLowerInvariant();
-            var exts = Config.Extensions.Where(o => o.Value.Contains(ext)).FirstOrDefault();
-            if (exts.Key == null) throw new Exception("不支持的文件类型：" + ext);
-            if (formFile.Length > Config.MaxSize) throw new Exception($"超出文件大小限制：{Config.MaxSizeNote}");
+            var file = files[i];
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            var type = "";
+            if (!string.IsNullOrEmpty(fileType))
+            {
+                if (!Config.Extensions.TryGetValue(fileType, out var extensions)) throw new ArgumentException($"不支持的文件类别");
+                if (!extensions.Contains(extension)) throw new ArgumentException($"不支持的文件类型：{extension}");
+                type = fileType;
+            }
+            else
+            {
+                var exts = Config.Extensions.Where(o => o.Value.Contains(extension)).FirstOrDefault();
+                if (exts.Key == null) throw new ArgumentException($"不支持的文件类型：{extension}");
+                type = exts.Key;
+            }
+            if (file.Length > Config.MaxSize) throw new ArgumentException($"超出文件大小限制：{Config.MaxSizeNote}");
 
             var guid = Guid.NewGuid().ToString();
-            var saveName = $"{guid}{ext}";
+            var saveName = $"{guid}{extension}";
             datas[i] = new Models.FileData()
             {
                 Guid = guid,
-                Name = Path.GetFileNameWithoutExtension(formFile.FileName),
-                Extension = ext,
-                FullName = Path.GetFileName(formFile.FileName),
-                Length = formFile.Length,
-                Type = exts.Key,
+                Name = Path.GetFileNameWithoutExtension(file.FileName),
+                Extension = extension,
+                FullName = Path.GetFileName(file.FileName),
+                Length = file.Length,
+                Type = type,
                 PhysicalPath = Path.Combine(phyDir, saveName),
                 VirtualPath = $"{virDir}/{saveName}",
             };
         }
-        for (var i = 0; i < formFiles.Length; i++)
+        for (var i = 0; i < files.Length; i++)
         {
-            var formFile = formFiles[i];
+            var file = files[i];
             var data = datas[i];
             using var stream = new FileStream(data.PhysicalPath, FileMode.Create);
-            await formFile.CopyToAsync(stream);
+            await file.CopyToAsync(stream);
             //var hashBytes = System.Security.Cryptography.SHA1.HashData(stream);
             //data.Hash = BitConverter.ToString(hashBytes).Replace("-", "");
         }

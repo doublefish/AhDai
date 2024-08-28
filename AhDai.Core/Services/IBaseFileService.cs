@@ -14,9 +14,10 @@ public interface IBaseFileService
     /// 上传
     /// </summary>
     /// <param name="rootPath"></param>
-    /// <param name="formFiles"></param>
+    /// <param name="fileType"></param>
+    /// <param name="files"></param>
     /// <returns></returns>
-    Task<ICollection<Models.FileData>> UploadAsync(string rootPath, params IFormFile[] formFiles);
+    Task<ICollection<Models.FileData>> UploadAsync(string rootPath, string? fileType, params IFormFile[] files);
 
     /// <summary>
     /// 下载
