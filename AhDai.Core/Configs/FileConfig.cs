@@ -16,16 +16,12 @@ public class FileConfig
     /// </summary>
     public string DownloadDirectory { get; set; } = "download";
     /// <summary>
-    /// 大小限制
+    /// 最大长度
     /// </summary>
-    public long MaxSize { get; set; }
+    public long MaxLength { get; set; }
     /// <summary>
     /// 扩展名
     /// </summary>
     public IDictionary<string, string[]> Extensions { get; set; } = new Dictionary<string, string[]>();
-    /// <summary>
-    /// 大小限制说明
-    /// </summary>
-    public string MaxSizeNote => Utils.FileUtil.GetFileSize(MaxSize);
 
 }

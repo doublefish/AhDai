@@ -248,19 +248,14 @@
             下载根目录
             </summary>
         </member>
-        <member name="P:AhDai.Core.Configs.FileConfig.MaxSize">
+        <member name="P:AhDai.Core.Configs.FileConfig.MaxLength">
             <summary>
-            大小限制
+            最大长度
             </summary>
         </member>
         <member name="P:AhDai.Core.Configs.FileConfig.Extensions">
             <summary>
             扩展名
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Configs.FileConfig.MaxSizeNote">
-            <summary>
-            大小限制说明
             </summary>
         </member>
         <member name="T:AhDai.Core.Configs.JwtConfig">

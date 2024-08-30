@@ -78,7 +78,7 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
                 if (exts.Key == null) throw new ArgumentException($"不支持的文件类型：{extension}");
                 type = exts.Key;
             }
-            if (file.Length > Config.MaxSize) throw new ArgumentException($"超出文件大小限制：{Config.MaxSizeNote}");
+            if (file.Length > Config.MaxLength) throw new ArgumentException($"超出文件大小限制：{Utils.FileUtil.GetFileSize(Config.MaxLength)}");
 
             var guid = Guid.NewGuid().ToString();
             var saveName = $"{guid}{extension}";
