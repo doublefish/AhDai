@@ -142,7 +142,6 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
             Directory.CreateDirectory(phyDir);
         }
         var extension = Path.GetExtension(name).ToLowerInvariant();
-        var extensions = Config.Extensions.Where(o => o.Value.Contains(extension)).FirstOrDefault();
 
         var guid = Guid.NewGuid().ToString();
         var saveName = $"{guid}{extension}";
