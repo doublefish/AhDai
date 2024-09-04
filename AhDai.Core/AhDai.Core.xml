@@ -1525,7 +1525,7 @@
             Config
             </summary>
         </member>
-        <member name="F:AhDai.Core.Services.Impl.BaseFileService.TypeProvider">
+        <member name="F:AhDai.Core.Services.Impl.BaseFileService.ContentTypeProvider">
             <summary>
             TypeProvider
             </summary>

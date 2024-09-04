@@ -26,7 +26,7 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// <summary>
     /// TypeProvider
     /// </summary>
-    public FileExtensionContentTypeProvider TypeProvider = new();
+    public FileExtensionContentTypeProvider ContentTypeProvider = new();
 
     /// <summary>
     /// 获取类型
@@ -35,7 +35,7 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// <returns>MimeType</returns>
     public string GetType(string extension)
     {
-        TypeProvider.TryGetContentType(extension, out var type);
+        ContentTypeProvider.TryGetContentType(extension, out var type);
         return type ?? "application/octet-stream";
     }
 
