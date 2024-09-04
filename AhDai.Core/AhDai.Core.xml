@@ -1008,11 +1008,6 @@
             后缀名
             </summary>
         </member>
-        <member name="P:AhDai.Core.Models.FileData.FullName">
-            <summary>
-            文件全名
-            </summary>
-        </member>
         <member name="P:AhDai.Core.Models.FileData.Type">
             <summary>
             类型
@@ -1335,13 +1330,20 @@
             IBaseFileService
             </summary>
         </member>
+        <member name="M:AhDai.Core.Services.IBaseFileService.GetType(System.String)">
+            <summary>
+            获取类型
+            </summary>
+            <param name="extension"></param>
+            <returns>MimeType</returns>
+        </member>
         <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             上传
             </summary>
             <param name="rootPath"></param>
             <param name="file"></param>
-            <param name="fileType"></param>
+            <param name="category"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String)">
@@ -1350,7 +1352,7 @@
             </summary>
             <param name="rootPath"></param>
             <param name="files"></param>
-            <param name="fileType"></param>
+            <param name="category"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAsync(System.String,System.String,System.String)">
@@ -1358,8 +1360,8 @@
             下载
             </summary>
             <param name="rootPath"></param>
-            <param name="fileName"></param>
-            <param name="fileUrl"></param>
+            <param name="url"></param>
+            <param name="name"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String)">
@@ -1368,8 +1370,8 @@
             </summary>
             <param name="httpClient"></param>
             <param name="rootPath"></param>
-            <param name="fileName"></param>
-            <param name="fileUrl"></param>
+            <param name="url"></param>
+            <param name="name"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Services.IBaseJwtService">
@@ -1523,13 +1525,25 @@
             Config
             </summary>
         </member>
+        <member name="F:AhDai.Core.Services.Impl.BaseFileService.TypeProvider">
+            <summary>
+            TypeProvider
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Services.Impl.BaseFileService.GetType(System.String)">
+            <summary>
+            获取类型
+            </summary>
+            <param name="extension"></param>
+            <returns>MimeType</returns>
+        </member>
         <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             上传
             </summary>
             <param name="rootPath"></param>
             <param name="file"></param>
-            <param name="fileType"></param>
+            <param name="category"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String)">
@@ -1538,7 +1552,7 @@
             </summary>
             <param name="rootPath"></param>
             <param name="files"></param>
-            <param name="fileType"></param>
+            <param name="category"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.String,System.String,System.String)">
@@ -1546,8 +1560,8 @@
             下载
             </summary>
             <param name="rootPath"></param>
-            <param name="fileName"></param>
-            <param name="fileUrl"></param>
+            <param name="url"></param>
+            <param name="name"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String)">
@@ -1556,8 +1570,8 @@
             </summary>
             <param name="httpClient"></param>
             <param name="rootPath"></param>
-            <param name="fileName"></param>
-            <param name="fileUrl"></param>
+            <param name="url"></param>
+            <param name="name"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.Impl.BaseFileService.Compress(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">

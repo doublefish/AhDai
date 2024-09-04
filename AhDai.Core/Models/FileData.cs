@@ -18,10 +18,6 @@ public class FileData
     /// </summary>
     public string Extension { get; set; } = default!;
     /// <summary>
-    /// 文件全名
-    /// </summary>
-    public string FullName { get; set; } = default!;
-    /// <summary>
     /// 类型
     /// </summary>
     public string Type { get; set; } = default!;

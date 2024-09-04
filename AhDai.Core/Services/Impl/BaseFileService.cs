@@ -1,6 +1,6 @@
 ﻿using AhDai.Core.Extensions;
-using AhDai.Core.Utils;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -23,17 +23,32 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// Config
     /// </summary>
     public Configs.FileConfig Config { get; private set; } = configuration.GetFileConfig();
+    /// <summary>
+    /// TypeProvider
+    /// </summary>
+    public FileExtensionContentTypeProvider TypeProvider = new();
+
+    /// <summary>
+    /// 获取类型
+    /// </summary>
+    /// <param name="extension"></param>
+    /// <returns>MimeType</returns>
+    public string GetType(string extension)
+    {
+        TypeProvider.TryGetContentType(extension, out var type);
+        return type ?? "application/octet-stream";
+    }
 
     /// <summary>
     /// 上传
     /// </summary>
     /// <param name="rootPath"></param>
     /// <param name="file"></param>
-    /// <param name="fileType"></param>
+    /// <param name="category"></param>
     /// <returns></returns>
-    public virtual async Task<Models.FileData> UploadAsync(string rootPath, IFormFile file, string? fileType = null)
+    public virtual async Task<Models.FileData> UploadAsync(string rootPath, IFormFile file, string? category = null)
     {
-        var result = await UploadAsync(rootPath, [file], fileType);
+        var result = await UploadAsync(rootPath, [file], category);
         return result[0];
     }
 
@@ -42,9 +57,9 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// </summary>
     /// <param name="rootPath"></param>
     /// <param name="files"></param>
-    /// <param name="fileType"></param>
+    /// <param name="category"></param>
     /// <returns></returns>
-    public virtual async Task<Models.FileData[]> UploadAsync(string rootPath, IFormFile[] files, string? fileType = null)
+    public virtual async Task<Models.FileData[]> UploadAsync(string rootPath, IFormFile[] files, string? category = null)
     {
         files = files.Where(o => o != null).ToArray();
         //If the request is correct, the binary data will be extracted from content and IIS stores files in specified location.
@@ -60,24 +75,14 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
         {
             Directory.CreateDirectory(phyDir);
         }
+
+        var extensions = string.IsNullOrEmpty(category) ? Config.Extensions.SelectMany(x => x.Value).ToArray() : Config.Extensions[category];
         var datas = new Models.FileData[files.Length];
         for (var i = 0; i < files.Length; i++)
         {
             var file = files[i];
             var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
-            var type = "";
-            if (!string.IsNullOrEmpty(fileType))
-            {
-                if (!Config.Extensions.TryGetValue(fileType, out var extensions)) throw new ArgumentException($"不支持的文件类别");
-                if (!extensions.Contains(extension)) throw new ArgumentException($"不支持的文件类型：{extension}");
-                type = fileType;
-            }
-            else
-            {
-                var exts = Config.Extensions.Where(o => o.Value.Contains(extension)).FirstOrDefault();
-                if (exts.Key == null) throw new ArgumentException($"不支持的文件类型：{extension}");
-                type = exts.Key;
-            }
+            if (!extensions.Contains(extension)) throw new ArgumentException($"不支持的文件类型：{extension}");
             if (file.Length > Config.MaxLength) throw new ArgumentException($"超出文件大小限制：{Utils.FileUtil.GetFileSize(Config.MaxLength)}");
 
             var guid = Guid.NewGuid().ToString();
@@ -85,11 +90,10 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
             datas[i] = new Models.FileData()
             {
                 Guid = guid,
-                Name = Path.GetFileNameWithoutExtension(file.FileName),
+                Name = Path.GetFileName(file.FileName),
                 Extension = extension,
-                FullName = Path.GetFileName(file.FileName),
                 Length = file.Length,
-                Type = type,
+                Type = GetType(extension),
                 PhysicalPath = Path.Combine(phyDir, saveName),
                 VirtualPath = $"{virDir}/{saveName}",
             };
@@ -110,14 +114,14 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// 下载
     /// </summary>
     /// <param name="rootPath"></param>
-    /// <param name="fileName"></param>
-    /// <param name="fileUrl"></param>
+    /// <param name="url"></param>
+    /// <param name="name"></param>
     /// <returns></returns>
-    public async Task<Models.FileData> DownloadAsync(string rootPath, string fileName, string fileUrl)
+    public async Task<Models.FileData> DownloadAsync(string rootPath, string url, string name)
     {
-        var httpClientFactory = ServiceUtil.Services.GetRequiredService<IHttpClientFactory>();
+        var httpClientFactory = Utils.ServiceUtil.Services.GetRequiredService<IHttpClientFactory>();
         using var httpClient = httpClientFactory.CreateClient();
-        return await DownloadAsync(httpClient, rootPath, fileName, fileUrl);
+        return await DownloadAsync(httpClient, rootPath, url, name);
     }
 
     /// <summary>
@@ -125,10 +129,10 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// </summary>
     /// <param name="httpClient"></param>
     /// <param name="rootPath"></param>
-    /// <param name="fileName"></param>
-    /// <param name="fileUrl"></param>
+    /// <param name="url"></param>
+    /// <param name="name"></param>
     /// <returns></returns>
-    public async Task<Models.FileData> DownloadAsync(HttpClient httpClient, string rootPath, string fileName, string fileUrl)
+    public async Task<Models.FileData> DownloadAsync(HttpClient httpClient, string rootPath, string url, string name)
     {
         var dir = DateTime.Now.ToString("yyyy-MM-dd");
         var virDir = $"{Config.DownloadDirectory}/{dir}";
@@ -137,23 +141,23 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
         {
             Directory.CreateDirectory(phyDir);
         }
-        var ext = Path.GetExtension(fileName).ToLowerInvariant();
-        var exts = Config.Extensions.Where(o => o.Value.Contains(ext)).FirstOrDefault();
+        var extension = Path.GetExtension(name).ToLowerInvariant();
+        var extensions = Config.Extensions.Where(o => o.Value.Contains(extension)).FirstOrDefault();
+
         var guid = Guid.NewGuid().ToString();
-        var saveName = $"{guid}{ext}";
+        var saveName = $"{guid}{extension}";
         var data = new Models.FileData()
         {
             Guid = guid,
-            Name = Path.GetFileNameWithoutExtension(fileName),
-            Extension = ext,
-            FullName = fileName,
+            Name = Path.GetFileName(name),
+            Extension = extension,
             //Length = formFile.Length,
-            Type = exts.Key,
+            Type = GetType(extension),
             PhysicalPath = Path.Combine(phyDir, saveName),
             VirtualPath = $"{virDir}/{saveName}",
         };
 
-        using var res = await httpClient.GetAsync(fileUrl, HttpCompletionOption.ResponseHeadersRead);
+        using var res = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
         res.EnsureSuccessStatusCode();
         await using (var cs = await res.Content.ReadAsStreamAsync())
         {
