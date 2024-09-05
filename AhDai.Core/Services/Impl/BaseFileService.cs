@@ -87,8 +87,8 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
 
             datas[i] = new Models.FileData()
             {
-                ActualName = $"{Guid.NewGuid()}{extension}",
                 Name = Path.GetFileName(file.FileName),
+                ActualName = $"{Guid.NewGuid()}{extension}",
                 Extension = extension,
                 Length = file.Length,
                 Type = GetType(extension),
@@ -143,8 +143,8 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
 
         var data = new Models.FileData()
         {
-            ActualName = $"{Guid.NewGuid()}{extension}",
             Name = Path.GetFileName(name),
+            ActualName = $"{Guid.NewGuid()}{extension}",
             Extension = extension,
             //Length = formFile.Length,
             Type = GetType(extension),
