@@ -100,7 +100,8 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
         {
             var file = files[i];
             var data = datas[i];
-            using var stream = new FileStream(data.PhysicalDirectory, FileMode.Create);
+            var path = Path.Combine(data.PhysicalDirectory, data.ActualName);
+            using var stream = new FileStream(path, FileMode.Create);
             await file.CopyToAsync(stream);
             //var hashBytes = System.Security.Cryptography.SHA1.HashData(stream);
             //data.Hash = BitConverter.ToString(hashBytes).Replace("-", "");
@@ -154,9 +155,10 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
 
         using var res = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
         res.EnsureSuccessStatusCode();
+        var path = Path.Combine(data.PhysicalDirectory, data.ActualName);
         await using (var cs = await res.Content.ReadAsStreamAsync())
         {
-            using var fs = new FileStream(data.PhysicalDirectory, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+            using var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
             await cs.CopyToAsync(fs);
             data.Length = cs.Length;
         }
