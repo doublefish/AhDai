@@ -993,14 +993,14 @@
             上传文件
             </summary>
         </member>
-        <member name="P:AhDai.Core.Models.FileData.Guid">
-            <summary>
-            唯一标识
-            </summary>
-        </member>
         <member name="P:AhDai.Core.Models.FileData.Name">
             <summary>
             文件名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.FileData.ActualName">
+            <summary>
+            实际名称
             </summary>
         </member>
         <member name="P:AhDai.Core.Models.FileData.Extension">
@@ -1018,19 +1018,19 @@
             大小
             </summary>
         </member>
-        <member name="P:AhDai.Core.Models.FileData.PhysicalPath">
-            <summary>
-            物理路径
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.FileData.VirtualPath">
-            <summary>
-            虚拟路径
-            </summary>
-        </member>
         <member name="P:AhDai.Core.Models.FileData.Hash">
             <summary>
             哈希
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.FileData.VirtualDirectory">
+            <summary>
+            虚拟目录
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.FileData.PhysicalDirectory">
+            <summary>
+            物理目录
             </summary>
         </member>
         <member name="T:AhDai.Core.Models.HttpRequest">

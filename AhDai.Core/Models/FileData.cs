@@ -6,13 +6,13 @@
 public class FileData
 {
     /// <summary>
-    /// 唯一标识
-    /// </summary>
-    public string Guid { get; set; } = default!;
-    /// <summary>
     /// 文件名
     /// </summary>
     public string Name { get; set; } = default!;
+    /// <summary>
+    /// 实际名称
+    /// </summary>
+    public string ActualName { get; set; } = default!;
     /// <summary>
     /// 后缀名
     /// </summary>
@@ -26,15 +26,15 @@ public class FileData
     /// </summary>
     public long Length { get; set; }
     /// <summary>
-    /// 物理路径
-    /// </summary>
-    public string PhysicalPath { get; set; } = default!;
-    /// <summary>
-    /// 虚拟路径
-    /// </summary>
-    public string VirtualPath { get; set; } = default!;
-    /// <summary>
     /// 哈希
     /// </summary>
     public string Hash { get; set; } = default!;
+    /// <summary>
+    /// 虚拟目录
+    /// </summary>
+    public string VirtualDirectory { get; set; } = default!;
+    /// <summary>
+    /// 物理目录
+    /// </summary>
+    public string PhysicalDirectory { get; set; } = default!;
 }
