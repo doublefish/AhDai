@@ -1337,39 +1337,43 @@
             <param name="extension"></param>
             <returns>MimeType</returns>
         </member>
-        <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
+        <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             上传
             </summary>
-            <param name="rootPath"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
             <param name="file"></param>
             <param name="category"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String)">
+        <member name="M:AhDai.Core.Services.IBaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String)">
             <summary>
             上传
             </summary>
-            <param name="rootPath"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
             <param name="files"></param>
             <param name="category"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAsync(System.String,System.String,System.String)">
+        <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAsync(System.String,System.String,System.String,System.String)">
             <summary>
             下载
             </summary>
-            <param name="rootPath"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
             <param name="url"></param>
             <param name="name"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String)">
+        <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String)">
             <summary>
             下载
             </summary>
             <param name="httpClient"></param>
-            <param name="rootPath"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
             <param name="url"></param>
             <param name="name"></param>
             <returns></returns>
@@ -1537,39 +1541,43 @@
             <param name="extension"></param>
             <returns>MimeType</returns>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
+        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             上传
             </summary>
-            <param name="rootPath"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
             <param name="file"></param>
             <param name="category"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String)">
+        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String)">
             <summary>
             上传
             </summary>
-            <param name="rootPath"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
             <param name="files"></param>
             <param name="category"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.String,System.String,System.String)">
+        <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.String,System.String,System.String,System.String)">
             <summary>
             下载
             </summary>
-            <param name="rootPath"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
             <param name="url"></param>
             <param name="name"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String)">
+        <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String)">
             <summary>
             下载
             </summary>
             <param name="httpClient"></param>
-            <param name="rootPath"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
             <param name="url"></param>
             <param name="name"></param>
             <returns></returns>

@@ -42,24 +42,26 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// <summary>
     /// 上传
     /// </summary>
-    /// <param name="rootPath"></param>
+    /// <param name="root"></param>
+    /// <param name="dir"></param>
     /// <param name="file"></param>
     /// <param name="category"></param>
     /// <returns></returns>
-    public virtual async Task<Models.FileData> UploadAsync(string rootPath, IFormFile file, string? category = null)
+    public virtual async Task<Models.FileData> UploadAsync(string root, string dir, IFormFile file, string? category = null)
     {
-        var result = await UploadAsync(rootPath, [file], category);
+        var result = await UploadAsync(root, dir, [file], category);
         return result[0];
     }
 
     /// <summary>
     /// 上传
     /// </summary>
-    /// <param name="rootPath"></param>
+    /// <param name="root"></param>
+    /// <param name="dir"></param>
     /// <param name="files"></param>
     /// <param name="category"></param>
     /// <returns></returns>
-    public virtual async Task<Models.FileData[]> UploadAsync(string rootPath, IFormFile[] files, string? category = null)
+    public virtual async Task<Models.FileData[]> UploadAsync(string root, string dir, IFormFile[] files, string? category = null)
     {
         files = files.Where(o => o != null).ToArray();
         //If the request is correct, the binary data will be extracted from content and IIS stores files in specified location.
@@ -68,9 +70,8 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
             throw new ArgumentException("没有需要上传的文件");
         }
 
-        var dir = DateTime.Now.ToString("yyyy-MM-dd");
         var virDir = $"{Config.UploadDirectory}/{dir}";
-        var phyDir = Path.Combine(rootPath, Config.UploadDirectory, dir);
+        var phyDir = Path.Combine(root, Config.UploadDirectory, dir);
         if (!Directory.Exists(phyDir))
         {
             Directory.CreateDirectory(phyDir);
@@ -112,30 +113,31 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// <summary>
     /// 下载
     /// </summary>
-    /// <param name="rootPath"></param>
+    /// <param name="root"></param>
+    /// <param name="dir"></param>
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    public async Task<Models.FileData> DownloadAsync(string rootPath, string url, string name)
+    public async Task<Models.FileData> DownloadAsync(string root, string dir, string url, string name)
     {
         var httpClientFactory = Utils.ServiceUtil.Services.GetRequiredService<IHttpClientFactory>();
         using var httpClient = httpClientFactory.CreateClient();
-        return await DownloadAsync(httpClient, rootPath, url, name);
+        return await DownloadAsync(httpClient, root, dir, url, name);
     }
 
     /// <summary>
     /// 下载
     /// </summary>
     /// <param name="httpClient"></param>
-    /// <param name="rootPath"></param>
+    /// <param name="root"></param>
+    /// <param name="dir"></param>
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    public async Task<Models.FileData> DownloadAsync(HttpClient httpClient, string rootPath, string url, string name)
+    public async Task<Models.FileData> DownloadAsync(HttpClient httpClient, string root, string dir, string url, string name)
     {
-        var dir = DateTime.Now.ToString("yyyy-MM-dd");
         var virDir = $"{Config.DownloadDirectory}/{dir}";
-        var phyDir = Path.Combine(rootPath, Config.DownloadDirectory, dir);
+        var phyDir = Path.Combine(root, Config.DownloadDirectory, dir);
         if (!Directory.Exists(phyDir))
         {
             Directory.CreateDirectory(phyDir);
