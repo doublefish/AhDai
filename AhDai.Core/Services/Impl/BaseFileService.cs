@@ -162,7 +162,7 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
         {
             using var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
             await cs.CopyToAsync(fs);
-            data.Length = cs.Length;
+            data.Length = fs.Length;
         }
         return data;
     }
