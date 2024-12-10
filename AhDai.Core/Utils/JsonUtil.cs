@@ -1,6 +1,5 @@
 ﻿using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Unicode;
 
 namespace AhDai.Core.Utils;
 
@@ -22,7 +21,8 @@ public static class JsonUtil
         Options = new JsonSerializerOptions()
         {
             PropertyNameCaseInsensitive = true,
-            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+            //Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             Converters = { new DatetimeJsonConverter(Const.DateTimeFormat) }
         };
     }
