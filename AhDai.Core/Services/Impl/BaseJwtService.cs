@@ -57,8 +57,9 @@ public class BaseJwtService : IBaseJwtService
     /// GenerateToken
     /// </summary>
     /// <param name="data"></param>
+    /// <param name="expiration">分钟</param>
     /// <returns></returns>
-    public virtual async Task<TokenResult> GenerateTokenAsync(TokenData data)
+    public virtual async Task<TokenResult> GenerateTokenAsync(TokenData data, int? expiration = null)
     {
         var claims = new List<Claim>()
         {
@@ -84,7 +85,7 @@ public class BaseJwtService : IBaseJwtService
                 claims.Add(new Claim($"Ext-{kv.Key}", kv.Value));
             }
         }
-        var result = await GenerateTokenAsync([.. claims]);
+        var result = await GenerateTokenAsync([.. claims], expiration);
         result.Id = data.Id;
         result.Username = data.Username;
         return result;
@@ -94,10 +95,12 @@ public class BaseJwtService : IBaseJwtService
     /// GenerateToken
     /// </summary>
     /// <param name="claims"></param>
+    /// <param name="expiration">分钟</param>
     /// <returns></returns>
-    public virtual async Task<TokenResult> GenerateTokenAsync(Claim[] claims)
+    public virtual async Task<TokenResult> GenerateTokenAsync(Claim[] claims, int? expiration = null)
     {
-        var expires = DateTime.UtcNow.AddMinutes(Config.Expiration);
+        var expiryMinutes = expiration ?? Config.Expiration;
+        var expires = DateTime.UtcNow.AddMinutes(expiryMinutes);
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.SigningKey));
         var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var jwt = new JwtSecurityToken(
@@ -122,7 +125,7 @@ public class BaseJwtService : IBaseJwtService
             }
             var value = JsonUtil.Serialize(dict);
             var rdb = redis.GetDatabase();
-            await rdb.StringSetAsync($"{Config.RedisKey}:{username}:{token}", value, TimeSpan.FromMinutes(Config.Expiration));
+            await rdb.StringSetAsync($"{Config.RedisKey}:{username}:{token}", value, TimeSpan.FromMinutes(expiryMinutes));
         }
         return new TokenResult()
         {

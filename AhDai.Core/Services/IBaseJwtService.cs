@@ -14,15 +14,17 @@ public interface IBaseJwtService
     /// 生成Token
     /// </summary>
     /// <param name="data"></param>
+    /// <param name="expiration">分钟</param>
     /// <returns></returns>
-    Task<TokenResult> GenerateTokenAsync(TokenData data);
+    Task<TokenResult> GenerateTokenAsync(TokenData data, int? expiration = null);
 
     /// <summary>
     /// 生成Token
     /// </summary>
     /// <param name="claims"></param>
+    /// <param name="expiration">分钟</param>
     /// <returns></returns>
-    Task<TokenResult> GenerateTokenAsync(Claim[] claims);
+    Task<TokenResult> GenerateTokenAsync(Claim[] claims, int? expiration = null);
 
     /// <summary>
     /// 读取Token

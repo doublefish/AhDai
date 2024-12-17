@@ -1383,18 +1383,20 @@
             Jwt服务
             </summary>
         </member>
-        <member name="M:AhDai.Core.Services.IBaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData)">
+        <member name="M:AhDai.Core.Services.IBaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
             <summary>
             生成Token
             </summary>
             <param name="data"></param>
+            <param name="expiration">分钟</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.IBaseJwtService.GenerateTokenAsync(System.Security.Claims.Claim[])">
+        <member name="M:AhDai.Core.Services.IBaseJwtService.GenerateTokenAsync(System.Security.Claims.Claim[],System.Nullable{System.Int32})">
             <summary>
             生成Token
             </summary>
             <param name="claims"></param>
+            <param name="expiration">分钟</param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.IBaseJwtService.ReadToken(System.String)">
@@ -1618,18 +1620,20 @@
             <param name="serviceProvider"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData)">
+        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
             <summary>
             GenerateToken
             </summary>
             <param name="data"></param>
+            <param name="expiration">分钟</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.GenerateTokenAsync(System.Security.Claims.Claim[])">
+        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.GenerateTokenAsync(System.Security.Claims.Claim[],System.Nullable{System.Int32})">
             <summary>
             GenerateToken
             </summary>
             <param name="claims"></param>
+            <param name="expiration">分钟</param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.Impl.BaseJwtService.ReadToken(System.String)">
