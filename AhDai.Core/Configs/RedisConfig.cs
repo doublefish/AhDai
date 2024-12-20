@@ -8,7 +8,7 @@ public class RedisConfig
     /// <summary>
     /// 主机
     /// </summary>
-    public string Host { get; set; } = default!;
+    public string Host { get; set; } = null!;
     /// <summary>
     /// 端口
     /// </summary>

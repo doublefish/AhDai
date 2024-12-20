@@ -41,5 +41,5 @@ public class HttpResponse
     /// <summary>
     /// Content
     /// </summary>
-    public string Content { get; set; } = default!;
+    public string Content { get; set; } = null!;
 }

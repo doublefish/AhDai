@@ -15,11 +15,11 @@ public class HttpRequest
     /// <summary>
     /// 地址
     /// </summary>
-    public string Url { get; set; } = default!;
+    public string Url { get; set; } = null!;
     /// <summary>
     /// 内容类型
     /// </summary>
-    public string ContentType { get; set; } = default!;
+    public string ContentType { get; set; } = null!;
     /// <summary>
     /// 内容
     /// </summary>

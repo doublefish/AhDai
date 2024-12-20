@@ -15,7 +15,7 @@ public static class RARUtil
     /// <summary>
     /// WinRAR.exe路径
     /// </summary>
-    public static string ApplicationPath { get; private set; } = default!;
+    public static string ApplicationPath { get; private set; } = null!;
 
     /// <summary>
     /// 构造函数

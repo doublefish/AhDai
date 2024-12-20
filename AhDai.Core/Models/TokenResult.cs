@@ -10,15 +10,15 @@ public class TokenResult
     /// <summary>
     /// 用户Id
     /// </summary>
-    public string Id { get; set; } = default!;
+    public string Id { get; set; } = null!;
     /// <summary>
     /// 用户名
     /// </summary>
-    public string Username { get; set; } = default!;
+    public string Username { get; set; } = null!;
     /// <summary>
     /// Token
     /// </summary>
-    public string Token { get; set; } = default!;
+    public string Token { get; set; } = null!;
     /// <summary>
     /// 过期时间
     /// </summary>
@@ -26,5 +26,5 @@ public class TokenResult
     /// <summary>
     /// 认证类型：Bearer
     /// </summary>
-    public string Type { get; set; } = default!;
+    public string Type { get; set; } = null!;
 }

@@ -8,5 +8,5 @@ public class RedisOptions
     /// <summary>
     /// Redis配置
     /// </summary>
-    public Configs.RedisConfig Config { get; set; } = default!;
+    public Configs.RedisConfig Config { get; set; } = null!;
 }

@@ -11,11 +11,11 @@ public static class ServiceUtil
     /// <summary>
     /// 服务实例
     /// </summary>
-    public static IServiceProvider Services { get; private set; } = default!;
+    public static IServiceProvider Services { get; private set; } = null!;
     /// <summary>
     /// Configuration
     /// </summary>
-    public static IConfiguration Configuration { get; private set; } = default!;
+    public static IConfiguration Configuration { get; private set; } = null!;
 
     /// <summary>
     /// 初始化

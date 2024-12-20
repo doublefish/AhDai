@@ -8,15 +8,19 @@ public class JwtConfig
     /// <summary>
     /// 签发人
     /// </summary>
-    public string Issuer { get; set; } = default!;
+    public string Issuer { get; set; } = null!;
     /// <summary>
     /// 受众
     /// </summary>
-    public string Audience { get; set; } = default!;
+    public string Audience { get; set; } = null!;
     /// <summary>
-    /// 密钥
+    /// 私钥
     /// </summary>
-    public string SigningKey { get; set; } = default!;
+    public string PrivateKey { get; set; } = null!;
+    /// <summary>
+    /// 公钥
+    /// </summary>
+    public string PublicKey { get; set; } = null!;
     /// <summary>
     /// 超时时间（分钟）
     /// </summary>
@@ -32,5 +36,5 @@ public class JwtConfig
     /// <summary>
     /// RedisKey
     /// </summary>
-    public string RedisKey { get; set; } = default!;
+    public string RedisKey { get; set; } = null!;
 }

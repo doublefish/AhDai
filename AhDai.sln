@@ -15,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhDai.Core", "AhDai.Core\Ah
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AhDai.WorkerService", "AhDai.WorkerService\AhDai.WorkerService.csproj", "{A4F8C263-C049-49E3-BD87-E16B2F9F5AC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhDai.Core.Log4net", "AhDai.Core.Log4net\AhDai.Core.Log4net.csproj", "{2E0FD49B-B165-46AE-A3CB-58833836995E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{A4F8C263-C049-49E3-BD87-E16B2F9F5AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4F8C263-C049-49E3-BD87-E16B2F9F5AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4F8C263-C049-49E3-BD87-E16B2F9F5AC7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E0FD49B-B165-46AE-A3CB-58833836995E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E0FD49B-B165-46AE-A3CB-58833836995E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E0FD49B-B165-46AE-A3CB-58833836995E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E0FD49B-B165-46AE-A3CB-58833836995E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

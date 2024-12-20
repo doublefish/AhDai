@@ -70,7 +70,7 @@ public static class ServiceCollectionExtensions
                 ValidAudience = config.Audience,
                 // 是否验证密钥
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.SigningKey)),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.PrivateKey)),
                 // 是否验证生命周期，使用当前时间与Token的Claims中的NotBefore和Expires对比
                 ValidateLifetime = true,
                 // 过期时间，是否要求Token的Claims中必须包含Expires

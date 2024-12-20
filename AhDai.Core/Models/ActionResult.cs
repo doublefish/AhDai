@@ -12,7 +12,7 @@ public class ActionResult<T> : Services.IActionResult<T>
     /// <summary>
     /// 动作Id
     /// </summary>
-    public string ActionId { get; set; } = default!;
+    public string ActionId { get; set; } = null!;
     /// <summary>
     /// 状态代码
     /// </summary>
@@ -20,7 +20,7 @@ public class ActionResult<T> : Services.IActionResult<T>
     /// <summary>
     /// 消息
     /// </summary>
-    public string Message { get; set; } = default!;
+    public string Message { get; set; } = null!;
     /// <summary>
     /// 结果
     /// </summary>
@@ -28,7 +28,7 @@ public class ActionResult<T> : Services.IActionResult<T>
     /// <summary>
     /// 内容类型
     /// </summary>
-    public string ContentType { get; set; } = default!;
+    public string ContentType { get; set; } = null!;
 
     /// <summary>
     /// 构造函数

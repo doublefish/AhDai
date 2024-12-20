@@ -101,7 +101,7 @@ public class BaseJwtService : IBaseJwtService
     {
         var expiryMinutes = expiration ?? Config.Expiration;
         var expires = DateTime.UtcNow.AddMinutes(expiryMinutes);
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.SigningKey));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.PrivateKey));
         var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var jwt = new JwtSecurityToken(
             issuer: Config.Issuer,

@@ -8,5 +8,5 @@ public class LogRequestConfig
     /// <summary>
     /// 方法
     /// </summary>
-    public string[] Methods { get; set; } = default!;
+    public string[] Methods { get; set; } = null!;
 }

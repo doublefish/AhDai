@@ -14,7 +14,7 @@ public class Token<T> where T : TokenData
     /// <summary>
     /// 用户名对应签名Token
     /// </summary>
-    public string Signature { get; set; } = default!;
+    public string Signature { get; set; } = null!;
     /// <summary>
     /// Token过期时间
     /// </summary>
@@ -22,5 +22,5 @@ public class Token<T> where T : TokenData
     /// <summary>
     /// 数据
     /// </summary>
-    public T Data { get; set; } = default!;
+    public T Data { get; set; } = null!;
 }
