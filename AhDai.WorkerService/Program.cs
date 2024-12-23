@@ -34,8 +34,6 @@ public class Program
         builder.Services.AddFileService();
         builder.Services.AddHostedService<Worker>();
 
-
-
         var host = builder.Build();
 
         ServiceUtil.Init(host.Services, host.Services.GetRequiredService<IConfiguration>());

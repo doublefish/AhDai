@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Text;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace AhDai.Core.Extensions;
@@ -60,6 +60,8 @@ public static class ServiceCollectionExtensions
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(options =>
         {
+            var rsa = RSA.Create();
+            rsa.ImportRSAPublicKey(Convert.FromBase64String(config.PublicKey), out _);
             options.TokenValidationParameters = new TokenValidationParameters()
             {
                 // 是否验证签发人
@@ -70,13 +72,15 @@ public static class ServiceCollectionExtensions
                 ValidAudience = config.Audience,
                 // 是否验证密钥
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.PrivateKey)),
+                // 密钥
+                //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.PrivateKey)),
+                IssuerSigningKey = new RsaSecurityKey(rsa),
                 // 是否验证生命周期，使用当前时间与Token的Claims中的NotBefore和Expires对比
                 ValidateLifetime = true,
                 // 过期时间，是否要求Token的Claims中必须包含Expires
                 RequireExpirationTime = false,
                 // 允许服务器时间偏移量
-                ClockSkew = TimeSpan.FromSeconds(config.ClockSkew)
+                ClockSkew = TimeSpan.FromMinutes(config.ClockSkew)
             };
             options.Events = new JwtBearerEvents
             {

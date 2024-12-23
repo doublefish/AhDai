@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AhDai.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:AhDai.WebApi.Configs.CommaSeparatedArrayModelBinder">
+            <summary>
+            CommaSeparatedArrayModelBinder
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.Configs.CommaSeparatedArrayModelBinder.BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext)">
+            <summary>
+            BindModelAsync
+            </summary>
+            <param name="bindingContext"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:AhDai.WebApi.Configs.CommaSeparatedArrayModelBinderProvider">
+            <summary>
+            CommaSeparatedArrayModelBinderProvider
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.Configs.CommaSeparatedArrayModelBinderProvider.GetBinder(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderProviderContext)">
+            <summary>
+            GetBinder
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.WebApi.Configs.HttpLoggingMiddleware">
+            <summary>
+            HttpLoggingMiddleware
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.Configs.HttpLoggingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{AhDai.WebApi.Configs.HttpLoggingMiddleware})">
+            <summary>
+            HttpLoggingMiddleware
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.Configs.HttpLoggingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            InvokeAsync
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.WebApi.Configs.KestrelServerLimitsConfig">
+            <summary>
+            服务限制配置
+            </summary>
+        </member>
+        <member name="P:AhDai.WebApi.Configs.KestrelServerLimitsConfig.MaxRequestBodySize">
+            <summary>
+            请求体最大限制
+            </summary>
+        </member>
+        <member name="T:AhDai.WebApi.SwaggerExtensions">
+            <summary>
+            SwaggerExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.SwaggerExtensions.AddMySwaggerGen(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions})">
+            <summary>
+            AddMySwaggerGen
+            </summary>
+            <param name="services"></param>
+            <param name="setupAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.WebApi.SwaggerExtensions.UseMySwaggerUI(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIOptions})">
+            <summary>
+            UseMySwaggerUI
+            </summary>
+            <param name="app"></param>
+            <param name="setupAction"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.WebApi.SwaggerGroupName">
+            <summary>
+            SwaggerGroupName
+            </summary>
+        </member>
+        <member name="F:AhDai.WebApi.SwaggerGroupName.All">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="F:AhDai.WebApi.SwaggerGroupName.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="T:AhDai.WebApi.Controllers.AuthController">
+            <summary>
+            
+            </summary>
+            <param name="jwtService"></param>
+        </member>
+        <member name="M:AhDai.WebApi.Controllers.AuthController.#ctor(AhDai.Core.Services.IBaseJwtService)">
+            <summary>
+            
+            </summary>
+            <param name="jwtService"></param>
+        </member>
+        <member name="M:AhDai.WebApi.Controllers.AuthController.LoginAsync(AhDai.WebApi.Models.LoginInput)">
+            <summary>
+            登录
+            </summary>
+            <param name="input">入参</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.WebApi.Controllers.AuthController.GetLoginAsync">
+            <summary>
+            获取登录信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.WebApi.Controllers.BaseEmptyController">
+            <summary>
+            BaseEmptyController
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.Controllers.BaseEmptyController.#ctor">
+            <summary>
+            BaseEmptyController
+            </summary>
+        </member>
+        <member name="T:AhDai.WebApi.Controllers.BaseEmptyController`1">
+            <summary>
+            BaseEmptyController
+            </summary>
+            <typeparam name="Service"></typeparam>
+            <param name="service"></param>
+        </member>
+        <member name="M:AhDai.WebApi.Controllers.BaseEmptyController`1.#ctor(`0)">
+            <summary>
+            BaseEmptyController
+            </summary>
+            <typeparam name="Service"></typeparam>
+            <param name="service"></param>
+        </member>
+        <member name="F:AhDai.WebApi.Controllers.BaseEmptyController`1._service">
+            <summary>
+            _service
+            </summary>
+        </member>
+        <member name="T:AhDai.WebApi.Filters.SwaggerDocumentFilter">
+            <summary>
+            添加控制器模块说明
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.Filters.SwaggerDocumentFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            Apply
+            </summary>
+            <param name="swaggerDoc"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:AhDai.WebApi.Filters.SwaggerOperationFilter">
+            <summary>
+            操作过过滤器 添加通用参数等
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.Filters.SwaggerOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:AhDai.WebApi.Filters.SwaggerSchemaFilter">
+            <summary>
+            SwaggerSchemaFilter
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.Filters.SwaggerSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+            <summary>
+            Apply
+            </summary>
+            <param name="schema"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:AhDai.WebApi.Models.LoginInput">
+            <summary>
+            LoginInput
+            </summary>
+        </member>
+        <member name="P:AhDai.WebApi.Models.LoginInput.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:AhDai.WebApi.Models.LoginInput.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:AhDai.WebApi.Models.LoginOutput">
+            <summary>
+            LoginOutput
+            </summary>
+        </member>
+        <member name="P:AhDai.WebApi.Models.LoginOutput.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:AhDai.WebApi.Models.LoginOutput.Expiration">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="P:AhDai.WebApi.Models.LoginOutput.Type">
+            <summary>
+            认证类型：Bearer
+            </summary>
+        </member>
+        <member name="T:AhDai.WebApi.Program">
+            <summary>
+            Program
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.Program.Main(System.String[])">
+            <summary>
+            Main
+            </summary>
+            <param name="args"></param>
+        </member>
+    </members>
+</doc>

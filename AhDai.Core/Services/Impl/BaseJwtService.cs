@@ -2,6 +2,7 @@
 using AhDai.Core.Extensions;
 using AhDai.Core.Models;
 using AhDai.Core.Utils;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -101,8 +103,13 @@ public class BaseJwtService : IBaseJwtService
     {
         var expiryMinutes = expiration ?? Config.Expiration;
         var expires = DateTime.UtcNow.AddMinutes(expiryMinutes);
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.PrivateKey));
-        var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.PrivateKey));
+        //var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        using var rsa = RSA.Create();
+        rsa.ImportRSAPrivateKey(Convert.FromBase64String(Config.PrivateKey), out _);
+        var signingCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256);
         var jwt = new JwtSecurityToken(
             issuer: Config.Issuer,
             audience: Config.Audience,
@@ -111,6 +118,7 @@ public class BaseJwtService : IBaseJwtService
             expires: expires,
             signingCredentials: signingCredentials);
         var token = new JwtSecurityTokenHandler().WriteToken(jwt);
+
         if (Config.EnableRedis)
         {
             var redis = Services.GetRequiredService<IBaseRedisService>();
@@ -175,6 +183,23 @@ public class BaseJwtService : IBaseJwtService
     /// <param name="token"></param>
     /// <returns></returns>
     public virtual async Task<bool> ValidateTokenAsync(string token)
+    {
+        if (!Config.EnableRedis) return false;
+        var securityToken = ReadToken(token);
+        var username = securityToken.Claims.Where(x => x.Type == "Username").FirstOrDefault()?.Value;
+        if (string.IsNullOrEmpty(username)) return false;
+        var data = securityToken.RawData;
+        var redis = Services.GetRequiredService<IBaseRedisService>();
+        var rdb = redis.GetDatabase();
+        return await rdb.KeyExistsAsync($"{Config.RedisKey}:{username}:{data}");
+    }
+
+    /// <summary>
+    /// 从缓存验证Token
+    /// </summary>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    public virtual async Task<bool> ValidateToken2Async(string token)
     {
         if (!Config.EnableRedis) return false;
         var securityToken = ReadToken(token);
