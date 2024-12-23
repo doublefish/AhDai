@@ -5,30 +5,36 @@ using System.Threading.Tasks;
 namespace AhDai.Core.Models;
 
 /// <summary>
-/// 动作结果
+/// ActionResult
 /// </summary>
-public class ActionResult<T> : Services.IActionResult<T>
+/// <typeparam name="T"></typeparam>
+/// <param name="actionId">动作Id</param>
+/// <param name="code">结果代码</param>
+/// <param name="message">消息</param>
+/// <param name="content">内容</param>
+/// <param name="contentType">内容类型</param>
+public class ActionResult<T>(string actionId, int code, string message, T content, string contentType = HttpContentType.Json) : Services.IActionResult<T>
 {
     /// <summary>
     /// 动作Id
     /// </summary>
-    public string ActionId { get; set; } = null!;
+    public string ActionId { get; set; } = actionId;
     /// <summary>
     /// 状态代码
     /// </summary>
-    public int Code { get; set; }
+    public int Code { get; set; } = code;
     /// <summary>
     /// 消息
     /// </summary>
-    public string Message { get; set; } = null!;
+    public string Message { get; set; } = message;
     /// <summary>
     /// 结果
     /// </summary>
-    public T Content { get; set; }
+    public T Content { get; set; } = content;
     /// <summary>
     /// 内容类型
     /// </summary>
-    public string ContentType { get; set; } = null!;
+    public string ContentType { get; set; } = contentType;
 
     /// <summary>
     /// 构造函数
@@ -41,23 +47,6 @@ public class ActionResult<T> : Services.IActionResult<T>
     }
 
     /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="actionId">动作Id</param>
-    /// <param name="code">结果代码</param>
-    /// <param name="message">消息</param>
-    /// <param name="content">内容</param>
-    /// <param name="contentType">内容类型</param>
-    public ActionResult(string actionId, int code, string message, T content, string contentType = HttpContentType.Json)
-    {
-        ActionId = actionId;
-        Code = code;
-        Message = message;
-        Content = content;
-        ContentType = contentType;
-    }
-
-    /// <summary>
     /// ExecuteResultAsync
     /// </summary>
     /// <param name="context"></param>
@@ -66,8 +55,8 @@ public class ActionResult<T> : Services.IActionResult<T>
     {
         var text = ContentType switch
         {
-            HttpContentType.Xml => AhDai.Base.Utils.XmlUtil.SerializeObject(this),
-            HttpContentType.TextXml => AhDai.Base.Utils.XmlUtil.SerializeObject(this),
+            HttpContentType.Xml => Base.Utils.XmlUtil.SerializeObject(this),
+            HttpContentType.TextXml => Base.Utils.XmlUtil.SerializeObject(this),
             _ => Utils.JsonUtil.Serialize(this),
         };
         //var bytes = Encoding.Default.GetBytes(text);

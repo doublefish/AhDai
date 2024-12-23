@@ -904,14 +904,12 @@
             RequestMiddleware
             </summary>
             <param name="next"></param>
-            <param name="logger"></param>
         </member>
-        <member name="M:AhDai.Core.Middlewares.RequestMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Middlewares.RequestMiddleware})">
+        <member name="M:AhDai.Core.Middlewares.RequestMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
             <summary>
             RequestMiddleware
             </summary>
             <param name="next"></param>
-            <param name="logger"></param>
         </member>
         <member name="M:AhDai.Core.Middlewares.RequestMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
@@ -922,8 +920,25 @@
         </member>
         <member name="T:AhDai.Core.Models.ActionResult`1">
             <summary>
-            动作结果
+            ActionResult
             </summary>
+            <typeparam name="T"></typeparam>
+            <param name="actionId">动作Id</param>
+            <param name="code">结果代码</param>
+            <param name="message">消息</param>
+            <param name="content">内容</param>
+            <param name="contentType">内容类型</param>
+        </member>
+        <member name="M:AhDai.Core.Models.ActionResult`1.#ctor(System.String,System.Int32,System.String,`0,System.String)">
+            <summary>
+            ActionResult
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="actionId">动作Id</param>
+            <param name="code">结果代码</param>
+            <param name="message">消息</param>
+            <param name="content">内容</param>
+            <param name="contentType">内容类型</param>
         </member>
         <member name="P:AhDai.Core.Models.ActionResult`1.ActionId">
             <summary>
@@ -955,16 +970,6 @@
             构造函数
             </summary>
             <param name="actionId">动作Id</param>
-            <param name="content">内容</param>
-            <param name="contentType">内容类型</param>
-        </member>
-        <member name="M:AhDai.Core.Models.ActionResult`1.#ctor(System.String,System.Int32,System.String,`0,System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="actionId">动作Id</param>
-            <param name="code">结果代码</param>
-            <param name="message">消息</param>
             <param name="content">内容</param>
             <param name="contentType">内容类型</param>
         </member>

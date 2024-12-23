@@ -1,7 +1,6 @@
 ﻿using AhDai.Base.Extensions;
 using AhDai.Core.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,12 +10,10 @@ namespace AhDai.Core.Middlewares;
 /// RequestMiddleware
 /// </summary>
 /// <param name="next"></param>
-/// <param name="logger"></param>
-public class RequestMiddleware(RequestDelegate next
-    , ILogger<RequestMiddleware> logger)
+public class RequestMiddleware(RequestDelegate next)
 {
     readonly RequestDelegate _next = next;
-    readonly ILogger<RequestMiddleware> _logger = logger;
+    //readonly ILogger<RequestMiddleware> _logger = logger;
 
     /// <summary>
     /// InvokeAsync
@@ -34,7 +31,6 @@ public class RequestMiddleware(RequestDelegate next
         //LogContext.PushProperty("IpAddress", ipAddress);
         //using (_logger.BeginScope(new { IpAddress = ipAddress + "-1" }))
         //{
-        //    _logger.LogInformation("请求IP: {IpAddress}, Path: {Path}", ipAddress, httpContext.Request.Path);
         //    await _next(httpContext);
         //}
         await _next(httpContext);
