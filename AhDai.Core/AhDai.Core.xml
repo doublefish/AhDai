@@ -1627,6 +1627,11 @@
             配置
             </summary>
         </member>
+        <member name="P:AhDai.Core.Services.Impl.BaseJwtService.SigningCredentials">
+            <summary>
+            RSA
+            </summary>
+        </member>
         <member name="P:AhDai.Core.Services.Impl.BaseJwtService.Logger">
             <summary>
             日志

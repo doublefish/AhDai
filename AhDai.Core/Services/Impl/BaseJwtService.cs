@@ -29,6 +29,10 @@ public class BaseJwtService : IBaseJwtService
     /// </summary>
     public JwtConfig Config { get; private set; }
     /// <summary>
+    /// RSA
+    /// </summary>
+    public SigningCredentials SigningCredentials { get; private set; }
+    /// <summary>
     /// 日志
     /// </summary>
     public ILogger<BaseJwtService> Logger { get; private set; }
@@ -46,6 +50,9 @@ public class BaseJwtService : IBaseJwtService
     public BaseJwtService(IConfiguration configuration, IServiceProvider serviceProvider, ILogger<BaseJwtService> logger)
     {
         Config = configuration.GetJwtConfig();
+        var rsa = RSA.Create();
+        rsa.ImportRSAPrivateKey(Convert.FromBase64String(Config.PrivateKey), out _);
+        SigningCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256);
         Services = serviceProvider;
         if (Config.EnableRedis)
         {
@@ -104,19 +111,13 @@ public class BaseJwtService : IBaseJwtService
         var expiryMinutes = expiration ?? Config.Expiration;
         var expires = DateTime.UtcNow.AddMinutes(expiryMinutes);
 
-        //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.PrivateKey));
-        //var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        using var rsa = RSA.Create();
-        rsa.ImportRSAPrivateKey(Convert.FromBase64String(Config.PrivateKey), out _);
-        var signingCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256);
         var jwt = new JwtSecurityToken(
             issuer: Config.Issuer,
             audience: Config.Audience,
             claims: claims,
             notBefore: DateTime.UtcNow,
             expires: expires,
-            signingCredentials: signingCredentials);
+            signingCredentials: SigningCredentials);
         var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
         if (Config.EnableRedis)
