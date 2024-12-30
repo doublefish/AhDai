@@ -117,11 +117,10 @@
             扩展数据
             </summary>
         </member>
-        <member name="M:AhDai.Core.ApiResult`1.#ctor(`0)">
+        <member name="M:AhDai.Core.ApiResult`1.#ctor">
             <summary>
             构造函数
             </summary>
-            <param name="data">内容</param>
         </member>
         <member name="M:AhDai.Core.ApiResult`1.#ctor(System.Int32,System.String,`0)">
             <summary>
@@ -129,6 +128,12 @@
             </summary>
             <param name="code">结果代码</param>
             <param name="message">消息</param>
+            <param name="data">内容</param>
+        </member>
+        <member name="M:AhDai.Core.ApiResult`1.#ctor(`0)">
+            <summary>
+            构造函数
+            </summary>
             <param name="data">内容</param>
         </member>
         <member name="T:AhDai.Core.Attributes.ApiAuthorizeAttribute">
