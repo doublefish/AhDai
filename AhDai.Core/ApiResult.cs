@@ -76,6 +76,21 @@ public class ApiResult<T> : ApiResult, IApiResult<T>
     /// <summary>
     /// 构造函数
     /// </summary>
+    public ApiResult() : this(0, "", default!)
+    {
+    }
+
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    /// <param name="data">内容</param>
+    public ApiResult(T data) : this(200, "ok", data)
+    {
+    }
+
+    /// <summary>
+    /// 构造函数
+    /// </summary>
     /// <param name="code">结果代码</param>
     /// <param name="message">消息</param>
     /// <param name="data">内容</param>
@@ -85,13 +100,4 @@ public class ApiResult<T> : ApiResult, IApiResult<T>
         Message = message;
         Data = data;
     }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="data">内容</param>
-    public ApiResult(T data = default!) : this(200, "ok", data)
-    {
-    }
-
 }
