@@ -11,7 +11,7 @@ using System.Net.Http;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-namespace AhDai.Core.Services.Impl;
+namespace AhDai.Core.Services;
 
 /// <summary>
 /// 文件服务

@@ -21,7 +21,7 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddRedisService(this IServiceCollection services)
     {
-        services.AddSingleton<Services.IBaseRedisService, Services.Impl.BaseRedisService>();
+        services.AddSingleton<Services.IBaseRedisService, Services.BaseRedisService>();
         return services;
     }
 
@@ -32,7 +32,7 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddJwtService(this IServiceCollection services)
     {
-        return services.AddSingleton<Services.IBaseJwtService, Services.Impl.BaseJwtService>();
+        return services.AddSingleton<Services.IBaseJwtService, Services.BaseJwtService>();
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddFileService(this IServiceCollection services)
     {
-        return services.AddSingleton<Services.IBaseFileService, Services.Impl.BaseFileService>();
+        return services.AddSingleton<Services.IBaseFileService, Services.BaseFileService>();
     }
 
     /// <summary>

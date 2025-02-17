@@ -29,10 +29,11 @@ public class Program
             ServicePointManager.DefaultConnectionLimit = 512;
         });//.AddHttpMessageHandler<Handlers.HttpLoggingHandler>();
 
-        builder.Services.AddRedisService();
-        builder.Services.AddJwtService();
-        builder.Services.AddFileService();
-        builder.Services.AddHostedService<Worker>();
+        //builder.Services.AddRedisService();
+        //builder.Services.AddJwtService();
+        //builder.Services.AddFileService();
+        //builder.Services.AddHostedService<Worker>();
+        builder.Services.AddHostedService<Worker2>();
 
         var host = builder.Build();
 
