@@ -2,7 +2,6 @@
 using AhDai.Core.Extensions;
 using AhDai.Core.Models;
 using AhDai.Core.Utils;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,10 +13,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace AhDai.Core.Services.Impl;
+namespace AhDai.Core.Services;
 
 /// <summary>
 /// Jwt服务
@@ -29,13 +27,13 @@ public class BaseJwtService : IBaseJwtService
     /// </summary>
     public JwtConfig Config { get; private set; }
     /// <summary>
-    /// RSA
-    /// </summary>
-    public SigningCredentials SigningCredentials { get; private set; }
-    /// <summary>
     /// 日志
     /// </summary>
     public ILogger<BaseJwtService> Logger { get; private set; }
+    /// <summary>
+    /// RSA
+    /// </summary>
+    public SigningCredentials SigningCredentials { get; private set; }
     /// <summary>
     /// Services
     /// </summary>
@@ -50,6 +48,9 @@ public class BaseJwtService : IBaseJwtService
     public BaseJwtService(IConfiguration configuration, IServiceProvider serviceProvider, ILogger<BaseJwtService> logger)
     {
         Config = configuration.GetJwtConfig();
+        Logger = logger;
+        Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
+
         var rsa = RSA.Create();
         rsa.ImportRSAPrivateKey(Convert.FromBase64String(Config.PrivateKey), out _);
         SigningCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256);
@@ -58,8 +59,6 @@ public class BaseJwtService : IBaseJwtService
         {
             serviceProvider.GetRequiredService<IBaseRedisService>();
         }
-        Logger = logger;
-        Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
     }
 
     /// <summary>

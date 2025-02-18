@@ -1,9 +1,11 @@
 ﻿using AhDai.Core.Extensions;
+using AhDai.Core.Utils;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Net.Mail;
 
-namespace AhDai.Core.Services.Impl;
+namespace AhDai.Core.Services;
 
 /// <summary>
 /// 邮件服务
@@ -14,14 +16,21 @@ public class BaseMailService : IBaseMailService
     /// 配置
     /// </summary>
     public Configs.MailConfig Config { get; private set; }
+    /// <summary>
+    /// 日志
+    /// </summary>
+    public ILogger<BaseMailService> Logger { get; private set; }
 
     /// <summary>
     /// 构造函数
     /// </summary>
-    /// <param name="configuration">配置</param>
-    public BaseMailService(IConfiguration configuration)
+    /// <param name="configuration"></param>
+    /// <param name="logger"></param>
+    public BaseMailService(IConfiguration configuration, ILogger<BaseMailService> logger)
     {
         Config = configuration.GetMailConfig();
+        Logger = logger;
+        Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
     }
 
     /// <summary>
@@ -60,7 +69,6 @@ public class BaseMailService : IBaseMailService
                 Body = body,
                 IsBodyHtml = true
             });
-            client.Dispose();
         };
     }
 }

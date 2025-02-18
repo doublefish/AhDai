@@ -6,16 +6,13 @@ using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 using System.Collections.Generic;
 
-namespace AhDai.Core.Services.Impl;
+namespace AhDai.Core.Services;
 
 /// <summary>
 /// Redis服务
 /// </summary>
 public class BaseRedisService : IBaseRedisService
 {
-    readonly Dictionary<string, IConnectionMultiplexer> ConnectionMultiplexers;
-    readonly object Locker;
-
     /// <summary>
     /// 配置
     /// </summary>
@@ -25,6 +22,9 @@ public class BaseRedisService : IBaseRedisService
     /// </summary>
     public ILogger<BaseRedisService> Logger { get; private set; }
 
+    readonly Dictionary<string, IConnectionMultiplexer> ConnectionMultiplexers;
+    readonly object Locker;
+
     /// <summary>
     /// 构造函数
     /// </summary>
@@ -32,12 +32,12 @@ public class BaseRedisService : IBaseRedisService
     /// <param name="logger"></param>
     public BaseRedisService(IConfiguration configuration, ILogger<BaseRedisService> logger)
     {
-        ConnectionMultiplexers = [];
-        Locker = new object();
-
         Config = configuration.GetRedisConfig();
         Logger = logger;
         Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
+
+        ConnectionMultiplexers = [];
+        Locker = new object();
     }
 
     /// <summary>

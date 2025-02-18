@@ -122,18 +122,18 @@
             构造函数
             </summary>
         </member>
+        <member name="M:AhDai.Core.ApiResult`1.#ctor(`0)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="data">内容</param>
+        </member>
         <member name="M:AhDai.Core.ApiResult`1.#ctor(System.Int32,System.String,`0)">
             <summary>
             构造函数
             </summary>
             <param name="code">结果代码</param>
             <param name="message">消息</param>
-            <param name="data">内容</param>
-        </member>
-        <member name="M:AhDai.Core.ApiResult`1.#ctor(`0)">
-            <summary>
-            构造函数
-            </summary>
             <param name="data">内容</param>
         </member>
         <member name="T:AhDai.Core.Attributes.ApiAuthorizeAttribute">
@@ -1324,6 +1324,338 @@
             Redis配置
             </summary>
         </member>
+        <member name="T:AhDai.Core.Services.BaseFileService">
+            <summary>
+            文件服务
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseFileService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            文件服务
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:AhDai.Core.Services.BaseFileService.Config">
+            <summary>
+            Config
+            </summary>
+        </member>
+        <member name="F:AhDai.Core.Services.BaseFileService.ContentTypeProvider">
+            <summary>
+            TypeProvider
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseFileService.GetType(System.String)">
+            <summary>
+            获取类型
+            </summary>
+            <param name="extension"></param>
+            <returns>MimeType</returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
+            <summary>
+            上传
+            </summary>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="file"></param>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String)">
+            <summary>
+            上传
+            </summary>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="files"></param>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseFileService.DownloadAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            下载
+            </summary>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="url"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String)">
+            <summary>
+            下载
+            </summary>
+            <param name="httpClient"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="url"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseFileService.Compress(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            批量压缩
+            </summary>
+            <param name="rootPath"></param>
+            <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Services.BaseJwtService">
+            <summary>
+            Jwt服务
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.BaseJwtService.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.BaseJwtService.Logger">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.BaseJwtService.SigningCredentials">
+            <summary>
+            RSA
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.BaseJwtService.Services">
+            <summary>
+            Services
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.BaseJwtService})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+            <param name="serviceProvider"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
+            <summary>
+            GenerateToken
+            </summary>
+            <param name="data"></param>
+            <param name="expiration">分钟</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.GenerateTokenAsync(System.Security.Claims.Claim[],System.Nullable{System.Int32})">
+            <summary>
+            GenerateToken
+            </summary>
+            <param name="claims"></param>
+            <param name="expiration">分钟</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.ReadToken(System.String)">
+            <summary>
+            获取声明的数据
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.GetTokenData(System.String)">
+            <summary>
+            获取声明的数据
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.RefreshTokenAsync(System.String)">
+            <summary>
+            刷新Token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.ValidateTokenAsync(System.String)">
+            <summary>
+            从缓存验证Token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.ValidateToken2Async(System.String)">
+            <summary>
+            从缓存验证Token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.RemoveTokenAsync(System.String)">
+            <summary>
+            从缓存中移除Token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.ToTokenData(System.Security.Claims.Claim[])">
+            <summary>
+            转数据
+            </summary>
+            <param name="claims"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Services.BaseMailService">
+            <summary>
+            邮件服务
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.BaseMailService.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.BaseMailService.Logger">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseMailService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.BaseMailService})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseMailService.CreateSmtpClient(AhDai.Core.Configs.MailConfig)">
+            <summary>
+            创建客户端
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseMailService.Send(System.String,System.String,System.String,AhDai.Core.Configs.MailConfig)">
+            <summary>
+            发送
+            </summary>
+            <param name="recipients">接收人</param>
+            <param name="subject">主题</param>
+            <param name="body">正文</param>
+            <param name="config">自定义配置</param>
+        </member>
+        <member name="T:AhDai.Core.Services.BaseRedisService">
+            <summary>
+            Redis服务
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.BaseRedisService.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.BaseRedisService.Logger">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.BaseRedisService})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.CreateConfiguration(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            创建连接配置
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+            <param name="password"></param>
+            <param name="abortConnect"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.CreateConfiguration(AhDai.Core.Configs.RedisConfig)">
+            <summary>
+            创建连接配置
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.CreateConnectionMultiplexer(System.String)">
+            <summary>
+            创建连接器
+            </summary>
+            <param name="configuration">配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.CreateConnectionMultiplexer(AhDai.Core.Configs.RedisConfig)">
+            <summary>
+            创建连接器
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.GetConnectionMultiplexer(AhDai.Core.Configs.RedisConfig)">
+            <summary>
+            获取连接实例
+            </summary>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.GetDatabase(System.Int32,System.Object,AhDai.Core.Configs.RedisConfig)">
+            <summary>
+            GetDatabase
+            </summary>
+            <param name="db"></param>
+            <param name="asyncState"></param>
+            <param name="config">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.ConfigurationChangedBroadcast(System.Object,StackExchange.Redis.EndPointEventArgs)">
+            <summary>
+            当节点被明确请求通过广播重新配置时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.ConfigurationChanged(System.Object,StackExchange.Redis.EndPointEventArgs)">
+            <summary>
+            检测到配置更改时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.HashSlotMoved(System.Object,StackExchange.Redis.HashSlotMovedEventArgs)">
+            <summary>
+            当哈希槽被重新定位时/更改集群
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.ErrorMessage(System.Object,StackExchange.Redis.RedisErrorEventArgs)">
+            <summary>
+            发生错误时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.InternalError(System.Object,StackExchange.Redis.InternalErrorEventArgs)">
+            <summary>
+            发生内部错误时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.ConnectionFailed(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            连接失败，如果重新连接成功将不会收到这个通知
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.ConnectionRestored(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            建立物理连接时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
         <member name="T:AhDai.Core.Services.IActionResult`1">
             <summary>
             IActionResult
@@ -1543,332 +1875,6 @@
             <param name="asyncState"></param>
             <param name="config">自定义配置</param>
             <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Services.Impl.BaseFileService">
-            <summary>
-            文件服务
-            </summary>
-            <param name="configuration"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            文件服务
-            </summary>
-            <param name="configuration"></param>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.BaseFileService.Config">
-            <summary>
-            Config
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Services.Impl.BaseFileService.ContentTypeProvider">
-            <summary>
-            TypeProvider
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.GetType(System.String)">
-            <summary>
-            获取类型
-            </summary>
-            <param name="extension"></param>
-            <returns>MimeType</returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
-            <summary>
-            上传
-            </summary>
-            <param name="root"></param>
-            <param name="dir"></param>
-            <param name="file"></param>
-            <param name="category"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String)">
-            <summary>
-            上传
-            </summary>
-            <param name="root"></param>
-            <param name="dir"></param>
-            <param name="files"></param>
-            <param name="category"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.String,System.String,System.String,System.String)">
-            <summary>
-            下载
-            </summary>
-            <param name="root"></param>
-            <param name="dir"></param>
-            <param name="url"></param>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String)">
-            <summary>
-            下载
-            </summary>
-            <param name="httpClient"></param>
-            <param name="root"></param>
-            <param name="dir"></param>
-            <param name="url"></param>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseFileService.Compress(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
-            <summary>
-            批量压缩
-            </summary>
-            <param name="rootPath"></param>
-            <param name="files"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Services.Impl.BaseJwtService">
-            <summary>
-            Jwt服务
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.BaseJwtService.Config">
-            <summary>
-            配置
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.BaseJwtService.SigningCredentials">
-            <summary>
-            RSA
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.BaseJwtService.Logger">
-            <summary>
-            日志
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.BaseJwtService.Services">
-            <summary>
-            Services
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.Impl.BaseJwtService})">
-            <summary>
-            构造函数
-            </summary>
-            <param name="configuration"></param>
-            <param name="serviceProvider"></param>
-            <param name="logger"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
-            <summary>
-            GenerateToken
-            </summary>
-            <param name="data"></param>
-            <param name="expiration">分钟</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.GenerateTokenAsync(System.Security.Claims.Claim[],System.Nullable{System.Int32})">
-            <summary>
-            GenerateToken
-            </summary>
-            <param name="claims"></param>
-            <param name="expiration">分钟</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.ReadToken(System.String)">
-            <summary>
-            获取声明的数据
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.GetTokenData(System.String)">
-            <summary>
-            获取声明的数据
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.RefreshTokenAsync(System.String)">
-            <summary>
-            刷新Token
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.ValidateTokenAsync(System.String)">
-            <summary>
-            从缓存验证Token
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.ValidateToken2Async(System.String)">
-            <summary>
-            从缓存验证Token
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.RemoveTokenAsync(System.String)">
-            <summary>
-            从缓存中移除Token
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseJwtService.ToTokenData(System.Security.Claims.Claim[])">
-            <summary>
-            转数据
-            </summary>
-            <param name="claims"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Services.Impl.BaseMailService">
-            <summary>
-            邮件服务
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.BaseMailService.Config">
-            <summary>
-            配置
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseMailService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="configuration">配置</param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseMailService.CreateSmtpClient(AhDai.Core.Configs.MailConfig)">
-            <summary>
-            创建客户端
-            </summary>
-            <param name="config">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseMailService.Send(System.String,System.String,System.String,AhDai.Core.Configs.MailConfig)">
-            <summary>
-            发送
-            </summary>
-            <param name="recipients">接收人</param>
-            <param name="subject">主题</param>
-            <param name="body">正文</param>
-            <param name="config">自定义配置</param>
-        </member>
-        <member name="T:AhDai.Core.Services.Impl.BaseRedisService">
-            <summary>
-            Redis服务
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.BaseRedisService.Config">
-            <summary>
-            配置
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.Impl.BaseRedisService.Logger">
-            <summary>
-            日志
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.Impl.BaseRedisService})">
-            <summary>
-            构造函数
-            </summary>
-            <param name="configuration"></param>
-            <param name="logger"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.CreateConfiguration(System.String,System.Int32,System.String,System.Boolean)">
-            <summary>
-            创建连接配置
-            </summary>
-            <param name="host"></param>
-            <param name="port"></param>
-            <param name="password"></param>
-            <param name="abortConnect"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.CreateConfiguration(AhDai.Core.Configs.RedisConfig)">
-            <summary>
-            创建连接配置
-            </summary>
-            <param name="config">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.CreateConnectionMultiplexer(System.String)">
-            <summary>
-            创建连接器
-            </summary>
-            <param name="configuration">配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.CreateConnectionMultiplexer(AhDai.Core.Configs.RedisConfig)">
-            <summary>
-            创建连接器
-            </summary>
-            <param name="config">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.GetConnectionMultiplexer(AhDai.Core.Configs.RedisConfig)">
-            <summary>
-            获取连接实例
-            </summary>
-            <param name="config">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.GetDatabase(System.Int32,System.Object,AhDai.Core.Configs.RedisConfig)">
-            <summary>
-            GetDatabase
-            </summary>
-            <param name="db"></param>
-            <param name="asyncState"></param>
-            <param name="config">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.ConfigurationChangedBroadcast(System.Object,StackExchange.Redis.EndPointEventArgs)">
-            <summary>
-            当节点被明确请求通过广播重新配置时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.ConfigurationChanged(System.Object,StackExchange.Redis.EndPointEventArgs)">
-            <summary>
-            检测到配置更改时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.HashSlotMoved(System.Object,StackExchange.Redis.HashSlotMovedEventArgs)">
-            <summary>
-            当哈希槽被重新定位时/更改集群
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.ErrorMessage(System.Object,StackExchange.Redis.RedisErrorEventArgs)">
-            <summary>
-            发生错误时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.InternalError(System.Object,StackExchange.Redis.InternalErrorEventArgs)">
-            <summary>
-            发生内部错误时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.ConnectionFailed(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
-            <summary>
-            连接失败，如果重新连接成功将不会收到这个通知
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.Impl.BaseRedisService.ConnectionRestored(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
-            <summary>
-            建立物理连接时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
         </member>
         <member name="T:AhDai.Core.Utils.ComputerUtil">
             <summary>
