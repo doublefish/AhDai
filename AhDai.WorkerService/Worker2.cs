@@ -36,6 +36,7 @@ public class Worker2(IConfiguration configuration, ILogger<Worker2> logger, IHtt
                     try
                     {
                         ip = await GetExternalIpAddressAsync(url);
+                        _logger.LogInformation("本机外网地址：{ip}", ip);
                         break;
                     }
                     catch
@@ -51,7 +52,7 @@ public class Worker2(IConfiguration configuration, ILogger<Worker2> logger, IHtt
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "发生异常=>{time}", ex.Message);
+                _logger.LogError(ex, "发生异常=>{message}", ex.Message);
             }
             await Task.Delay(1000 * 3, stoppingToken);
         }
@@ -75,7 +76,8 @@ public class Worker2(IConfiguration configuration, ILogger<Worker2> logger, IHtt
         var smtpClient = new SmtpClient(_mailConfig.SmtpHost, _mailConfig.SmtpPort)
         {
             Credentials = new NetworkCredential(_mailConfig.SmtpUsername, _mailConfig.SmtpPassword),
-            EnableSsl = true
+            EnableSsl = true,
+            Timeout = 3000,
         };
         smtpClient.Send(mail);
     }
