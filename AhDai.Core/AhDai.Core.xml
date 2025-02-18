@@ -295,7 +295,7 @@
         </member>
         <member name="P:AhDai.Core.Configs.JwtConfig.ClockSkew">
             <summary>
-            允许服务器时间偏移量（秒）
+            允许服务器时间偏移量（分钟）
             </summary>
         </member>
         <member name="P:AhDai.Core.Configs.JwtConfig.EnableRedis">

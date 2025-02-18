@@ -26,7 +26,7 @@ public class JwtConfig
     /// </summary>
     public int Expiration { get; set; }
     /// <summary>
-    /// 允许服务器时间偏移量（秒）
+    /// 允许服务器时间偏移量（分钟）
     /// </summary>
     public int ClockSkew { get; set; }
     /// <summary>
