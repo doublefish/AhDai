@@ -1,4 +1,5 @@
 ﻿using AhDai.Core.Utils;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,9 +52,9 @@ public static class ServiceCollectionExtensions
     /// <param name="services"></param>
     /// <param name="config"></param>
     /// <returns></returns>
-    public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, Configs.JwtConfig config)
+    public static AuthenticationBuilder AddJwtAuthentication(this IServiceCollection services, Configs.JwtConfig config)
     {
-        services.AddAuthentication(options =>
+        return services.AddAuthentication(options =>
         {
             //options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -109,7 +110,6 @@ public static class ServiceCollectionExtensions
                 }
             };
         });
-        return services;
     }
 
 }
