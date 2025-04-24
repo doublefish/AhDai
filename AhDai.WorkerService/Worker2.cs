@@ -54,7 +54,7 @@ public class Worker2(IConfiguration configuration, ILogger<Worker2> logger, IHtt
             {
                 _logger.LogError(ex, "·¢ÉúÒì³£=>{message}", ex.Message);
             }
-            await Task.Delay(1000 * 3, stoppingToken);
+            await Task.Delay(1000 * 3 * 30, stoppingToken);
         }
     }
 
