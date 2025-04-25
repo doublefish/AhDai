@@ -1271,7 +1271,7 @@
         </member>
         <member name="P:AhDai.Core.Models.TokenData.Extensions">
             <summary>
-            扩展数据：存储键为 Ext-{key}
+            扩展数据
             </summary>
         </member>
         <member name="T:AhDai.Core.Models.TokenResult">
@@ -1473,13 +1473,6 @@
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Services.BaseJwtService.ValidateTokenAsync(System.String)">
-            <summary>
-            从缓存验证Token
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.ValidateToken2Async(System.String)">
             <summary>
             从缓存验证Token
             </summary>

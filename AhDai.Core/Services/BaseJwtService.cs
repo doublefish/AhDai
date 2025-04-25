@@ -72,11 +72,13 @@ public class BaseJwtService : IBaseJwtService
         var claims = new List<Claim>()
         {
             new("Id", data.Id),
-            new("Username", data.Username)
+            new("Username", data.Username),
+            new(ClaimTypes.NameIdentifier, data.Username)
         };
         if (data.Name != null)
         {
             claims.Add(new Claim("Name", data.Name));
+            claims.Add(new Claim(ClaimTypes.Name, data.Name));
         }
         if (data.Type != null)
         {
@@ -88,9 +90,9 @@ public class BaseJwtService : IBaseJwtService
         }
         if (data.Extensions != null)
         {
-            foreach (var kv in data.Extensions)
+            foreach (var item in data.Extensions)
             {
-                claims.Add(new Claim($"Ext-{kv.Key}", kv.Value));
+                claims.Add(new Claim(item.Key, string.Join(",", item.Value)));
             }
         }
         var result = await GenerateTokenAsync([.. claims], expiration);
@@ -122,7 +124,7 @@ public class BaseJwtService : IBaseJwtService
         if (Config.EnableRedis)
         {
             var redis = Services.GetRequiredService<IBaseRedisService>();
-            var dict = claims.ToDictionary(o => o.Type, o => o.Value);
+            var dict = claims.GroupBy(claim => claim.Type).ToDictionary(g => g.Key, g => string.Join(",", g.Select(c => c.Value)));
             dict.Add("Issuer", Config.Issuer);
             dict.Add("IssueTime", DateTime.Now.ToString(Const.DateTimeFormat));
             dict.Add("ExpirationTime", expires.ToLocalTime().ToString(Const.DateTimeFormat));
@@ -173,8 +175,7 @@ public class BaseJwtService : IBaseJwtService
     public virtual async Task<TokenResult> RefreshTokenAsync(string token)
     {
         var securityToken = ReadToken(token);
-        var data = ToTokenData(securityToken.Claims.ToArray());
-        return await GenerateTokenAsync(data);
+        return await GenerateTokenAsync(securityToken.Claims.ToArray());
     }
 
     /// <summary>
@@ -183,23 +184,6 @@ public class BaseJwtService : IBaseJwtService
     /// <param name="token"></param>
     /// <returns></returns>
     public virtual async Task<bool> ValidateTokenAsync(string token)
-    {
-        if (!Config.EnableRedis) return false;
-        var securityToken = ReadToken(token);
-        var username = securityToken.Claims.Where(x => x.Type == "Username").FirstOrDefault()?.Value;
-        if (string.IsNullOrEmpty(username)) return false;
-        var data = securityToken.RawData;
-        var redis = Services.GetRequiredService<IBaseRedisService>();
-        var rdb = redis.GetDatabase();
-        return await rdb.KeyExistsAsync($"{Config.RedisKey}:{username}:{data}");
-    }
-
-    /// <summary>
-    /// 从缓存验证Token
-    /// </summary>
-    /// <param name="token"></param>
-    /// <returns></returns>
-    public virtual async Task<bool> ValidateToken2Async(string token)
     {
         if (!Config.EnableRedis) return false;
         var securityToken = ReadToken(token);
@@ -236,7 +220,7 @@ public class BaseJwtService : IBaseJwtService
     {
         var data = new TokenData()
         {
-            Extensions = new Dictionary<string, string>()
+            Extensions = new Dictionary<string, ICollection<string>>(),
         };
         foreach (var c in claims)
         {
@@ -248,10 +232,12 @@ public class BaseJwtService : IBaseJwtService
                 case "Type": data.Type = c.Value; break;
                 case "Platform": data.Platform = c.Value; break;
                 default:
-                    if (c.Type.StartsWith("Ext-"))
+                    if (!data.Extensions.TryGetValue(c.Type, out var values))
                     {
-                        data.Extensions.Add(c.Type[4..], c.Value);
+                        values = [];
+                        data.Extensions.Add(c.Type, values);
                     }
+                    values.Add(c.Value);
                     break;
             }
         }

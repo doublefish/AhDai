@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace AhDai.Core.Models;
 
@@ -28,8 +29,8 @@ public class TokenData
     /// </summary>
     public string Platform { get; set; } = null!;
     /// <summary>
-    /// 扩展数据：存储键为 Ext-{key}
+    /// 扩展数据
     /// </summary>
-    public IDictionary<string, string> Extensions { get; set; } = null!;
+    public IDictionary<string, ICollection<string>> Extensions { get; set; } = null!;
 
 }
