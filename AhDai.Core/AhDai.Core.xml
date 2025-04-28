@@ -746,7 +746,7 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddJwtAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,AhDai.Core.Configs.JwtConfig)">
+        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddJwtAuthentication(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,AhDai.Core.Configs.JwtConfig)">
             <summary>
             添加Jwt认证服务
             </summary>

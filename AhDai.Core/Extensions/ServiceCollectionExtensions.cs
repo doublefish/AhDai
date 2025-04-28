@@ -52,14 +52,9 @@ public static class ServiceCollectionExtensions
     /// <param name="services"></param>
     /// <param name="config"></param>
     /// <returns></returns>
-    public static AuthenticationBuilder AddJwtAuthentication(this IServiceCollection services, Configs.JwtConfig config)
+    public static AuthenticationBuilder AddJwtAuthentication(this AuthenticationBuilder services, Configs.JwtConfig config)
     {
-        return services.AddAuthentication(options =>
-        {
-            //options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(options =>
+        return services.AddJwtBearer(options =>
         {
             var rsa = RSA.Create();
             rsa.ImportRSAPublicKey(Convert.FromBase64String(config.PublicKey), out _);
