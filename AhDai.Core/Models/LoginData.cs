@@ -12,5 +12,5 @@ public class LoginData
     /// <summary>
     /// 用户名
     /// </summary>
-    public string Username { get; set; } = "";
+    public string Username { get; set; } = null!;
 }

@@ -12,11 +12,11 @@ public class ApiResult : IApiResult
     /// <summary>
     /// 消息
     /// </summary>
-    public string Message { get; set; } = "";
+    public string Message { get; set; } = null!;
     /// <summary>
     /// 追踪Id
     /// </summary>
-    public string TraceId { get; set; } = "";
+    public string TraceId { get; set; } = null!;
 
     /// <summary>
     /// 构造函数

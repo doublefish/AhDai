@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
-using System.Net;
 
 namespace AhDai.Core.Extensions;
 
@@ -91,11 +91,13 @@ public static class BuilderExtensions
     {
         options.InvalidModelStateResponseFactory = context =>
         {
-            var errors = context.ModelState.Where(ms => ms.Value != null && ms.Value.Errors.Count > 0).ToDictionary(
-                kvp => kvp.Key,
-                kvp => kvp.Value?.Errors.Select(e => e.ErrorMessage).ToArray()
-            );
-            var res = ApiResult.Error((int)HttpStatusCode.BadRequest, "实体验证失败", errors);
+            var errors = context.ModelState.Where(kvp => kvp.Value != null && kvp.Value.Errors.Count > 0)
+            .SelectMany(kvp => kvp.Value?.Errors.Select(error => new Models.ValidationError
+            {
+                Field = kvp.Key,
+                Message = error.ErrorMessage,
+            }) ?? []);
+            var res = ApiResult.Error(StatusCodes.Status400BadRequest, "实体验证失败", errors);
             res.TraceId = context.HttpContext.TraceIdentifier;
             return new BadRequestObjectResult(res);
         };
