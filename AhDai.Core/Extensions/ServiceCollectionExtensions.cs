@@ -117,6 +117,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddGenericAuthorization(this IServiceCollection services)
     {
         services.AddSingleton<IAuthorizationHandler, GenericClaimHandler>();
+        services.AddSingleton<IAuthorizationMiddlewareResultHandler, GenericAuthorizationMiddlewareResultHandler>();
         //services.AddAuthorizationBuilder().SetDefaultPolicy(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().AddRequirements(new ClaimRequirement("", "")).Build());
         return services;
     }

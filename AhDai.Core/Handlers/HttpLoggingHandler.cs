@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AhDai.Core.Handlers;
 
-internal class HttpLoggingHandler(ILogger<HttpLoggingHandler> logger) : DelegatingHandler
+/// <summary>
+/// HttpLoggingHandler
+/// </summary>
+/// <param name="logger"></param>
+public class HttpLoggingHandler(ILogger<HttpLoggingHandler> logger) : DelegatingHandler
 {
     private readonly ILogger<HttpLoggingHandler> _logger = logger;
 
