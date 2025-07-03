@@ -136,10 +136,35 @@
             <param name="message">消息</param>
             <param name="data">内容</param>
         </member>
+        <member name="T:AhDai.Core.Attributes.AllowClaimBypassAttribute">
+            <summary>
+            AllowClaimBypassAttribute
+            </summary>
+            <param name="claimTypes"></param>
+        </member>
+        <member name="M:AhDai.Core.Attributes.AllowClaimBypassAttribute.#ctor(System.String[])">
+            <summary>
+            AllowClaimBypassAttribute
+            </summary>
+            <param name="claimTypes"></param>
+        </member>
+        <member name="P:AhDai.Core.Attributes.AllowClaimBypassAttribute.ClaimTypes">
+            <summary>
+            允许跳过的特定 Claim 类型。
+            如果为 null 或空，则跳过所有 Claim 验证需求。
+            </summary>
+        </member>
         <member name="T:AhDai.Core.Attributes.ApiAuthorizeAttribute">
             <summary>
             ApiAuthorizeAttribute
             </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Attributes.ApiAuthorizeAttribute.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Attributes.ApiAuthorizeAttribute})">
+            <summary>
+            ApiAuthorizeAttribute
+            </summary>
+            <param name="logger"></param>
         </member>
         <member name="F:AhDai.Core.Attributes.ApiAuthorizeAttribute._logger">
             <summary>
@@ -160,12 +185,6 @@
             <summary>
             是否验证权限
             </summary>
-        </member>
-        <member name="M:AhDai.Core.Attributes.ApiAuthorizeAttribute.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Attributes.ApiAuthorizeAttribute})">
-            <summary>
-            构造函数
-            </summary>
-            <param name="logger"></param>
         </member>
         <member name="M:AhDai.Core.Attributes.ApiAuthorizeAttribute.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
             <summary>
@@ -201,17 +220,18 @@
             <summary>
             ErrorCodeAttribute
             </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:AhDai.Core.Attributes.ErrorCodeAttribute.#ctor(System.String)">
+            <summary>
+            ErrorCodeAttribute
+            </summary>
+            <param name="message"></param>
         </member>
         <member name="P:AhDai.Core.Attributes.ErrorCodeAttribute.Message">
             <summary>
             消息
             </summary>
-        </member>
-        <member name="M:AhDai.Core.Attributes.ErrorCodeAttribute.#ctor(System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="message">消息</param>
         </member>
         <member name="T:AhDai.Core.Configs.ElasticConfig">
             <summary>
@@ -754,6 +774,13 @@
             <param name="config"></param>
             <returns></returns>
         </member>
+        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddGenericAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加通用授权服务
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Core.Extensions.X509CertificateExtensions">
             <summary>
             X509CertificateExt
@@ -811,6 +838,34 @@
             </summary>
             <param name="context"></param>
             <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Handlers.GenericAuthorizationMiddlewareResultHandler">
+            <summary>
+            GenericAuthorizationMiddlewareResultHandler
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Handlers.GenericAuthorizationMiddlewareResultHandler.HandleAsync(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Authorization.AuthorizationPolicy,Microsoft.AspNetCore.Authorization.Policy.PolicyAuthorizationResult)">
+            <summary>
+            HandleAsync
+            </summary>
+            <param name="next"></param>
+            <param name="context"></param>
+            <param name="policy"></param>
+            <param name="authorizeResult"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Handlers.GenericClaimHandler">
+            <summary>
+            GenericClaimHandler
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Handlers.GenericClaimHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,AhDai.Core.Requirements.ClaimRequirement)">
+            <summary>
+            HandleRequirementAsync
+            </summary>
+            <param name="context"></param>
+            <param name="requirement"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.HttpContentType">
@@ -984,24 +1039,6 @@
             </summary>
             <param name="context"></param>
             <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Models.CustomException">
-            <summary>
-            CustomException
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.CustomException.Code">
-            <summary>
-            Code
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Models.CustomException.#ctor(System.Int32,System.String,System.Exception)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="code">建议使用1000-2000之间的值</param>
-            <param name="message"></param>
-            <param name="innerException"></param>
         </member>
         <member name="T:AhDai.Core.Models.FileData">
             <summary>
@@ -1337,6 +1374,30 @@
         <member name="P:AhDai.Core.Options.RedisOptions.Config">
             <summary>
             Redis配置
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Requirements.ClaimRequirement">
+            <summary>
+            ClaimRequirement
+            </summary>
+            <param name="claimType"></param>
+            <param name="claimValue"></param>
+        </member>
+        <member name="M:AhDai.Core.Requirements.ClaimRequirement.#ctor(System.String,System.String)">
+            <summary>
+            ClaimRequirement
+            </summary>
+            <param name="claimType"></param>
+            <param name="claimValue"></param>
+        </member>
+        <member name="P:AhDai.Core.Requirements.ClaimRequirement.ClaimType">
+            <summary>
+            要验证的Claim类型
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Requirements.ClaimRequirement.ClaimValue">
+            <summary>
+            要验证的Claim值
             </summary>
         </member>
         <member name="T:AhDai.Core.Services.BaseFileService">

@@ -11,12 +11,13 @@ namespace AhDai.Core.Attributes;
 /// <summary>
 /// ApiAuthorizeAttribute
 /// </summary>
-public abstract class ApiAuthorizeAttribute : ActionFilterAttribute
+/// <param name="logger"></param>
+public abstract class ApiAuthorizeAttribute(ILogger<ApiAuthorizeAttribute> logger) : ActionFilterAttribute
 {
     /// <summary>
     /// _logger
     /// </summary>
-    readonly ILogger<ApiAuthorizeAttribute> _logger;
+    readonly ILogger<ApiAuthorizeAttribute> _logger = logger;
     /// <summary>
     /// 访问频率
     /// </summary>
@@ -24,22 +25,11 @@ public abstract class ApiAuthorizeAttribute : ActionFilterAttribute
     /// <summary>
     /// 是否验证Token
     /// </summary>
-    public bool VerifyToken { get; set; }
+    public bool VerifyToken { get; set; } = true;
     /// <summary>
     /// 是否验证权限
     /// </summary>
     public bool VerifyRight { get; set; }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="logger"></param>
-    public ApiAuthorizeAttribute(ILogger<ApiAuthorizeAttribute> logger)
-    {
-        _logger = logger;
-        //Frequency = 2D;
-        VerifyToken = true;
-    }
 
     /// <summary>
     /// OnActionExecutionAsync
