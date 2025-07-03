@@ -46,7 +46,7 @@ public class GenericClaimHandler : AuthorizationHandler<ClaimRequirement>
         }
         else
         {
-            context.Fail(new AuthorizationFailureReason(this, $"用户不满足Claim要求: {requirement.ClaimType} = {requirement.ClaimValue}"));
+            context.Fail(new AuthorizationFailureReason(this, requirement.Message));
         }
         return Task.CompletedTask;
     }

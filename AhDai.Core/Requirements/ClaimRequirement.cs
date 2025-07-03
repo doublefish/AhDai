@@ -7,15 +7,19 @@ namespace AhDai.Core.Requirements;
 /// </summary>
 /// <param name="claimType"></param>
 /// <param name="claimValue"></param>
-public class ClaimRequirement(string claimType, string claimValue) : IAuthorizationRequirement
+/// <param name="message"></param>
+public class ClaimRequirement(string claimType, string claimValue, string message) : IAuthorizationRequirement
 {
     /// <summary>
     /// 要验证的Claim类型
     /// </summary>
     public string ClaimType { get; } = claimType;
-
     /// <summary>
     /// 要验证的Claim值
     /// </summary>
     public string ClaimValue { get; } = claimValue;
+    /// <summary>
+    /// 错误消息
+    /// </summary>
+    public string Message { get; } = message;
 }

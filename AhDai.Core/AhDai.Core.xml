@@ -1382,13 +1382,15 @@
             </summary>
             <param name="claimType"></param>
             <param name="claimValue"></param>
+            <param name="message"></param>
         </member>
-        <member name="M:AhDai.Core.Requirements.ClaimRequirement.#ctor(System.String,System.String)">
+        <member name="M:AhDai.Core.Requirements.ClaimRequirement.#ctor(System.String,System.String,System.String)">
             <summary>
             ClaimRequirement
             </summary>
             <param name="claimType"></param>
             <param name="claimValue"></param>
+            <param name="message"></param>
         </member>
         <member name="P:AhDai.Core.Requirements.ClaimRequirement.ClaimType">
             <summary>
@@ -1398,6 +1400,11 @@
         <member name="P:AhDai.Core.Requirements.ClaimRequirement.ClaimValue">
             <summary>
             要验证的Claim值
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Requirements.ClaimRequirement.Message">
+            <summary>
+            错误消息
             </summary>
         </member>
         <member name="T:AhDai.Core.Services.BaseFileService">
