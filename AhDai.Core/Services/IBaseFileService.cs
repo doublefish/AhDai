@@ -44,7 +44,7 @@ public interface IBaseFileService
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    Task<Models.FileData> DownloadAsync(string root, string dir, string url, string name);
+    Task<Models.FileData> DownloadAsync(string root, string dir, string url, string? name = null);
 
     /// <summary>
     /// 下载
@@ -55,5 +55,5 @@ public interface IBaseFileService
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    Task<Models.FileData> DownloadAsync(HttpClient httpClient, string root, string dir, string url, string name);
+    Task<Models.FileData> DownloadAsync(HttpClient httpClient, string root, string dir, string url, string? name = null);
 }

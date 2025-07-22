@@ -14,6 +14,12 @@ public class HttpLoggingHandler(ILogger<HttpLoggingHandler> logger) : Delegating
 {
     private readonly ILogger<HttpLoggingHandler> _logger = logger;
 
+    /// <summary>
+    /// SendAsync
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var requestContent = "";

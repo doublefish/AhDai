@@ -118,7 +118,7 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    public async Task<Models.FileData> DownloadAsync(string root, string dir, string url, string name)
+    public async Task<Models.FileData> DownloadAsync(string root, string dir, string url, string? name = null)
     {
         var httpClientFactory = Utils.ServiceUtil.Services.GetRequiredService<IHttpClientFactory>();
         using var httpClient = httpClientFactory.CreateClient();
@@ -134,7 +134,7 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    public async Task<Models.FileData> DownloadAsync(HttpClient httpClient, string root, string dir, string url, string name)
+    public async Task<Models.FileData> DownloadAsync(HttpClient httpClient, string root, string dir, string url, string? name = null)
     {
         var virDir = $"{Config.DownloadDirectory}/{dir}";
         var phyDir = Path.Combine(root, Config.DownloadDirectory, dir);
@@ -142,7 +142,8 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
         {
             Directory.CreateDirectory(phyDir);
         }
-        var extension = Path.GetExtension(name).ToLowerInvariant();
+        name ??= Path.GetFileName(url);
+        var extension = Path.GetExtension(url).ToLowerInvariant();
 
         var data = new Models.FileData()
         {

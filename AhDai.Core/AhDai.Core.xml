@@ -868,6 +868,26 @@
             <param name="requirement"></param>
             <returns></returns>
         </member>
+        <member name="T:AhDai.Core.Handlers.HttpLoggingHandler">
+            <summary>
+            HttpLoggingHandler
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Handlers.HttpLoggingHandler.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Handlers.HttpLoggingHandler})">
+            <summary>
+            HttpLoggingHandler
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Handlers.HttpLoggingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            SendAsync
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Core.HttpContentType">
             <summary>
             HttpContentType
