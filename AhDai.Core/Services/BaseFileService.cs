@@ -143,7 +143,7 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
             Directory.CreateDirectory(phyDir);
         }
         name ??= Path.GetFileName(url);
-        var extension = Path.GetExtension(url).ToLowerInvariant();
+        var extension = Path.GetExtension(name).ToLowerInvariant();
 
         var data = new Models.FileData()
         {
