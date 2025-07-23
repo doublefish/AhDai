@@ -136,14 +136,20 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// <returns></returns>
     public async Task<Models.FileData> DownloadAsync(HttpClient httpClient, string root, string dir, string url, string? name = null)
     {
+        //name ??= Path.GetFileName(url);
+        if (string.IsNullOrEmpty(name))
+        {
+            var uri = new Uri(url);
+            name = Path.GetFileName(uri.AbsolutePath);
+        }
+        var extension = Path.GetExtension(name).ToLowerInvariant();
+
         var virDir = $"{Config.DownloadDirectory}/{dir}";
         var phyDir = Path.Combine(root, Config.DownloadDirectory, dir);
         if (!Directory.Exists(phyDir))
         {
             Directory.CreateDirectory(phyDir);
         }
-        name ??= Path.GetFileName(url);
-        var extension = Path.GetExtension(name).ToLowerInvariant();
 
         var data = new Models.FileData()
         {
