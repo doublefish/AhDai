@@ -6,9 +6,9 @@
 		<Nullable>enable</Nullable>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
-		<Version>1.5.4</Version>
-		<AssemblyVersion>1.5.4</AssemblyVersion>
-		<FileVersion>1.5.4</FileVersion>
+		<Version>1.5.5</Version>
+		<AssemblyVersion>1.5.5</AssemblyVersion>
+		<FileVersion>1.5.5</FileVersion>
 		<PackageProjectUrl>https://github.com/doublefish/AhDai</PackageProjectUrl>
 		<Description>常用方法封装 - Core</Description>
 		<PackageReleaseNotes>Token加密方式升级为RSA</PackageReleaseNotes>
@@ -33,7 +33,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AhDai.Base" Version="1.0.4" />
+		<PackageReference Include="AhDai.Base" Version="1.0.5" />
 
 		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
 		<PackageReference Include="StackExchange.Redis" Version="2.8.31" />
