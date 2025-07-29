@@ -16,13 +16,9 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static byte ToByte(this string s, byte error = byte.MinValue)
+        public static byte ToByte(this string s, byte? error = null)
         {
-            if (byte.TryParse(s, out byte result))
-            {
-                return result;
-            }
-            return error;
+            return byte.TryParse(s, out byte result) ? result : error ?? byte.MinValue;
         }
 
         /// <summary>
@@ -31,13 +27,9 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static sbyte ToSByte(this string s, sbyte error = sbyte.MinValue)
+        public static sbyte ToSByte(this string s, sbyte? error = null)
         {
-            if (sbyte.TryParse(s, out sbyte result))
-            {
-                return result;
-            }
-            return error;
+            return sbyte.TryParse(s, out sbyte result) ? result : error ?? sbyte.MinValue;
         }
 
         /// <summary>
@@ -46,13 +38,9 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static bool ToBoolean(this string s, bool error = false)
+        public static bool ToBoolean(this string s, bool? error = null)
         {
-            if (bool.TryParse(s, out bool result))
-            {
-                return result;
-            }
-            return error;
+            return bool.TryParse(s, out bool result) ? result : error ?? false;
         }
 
         /// <summary>
@@ -61,13 +49,9 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static short ToInt16(this string s, short error = short.MinValue)
+        public static short ToInt16(this string s, short? error = null)
         {
-            if (short.TryParse(s, out short result))
-            {
-                return result;
-            }
-            return error;
+            return short.TryParse(s, out short result) ? result : error ?? short.MinValue;
         }
 
         /// <summary>
@@ -76,7 +60,7 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static int ToInt32(this string s, int error = int.MinValue)
+        public static int ToInt32(this string s, int? error = null)
         {
             if (!string.IsNullOrEmpty(s))
             {
@@ -93,7 +77,7 @@ namespace AhDai.Base.Extensions
                     return result;
                 }
             }
-            return error;
+            return error ?? int.MinValue;
         }
 
         /// <summary>
@@ -102,7 +86,7 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static long ToInt64(this string s, long error = long.MinValue)
+        public static long ToInt64(this string s, long? error = null)
         {
             if (!string.IsNullOrEmpty(s))
             {
@@ -122,7 +106,7 @@ namespace AhDai.Base.Extensions
                     }
                 }
             }
-            return error;
+            return error ?? long.MinValue;
         }
 
         /// <summary>
@@ -131,7 +115,7 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static ulong ToUInt64(this string s, ulong error = ulong.MinValue)
+        public static ulong ToUInt64(this string s, ulong? error = null)
         {
             if (!string.IsNullOrEmpty(s))
             {
@@ -151,7 +135,7 @@ namespace AhDai.Base.Extensions
                     }
                 }
             }
-            return error;
+            return error ?? ulong.MinValue;
         }
 
         /// <summary>
@@ -160,7 +144,7 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static float ToSingle(this string s, float error = float.MinValue)
+        public static float ToSingle(this string s, float? error = null)
         {
             if (!string.IsNullOrEmpty(s))
             {
@@ -180,7 +164,7 @@ namespace AhDai.Base.Extensions
                     }
                 }
             }
-            return error;
+            return error ?? float.MinValue;
         }
 
         /// <summary>
@@ -189,7 +173,7 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static double ToDouble(this string s, double error = double.MinValue)
+        public static double ToDouble(this string s, double? error = null)
         {
             if (!string.IsNullOrEmpty(s))
             {
@@ -209,7 +193,7 @@ namespace AhDai.Base.Extensions
                     }
                 }
             }
-            return error;
+            return error ?? double.MinValue;
         }
 
         /// <summary>
@@ -218,7 +202,7 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static decimal ToDecimal(this string s, decimal error = decimal.MinValue)
+        public static decimal ToDecimal(this string s, decimal? error = null)
         {
             if (!string.IsNullOrEmpty(s))
             {
@@ -238,17 +222,7 @@ namespace AhDai.Base.Extensions
                     }
                 }
             }
-            return error;
-        }
-
-        /// <summary>
-        /// 类型转换
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        public static DateTime ToDateTime(this string s)
-        {
-            return s.ToDateTime(DateTime.MinValue);
+            return error ?? decimal.MinValue;
         }
 
         /// <summary>
@@ -257,26 +231,9 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static DateTime ToDateTime(this string s, DateTime error)
+        public static DateTime ToDateTime(this string s, DateTime? error = null)
         {
-            if (DateTime.TryParse(s, out DateTime result))
-            {
-                return result;
-            }
-            return error;
-        }
-
-        /// <summary>
-        /// 类型转换
-        /// </summary>
-        /// <param name="s"></param>
-        /// <param name="format"></param>
-        /// <param name="provider"></param>
-        /// <param name="styles"></param>
-        /// <returns></returns>
-        public static DateTime ToDateTimeExact(this string s, string format, IFormatProvider provider, DateTimeStyles styles)
-        {
-            return s.ToDateTimeExact(format, provider, styles, DateTime.MinValue);
+            return DateTime.TryParse(s, out DateTime result) ? result : error ?? DateTime.MinValue;
         }
 
         /// <summary>
@@ -288,26 +245,9 @@ namespace AhDai.Base.Extensions
         /// <param name="styles"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static DateTime ToDateTimeExact(this string s, string format, IFormatProvider provider, DateTimeStyles styles, DateTime error)
+        public static DateTime ToDateTimeExact(this string s, string format, IFormatProvider provider = null, DateTimeStyles? styles = null, DateTime? error = null)
         {
-            if (DateTime.TryParseExact(s, format, provider, styles, out DateTime result))
-            {
-                return result;
-            }
-            return error;
-        }
-
-        /// <summary>
-        /// 类型转换
-        /// </summary>
-        /// <param name="s"></param>
-        /// <param name="formats"></param>
-        /// <param name="provider"></param>
-        /// <param name="styles"></param>
-        /// <returns></returns>
-        public static DateTime ToDateTimeExact(this string s, string[] formats, IFormatProvider provider, DateTimeStyles styles)
-        {
-            return s.ToDateTimeExact(formats, provider, styles, DateTime.MinValue);
+            return DateTime.TryParseExact(s, format, provider, styles ?? DateTimeStyles.None, out DateTime result) ? result : error ?? DateTime.MinValue;
         }
 
         /// <summary>
@@ -319,23 +259,9 @@ namespace AhDai.Base.Extensions
         /// <param name="styles"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static DateTime ToDateTimeExact(this string s, string[] formats, IFormatProvider provider, DateTimeStyles styles, DateTime error)
+        public static DateTime ToDateTimeExact(this string s, string[] formats, IFormatProvider provider, DateTimeStyles? styles = null, DateTime? error = null)
         {
-            if (DateTime.TryParseExact(s, formats, provider, styles, out DateTime result))
-            {
-                return result;
-            }
-            return error;
-        }
-
-        /// <summary>
-        /// 类型转换
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        public static TimeSpan ToTimeSpan(this string s)
-        {
-            return s.ToTimeSpan(TimeSpan.MinValue);
+            return DateTime.TryParseExact(s, formats, provider, styles ?? DateTimeStyles.None, out DateTime result) ? result : error ?? DateTime.MinValue;
         }
 
         /// <summary>
@@ -344,13 +270,9 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static TimeSpan ToTimeSpan(this string s, TimeSpan error)
+        public static TimeSpan ToTimeSpan(this string s, TimeSpan? error = null)
         {
-            if (TimeSpan.TryParse(s, out TimeSpan result))
-            {
-                return result;
-            }
-            return error;
+            return TimeSpan.TryParse(s, out TimeSpan result) ? result : error ?? TimeSpan.MinValue;
         }
 
         /// <summary>
@@ -359,27 +281,26 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="format"></param>
         /// <param name="provider"></param>
-        /// <returns></returns>
-        public static TimeSpan ToTimeSpanExact(this string s, string format, IFormatProvider provider)
-        {
-            return s.ToTimeSpanExact(format, provider, TimeSpan.MinValue);
-        }
-
-        /// <summary>
-        /// 类型转换
-        /// </summary>
-        /// <param name="s"></param>
-        /// <param name="format"></param>
-        /// <param name="provider"></param>
+        /// <param name="styles"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static TimeSpan ToTimeSpanExact(this string s, string format, IFormatProvider provider, TimeSpan error)
+        public static TimeSpan ToTimeSpanExact(this string s, string format, IFormatProvider provider = null, TimeSpanStyles? styles = null, TimeSpan? error = null)
         {
-            if (TimeSpan.TryParseExact(s, format, provider, TimeSpanStyles.None, out TimeSpan result))
-            {
-                return result;
-            }
-            return error;
+            return TimeSpan.TryParseExact(s, format, provider, styles ?? TimeSpanStyles.None, out TimeSpan result) ? result : error ?? TimeSpan.MinValue;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="formats"></param>
+        /// <param name="provider"></param>
+        /// <param name="styles"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static TimeSpan ToTimeSpanExact(this string s, string[] formats, IFormatProvider provider = null, TimeSpanStyles? styles = null, TimeSpan? error = null)
+        {
+            return TimeSpan.TryParseExact(s, formats, provider, styles ?? TimeSpanStyles.None, out TimeSpan result) ? result : error ?? TimeSpan.MinValue;
         }
         #endregion
 

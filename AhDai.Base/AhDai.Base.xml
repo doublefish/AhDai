@@ -322,7 +322,7 @@
             StringExt
             </summary>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToByte(System.String,System.Byte)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToByte(System.String,System.Nullable{System.Byte})">
             <summary>
             类型转换
             </summary>
@@ -330,7 +330,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToSByte(System.String,System.SByte)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToSByte(System.String,System.Nullable{System.SByte})">
             <summary>
             类型转换
             </summary>
@@ -338,7 +338,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToBoolean(System.String,System.Boolean)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToBoolean(System.String,System.Nullable{System.Boolean})">
             <summary>
             类型转换
             </summary>
@@ -346,7 +346,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToInt16(System.String,System.Int16)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToInt16(System.String,System.Nullable{System.Int16})">
             <summary>
             类型转换
             </summary>
@@ -354,7 +354,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToInt32(System.String,System.Int32)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToInt32(System.String,System.Nullable{System.Int32})">
             <summary>
             类型转换
             </summary>
@@ -362,7 +362,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToInt64(System.String,System.Int64)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToInt64(System.String,System.Nullable{System.Int64})">
             <summary>
             类型转换
             </summary>
@@ -370,7 +370,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToUInt64(System.String,System.UInt64)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToUInt64(System.String,System.Nullable{System.UInt64})">
             <summary>
             类型转换
             </summary>
@@ -378,7 +378,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToSingle(System.String,System.Single)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToSingle(System.String,System.Nullable{System.Single})">
             <summary>
             类型转换
             </summary>
@@ -386,7 +386,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDouble(System.String,System.Double)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDouble(System.String,System.Nullable{System.Double})">
             <summary>
             类型转换
             </summary>
@@ -394,7 +394,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDecimal(System.String,System.Decimal)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDecimal(System.String,System.Nullable{System.Decimal})">
             <summary>
             类型转换
             </summary>
@@ -402,14 +402,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTime(System.String)">
-            <summary>
-            类型转换
-            </summary>
-            <param name="s"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTime(System.String,System.DateTime)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTime(System.String,System.Nullable{System.DateTime})">
             <summary>
             类型转换
             </summary>
@@ -417,17 +410,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)">
-            <summary>
-            类型转换
-            </summary>
-            <param name="s"></param>
-            <param name="format"></param>
-            <param name="provider"></param>
-            <param name="styles"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String,System.IFormatProvider,System.Nullable{System.Globalization.DateTimeStyles},System.Nullable{System.DateTime})">
             <summary>
             类型转换
             </summary>
@@ -438,17 +421,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)">
-            <summary>
-            类型转换
-            </summary>
-            <param name="s"></param>
-            <param name="formats"></param>
-            <param name="provider"></param>
-            <param name="styles"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String[],System.IFormatProvider,System.Nullable{System.Globalization.DateTimeStyles},System.Nullable{System.DateTime})">
             <summary>
             类型转换
             </summary>
@@ -459,14 +432,7 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToTimeSpan(System.String)">
-            <summary>
-            类型转换
-            </summary>
-            <param name="s"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToTimeSpan(System.String,System.TimeSpan)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToTimeSpan(System.String,System.Nullable{System.TimeSpan})">
             <summary>
             类型转换
             </summary>
@@ -474,22 +440,25 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToTimeSpanExact(System.String,System.String,System.IFormatProvider)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToTimeSpanExact(System.String,System.String,System.IFormatProvider,System.Nullable{System.Globalization.TimeSpanStyles},System.Nullable{System.TimeSpan})">
             <summary>
             类型转换
             </summary>
             <param name="s"></param>
             <param name="format"></param>
             <param name="provider"></param>
+            <param name="styles"></param>
+            <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToTimeSpanExact(System.String,System.String,System.IFormatProvider,System.TimeSpan)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToTimeSpanExact(System.String,System.String[],System.IFormatProvider,System.Nullable{System.Globalization.TimeSpanStyles},System.Nullable{System.TimeSpan})">
             <summary>
             类型转换
             </summary>
             <param name="s"></param>
-            <param name="format"></param>
+            <param name="formats"></param>
             <param name="provider"></param>
+            <param name="styles"></param>
             <param name="error"></param>
             <returns></returns>
         </member>
