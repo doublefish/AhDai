@@ -259,7 +259,7 @@ namespace AhDai.Base.Extensions
         /// <param name="styles"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static DateTime ToDateTimeExact(this string s, string[] formats, IFormatProvider provider, DateTimeStyles? styles = null, DateTime? error = null)
+        public static DateTime ToDateTimeExact(this string s, string[] formats, IFormatProvider provider = null, DateTimeStyles? styles = null, DateTime? error = null)
         {
             return DateTime.TryParseExact(s, formats, provider, styles ?? DateTimeStyles.None, out DateTime result) ? result : error ?? DateTime.MinValue;
         }
