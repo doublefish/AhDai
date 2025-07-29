@@ -160,13 +160,6 @@
             ExceptionExt
             </summary>
         </member>
-        <member name="M:AhDai.Base.Extensions.ExceptionExtensions.GetInner(System.Exception)">
-            <summary>
-            获取内部Exception
-            </summary>
-            <param name="ex"></param>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Base.Extensions.IDictionaryExtensions">
             <summary>
             IDictionaryExtensions
@@ -424,22 +417,45 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String,System.IFormatProvider)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)">
             <summary>
             类型转换
             </summary>
             <param name="s"></param>
             <param name="format"></param>
             <param name="provider"></param>
+            <param name="styles"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String,System.IFormatProvider,System.DateTime)">
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime)">
             <summary>
             类型转换
             </summary>
             <param name="s"></param>
             <param name="format"></param>
             <param name="provider"></param>
+            <param name="styles"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="formats"></param>
+            <param name="provider"></param>
+            <param name="styles"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Base.Extensions.StringExtensions.ToDateTimeExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="formats"></param>
+            <param name="provider"></param>
+            <param name="styles"></param>
             <param name="error"></param>
             <returns></returns>
         </member>

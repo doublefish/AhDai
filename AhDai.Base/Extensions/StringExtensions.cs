@@ -272,10 +272,11 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="format"></param>
         /// <param name="provider"></param>
+        /// <param name="styles"></param>
         /// <returns></returns>
-        public static DateTime ToDateTimeExact(this string s, string format, IFormatProvider provider)
+        public static DateTime ToDateTimeExact(this string s, string format, IFormatProvider provider, DateTimeStyles styles)
         {
-            return s.ToDateTimeExact(format, provider, DateTime.MinValue);
+            return s.ToDateTimeExact(format, provider, styles, DateTime.MinValue);
         }
 
         /// <summary>
@@ -284,11 +285,43 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="format"></param>
         /// <param name="provider"></param>
+        /// <param name="styles"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static DateTime ToDateTimeExact(this string s, string format, IFormatProvider provider, DateTime error)
+        public static DateTime ToDateTimeExact(this string s, string format, IFormatProvider provider, DateTimeStyles styles, DateTime error)
         {
-            if (DateTime.TryParseExact(s, format, provider, DateTimeStyles.None, out DateTime result))
+            if (DateTime.TryParseExact(s, format, provider, styles, out DateTime result))
+            {
+                return result;
+            }
+            return error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="formats"></param>
+        /// <param name="provider"></param>
+        /// <param name="styles"></param>
+        /// <returns></returns>
+        public static DateTime ToDateTimeExact(this string s, string[] formats, IFormatProvider provider, DateTimeStyles styles)
+        {
+            return s.ToDateTimeExact(formats, provider, styles, DateTime.MinValue);
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="formats"></param>
+        /// <param name="provider"></param>
+        /// <param name="styles"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static DateTime ToDateTimeExact(this string s, string[] formats, IFormatProvider provider, DateTimeStyles styles, DateTime error)
+        {
+            if (DateTime.TryParseExact(s, formats, provider, styles, out DateTime result))
             {
                 return result;
             }
