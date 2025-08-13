@@ -70,9 +70,9 @@ namespace AhDai.Base.Extensions
                 return null;
             }
             var sorted = new SortedDictionary<TKey, TValue>();
-            foreach (var kv in dict)
+            foreach (var kvp in dict)
             {
-                sorted.Add(kv.Key, kv.Value);
+                sorted.Add(kvp.Key, kvp.Value);
             }
             return sorted;
         }
@@ -142,15 +142,16 @@ namespace AhDai.Base.Extensions
                 return "";
             }
             var builder = new StringBuilder();
-            foreach (var kv in dict)
+            foreach (var kvp in dict)
             {
-                if ((ignoreNullOrEmpty == true && (kv.Value == null || kv.Value.Equals(""))) || (ignores != null && ignores.Contains(kv.Key)))
+                if ((ignoreNullOrEmpty == true && (kvp.Value == null || kvp.Value.Equals(""))) || (ignores != null && ignores.Contains(kvp.Key)))
                 {
                     continue;
                 }
-                builder.Append($"&{kv.Key}={kv.Value}");
+                if (builder.Length > 0) builder.Append('&');
+                builder.Append(kvp.Key).Append('=').Append(kvp.Value);
             }
-            return builder.Remove(0, 1).ToString();
+            return builder.ToString();
         }
 
         /// <summary>
@@ -168,17 +169,14 @@ namespace AhDai.Base.Extensions
                 return "";
             }
             var builder = new StringBuilder();
-            foreach (var kv in dict)
+            foreach (var kvp in dict)
             {
-                if ((ignoreNullOrEmpty == true && string.IsNullOrEmpty(kv.Value)) || (ignores != null && ignores.Contains(kv.Key)))
+                if ((ignoreNullOrEmpty == true && string.IsNullOrEmpty(kvp.Value)) || (ignores != null && ignores.Contains(kvp.Key)))
                 {
                     continue;
                 }
-                builder.Append($"{separator}{kv.Value}");
-            }
-            if (!string.IsNullOrEmpty(separator))
-            {
-                builder = builder.Remove(0, 1);
+                if (builder.Length > 0) builder.Append(separator);
+                builder.Append(kvp.Value);
             }
             return builder.ToString();
         }
@@ -196,13 +194,13 @@ namespace AhDai.Base.Extensions
                 return "";
             }
             var builder = new StringBuilder();
-            foreach (var kv in dict)
+            foreach (var kvp in dict)
             {
-                if (ignores != null && ignores.Contains(kv.Key))
+                if (ignores != null && ignores.Contains(kvp.Key))
                 {
                     continue;
                 }
-                builder.Append($"<{kv.Key}>{kv.Value}</{kv.Key}>");
+                builder.Append('<').Append(kvp.Key).Append('>').Append(kvp.Value).Append('<').Append('/').Append(kvp.Key).Append('>');
             }
             return builder.ToString();
         }

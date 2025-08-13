@@ -24,14 +24,15 @@ public static class IDictionaryExtensions
             return "";
         }
         var builder = new StringBuilder();
-        foreach (var kv in pairs)
+        foreach (var kvp in pairs)
         {
-            if (kv.Value.Count == 0 || (ignores != null && ignores.Contains(kv.Key)))
+            if (kvp.Value.Count == 0 || (ignores != null && ignores.Contains(kvp.Key)))
             {
                 continue;
             }
-            builder.Append($"&{kv.Key}={kv.Value}");
+            if (builder.Length > 0) builder.Append('&');
+            builder.Append(kvp.Key).Append('=').Append(kvp.Value);
         }
-        return builder.Remove(0, 1).ToString();
+        return builder.ToString();
     }
 }

@@ -17,9 +17,9 @@ namespace AhDai.Base.Extensions
         public static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>(this SortedDictionary<TKey, TValue> sorted)
         {
             var dic = new Dictionary<TKey, TValue>();
-            foreach (var kv in sorted)
+            foreach (var kvp in sorted)
             {
-                dic.Add(kv.Key, kv.Value);
+                dic.Add(kvp.Key, kvp.Value);
             }
             return dic;
         }
