@@ -2176,18 +2176,13 @@
             <summary>
             JsonConverter
             </summary>
-            <param name="format"></param>
+            <param name="formats"></param>
         </member>
-        <member name="M:AhDai.Core.Utils.DatetimeJsonConverter.#ctor(System.String)">
+        <member name="M:AhDai.Core.Utils.DatetimeJsonConverter.#ctor(System.String[])">
             <summary>
             JsonConverter
             </summary>
-            <param name="format"></param>
-        </member>
-        <member name="P:AhDai.Core.Utils.DatetimeJsonConverter.Format">
-            <summary>
-            格式
-            </summary>
+            <param name="formats"></param>
         </member>
         <member name="M:AhDai.Core.Utils.DatetimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
             <summary>

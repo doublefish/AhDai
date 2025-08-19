@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AhDai.Base;
+using System;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -7,13 +9,14 @@ namespace AhDai.Core.Utils;
 /// <summary>
 /// JsonConverter
 /// </summary>
-/// <param name="format"></param>
-public class DatetimeJsonConverter(string format) : JsonConverter<DateTime>
+/// <param name="formats"></param>
+public class DatetimeJsonConverter(string[]? formats = null) : JsonConverter<DateTime>
 {
-    /// <summary>
-    /// 格式
-    /// </summary>
-    public string Format { get; set; } = format;
+    readonly string[] _formats = formats ?? [
+        Const.Iso8601WithOffsetDateTimeFormat,
+        Const.Iso8601UtcDateTimeFormat,
+        Const.StandardDateTimeFormat,
+    ];
 
     /// <summary>
     /// Read
@@ -24,11 +27,18 @@ public class DatetimeJsonConverter(string format) : JsonConverter<DateTime>
     /// <returns></returns>
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TokenType != JsonTokenType.String)
+        var dateString = reader.GetString();
+        if (!string.IsNullOrEmpty(dateString))
         {
-            return reader.GetDateTime();
+            foreach (var format in _formats)
+            {
+                if (DateTime.TryParseExact(dateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
+                {
+                    return result;
+                }
+            }
         }
-        return DateTime.TryParse(reader.GetString(), out var date) ? date : reader.GetDateTime();
+        return reader.GetDateTime();
     }
 
     /// <summary>
@@ -39,6 +49,6 @@ public class DatetimeJsonConverter(string format) : JsonConverter<DateTime>
     /// <param name="options"></param>
     public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
     {
-        writer.WriteStringValue(value.ToString(Format));
+        writer.WriteStringValue(value.ToString(_formats[0]));
     }
 }
