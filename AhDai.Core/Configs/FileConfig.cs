@@ -10,11 +10,15 @@ public class FileConfig
     /// <summary>
     /// 上传根目录
     /// </summary>
-    public string UploadDirectory { get; set; } = "upload";
+    public string UploadDirectory { get; set; } = "uploads";
     /// <summary>
     /// 下载根目录
     /// </summary>
-    public string DownloadDirectory { get; set; } = "download";
+    public string DownloadDirectory { get; set; } = "downloads";
+    /// <summary>
+    /// 文件导出目录
+    /// </summary>
+    public string ExportDirectory { get; set; } = "exports";
     /// <summary>
     /// 最大长度
     /// </summary>

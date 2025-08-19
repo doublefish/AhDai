@@ -273,6 +273,11 @@
             下载根目录
             </summary>
         </member>
+        <member name="P:AhDai.Core.Configs.FileConfig.ExportDirectory">
+            <summary>
+            文件导出目录
+            </summary>
+        </member>
         <member name="P:AhDai.Core.Configs.FileConfig.MaxLength">
             <summary>
             最大长度
@@ -392,36 +397,6 @@
         <member name="P:AhDai.Core.Configs.RedisConfig.Database">
             <summary>
             默认库
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Const">
-            <summary>
-            Const
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Const.DateTimeFormatRfc3339">
-            <summary>
-            时间格式：2015-05-20T13:29:35+08:00
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Const.DateTimeFormat">
-            <summary>
-            时间格式
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Const.RequestId">
-            <summary>
-            请求Id
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Const.UserId">
-            <summary>
-            用户Id
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Const.Authorization">
-            <summary>
-            Authorization
             </summary>
         </member>
         <member name="T:AhDai.Core.Extensions.BuilderExtensions">

@@ -1,4 +1,5 @@
-﻿using AhDai.Core.Configs;
+﻿using AhDai.Base;
+using AhDai.Core.Configs;
 using AhDai.Core.Extensions;
 using AhDai.Core.Models;
 using AhDai.Core.Utils;
@@ -126,8 +127,8 @@ public class BaseJwtService : IBaseJwtService
             var redis = Services.GetRequiredService<IBaseRedisService>();
             var dict = claims.GroupBy(claim => claim.Type).ToDictionary(g => g.Key, g => string.Join(",", g.Select(c => c.Value)));
             dict.Add("Issuer", Config.Issuer);
-            dict.Add("IssueTime", DateTime.Now.ToString(Const.DateTimeFormat));
-            dict.Add("ExpirationTime", expires.ToLocalTime().ToString(Const.DateTimeFormat));
+            dict.Add("IssueTime", DateTime.Now.ToString(Const.StandardDateTimeFormat));
+            dict.Add("ExpirationTime", expires.ToLocalTime().ToString(Const.StandardDateTimeFormat));
             dict.Add("Token", token);
             if (!dict.TryGetValue("Username", out var username) || string.IsNullOrEmpty(username))
             {

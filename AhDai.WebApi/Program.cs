@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.HttpLogging;
+using AhDai.Base;
 
 namespace AhDai.WebApi;
 
@@ -73,7 +74,7 @@ public class Program
         });
 
         var config = builder.Configuration.GetJwtConfig();
-        builder.Services.AddJwtAuthentication(config);
+        builder.Services.AddAuthentication().AddJwtAuthentication(config);
 
         // ¿ØÖÆÆ÷
         builder.Services.AddControllers(options =>
@@ -89,7 +90,7 @@ public class Program
         }).AddJsonOptions(options =>
         {
             options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-            options.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter("yyyy-MM-ddTHH:mm:sszzz"));
+            options.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter(Const.Iso8601WithOffsetDateTimeFormat));
         });
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

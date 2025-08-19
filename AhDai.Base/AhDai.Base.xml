@@ -9,9 +9,19 @@
             Const
             </summary>
         </member>
-        <member name="F:AhDai.Base.Const.DateTimeFormat">
+        <member name="F:AhDai.Base.Const.StandardDateTimeFormat">
             <summary>
-            时间格式
+            标准日期时间格式：yyyy-MM-dd HH:mm:ss
+            </summary>
+        </member>
+        <member name="F:AhDai.Base.Const.Iso8601UtcDateTimeFormat">
+            <summary>
+            ISO 8601 UTC格式：yyyy-MM-ddTHH:mm:ssZ
+            </summary>
+        </member>
+        <member name="F:AhDai.Base.Const.Iso8601WithOffsetDateTimeFormat">
+            <summary>
+            ISO 8601 带时区偏移格式：yyyy-MM-ddTHH:mm:sszzz
             </summary>
         </member>
         <member name="T:AhDai.Base.Extensions.ArrayExtensions">
