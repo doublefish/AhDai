@@ -1985,13 +1985,15 @@
             <summary>
             DatetimeJsonConverter
             </summary>
-            <param name="format"></param>
+            <param name="writeFormat"></param>
+            <param name="readFormats"></param>
         </member>
-        <member name="M:AhDai.Core.Utils.DatetimeJsonConverter.#ctor(System.String)">
+        <member name="M:AhDai.Core.Utils.DatetimeJsonConverter.#ctor(System.String,System.String[])">
             <summary>
             DatetimeJsonConverter
             </summary>
-            <param name="format"></param>
+            <param name="writeFormat"></param>
+            <param name="readFormats"></param>
         </member>
         <member name="M:AhDai.Core.Utils.DatetimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
             <summary>

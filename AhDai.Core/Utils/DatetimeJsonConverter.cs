@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -7,10 +8,13 @@ namespace AhDai.Core.Utils;
 /// <summary>
 /// DatetimeJsonConverter
 /// </summary>
-/// <param name="format"></param>
-public class DatetimeJsonConverter(string format) : JsonConverter<DateTime>
+/// <param name="writeFormat"></param>
+/// <param name="readFormats"></param>
+public class DatetimeJsonConverter(string writeFormat, string[]? readFormats = null) : JsonConverter<DateTime>
 {
-    readonly string _format = format;
+    readonly string _writeFormat = writeFormat;
+
+    readonly string[] _readFormats = readFormats ?? [];
 
     /// <summary>
     /// Read
@@ -21,7 +25,24 @@ public class DatetimeJsonConverter(string format) : JsonConverter<DateTime>
     /// <returns></returns>
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return reader.GetDateTime();
+        if (reader.TokenType != JsonTokenType.String)
+        {
+            throw new JsonException($"Expected string but was {reader.TokenType}");
+        }
+        var dateString = reader.GetString();
+        if (string.IsNullOrEmpty(dateString))
+        {
+            return default;
+        }
+        if (_readFormats.Length > 0 && DateTime.TryParseExact(dateString, _readFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result1))
+        {
+            return result1;
+        }
+        if (DateTime.TryParse(dateString, out var result2))
+        {
+            return result2;
+        }
+        throw new JsonException($"Unable to parse '{dateString}' as a DateTime. Supported formats: {string.Join(", ", _readFormats)}");
     }
 
     /// <summary>
@@ -32,6 +53,6 @@ public class DatetimeJsonConverter(string format) : JsonConverter<DateTime>
     /// <param name="options"></param>
     public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
     {
-        writer.WriteStringValue(value.ToString(_format));
+        writer.WriteStringValue(value.ToString(_writeFormat));
     }
 }
