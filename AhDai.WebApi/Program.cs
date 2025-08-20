@@ -90,7 +90,7 @@ public class Program
         }).AddJsonOptions(options =>
         {
             options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-            options.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter());
+            //options.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter());
         });
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
