@@ -50,7 +50,7 @@ public class BaseJwtService : IBaseJwtService
     {
         Config = configuration.GetJwtConfig();
         Logger = logger;
-        Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
+        //Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
 
         var rsa = RSA.Create();
         rsa.ImportRSAPrivateKey(Convert.FromBase64String(Config.PrivateKey), out _);

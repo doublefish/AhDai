@@ -17,7 +17,8 @@ namespace AhDai.Core.Services;
 /// 文件服务
 /// </summary>
 /// <param name="configuration"></param>
-public class BaseFileService(IConfiguration configuration) : IBaseFileService
+/// <param name="serviceProvider"></param>
+public class BaseFileService(IConfiguration configuration, IServiceProvider serviceProvider) : IBaseFileService
 {
     /// <summary>
     /// Config
@@ -27,6 +28,10 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// TypeProvider
     /// </summary>
     public FileExtensionContentTypeProvider ContentTypeProvider = new();
+    /// <summary>
+    /// httpClientFactory
+    /// </summary>
+    public IHttpClientFactory? HttpClientFactory { get; private set; } = serviceProvider.GetService<IHttpClientFactory>();
 
     /// <summary>
     /// 获取类型
@@ -120,8 +125,8 @@ public class BaseFileService(IConfiguration configuration) : IBaseFileService
     /// <returns></returns>
     public async Task<Models.FileData> DownloadAsync(string root, string dir, string url, string? name = null)
     {
-        var httpClientFactory = Utils.ServiceUtil.Services.GetRequiredService<IHttpClientFactory>();
-        using var httpClient = httpClientFactory.CreateClient();
+        if (HttpClientFactory == null) throw new ArgumentException("未注入IHttpClientFactory");
+        using var httpClient = HttpClientFactory.CreateClient();
         return await DownloadAsync(httpClient, root, dir, url, name);
     }
 
