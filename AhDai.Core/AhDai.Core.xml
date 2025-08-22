@@ -1407,12 +1407,14 @@
             文件服务
             </summary>
             <param name="configuration"></param>
+            <param name="serviceProvider"></param>
         </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:AhDai.Core.Services.BaseFileService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,System.IServiceProvider)">
             <summary>
             文件服务
             </summary>
             <param name="configuration"></param>
+            <param name="serviceProvider"></param>
         </member>
         <member name="P:AhDai.Core.Services.BaseFileService.Config">
             <summary>
@@ -1422,6 +1424,11 @@
         <member name="F:AhDai.Core.Services.BaseFileService.ContentTypeProvider">
             <summary>
             TypeProvider
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Services.BaseFileService.HttpClientFactory">
+            <summary>
+            httpClientFactory
             </summary>
         </member>
         <member name="M:AhDai.Core.Services.BaseFileService.GetType(System.String)">
