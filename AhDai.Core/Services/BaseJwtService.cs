@@ -4,8 +4,6 @@ using AhDai.Core.Extensions;
 using AhDai.Core.Models;
 using AhDai.Core.Utils;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
 using System;
@@ -21,46 +19,38 @@ namespace AhDai.Core.Services;
 /// <summary>
 /// Jwt服务
 /// </summary>
-public class BaseJwtService : IBaseJwtService
+/// <param name="configuration"></param>
+/// <param name="redisService"></param>
+public class BaseJwtService(IConfiguration configuration, IBaseRedisService? redisService) : IBaseJwtService
 {
+    readonly JwtConfig _config = configuration.GetJwtConfig();
+    readonly IBaseRedisService? _redisService = redisService;
+    SigningCredentials? _signingCredentials;
+
     /// <summary>
     /// 配置
     /// </summary>
-    public JwtConfig Config { get; private set; }
-    /// <summary>
-    /// 日志
-    /// </summary>
-    public ILogger<BaseJwtService> Logger { get; private set; }
+    public JwtConfig Config => _config;
     /// <summary>
     /// RSA
     /// </summary>
-    public SigningCredentials SigningCredentials { get; private set; }
-    /// <summary>
-    /// Services
-    /// </summary>
-    public IServiceProvider Services { get; private set; }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="configuration"></param>
-    /// <param name="serviceProvider"></param>
-    /// <param name="logger"></param>
-    public BaseJwtService(IConfiguration configuration, IServiceProvider serviceProvider, ILogger<BaseJwtService> logger)
+    public SigningCredentials SigningCredentials
     {
-        Config = configuration.GetJwtConfig();
-        Logger = logger;
-        //Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
-
-        var rsa = RSA.Create();
-        rsa.ImportRSAPrivateKey(Convert.FromBase64String(Config.PrivateKey), out _);
-        SigningCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256);
-        Services = serviceProvider;
-        if (Config.EnableRedis)
+        get
         {
-            serviceProvider.GetRequiredService<IBaseRedisService>();
+            if (_signingCredentials == null)
+            {
+                var rsa = RSA.Create();
+                rsa.ImportRSAPrivateKey(Convert.FromBase64String(Config.PrivateKey), out _);
+                _signingCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256);
+            }
+            return _signingCredentials;
         }
     }
+    /// <summary>
+    /// RedisService
+    /// </summary>
+    public IBaseRedisService RedisService => _redisService ?? throw new ArgumentException("未注入IBaseRedisService");
 
     /// <summary>
     /// GenerateToken
@@ -124,7 +114,7 @@ public class BaseJwtService : IBaseJwtService
 
         if (Config.EnableRedis)
         {
-            var redis = Services.GetRequiredService<IBaseRedisService>();
+            var redis = RedisService;
             var dict = claims.GroupBy(claim => claim.Type).ToDictionary(g => g.Key, g => string.Join(",", g.Select(c => c.Value)));
             dict.Add("Issuer", Config.Issuer);
             dict.Add("IssueTime", DateTime.Now.ToString(Const.StandardDateTimeFormat));
@@ -191,7 +181,7 @@ public class BaseJwtService : IBaseJwtService
         var username = securityToken.Claims.Where(x => x.Type == "Username").FirstOrDefault()?.Value;
         if (string.IsNullOrEmpty(username)) return false;
         var data = securityToken.RawData;
-        var redis = Services.GetRequiredService<IBaseRedisService>();
+        var redis = RedisService;
         var rdb = redis.GetDatabase();
         return await rdb.KeyExistsAsync($"{Config.RedisKey}:{username}:{data}");
     }
@@ -207,7 +197,7 @@ public class BaseJwtService : IBaseJwtService
         var securityToken = ReadToken(token);
         var username = securityToken.Claims.Where(x => x.Type == "Username").FirstOrDefault()?.Value;
         var data = securityToken.RawData;
-        var redis = Services.GetRequiredService<IBaseRedisService>();
+        var redis = RedisService;
         var rdb = redis.GetDatabase();
         return await rdb.KeyDeleteAsync($"{Config.RedisKey}:{username}:{data}");
     }

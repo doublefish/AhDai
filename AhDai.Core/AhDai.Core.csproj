@@ -6,9 +6,9 @@
 		<Nullable>enable</Nullable>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
-		<Version>1.6.3</Version>
-		<AssemblyVersion>1.6.3</AssemblyVersion>
-		<FileVersion>1.6.3</FileVersion>
+		<Version>1.6.4</Version>
+		<AssemblyVersion>1.6.4</AssemblyVersion>
+		<FileVersion>1.6.4</FileVersion>
 		<PackageProjectUrl>https://github.com/doublefish/AhDai</PackageProjectUrl>
 		<Description>常用方法封装 - Core</Description>
 		<PackageReleaseNotes>Token加密方式升级为RSA</PackageReleaseNotes>

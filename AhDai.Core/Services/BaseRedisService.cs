@@ -1,6 +1,5 @@
 ﻿using AhDai.Core.Configs;
 using AhDai.Core.Extensions;
-using AhDai.Core.Utils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
@@ -11,34 +10,23 @@ namespace AhDai.Core.Services;
 /// <summary>
 /// Redis服务
 /// </summary>
-public class BaseRedisService : IBaseRedisService
+/// <param name="logger"></param>
+/// <param name="configuration"></param>
+public class BaseRedisService(ILogger<BaseRedisService> logger, IConfiguration configuration) : IBaseRedisService
 {
+    readonly ILogger<BaseRedisService> _logger = logger;
+    readonly RedisConfig _config = configuration.GetRedisConfig();
+    readonly Dictionary<string, IConnectionMultiplexer> _connectionMultiplexer = [];
+    readonly object _locker = new();
+
     /// <summary>
     /// 配置
     /// </summary>
-    public RedisConfig Config { get; private set; }
+    public RedisConfig Config => _config;
     /// <summary>
-    /// 日志
+    /// ConnectionMultiplexer
     /// </summary>
-    public ILogger<BaseRedisService> Logger { get; private set; }
-
-    readonly Dictionary<string, IConnectionMultiplexer> ConnectionMultiplexers;
-    readonly object Locker;
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="configuration"></param>
-    /// <param name="logger"></param>
-    public BaseRedisService(IConfiguration configuration, ILogger<BaseRedisService> logger)
-    {
-        Config = configuration.GetRedisConfig();
-        Logger = logger;
-        Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
-
-        ConnectionMultiplexers = [];
-        Locker = new object();
-    }
+    public Dictionary<string, IConnectionMultiplexer> ConnectionMultiplexers => _connectionMultiplexer;
 
     /// <summary>
     /// 创建连接配置
@@ -109,7 +97,7 @@ public class BaseRedisService : IBaseRedisService
         var configString = CreateConfiguration(c);
         if (!ConnectionMultiplexers.TryGetValue(configString, out var multiplexer) || !multiplexer.IsConnected)
         {
-            lock (Locker)
+            lock (_locker)
             {
                 multiplexer = CreateConnectionMultiplexer(configString);
                 ConnectionMultiplexers[configString] = multiplexer;
@@ -140,7 +128,7 @@ public class BaseRedisService : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void ConfigurationChangedBroadcast(object? sender, EndPointEventArgs e)
     {
-        Logger.LogDebug("ConfigurationChangedBroadcast=>EndPoint={EndPoint}", e.EndPoint);
+        _logger.LogDebug("ConfigurationChangedBroadcast=>EndPoint={EndPoint}", e.EndPoint);
     }
 
     /// <summary>
@@ -150,7 +138,7 @@ public class BaseRedisService : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void ConfigurationChanged(object? sender, EndPointEventArgs e)
     {
-        Logger.LogDebug("ConfigurationChanged=>EndPoint={EndPoint}", e.EndPoint);
+        _logger.LogDebug("ConfigurationChanged=>EndPoint={EndPoint}", e.EndPoint);
     }
 
     /// <summary>
@@ -160,7 +148,7 @@ public class BaseRedisService : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void HashSlotMoved(object? sender, HashSlotMovedEventArgs e)
     {
-        Logger.LogDebug("HashSlotMoved=>NewEndPoint={NewEndPoint},OldEndPoint={OldEndPoint}", e.NewEndPoint, e.OldEndPoint);
+        _logger.LogDebug("HashSlotMoved=>NewEndPoint={NewEndPoint},OldEndPoint={OldEndPoint}", e.NewEndPoint, e.OldEndPoint);
     }
 
     /// <summary>
@@ -170,7 +158,7 @@ public class BaseRedisService : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void ErrorMessage(object? sender, RedisErrorEventArgs e)
     {
-        Logger.LogError("ErrorMessage=>{Message}", e.Message);
+        _logger.LogError("ErrorMessage=>{Message}", e.Message);
     }
 
     /// <summary>
@@ -180,7 +168,7 @@ public class BaseRedisService : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void InternalError(object? sender, InternalErrorEventArgs e)
     {
-        Logger.LogError(e.Exception, "InternalError=>{Message}", e.Exception.Message);
+        _logger.LogError(e.Exception, "InternalError=>{Message}", e.Exception.Message);
     }
 
     /// <summary>
@@ -190,7 +178,7 @@ public class BaseRedisService : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void ConnectionFailed(object? sender, ConnectionFailedEventArgs e)
     {
-        Logger.LogDebug(e.Exception, "ConnectionFailed=>EndPoint={EndPoint},FailureType={FailureType},Message={Message}", e.EndPoint, e.FailureType, e.Exception?.Message);
+        _logger.LogDebug(e.Exception, "ConnectionFailed=>EndPoint={EndPoint},FailureType={FailureType},Message={Message}", e.EndPoint, e.FailureType, e.Exception?.Message);
     }
 
     /// <summary>
@@ -200,7 +188,7 @@ public class BaseRedisService : IBaseRedisService
     /// <param name="e"></param>
     protected virtual void ConnectionRestored(object? sender, ConnectionFailedEventArgs e)
     {
-        Logger.LogDebug("ConnectionRestored=>EndPoint={EndPoint}", e.EndPoint);
+        _logger.LogDebug("ConnectionRestored=>EndPoint={EndPoint}", e.EndPoint);
     }
     #endregion
 }

@@ -1407,21 +1407,21 @@
             文件服务
             </summary>
             <param name="configuration"></param>
-            <param name="serviceProvider"></param>
+            <param name="httpClientFactory"></param>
         </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,System.IServiceProvider)">
+        <member name="M:AhDai.Core.Services.BaseFileService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,System.Net.Http.IHttpClientFactory)">
             <summary>
             文件服务
             </summary>
             <param name="configuration"></param>
-            <param name="serviceProvider"></param>
+            <param name="httpClientFactory"></param>
         </member>
         <member name="P:AhDai.Core.Services.BaseFileService.Config">
             <summary>
             Config
             </summary>
         </member>
-        <member name="F:AhDai.Core.Services.BaseFileService.ContentTypeProvider">
+        <member name="P:AhDai.Core.Services.BaseFileService.ContentTypeProvider">
             <summary>
             TypeProvider
             </summary>
@@ -1491,15 +1491,19 @@
             <summary>
             Jwt服务
             </summary>
+            <param name="configuration"></param>
+            <param name="redisService"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseJwtService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,AhDai.Core.Services.IBaseRedisService)">
+            <summary>
+            Jwt服务
+            </summary>
+            <param name="configuration"></param>
+            <param name="redisService"></param>
         </member>
         <member name="P:AhDai.Core.Services.BaseJwtService.Config">
             <summary>
             配置
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.BaseJwtService.Logger">
-            <summary>
-            日志
             </summary>
         </member>
         <member name="P:AhDai.Core.Services.BaseJwtService.SigningCredentials">
@@ -1507,18 +1511,10 @@
             RSA
             </summary>
         </member>
-        <member name="P:AhDai.Core.Services.BaseJwtService.Services">
+        <member name="P:AhDai.Core.Services.BaseJwtService.RedisService">
             <summary>
-            Services
+            RedisService
             </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.BaseJwtService})">
-            <summary>
-            构造函数
-            </summary>
-            <param name="configuration"></param>
-            <param name="serviceProvider"></param>
-            <param name="logger"></param>
         </member>
         <member name="M:AhDai.Core.Services.BaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
             <summary>
@@ -1620,23 +1616,25 @@
             <summary>
             Redis服务
             </summary>
+            <param name="logger"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseRedisService.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.BaseRedisService},Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Redis服务
+            </summary>
+            <param name="logger"></param>
+            <param name="configuration"></param>
         </member>
         <member name="P:AhDai.Core.Services.BaseRedisService.Config">
             <summary>
             配置
             </summary>
         </member>
-        <member name="P:AhDai.Core.Services.BaseRedisService.Logger">
+        <member name="P:AhDai.Core.Services.BaseRedisService.ConnectionMultiplexers">
             <summary>
-            日志
+            ConnectionMultiplexer
             </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.BaseRedisService})">
-            <summary>
-            构造函数
-            </summary>
-            <param name="configuration"></param>
-            <param name="logger"></param>
         </member>
         <member name="M:AhDai.Core.Services.BaseRedisService.CreateConfiguration(System.String,System.Int32,System.String,System.Boolean)">
             <summary>

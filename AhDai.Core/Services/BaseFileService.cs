@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,21 +16,25 @@ namespace AhDai.Core.Services;
 /// 文件服务
 /// </summary>
 /// <param name="configuration"></param>
-/// <param name="serviceProvider"></param>
-public class BaseFileService(IConfiguration configuration, IServiceProvider serviceProvider) : IBaseFileService
+/// <param name="httpClientFactory"></param>
+public class BaseFileService(IConfiguration configuration, IHttpClientFactory? httpClientFactory) : IBaseFileService
 {
+    readonly IHttpClientFactory? _httpClientFactory = httpClientFactory;
+    readonly Configs.FileConfig _config = configuration.GetFileConfig();
+    readonly FileExtensionContentTypeProvider _contentTypeProvider = new();
+
     /// <summary>
     /// Config
     /// </summary>
-    public Configs.FileConfig Config { get; private set; } = configuration.GetFileConfig();
+    public Configs.FileConfig Config => _config;
     /// <summary>
     /// TypeProvider
     /// </summary>
-    public FileExtensionContentTypeProvider ContentTypeProvider = new();
+    public FileExtensionContentTypeProvider ContentTypeProvider => _contentTypeProvider;
     /// <summary>
     /// httpClientFactory
     /// </summary>
-    public IHttpClientFactory? HttpClientFactory { get; private set; } = serviceProvider.GetService<IHttpClientFactory>();
+    public IHttpClientFactory HttpClientFactory => _httpClientFactory ?? throw new ArgumentException("未注入IHttpClientFactory");
 
     /// <summary>
     /// 获取类型
@@ -125,7 +128,6 @@ public class BaseFileService(IConfiguration configuration, IServiceProvider serv
     /// <returns></returns>
     public async Task<Models.FileData> DownloadAsync(string root, string dir, string url, string? name = null)
     {
-        if (HttpClientFactory == null) throw new ArgumentException("未注入IHttpClientFactory");
         using var httpClient = HttpClientFactory.CreateClient();
         return await DownloadAsync(httpClient, root, dir, url, name);
     }
