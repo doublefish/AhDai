@@ -1080,6 +1080,11 @@
             物理目录
             </summary>
         </member>
+        <member name="P:AhDai.Core.Models.FileData.PhysicalPath">
+            <summary>
+            实际路径（物理目录 + 实际名称）
+            </summary>
+        </member>
         <member name="T:AhDai.Core.Models.HttpRequest">
             <summary>
             Http请求数据
