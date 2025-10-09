@@ -1050,6 +1050,11 @@
             实际名称
             </summary>
         </member>
+        <member name="P:AhDai.Core.Models.FileData.ActualPath">
+            <summary>
+            实际路径
+            </summary>
+        </member>
         <member name="P:AhDai.Core.Models.FileData.Extension">
             <summary>
             后缀名
@@ -1078,11 +1083,6 @@
         <member name="P:AhDai.Core.Models.FileData.PhysicalDirectory">
             <summary>
             物理目录
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.FileData.PhysicalPath">
-            <summary>
-            实际路径（物理目录 + 实际名称）
             </summary>
         </member>
         <member name="T:AhDai.Core.Models.HttpRequest">

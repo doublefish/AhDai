@@ -99,19 +99,19 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             {
                 Name = Path.GetFileName(file.FileName),
                 ActualName = actualName,
+                ActualPath = Path.Combine(phyDir, actualName),
                 Extension = extension,
                 Length = file.Length,
                 Type = GetType(extension),
                 VirtualDirectory = virDir,
                 PhysicalDirectory = phyDir,
-                PhysicalPath = Path.Combine(phyDir, actualName),
             };
         }
         for (var i = 0; i < files.Length; i++)
         {
             var file = files[i];
             var data = datas[i];
-            using var stream = new FileStream(data.PhysicalPath, FileMode.Create);
+            using var stream = new FileStream(data.ActualPath, FileMode.Create);
             await file.CopyToAsync(stream);
             //var hashBytes = System.Security.Cryptography.SHA1.HashData(stream);
             //data.Hash = BitConverter.ToString(hashBytes).Replace("-", "");
@@ -164,19 +164,19 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
         {
             Name = Path.GetFileName(name),
             ActualName = actualName,
+            ActualPath = Path.Combine(phyDir, actualName),
             Extension = extension,
             //Length = formFile.Length,
             Type = GetType(extension),
             VirtualDirectory = virDir,
             PhysicalDirectory = phyDir,
-            PhysicalPath = Path.Combine(phyDir, actualName),
         };
 
         using var res = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
         res.EnsureSuccessStatusCode();
         await using (var cs = await res.Content.ReadAsStreamAsync())
         {
-            using var fs = new FileStream(data.PhysicalPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+            using var fs = new FileStream(data.ActualPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
             await cs.CopyToAsync(fs);
             data.Length = fs.Length;
         }

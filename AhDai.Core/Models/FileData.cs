@@ -16,6 +16,10 @@ public class FileData
     /// </summary>
     public string ActualName { get; set; } = null!;
     /// <summary>
+    /// 实际路径
+    /// </summary>
+    public string ActualPath { get; set; } = null!;
+    /// <summary>
     /// 后缀名
     /// </summary>
     public string Extension { get; set; } = null!;
@@ -39,8 +43,4 @@ public class FileData
     /// 物理目录
     /// </summary>
     public string PhysicalDirectory { get; set; } = null!;
-    /// <summary>
-    /// 实际路径（物理目录 + 实际名称）
-    /// </summary>
-    public string PhysicalPath { get; set; } = null!;
 }
