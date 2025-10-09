@@ -1,4 +1,6 @@
-﻿namespace AhDai.Core.Models;
+﻿using System.IO;
+
+namespace AhDai.Core.Models;
 
 /// <summary>
 /// 上传文件
@@ -37,4 +39,8 @@ public class FileData
     /// 物理目录
     /// </summary>
     public string PhysicalDirectory { get; set; } = null!;
+    /// <summary>
+    /// 实际路径（物理目录 + 实际名称）
+    /// </summary>
+    public string PhysicalPath { get; set; } = null!;
 }

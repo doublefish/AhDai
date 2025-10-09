@@ -93,24 +93,25 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
             if (!extensions.Contains(extension)) throw new ArgumentException($"不支持的文件类型：{extension}");
             if (file.Length > Config.MaxLength) throw new ArgumentException($"超出文件大小限制：{Utils.FileUtil.GetFileSize(Config.MaxLength)}");
-
+            
+            var actualName = $"{Guid.NewGuid()}{extension}";
             datas[i] = new Models.FileData()
             {
                 Name = Path.GetFileName(file.FileName),
-                ActualName = $"{Guid.NewGuid()}{extension}",
+                ActualName = actualName,
                 Extension = extension,
                 Length = file.Length,
                 Type = GetType(extension),
                 VirtualDirectory = virDir,
                 PhysicalDirectory = phyDir,
+                PhysicalPath = Path.Combine(phyDir, actualName),
             };
         }
         for (var i = 0; i < files.Length; i++)
         {
             var file = files[i];
             var data = datas[i];
-            var path = Path.Combine(data.PhysicalDirectory, data.ActualName);
-            using var stream = new FileStream(path, FileMode.Create);
+            using var stream = new FileStream(data.PhysicalPath, FileMode.Create);
             await file.CopyToAsync(stream);
             //var hashBytes = System.Security.Cryptography.SHA1.HashData(stream);
             //data.Hash = BitConverter.ToString(hashBytes).Replace("-", "");
@@ -158,23 +159,24 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             Directory.CreateDirectory(phyDir);
         }
 
+        var actualName = $"{Guid.NewGuid()}{extension}";
         var data = new Models.FileData()
         {
             Name = Path.GetFileName(name),
-            ActualName = $"{Guid.NewGuid()}{extension}",
+            ActualName = actualName,
             Extension = extension,
             //Length = formFile.Length,
             Type = GetType(extension),
             VirtualDirectory = virDir,
             PhysicalDirectory = phyDir,
+            PhysicalPath = Path.Combine(phyDir, actualName),
         };
 
         using var res = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
         res.EnsureSuccessStatusCode();
-        var path = Path.Combine(data.PhysicalDirectory, data.ActualName);
         await using (var cs = await res.Content.ReadAsStreamAsync())
         {
-            using var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+            using var fs = new FileStream(data.PhysicalPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
             await cs.CopyToAsync(fs);
             data.Length = fs.Length;
         }
