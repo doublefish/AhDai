@@ -43,7 +43,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     /// <returns>MimeType</returns>
     public string GetType(string extension)
     {
-        ContentTypeProvider.TryGetContentType(extension, out var type);
+        _contentTypeProvider.TryGetContentType(extension, out var type);
         return type ?? "application/octet-stream";
     }
 
@@ -122,28 +122,15 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     /// <summary>
     /// 下载
     /// </summary>
-    /// <param name="root"></param>
-    /// <param name="dir"></param>
-    /// <param name="url"></param>
-    /// <param name="name"></param>
-    /// <returns></returns>
-    public async Task<Models.FileData> DownloadAsync(string root, string dir, string url, string? name = null)
-    {
-        var httpClient = HttpClientFactory.CreateClient();
-        return await DownloadAsync(httpClient, root, dir, url, name);
-    }
-
-    /// <summary>
-    /// 下载
-    /// </summary>
     /// <param name="httpClient"></param>
     /// <param name="root"></param>
     /// <param name="dir"></param>
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    public async Task<Models.FileData> DownloadAsync(HttpClient httpClient, string root, string dir, string url, string? name = null)
+    public async Task<Models.FileData> DownloadAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null)
     {
+        httpClient ??= HttpClientFactory.CreateClient();
         //name ??= Path.GetFileName(url);
         if (string.IsNullOrEmpty(name))
         {

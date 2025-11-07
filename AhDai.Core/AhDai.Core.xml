@@ -1463,16 +1463,6 @@
             <param name="category"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.DownloadAsync(System.String,System.String,System.String,System.String)">
-            <summary>
-            下载
-            </summary>
-            <param name="root"></param>
-            <param name="dir"></param>
-            <param name="url"></param>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
         <member name="M:AhDai.Core.Services.BaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String)">
             <summary>
             下载
