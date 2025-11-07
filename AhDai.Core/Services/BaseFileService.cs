@@ -93,7 +93,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
             if (!extensions.Contains(extension)) throw new ArgumentException($"不支持的文件类型：{extension}");
             if (file.Length > Config.MaxLength) throw new ArgumentException($"超出文件大小限制：{Utils.FileUtil.GetFileSize(Config.MaxLength)}");
-            
+
             var actualName = $"{Guid.NewGuid()}{extension}";
             datas[i] = new Models.FileData()
             {
@@ -129,7 +129,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     /// <returns></returns>
     public async Task<Models.FileData> DownloadAsync(string root, string dir, string url, string? name = null)
     {
-        using var httpClient = HttpClientFactory.CreateClient();
+        var httpClient = HttpClientFactory.CreateClient();
         return await DownloadAsync(httpClient, root, dir, url, name);
     }
 

@@ -60,7 +60,7 @@ public class Worker2(IConfiguration configuration, ILogger<Worker2> logger, IHtt
 
     async Task<string> GetExternalIpAddressAsync(string apiUrl)
     {
-        using var client = _httpClientFactory.CreateClient();
+        var client = _httpClientFactory.CreateClient();
         client.Timeout = TimeSpan.FromSeconds(5);
         var response = await client.GetStringAsync(apiUrl);
         return response.Trim();
