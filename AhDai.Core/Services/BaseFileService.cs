@@ -91,7 +91,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
         {
             var file = files[i];
             var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
-            if (!extensions.Contains(extension)) throw new ArgumentException($"不支持的文件类型：{extension}");
+            if (!extensions.Contains(extension, StringComparer.OrdinalIgnoreCase)) throw new ArgumentException($"不支持的文件类型：{extension}");
             if (file.Length > Config.MaxLength) throw new ArgumentException($"超出文件大小限制：{Utils.FileUtil.GetFileSize(Config.MaxLength)}");
 
             var actualName = $"{Guid.NewGuid()}{extension}";

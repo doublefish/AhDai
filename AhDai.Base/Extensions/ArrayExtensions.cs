@@ -183,17 +183,6 @@ namespace AhDai.Base.Extensions
         }
 
         /// <summary>
-        /// 是否存在指定属性
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static bool ExistByStartsWith(this string[] array, string value)
-        {
-            return array.Contains(value) || array.Any(item => item.StartsWith(value + "."));
-        }
-
-        /// <summary>
         /// 读取子级属性
         /// </summary>
         /// <param name="array"></param>
