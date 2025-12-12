@@ -288,6 +288,11 @@
             扩展名
             </summary>
         </member>
+        <member name="P:AhDai.Core.Configs.FileConfig.ComputeHash">
+            <summary>
+            是否需要计算文件哈希（SHA256）
+            </summary>
+        </member>
         <member name="T:AhDai.Core.Configs.JwtConfig">
             <summary>
             JwtConfig
@@ -1480,6 +1485,13 @@
             </summary>
             <param name="rootPath"></param>
             <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseFileService.ComputeHashAsync(System.IO.FileStream)">
+            <summary>
+            计算Hash
+            </summary>
+            <param name="fs"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Services.BaseJwtService">
