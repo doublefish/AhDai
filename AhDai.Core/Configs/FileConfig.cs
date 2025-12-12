@@ -27,5 +27,8 @@ public class FileConfig
     /// 扩展名
     /// </summary>
     public IDictionary<string, string[]> Extensions { get; set; } = new Dictionary<string, string[]>();
-
+    /// <summary>
+    /// 是否需要计算文件哈希（SHA256）
+    /// </summary>
+    public bool ComputeHash { get; set; }
 }

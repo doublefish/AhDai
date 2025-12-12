@@ -79,21 +79,21 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             throw new ArgumentException("没有需要上传的文件");
         }
 
-        var virDir = $"{Config.UploadDirectory}/{dir}";
-        var phyDir = Path.Combine(root, Config.UploadDirectory, dir);
+        var virDir = $"{_config.UploadDirectory}/{dir}";
+        var phyDir = Path.Combine(root, _config.UploadDirectory, dir);
         if (!Directory.Exists(phyDir))
         {
             Directory.CreateDirectory(phyDir);
         }
 
-        var extensions = string.IsNullOrEmpty(category) ? Config.Extensions.SelectMany(x => x.Value).ToArray() : Config.Extensions[category];
+        var extensions = string.IsNullOrEmpty(category) ? _config.Extensions.SelectMany(x => x.Value).ToArray() : _config.Extensions[category];
         var datas = new Models.FileData[files.Length];
         for (var i = 0; i < files.Length; i++)
         {
             var file = files[i];
             var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
             if (!extensions.Contains(extension, StringComparer.OrdinalIgnoreCase)) throw new ArgumentException($"不支持的文件类型：{extension}");
-            if (file.Length > Config.MaxLength) throw new ArgumentException($"超出文件大小限制：{Utils.FileUtil.GetFileSize(Config.MaxLength)}");
+            if (file.Length > _config.MaxLength) throw new ArgumentException($"超出文件大小限制：{Utils.FileUtil.GetFileSize(_config.MaxLength)}");
 
             var actualName = $"{Guid.NewGuid()}{extension}";
             var actualPath = Path.Combine(phyDir, actualName);
@@ -104,10 +104,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             await stream.CopyToAsync(fs);
             await fs.FlushAsync();
 
-            fs.Seek(0, SeekOrigin.Begin);
-            using var sha256 = SHA256.Create();
-            var hashBytes = await sha256.ComputeHashAsync(fs);
-            var hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+            var hash = await ComputeHashAsync(fs);
 
             datas[i] = new Models.FileData()
             {
@@ -145,8 +142,8 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
         }
         var extension = Path.GetExtension(name).ToLowerInvariant();
 
-        var virDir = $"{Config.DownloadDirectory}/{dir}";
-        var phyDir = Path.Combine(root, Config.DownloadDirectory, dir);
+        var virDir = $"{_config.DownloadDirectory}/{dir}";
+        var phyDir = Path.Combine(root, _config.DownloadDirectory, dir);
         if (!Directory.Exists(phyDir))
         {
             Directory.CreateDirectory(phyDir);
@@ -167,12 +164,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             await fs.FlushAsync();
 
             length = fs.Length;
-
-            fs.Seek(0, SeekOrigin.Begin);
-
-            using var sha256 = SHA256.Create();
-            var hashBytes = await sha256.ComputeHashAsync(fs);
-            hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+            hash = await ComputeHashAsync(fs);
         }
 
         return new Models.FileData()
@@ -202,7 +194,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
         var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
 
         //文件目录
-        var folderPath = Path.Combine(rootPath, Config.DownloadDirectory);
+        var folderPath = Path.Combine(rootPath, _config.DownloadDirectory);
         //临时文件夹路径
         var tempFolderPath = Path.Combine(folderPath, timestamp);
         //创建临时文件夹
@@ -226,5 +218,19 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
         Directory.Delete(tempFolderPath, true);
         var filePath = Path.Combine(folderPath, fileName);
         return filePath;
+    }
+
+    /// <summary>
+    /// 计算Hash
+    /// </summary>
+    /// <param name="fs"></param>
+    /// <returns></returns>
+    protected virtual async Task<string> ComputeHashAsync(FileStream fs)
+    {
+        if (!_config.ComputeHash) return "";
+
+        fs.Seek(0, SeekOrigin.Begin);
+        var hashBytes = await SHA256.HashDataAsync(fs);
+        return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
     }
 }
