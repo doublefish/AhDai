@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Versioning;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace AhDai.Core.Services;
@@ -95,26 +96,31 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             if (file.Length > Config.MaxLength) throw new ArgumentException($"超出文件大小限制：{Utils.FileUtil.GetFileSize(Config.MaxLength)}");
 
             var actualName = $"{Guid.NewGuid()}{extension}";
+            var actualPath = Path.Combine(phyDir, actualName);
+
+            using var stream = file.OpenReadStream();
+            using var fs = new FileStream(actualPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+            stream.Seek(0, SeekOrigin.Begin);
+            await stream.CopyToAsync(fs);
+            await fs.FlushAsync();
+
+            fs.Seek(0, SeekOrigin.Begin);
+            using var sha256 = SHA256.Create();
+            var hashBytes = await sha256.ComputeHashAsync(fs);
+            var hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+
             datas[i] = new Models.FileData()
             {
                 Name = Path.GetFileName(file.FileName),
                 ActualName = actualName,
-                ActualPath = Path.Combine(phyDir, actualName),
+                ActualPath = actualPath,
                 Extension = extension,
-                Length = file.Length,
                 Type = GetType(extension),
+                Length = file.Length,
+                Hash = hash,
                 VirtualDirectory = virDir,
                 PhysicalDirectory = phyDir,
             };
-        }
-        for (var i = 0; i < files.Length; i++)
-        {
-            var file = files[i];
-            var data = datas[i];
-            using var stream = new FileStream(data.ActualPath, FileMode.Create);
-            await file.CopyToAsync(stream);
-            //var hashBytes = System.Security.Cryptography.SHA1.HashData(stream);
-            //data.Hash = BitConverter.ToString(hashBytes).Replace("-", "");
         }
         return datas;
     }
@@ -147,27 +153,40 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
         }
 
         var actualName = $"{Guid.NewGuid()}{extension}";
-        var data = new Models.FileData()
-        {
-            Name = Path.GetFileName(name),
-            ActualName = actualName,
-            ActualPath = Path.Combine(phyDir, actualName),
-            Extension = extension,
-            //Length = formFile.Length,
-            Type = GetType(extension),
-            VirtualDirectory = virDir,
-            PhysicalDirectory = phyDir,
-        };
+        var actualPath = Path.Combine(phyDir, actualName);
 
         using var res = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
         res.EnsureSuccessStatusCode();
-        await using (var cs = await res.Content.ReadAsStreamAsync())
+
+        long length;
+        string hash;
+        await using (var stream = await res.Content.ReadAsStreamAsync())
         {
-            using var fs = new FileStream(data.ActualPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
-            await cs.CopyToAsync(fs);
-            data.Length = fs.Length;
+            using var fs = new FileStream(actualPath, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 8192, true);
+            await stream.CopyToAsync(fs);
+            await fs.FlushAsync();
+
+            length = fs.Length;
+
+            fs.Seek(0, SeekOrigin.Begin);
+
+            using var sha256 = SHA256.Create();
+            var hashBytes = await sha256.ComputeHashAsync(fs);
+            hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
         }
-        return data;
+
+        return new Models.FileData()
+        {
+            Name = Path.GetFileName(name),
+            ActualName = actualName,
+            ActualPath = actualPath,
+            Extension = extension,
+            Type = GetType(extension),
+            Length = length,
+            Hash = hash,
+            VirtualDirectory = virDir,
+            PhysicalDirectory = phyDir,
+        };
     }
 
     /// <summary>
