@@ -100,7 +100,6 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
 
             using var stream = file.OpenReadStream();
             using var fs = new FileStream(actualPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
-            stream.Seek(0, SeekOrigin.Begin);
             await stream.CopyToAsync(fs);
             await fs.FlushAsync();
 
