@@ -129,7 +129,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    public async Task<Models.FileData> DownloadAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null)
+    public async Task<(Models.FileData, FileStream)> DownloadAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null)
     {
         httpClient ??= HttpClientFactory.CreateClient();
         //name ??= Path.GetFileName(url);
@@ -155,17 +155,29 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
 
         long length;
         string hash;
-        await using (var stream = await res.Content.ReadAsStreamAsync())
+        FileStream? fs = null;
+
+        try
         {
-            using var fs = new FileStream(actualPath, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 8192, true);
+            using var stream = await res.Content.ReadAsStreamAsync();
+            fs = new FileStream(actualPath, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 8192, true);
             await stream.CopyToAsync(fs);
             await fs.FlushAsync();
 
             length = fs.Length;
             hash = await ComputeHashAsync(fs);
         }
+        catch
+        {
+            fs?.Dispose();
+            if (File.Exists(actualPath))
+            {
+                File.Delete(actualPath);
+            }
+            throw;
+        }
 
-        return new Models.FileData()
+        return (new Models.FileData()
         {
             Name = Path.GetFileName(name),
             ActualName = actualName,
@@ -176,7 +188,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             Hash = hash,
             VirtualDirectory = virDir,
             PhysicalDirectory = phyDir,
-        };
+        }, fs);
     }
 
     /// <summary>
