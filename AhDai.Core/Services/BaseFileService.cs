@@ -105,7 +105,6 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             await fs.FlushAsync();
 
             var hash = await ComputeHashAsync(fs);
-
             datas[i] = new Models.FileData()
             {
                 Name = Path.GetFileName(file.FileName),
@@ -231,6 +230,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
 
         fs.Seek(0, SeekOrigin.Begin);
         var hashBytes = await SHA256.HashDataAsync(fs);
+        fs.Seek(0, SeekOrigin.Begin);
         return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
     }
 }
