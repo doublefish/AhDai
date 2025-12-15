@@ -223,14 +223,29 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     /// 计算Hash
     /// </summary>
     /// <param name="fs"></param>
+    /// <param name="computeHash"></param>
     /// <returns></returns>
-    protected virtual async Task<string> ComputeHashAsync(FileStream fs)
+    public virtual async Task<string> ComputeHashAsync(Stream fs, bool? computeHash = null)
     {
-        if (!_config.ComputeHash) return "";
+        if (!(computeHash ?? _config.ComputeHash)) return "";
 
         fs.Seek(0, SeekOrigin.Begin);
         var hashBytes = await SHA256.HashDataAsync(fs);
         fs.Seek(0, SeekOrigin.Begin);
+        return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+    }
+
+    /// <summary>
+    /// 计算Hash
+    /// </summary>
+    /// <param name="bytes"></param>
+    /// <param name="computeHash"></param>
+    /// <returns></returns>
+    public virtual string ComputeHash(byte[] bytes, bool? computeHash = null)
+    {
+        if (!(computeHash ?? _config.ComputeHash)) return "";
+
+        var hashBytes = SHA256.HashData(bytes);
         return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
     }
 }

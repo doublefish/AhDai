@@ -1487,11 +1487,20 @@
             <param name="files"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.ComputeHashAsync(System.IO.FileStream)">
+        <member name="M:AhDai.Core.Services.BaseFileService.ComputeHashAsync(System.IO.Stream,System.Nullable{System.Boolean})">
             <summary>
             计算Hash
             </summary>
             <param name="fs"></param>
+            <param name="computeHash"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.BaseFileService.ComputeHash(System.Byte[],System.Nullable{System.Boolean})">
+            <summary>
+            计算Hash
+            </summary>
+            <param name="bytes"></param>
+            <param name="computeHash"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Services.BaseJwtService">
