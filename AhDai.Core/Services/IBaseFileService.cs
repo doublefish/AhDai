@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -57,4 +58,21 @@ public interface IBaseFileService
     /// <param name="name"></param>
     /// <returns></returns>
     Task<Models.FileData> DownloadAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null);
+
+    /// <summary>
+    /// 计算哈希
+    /// </summary>
+    /// <param name="fs"></param>
+    /// <param name="computeHash"></param>
+    /// <returns></returns>
+    Task<string> ComputeHashAsync(Stream fs, bool? computeHash = null);
+
+    /// <summary>
+    /// 计算哈希
+    /// </summary>
+    /// <param name="bytes"></param>
+    /// <param name="computeHash"></param>
+    /// <returns></returns>
+    string ComputeHash(byte[] bytes, bool? computeHash = null);
+
 }

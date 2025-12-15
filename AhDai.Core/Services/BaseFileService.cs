@@ -220,7 +220,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     }
 
     /// <summary>
-    /// 计算Hash
+    /// 计算哈希
     /// </summary>
     /// <param name="fs"></param>
     /// <param name="computeHash"></param>
@@ -236,7 +236,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     }
 
     /// <summary>
-    /// 计算Hash
+    /// 计算哈希
     /// </summary>
     /// <param name="bytes"></param>
     /// <param name="computeHash"></param>

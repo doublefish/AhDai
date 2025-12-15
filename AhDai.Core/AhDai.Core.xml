@@ -1489,7 +1489,7 @@
         </member>
         <member name="M:AhDai.Core.Services.BaseFileService.ComputeHashAsync(System.IO.Stream,System.Nullable{System.Boolean})">
             <summary>
-            计算Hash
+            计算哈希
             </summary>
             <param name="fs"></param>
             <param name="computeHash"></param>
@@ -1497,7 +1497,7 @@
         </member>
         <member name="M:AhDai.Core.Services.BaseFileService.ComputeHash(System.Byte[],System.Nullable{System.Boolean})">
             <summary>
-            计算Hash
+            计算哈希
             </summary>
             <param name="bytes"></param>
             <param name="computeHash"></param>
@@ -1830,6 +1830,22 @@
             <param name="dir"></param>
             <param name="url"></param>
             <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.IBaseFileService.ComputeHashAsync(System.IO.Stream,System.Nullable{System.Boolean})">
+            <summary>
+            计算哈希
+            </summary>
+            <param name="fs"></param>
+            <param name="computeHash"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.IBaseFileService.ComputeHash(System.Byte[],System.Nullable{System.Boolean})">
+            <summary>
+            计算哈希
+            </summary>
+            <param name="bytes"></param>
+            <param name="computeHash"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Services.IBaseJwtService">
