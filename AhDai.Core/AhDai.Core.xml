@@ -1479,6 +1479,17 @@
             <param name="name"></param>
             <returns></returns>
         </member>
+        <member name="M:AhDai.Core.Services.BaseFileService.DownloadAndOpenAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String)">
+            <summary>
+            下载并打开
+            </summary>
+            <param name="httpClient"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="url"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
         <member name="M:AhDai.Core.Services.BaseFileService.Compress(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
             批量压缩
@@ -1824,6 +1835,17 @@
         <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String)">
             <summary>
             下载
+            </summary>
+            <param name="httpClient"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="url"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Services.IBaseFileService.DownloadAndOpenAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String)">
+            <summary>
+            下载并打开
             </summary>
             <param name="httpClient"></param>
             <param name="root"></param>

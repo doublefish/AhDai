@@ -45,7 +45,7 @@ public interface IBaseFileService
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    Task<(Models.FileData, FileStream)> DownloadAsync(string root, string dir, string url, string? name = null)
+    Task<Models.FileData> DownloadAsync(string root, string dir, string url, string? name = null)
         => DownloadAsync(null, root, dir, url, name);
 
     /// <summary>
@@ -57,7 +57,18 @@ public interface IBaseFileService
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    Task<(Models.FileData, FileStream)> DownloadAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null);
+    Task<Models.FileData> DownloadAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null);
+
+    /// <summary>
+    /// 下载并打开
+    /// </summary>
+    /// <param name="httpClient"></param>
+    /// <param name="root"></param>
+    /// <param name="dir"></param>
+    /// <param name="url"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    Task<(Models.FileData, FileStream)> DownloadAndOpenAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null);
 
     /// <summary>
     /// 计算哈希

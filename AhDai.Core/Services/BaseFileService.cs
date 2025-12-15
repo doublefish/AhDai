@@ -129,14 +129,37 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     /// <param name="url"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    public async Task<(Models.FileData, FileStream)> DownloadAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null)
+    public async Task<Models.FileData> DownloadAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null)
+    {
+        var (data, _) = await DownloadAndOpenAsync(httpClient, root, dir, url, name);
+        return data;
+    }
+
+    /// <summary>
+    /// 下载并打开
+    /// </summary>
+    /// <param name="httpClient"></param>
+    /// <param name="root"></param>
+    /// <param name="dir"></param>
+    /// <param name="url"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public async Task<(Models.FileData, FileStream)> DownloadAndOpenAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null)
     {
         httpClient ??= HttpClientFactory.CreateClient();
-        //name ??= Path.GetFileName(url);
+        
         if (string.IsNullOrEmpty(name))
         {
-            var uri = new Uri(url);
-            name = Path.GetFileName(uri.AbsolutePath);
+            //var uri = new Uri(url);
+            //name = Path.GetFileName(uri.AbsolutePath);
+            if (Uri.TryCreate(url, UriKind.Absolute, out var uri))
+            {
+                name = Path.GetFileName(uri.AbsolutePath);
+            }
+            else
+            {
+                name = Path.GetFileName(url);
+            }
         }
         var extension = Path.GetExtension(name).ToLowerInvariant();
 
@@ -156,7 +179,6 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
         long length;
         string hash;
         FileStream? fs = null;
-
         try
         {
             using var stream = await res.Content.ReadAsStreamAsync();
