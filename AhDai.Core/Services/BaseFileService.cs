@@ -99,7 +99,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             var actualPath = Path.Combine(phyDir, actualName);
 
             using var stream = file.OpenReadStream();
-            using var fs = new FileStream(actualPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+            using var fs = new FileStream(actualPath, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 8192, true);
             await stream.CopyToAsync(fs);
             await fs.FlushAsync();
 
