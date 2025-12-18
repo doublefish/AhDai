@@ -131,7 +131,8 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     /// <returns></returns>
     public async Task<Models.FileData> DownloadAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null)
     {
-        var (data, _) = await DownloadAndOpenAsync(httpClient, root, dir, url, name);
+        var (data, fs) = await DownloadAndOpenAsync(httpClient, root, dir, url, name);
+        fs.Dispose();
         return data;
     }
 
