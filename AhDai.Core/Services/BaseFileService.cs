@@ -132,7 +132,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     public async Task<Models.FileData> DownloadAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null)
     {
         var (data, fs) = await DownloadAndOpenAsync(httpClient, root, dir, url, name);
-        fs.Dispose();
+        await fs.DisposeAsync();
         return data;
     }
 
@@ -148,7 +148,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     public async Task<(Models.FileData, FileStream)> DownloadAndOpenAsync(HttpClient? httpClient, string root, string dir, string url, string? name = null)
     {
         httpClient ??= HttpClientFactory.CreateClient();
-        
+
         if (string.IsNullOrEmpty(name))
         {
             //var uri = new Uri(url);
@@ -192,7 +192,10 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
         }
         catch
         {
-            fs?.Dispose();
+            if (fs != null)
+            {
+                await fs.DisposeAsync();
+            }
             if (File.Exists(actualPath))
             {
                 File.Delete(actualPath);
