@@ -480,6 +480,17 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
+        <member name="T:AhDai.Core.Extensions.HttpContextExtensions">
+            <summary>
+            HttpContextExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Extensions.HttpContextExtensions.GetClientIpAddress(Microsoft.AspNetCore.Http.HttpContext,System.Boolean)">
+            <summary>
+            获取客户端IP地址
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Core.Extensions.HttpRequestExtensions">
             <summary>
             HttpRequestExtensions
