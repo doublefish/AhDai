@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 
 namespace AhDai.Base.Extensions
@@ -18,34 +19,57 @@ namespace AhDai.Base.Extensions
         {
             if (value == null || value == DBNull.Value)
             {
-                propertyInfo.SetValue(obj, default);
+                propertyInfo.SetValue(obj, null);
                 return;
             }
 
             var targetType = propertyInfo.PropertyType;
+            var underlyingType = Nullable.GetUnderlyingType(targetType) ?? targetType;
+            if (underlyingType.IsInstanceOfType(value))
+            {
+                propertyInfo.SetValue(obj, value);
+                return;
+            }
+
             if (targetType.FullName.StartsWith("System.Collections") || targetType.FullName.EndsWith("[]"))
             {
                 return;
             }
 
-            var sourceType = value.GetType();
-            if (targetType.FullName != sourceType.FullName)
+            object convertedValue;
+            try
             {
-                // Nullable类型和数据源类型和目标类型不一致
-                if (targetType.GenericTypeArguments.Length > 0)
+                if (underlyingType.IsEnum)
                 {
-                    var type = targetType.GenericTypeArguments[0];
-                    if (type.FullName != sourceType.FullName)
+                    convertedValue = Enum.Parse(underlyingType, value.ToString(), true);
+                }
+                else if (underlyingType == typeof(Guid))
+                {
+                    convertedValue = Guid.Parse(value.ToString()!);
+                }
+                else if (value is string strValue)
+                {
+                    var converter = TypeDescriptor.GetConverter(underlyingType);
+                    if (converter.CanConvertFrom(typeof(string)))
                     {
-                        value = Convert.ChangeType(value, type);
+                        convertedValue = converter.ConvertFromInvariantString(strValue);
+                    }
+                    else
+                    {
+                        convertedValue = Convert.ChangeType(value, underlyingType);
                     }
                 }
                 else
                 {
-                    value = Convert.ChangeType(value, targetType);
+                    convertedValue = Convert.ChangeType(value, underlyingType);
                 }
             }
-            propertyInfo.SetValue(obj, value);
+            catch
+            {
+                throw new InvalidCastException($"无法将值 '{value}' ({value.GetType().Name}) 转换为属性 '{propertyInfo.Name}' 的目标类型 {targetType.Name}");
+            }
+
+            propertyInfo.SetValue(obj, convertedValue);
         }
     }
 }

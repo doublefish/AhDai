@@ -107,14 +107,6 @@
             <param name="bytesB"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Base.Extensions.ArrayExtensions.ExistByStartsWith(System.String[],System.String)">
-            <summary>
-            是否存在指定属性
-            </summary>
-            <param name="array"></param>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
         <member name="M:AhDai.Base.Extensions.ArrayExtensions.ListByStartsWith(System.String[],System.String)">
             <summary>
             读取子级属性

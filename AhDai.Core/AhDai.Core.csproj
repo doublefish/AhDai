@@ -6,9 +6,9 @@
 		<Nullable>enable</Nullable>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
-		<Version>1.7.9</Version>
-		<AssemblyVersion>1.7.9</AssemblyVersion>
-		<FileVersion>1.7.9</FileVersion>
+		<Version>1.8.0</Version>
+		<AssemblyVersion>1.8.0</AssemblyVersion>
+		<FileVersion>1.8.0</FileVersion>
 		<PackageProjectUrl>https://github.com/doublefish/AhDai</PackageProjectUrl>
 		<Description>常用方法封装 - Core</Description>
 		<PackageReleaseNotes>Token加密方式升级为RSA</PackageReleaseNotes>
@@ -33,7 +33,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AhDai.Base" Version="1.0.7" />
+		<PackageReference Include="AhDai.Base" Version="1.0.8" />
 		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
 		<PackageReference Include="StackExchange.Redis" Version="2.8.58" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.4" />
