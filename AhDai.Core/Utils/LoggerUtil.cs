@@ -21,34 +21,39 @@ public static class LoggerUtil
     /// GetLogger
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    /// <param name="creationMode">创建模式 (0: Factory, 1: Provider)</param>
     /// <returns></returns>
-    public static ILogger GetLogger<T>()
-    {
-        var type = typeof(T);
-        return GetLogger(type.FullName ?? type.Name);
-    }
+    public static ILogger GetLogger<T>(int creationMode = 0) => GetLogger(typeof(T), creationMode);
 
     /// <summary>
     /// GetLogger
     /// </summary>
-    /// <param name="categoryName"></param>
     /// <param name="type"></param>
+    /// <param name="creationMode">创建模式 (0: Factory, 1: Provider)</param>
     /// <returns></returns>
-    public static ILogger GetLogger(string categoryName, int type = 0)
+    public static ILogger GetLogger(Type type, int creationMode = 0) => GetLogger(type.FullName ?? type.Name, creationMode);
+
+    /// <summary>
+    /// GetLogger
+    /// </summary>
+    /// <param name="categoryName">日志类别名称</param>
+    /// <param name="creationMode">创建模式 (0: Factory, 1: Provider)</param>
+    /// <returns></returns>
+    public static ILogger GetLogger(string categoryName, int creationMode = 0)
     {
         if (ServiceUtil.Services == null)
         {
             throw new Exception("未初始化ServiceHelper.Services");
         }
-        if (type == 1)
+        if (creationMode == 1)
         {
             var provider = ServiceUtil.Services.GetRequiredService<ILoggerProvider>();
             return provider.CreateLogger(categoryName);
         }
         else
         {
-            var factory = ServiceUtil.Services.GetRequiredService<ILoggerFactory>();
             // 复用同名对象
+            var factory = ServiceUtil.Services.GetRequiredService<ILoggerFactory>();
             return factory.CreateLogger(categoryName);
         }
     }

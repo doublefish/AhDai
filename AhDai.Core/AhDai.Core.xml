@@ -2316,19 +2316,28 @@
             构造函数
             </summary>
         </member>
-        <member name="M:AhDai.Core.Utils.LoggerUtil.GetLogger``1">
+        <member name="M:AhDai.Core.Utils.LoggerUtil.GetLogger``1(System.Int32)">
             <summary>
             GetLogger
             </summary>
             <typeparam name="T"></typeparam>
+            <param name="creationMode">创建模式 (0: Factory, 1: Provider)</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.LoggerUtil.GetLogger(System.Type,System.Int32)">
+            <summary>
+            GetLogger
+            </summary>
+            <param name="type"></param>
+            <param name="creationMode">创建模式 (0: Factory, 1: Provider)</param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Utils.LoggerUtil.GetLogger(System.String,System.Int32)">
             <summary>
             GetLogger
             </summary>
-            <param name="categoryName"></param>
-            <param name="type"></param>
+            <param name="categoryName">日志类别名称</param>
+            <param name="creationMode">创建模式 (0: Factory, 1: Provider)</param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Utils.RARUtil">
