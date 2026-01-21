@@ -2,31 +2,27 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.1</TargetFrameworks>
-		<Authors>Shuang Yu</Authors>
-		<Company>AhDai</Company>
+		
 		<Version>1.0.8</Version>
 		<AssemblyVersion>1.0.8</AssemblyVersion>
 		<FileVersion>1.0.8</FileVersion>
-		<PackageProjectUrl>https://github.com/doublefish/AhDai</PackageProjectUrl>
-		<Description>常用方法封装</Description>
-		<PackageReleaseNotes>无</PackageReleaseNotes>
+		<Authors>Shuang Yu</Authors>
+		<Company>AhDai</Company>
 		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
+		
+		<Description>常用方法封装</Description>
 		<PackageIcon></PackageIcon>
-		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageTags>AhDai;Base</PackageTags>
+		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+		<PackageProjectUrl>https://github.com/doublefish/AhDai</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/doublefish/AhDai</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageReleaseNotes>无</PackageReleaseNotes>
+
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<DocumentationFile>AhDai.Base.xml</DocumentationFile>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>AhDai.Base.xml</DocumentationFile>
-	</PropertyGroup>
-
 </Project>
