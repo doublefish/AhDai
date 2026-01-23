@@ -5,9 +5,9 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 
-		<Version>1.10.0</Version>
-		<AssemblyVersion>1.10.0</AssemblyVersion>
-		<FileVersion>1.10.0</FileVersion>
+		<Version>1.10.1</Version>
+		<AssemblyVersion>1.10.1</AssemblyVersion>
+		<FileVersion>1.10.1</FileVersion>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
 		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
