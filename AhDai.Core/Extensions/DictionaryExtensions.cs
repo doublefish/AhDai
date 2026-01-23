@@ -7,9 +7,9 @@ using System.Text;
 namespace AhDai.Core;
 
 /// <summary>
-/// IDictionaryExtensions
+/// DictionaryExtensions
 /// </summary>
-public static class IDictionaryExtensions
+public static class DictionaryExtensions
 {
     /// <summary>
     /// ToQueryString
