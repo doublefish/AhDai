@@ -10,7 +10,7 @@ using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace AhDai.Core.Extensions;
+namespace AhDai.Core;
 
 /// <summary>
 /// ServiceCollectionExtensions

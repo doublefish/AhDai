@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AhDai.Core.Extensions;
+namespace AhDai.Core;
 
 /// <summary>
 /// IDictionaryExtensions

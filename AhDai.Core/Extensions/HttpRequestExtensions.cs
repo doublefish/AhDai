@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace AhDai.Core.Extensions;
+namespace AhDai.Core;
 
 /// <summary>
 /// HttpRequestExtensions
@@ -18,7 +18,7 @@ public static partial class HttpRequestExtensions
     /// MobileDeviceRegex
     /// </summary>
     /// <returns></returns>
-    [GeneratedRegex(@"(iemobile|iphone|ipod|android|nokia|sonyericsson|blackberry|samsung|sec\-|windows ce|motorola|mot\-|up.b|midp\-)", RegexOptions.IgnoreCase | RegexOptions.Compiled, "zh-CN")]
+    [GeneratedRegex(@"(iemobile|iphone|ipod|android|nokia|sonyericsson|blackberry|samsung|sec\-|windows ce|motorola|mot\-|up.b|midp\-)", RegexOptions.IgnoreCase | RegexOptions.Compiled)]
     public static partial Regex MobileDeviceRegex();
 
     /// <summary>
@@ -39,7 +39,7 @@ public static partial class HttpRequestExtensions
     public static string GetPath(this HttpRequest httpRequest)
     {
         var path = httpRequest.Path.Value ?? "";
-        if (path.EndsWith("/"))
+        if (path.EndsWith('/'))
         {
             path = path[1..^1];
         }

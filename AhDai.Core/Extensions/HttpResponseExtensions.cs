@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AhDai.Core.Extensions;
+namespace AhDai.Core;
 
 /// <summary>
 /// HttpResponseExtensions

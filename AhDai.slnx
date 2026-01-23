@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="AhDai.Base/AhDai.Base.csproj" />
+  <Project Path="AhDai.Core/AhDai.Core.csproj" />
+  <Project Path="AhDai.WebApi/AhDai.WebApi.csproj" />
+  <Project Path="AhDai.WorkerService/AhDai.WorkerService.csproj" />
+</Solution>

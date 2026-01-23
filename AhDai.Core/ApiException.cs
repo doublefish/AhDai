@@ -1,5 +1,5 @@
 ﻿using AhDai.Core.Attributes;
-using Microsoft.OpenApi.Extensions;
+using AhDai.Core.Extensions;
 using System;
 
 namespace AhDai.Core;
