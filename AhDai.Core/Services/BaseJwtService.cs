@@ -1,6 +1,5 @@
 ﻿using AhDai.Base;
 using AhDai.Core.Configs;
-using AhDai.Core.Extensions;
 using AhDai.Core.Models;
 using AhDai.Core.Utils;
 using Microsoft.Extensions.Configuration;

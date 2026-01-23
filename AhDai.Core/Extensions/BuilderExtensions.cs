@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 
-namespace AhDai.Core.Extensions;
+namespace AhDai.Core;
 
 /// <summary>
 /// BuilderExtensions

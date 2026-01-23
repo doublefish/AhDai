@@ -404,12 +404,12 @@
             默认库
             </summary>
         </member>
-        <member name="T:AhDai.Core.Extensions.BuilderExtensions">
+        <member name="T:AhDai.Core.BuilderExtensions">
             <summary>
             BuilderExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.UseRedis(Microsoft.AspNetCore.Builder.IApplicationBuilder,AhDai.Core.Options.RedisOptions)">
+        <member name="M:AhDai.Core.BuilderExtensions.UseRedis(Microsoft.AspNetCore.Builder.IApplicationBuilder,AhDai.Core.Options.RedisOptions)">
             <summary>
             UseRedis
             </summary>
@@ -417,7 +417,7 @@
             <param name="options"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.UseRedis(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{AhDai.Core.Options.RedisOptions})">
+        <member name="M:AhDai.Core.BuilderExtensions.UseRedis(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{AhDai.Core.Options.RedisOptions})">
             <summary>
             UseRedis
             </summary>
@@ -425,7 +425,7 @@
             <param name="setupAction"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.UseMail(Microsoft.AspNetCore.Builder.IApplicationBuilder,AhDai.Core.Options.MailOptions)">
+        <member name="M:AhDai.Core.BuilderExtensions.UseMail(Microsoft.AspNetCore.Builder.IApplicationBuilder,AhDai.Core.Options.MailOptions)">
             <summary>
             UseMail
             </summary>
@@ -433,7 +433,7 @@
             <param name="options"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.UseMail(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{AhDai.Core.Options.MailOptions})">
+        <member name="M:AhDai.Core.BuilderExtensions.UseMail(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{AhDai.Core.Options.MailOptions})">
             <summary>
             UseMail
             </summary>
@@ -441,7 +441,7 @@
             <param name="setupAction"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.ConfigInvalidModelStateResponse(Microsoft.AspNetCore.Mvc.ApiBehaviorOptions)">
+        <member name="M:AhDai.Core.BuilderExtensions.ConfigInvalidModelStateResponse(Microsoft.AspNetCore.Mvc.ApiBehaviorOptions)">
             <summary>
             配置实体验证错误返回结果
             </summary>
@@ -2472,8 +2472,52 @@
         <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
             <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
         </member>
-        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_ascii_662A8000662A800">
-            <summary>Supports searching for characters in or not in "ABIMNSUWabimnsuw".</summary>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_indexOfAnyStrings_OrdinalIgnoreCase_46014A8B7B3C7A2F9033727512F94E85EAA984C17CE55A0D78E1E676BFA041AA">
+            <summary>Supports searching for the specified strings.</summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type)">
+            <summary>
+            Generates a documentation comment ID for a type.
+            Example: T:Namespace.Outer+Inner`1 becomes T:Namespace.Outer.Inner`1
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.PropertyInfo)">
+            <summary>
+            Generates a documentation comment ID for a property.
+            Example: P:Namespace.ContainingType.PropertyName or for an indexer P:Namespace.ContainingType.Item(System.Int32)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type,System.String)">
+            <summary>
+            Generates a documentation comment ID for a property given its container type and property name.
+            Example: P:Namespace.ContainingType.PropertyName
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.MethodInfo)">
+            <summary>
+            Generates a documentation comment ID for a method (or constructor).
+            For example:
+              M:Namespace.ContainingType.MethodName(ParamType1,ParamType2)~ReturnType
+              M:Namespace.ContainingType.#ctor(ParamType)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.GetTypeDocId(System.Type,System.Boolean,System.Boolean)">
+            <summary>
+            Generates a documentation ID string for a type.
+            This method handles nested types (replacing '+' with '.'),
+            generic types, arrays, pointers, by-ref types, and generic parameters.
+            The <paramref name="includeGenericArguments"/> flag controls whether
+            constructed generic type arguments are emitted, while <paramref name="omitGenericArity"/>
+            controls whether the generic arity marker (e.g. "`1") is appended.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.NormalizeDocId(System.String)">
+            <summary>
+            Normalizes a documentation comment ID to match the compiler-style format.
+            Strips the return type suffix for ordinary methods but retains it for conversion operators.
+            </summary>
+            <param name="docId">The documentation comment ID to normalize.</param>
+            <returns>The normalized documentation comment ID.</returns>
         </member>
     </members>
 </doc>
