@@ -441,12 +441,6 @@
             <param name="setupAction"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.BuilderExtensions.ConfigInvalidModelStateResponse(Microsoft.AspNetCore.Mvc.ApiBehaviorOptions)">
-            <summary>
-            配置实体验证错误返回结果
-            </summary>
-            <param name="options"></param>
-        </member>
         <member name="T:AhDai.Core.ConfigurationExtensions">
             <summary>
             ConfigurationExtensions
@@ -478,6 +472,19 @@
             获取File配置
             </summary>
             <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.DictionaryExtensions">
+            <summary>
+            DictionaryExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.DictionaryExtensions.ToQueryString(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Microsoft.Extensions.Primitives.StringValues}},System.String[])">
+            <summary>
+            ToQueryString
+            </summary>
+            <param name="pairs"></param>
+            <param name="ignores"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.EnumExtensions">
@@ -706,18 +713,16 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.IDictionaryExtensions">
+        <member name="T:AhDai.Core.OptionsExtensions">
             <summary>
-            IDictionaryExtensions
+            OptionsExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Core.IDictionaryExtensions.ToQueryString(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Microsoft.Extensions.Primitives.StringValues}},System.String[])">
+        <member name="M:AhDai.Core.OptionsExtensions.ConfigInvalidModelStateResponse(Microsoft.AspNetCore.Mvc.ApiBehaviorOptions)">
             <summary>
-            ToQueryString
+            配置实体验证错误返回结果
             </summary>
-            <param name="pairs"></param>
-            <param name="ignores"></param>
-            <returns></returns>
+            <param name="options"></param>
         </member>
         <member name="T:AhDai.Core.ServiceCollectionExtensions">
             <summary>
@@ -758,6 +763,41 @@
             添加通用授权服务
             </summary>
             <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.StringExtensions">
+            <summary>
+            StringExt
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.StringExtensions.ToDateOnly(System.String,System.Nullable{System.DateOnly})">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.StringExtensions.ToDateOnlyExact(System.String,System.String,System.IFormatProvider,System.Nullable{System.Globalization.DateTimeStyles},System.Nullable{System.DateOnly})">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="format"></param>
+            <param name="provider"></param>
+            <param name="styles"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.StringExtensions.ToDateOnlyExact(System.String,System.String[],System.IFormatProvider,System.Nullable{System.Globalization.DateTimeStyles},System.Nullable{System.DateOnly})">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="formats"></param>
+            <param name="provider"></param>
+            <param name="styles"></param>
+            <param name="error"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Filters.ActionFilter">
