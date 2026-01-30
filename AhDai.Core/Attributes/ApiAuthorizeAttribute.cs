@@ -99,7 +99,7 @@ public abstract class ApiAuthorizeAttribute(ILogger<ApiAuthorizeAttribute> logge
     /// <param name="httpContext"></param>
     protected virtual void WriteLog(HttpContext httpContext)
     {
-        _logger.LogInformation("接收请求=>RemoteIpAddress={RemoteIpAddress},RemotePort={RemotePort},{Method} {Path}"
+        if (_logger.IsEnabled(LogLevel.Information)) _logger.LogInformation("接收请求=>RemoteIpAddress={RemoteIpAddress},RemotePort={RemotePort},{Method} {Path}"
             , httpContext.Connection.RemoteIpAddress
             , httpContext.Connection.RemotePort
             , httpContext.Request.Method

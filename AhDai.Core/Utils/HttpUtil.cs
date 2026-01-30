@@ -17,8 +17,12 @@ namespace AhDai.Core.Utils;
 /// <summary>
 /// HttpHelper
 /// </summary>
-public static class HttpUtil
+public static partial class HttpUtil
 {
+
+    [GeneratedRegex(@"^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})", RegexOptions.IgnoreCase, "zh-CN")]
+    public static partial Regex IpRegex();
+
     /// <summary>
     /// Client
     /// </summary>
@@ -211,7 +215,7 @@ public static class HttpUtil
             var _array = kv.Split('=');
             if (_array.Length > 2)
             {
-                _array = new string[] { _array[0], string.Join("=", _array, 1, _array.Length - 1) };
+                _array = [_array[0], string.Join("=", _array, 1, _array.Length - 1)];
             }
             else if (_array.Length != 2)
             {
@@ -355,6 +359,6 @@ public static class HttpUtil
         {
             return false;
         }
-        return new Regex(@"^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})", RegexOptions.IgnoreCase).IsMatch(ip);
+        return IpRegex().IsMatch(ip);
     }
 }

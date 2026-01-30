@@ -53,10 +53,6 @@ public static class FileUtil
     /// <returns></returns>
     public static HttpResponseMessage Output(byte[] bytes, string type, string name)
     {
-        if (bytes == null)
-        {
-            throw new ArgumentNullException(nameof(bytes));
-        }
         var response = new HttpResponseMessage(HttpStatusCode.OK)
         {
             Content = new ByteArrayContent(bytes)

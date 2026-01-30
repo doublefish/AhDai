@@ -29,7 +29,7 @@ public class BaseMailService : IBaseMailService
     {
         Config = configuration.GetMailConfig();
         Logger = logger;
-        Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
+        if (Logger.IsEnabled(LogLevel.Debug)) Logger.LogDebug("Init=>Config={Config}", JsonUtil.Serialize(Config));
     }
 
     /// <summary>
@@ -68,6 +68,7 @@ public class BaseMailService : IBaseMailService
                 Body = body,
                 IsBodyHtml = true
             });
-        };
+        }
+        ;
     }
 }

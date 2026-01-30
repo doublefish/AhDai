@@ -28,7 +28,7 @@ public class HttpLoggingHandler(ILogger<HttpLoggingHandler> logger) : Delegating
         {
             requestContent = await request.Content.ReadAsStringAsync(cancellationToken);
         }
-        _logger.LogInformation("发送请求=>{Method} {RequestUri}\r\n{Content}", request.Method, request.RequestUri, requestContent);
+        if (_logger.IsEnabled(LogLevel.Information)) _logger.LogInformation("发送请求=>{Method} {RequestUri}\r\n{Content}", request.Method, request.RequestUri, requestContent);
         var watcher = new Stopwatch();
         watcher.Start();
         var response = await base.SendAsync(request, cancellationToken);
@@ -38,7 +38,7 @@ public class HttpLoggingHandler(ILogger<HttpLoggingHandler> logger) : Delegating
         {
             responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
         }
-        _logger.LogInformation("接收响应=>{StatusCode} {Content} 耗时{ElapsedMilliseconds}ms", response.StatusCode, responseContent, watcher.ElapsedMilliseconds);
+        if (_logger.IsEnabled(LogLevel.Information)) _logger.LogInformation("接收响应=>{StatusCode} {Content} 耗时{ElapsedMilliseconds}ms", response.StatusCode, responseContent, watcher.ElapsedMilliseconds);
         return response;
     }
 }

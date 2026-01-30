@@ -33,7 +33,7 @@ public class ActionFilter(ILogger<ActionFilter> logger) : IActionFilter, IOrdere
         {
             _logger.LogError(context.Exception, "{Message}", context.Exception.Message);
             context.ExceptionHandled = true;
-            IApiResult result;
+            ApiResult<string> result;
             if (context.Exception is ApiException apiException)
             {
                 result = ApiResult.Error(apiException.Code, apiException.Message, apiException.Data);

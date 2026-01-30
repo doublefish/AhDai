@@ -6,25 +6,16 @@ namespace AhDai.Core.Models;
 /// 分页数据
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class PageData<T>
+/// <param name="count"></param>
+/// <param name="list"></param>
+public class PageData<T>(int count, ICollection<T> list)
 {
     /// <summary>
     /// 总数
     /// </summary>
-    public int Count { get; set; }
+    public int Count { get; set; } = count;
     /// <summary>
     /// 数据
     /// </summary>
-    public ICollection<T> List { get; set; }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="count"></param>
-    /// <param name="list"></param>
-    public PageData(int count, ICollection<T> list)
-    {
-        Count = count;
-        List = list;
-    }
+    public ICollection<T> List { get; set; } = list;
 }

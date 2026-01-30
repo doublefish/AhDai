@@ -6,20 +6,23 @@ namespace AhDai.Core.Models;
 /// <summary>
 /// Http请求数据
 /// </summary>
-public class HttpRequest
+/// <param name="method"></param>
+/// <param name="url"></param>
+/// <param name="contentType"></param>
+public class HttpRequest(HttpMethod method, string url, string contentType = HttpContentType.Url)
 {
     /// <summary>
     /// 类型
     /// </summary>
-    public HttpMethod Method { get; set; }
+    public HttpMethod Method { get; set; } = method;
     /// <summary>
     /// 地址
     /// </summary>
-    public string Url { get; set; } = null!;
+    public string Url { get; set; } = url;
     /// <summary>
     /// 内容类型
     /// </summary>
-    public string ContentType { get; set; } = null!;
+    public string ContentType { get; set; } = contentType;
     /// <summary>
     /// 内容
     /// </summary>
@@ -36,17 +39,4 @@ public class HttpRequest
     /// 内容
     /// </summary>
     public IDictionary<string, object>? Body { get; set; }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="method"></param>
-    /// <param name="url"></param>
-    /// <param name="contentType"></param>
-    public HttpRequest(HttpMethod method, string url, string contentType = HttpContentType.Url)
-    {
-        Method = method;
-        Url = url;
-        ContentType = contentType;
-    }
 }

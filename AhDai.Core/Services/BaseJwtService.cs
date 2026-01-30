@@ -154,7 +154,7 @@ public class BaseJwtService(IConfiguration configuration, IBaseRedisService? red
     public virtual TokenData GetTokenData(string token)
     {
         var securityToken = ReadToken(token);
-        return ToTokenData(securityToken.Claims.ToArray());
+        return ToTokenData([.. securityToken.Claims]);
     }
 
     /// <summary>
@@ -165,7 +165,7 @@ public class BaseJwtService(IConfiguration configuration, IBaseRedisService? red
     public virtual async Task<TokenResult> RefreshTokenAsync(string token)
     {
         var securityToken = ReadToken(token);
-        return await GenerateTokenAsync(securityToken.Claims.ToArray());
+        return await GenerateTokenAsync([.. securityToken.Claims]);
     }
 
     /// <summary>

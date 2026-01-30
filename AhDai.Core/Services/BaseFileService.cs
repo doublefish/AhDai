@@ -71,7 +71,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     /// <returns></returns>
     public virtual async Task<Models.FileData[]> UploadAsync(string root, string dir, IFormFile[] files, string? category = null)
     {
-        files = files.Where(o => o != null).ToArray();
+        files = [.. files.Where(o => o != null)];
         //If the request is correct, the binary data will be extracted from content and IIS stores files in specified location.
         if (files.Length == 0)
         {
@@ -85,7 +85,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
             Directory.CreateDirectory(phyDir);
         }
 
-        var extensions = string.IsNullOrEmpty(category) ? _config.Extensions.SelectMany(x => x.Value).ToArray() : _config.Extensions[category];
+        var extensions = string.IsNullOrEmpty(category) ? [.. _config.Extensions.SelectMany(x => x.Value)] : _config.Extensions[category];
         var datas = new Models.FileData[files.Length];
         for (var i = 0; i < files.Length; i++)
         {
@@ -268,7 +268,11 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
         fs.Seek(0, SeekOrigin.Begin);
         var hashBytes = await SHA256.HashDataAsync(fs);
         fs.Seek(0, SeekOrigin.Begin);
+#if NET9_0_OR_GREATER
+        return Convert.ToHexStringLower(hashBytes);
+#else
         return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+#endif
     }
 
     /// <summary>
@@ -282,6 +286,10 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
         if (!(computeHash ?? _config.ComputeHash)) return "";
 
         var hashBytes = SHA256.HashData(bytes);
+#if NET9_0_OR_GREATER
+        return Convert.ToHexStringLower(hashBytes);
+#else
         return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+#endif
     }
 }

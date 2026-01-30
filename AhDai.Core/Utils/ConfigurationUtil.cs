@@ -16,7 +16,7 @@ public static class ConfigurationUtil
     public static IDictionary<string, string?> GetAll(IConfiguration configuration)
     {
         var children = configuration.GetChildren();
-        return GetAll(children.ToArray());
+        return GetAll([.. children]);
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ public static class ConfigurationUtil
         foreach (var section in sections)
         {
             dict.Add(section.Path, section.Value);
-            var children = GetAll(section.GetChildren().ToArray());
+            var children = GetAll([.. section.GetChildren()]);
             foreach (var child in children)
             {
                 dict.Add(child.Key, child.Value);

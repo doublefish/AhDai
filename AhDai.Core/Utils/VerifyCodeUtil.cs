@@ -20,7 +20,7 @@ namespace AhDai.Core.Utils;
 /// </summary>
 public static class VerifyCodeUtil
 {
-    static readonly string[] Fonts = new string[] { "Helvetica", "Geneva", "sans-serif", "Verdana", "Times New Roman", "Courier New", "Arial" };
+    static readonly string[] Fonts = ["Helvetica", "Geneva", "sans-serif", "Verdana", "Times New Roman", "Courier New", "Arial"];
     static readonly Random Random;
     static readonly TimeSpan Expiry;
     static readonly string CacheKey = "VerifyCode";
