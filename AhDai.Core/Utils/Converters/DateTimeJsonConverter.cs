@@ -10,7 +10,7 @@ namespace AhDai.Core.Utils.Converters;
 /// </summary>
 /// <param name="writeFormat"></param>
 /// <param name="readFormats"></param>
-public class DateTimeJsonConverter1(string writeFormat, string[]? readFormats = null) : JsonConverter<DateTime>
+public class DateTimeJsonConverter(string writeFormat, string[]? readFormats = null) : JsonConverter<DateTime>
 {
     readonly string _writeFormat = writeFormat;
     readonly string[] _readFormats = readFormats ?? [];

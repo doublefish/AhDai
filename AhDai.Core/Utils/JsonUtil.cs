@@ -24,7 +24,7 @@ public static class JsonUtil
             PropertyNameCaseInsensitive = true,
             //Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            Converters = { new Converters.DateTimeJsonConverter1(Const.Iso8601WithOffsetDateTimeFormat), new Converters.DateOnlyJsonConverter(Const.Iso8601WithOffsetDateTimeFormat) },
+            Converters = { new Converters.DateTimeJsonConverter(Const.Iso8601WithOffsetDateTimeFormat), new Converters.DateOnlyJsonConverter(Const.Iso8601WithOffsetDateTimeFormat) },
         };
     }
 
