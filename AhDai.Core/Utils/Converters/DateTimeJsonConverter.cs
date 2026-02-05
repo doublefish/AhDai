@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace AhDai.Core.Utils.Converters;
 
 /// <summary>
-/// DatetimeJsonConverter
+/// DateTimeJsonConverter
 /// </summary>
 /// <param name="writeFormat"></param>
 /// <param name="readFormats"></param>

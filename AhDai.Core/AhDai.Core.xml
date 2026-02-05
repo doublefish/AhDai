@@ -2117,21 +2117,12 @@
             </summary>
             <param name="sections"></param>
         </member>
-        <member name="T:AhDai.Core.Utils.DatetimeJsonConverter">
+        <member name="T:AhDai.Core.Utils.Converters.DateOnlyJsonConverter">
             <summary>
-            DatetimeJsonConverter
+            DateOnlyJsonConverter
             </summary>
-            <param name="writeFormat"></param>
-            <param name="readFormats"></param>
         </member>
-        <member name="M:AhDai.Core.Utils.DatetimeJsonConverter.#ctor(System.String,System.String[])">
-            <summary>
-            DatetimeJsonConverter
-            </summary>
-            <param name="writeFormat"></param>
-            <param name="readFormats"></param>
-        </member>
-        <member name="M:AhDai.Core.Utils.DatetimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+        <member name="M:AhDai.Core.Utils.Converters.DateOnlyJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
             <summary>
             Read
             </summary>
@@ -2140,7 +2131,38 @@
             <param name="options"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Utils.DatetimeJsonConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateTime,System.Text.Json.JsonSerializerOptions)">
+        <member name="M:AhDai.Core.Utils.Converters.DateOnlyJsonConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateOnly,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Write
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:AhDai.Core.Utils.Converters.DateTimeJsonConverter">
+            <summary>
+            DateTimeJsonConverter
+            </summary>
+            <param name="writeFormat"></param>
+            <param name="readFormats"></param>
+        </member>
+        <member name="M:AhDai.Core.Utils.Converters.DateTimeJsonConverter.#ctor(System.String,System.String[])">
+            <summary>
+            DateTimeJsonConverter
+            </summary>
+            <param name="writeFormat"></param>
+            <param name="readFormats"></param>
+        </member>
+        <member name="M:AhDai.Core.Utils.Converters.DateTimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Read
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.Converters.DateTimeJsonConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateTime,System.Text.Json.JsonSerializerOptions)">
             <summary>
             Write
             </summary>

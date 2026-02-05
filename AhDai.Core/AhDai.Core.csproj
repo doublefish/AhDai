@@ -5,9 +5,9 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 
-		<Version>1.10.3</Version>
-		<AssemblyVersion>1.10.3</AssemblyVersion>
-		<FileVersion>1.10.3</FileVersion>
+		<Version>1.10.4</Version>
+		<AssemblyVersion>1.10.4</AssemblyVersion>
+		<FileVersion>1.10.4</FileVersion>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
 		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
@@ -31,8 +31,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="AhDai.Base" Version="1.0.8" />
-		
-		<PackageReference Include="StackExchange.Redis" Version="2.10.1" />
+		<PackageReference Include="StackExchange.Redis" Version="2.10.14" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0' ">

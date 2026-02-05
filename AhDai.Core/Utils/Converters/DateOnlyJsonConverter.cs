@@ -8,10 +8,8 @@ namespace AhDai.Core.Utils.Converters;
 /// <summary>
 /// DateOnlyJsonConverter
 /// </summary>
-public class DateOnlyJsonConverter(string[]? readFormats = null) : JsonConverter<DateOnly>
+public class DateOnlyJsonConverter : JsonConverter<DateOnly>
 {
-    readonly string[] _readFormats = readFormats ?? [];
-
     /// <summary>
     /// Read
     /// </summary>
@@ -34,19 +32,15 @@ public class DateOnlyJsonConverter(string[]? readFormats = null) : JsonConverter
         {
             return default;
         }
-        if (_readFormats.Length > 0 && DateOnly.TryParseExact(str, _readFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result1))
+        if (DateOnly.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result1))
         {
             return result1;
         }
-        if (DateOnly.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result2))
+        if (DateTime.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var result2))
         {
-            return result2;
+            return DateOnly.FromDateTime(result2);
         }
-        if (DateTime.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var result3))
-        {
-            return DateOnly.FromDateTime(result3);
-        }
-        throw new JsonException($"Unable to parse '{str}' as a DateOnly. Supported formats: {string.Join(", ", _readFormats)}");
+        throw new JsonException($"Unable to parse '{str}' as a DateOnly.");
     }
 
     /// <summary>
