@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 
-namespace AhDai.Core;
+namespace AhDai.Core.Extensions;
 
 /// <summary>
 /// ConfigurationExtensions

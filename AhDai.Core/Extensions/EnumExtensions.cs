@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace AhDai.Core;
+namespace AhDai.Core.Extensions;
 
 /// <summary>
 /// EnumExtensions

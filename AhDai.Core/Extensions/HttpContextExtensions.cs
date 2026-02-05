@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Linq;
 
-namespace AhDai.Core;
+namespace AhDai.Core.Extensions;
 
 /// <summary>
 /// HttpContextExtensions
