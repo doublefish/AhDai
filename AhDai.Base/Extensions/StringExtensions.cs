@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Text;
 
 namespace AhDai.Base.Extensions
 {
@@ -247,7 +248,7 @@ namespace AhDai.Base.Extensions
         /// <returns></returns>
         public static DateTime ToDateTimeExact(this string s, string format, IFormatProvider provider = null, DateTimeStyles? styles = null, DateTime? error = null)
         {
-            return DateTime.TryParseExact(s, format, provider, styles ?? DateTimeStyles.None, out DateTime result) ? result : error ?? DateTime.MinValue;
+            return DateTime.TryParseExact(s, format, provider, styles ?? DateTimeStyles.RoundtripKind, out DateTime result) ? result : error ?? DateTime.MinValue;
         }
 
         /// <summary>
@@ -261,7 +262,7 @@ namespace AhDai.Base.Extensions
         /// <returns></returns>
         public static DateTime ToDateTimeExact(this string s, string[] formats, IFormatProvider provider = null, DateTimeStyles? styles = null, DateTime? error = null)
         {
-            return DateTime.TryParseExact(s, formats, provider, styles ?? DateTimeStyles.None, out DateTime result) ? result : error ?? DateTime.MinValue;
+            return DateTime.TryParseExact(s, formats, provider, styles ?? DateTimeStyles.RoundtripKind, out DateTime result) ? result : error ?? DateTime.MinValue;
         }
 
         /// <summary>
@@ -364,13 +365,24 @@ namespace AhDai.Base.Extensions
         }
 
         /// <summary>
-        /// 去除空格、回车、换行符和制表符
+        /// 去除空格、回车、换行和制表符
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
         public static string ToInline(this string s)
         {
-            return s.Replace(" ", "").Replace("\r", "").Replace("\n", "").Replace("\t", "");
+            if (string.IsNullOrEmpty(s)) return s;
+
+            var builder = new StringBuilder(s.Length);
+            foreach (char c in s)
+            {
+                // 过滤掉空格、回车、换行、制表符
+                if (c != ' ' && c != '\r' && c != '\n' && c != '\t')
+                {
+                    builder.Append(c);
+                }
+            }
+            return builder.ToString();
         }
     }
 }

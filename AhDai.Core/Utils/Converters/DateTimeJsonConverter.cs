@@ -37,11 +37,11 @@ public class DateTimeJsonConverter(string writeFormat, string[]? readFormats = n
         {
             return default;
         }
-        if (_readFormats.Length > 0 && DateTime.TryParseExact(str, _readFormats, CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.RoundtripKind, out var result1))
+        if (_readFormats.Length > 0 && DateTime.TryParseExact(str, _readFormats, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var result1))
         {
             return result1;
         }
-        if (DateTime.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.RoundtripKind, out var result2))
+        if (DateTime.TryParse(str, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var result2))
         {
             return result2;
         }
