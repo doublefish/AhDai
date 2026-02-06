@@ -45,7 +45,7 @@ public static class HttpRequestUtil
                     if (array.Length >= i)
                     {
                         //上{limit}次访问时间
-                        var lastTime = array[i - 1].ToTimeSpan();
+                        var lastTime = array[i - 1].ToTimeSpan(default);
                         //距上{limit}次访问时间差
                         var ts = time.Subtract(lastTime).TotalSeconds;
                         if (ts < 1D)
@@ -58,7 +58,7 @@ public static class HttpRequestUtil
                 {
                     //每秒可访问次数小于等于1，等价于两次访问时间间隔小于{limit}秒，则计算当前时间据上次访问时间的差是否小于{limit}即可
                     //上次访问时间
-                    var lastTime = array[0].ToTimeSpan();
+                    var lastTime = array[0].ToTimeSpan(default);
                     //距上次访问时间差
                     var ts = time.Subtract(lastTime).TotalSeconds;
                     if (ts < limit)

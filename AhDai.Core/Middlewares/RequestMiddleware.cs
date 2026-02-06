@@ -54,8 +54,8 @@ public class RequestMiddleware(RequestDelegate next)
             return data;
         }
 
-        var userId = httpContext.Request.Query["userId"].FirstOrDefault().ToInt64();
-        var tenantId = httpContext.Request.Query["tenantId"].FirstOrDefault().ToInt64();
+        var userId = httpContext.Request.Query["userId"].FirstOrDefault()?.ToInt64(default);
+        var tenantId = httpContext.Request.Query["tenantId"].FirstOrDefault()?.ToInt64(default);
         if (userId > 0 && tenantId > 0)
         {
             //using var db = MyApp.GetMasterDbContextAsync().GetAwaiter().GetResult();

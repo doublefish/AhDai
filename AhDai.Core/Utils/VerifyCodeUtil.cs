@@ -98,7 +98,7 @@ public static class VerifyCodeUtil
             throw new ArgumentException("Verification code timeout.");
         }
         var array = value.ToString().Split(',');
-        if (time > array[1].ToTimeSpan())
+        if (time > array[1].ToTimeSpan(default))
         {
             throw new ArgumentException("Verification code timeout.");
         }

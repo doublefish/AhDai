@@ -770,6 +770,15 @@
             StringExt
             </summary>
         </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnlyOrNull(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="provider"></param>
+            <param name="style"></param>
+            <returns></returns>
+        </member>
         <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnly(System.String,System.Nullable{System.DateOnly})">
             <summary>
             类型转换
@@ -778,25 +787,160 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnlyExact(System.String,System.String,System.IFormatProvider,System.Nullable{System.Globalization.DateTimeStyles},System.Nullable{System.DateOnly})">
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnly(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateOnly)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="provider"></param>
+            <param name="style"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnlyExactOrNull(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)">
             <summary>
             类型转换
             </summary>
             <param name="s"></param>
             <param name="format"></param>
             <param name="provider"></param>
-            <param name="styles"></param>
-            <param name="error"></param>
+            <param name="style"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnlyExact(System.String,System.String[],System.IFormatProvider,System.Nullable{System.Globalization.DateTimeStyles},System.Nullable{System.DateOnly})">
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnlyExactOrNull(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)">
             <summary>
             类型转换
             </summary>
             <param name="s"></param>
             <param name="formats"></param>
             <param name="provider"></param>
-            <param name="styles"></param>
+            <param name="style"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnlyExact(System.String,System.String,System.Nullable{System.DateOnly})">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="format"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnlyExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateOnly)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="format"></param>
+            <param name="provider"></param>
+            <param name="style"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnlyExact(System.String,System.String[],System.Nullable{System.DateOnly})">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="formats"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToDateOnlyExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateOnly)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="formats"></param>
+            <param name="provider"></param>
+            <param name="style"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToTimeOnlyOrNull(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="provider"></param>
+            <param name="style"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToTimeOnly(System.String,System.Nullable{System.TimeOnly})">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToTimeOnly(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.TimeOnly)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="provider"></param>
+            <param name="style"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToTimeOnlyExactOrNull(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="format"></param>
+            <param name="provider"></param>
+            <param name="style"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToTimeOnlyExactOrNull(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="formats"></param>
+            <param name="provider"></param>
+            <param name="style"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToTimeOnlyExact(System.String,System.String,System.Nullable{System.TimeOnly})">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="format"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToTimeOnlyExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.TimeOnly)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="format"></param>
+            <param name="provider"></param>
+            <param name="style"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToTimeOnlyExact(System.String,System.String[],System.Nullable{System.TimeOnly})">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="formats"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToTimeOnlyExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.TimeOnly)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="s"></param>
+            <param name="formats"></param>
+            <param name="provider"></param>
+            <param name="style"></param>
             <param name="error"></param>
             <returns></returns>
         </member>

@@ -5,9 +5,9 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 
-		<Version>1.10.6</Version>
-		<AssemblyVersion>1.10.6</AssemblyVersion>
-		<FileVersion>1.10.6</FileVersion>
+		<Version>1.10.7</Version>
+		<AssemblyVersion>1.10.7</AssemblyVersion>
+		<FileVersion>1.10.7</FileVersion>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
 		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
@@ -30,7 +30,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AhDai.Base" Version="1.0.9" />
+		<PackageReference Include="AhDai.Base" Version="1.1.1" />
 		<PackageReference Include="StackExchange.Redis" Version="2.10.14" />
 	</ItemGroup>
 

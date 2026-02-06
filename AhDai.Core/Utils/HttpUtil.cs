@@ -136,7 +136,7 @@ public static partial class HttpUtil
         }
 
         var charSet = response.Content.Headers.ContentType?.CharSet;
-        var encoding = TextUtil.GetEncoding(charSet);
+        var encoding = TextUtil.GetEncoding(charSet ?? "");
         if (charSet == "gzip")
         {
             using var stream = await response.Content.ReadAsStreamAsync();
