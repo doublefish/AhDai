@@ -14,12 +14,9 @@ namespace AhDai.Base.Utils
         /// <param name="s"></param>
         /// <param name="encode">编码</param>
         /// <returns></returns>
-        public static string ToHexString(string s, Encoding encode = null)
+        public static string ToHexString(string s, Encoding? encode = null)
         {
-            if (encode == null)
-            {
-                encode = Encoding.UTF8;
-            }
+            encode ??= Encoding.UTF8;
             var bytes = encode.GetBytes(s);
             var result = string.Empty;
             for (var i = 0; i < bytes.Length; i++)
@@ -50,12 +47,9 @@ namespace AhDai.Base.Utils
         /// <param name="hex"></param>
         /// <param name="encode">编码</param>
         /// <returns></returns>
-        public static string ToString(string hex, Encoding encode = null)
+        public static string ToString(string hex, Encoding? encode = null)
         {
-            if (encode == null)
-            {
-                encode = Encoding.UTF8;
-            }
+            encode ??= Encoding.UTF8;
             var chars = hex.Split(new char[] { '%' }, StringSplitOptions.RemoveEmptyEntries);
             var bytes = new byte[chars.Length];
             for (var i = 0; i < chars.Length; i++)

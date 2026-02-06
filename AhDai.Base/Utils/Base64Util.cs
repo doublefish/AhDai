@@ -14,7 +14,7 @@ namespace AhDai.Base.Utils
         /// <param name="s"></param>
         /// <param name="encode">编码</param>
         /// <returns></returns>
-        public static string ToBase64String(string s, Encoding encode = null)
+        public static string ToBase64String(string s, Encoding? encode = null)
         {
             encode ??= Encoding.UTF8;
             var buffer = encode.GetBytes(s);
@@ -27,7 +27,7 @@ namespace AhDai.Base.Utils
         /// <param name="s"></param>
         /// <param name="encode">编码</param>
         /// <returns></returns>
-        public static string ToString(string s, Encoding encode = null)
+        public static string ToString(string s, Encoding? encode = null)
         {
             encode ??= Encoding.UTF8;
             var bytes = ToBytes(s);

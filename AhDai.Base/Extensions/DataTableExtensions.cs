@@ -36,7 +36,7 @@ namespace AhDai.Base.Extensions
         /// <param name="dataRow"></param>
         /// <param name="propertyInfos"></param>
         /// <returns></returns>
-        public static T ToModel<T>(this DataRow dataRow, PropertyInfo[] propertyInfos = null) where T : class, new()
+        public static T ToModel<T>(this DataRow dataRow, PropertyInfo[]? propertyInfos = null) where T : class, new()
         {
             propertyInfos ??= typeof(T).GetProperties();
             var data = Activator.CreateInstance<T>();

@@ -19,7 +19,7 @@ namespace AhDai.Base.Extensions
             var result = new byte[array.Length];
             for (var i = 0; i < array.Length; i++)
             {
-                result[i] = array[i].ToByte();
+                result[i] = array[i].ToByte(default);
             }
             return result;
         }
@@ -34,7 +34,7 @@ namespace AhDai.Base.Extensions
             var result = new sbyte[array.Length];
             for (var i = 0; i < array.Length; i++)
             {
-                result[i] = array[i].ToSByte();
+                result[i] = array[i].ToSByte(default);
             }
             return result;
         }
@@ -49,7 +49,7 @@ namespace AhDai.Base.Extensions
             var result = new short[array.Length];
             for (var i = 0; i < array.Length; i++)
             {
-                result[i] = array[i].ToInt16();
+                result[i] = array[i].ToInt16(default);
             }
             return result;
         }
@@ -64,7 +64,7 @@ namespace AhDai.Base.Extensions
             var result = new int[array.Length];
             for (var i = 0; i < array.Length; i++)
             {
-                result[i] = array[i].ToInt32();
+                result[i] = array[i].ToInt32(default);
             }
             return result;
         }
@@ -79,7 +79,7 @@ namespace AhDai.Base.Extensions
             var result = new long[array.Length];
             for (var i = 0; i < array.Length; i++)
             {
-                result[i] = array[i].ToInt64();
+                result[i] = array[i].ToInt64(default);
             }
             return result;
         }
@@ -94,7 +94,7 @@ namespace AhDai.Base.Extensions
             var result = new float[array.Length];
             for (var i = 0; i < array.Length; i++)
             {
-                result[i] = array[i].ToSingle();
+                result[i] = array[i].ToSingle(default);
             }
             return result;
         }
@@ -109,7 +109,7 @@ namespace AhDai.Base.Extensions
             var result = new double[array.Length];
             for (var i = 0; i < array.Length; i++)
             {
-                result[i] = array[i].ToDouble();
+                result[i] = array[i].ToDouble(default);
             }
             return result;
         }
@@ -124,7 +124,7 @@ namespace AhDai.Base.Extensions
             var result = new decimal[array.Length];
             for (var i = 0; i < array.Length; i++)
             {
-                result[i] = array[i].ToDecimal();
+                result[i] = array[i].ToDecimal(default);
             }
             return result;
         }
@@ -139,7 +139,7 @@ namespace AhDai.Base.Extensions
             var result = new DateTime[array.Length];
             for (var i = 0; i < array.Length; i++)
             {
-                result[i] = array[i].ToDateTime();
+                result[i] = array[i].ToDateTime(default);
             }
             return result;
         }
@@ -154,7 +154,7 @@ namespace AhDai.Base.Extensions
             var result = new TimeSpan[array.Length];
             for (var i = 0; i < array.Length; i++)
             {
-                result[i] = array[i].ToTimeSpan();
+                result[i] = array[i].ToTimeSpan(default);
             }
             return result;
         }

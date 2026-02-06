@@ -41,7 +41,7 @@ namespace AhDai.Base.Extensions
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="values">例外的默认值，格式：属性名称-值</param>
-        public static void SetMinValue(this object obj, IDictionary<string, object> values = null)
+        public static void SetMinValue(this object obj, IDictionary<string, object?>? values = null)
         {
             var propertyInfos = obj.GetType().GetProperties();
             foreach (var pi in propertyInfos)
@@ -66,7 +66,7 @@ namespace AhDai.Base.Extensions
         /// <param name="obj"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static bool IsMinValue(this object obj, Type type = null)
+        public static bool IsMinValue(this object obj, Type? type = null)
         {
             var min = obj.GetMinValue(type);
             return obj.Equals(min);
@@ -78,7 +78,7 @@ namespace AhDai.Base.Extensions
         /// <param name="obj"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static object GetMinValue(this object obj, Type type = null)
+        public static object? GetMinValue(this object obj, Type? type = null)
         {
             type ??= obj.GetType();
             return type.FullName switch

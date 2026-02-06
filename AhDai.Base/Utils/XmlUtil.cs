@@ -16,16 +16,16 @@ namespace AhDai.Base.Utils
         /// <returns></returns>
         public static string SerializeObject<T>(T obj)
         {
-            var stringWriter = new StringWriter();
+            var writer = new StringWriter();
             try
             {
-                new XmlSerializer(obj.GetType()).Serialize(stringWriter, obj);
+                new XmlSerializer(typeof(T)).Serialize(writer, obj);
             }
             finally
             {
-                stringWriter.Dispose();
+                writer.Dispose();
             }
-            return stringWriter.ToString();
+            return writer.ToString();
         }
     }
 }

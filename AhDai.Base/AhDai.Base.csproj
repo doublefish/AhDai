@@ -2,10 +2,11 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.1</TargetFrameworks>
+		<Nullable>enable</Nullable>
 		
-		<Version>1.0.9</Version>
-		<AssemblyVersion>1.0.9</AssemblyVersion>
-		<FileVersion>1.0.9</FileVersion>
+		<Version>1.1.1</Version>
+		<AssemblyVersion>1.1.1</AssemblyVersion>
+		<FileVersion>1.1.1</FileVersion>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
 		<Copyright>© Shuang Yu. All rights reserved.</Copyright>

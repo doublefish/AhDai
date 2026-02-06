@@ -9,28 +9,18 @@ namespace AhDai.Base.Extensions
     /// </summary>
     public static class StringExtensions
     {
-        #region 类型转换
-
         /// <summary>
         /// 类型转换
         /// </summary>
         /// <param name="s"></param>
-        /// <param name="error"></param>
         /// <returns></returns>
-        public static byte ToByte(this string s, byte? error = null)
+        public static bool? ToBooleanOrNull(this string s)
         {
-            return byte.TryParse(s, out byte result) ? result : error ?? byte.MinValue;
-        }
-
-        /// <summary>
-        /// 类型转换
-        /// </summary>
-        /// <param name="s"></param>
-        /// <param name="error"></param>
-        /// <returns></returns>
-        public static sbyte ToSByte(this string s, sbyte? error = null)
-        {
-            return sbyte.TryParse(s, out sbyte result) ? result : error ?? sbyte.MinValue;
+            if (!string.IsNullOrWhiteSpace(s) && bool.TryParse(s.AsSpan(), out bool result))
+            {
+                return result;
+            }
+            return null;
         }
 
         /// <summary>
@@ -41,44 +31,23 @@ namespace AhDai.Base.Extensions
         /// <returns></returns>
         public static bool ToBoolean(this string s, bool? error = null)
         {
-            return bool.TryParse(s, out bool result) ? result : error ?? false;
+            return s.ToBooleanOrNull() ?? error ?? default;
         }
 
         /// <summary>
         /// 类型转换
         /// </summary>
         /// <param name="s"></param>
-        /// <param name="error"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
         /// <returns></returns>
-        public static short ToInt16(this string s, short? error = null)
+        public static sbyte? ToSByteOrNull(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
         {
-            return short.TryParse(s, out short result) ? result : error ?? short.MinValue;
-        }
-
-        /// <summary>
-        /// 类型转换
-        /// </summary>
-        /// <param name="s"></param>
-        /// <param name="error"></param>
-        /// <returns></returns>
-        public static int ToInt32(this string s, int? error = null)
-        {
-            if (!string.IsNullOrEmpty(s))
+            if (!string.IsNullOrWhiteSpace(s) && sbyte.TryParse(s.AsSpan(), style, provider, out sbyte result))
             {
-                s = s.ToLower();
-                if (s.Contains('e'))
-                {
-                    if (int.TryParse(s, NumberStyles.Float, null, out int result))
-                    {
-                        return result;
-                    }
-                }
-                else if (int.TryParse(s, out int result))
-                {
-                    return result;
-                }
+                return result;
             }
-            return error ?? int.MinValue;
+            return null;
         }
 
         /// <summary>
@@ -87,27 +56,38 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static long ToInt64(this string s, long? error = null)
+        public static sbyte ToSByte(this string s, sbyte? error = default)
         {
-            if (!string.IsNullOrEmpty(s))
+            return s.ToSByteOrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static sbyte ToSByte(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null, sbyte error = default)
+        {
+            return s.ToSByteOrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static byte? ToByteOrNull(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && byte.TryParse(s.AsSpan(), style, provider, out byte result))
             {
-                s = s.ToLower();
-                if (s.Contains('e'))
-                {
-                    if (long.TryParse(s, NumberStyles.Float, null, out long result))
-                    {
-                        return result;
-                    }
-                }
-                else
-                {
-                    if (long.TryParse(s, out long result))
-                    {
-                        return result;
-                    }
-                }
+                return result;
             }
-            return error ?? long.MinValue;
+            return null;
         }
 
         /// <summary>
@@ -116,27 +96,38 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static ulong ToUInt64(this string s, ulong? error = null)
+        public static byte ToByte(this string s, byte? error = default)
         {
-            if (!string.IsNullOrEmpty(s))
+            return s.ToByteOrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static byte ToByte(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null, byte error = default)
+        {
+            return s.ToByteOrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static short? ToInt16OrNull(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && short.TryParse(s.AsSpan(), style, provider, out short result))
             {
-                s = s.ToLower();
-                if (s.Contains('e'))
-                {
-                    if (ulong.TryParse(s, NumberStyles.Float, null, out ulong result))
-                    {
-                        return result;
-                    }
-                }
-                else
-                {
-                    if (ulong.TryParse(s, out ulong result))
-                    {
-                        return result;
-                    }
-                }
+                return result;
             }
-            return error ?? ulong.MinValue;
+            return null;
         }
 
         /// <summary>
@@ -145,27 +136,38 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static float ToSingle(this string s, float? error = null)
+        public static short ToInt16(this string s, short? error = default)
         {
-            if (!string.IsNullOrEmpty(s))
+            return s.ToInt16OrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static short ToInt16(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null, short error = default)
+        {
+            return s.ToInt16OrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static int? ToInt32OrNull(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && int.TryParse(s.AsSpan(), style, provider, out int result))
             {
-                s = s.ToLower();
-                if (s.Contains('e'))
-                {
-                    if (float.TryParse(s, NumberStyles.Float, null, out float result))
-                    {
-                        return result;
-                    }
-                }
-                else
-                {
-                    if (float.TryParse(s, out float result))
-                    {
-                        return result;
-                    }
-                }
+                return result;
             }
-            return error ?? float.MinValue;
+            return null;
         }
 
         /// <summary>
@@ -174,27 +176,38 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static double ToDouble(this string s, double? error = null)
+        public static int ToInt32(this string s, int? error = default)
         {
-            if (!string.IsNullOrEmpty(s))
+            return s.ToInt32OrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static int ToInt32(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null, int error = default)
+        {
+            return s.ToInt32OrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static long? ToInt64OrNull(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && long.TryParse(s.AsSpan(), style, provider, out long result))
             {
-                s = s.ToLower();
-                if (s.Contains('e'))
-                {
-                    if (double.TryParse(s, NumberStyles.Float, null, out double result))
-                    {
-                        return result;
-                    }
-                }
-                else
-                {
-                    if (double.TryParse(s, out double result))
-                    {
-                        return result;
-                    }
-                }
+                return result;
             }
-            return error ?? double.MinValue;
+            return null;
         }
 
         /// <summary>
@@ -203,27 +216,38 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static decimal ToDecimal(this string s, decimal? error = null)
+        public static long ToInt64(this string s, long? error = default)
         {
-            if (!string.IsNullOrEmpty(s))
+            return s.ToInt64OrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static long ToInt64(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null, long error = default)
+        {
+            return s.ToInt64OrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static ushort? ToUInt16OrNull(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && ushort.TryParse(s.AsSpan(), style, provider, out ushort result))
             {
-                s = s.ToLower();
-                if (s.Contains('e'))
-                {
-                    if (decimal.TryParse(s, NumberStyles.Float, null, out decimal result))
-                    {
-                        return result;
-                    }
-                }
-                else
-                {
-                    if (decimal.TryParse(s, out decimal result))
-                    {
-                        return result;
-                    }
-                }
+                return result;
             }
-            return error ?? decimal.MinValue;
+            return null;
         }
 
         /// <summary>
@@ -232,9 +256,308 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static DateTime ToDateTime(this string s, DateTime? error = null)
+        public static ushort ToUInt16(this string s, ushort? error = default)
         {
-            return DateTime.TryParse(s, out DateTime result) ? result : error ?? DateTime.MinValue;
+            return s.ToUInt16OrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static ushort ToUInt16(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null, ushort error = default)
+        {
+            return s.ToUInt16OrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static uint? ToUInt32OrNull(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && uint.TryParse(s.AsSpan(), style, provider, out uint result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static uint ToUInt32(this string s, uint? error = default)
+        {
+            return s.ToUInt32OrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static uint ToUInt32(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null, uint error = default)
+        {
+            return s.ToUInt32OrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static ulong? ToUInt64OrNull(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && ulong.TryParse(s.AsSpan(), style, provider, out ulong result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static ulong ToUInt64(this string s, ulong? error = default)
+        {
+            return s.ToUInt64OrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static ulong ToUInt64(this string s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null, ulong error = default)
+        {
+            return s.ToUInt64OrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static float? ToSingleOrNull(this string s, NumberStyles style = NumberStyles.AllowThousands | NumberStyles.Float, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && float.TryParse(s.AsSpan(), style, provider, out float result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static float ToSingle(this string s, float? error = default)
+        {
+            return s.ToSingleOrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static float ToSingle(this string s, NumberStyles style = NumberStyles.AllowThousands | NumberStyles.Float, IFormatProvider? provider = null, float error = default)
+        {
+            return s.ToSingleOrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static double? ToDoubleOrNull(this string s, NumberStyles style = NumberStyles.AllowThousands | NumberStyles.Float, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && double.TryParse(s.AsSpan(), style, provider, out double result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static double ToDouble(this string s, double? error = default)
+        {
+            return s.ToDoubleOrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static double ToDouble(this string s, NumberStyles style = NumberStyles.AllowThousands | NumberStyles.Float, IFormatProvider? provider = null, double error = default)
+        {
+            return s.ToDoubleOrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static decimal? ToDecimalOrNull(this string s, NumberStyles style = NumberStyles.Number, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && decimal.TryParse(s.AsSpan(), style, provider, out decimal result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static decimal ToDecimal(this string s, decimal? error = default)
+        {
+            return s.ToDecimalOrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="style"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static decimal ToDecimal(this string s, NumberStyles style = NumberStyles.Number, IFormatProvider? provider = null, decimal error = default)
+        {
+            return s.ToDecimalOrNull(style, provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="provider"></param>
+        /// <param name="styles"></param>
+        /// <returns></returns>
+        public static DateTime? ToDateTimeOrNull(this string s, IFormatProvider? provider = null, DateTimeStyles styles = DateTimeStyles.None)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && DateTime.TryParse(s.AsSpan(), provider, styles, out DateTime result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static DateTime ToDateTime(this string s, DateTime? error = default)
+        {
+            return s.ToDateTimeOrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="provider"></param>
+        /// <param name="styles"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static DateTime ToDateTime(this string s, IFormatProvider? provider = null, DateTimeStyles styles = DateTimeStyles.None, DateTime error = default)
+        {
+            return s.ToDateTimeOrNull(provider, styles) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="format"></param>
+        /// <param name="provider"></param>
+        /// <param name="styles"></param>
+        /// <returns></returns>
+        public static DateTime? ToDateTimeExactOrNull(this string s, string format, IFormatProvider? provider = null, DateTimeStyles styles = DateTimeStyles.None)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && DateTime.TryParseExact(s.AsSpan(), format, provider, styles, out DateTime result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="formats"></param>
+        /// <param name="provider"></param>
+        /// <param name="styles"></param>
+        /// <returns></returns>
+        public static DateTime? ToDateTimeExactOrNull(this string s, string[] formats, IFormatProvider? provider = null, DateTimeStyles styles = DateTimeStyles.None)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && DateTime.TryParseExact(s.AsSpan(), formats, provider, styles, out DateTime result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="format"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static DateTime ToDateTimeExact(this string s, string format, DateTime? error = null)
+        {
+            return s.ToDateTimeExactOrNull(format) ?? error ?? default;
         }
 
         /// <summary>
@@ -246,9 +569,21 @@ namespace AhDai.Base.Extensions
         /// <param name="styles"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static DateTime ToDateTimeExact(this string s, string format, IFormatProvider provider = null, DateTimeStyles? styles = null, DateTime? error = null)
+        public static DateTime ToDateTimeExact(this string s, string format, IFormatProvider? provider = null, DateTimeStyles styles = DateTimeStyles.None, DateTime error = default)
         {
-            return DateTime.TryParseExact(s, format, provider, styles ?? DateTimeStyles.RoundtripKind, out DateTime result) ? result : error ?? DateTime.MinValue;
+            return s.ToDateTimeExactOrNull(format, provider, styles) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="formats"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static DateTime ToDateTimeExact(this string s, string[] formats, DateTime? error = default)
+        {
+            return s.ToDateTimeExactOrNull(formats) ?? error ?? default;
         }
 
         /// <summary>
@@ -260,9 +595,24 @@ namespace AhDai.Base.Extensions
         /// <param name="styles"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static DateTime ToDateTimeExact(this string s, string[] formats, IFormatProvider provider = null, DateTimeStyles? styles = null, DateTime? error = null)
+        public static DateTime ToDateTimeExact(this string s, string[] formats, IFormatProvider? provider = null, DateTimeStyles styles = DateTimeStyles.None, DateTime error = default)
         {
-            return DateTime.TryParseExact(s, formats, provider, styles ?? DateTimeStyles.RoundtripKind, out DateTime result) ? result : error ?? DateTime.MinValue;
+            return s.ToDateTimeExactOrNull(formats, provider, styles) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static TimeSpan? ToTimeSpanOrNull(this string s, IFormatProvider? provider = null)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && TimeSpan.TryParse(s.AsSpan(), provider, out TimeSpan result))
+            {
+                return result;
+            }
+            return null;
         }
 
         /// <summary>
@@ -271,9 +621,67 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static TimeSpan ToTimeSpan(this string s, TimeSpan? error = null)
+        public static TimeSpan ToTimeSpan(this string s, TimeSpan? error = default)
         {
-            return TimeSpan.TryParse(s, out TimeSpan result) ? result : error ?? TimeSpan.MinValue;
+            return s.ToTimeSpanOrNull() ?? error ?? default;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="provider"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static TimeSpan ToTimeSpan(this string s, IFormatProvider? provider = null, TimeSpan error = default)
+        {
+            return s.ToTimeSpanOrNull(provider) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="format"></param>
+        /// <param name="provider"></param>
+        /// <param name="styles"></param>
+        /// <returns></returns>
+        public static TimeSpan? ToTimeSpanExactOrNull(this string s, string format, IFormatProvider? provider = null, TimeSpanStyles styles = TimeSpanStyles.None)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && TimeSpan.TryParseExact(s.AsSpan(), format, provider, styles, out TimeSpan result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="formats"></param>
+        /// <param name="provider"></param>
+        /// <param name="styles"></param>
+        /// <returns></returns>
+        public static TimeSpan? ToTimeSpanExactOrNull(this string s, string[] formats, IFormatProvider? provider = null, TimeSpanStyles styles = TimeSpanStyles.None)
+        {
+            if (!string.IsNullOrWhiteSpace(s) && TimeSpan.TryParseExact(s.AsSpan(), formats, provider, styles, out TimeSpan result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="format"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static TimeSpan ToTimeSpanExact(this string s, string format, TimeSpan? error = default)
+        {
+            return s.ToTimeSpanExactOrNull(format) ?? error ?? default;
         }
 
         /// <summary>
@@ -285,9 +693,21 @@ namespace AhDai.Base.Extensions
         /// <param name="styles"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static TimeSpan ToTimeSpanExact(this string s, string format, IFormatProvider provider = null, TimeSpanStyles? styles = null, TimeSpan? error = null)
+        public static TimeSpan ToTimeSpanExact(this string s, string format, IFormatProvider? provider = null, TimeSpanStyles styles = TimeSpanStyles.None, TimeSpan error = default)
         {
-            return TimeSpan.TryParseExact(s, format, provider, styles ?? TimeSpanStyles.None, out TimeSpan result) ? result : error ?? TimeSpan.MinValue;
+            return s.ToTimeSpanExactOrNull(format, provider, styles) ?? error;
+        }
+
+        /// <summary>
+        /// 类型转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="formats"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static TimeSpan ToTimeSpanExact(this string s, string[] formats, TimeSpan? error = default)
+        {
+            return s.ToTimeSpanExactOrNull(formats) ?? error ?? default;
         }
 
         /// <summary>
@@ -299,11 +719,11 @@ namespace AhDai.Base.Extensions
         /// <param name="styles"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static TimeSpan ToTimeSpanExact(this string s, string[] formats, IFormatProvider provider = null, TimeSpanStyles? styles = null, TimeSpan? error = null)
+        public static TimeSpan ToTimeSpanExact(this string s, string[] formats, IFormatProvider? provider = null, TimeSpanStyles styles = TimeSpanStyles.None, TimeSpan error = default)
         {
-            return TimeSpan.TryParseExact(s, formats, provider, styles ?? TimeSpanStyles.None, out TimeSpan result) ? result : error ?? TimeSpan.MinValue;
+            return s.ToTimeSpanExactOrNull(formats, provider, styles) ?? error;
         }
-        #endregion
+
 
         /// <summary>
         /// 补齐
@@ -312,13 +732,9 @@ namespace AhDai.Base.Extensions
         /// <param name="length">指定长度；输入字符串超出字符时，不做处理，直接返回</param>
         /// <param name="prefix">前缀</param>
         /// <returns></returns>
-        public static string Complete(this string s, int length, string prefix = "0")
+        public static string Complete(this string s, int length, char prefix = '0')
         {
-            while (s.Length < length)
-            {
-                s = prefix + s;
-            }
-            return s;
+            return s.Length >= length ? s : s.PadLeft(length, prefix);
         }
 
         /// <summary>
@@ -326,11 +742,11 @@ namespace AhDai.Base.Extensions
         /// </summary>
         /// <param name="s"></param>
         /// <param name="startIndex"></param>
-        /// <param name="endIndex"></param>
+        /// <param name="length"></param>
         /// <returns></returns>
-        public static string Replace(this string s, int startIndex, int endIndex)
+        public static string Replace(this string s, int startIndex, int length)
         {
-            return s.Replace('*', startIndex, endIndex);
+            return s.Replace('*', startIndex, length);
         }
 
         /// <summary>
@@ -339,27 +755,17 @@ namespace AhDai.Base.Extensions
         /// <param name="s"></param>
         /// <param name="newChar"></param>
         /// <param name="startIndex"></param>
-        /// <param name="endIndex"></param>
+        /// <param name="length"></param>
         /// <returns></returns>
-        public static string Replace(this string s, char newChar, int startIndex, int endIndex)
+        public static string Replace(this string s, char newChar, int startIndex, int length)
         {
-            if (string.IsNullOrEmpty(s) || s.Length <= startIndex)
-            {
-                return s;
-            }
+            if (string.IsNullOrEmpty(s) || startIndex < 0 || startIndex >= s.Length || length <= 0) return s;
+
+            var actualLength = Math.Min(length, s.Length - startIndex);
             var chars = s.ToCharArray();
-            if (endIndex >= chars.Length)
+            for (int i = 0; i < actualLength; i++)
             {
-                endIndex = chars.Length;
-            }
-            else
-            {
-                endIndex++;
-            }
-            while (startIndex < endIndex)
-            {
-                chars[startIndex] = newChar;
-                startIndex++;
+                chars[startIndex + i] = newChar;
             }
             return new string(chars);
         }
@@ -373,11 +779,22 @@ namespace AhDai.Base.Extensions
         {
             if (string.IsNullOrEmpty(s)) return s;
 
-            var builder = new StringBuilder(s.Length);
-            foreach (char c in s)
+            var span = s.AsSpan();
+            var hasWhiteSpace = false;
+            foreach (var c in span)
             {
-                // 过滤掉空格、回车、换行、制表符
-                if (c != ' ' && c != '\r' && c != '\n' && c != '\t')
+                if (char.IsWhiteSpace(c))
+                {
+                    hasWhiteSpace = true;
+                    break;
+                }
+            }
+            if (!hasWhiteSpace) return s;
+
+            var builder = new StringBuilder(span.Length);
+            foreach (char c in span)
+            {
+                if (!char.IsWhiteSpace(c))
                 {
                     builder.Append(c);
                 }

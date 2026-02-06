@@ -37,8 +37,8 @@ namespace AhDai.Base.Utils
                     var attrs = type.GetField(v.ToString()).GetCustomAttributes(DescriptionType, true);
                     if (attrs.Length > 0)
                     {
-                        var attr = attrs.FirstOrDefault() as DescriptionAttribute;
-                        description = attr.Description;
+                        var attr = attrs.First() as DescriptionAttribute;
+                        description = attr?.Description ?? "";
                     }
                     break;
                 }
@@ -77,8 +77,8 @@ namespace AhDai.Base.Utils
                 var attrs = type.GetField(v.ToString()).GetCustomAttributes(DescriptionType, true);
                 if (attrs.Length > 0)
                 {
-                    var attr = attrs.FirstOrDefault() as DescriptionAttribute;
-                    description = attr.Description;
+                    var attr = attrs.First() as DescriptionAttribute;
+                    description = attr?.Description ?? "";
                 }
                 dict.Add((T)v, description);
             }
