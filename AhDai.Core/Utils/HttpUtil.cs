@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -360,5 +362,37 @@ public static partial class HttpUtil
             return false;
         }
         return IpRegex().IsMatch(ip);
+    }
+
+    /// <summary>
+    /// 是否内部Ip
+    /// </summary>
+    /// <param name="ip"></param>
+    /// <returns></returns>
+    public static bool IsInternalIp(string ip)
+    {
+        if (!IPAddress.TryParse(ip, out var address)) return false;
+
+        if (address.IsIPv4MappedToIPv6)
+        {
+            address = address.MapToIPv4();
+        }
+
+        if (IPAddress.IsLoopback(address)) return true;
+
+        var bytes = address.GetAddressBytes();
+
+        // 仅针对 IPv4 的私有网段判断
+        if (address.AddressFamily == AddressFamily.InterNetwork)
+        {
+            // 10.x.x.x
+            if (bytes[0] == 10) return true;
+            // 172.16.x.x - 172.31.x.x
+            if (bytes[0] == 172 && bytes[1] >= 16 && bytes[1] <= 31) return true;
+            // 192.168.x.x
+            if (bytes[0] == 192 && bytes[1] == 168) return true;
+        }
+
+        return false;
     }
 }
