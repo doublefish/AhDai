@@ -2780,12 +2780,8 @@
         <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
             <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
         </member>
-        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_ascii_662A8000662A800">
-            <summary>Supports searching for characters in or not in "ABIMNSUWabimnsuw".</summary>
-        </member>
-    </members>
-</doc>
-gs.</summary>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_indexOfAnyStrings_OrdinalIgnoreCase_46014A8B7B3C7A2F9033727512F94E85EAA984C17CE55A0D78E1E676BFA041AA">
+            <summary>Supports searching for the specified strings.</summary>
         </member>
         <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type)">
             <summary>
