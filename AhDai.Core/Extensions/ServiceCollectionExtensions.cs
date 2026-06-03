@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddRedisService(this IServiceCollection services)
     {
-        services.AddSingleton<Services.IBaseRedisService, Services.BaseRedisService>();
+        services.AddSingleton<Interfaces.Services.IBaseRedisService, Services.BaseRedisService>();
         return services;
     }
 
@@ -35,7 +35,7 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddJwtService(this IServiceCollection services)
     {
-        return services.AddSingleton<Services.IBaseJwtService, Services.BaseJwtService>();
+        return services.AddSingleton<Interfaces.Services.IBaseJwtService, Services.BaseJwtService>();
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddFileService(this IServiceCollection services)
     {
-        return services.AddSingleton<Services.IBaseFileService, Services.BaseFileService>();
+        return services.AddSingleton<Interfaces.Services.IBaseFileService, Services.BaseFileService>();
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ public static class ServiceCollectionExtensions
                     if (config.EnableRedis)
                     {
                         var token = context.Request.Headers.Authorization.ToString();
-                        var jwtService = ServiceUtil.Services.GetRequiredService<Services.IBaseJwtService>();
+                        var jwtService = ServiceUtil.Services.GetRequiredService<Interfaces.Services.IBaseJwtService>();
                         var exists = await jwtService.ValidateTokenAsync(token);
                         if (!exists) context.Fail(new Exception("认证失效"));
                     }

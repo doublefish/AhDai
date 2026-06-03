@@ -1,5 +1,6 @@
 ﻿using AhDai.Core.Configs;
 using AhDai.Core.Extensions;
+using AhDai.Core.Interfaces.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;

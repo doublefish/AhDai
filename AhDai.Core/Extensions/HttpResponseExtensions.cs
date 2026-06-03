@@ -23,7 +23,7 @@ public static class HttpResponseExtensions
         response.StatusCode = StatusCodes.Status200OK;
         if (!string.IsNullOrEmpty(contentType) && (contentType == HttpContentType.Xml || contentType == HttpContentType.TextHtml))
         {
-            return response.WriteAsync(Base.Utils.XmlUtil.SerializeObject(data), cancellationToken);
+            return response.WriteAsync(Utils.XmlUtil.SerializeObject(data), cancellationToken);
         }
         else
         {

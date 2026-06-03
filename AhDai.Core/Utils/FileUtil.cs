@@ -3,9 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace AhDai.Core.Utils;
 
@@ -14,17 +12,7 @@ namespace AhDai.Core.Utils;
 /// </summary>
 public static class FileUtil
 {
-    /// <summary>
-    /// 输出图片
-    /// </summary>
-    /// <param name="path"></param>
-    /// <returns></returns>
-    public static HttpResponseMessage OutputImage(string path)
-    {
-        var task = Task.Run(() => { return OutputImageAsync(path); });
-        task.Wait();
-        return task.Result;
-    }
+    static readonly Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider ContentTypeProvider = new();
 
     /// <summary>
     /// 输出图片
@@ -33,15 +21,21 @@ public static class FileUtil
     /// <returns></returns>
     public static async Task<HttpResponseMessage> OutputImageAsync(string path)
     {
-        if (!File.Exists(path))
+        if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
         {
             return new HttpResponseMessage(HttpStatusCode.NotFound);
         }
-        var bytes = await File.ReadAllBytesAsync(path);
-        var extension = Path.GetExtension(path);
-        var type = $"image/{extension[1..]}";
-        var name = $"{Guid.NewGuid()}{extension}";
-        return Output(bytes, type, name);
+
+        var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 4096, useAsync: true);
+
+        if (!ContentTypeProvider.TryGetContentType(path, out var contentType))
+        {
+            contentType = "application/octet-stream";
+        }
+
+        var fileName = $"{Guid.NewGuid()}{Path.GetExtension(path)}";
+
+        return Output(stream, contentType, fileName);
     }
 
     /// <summary>
@@ -57,12 +51,8 @@ public static class FileUtil
         {
             Content = new ByteArrayContent(bytes)
         };
-        response.Content.Headers.ContentLength = bytes.Length;
-        response.Content.Headers.ContentType = new MediaTypeHeaderValue(type);
-        response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-        {
-            FileName = HttpUtility.UrlEncode(name, Encoding.UTF8)
-        };
+
+        SetResponseHeaders(response.Content, type, name);
         return response;
     }
 
@@ -79,12 +69,13 @@ public static class FileUtil
         {
             Content = new StreamContent(stream)
         };
-        //response.Data.Headers.ContentLength = stream.Length;
-        response.Content.Headers.ContentType = new MediaTypeHeaderValue(type);
-        response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+
+        if (stream.CanSeek)
         {
-            FileName = HttpUtility.UrlEncode(name, Encoding.UTF8)
-        };
+            response.Content.Headers.ContentLength = stream.Length;
+        }
+
+        SetResponseHeaders(response.Content, type, name);
         return response;
     }
 
@@ -96,28 +87,43 @@ public static class FileUtil
     /// <returns></returns>
     public static string ToPhysicalPath(string path, char separator = '/')
     {
-        var paths = path.Split(separator);
-        return Path.Combine(paths);
+        if (string.IsNullOrWhiteSpace(path)) return string.Empty;
+
+        if (Path.DirectorySeparatorChar != separator)
+        {
+            path = path.Replace(separator, Path.DirectorySeparatorChar);
+        }
+
+        return Path.GetFullPath(path);
     }
 
     /// <summary>
     /// 换算文件大小
     /// </summary>
-    /// <param name="b"></param>
+    /// <param name="bytes"></param>
     /// <returns></returns>
-    public static string GetFileSize(long b)
+    public static string GetFileSize(long bytes)
     {
-        var size = (double)b;
-        var units = new string[] { "B", "KB", "MB", "GB", "TB" };
-        var unit = units[0];
-        var i = 0;
-        while (size > 100 && i < units.Length)
+        if (bytes <= 0) return "0 B";
+
+        var units = new string[] { "B", "KB", "MB", "GB", "TB", "PB" };
+
+        var digitGroups = (int)(Math.Log10(bytes) / Math.Log10(1024));
+
+        // 防御上边界，防止超越单位数组
+        if (digitGroups >= units.Length) digitGroups = units.Length - 1;
+
+        var size = bytes / Math.Pow(1024, digitGroups);
+
+        return $"{size:F2} {units[digitGroups]}";
+    }
+
+    static void SetResponseHeaders(HttpContent content, string type, string name)
+    {
+        content.Headers.ContentType = new MediaTypeHeaderValue(type);
+        content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
         {
-            size /= 1024;
-            unit = units[i + 1];
-            i++;
-        }
-        size = Math.Round(size, 2);
-        return size + unit;
+            FileName = name
+        };
     }
 }

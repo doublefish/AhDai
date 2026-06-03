@@ -1,4 +1,5 @@
 ﻿using AhDai.Core.Extensions;
+using AhDai.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
@@ -249,7 +250,7 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
 
         //生成RAR文件
         var fileName = $"{timestamp}.rar";
-        Utils.RARUtil.Compress(tempFolderPath, folderPath, fileName);
+        Utils.CompressionUtil.Compress(tempFolderPath, folderPath, fileName);
         //清空临时文件夹
         Directory.Delete(tempFolderPath, true);
         var filePath = Path.Combine(folderPath, fileName);
