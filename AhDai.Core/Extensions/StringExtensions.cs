@@ -1012,20 +1012,9 @@ public static class StringExtensions
 
     #endregion
 
-    /// <summary>
-    /// 补齐
-    /// </summary>
-    /// <param name="s"></param>
-    /// <param name="length">指定长度；输入字符串超出字符时，不做处理，直接返回</param>
-    /// <param name="prefix">前缀</param>
-    /// <returns></returns>
-    public static string Complete(this string s, int length, char prefix = '0')
-    {
-        return s.Length >= length ? s : s.PadLeft(length, prefix);
-    }
 
     /// <summary>
-    /// 替换字符
+    /// 替换指定索引范围内的字符（默认打码为 '*'）
     /// </summary>
     /// <param name="s"></param>
     /// <param name="startIndex"></param>
@@ -1046,15 +1035,15 @@ public static class StringExtensions
     /// <returns></returns>
     public static string Replace(this string s, char newChar, int startIndex, int length)
     {
-        if (string.IsNullOrEmpty(s) || startIndex < 0 || startIndex >= s.Length || length <= 0) return s;
+        if (string.IsNullOrEmpty(s) || startIndex < 0 || startIndex >= s.Length || length <= 0)
+            return s;
 
         var actualLength = Math.Min(length, s.Length - startIndex);
-        var chars = s.ToCharArray();
-        for (int i = 0; i < actualLength; i++)
+        return string.Create(s.Length, (s, newChar, startIndex, actualLength), static (destSpan, state) =>
         {
-            chars[startIndex + i] = newChar;
-        }
-        return new string(chars);
+            state.s.AsSpan().CopyTo(destSpan);
+            destSpan.Slice(state.startIndex, state.actualLength).Fill(state.newChar);
+        });
     }
 
     /// <summary>
@@ -1066,26 +1055,65 @@ public static class StringExtensions
     {
         if (string.IsNullOrEmpty(s)) return s;
 
-        var span = s.AsSpan();
-        var hasWhiteSpace = false;
-        foreach (var c in span)
+        var source = s.AsSpan();
+
+        var hasTargetWhiteSpace = false;
+        foreach (char c in source)
         {
-            if (char.IsWhiteSpace(c))
+            if (c is ' ' or '\r' or '\n' or '\t')
             {
-                hasWhiteSpace = true;
+                hasTargetWhiteSpace = true;
                 break;
             }
         }
-        if (!hasWhiteSpace) return s;
+        if (!hasTargetWhiteSpace) return s;
 
-        var builder = new StringBuilder(span.Length);
-        foreach (char c in span)
+        var buffer = s.Length <= 512 ? stackalloc char[s.Length] : new char[s.Length];
+        var destIndex = 0;
+        for (var i = 0; i < source.Length; i++)
         {
-            if (!char.IsWhiteSpace(c))
+            char c = source[i];
+            if (c is ' ' or '\r' or '\n' or '\t')
             {
-                builder.Append(c);
+                continue;
             }
+            buffer[destIndex++] = c;
         }
-        return builder.ToString();
+        return new string(buffer[..destIndex]);
+    }
+
+    /// <summary>
+    /// 安全截取字符串（达到最大长度时自动截断，不抛出异常）
+    /// </summary>
+    /// <param name="str"></param>
+    /// <param name="maxLength"></param>
+    /// <returns></returns>
+    public static string Truncate(this string str, int maxLength) => string.IsNullOrEmpty(str) || str.Length <= maxLength ? str : str[..maxLength];
+
+    /// <summary>
+    /// 截取字符串并追加省略号
+    /// </summary>
+    /// <param name="str"></param>
+    /// <param name="maxLength"></param>
+    /// <returns></returns>
+    public static string TruncateWithEllipsis(this string str, int maxLength) => string.IsNullOrEmpty(str) || str.Length <= maxLength ? str : str[..maxLength] + "...";
+
+    /// <summary>
+    /// ToCamelCase
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static string ToCamelCase(this string str)
+    {
+        if (string.IsNullOrEmpty(str))
+        {
+            return str;
+        }
+        var firstChar = char.ToLower(str[0]);
+        if (str.Length == 1)
+        {
+            return firstChar.ToString();
+        }
+        return firstChar + str[1..];
     }
 }

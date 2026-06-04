@@ -1,0 +1,35 @@
+﻿using AhDai.Integration.Aliyun.Configs;
+using AhDai.Integration.Aliyun.Models;
+using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+namespace AhDai.Integration.Aliyun;
+
+/// <summary>
+/// AliyunOcrService
+/// </summary>
+internal class AliyunOcrService(IAliyunOcrConfigProvider configProvider, IHttpClientFactory httpClientFactory)
+    : AliyunService<AliyunOcrConfig, IAliyunOcrConfigProvider>(configProvider, httpClientFactory, "2021-07-07", 1), IAliyunOcrService
+{
+    public async Task<OcrTaxPaymentCertificateOutput> TaxPaymentCertificateAsync(string? url, Stream? stream)
+    {
+        //var query = Utils.ObjectUtl.ToSortedDictionary(input);
+        var query = new SortedDictionary<string, string?>()
+        {
+            { "Url", url ?? "" }
+        };
+        StreamContent? content = null;
+        if (stream != null)
+        {
+            var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            ms.Position = 0;
+            content = new StreamContent(ms);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+        }
+        //var res = await new AliyunOcrTestService(Config).TaxPaymentCertificateAsync(url, stream);
+        return await SendAsync<OcrTaxPaymentCertificateOutput>(HttpMethod.Post, "RecognizeTaxClearanceCertificate", content, query);
+    }
+}

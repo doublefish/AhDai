@@ -1,0 +1,20 @@
+﻿using AhDai.Integration.Aliyun.Configs;
+using AhDai.Integration.Aliyun.Models;
+using System.IO;
+using System.Threading.Tasks;
+
+namespace AhDai.Integration.Aliyun;
+
+/// <summary>
+/// IAliyunOcrService
+/// </summary>
+public interface IAliyunOcrService : IBaseService<AliyunOcrConfig>
+{
+    /// <summary>
+    /// 识别完税证明
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="stream"></param>
+    /// <returns></returns>
+    Task<OcrTaxPaymentCertificateOutput> TaxPaymentCertificateAsync(string? url, Stream? stream);
+}

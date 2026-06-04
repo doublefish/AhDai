@@ -868,6 +868,29 @@
             LinqExt
             </summary>
         </member>
+        <member name="M:AhDai.Core.Extensions.LinqExtensions.True``1">
+            <summary>
+            True
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.LinqExtensions.False``1">
+            <summary>
+            False
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.LinqExtensions.WhereAll``1(System.Linq.IQueryable{``0},System.Collections.Generic.IEnumerable{System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}}})">
+            <summary>
+            添加多个条件
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="source"></param>
+            <param name="predicates"></param>
+            <returns></returns>
+        </member>
         <member name="M:AhDai.Core.Extensions.LinqExtensions.Paginate``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
             <summary>
             分页
@@ -876,6 +899,35 @@
             <param name="query"></param>
             <param name="pageNumber">页码</param>
             <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.LinqExtensions.Or``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Or
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.LinqExtensions.OrderByDynamic``1(System.Linq.IQueryable{``0},System.String,System.String)">
+            <summary>
+            动态排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="sortName"></param>
+            <param name="sortType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.LinqExtensions.OrderByDynamic``1(System.Linq.IQueryable{``0},System.String[],System.String)">
+            <summary>
+            动态排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="sortNames"></param>
+            <param name="sortType"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Extensions.ObjectExtensions">
@@ -1650,18 +1702,9 @@
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.StringExtensions.Complete(System.String,System.Int32,System.Char)">
-            <summary>
-            补齐
-            </summary>
-            <param name="s"></param>
-            <param name="length">指定长度；输入字符串超出字符时，不做处理，直接返回</param>
-            <param name="prefix">前缀</param>
-            <returns></returns>
-        </member>
         <member name="M:AhDai.Core.Extensions.StringExtensions.Replace(System.String,System.Int32,System.Int32)">
             <summary>
-            替换字符
+            替换指定索引范围内的字符（默认打码为 '*'）
             </summary>
             <param name="s"></param>
             <param name="startIndex"></param>
@@ -1683,6 +1726,29 @@
             去除空格、回车、换行和制表符
             </summary>
             <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.Truncate(System.String,System.Int32)">
+            <summary>
+            安全截取字符串（达到最大长度时自动截断，不抛出异常）
+            </summary>
+            <param name="str"></param>
+            <param name="maxLength"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.TruncateWithEllipsis(System.String,System.Int32)">
+            <summary>
+            截取字符串并追加省略号
+            </summary>
+            <param name="str"></param>
+            <param name="maxLength"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.StringExtensions.ToCamelCase(System.String)">
+            <summary>
+            ToCamelCase
+            </summary>
+            <param name="str"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Extensions.XmlExtensions">
@@ -2362,6 +2428,59 @@
             <param name="code">结果代码</param>
             <param name="message">消息</param>
             <param name="data">内容</param>
+        </member>
+        <member name="T:AhDai.Core.Models.DictItem`2">
+            <summary>
+            DictItem
+            </summary>
+            <typeparam name="TValue"></typeparam>
+            <typeparam name="TName"></typeparam>
+            <param name="value"></param>
+            <param name="name"></param>
+            <param name="sort"></param>
+        </member>
+        <member name="M:AhDai.Core.Models.DictItem`2.#ctor(`0,`1,System.Int32)">
+            <summary>
+            DictItem
+            </summary>
+            <typeparam name="TValue"></typeparam>
+            <typeparam name="TName"></typeparam>
+            <param name="value"></param>
+            <param name="name"></param>
+            <param name="sort"></param>
+        </member>
+        <member name="P:AhDai.Core.Models.DictItem`2.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.DictItem`2.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.DictItem`2.Sort">
+            <summary>
+            顺序
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Models.DictItem`1">
+            <summary>
+            DictItem
+            </summary>
+            <typeparam name="TValue"></typeparam>
+            <param name="value"></param>
+            <param name="name"></param>
+            <param name="sort"></param>
+        </member>
+        <member name="M:AhDai.Core.Models.DictItem`1.#ctor(`0,System.String,System.Int32)">
+            <summary>
+            DictItem
+            </summary>
+            <typeparam name="TValue"></typeparam>
+            <param name="value"></param>
+            <param name="name"></param>
+            <param name="sort"></param>
         </member>
         <member name="T:AhDai.Core.Models.FileData">
             <summary>
@@ -3149,10 +3268,55 @@
             时间戳（距1970-01-01的秒数）
             </summary>
         </member>
+        <member name="T:AhDai.Core.Utils.DictItemUtil">
+            <summary>
+            高性能配置元数据与字典转换工具
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Utils.DictItemUtil.FromEnum``1(``0[],``0[])">
+            <summary>
+            从枚举中极速提取字典项列表
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Utils.DictItemUtil.FromClass``1(System.String[],System.String[])">
+            <summary>
+            从静态常量类中极速提取字符串字典项列表
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Utils.DictItemUtil.FromClass``2(``1[],``1[])">
+            <summary>
+            从静态常量类中极速提取指定类型的字典项列表
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Utils.DictItemUtil.EnumDictCache`1">
+            <summary>
+            针对枚举的强类型隔离缓存
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:AhDai.Core.Utils.DictItemUtil.ClassDictCache`2">
+            <summary>
+            针对静态常量类的强类型隔离缓存
+            </summary>
+            <typeparam name="TClass"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
         <member name="T:AhDai.Core.Utils.FileUtil">
             <summary>
             FileUtil
             </summary>
+        </member>
+        <member name="M:AhDai.Core.Utils.FileUtil.EnsureDirectoryExists(System.String)">
+            <summary>
+            EnsureDirectoryExists
+            </summary>
+            <param name="directoryPath"></param>
+        </member>
+        <member name="M:AhDai.Core.Utils.FileUtil.EnsureParentDirectoryExists(System.String)">
+            <summary>
+            EnsureParentDirectoryExists
+            </summary>
+            <param name="filePath"></param>
         </member>
         <member name="M:AhDai.Core.Utils.FileUtil.OutputImageAsync(System.String)">
             <summary>
@@ -3193,6 +3357,36 @@
             </summary>
             <param name="bytes"></param>
             <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Utils.GeoUtil">
+            <summary>
+            GeoUtil
+            </summary>
+        </member>
+        <member name="F:AhDai.Core.Utils.GeoUtil.EarthRadiusKm">
+            <summary>
+            地球半径，单位：公里
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Utils.GeoUtil.GetDistance(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            计算球面距离
+            </summary>
+            <param name="startLongitude"></param>
+            <param name="startLatitude"></param>
+            <param name="endLongitude"></param>
+            <param name="endLatitude"></param>
+            <returns>距离：公里</returns>
+        </member>
+        <member name="M:AhDai.Core.Utils.GeoUtil.GetDistance(System.Decimal,System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            计算球面距离
+            </summary>
+            <param name="startLongitude"></param>
+            <param name="startLatitude"></param>
+            <param name="endLongitude"></param>
+            <param name="endLatitude"></param>
+            <returns>距离：公里</returns>
         </member>
         <member name="T:AhDai.Core.Utils.HexUtil">
             <summary>
@@ -3336,6 +3530,18 @@
             <summary>
             LinqUtil
             </summary>
+        </member>
+        <member name="M:AhDai.Core.Utils.LinqUtil.BuildRangedPredicates``1(System.Linq.Expressions.Expression{System.Func{``0,System.Decimal}},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            BuildRangedPredicates
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="selector"></param>
+            <param name="min"></param>
+            <param name="max"></param>
+            <param name="includeMin"></param>
+            <param name="includeMax"></param>
+            <returns></returns>
         </member>
         <member name="T:AhDai.Core.Utils.LoggerUtil">
             <summary>

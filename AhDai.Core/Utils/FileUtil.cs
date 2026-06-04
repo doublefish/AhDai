@@ -15,6 +15,28 @@ public static class FileUtil
     static readonly Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider ContentTypeProvider = new();
 
     /// <summary>
+    /// EnsureDirectoryExists
+    /// </summary>
+    /// <param name="directoryPath"></param>
+    public static void EnsureDirectoryExists(string? directoryPath)
+    {
+        if (!string.IsNullOrEmpty(directoryPath) && !Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+    }
+
+    /// <summary>
+    /// EnsureParentDirectoryExists
+    /// </summary>
+    /// <param name="filePath"></param>
+    public static void EnsureParentDirectoryExists(string filePath)
+    {
+        var dir = Path.GetDirectoryName(filePath);
+        EnsureDirectoryExists(dir);
+    }
+
+    /// <summary>
     /// 输出图片
     /// </summary>
     /// <param name="path"></param>
