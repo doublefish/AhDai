@@ -1,11 +1,10 @@
-﻿using AhDai.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace AhDai.Core;
+namespace AhDai.Core.Infrastructure;
 
 /// <summary>
 /// 类型属性元数据中心

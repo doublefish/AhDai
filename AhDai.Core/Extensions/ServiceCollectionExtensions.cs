@@ -1,4 +1,5 @@
 ﻿using AhDai.Core.Handlers;
+using AhDai.Core.Models;
 using AhDai.Core.Utils;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AhDai.Core.Consts;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.IO;
@@ -55,35 +56,6 @@ public static partial class HttpRequestExtensions
             path = string.Join('/', paths, 0, paths.Length - routeValueCount + 2);
         }
         return path;
-    }
-
-    /// <summary>
-    /// 验证请求频率
-    /// </summary>
-    /// <param name="httpRequest"></param>
-    /// <param name="limit"></param>
-    /// <param name="path"></param>
-    /// <returns></returns>
-    public static void VerifyRequestFrequencyLimit(this HttpRequest httpRequest, double limit = 1D, string? path = null)
-    {
-        if (string.IsNullOrEmpty(path))
-        {
-            path = httpRequest.GetPath();
-        }
-        var ipAddress = httpRequest.HttpContext.Connection.RemoteIpAddress;
-        try
-        {
-            Utils.HttpRequestUtil.VerifyFrequencyLimit(ipAddress?.ToString() ?? "", path, limit);
-        }
-        catch (Exception ex)
-        {
-            var error = ex.Message switch
-            {
-                "Requests are too frequent." => "请求过于频繁。",
-                _ => ex.Message,
-            };
-            throw new ArgumentException(error);
-        }
     }
 
     /// <summary>

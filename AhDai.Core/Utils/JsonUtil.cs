@@ -1,4 +1,5 @@
-﻿using System.Text.Encodings.Web;
+﻿using AhDai.Core.Consts;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 
 namespace AhDai.Core.Utils;
@@ -23,7 +24,7 @@ public static class JsonUtil
             PropertyNameCaseInsensitive = true,
             //Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            Converters = { new Converters.DateTimeJsonConverter(Const.Iso8601WithOffsetDateTimeFormat), new Converters.DateOnlyJsonConverter() },
+            Converters = { new Converters.DateTimeJsonConverter(DateTimeFormat.Iso8601WithOffset), new Converters.DateOnlyJsonConverter() },
         };
     }
 

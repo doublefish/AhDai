@@ -1,4 +1,5 @@
-﻿using AhDai.Core.Extensions;
+﻿using AhDai.Core.Consts;
+using AhDai.Core.Extensions;
 using System;
 using System.IO;
 using System.IO.Compression;

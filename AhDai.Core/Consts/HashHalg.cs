@@ -1,4 +1,4 @@
-﻿namespace AhDai.Core
+﻿namespace AhDai.Core.Consts
 {
     /// <summary>
     /// 哈希算法名称

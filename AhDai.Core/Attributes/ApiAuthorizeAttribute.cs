@@ -1,4 +1,5 @@
 ﻿using AhDai.Core.Extensions;
+using AhDai.Core.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -41,12 +42,6 @@ public abstract class ApiAuthorizeAttribute(ILogger<ApiAuthorizeAttribute> logge
     {
         //请求地址
         var path = context.HttpContext.Request.GetPath();
-
-        //限制请求频率
-        if (Frequency > 0D)
-        {
-            context.HttpContext.Request.VerifyRequestFrequencyLimit(Frequency, path);
-        }
 
         if (VerifyToken)
         {

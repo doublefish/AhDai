@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AhDai.Core.Infrastructure;
+using System;
 using System.Collections.Generic;
 
 namespace AhDai.Core.Extensions;

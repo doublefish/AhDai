@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.Json.Serialization;
 
-namespace AhDai.Core.Models;
+namespace AhDai.Core.Infrastructure;
 
 /// <summary>
 /// 属性元数据封装

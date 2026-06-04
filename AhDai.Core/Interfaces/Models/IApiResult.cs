@@ -1,4 +1,4 @@
-﻿namespace AhDai.Core;
+﻿namespace AhDai.Core.Interfaces.Models;
 
 /// <summary>
 /// IApiResult

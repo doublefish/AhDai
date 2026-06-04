@@ -1,4 +1,4 @@
-﻿using AhDai.Core.Models;
+﻿using AhDai.Core.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Data;

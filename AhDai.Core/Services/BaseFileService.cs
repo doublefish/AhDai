@@ -219,45 +219,6 @@ public class BaseFileService(IConfiguration configuration, IHttpClientFactory? h
     }
 
     /// <summary>
-    /// 批量压缩
-    /// </summary>
-    /// <param name="rootPath"></param>
-    /// <param name="files"></param>
-    /// <returns></returns>
-    [SupportedOSPlatform("windows")]
-    public virtual string Compress(string rootPath, IDictionary<string, string> files)
-    {
-        ArgumentNullException.ThrowIfNull(files);
-        var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-
-        //文件目录
-        var folderPath = Path.Combine(rootPath, _config.DownloadDirectory);
-        //临时文件夹路径
-        var tempFolderPath = Path.Combine(folderPath, timestamp);
-        //创建临时文件夹
-        Directory.CreateDirectory(tempFolderPath);
-
-        foreach (var kv in files)
-        {
-            var sourceFileName = kv.Value;
-            if (!File.Exists(sourceFileName))
-            {
-                continue;
-            }
-            var destFileName = Path.Combine(tempFolderPath, kv.Key);
-            File.Copy(sourceFileName, destFileName);
-        }
-
-        //生成RAR文件
-        var fileName = $"{timestamp}.rar";
-        Utils.CompressionUtil.Compress(tempFolderPath, folderPath, fileName);
-        //清空临时文件夹
-        Directory.Delete(tempFolderPath, true);
-        var filePath = Path.Combine(folderPath, fileName);
-        return filePath;
-    }
-
-    /// <summary>
     /// 计算哈希
     /// </summary>
     /// <param name="fs"></param>

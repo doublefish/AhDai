@@ -2,7 +2,7 @@
 using AhDai.Core.Extensions;
 using System;
 
-namespace AhDai.Core;
+namespace AhDai.Core.Models;
 
 /// <summary>
 /// ApiException
