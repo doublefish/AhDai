@@ -26,7 +26,7 @@ public class GenericAuthorizationMiddlewareResultHandler : IAuthorizationMiddlew
     {
         if (authorizeResult.Forbidden)
         {
-            var errorMessage = "禁止访问"; 
+            var errorMessage = "禁止访问";
             if (authorizeResult.AuthorizationFailure?.FailureReasons != null && authorizeResult.AuthorizationFailure.FailureReasons.Any())
             {
                 errorMessage = string.Join("；", authorizeResult.AuthorizationFailure.FailureReasons.Select(r => r.Message));

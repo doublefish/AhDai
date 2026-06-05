@@ -1,32 +1,31 @@
-﻿using AhDai.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
-namespace AhDai.Core.Utils;
+namespace AhDai.Core.Metadata;
 
 /// <summary>
 /// 高性能配置元数据与字典转换工具
 /// </summary>
-public static class DictItemUtil
+public static class OptionProvider
 {
     /// <summary>
     /// 从枚举中极速提取字典项列表
     /// </summary>
-    public static DictItem<T>[] FromEnum<T>(T[]? includeValues = null, T[]? excludeValues = null) where T : struct, Enum
+    public static OptionItem<T>[] FromEnum<T>(T[]? includeValues = null, T[]? excludeValues = null) where T : struct, Enum
     {
-        var allItems = EnumDictCache<T>.CachedItems;
+        var allItems = EnumOptionCache<T>.CachedItems;
 
         if (includeValues == null && excludeValues == null)
             return allItems;
 
-        var includeSet = includeValues != null ? EnumDictCache<T>.CreateFrozenSet(includeValues) : null;
-        var excludeSet = excludeValues != null ? EnumDictCache<T>.CreateFrozenSet(excludeValues) : null;
+        var includeSet = includeValues?.ToFrozenSet();
+        var excludeSet = excludeValues?.ToFrozenSet();
 
-        var result = new List<DictItem<T>>(allItems.Length);
+        var result = new List<OptionItem<T>>(allItems.Length);
         foreach (var item in allItems)
         {
             if (includeSet != null && !includeSet.Contains(item.Value)) continue;
@@ -40,7 +39,7 @@ public static class DictItemUtil
     /// <summary>
     /// 从静态常量类中极速提取字符串字典项列表
     /// </summary>
-    public static DictItem<string>[] FromClass<TClass>(string[]? includeValues = null, string[]? excludeValues = null) where TClass : class
+    public static OptionItem<string>[] FromClass<TClass>(string[]? includeValues = null, string[]? excludeValues = null) where TClass : class
     {
         return FromClass<TClass, string>(includeValues, excludeValues);
     }
@@ -48,9 +47,9 @@ public static class DictItemUtil
     /// <summary>
     /// 从静态常量类中极速提取指定类型的字典项列表
     /// </summary>
-    public static DictItem<TValue>[] FromClass<TClass, TValue>(TValue[]? includeValues = null, TValue[]? excludeValues = null) where TClass : class
+    public static OptionItem<TValue>[] FromClass<TClass, TValue>(TValue[]? includeValues = null, TValue[]? excludeValues = null) where TClass : class
     {
-        var allItems = ClassDictCache<TClass, TValue>.CachedItems;
+        var allItems = ClassOptionCache<TClass, TValue>.CachedItems;
 
         if (includeValues == null && excludeValues == null)
             return allItems;
@@ -58,7 +57,7 @@ public static class DictItemUtil
         var includeSet = includeValues?.ToFrozenSet();
         var excludeSet = excludeValues?.ToFrozenSet();
 
-        var result = new List<DictItem<TValue>>(allItems.Length);
+        var result = new List<OptionItem<TValue>>(allItems.Length);
         foreach (var item in allItems)
         {
             if (includeSet != null && !includeSet.Contains(item.Value)) continue;
@@ -75,15 +74,15 @@ public static class DictItemUtil
     /// 针对枚举的强类型隔离缓存
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    static class EnumDictCache<T> where T : struct, Enum
+    static class EnumOptionCache<T> where T : struct, Enum
     {
-        public static readonly DictItem<T>[] CachedItems;
+        public static readonly OptionItem<T>[] CachedItems;
 
-        static EnumDictCache()
+        static EnumOptionCache()
         {
             var type = typeof(T);
             var fields = type.GetFields();
-            var list = new List<DictItem<T>>();
+            var list = new List<OptionItem<T>>();
 
             foreach (var field in fields)
             {
@@ -92,17 +91,15 @@ public static class DictItemUtil
                 var value = (T)field.GetRawConstantValue()!;
                 var attribute = field.GetCustomAttribute<DisplayAttribute>();
 
-                list.Add(new DictItem<T>(
+                list.Add(new OptionItem<T>(
                     value,
                     attribute?.GetName() ?? field.Name,
                     attribute?.GetOrder() ?? 99
                 ));
             }
 
-            CachedItems = [.. list.OrderBy(x => x.Sort).ThenBy(x => Convert.ToInt64(x.Value))];
+            CachedItems = [.. list.OrderBy(x => x.Order).ThenBy(x => Convert.ToInt64(x.Value))];
         }
-
-        public static FrozenSet<T> CreateFrozenSet(T[] source) => source.ToFrozenSet();
     }
 
     /// <summary>
@@ -110,15 +107,15 @@ public static class DictItemUtil
     /// </summary>
     /// <typeparam name="TClass"></typeparam>
     /// <typeparam name="TValue"></typeparam>
-    private static class ClassDictCache<TClass, TValue> where TClass : class
+    private static class ClassOptionCache<TClass, TValue> where TClass : class
     {
-        public static readonly DictItem<TValue>[] CachedItems;
+        public static readonly OptionItem<TValue>[] CachedItems;
 
-        static ClassDictCache()
+        static ClassOptionCache()
         {
             var type = typeof(TClass);
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
-            var list = new List<DictItem<TValue>>();
+            var list = new List<OptionItem<TValue>>();
 
             foreach (var field in fields)
             {
@@ -127,10 +124,10 @@ public static class DictItemUtil
                 if (obj is not TValue value) continue;
 
                 var attribute = field.GetCustomAttribute<DisplayAttribute>();
-                list.Add(new DictItem<TValue>(value, attribute?.GetName() ?? field.Name ?? string.Empty, attribute?.GetOrder() ?? 99));
+                list.Add(new OptionItem<TValue>(value, attribute?.GetName() ?? field.Name ?? string.Empty, attribute?.GetOrder() ?? 99));
             }
 
-            CachedItems = [.. list.OrderBy(x => x.Sort).ThenBy(x => x.Value)];
+            CachedItems = [.. list.OrderBy(x => x.Order).ThenBy(x => x.Name)];
         }
     }
     #endregion

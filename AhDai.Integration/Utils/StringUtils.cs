@@ -1,5 +1,4 @@
-﻿using AhDai.Core;
-using AhDai.Core.Infrastructure;
+﻿using AhDai.Core.Metadata;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -85,7 +84,7 @@ internal class StringUtils
     {
         if (obj == null) return "";
 
-        var props = TypeMetadataCache.GetProperties<T>();
+        var props = TypeMetadataProvider.GetProperties<T>();
         var builder = new StringBuilder();
         foreach (var p in props)
         {

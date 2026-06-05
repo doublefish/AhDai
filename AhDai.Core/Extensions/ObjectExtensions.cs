@@ -1,4 +1,4 @@
-﻿using AhDai.Core.Infrastructure;
+﻿using AhDai.Core.Metadata;
 using System;
 using System.Collections.Generic;
 
@@ -21,7 +21,7 @@ public static class ObjectExtensions
 
         var data = new T();
         var ignoreSet = ignores != null && ignores.Length > 0 ? new HashSet<string>(ignores, StringComparer.OrdinalIgnoreCase) : null;
-        var properties = TypeMetadataCache.GetProperties<T>();
+        var properties = TypeMetadataProvider.GetProperties<T>();
         foreach (var meta in properties)
         {
             var pi = meta.Info;

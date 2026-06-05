@@ -23,7 +23,7 @@
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>集成服务</PackageReleaseNotes>
 
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<DocumentationFile>AhDai.Integration.xml</DocumentationFile>
 		<OpenApiGenerateDocuments>False</OpenApiGenerateDocuments>

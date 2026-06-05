@@ -1,7 +1,7 @@
 ﻿using AhDai.Integration.AntChain;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AhDai.Integration;
+namespace AhDai.Integration.Extensions;
 
 /// <summary>
 /// ServiceCollectionExtensions

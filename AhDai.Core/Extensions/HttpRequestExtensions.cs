@@ -1,7 +1,6 @@
 ﻿using AhDai.Core.Consts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using System;
 using System.IO;
 using System.Linq;
 using System.Text;

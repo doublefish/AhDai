@@ -1,4 +1,4 @@
-﻿using AhDai.Core.Infrastructure;
+﻿using AhDai.Core.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,7 +22,7 @@ public static class DataTableExtensions
 
         var list = new List<T>(dataTable.Rows.Count);
 
-        var propDict = TypeMetadataCache.GetPropertyDict<T>();
+        var propDict = TypeMetadataProvider.GetPropertyDict<T>();
         foreach (DataRow dataRow in dataTable.Rows)
         {
             var data = dataRow.ToModel<T>(propDict);
@@ -39,7 +39,7 @@ public static class DataTableExtensions
     /// <returns></returns>
     public static T ToModel<T>(this DataRow dataRow) where T : class, new()
     {
-        var propDict = TypeMetadataCache.GetPropertyDict<T>();
+        var propDict = TypeMetadataProvider.GetPropertyDict<T>();
         return dataRow.ToModel<T>(propDict);
     }
 
@@ -77,9 +77,9 @@ public static class DataTableExtensions
     public static ICollection<T> ToList<T>(this IDataReader dataReader) where T : class, new()
     {
         var list = new List<T>();
-        var propDict = TypeMetadataCache.GetPropertyDict<T>();
+        var propDict = TypeMetadataProvider.GetPropertyDict<T>();
         var fieldCount = dataReader.FieldCount;
-        
+
         var activeFields = new (PropertyMetadata Meta, int Index)[fieldCount];
         var activeFieldCount = 0;
         for (var i = 0; i < fieldCount; i++)

@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace AhDai.Core.Models;
+﻿namespace AhDai.Core.Models;
 
 /// <summary>
 /// 上传文件

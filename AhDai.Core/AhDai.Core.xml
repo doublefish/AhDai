@@ -551,7 +551,7 @@
             <param name="dataRow"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.DataTableExtensions.ToModel``1(System.Data.DataRow,System.Collections.Generic.Dictionary{System.String,AhDai.Core.Infrastructure.PropertyMetadata})">
+        <member name="M:AhDai.Core.Extensions.DataTableExtensions.ToModel``1(System.Data.DataRow,System.Collections.Generic.Dictionary{System.String,AhDai.Core.Metadata.PropertyMetadata})">
             <summary>
             ToModel
             </summary>
@@ -1882,57 +1882,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Infrastructure.PropertyMetadata">
-            <summary>
-            属性元数据封装
-            </summary>
-            <param name="info"></param>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.PropertyMetadata.#ctor(System.Reflection.PropertyInfo)">
-            <summary>
-            属性元数据封装
-            </summary>
-            <param name="info"></param>
-        </member>
-        <member name="P:AhDai.Core.Infrastructure.PropertyMetadata.Info">
-            <summary>
-            PropertyInfo
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Infrastructure.PropertyMetadata.JsonName">
-            <summary>
-            预解析常用的 JsonPropertyName
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Infrastructure.TypeMetadataCache">
-            <summary>
-            类型属性元数据中心
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.TypeMetadataCache.GetProperties(System.Type)">
-            <summary>
-            获取属性元数据列表
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.TypeMetadataCache.GetProperties``1">
-            <summary>
-            获取属性元数据列表
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.TypeMetadataCache.GetPropertyDict(System.Type)">
-            <summary>
-            获取不区分大小写的属性名与属性元数据映射字典
-            </summary>
-            <param name="type"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.TypeMetadataCache.GetPropertyDict``1">
-            <summary>
-            获取不区分大小写的属性名与属性元数据映射字典
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Core.Interfaces.Models.IActionResult`1">
             <summary>
             IActionResult
@@ -2216,6 +2165,123 @@
             <param name="config">自定义配置</param>
             <returns></returns>
         </member>
+        <member name="T:AhDai.Core.Metadata.OptionItem`1">
+            <summary>
+            OptionItem
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="name"></param>
+            <param name="order"></param>
+        </member>
+        <member name="M:AhDai.Core.Metadata.OptionItem`1.#ctor(`0,System.String,System.Int32)">
+            <summary>
+            OptionItem
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="name"></param>
+            <param name="order"></param>
+        </member>
+        <member name="P:AhDai.Core.Metadata.OptionItem`1.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Metadata.OptionItem`1.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Metadata.OptionItem`1.Order">
+            <summary>
+            顺序
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Metadata.OptionProvider">
+            <summary>
+            高性能配置元数据与字典转换工具
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Metadata.OptionProvider.FromEnum``1(``0[],``0[])">
+            <summary>
+            从枚举中极速提取字典项列表
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Metadata.OptionProvider.FromClass``1(System.String[],System.String[])">
+            <summary>
+            从静态常量类中极速提取字符串字典项列表
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Metadata.OptionProvider.FromClass``2(``1[],``1[])">
+            <summary>
+            从静态常量类中极速提取指定类型的字典项列表
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Metadata.OptionProvider.EnumOptionCache`1">
+            <summary>
+            针对枚举的强类型隔离缓存
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:AhDai.Core.Metadata.OptionProvider.ClassOptionCache`2">
+            <summary>
+            针对静态常量类的强类型隔离缓存
+            </summary>
+            <typeparam name="TClass"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="T:AhDai.Core.Metadata.PropertyMetadata">
+            <summary>
+            属性元数据封装
+            </summary>
+            <param name="info"></param>
+        </member>
+        <member name="M:AhDai.Core.Metadata.PropertyMetadata.#ctor(System.Reflection.PropertyInfo)">
+            <summary>
+            属性元数据封装
+            </summary>
+            <param name="info"></param>
+        </member>
+        <member name="P:AhDai.Core.Metadata.PropertyMetadata.Info">
+            <summary>
+            PropertyInfo
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Metadata.PropertyMetadata.JsonName">
+            <summary>
+            预解析常用的 JsonPropertyName
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Metadata.TypeMetadataProvider">
+            <summary>
+            类型属性元数据中心
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Metadata.TypeMetadataProvider.GetProperties(System.Type)">
+            <summary>
+            获取属性元数据列表
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Metadata.TypeMetadataProvider.GetProperties``1">
+            <summary>
+            获取属性元数据列表
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Metadata.TypeMetadataProvider.GetPropertyDict(System.Type)">
+            <summary>
+            获取不区分大小写的属性名与属性元数据映射字典
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Metadata.TypeMetadataProvider.GetPropertyDict``1">
+            <summary>
+            获取不区分大小写的属性名与属性元数据映射字典
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Core.Middlewares.RequestMiddleware">
             <summary>
             RequestMiddleware
@@ -2428,59 +2494,6 @@
             <param name="code">结果代码</param>
             <param name="message">消息</param>
             <param name="data">内容</param>
-        </member>
-        <member name="T:AhDai.Core.Models.DictItem`2">
-            <summary>
-            DictItem
-            </summary>
-            <typeparam name="TValue"></typeparam>
-            <typeparam name="TName"></typeparam>
-            <param name="value"></param>
-            <param name="name"></param>
-            <param name="sort"></param>
-        </member>
-        <member name="M:AhDai.Core.Models.DictItem`2.#ctor(`0,`1,System.Int32)">
-            <summary>
-            DictItem
-            </summary>
-            <typeparam name="TValue"></typeparam>
-            <typeparam name="TName"></typeparam>
-            <param name="value"></param>
-            <param name="name"></param>
-            <param name="sort"></param>
-        </member>
-        <member name="P:AhDai.Core.Models.DictItem`2.Value">
-            <summary>
-            值
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.DictItem`2.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.DictItem`2.Sort">
-            <summary>
-            顺序
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Models.DictItem`1">
-            <summary>
-            DictItem
-            </summary>
-            <typeparam name="TValue"></typeparam>
-            <param name="value"></param>
-            <param name="name"></param>
-            <param name="sort"></param>
-        </member>
-        <member name="M:AhDai.Core.Models.DictItem`1.#ctor(`0,System.String,System.Int32)">
-            <summary>
-            DictItem
-            </summary>
-            <typeparam name="TValue"></typeparam>
-            <param name="value"></param>
-            <param name="name"></param>
-            <param name="sort"></param>
         </member>
         <member name="T:AhDai.Core.Models.FileData">
             <summary>
@@ -3267,39 +3280,6 @@
             <summary>
             时间戳（距1970-01-01的秒数）
             </summary>
-        </member>
-        <member name="T:AhDai.Core.Utils.DictItemUtil">
-            <summary>
-            高性能配置元数据与字典转换工具
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Utils.DictItemUtil.FromEnum``1(``0[],``0[])">
-            <summary>
-            从枚举中极速提取字典项列表
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Utils.DictItemUtil.FromClass``1(System.String[],System.String[])">
-            <summary>
-            从静态常量类中极速提取字符串字典项列表
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Utils.DictItemUtil.FromClass``2(``1[],``1[])">
-            <summary>
-            从静态常量类中极速提取指定类型的字典项列表
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Utils.DictItemUtil.EnumDictCache`1">
-            <summary>
-            针对枚举的强类型隔离缓存
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="T:AhDai.Core.Utils.DictItemUtil.ClassDictCache`2">
-            <summary>
-            针对静态常量类的强类型隔离缓存
-            </summary>
-            <typeparam name="TClass"></typeparam>
-            <typeparam name="TValue"></typeparam>
         </member>
         <member name="T:AhDai.Core.Utils.FileUtil">
             <summary>

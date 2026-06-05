@@ -165,7 +165,7 @@ public static class DictionaryExtensions
     /// <returns></returns>
     public static string ToQueryString(this IEnumerable<KeyValuePair<string, StringValues>> pairs, params string[] ignores)
     {
-        if ( !pairs.Any()) return string.Empty;
+        if (!pairs.Any()) return string.Empty;
 
         var ignoreSet = ignores != null && ignores.Length > 0 ? new HashSet<string>(ignores, StringComparer.OrdinalIgnoreCase) : null;
         var builder = new StringBuilder();

@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace AhDai.Core.Infrastructure;
+namespace AhDai.Core.Metadata;
 
 /// <summary>
 /// 类型属性元数据中心
 /// </summary>
-public class TypeMetadataCache
+public class TypeMetadataProvider
 {
     static readonly ConcurrentDictionary<Type, PropertyMetadata[]> _arrayCache = new();
     static readonly ConcurrentDictionary<Type, Dictionary<string, PropertyMetadata>> _dictCache = new();

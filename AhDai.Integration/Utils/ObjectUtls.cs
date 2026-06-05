@@ -1,5 +1,4 @@
-﻿using AhDai.Core;
-using AhDai.Core.Infrastructure;
+﻿using AhDai.Core.Metadata;
 using System;
 using System.Collections.Generic;
 
@@ -33,7 +32,7 @@ internal class ObjectUtls
     static void ProcessObject(string prefix, object obj, IDictionary<string, string?> dict)
     {
         if (obj == null) return;
-        var props = TypeMetadataCache.GetProperties(obj.GetType());
+        var props = TypeMetadataProvider.GetProperties(obj.GetType());
         foreach (var p in props)
         {
             var value = p.Info.GetValue(obj);
