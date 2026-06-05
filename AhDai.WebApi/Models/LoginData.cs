@@ -1,4 +1,4 @@
-﻿namespace AhDai.Core.Models;
+﻿namespace AhDai.WebApi.Models;
 
 /// <summary>
 /// LoginData

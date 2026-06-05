@@ -2282,25 +2282,6 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Middlewares.RequestMiddleware">
-            <summary>
-            RequestMiddleware
-            </summary>
-            <param name="next"></param>
-        </member>
-        <member name="M:AhDai.Core.Middlewares.RequestMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
-            <summary>
-            RequestMiddleware
-            </summary>
-            <param name="next"></param>
-        </member>
-        <member name="M:AhDai.Core.Middlewares.RequestMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-            InvokeAsync
-            </summary>
-            <param name="httpContext"></param>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Core.Models.ActionResult`1">
             <summary>
             ActionResult
@@ -2639,72 +2620,6 @@
         <member name="P:AhDai.Core.Models.HttpResponse.Content">
             <summary>
             Content
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Models.LoginData">
-            <summary>
-            LoginData
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.LoginData.Id">
-            <summary>
-            用户Id
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.LoginData.Username">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Models.PageData`1">
-            <summary>
-            分页数据
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="count"></param>
-            <param name="list"></param>
-        </member>
-        <member name="M:AhDai.Core.Models.PageData`1.#ctor(System.Int32,System.Collections.Generic.ICollection{`0})">
-            <summary>
-            分页数据
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="count"></param>
-            <param name="list"></param>
-        </member>
-        <member name="P:AhDai.Core.Models.PageData`1.Count">
-            <summary>
-            总数
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.PageData`1.List">
-            <summary>
-            数据
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Models.Token`1">
-            <summary>
-            Token
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.Token`1.Id">
-            <summary>
-            用户Id
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.Token`1.Signature">
-            <summary>
-            用户名对应签名Token
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.Token`1.Expiry">
-            <summary>
-            Token过期时间
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.Token`1.Data">
-            <summary>
-            数据
             </summary>
         </member>
         <member name="T:AhDai.Core.Models.TokenData">
