@@ -1,4 +1,6 @@
-﻿namespace AhDai.Integration;
+﻿using AhDai.Integration.Abstractions;
+
+namespace AhDai.Integration.Models;
 
 /// <summary>
 /// BaseConfig

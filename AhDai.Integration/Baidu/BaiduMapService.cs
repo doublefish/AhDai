@@ -2,6 +2,7 @@
 using AhDai.Core.Utils;
 using AhDai.Integration.Baidu.Configs;
 using AhDai.Integration.Baidu.Models;
+using AhDai.Integration.Infrastructure.Services;
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;

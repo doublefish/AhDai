@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AhDai.Integration.Abstractions;
+using System;
 using System.Text.Json.Serialization;
 
 namespace AhDai.Integration.AntChain.Models;

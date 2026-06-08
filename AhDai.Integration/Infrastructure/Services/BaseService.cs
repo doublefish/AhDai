@@ -1,10 +1,11 @@
 ﻿using AhDai.Core.Utils;
+using AhDai.Integration.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace AhDai.Integration;
+namespace AhDai.Integration.Infrastructure.Services;
 
 /// <summary>
 /// BaseService

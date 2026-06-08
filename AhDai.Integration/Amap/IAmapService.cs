@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.Amap.Configs;
+﻿using AhDai.Integration.Abstractions;
+using AhDai.Integration.Amap.Configs;
 using AhDai.Integration.Amap.Models;
 using System.Threading.Tasks;
 

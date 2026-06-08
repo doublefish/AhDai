@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AhDai.Integration.Abstractions;
+using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;

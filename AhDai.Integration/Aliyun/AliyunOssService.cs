@@ -2,6 +2,7 @@
 using AhDai.Core.Utils;
 using AhDai.Integration.Aliyun.Configs;
 using AhDai.Integration.Aliyun.Models;
+using AhDai.Integration.Infrastructure.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.StaticFiles;
 using System;

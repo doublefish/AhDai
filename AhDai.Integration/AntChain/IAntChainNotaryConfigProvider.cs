@@ -1,4 +1,6 @@
-﻿namespace AhDai.Integration.AntChain;
+﻿using AhDai.Integration.Abstractions;
+
+namespace AhDai.Integration.AntChain;
 
 /// <summary>
 /// IAntChainNotaryConfigProvider

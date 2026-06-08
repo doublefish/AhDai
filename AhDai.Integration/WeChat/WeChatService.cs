@@ -1,5 +1,7 @@
 ﻿using AhDai.Core.Interfaces.Services;
 using AhDai.Core.Utils;
+using AhDai.Integration.Abstractions;
+using AhDai.Integration.Infrastructure.Services;
 using AhDai.Integration.WeChat.Configs;
 using AhDai.Integration.WeChat.Models;
 using Microsoft.AspNetCore.Http;

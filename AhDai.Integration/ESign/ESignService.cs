@@ -2,6 +2,7 @@
 using AhDai.Core.Utils;
 using AhDai.Integration.ESign.Configs;
 using AhDai.Integration.ESign.Models;
+using AhDai.Integration.Infrastructure.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;

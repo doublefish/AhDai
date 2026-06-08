@@ -1,4 +1,6 @@
-﻿namespace AhDai.Integration.Amap;
+﻿using AhDai.Integration.Abstractions;
+
+namespace AhDai.Integration.Amap;
 
 /// <summary>
 /// IAmapConfigProvider

@@ -1,4 +1,6 @@
-﻿namespace AhDai.Integration.Baidu;
+﻿using AhDai.Integration.Abstractions;
+
+namespace AhDai.Integration.Baidu;
 
 /// <summary>
 /// IBaiduConfigProvider

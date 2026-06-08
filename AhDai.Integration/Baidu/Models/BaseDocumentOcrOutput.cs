@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using AhDai.Integration.Abstractions;
+using System.Text.Json.Serialization;
 
 namespace AhDai.Integration.Baidu.Models;
 

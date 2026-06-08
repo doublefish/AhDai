@@ -1,4 +1,4 @@
-﻿namespace AhDai.Integration;
+﻿namespace AhDai.Integration.Abstractions;
 
 /// <summary>
 /// IBaseOutput

@@ -1,4 +1,6 @@
-﻿namespace AhDai.Integration.Tianyancha;
+﻿using AhDai.Integration.Abstractions;
+
+namespace AhDai.Integration.Tianyancha;
 
 /// <summary>
 /// ITianyanchaConfigProvider

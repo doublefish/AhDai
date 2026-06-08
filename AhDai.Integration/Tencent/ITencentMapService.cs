@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.Tencent.Configs;
+﻿using AhDai.Integration.Abstractions;
+using AhDai.Integration.Tencent.Configs;
 using AhDai.Integration.Tencent.Models;
 using System.Threading.Tasks;
 

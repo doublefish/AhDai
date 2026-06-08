@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.AntChain.Configs;
+﻿using AhDai.Integration.Abstractions;
+using AhDai.Integration.AntChain.Configs;
 using AhDai.Integration.AntChain.Models;
 using System.Threading.Tasks;
 

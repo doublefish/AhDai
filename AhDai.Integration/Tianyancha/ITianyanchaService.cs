@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.Tianyancha.Configs;
+﻿using AhDai.Integration.Abstractions;
+using AhDai.Integration.Tianyancha.Configs;
 using AhDai.Integration.Tianyancha.Models;
 using System.Threading.Tasks;
 

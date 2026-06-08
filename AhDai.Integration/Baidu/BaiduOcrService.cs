@@ -1,4 +1,5 @@
 ﻿using AhDai.Core.Interfaces.Services;
+using AhDai.Integration.Abstractions;
 using AhDai.Integration.Baidu.Models;
 using System;
 using System.IO;

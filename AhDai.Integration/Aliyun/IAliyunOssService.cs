@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.Aliyun.Configs;
+﻿using AhDai.Integration.Abstractions;
+using AhDai.Integration.Aliyun.Configs;
 using AhDai.Integration.Aliyun.Models;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;

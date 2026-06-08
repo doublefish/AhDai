@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.WeChat.Configs;
+﻿using AhDai.Integration.Abstractions;
+using AhDai.Integration.WeChat.Configs;
 using AhDai.Integration.WeChat.Models;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;

@@ -1,4 +1,5 @@
 ﻿using AhDai.Integration.Attributes;
+using AhDai.Integration.Models;
 
 namespace AhDai.Integration.ESign.Configs;
 

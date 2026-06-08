@@ -1,4 +1,6 @@
-﻿namespace AhDai.Integration.WeChat;
+﻿using AhDai.Integration.Abstractions;
+
+namespace AhDai.Integration.WeChat;
 
 /// <summary>
 /// IWeChatWebAppConfigProvider

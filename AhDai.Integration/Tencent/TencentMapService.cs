@@ -1,5 +1,6 @@
 ﻿using AhDai.Core.Interfaces.Services;
 using AhDai.Core.Utils;
+using AhDai.Integration.Infrastructure.Services;
 using AhDai.Integration.Tencent.Configs;
 using AhDai.Integration.Tencent.Models;
 using System;

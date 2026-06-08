@@ -4,6 +4,54 @@
         <name>AhDai.Integration</name>
     </assembly>
     <members>
+        <member name="T:AhDai.Integration.Abstractions.IBaseConfigProvider`1">
+            <summary>
+            IBaseConfigProvider
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Abstractions.IBaseConfigProvider`1.GetAsync">
+            <summary>
+            获取配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Integration.Abstractions.IBaseOutput">
+            <summary>
+            IBaseOutput
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Abstractions.IBaseOutput.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Abstractions.IBaseService">
+            <summary>
+            BaseService
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Abstractions.IBaseService`1">
+            <summary>
+            BaseService
+            </summary>
+            <typeparam name="TConfig"></typeparam>
+        </member>
+        <member name="M:AhDai.Integration.Abstractions.IBaseService`1.GetConfigAsync">
+            <summary>
+            获取配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Integration.Abstractions.IConfig">
+            <summary>
+            IConfig
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Abstractions.IConfig.Host">
+            <summary>
+            Host
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Aliyun.AliyunOcrService">
             <summary>
             AliyunOcrService
@@ -3995,82 +4043,6 @@
             VerifyToken
             </summary>
         </member>
-        <member name="T:AhDai.Integration.BaseConfig">
-            <summary>
-            BaseConfig
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.BaseConfig.Host">
-            <summary>
-            Host
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.BaseConfigProvider`1">
-            <summary>
-            BaseConfigProvider
-            </summary>
-            <typeparam name="TConfig"></typeparam>
-            <param name="configuration"></param>
-        </member>
-        <member name="M:AhDai.Integration.BaseConfigProvider`1.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            BaseConfigProvider
-            </summary>
-            <typeparam name="TConfig"></typeparam>
-            <param name="configuration"></param>
-        </member>
-        <member name="F:AhDai.Integration.BaseConfigProvider`1._configuration">
-            <summary>
-            系统配置
-            </summary>
-        </member>
-        <member name="F:AhDai.Integration.BaseConfigProvider`1._cachedConfigs">
-            <summary>
-            配置缓存
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.BaseConfigProvider`1.GetTenantId">
-            <summary>
-            获取租户Id
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.BaseConfigProvider`1.GetAsync">
-            <summary>
-            GetAsync
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.BaseConfigProvider`1.GetAsync(System.String)">
-            <summary>
-            GetAsync
-            </summary>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.BaseConfigProvider`1.GetAsync(System.String,System.Int64)">
-            <summary>
-            GetAsync
-            </summary>
-            <param name="name"></param>
-            <param name="tenantId"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Integration.BaseService">
-            <summary>
-            BaseService
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.BaseService`2">
-            <summary>
-            BaseService
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.BaseService`2.#ctor(`1,System.Net.Http.IHttpClientFactory)">
-            <summary>
-            BaseService
-            </summary>
-        </member>
         <member name="T:AhDai.Integration.ESign.Configs.ESignConfig">
             <summary>
             ESignConfig
@@ -5725,53 +5697,81 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.IBaseConfigProvider`1">
-            <summary>
-            IBaseConfigProvider
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.IBaseConfigProvider`1.GetAsync">
-            <summary>
-            获取配置
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Integration.IBaseOutput">
-            <summary>
-            IBaseOutput
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.IBaseOutput.EnsureResult">
-            <summary>
-            确保结果
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.IBaseService">
+        <member name="T:AhDai.Integration.Infrastructure.Services.BaseService">
             <summary>
             BaseService
             </summary>
         </member>
-        <member name="T:AhDai.Integration.IBaseService`1">
+        <member name="T:AhDai.Integration.Infrastructure.Services.BaseService`2">
             <summary>
             BaseService
             </summary>
-            <typeparam name="TConfig"></typeparam>
         </member>
-        <member name="M:AhDai.Integration.IBaseService`1.GetConfigAsync">
+        <member name="M:AhDai.Integration.Infrastructure.Services.BaseService`2.#ctor(`1,System.Net.Http.IHttpClientFactory)">
             <summary>
-            获取配置
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Integration.IConfig">
-            <summary>
-            IConfig
+            BaseService
             </summary>
         </member>
-        <member name="P:AhDai.Integration.IConfig.Host">
+        <member name="T:AhDai.Integration.Models.BaseConfig">
+            <summary>
+            BaseConfig
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Models.BaseConfig.Host">
             <summary>
             Host
             </summary>
+        </member>
+        <member name="T:AhDai.Integration.Models.BaseConfigProvider`1">
+            <summary>
+            BaseConfigProvider
+            </summary>
+            <typeparam name="TConfig"></typeparam>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:AhDai.Integration.Models.BaseConfigProvider`1.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            BaseConfigProvider
+            </summary>
+            <typeparam name="TConfig"></typeparam>
+            <param name="configuration"></param>
+        </member>
+        <member name="F:AhDai.Integration.Models.BaseConfigProvider`1._configuration">
+            <summary>
+            系统配置
+            </summary>
+        </member>
+        <member name="F:AhDai.Integration.Models.BaseConfigProvider`1._cachedConfigs">
+            <summary>
+            配置缓存
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Models.BaseConfigProvider`1.GetTenantId">
+            <summary>
+            获取租户Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Models.BaseConfigProvider`1.GetAsync">
+            <summary>
+            GetAsync
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Models.BaseConfigProvider`1.GetAsync(System.String)">
+            <summary>
+            GetAsync
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Models.BaseConfigProvider`1.GetAsync(System.String,System.Int64)">
+            <summary>
+            GetAsync
+            </summary>
+            <param name="name"></param>
+            <param name="tenantId"></param>
+            <returns></returns>
         </member>
         <member name="T:AhDai.Integration.Models.BaseOcrFriendlyOutput">
             <summary>

@@ -1,4 +1,6 @@
-﻿namespace AhDai.Integration.ESign;
+﻿using AhDai.Integration.Abstractions;
+
+namespace AhDai.Integration.ESign;
 
 /// <summary>
 /// IESignConfigProvider

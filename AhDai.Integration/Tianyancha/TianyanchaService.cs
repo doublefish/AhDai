@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.Tianyancha.Configs;
+﻿using AhDai.Integration.Infrastructure.Services;
+using AhDai.Integration.Tianyancha.Configs;
 using AhDai.Integration.Tianyancha.Models;
 using System;
 using System.Net.Http;

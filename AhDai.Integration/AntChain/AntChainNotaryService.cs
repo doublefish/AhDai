@@ -1,5 +1,6 @@
 ﻿using AhDai.Integration.AntChain.Configs;
 using AhDai.Integration.AntChain.Models;
+using AhDai.Integration.Infrastructure.Services;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

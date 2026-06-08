@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace AhDai.Integration;
+namespace AhDai.Integration.Abstractions;
 
 
 /// <summary>

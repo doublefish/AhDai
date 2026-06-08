@@ -1,4 +1,6 @@
-﻿namespace AhDai.Integration.Aliyun;
+﻿using AhDai.Integration.Abstractions;
+
+namespace AhDai.Integration.Aliyun;
 
 /// <summary>
 /// IAliyunOssConfigProvider

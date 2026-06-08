@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.Baidu.Configs;
+﻿using AhDai.Integration.Abstractions;
+using AhDai.Integration.Baidu.Configs;
 using AhDai.Integration.Baidu.Models;
 using System.Threading.Tasks;
 

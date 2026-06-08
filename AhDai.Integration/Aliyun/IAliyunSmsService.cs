@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.Aliyun.Configs;
+﻿using AhDai.Integration.Abstractions;
+using AhDai.Integration.Aliyun.Configs;
 using AhDai.Integration.Aliyun.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;

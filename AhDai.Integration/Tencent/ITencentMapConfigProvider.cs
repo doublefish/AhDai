@@ -1,4 +1,6 @@
-﻿namespace AhDai.Integration.Tencent;
+﻿using AhDai.Integration.Abstractions;
+
+namespace AhDai.Integration.Tencent;
 
 /// <summary>
 /// ITencentMapConfigProvider

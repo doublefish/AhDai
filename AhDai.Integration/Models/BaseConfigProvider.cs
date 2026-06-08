@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AhDai.Integration.Abstractions;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AhDai.Integration;
+namespace AhDai.Integration.Models;
 
 /// <summary>
 /// BaseConfigProvider
