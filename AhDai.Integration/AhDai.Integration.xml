@@ -5702,6 +5702,30 @@
             BaseService
             </summary>
         </member>
+        <member name="F:AhDai.Integration.Infrastructure.Services.BaseService._logger">
+            <summary>
+            _logger
+            </summary>
+        </member>
+        <member name="F:AhDai.Integration.Infrastructure.Services.BaseService._httpClientFactory">
+            <summary>
+            _httpClientFactory
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.Services.BaseService.#ctor(System.Net.Http.IHttpClientFactory)">
+            <summary>
+            BaseService
+            </summary>
+            <param name="httpClientFactory"></param>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.Services.BaseService.CreateHttpClient(System.String,System.String)">
+            <summary>
+            CreateHttpClient
+            </summary>
+            <param name="baseAddress"></param>
+            <param name="authorization"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Infrastructure.Services.BaseService`2">
             <summary>
             BaseService
@@ -5711,6 +5735,22 @@
             <summary>
             BaseService
             </summary>
+        </member>
+        <member name="F:AhDai.Integration.Infrastructure.Services.BaseService`2._configProvider">
+            <summary>
+            _configProvider
+            </summary>
+        </member>
+        <member name="F:AhDai.Integration.Infrastructure.Services.BaseService`2._configName">
+            <summary>
+            _configName
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.Services.BaseService`2.GetConfigAsync">
+            <summary>
+            GetConfigAsync
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:AhDai.Integration.Models.BaseConfig">
             <summary>
@@ -7158,6 +7198,11 @@
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
+        <member name="T:AhDai.Integration.Utils.ObjectUtls">
+            <summary>
+            ObjectUtls
+            </summary>
+        </member>
         <member name="M:AhDai.Integration.Utils.ObjectUtls.ToSortedDictionary``1(``0,System.StringComparer)">
             <summary>
             ToSortedDictionary
@@ -7174,6 +7219,11 @@
             <param name="prefix"></param>
             <param name="obj"></param>
             <param name="dict"></param>
+        </member>
+        <member name="T:AhDai.Integration.Utils.StringUtils">
+            <summary>
+            StringUtils
+            </summary>
         </member>
         <member name="M:AhDai.Integration.Utils.StringUtils.ConvertToBase64Async(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>

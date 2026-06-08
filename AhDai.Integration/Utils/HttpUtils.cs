@@ -9,7 +9,7 @@ namespace AhDai.Integration.Utils;
 /// <summary>
 /// HttpUtils
 /// </summary>
-internal class HttpUtils
+public class HttpUtils
 {
     /// <summary>
     /// 

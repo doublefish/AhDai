@@ -9,7 +9,10 @@ using System.Threading.Tasks;
 
 namespace AhDai.Integration.Utils;
 
-internal class StringUtils
+/// <summary>
+/// StringUtils
+/// </summary>
+public class StringUtils
 {
     /// <summary>
     /// ConvertToBase64Async

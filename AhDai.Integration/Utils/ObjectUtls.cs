@@ -4,7 +4,10 @@ using System.Collections.Generic;
 
 namespace AhDai.Integration.Utils;
 
-internal class ObjectUtls
+/// <summary>
+/// ObjectUtls
+/// </summary>
+public class ObjectUtls
 {
     /// <summary>
     /// ToSortedDictionary
