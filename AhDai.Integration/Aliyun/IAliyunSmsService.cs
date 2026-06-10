@@ -19,5 +19,5 @@ public interface IAliyunSmsService : IBaseService<AliyunSmsConfig>
     /// <param name="templateParam"></param>
     /// <param name="signName"></param>
     /// <returns></returns>
-    Task<BaseSmsOutput> SendAsync(string phoneNumber, string templateCode, IDictionary<string, string> templateParam, string signName);
+    Task<SmsOutput> SendAsync(string phoneNumber, string templateCode, IDictionary<string, string> templateParam, string signName);
 }

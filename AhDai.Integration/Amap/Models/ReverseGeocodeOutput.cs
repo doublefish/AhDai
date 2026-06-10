@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace AhDai.Integration.Amap.Models;
 
@@ -13,4 +14,14 @@ public class ReverseGeocodeOutput : BaseOutput
     /// </summary>
     [JsonPropertyName("regeocode")]
     public RegeocodeOutput Regeocode { get; set; } = default!;
+
+    /// <summary>
+    /// 确保结果
+    /// </summary>
+    /// <exception cref="Exception"></exception>
+    public override void EnsureResult()
+    {
+        base.EnsureResult();
+        if (Regeocode == null) throw new Exception($"请求高德地图发生异常：返回数据为空，请联系管理员");
+    }
 }

@@ -3,7 +3,7 @@
 /// <summary>
 /// BaseOcrFriendlyOutput
 /// </summary>
-public class BaseOcrFriendlyOutput
+public abstract class BaseOcrFriendlyOutput
 {
     /// <summary>
     /// 附件

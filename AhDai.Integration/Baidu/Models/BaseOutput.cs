@@ -7,7 +7,7 @@ namespace AhDai.Integration.Baidu.Models;
 /// <summary>
 /// BaseOutput
 /// </summary>
-public class BaseOutput : IBaseOutput
+public abstract class BaseOutput : IBaseOutput
 {
     /// <summary>
     /// 错误代码
@@ -23,8 +23,8 @@ public class BaseOutput : IBaseOutput
     /// <summary>
     /// 确保结果
     /// </summary>
-    public void EnsureResult()
+    public virtual void EnsureResult()
     {
-        if (!string.IsNullOrEmpty(Error)) throw new Exception($"请求百度云服务发生异常：[{Error}]{ErrorMessage}，请联系管理员");
+        if (!string.IsNullOrEmpty(Error)) throw new Exception($"请求百度云发生异常：[{Error}]{ErrorMessage}，请联系管理员");
     }
 }

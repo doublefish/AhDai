@@ -3,7 +3,7 @@
 /// <summary>
 /// AliyunSmsConfig
 /// </summary>
-public class AliyunSmsConfig : AliyunConfig
+public class AliyunSmsConfig : BaseAliyunConfig
 {
 
 }

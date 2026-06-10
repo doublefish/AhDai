@@ -1,5 +1,6 @@
 ﻿using AhDai.Integration.Aliyun.Configs;
 using AhDai.Integration.Aliyun.Models;
+using AhDai.Integration.Aliyun.Providers;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -10,9 +11,14 @@ namespace AhDai.Integration.Aliyun;
 /// <summary>
 /// AliyunOcrService
 /// </summary>
+[Attributes.Service()]
 internal class AliyunOcrService(IAliyunOcrConfigProvider configProvider, IHttpClientFactory httpClientFactory)
-    : AliyunService<AliyunOcrConfig, IAliyunOcrConfigProvider>(configProvider, httpClientFactory, "2021-07-07", 1), IAliyunOcrService
+    : BaseAliyunService<AliyunOcrConfig, IAliyunOcrConfigProvider>(configProvider, httpClientFactory, "2021-07-07", 1)
+    , IAliyunOcrService
 {
+    protected override string ServiceName => "阿里云文字识别";
+
+
     public async Task<OcrTaxPaymentCertificateOutput> TaxPaymentCertificateAsync(string? url, Stream? stream)
     {
         //var query = Utils.ObjectUtl.ToSortedDictionary(input);

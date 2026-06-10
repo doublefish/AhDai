@@ -42,6 +42,6 @@ public abstract class BaseOcrOutput<TWordsResult> : IBaseOutput
     /// </summary>
     public virtual void EnsureResult()
     {
-        if (ErrorCode.HasValue) throw new Exception($"请求百度云服务发生异常：[{ErrorCode}]{ErrorMessage}，请联系管理员");
+        if (ErrorCode.HasValue) throw new Exception($"请求百度云发生异常：[{ErrorCode}]{ErrorMessage}，请联系管理员");
     }
 }

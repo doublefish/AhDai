@@ -1,11 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using AhDai.Integration.Abstractions;
+using System;
+using System.Text.Json.Serialization;
 
 namespace AhDai.Integration.WeChat.Models;
 
 /// <summary>
 /// BasePayOutput
 /// </summary>
-public class BasePayOutput
+public abstract class BasePayOutput : IBaseOutput
 {
     /// <summary>
     /// 错误代码
@@ -17,4 +19,12 @@ public class BasePayOutput
     /// </summary>
     [JsonPropertyName("message")]
     public string? Message { get; set; }
+
+    /// <summary>
+    /// 确保结果
+    /// </summary>
+    public virtual void EnsureResult()
+    {
+        if (!string.IsNullOrEmpty(Code)) throw new Exception($"请求微信支付发生异常：[{Code}]{Message}，请联系管理员");
+    }
 }

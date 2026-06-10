@@ -7,7 +7,7 @@ namespace AhDai.Integration.AntChain.Models;
 /// <summary>
 /// BaseTwcNotaryOutput
 /// </summary>
-public class BaseTwcNotaryOutput : IBaseOutput
+public abstract class BaseTwcNotaryOutput : IBaseOutput
 {
     /// <summary>
     /// API调用结果码，此接口成功为200
@@ -33,8 +33,8 @@ public class BaseTwcNotaryOutput : IBaseOutput
     /// <summary>
     /// 确保结果
     /// </summary>
-    public void EnsureResult()
+    public virtual void EnsureResult()
     {
-        if (ResultCode != "200") throw new Exception($"请求蚂蚁链服务发生异常：[{ResultCode}]{ResultMsg}，请联系管理员");
+        if (ResultCode != "200") throw new Exception($"请求蚂蚁链存证发生异常：[{ResultCode}]{ResultMsg}，请联系管理员");
     }
 }

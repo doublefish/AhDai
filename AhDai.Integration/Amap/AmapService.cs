@@ -1,11 +1,12 @@
 ﻿using AhDai.Core.Interfaces.Services;
 using AhDai.Core.Utils;
+using AhDai.Integration.Abstractions;
 using AhDai.Integration.Amap.Configs;
 using AhDai.Integration.Amap.Models;
-using AhDai.Integration.Infrastructure.Services;
+using AhDai.Integration.Amap.Providers;
+using AhDai.Integration.Infrastructure;
 using System;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Amap;
@@ -13,28 +14,31 @@ namespace AhDai.Integration.Amap;
 /// <summary>
 /// AmapService
 /// </summary>
-internal class AmapService(IBaseRedisService redisService, IAmapConfigProvider configProvider, IHttpClientFactory httpClientFactory)
+[Attributes.Service()]
+internal abstract class AmapService(IBaseRedisService redisService, IRedisKeyBuilder redisKeyBuilder, IAmapConfigProvider configProvider, IHttpClientFactory httpClientFactory)
     : BaseService<AmapConfig, IAmapConfigProvider>(configProvider, httpClientFactory), IAmapService
 {
     protected readonly IBaseRedisService _redisService = redisService;
+    protected readonly IRedisKeyBuilder _redisKeyBuilder = redisKeyBuilder;
+
+    protected override string ServiceName => "高德地图";
+
 
     public async Task<ReverseGeocodeOutput> GetReverseGeocodeAsync(ReverseGeocodeInput input)
     {
         //if (string.IsNullOrEmpty(input.Output)) input.Output = "json";
-
-        var config = await GetConfigAsync();
         var url = $"v3/geocode/regeo";
-        var res = await SendAsync<ReverseGeocodeOutput, ReverseGeocodeInput>(config, HttpMethod.Get, url, input);
-        if (res.Regeocode == null) throw new Exception("请求高德地图服务发生异常：响应结果中数据为空，请联系管理员");
+        var res = await GetAsync<ReverseGeocodeOutput>(url, input);
         return res;
     }
 
     public async Task<IpLocationOutput> GetIpLocationAsync(string ip, bool enableCache = false)
     {
+        var config = await GetConfigAsync();
         if (enableCache)
         {
             var rdb = _redisService.GetDatabase();
-            var key = $"AhDai:Amap:IpLocation:{ip}";
+            var key = _redisKeyBuilder.Build($"Amap:{config.AccessKey}:IpLocation:{ip}");
             var value = await rdb.StringGetAsync(key);
             if (value.HasValue)
             {
@@ -55,30 +59,9 @@ internal class AmapService(IBaseRedisService redisService, IAmapConfigProvider c
     public async Task<IpLocationOutput> GetIpLocationAsync(IpLocationInput input)
     {
         var config = await GetConfigAsync();
-        var url = $"v3/ip";
-        var res = await SendAsync<IpLocationOutput, IpLocationInput>(config, HttpMethod.Get, url, input);
-        //if (string.IsNullOrEmpty(res.Address) || res.Content == null) throw new Exception("请求高德地图服务发生异常：响应结果中数据为空，请联系管理员");
-        return res;
-    }
-
-    async Task<TOutput> SendAsync<TOutput, TInput>(AmapConfig config, HttpMethod method, string url, TInput input)
-        where TOutput : BaseOutput
-        where TInput : BaseInput
-    {
         input.Key = config.AccessKey;
-        if (method == HttpMethod.Get)
-        {
-            var queryString = Utils.StringUtils.ObjectToQueryString(input, true);
-            url += "?" + queryString;
-        }
-        var content = method == HttpMethod.Get ? null : JsonContent.Create(input);
-        return await SendAsync<TOutput>(config, method, url, content);
-    }
-
-    async Task<TOutput> SendAsync<TOutput>(AmapConfig config, HttpMethod method, string url, HttpContent? content)
-        where TOutput : BaseOutput
-    {
-        var client = CreateHttpClient(config.Host);
-        return await Utils.HttpUtils.SendAsync<TOutput>(client, method, url, content, "高德地图");
+        var url = $"v3/ip";
+        var res = await GetAsync<IpLocationOutput>(url, input);
+        return res;
     }
 }

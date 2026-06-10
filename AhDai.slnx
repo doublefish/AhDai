@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="AhDai.Core/AhDai.Core.csproj" />
   <Project Path="AhDai.Integration/AhDai.Integration.csproj" Id="e5d0e0cf-c058-43e9-91da-59bbba34bfbd" />
+  <Project Path="AhDai.Service/AhDai.Service.csproj" Id="8ff31f09-6995-4645-9a5b-b3b3c0d51313" />
   <Project Path="AhDai.WebApi/AhDai.WebApi.csproj" />
   <Project Path="AhDai.WorkerService/AhDai.WorkerService.csproj" />
 </Solution>

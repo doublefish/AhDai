@@ -2,7 +2,8 @@
 using AhDai.Core.Utils;
 using AhDai.Integration.Aliyun.Configs;
 using AhDai.Integration.Aliyun.Models;
-using AhDai.Integration.Infrastructure.Services;
+using AhDai.Integration.Aliyun.Providers;
+using AhDai.Integration.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.StaticFiles;
 using System;
@@ -20,12 +21,18 @@ namespace AhDai.Integration.Aliyun;
 /// <summary>
 /// AliyunOssService
 /// </summary>
+[Attributes.Service()]
 internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpClientFactory httpClientFactory)
-    : BaseService<AliyunOssConfig, IAliyunOssConfigProvider>(configProvider, httpClientFactory), IAliyunOssService
+    : BaseService<AliyunOssConfig, IAliyunOssConfigProvider>(configProvider, httpClientFactory)
+    , IAliyunOssService
 {
-    readonly FileExtensionContentTypeProvider ContentTypeProvider = new();
     const string SignatureVersion = "OSS4-HMAC-SHA256";
     const string UnsignedPayload = "UNSIGNED-PAYLOAD";
+
+    readonly FileExtensionContentTypeProvider ContentTypeProvider = new();
+
+    protected override string ServiceName => "阿里云对象存储";
+
 
     protected string GetContentType(string extension)
     {
@@ -221,10 +228,7 @@ internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpCl
         request.Content = content;
         var response = await client.SendAsync(request);
         var res = await response.Content.ReadAsStringAsync();
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new ArgumentException($"请求阿里云OSS服务发生异常，请联系管理员=>{res}");
-        }
+        if (!response.IsSuccessStatusCode) throw new ArgumentException($"请求{ServiceName}发生异常，请联系管理员=>{res}");
         return res;
     }
 

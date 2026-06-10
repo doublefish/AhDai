@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.Baidu.Models;
+﻿using AhDai.Integration.Baidu.Configs;
+using AhDai.Integration.Baidu.Models;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Baidu;
@@ -6,7 +7,7 @@ namespace AhDai.Integration.Baidu;
 /// <summary>
 /// IBaiduOcrService
 /// </summary>
-public interface IBaiduOcrService : IBaiduService
+public interface IBaiduOcrService : IBaseBaiduService<BaiduOcrConfig>
 {
     // 通用文字识别（标准版）
     //Task<OcrGeneralBasicOutput> GeneralBasicAsync(OcrGeneralBasicInput input, string accessToken);

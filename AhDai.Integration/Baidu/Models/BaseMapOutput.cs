@@ -7,7 +7,7 @@ namespace AhDai.Integration.Baidu.Models;
 /// <summary>
 /// BaseMapOutput
 /// </summary>
-public class BaseMapOutput : IBaseOutput
+public abstract class BaseMapOutput : IBaseOutput
 {
     /// <summary>
     /// 返回结果状态值，成功返回0，其他值请查看下方返回码状态表。
@@ -25,6 +25,6 @@ public class BaseMapOutput : IBaseOutput
     /// </summary>
     public virtual void EnsureResult()
     {
-        if (Status != 0) throw new Exception($"请求百度地图服务发生异常：[{Status}]{Message}，请联系管理员");
+        if (Status != 0) throw new Exception($"请求百度地图发生异常：[{Status}]{Message}，请联系管理员");
     }
 }

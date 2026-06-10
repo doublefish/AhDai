@@ -3,6 +3,6 @@
 /// <summary>
 /// AliyunOssConfig
 /// </summary>
-public class AliyunOssConfig : AliyunConfig
+public class AliyunOssConfig : BaseAliyunConfig
 {
 }

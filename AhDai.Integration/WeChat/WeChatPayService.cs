@@ -1,9 +1,12 @@
 ﻿using AhDai.Core.Converters;
 using AhDai.Core.Extensions;
 using AhDai.Core.Utils;
-using AhDai.Integration.Infrastructure.Services;
+using AhDai.Integration.Abstractions;
+using AhDai.Integration.AntChain.Models;
+using AhDai.Integration.Infrastructure;
 using AhDai.Integration.WeChat.Configs;
 using AhDai.Integration.WeChat.Models;
+using AhDai.Integration.WeChat.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,6 +23,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -28,8 +32,10 @@ namespace AhDai.Integration.WeChat;
 /// <summary>
 /// WeChatPayService
 /// </summary>
+[Attributes.Service()]
 internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpClientFactory httpClientFactory)
-    : BaseService<WeChatPayConfig, IWeChatPayConfigProvider>(configProvider, httpClientFactory), IWeChatPayService
+    : BaseService<WeChatPayConfig, IWeChatPayConfigProvider>(configProvider, httpClientFactory)
+    , IWeChatPayService
 {
     static JsonSerializerOptions? _JsonOptions;
     static JsonSerializerOptions JsonOptions
@@ -47,6 +53,9 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
         }
     }
 
+    protected override string ServiceName => "微信支付";
+
+
     public async Task<H5OrderOutput> CreateH5OrderAsync(H5OrderInput input)
     {
         var config = await GetConfigAsync();
@@ -61,7 +70,7 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
             Total = (int)(input.Amount * 100),
         };
         var url = "/v3/pay/transactions/h5";
-        return await SendAsync<H5OrderOutput, H5OrderInput>(config, HttpMethod.Post, url, input);
+        return await PostAsync<H5OrderOutput>(url, input);
     }
 
     public async Task<NativeOrderOutput> CreateNativeOrderAsync(NativeOrderInput input)
@@ -78,10 +87,10 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
             Total = (int)(input.Amount * 100),
         };
         var url = "/v3/pay/transactions/native";
-        return await SendAsync<NativeOrderOutput, NativeOrderInput>(config, HttpMethod.Post, url, input);
+        return await PostAsync<NativeOrderOutput>(url, input);
     }
 
-    public async Task<object> DownloadbillAsync(DateTime date, string type = "SUCCESS")
+    public async Task<object> DownloadBillAsync(DateTime date, string type = "SUCCESS")
     {
         var config = await GetConfigAsync();
         var input = new SortedDictionary<string, string?>()
@@ -105,13 +114,7 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
         {
             Content = new StringContent(xml.ToString(), Encoding.UTF8, new MediaTypeHeaderValue("application/xml"))
         };
-
-        var client = CreateHttpClient(config.Host);
-        var response = await client.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-        var res = await response.Content.ReadFromJsonAsync<BasePayOutput2>() ?? throw new Exception("请求微信支付服务发生异常：解析响应结果失败，请联系管理员");
-        if (!string.IsNullOrEmpty(res.ReturnCode)) throw new Exception($"请求微信支付服务发生异常：[{res.ReturnCode}]{res.ReturnMessage}，请联系管理员");
-        return res;
+        return await SendAsync<DownloadBillOutput>(null, request);
     }
 
     public async Task<OrderNotifyOutput> GetNotifyResultAsync(HttpContext httpContext)
@@ -144,13 +147,12 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
         return output;
     }
 
-    async Task<TOutput> SendAsync<TOutput, TInput>(WeChatPayConfig config, HttpMethod method, string url, TInput? input = null)
-        where TOutput : BasePayOutput
-        where TInput : class
+    protected override async Task<TOutput> SendAsync<TOutput>(HttpMethod method, string url, object? data = null, CancellationToken cancellationToken = default)
     {
+        var config = await GetConfigAsync();
         var request = new HttpRequestMessage(method, url);
-        var body = input != null ? JsonUtil.Serialize(input, JsonOptions) : "";
-        if (method != HttpMethod.Get && input != null)
+        var body = data != null ? JsonUtil.Serialize(data, JsonOptions) : "";
+        if (method != HttpMethod.Get && data != null)
         {
             request.Content = new StringContent(body, new MediaTypeHeaderValue("application/json"));
         }
@@ -170,11 +172,7 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
         client.DefaultRequestHeaders.Add("Authorization", authorization);
         client.DefaultRequestHeaders.Add("Accept", "application/json");
         client.DefaultRequestHeaders.Add("User-Agent", "lsl-wechat-pay");
-        var response = await client.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-        var res = await response.Content.ReadFromJsonAsync<TOutput>() ?? throw new Exception("请求微信支付服务发生异常：解析响应结果失败，请联系管理员");
-        if (!string.IsNullOrEmpty(res.Code)) throw new Exception($"请求微信支付服务发生异常：[{res.Code}]{res.Message}，请联系管理员");
-        return res;
+        return await SendAsync<TOutput>(client, request, cancellationToken);
     }
 
     /// <summary>

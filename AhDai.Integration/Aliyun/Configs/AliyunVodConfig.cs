@@ -3,6 +3,6 @@
 /// <summary>
 /// AliyunVodConfig
 /// </summary>
-public class AliyunVodConfig : AliyunConfig
+public class AliyunVodConfig : BaseAliyunConfig
 {
 }

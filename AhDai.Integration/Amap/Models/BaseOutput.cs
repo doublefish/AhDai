@@ -7,7 +7,7 @@ namespace AhDai.Integration.Amap.Models;
 /// <summary>
 /// BaseOutput
 /// </summary>
-public class BaseOutput : IBaseOutput
+public abstract class BaseOutput : IBaseOutput
 {
     /// <summary>
     /// 结果状态值：值为0或1，0表示失败；1表示成功
@@ -30,6 +30,6 @@ public class BaseOutput : IBaseOutput
     /// </summary>
     public virtual void EnsureResult()
     {
-        if (Status != 1) throw new Exception($"请求高德地图服务发生异常：[{InfoCode}]{Info}，请联系管理员");
+        if (Status != 1) throw new Exception($"请求高德地图发生异常：[{InfoCode}]{Info}，请联系管理员");
     }
 }

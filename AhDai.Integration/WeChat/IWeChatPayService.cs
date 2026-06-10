@@ -39,6 +39,6 @@ public interface IWeChatPayService : IBaseService<WeChatPayConfig>
     /// <param name="date"></param>
     /// <param name="type"></param>
     /// <returns></returns>
-    Task<object> DownloadbillAsync(DateTime date, string type = "SUCCESS");
+    Task<object> DownloadBillAsync(DateTime date, string type = "SUCCESS");
 
 }

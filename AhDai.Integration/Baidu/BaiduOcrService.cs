@@ -1,6 +1,8 @@
 ﻿using AhDai.Core.Interfaces.Services;
 using AhDai.Integration.Abstractions;
+using AhDai.Integration.Baidu.Configs;
 using AhDai.Integration.Baidu.Models;
+using AhDai.Integration.Baidu.Providers;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -11,9 +13,14 @@ namespace AhDai.Integration.Baidu;
 /// <summary>
 /// BaiduOcrService
 /// </summary>
-internal class BaiduOcrService(IBaseRedisService redisService, IBaiduConfigProvider configProvider, IHttpClientFactory httpClientFactory)
-    : BaiduService(redisService, configProvider, httpClientFactory), IBaiduOcrService
+[Attributes.Service()]
+internal class BaiduOcrService(IBaseRedisService redisService, IRedisKeyBuilder redisKeyBuilder, IBaiduOcrConfigProvider configProvider, IHttpClientFactory httpClientFactory)
+    : BaseBaiduService<BaiduOcrConfig, IBaiduOcrConfigProvider>(redisService, redisKeyBuilder, configProvider, httpClientFactory)
+    , IBaiduOcrService
 {
+    protected override string ServiceName => "百度文字识别";
+
+
     public async Task<OcrAccurateBasicOutput> AccurateBasicAsync(OcrAccurateBasicInput input, string accessToken)
     {
         var url = $"rest/2.0/ocr/v1/accurate_basic?access_token={accessToken}";
@@ -64,7 +71,7 @@ internal class BaiduOcrService(IBaseRedisService redisService, IBaiduConfigProvi
         if (input.File != null)
         {
             var maxSize = maxSizeKb * 1024;
-            if (input.File.Length > maxSize) throw new ArgumentException($"超出文件大小限制：{AhDai.Core.Utils.FileUtil.GetFileSize(maxSize)}");
+            if (input.File.Length > maxSize) throw new ArgumentException($"超出文件大小限制：{Core.Utils.FileUtil.GetFileSize(maxSize)}");
             var extension = Path.GetExtension(input.File.FileName);
             var fileType = extension switch
             {
@@ -78,10 +85,12 @@ internal class BaiduOcrService(IBaseRedisService redisService, IBaiduConfigProvi
         }
 
         var queryString = Utils.StringUtils.ObjectToQueryString(input, true, true);
-        var content = new StringContent(queryString);
 
-        var config = await GetConfigAsync();
-        return await SendAsync<TOutput>(config, method, url, content);
+        var request = new HttpRequestMessage(method, url)
+        {
+            Content = new StringContent(queryString),
+        };
+        return await SendAsync<TOutput>(null, request);
     }
 
 }

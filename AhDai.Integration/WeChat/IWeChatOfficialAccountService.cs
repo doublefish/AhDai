@@ -7,7 +7,7 @@ namespace AhDai.Integration.WeChat;
 /// <summary>
 /// IWeChatOfficialAccountService
 /// </summary>
-public interface IWeChatOfficialAccountService : IWeChatService<WeChatOfficialAccountConfig>
+public interface IWeChatOfficialAccountService : IBaseWeChatService<WeChatOfficialAccountConfig>
 {
     /// <summary>
     /// 创建二维码

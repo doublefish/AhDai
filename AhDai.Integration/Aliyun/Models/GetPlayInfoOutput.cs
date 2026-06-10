@@ -1,9 +1,11 @@
-﻿namespace AhDai.Integration.Aliyun.Models;
+﻿using AhDai.Integration.Abstractions;
+
+namespace AhDai.Integration.Aliyun.Models;
 
 /// <summary>
 /// GetPlayInfoOutput
 /// </summary>
-public class GetPlayInfoOutput
+public class GetPlayInfoOutput : IBaseOutput
 {
     /// <summary>
     /// 请求ID
@@ -17,4 +19,11 @@ public class GetPlayInfoOutput
     /// 音/视频播放信息（流信息）。
     /// </summary>
     public object PlayInfoList { get; set; } = default!;
+
+    /// <summary>
+    /// 确保结果
+    /// </summary>
+    public virtual void EnsureResult()
+    {
+    }
 }

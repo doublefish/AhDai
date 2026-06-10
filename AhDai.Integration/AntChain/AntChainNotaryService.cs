@@ -1,12 +1,11 @@
 ﻿using AhDai.Integration.AntChain.Configs;
 using AhDai.Integration.AntChain.Models;
-using AhDai.Integration.Infrastructure.Services;
-using Microsoft.AspNetCore.Http;
+using AhDai.Integration.AntChain.Providers;
+using AhDai.Integration.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +15,13 @@ namespace AhDai.Integration.AntChain;
 /// <summary>
 /// AntChainNotaryService
 /// </summary>
+[Attributes.Service()]
 internal class AntChainNotaryService(IAntChainNotaryConfigProvider configProvider, IHttpClientFactory httpClientFactory)
     : BaseService<AntChainNotaryConfig, IAntChainNotaryConfigProvider>(configProvider, httpClientFactory), IAntChainNotaryService
 {
+    protected override string ServiceName => "蚂蚁链存证";
+
+
     public async Task<TwcNotaryTransCreateOutput> CreateTransAsync(TwcNotaryTransCreateInput input)
     {
         if (input.Customer == null) throw new ArgumentException("关联实体的身份识别信息不可为空");
@@ -91,16 +94,17 @@ internal class AntChainNotaryService(IAntChainNotaryConfigProvider configProvide
 
         var client = CreateHttpClient(config.Host);
         client.Timeout = TimeSpan.FromMinutes(30);
+
         var request = new HttpRequestMessage(method, $"gateway.do?{queryString}");
         foreach (var header in headers)
         {
             request.Headers.TryAddWithoutValidation(header.Key, header.Value);
         }
         request.Content = new FormUrlEncodedContent(body);
-        var response = await client.SendAsync(request);
-        var res = await response.Content.ReadFromJsonAsync<TwcOutput<TOutput>>() ?? throw new Exception("请求蚂蚁链存证服务发生异常：解析响应结果失败，请联系管理员");
-        if (res.Response == null) throw new Exception("请求蚂蚁链存证服务发生异常：解析响应结果失败，请联系管理员");
-        if (res.Response.ResultCode != "200") throw new Exception($"请求蚂蚁链存证服务发生异常：[{res.Response.ResultCode}]{res.Response.ResultMsg}，请联系管理员");
+
+        var res = await SendAsync<TwcOutput<TOutput>>(client, request);
+        if (res.Response == null) throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
+        res.Response.EnsureResult();
         return res.Response;
     }
 

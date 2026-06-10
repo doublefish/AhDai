@@ -2,7 +2,8 @@
 using AhDai.Core.Utils;
 using AhDai.Integration.ESign.Configs;
 using AhDai.Integration.ESign.Models;
-using AhDai.Integration.Infrastructure.Services;
+using AhDai.Integration.ESign.Providers;
+using AhDai.Integration.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,9 +12,9 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.ESign;
@@ -21,26 +22,29 @@ namespace AhDai.Integration.ESign;
 /// <summary>
 /// ESignService
 /// </summary>
+[Attributes.Service()]
 internal class ESignService(IESignConfigProvider configProvider, IHttpClientFactory httpClientFactory
     , IBaseFileService baseFileService)
-    : BaseService<ESignConfig, IESignConfigProvider>(configProvider, httpClientFactory), IESignService
+    : BaseService<ESignConfig, IESignConfigProvider>(configProvider, httpClientFactory)
+    , IESignService
 {
     readonly IBaseFileService _baseFileService = baseFileService;
+
+    protected override string ServiceName => "电子签";
+
 
     #region 基础
     public async Task<OrgOutput> GetOrgByNameAsync(string orgName)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/organizations/identity-info?orgName={orgName}";
-        var res = await SendAsync<OrgOutput>(config, HttpMethod.Get, url);
+        var res = await GetAsync<Output<OrgOutput>>(url);
         return res.Data ?? throw new Exception("未查询到数据");
     }
 
     public async Task<PersonOutput> GetPersonByAccountAsync(string psnAccount)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/persons/identity-info?psnAccount={psnAccount}";
-        var res = await SendAsync<PersonOutput>(config, HttpMethod.Get, url);
+        var res = await GetAsync<Output<PersonOutput>>(url);
         return res.Data ?? throw new Exception("未查询到数据");
     }
     #endregion
@@ -48,9 +52,8 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     #region 授权
     public async Task<OrgAuthUrlOutput> GetOrgAuthUrlAsync(object input)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/org-auth-url";
-        var res = await SendAsync<OrgAuthUrlOutput, object>(config, HttpMethod.Post, url, input);
+        var res = await PostAsync<Output<OrgAuthUrlOutput>>(url, input);
         return res.Data ?? throw new Exception("未查询到数据");
     }
     #endregion
@@ -58,16 +61,14 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     #region 文件
     public async Task<FileUploadUrlOutput> GetFileUploadUrlAsync(FileUploadUrlInput input)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/files/file-upload-url";
-        var res = await SendAsync<FileUploadUrlOutput, FileUploadUrlInput>(config, HttpMethod.Post, url, input);
+        var res = await PostAsync<Output<FileUploadUrlOutput>>(url, input);
         return res.Data ?? throw new Exception("未查询到数据");
     }
 
     public async Task UploadFileToUrlAsync(string url, Stream stream, byte[]? contentMD5 = null, string? contentType = null)
     {
         contentType ??= "application/octet-stream";
-        var client = CreateHttpClient("", "");
 
         var finalMd5 = contentMD5;
         if (finalMd5 == null)
@@ -82,14 +83,13 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
         content.Headers.ContentMD5 = finalMd5;
         content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
 
+        //var config = await GetConfigAsync();
+        //var client = CreateHttpClient();
         var request = new HttpRequestMessage(HttpMethod.Put, url)
         {
             Content = content
         };
-        var response = await client.SendAsync(request);
-        //response.EnsureSuccessStatusCode();
-        var res = await response.Content.ReadFromJsonAsync<FileUploadOutput>() ?? throw new Exception("请求电子签服务发生异常：解析响应结果失败，请联系管理员");
-        if (res.ErrCode != 0) throw new Exception($"请求电子签服务发生异常：[{res.ErrCode}]{res.Msg}，请联系管理员");
+        await SendAsync<FileUploadOutput>(null, request);
     }
 
     public async Task<string> UploadFileAsync(FileUploadInput input)
@@ -157,9 +157,8 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
 
     public async Task<FileInfoOutput> GetFileAsync(string fileId, bool pageSize = false)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/files/{fileId}?pageSize={pageSize}";
-        var res = await SendAsync<FileInfoOutput>(config, HttpMethod.Get, url);
+        var res = await GetAsync<Output<FileInfoOutput>>(url);
         return res.Data ?? throw new Exception("未查询到数据");
     }
 
@@ -187,13 +186,12 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
 
     public async Task<GetFileKeywordPositionOutput[]> GetFileKeywordPositionsAsync(string fileId, params string[] keywords)
     {
-        var config = await GetConfigAsync();
         var dict = new Dictionary<string, string[]>()
         {
             ["keywords"] = keywords
         };
         var url = $"v3/files/{fileId}/keyword-positions";
-        var res = await SendAsync<GetFileKeywordPositionsOutput, Dictionary<string, string[]>>(config, HttpMethod.Post, url, dict);
+        var res = await PostAsync<Output<GetFileKeywordPositionsOutput>>(url, dict);
         var data = res.Data ?? throw new Exception("未查询到数据");
         return data.KeywordPositions;
     }
@@ -202,33 +200,29 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     #region 模板
     public async Task<DocTemplateCreateUrlOutput> GetDocTemplateCreateUrlAsync(DocTemplateCreateUrlInput input)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/doc-templates/doc-template-create-url";
-        var res = await SendAsync<DocTemplateCreateUrlOutput, DocTemplateCreateUrlInput>(config, HttpMethod.Post, url, input);
+        var res = await PostAsync<Output<DocTemplateCreateUrlOutput>>(url, input);
         return res.Data ?? throw new ArgumentException("未查询到数据");
     }
 
     public async Task<DocTemplateEditUrlOutput> GetDocTemplateEditUrlAsync(string docTemplateId, DocTemplateEditUrlInput input)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/doc-templates/{docTemplateId}/doc-template-edit-url";
-        var res = await SendAsync<DocTemplateEditUrlOutput, DocTemplateEditUrlInput>(config, HttpMethod.Post, url, input);
+        var res = await PostAsync<Output<DocTemplateEditUrlOutput>>(url, input);
         return res.Data ?? throw new ArgumentException("未查询到数据");
     }
 
     public async Task<IDictionary<string, object>> GetDocTemplateAsync(string docTemplateId)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/doc-templates/{docTemplateId}";
-        var res = await SendAsync<IDictionary<string, object>>(config, HttpMethod.Get, url);
+        var res = await GetAsync<Output<IDictionary<string, object>>>(url);
         return res.Data ?? throw new ArgumentException("未查询到数据");
     }
 
     public async Task<FileCreateByDocTemplateOutput> CreateFileByDocTemplateAsync(FileCreateByDocTemplateInput input)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/files/create-by-doc-template";
-        var res = await SendAsync<FileCreateByDocTemplateOutput, FileCreateByDocTemplateInput>(config, HttpMethod.Post, url, input);
+        var res = await PostAsync<Output<FileCreateByDocTemplateOutput>>(url, input);
         return res.Data ?? throw new Exception("未查询到数据");
     }
     #endregion
@@ -236,26 +230,23 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     #region 流程
     public async Task<string> CreateSignFlowByFileAsync(SignFlowCreateByFileInput input)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/sign-flow/create-by-file";
-        var res = await SendAsync<SignFlowCreateByFileOutput, SignFlowCreateByFileInput>(config, HttpMethod.Post, url, input);
+        var res = await PostAsync<Output<SignFlowCreateByFileOutput>>(url, input);
         if (res.Data == null || string.IsNullOrEmpty(res.Data.SignFlowId)) throw new Exception("发起签署流程发生异常，请联系管理员");
         return res.Data.SignFlowId;
     }
 
     public async Task RevokeSignFlowAsync(string signFlowId, SignFlowRevokeInput input)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/sign-flow/{signFlowId}/revoke";
-        var res = await SendAsync<IDictionary<string, string>, SignFlowRevokeInput>(config, HttpMethod.Post, url, input);
+        var res = await PostAsync<Output<IDictionary<string, string>>>(url, input);
         if (res.Data == null) throw new Exception("撤销签署流程发生异常，请联系管理员");
     }
 
     public async Task UrgeSignFlowAsync(string signFlowId, SignFlowUrgeInput input)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/sign-flow/{signFlowId}/urge";
-        await SendAsync<object, SignFlowUrgeInput>(config, HttpMethod.Post, url, input);
+        await PostAsync<Output<object>>(url, input);
     }
 
     public async Task<SignFlowRescissionOutput> InitiateSignFlowRescissionAsync(string signFlowId, SignFlowRescissionInput input)
@@ -295,15 +286,14 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
 
         var config = await GetConfigAsync();
         var url = $"v3/sign-flow/{signFlowId}/initiate-rescission";
-        var res = await SendAsync<SignFlowRescissionOutput, SignFlowRescissionInput>(config, HttpMethod.Post, url, input);
+        var res = await PostAsync<Output<SignFlowRescissionOutput>>(url, input);
         return res.Data ?? throw new Exception("发起合同解约发生异常，请联系管理员");
     }
 
     public async Task<SignFlowDetailOutput> GetSignFlowDetailAsync(string signFlowId)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/sign-flow/{signFlowId}/detail";
-        var res = await SendAsync<SignFlowDetailOutput>(config, HttpMethod.Get, url);
+        var res = await GetAsync<Output<SignFlowDetailOutput>>(url);
         if (res.Data == null) throw new Exception("未查询到数据");
         res.Data.SignFlowId = signFlowId;
         return res.Data;
@@ -311,18 +301,16 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
 
     public async Task<SignFlowSignUrlOutput> GetSignFlowSignUrlAsync(string signFlowId, SignFlowSignUrlInput input)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/sign-flow/{signFlowId}/sign-url";
-        var res = await SendAsync<SignFlowSignUrlOutput, SignFlowSignUrlInput>(config, HttpMethod.Post, url, input);
+        var res = await PostAsync<Output<SignFlowSignUrlOutput>>(url, input);
         if (res.Data == null) throw new Exception("未查询到数据");
         return res.Data;
     }
 
     public async Task<SignFileDownloadOutput> GetSignFlowFileDownloadUrlAsync(string signFlowId)
     {
-        var config = await GetConfigAsync();
         var url = $"v3/sign-flow/{signFlowId}/file-download-url";
-        var res = await SendAsync<SignFileDownloadOutput>(config, HttpMethod.Get, url);
+        var res = await GetAsync<Output<SignFileDownloadOutput>>(url);
         if (res.Data == null) throw new Exception("未查询到数据");
         return res.Data;
     }
@@ -352,18 +340,16 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     }
     #endregion
 
-    Task<BaseOutput<TOutput>> SendAsync<TOutput>(ESignConfig config, HttpMethod method, string url) => SendAsync<TOutput, string>(config, method, url, null);
-
-    async Task<BaseOutput<TOutput>> SendAsync<TOutput, TInput>(ESignConfig config, HttpMethod method, string url, TInput? input)
-        where TInput : class
+    protected override async Task<TOutput> SendAsync<TOutput>(HttpMethod method, string url, object? data, CancellationToken cancellationToken = default)
     {
+        var config = await GetConfigAsync();
         var request = new HttpRequestMessage(method, url);
 
         var contentType = "";
         var contentMD5 = "";
-        if (method != HttpMethod.Get && method != HttpMethod.Delete && input != null)
+        if (method != HttpMethod.Get && method != HttpMethod.Delete && data != null)
         {
-            var body = JsonUtil.Serialize(input);
+            var body = JsonUtil.Serialize(data);
             var contentMD5Bytes = MD5.HashData(Encoding.UTF8.GetBytes(body));
             contentMD5 = Convert.ToBase64String(contentMD5Bytes);
 
@@ -391,11 +377,7 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
         client.DefaultRequestHeaders.Add("X-Tsign-Open-Auth-Mode", "Signature");
         client.DefaultRequestHeaders.Add("X-Tsign-Open-Ca-Signature", signature);
         client.DefaultRequestHeaders.Add("X-Tsign-Open-Ca-Timestamp", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString());
-        var response = await client.SendAsync(request);
-        //response.EnsureSuccessStatusCode();
-        var res = await response.Content.ReadFromJsonAsync<BaseOutput<TOutput>>() ?? throw new Exception("请求电子签服务发生异常：解析响应结果失败，请联系管理员");
-        if (res.Code != 0) throw new Exception($"请求电子签服务发生异常：[{res.Code}]{res.Message}，请联系管理员");
-        return res;
+        return await SendAsync<TOutput>(client, request, cancellationToken);
     }
 
     static string ComputeSignature(string data, string appSecret)

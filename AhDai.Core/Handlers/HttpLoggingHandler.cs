@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AhDai.Core.Extensions;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading;
@@ -28,13 +29,14 @@ public class HttpLoggingHandler(ILogger<HttpLoggingHandler> logger) : Delegating
         {
             requestContent = await request.Content.ReadAsStringAsync(cancellationToken);
         }
-        if (_logger.IsEnabled(LogLevel.Information)) _logger.LogInformation("发送请求=>{Method} {RequestUri}\r\n{Content}", request.Method, request.RequestUri, requestContent);
+        if (_logger.IsEnabled(LogLevel.Information)) _logger.LogInformation("发送请求=>{Method} {RequestUri}\r\n{Content}", request.Method, request.RequestUri, requestContent.TruncateWithEllipsis(2048));
         var watcher = new Stopwatch();
         watcher.Start();
         var response = await base.SendAsync(request, cancellationToken);
         watcher.Stop();
         var responseContent = "";
-        if (response.Content != null && response.Content.Headers.ContentType?.MediaType == "application/json")
+        if (response.Content != null && (response.Content.Headers.ContentType?.MediaType == "application/json"
+            || response.Content.Headers.ContentType?.MediaType == "application/x-www-form-urlencoded"))
         {
             responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
         }

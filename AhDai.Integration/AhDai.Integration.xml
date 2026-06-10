@@ -52,12 +52,24 @@
             Host
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Abstractions.IRedisKeyBuilder">
+            <summary>
+            IRedisKeyBuilder
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Abstractions.IRedisKeyBuilder.Build(System.String[])">
+            <summary>
+            Build
+            </summary>
+            <param name="segments"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Aliyun.AliyunOcrService">
             <summary>
             AliyunOcrService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Aliyun.AliyunOcrService.#ctor(AhDai.Integration.Aliyun.IAliyunOcrConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Aliyun.AliyunOcrService.#ctor(AhDai.Integration.Aliyun.Providers.IAliyunOcrConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             AliyunOcrService
             </summary>
@@ -67,7 +79,7 @@
             AliyunOssService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Aliyun.AliyunOssService.#ctor(AhDai.Integration.Aliyun.IAliyunOssConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Aliyun.AliyunOssService.#ctor(AhDai.Integration.Aliyun.Providers.IAliyunOssConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             AliyunOssService
             </summary>
@@ -77,7 +89,7 @@
             AliyunService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Aliyun.AliyunSmsService.#ctor(AhDai.Integration.Aliyun.IAliyunSmsConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Aliyun.AliyunSmsService.#ctor(AhDai.Integration.Aliyun.Providers.IAliyunSmsConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             AliyunService
             </summary>
@@ -87,24 +99,9 @@
             AliyunVodService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Aliyun.AliyunVodService.#ctor(AhDai.Integration.Aliyun.IAliyunVodConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Aliyun.AliyunVodService.#ctor(AhDai.Integration.Aliyun.Providers.IAliyunVodConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             AliyunVodService
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.Aliyun.Configs.AliyunConfig">
-            <summary>
-            AliyunConfig
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Aliyun.Configs.AliyunConfig.AccessKeyId">
-            <summary>
-            AccessKeyId
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Aliyun.Configs.AliyunConfig.AccessKeySecret">
-            <summary>
-            AccessKeySecret
             </summary>
         </member>
         <member name="T:AhDai.Integration.Aliyun.Configs.AliyunOcrConfig">
@@ -127,9 +124,19 @@
             AliyunVodConfig
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Aliyun.IAliyunOcrConfigProvider">
+        <member name="T:AhDai.Integration.Aliyun.Configs.BaseAliyunConfig">
             <summary>
-            IAliyunOcrConfigProvider
+            BaseAliyunConfig
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Aliyun.Configs.BaseAliyunConfig.AccessKeyId">
+            <summary>
+            AccessKeyId
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Aliyun.Configs.BaseAliyunConfig.AccessKeySecret">
+            <summary>
+            AccessKeySecret
             </summary>
         </member>
         <member name="T:AhDai.Integration.Aliyun.IAliyunOcrService">
@@ -144,11 +151,6 @@
             <param name="url"></param>
             <param name="stream"></param>
             <returns></returns>
-        </member>
-        <member name="T:AhDai.Integration.Aliyun.IAliyunOssConfigProvider">
-            <summary>
-            IAliyunOssConfigProvider
-            </summary>
         </member>
         <member name="T:AhDai.Integration.Aliyun.IAliyunOssService">
             <summary>
@@ -216,11 +218,6 @@
             <param name="acl"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.Aliyun.IAliyunSmsConfigProvider">
-            <summary>
-            IAliyunSmsConfigProvider
-            </summary>
-        </member>
         <member name="T:AhDai.Integration.Aliyun.IAliyunSmsService">
             <summary>
             IAliyunSmsService
@@ -236,11 +233,6 @@
             <param name="signName"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.Aliyun.IAliyunVodConfigProvider">
-            <summary>
-            IAliyunVodConfigProvider
-            </summary>
-        </member>
         <member name="T:AhDai.Integration.Aliyun.IAliyunVodService">
             <summary>
             IAliyunVodService
@@ -253,29 +245,9 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.Aliyun.Models.BaseSmsOutput">
+        <member name="T:AhDai.Integration.Aliyun.IBaseAliyunService`1">
             <summary>
-            BaseSmsOutput
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Aliyun.Models.BaseSmsOutput.Code">
-            <summary>
-            请求状态码，返回 OK 代表请求成功
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Aliyun.Models.BaseSmsOutput.Message">
-            <summary>
-            状态码的描述
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Aliyun.Models.BaseSmsOutput.BizId">
-            <summary>
-            发送回执ID
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Aliyun.Models.BaseSmsOutput.RequestId">
-            <summary>
-            请求ID
+            IBaseAliyunService
             </summary>
         </member>
         <member name="T:AhDai.Integration.Aliyun.Models.GetPlayInfoInput">
@@ -374,6 +346,11 @@
             音/视频播放信息（流信息）。
             </summary>
         </member>
+        <member name="M:AhDai.Integration.Aliyun.Models.GetPlayInfoOutput.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Aliyun.Models.OcrTaxPaymentCertificateDataOutput">
             <summary>
             OcrTaxPaymentCertificateDataOutput
@@ -397,6 +374,11 @@
         <member name="P:AhDai.Integration.Aliyun.Models.OcrTaxPaymentCertificateOutput.Data">
             <summary>
             数据
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Aliyun.Models.OcrTaxPaymentCertificateOutput.EnsureResult">
+            <summary>
+            确保结果
             </summary>
         </member>
         <member name="M:AhDai.Integration.Aliyun.Models.OcrTaxPaymentCertificateOutput.GetFriendlyOutput">
@@ -705,9 +687,59 @@
             高度
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Aliyun.Models.SmsOutput">
+            <summary>
+            BaseSmsOutput
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Aliyun.Models.SmsOutput.Code">
+            <summary>
+            请求状态码，返回 OK 代表请求成功
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Aliyun.Models.SmsOutput.Message">
+            <summary>
+            状态码的描述
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Aliyun.Models.SmsOutput.BizId">
+            <summary>
+            发送回执ID
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Aliyun.Models.SmsOutput.RequestId">
+            <summary>
+            请求ID
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Aliyun.Models.SmsOutput.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Aliyun.Models.SmsSendInput">
             <summary>
             SmsSendInput
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Aliyun.Providers.IAliyunOcrConfigProvider">
+            <summary>
+            IAliyunOcrConfigProvider
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Aliyun.Providers.IAliyunOssConfigProvider">
+            <summary>
+            IAliyunOssConfigProvider
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Aliyun.Providers.IAliyunSmsConfigProvider">
+            <summary>
+            IAliyunSmsConfigProvider
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Aliyun.Providers.IAliyunVodConfigProvider">
+            <summary>
+            IAliyunVodConfigProvider
             </summary>
         </member>
         <member name="T:AhDai.Integration.Amap.AmapArrayConverter`1">
@@ -738,7 +770,7 @@
             AmapService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Amap.AmapService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Amap.IAmapConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Amap.AmapService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Amap.Providers.IAmapConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             AmapService
             </summary>
@@ -773,11 +805,6 @@
         <member name="P:AhDai.Integration.Amap.Configs.AmapConfig.AccessKey">
             <summary>
             AppSecret
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.Amap.IAmapConfigProvider">
-            <summary>
-            IAmapConfigProvider
             </summary>
         </member>
         <member name="T:AhDai.Integration.Amap.IAmapService">
@@ -1214,6 +1241,12 @@
             逆地理编码列表
             </summary>
         </member>
+        <member name="M:AhDai.Integration.Amap.Models.ReverseGeocodeOutput.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+            <exception cref="T:System.Exception"></exception>
+        </member>
         <member name="T:AhDai.Integration.Amap.Models.RoadInterOutput">
             <summary>
             道路交叉口
@@ -1314,12 +1347,17 @@
             门牌地址到请求坐标的距离，单位：米
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Amap.Providers.IAmapConfigProvider">
+            <summary>
+            IAmapConfigProvider
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.AntChain.AntChainNotaryService">
             <summary>
             AntChainNotaryService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.AntChain.AntChainNotaryService.#ctor(AhDai.Integration.AntChain.IAntChainNotaryConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.AntChain.AntChainNotaryService.#ctor(AhDai.Integration.AntChain.Providers.IAntChainNotaryConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             AntChainNotaryService
             </summary>
@@ -1347,11 +1385,6 @@
         <member name="P:AhDai.Integration.AntChain.Configs.AntChainNotaryConfig.InstanceId">
             <summary>
             集群实例ID
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.AntChain.IAntChainNotaryConfigProvider">
-            <summary>
-            IAntChainNotaryConfigProvider
             </summary>
         </member>
         <member name="T:AhDai.Integration.AntChain.IAntChainNotaryService">
@@ -1771,9 +1804,36 @@
             签名
             </summary>
         </member>
+        <member name="M:AhDai.Integration.AntChain.Models.TwcOutput`1.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.AntChain.Providers.IAntChainNotaryConfigProvider">
+            <summary>
+            IAntChainNotaryConfigProvider
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Attributes.SensitiveAttribute">
             <summary>
             SensitiveAttribute
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Attributes.ServiceAttribute">
+            <summary>
+            ServiceAttribute
+            </summary>
+            <param name="lifetime"></param>
+        </member>
+        <member name="M:AhDai.Integration.Attributes.ServiceAttribute.#ctor(Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            ServiceAttribute
+            </summary>
+            <param name="lifetime"></param>
+        </member>
+        <member name="P:AhDai.Integration.Attributes.ServiceAttribute.Lifetime">
+            <summary>
+            生命周期
             </summary>
         </member>
         <member name="T:AhDai.Integration.Baidu.BaiduFaceprintService">
@@ -1781,7 +1841,7 @@
             BaiduFaceprintService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Baidu.BaiduFaceprintService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Baidu.IBaiduConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Baidu.BaiduFaceprintService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduFaceprintConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             BaiduFaceprintService
             </summary>
@@ -1791,7 +1851,7 @@
             BaiduMapService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Baidu.BaiduMapService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Baidu.IBaiduMapConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Baidu.BaiduMapService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduMapConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             BaiduMapService
             </summary>
@@ -1801,47 +1861,32 @@
             BaiduOcrService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Baidu.BaiduOcrService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Baidu.IBaiduConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Baidu.BaiduOcrService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduOcrConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             BaiduOcrService
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Baidu.BaiduService">
+        <member name="T:AhDai.Integration.Baidu.BaseBaiduService`2">
             <summary>
-            BaiduService
+            BaseBaiduService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Baidu.BaiduService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Baidu.IBaiduConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Baidu.BaseBaiduService`2.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,`1,System.Net.Http.IHttpClientFactory)">
             <summary>
-            BaiduService
+            BaseBaiduService
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Baidu.Configs.BaiduConfig">
+        <member name="T:AhDai.Integration.Baidu.Configs.BaiduFaceprintConfig">
             <summary>
-            BaiduConfig
+            BaiduFaceprintConfig
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Baidu.Configs.BaiduConfig.AppId">
-            <summary>
-            AppId
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Baidu.Configs.BaiduConfig.ApiKey">
-            <summary>
-            ApiKey
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Baidu.Configs.BaiduConfig.AppSecret">
-            <summary>
-            AppSecret
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Baidu.Configs.BaiduConfig.FaceprintPlanId">
+        <member name="P:AhDai.Integration.Baidu.Configs.BaiduFaceprintConfig.FaceprintPlanId">
             <summary>
             人脸识别方案Id
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Baidu.Configs.BaiduConfig.FaceprintUrl">
+        <member name="P:AhDai.Integration.Baidu.Configs.BaiduFaceprintConfig.FaceprintUrl">
             <summary>
             人脸识别Url
             </summary>
@@ -1856,9 +1901,29 @@
             AccessKey
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Baidu.IBaiduConfigProvider">
+        <member name="T:AhDai.Integration.Baidu.Configs.BaiduOcrConfig">
             <summary>
-            IBaiduConfigProvider
+            BaiduOcrConfig
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Baidu.Configs.BaseBaiduConfig">
+            <summary>
+            BaseBaiduConfig
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Baidu.Configs.BaseBaiduConfig.AppId">
+            <summary>
+            AppId
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Baidu.Configs.BaseBaiduConfig.ApiKey">
+            <summary>
+            ApiKey
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Baidu.Configs.BaseBaiduConfig.AppSecret">
+            <summary>
+            AppSecret
             </summary>
         </member>
         <member name="T:AhDai.Integration.Baidu.IBaiduFaceprintService">
@@ -1918,11 +1983,6 @@
             <param name="successUrl"></param>
             <param name="failedUrl"></param>
             <returns></returns>
-        </member>
-        <member name="T:AhDai.Integration.Baidu.IBaiduMapConfigProvider">
-            <summary>
-            IBaiduMapConfigProvider
-            </summary>
         </member>
         <member name="T:AhDai.Integration.Baidu.IBaiduMapService">
             <summary>
@@ -2017,12 +2077,12 @@
             <param name="accessToken"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.Baidu.IBaiduService">
+        <member name="T:AhDai.Integration.Baidu.IBaseBaiduService`1">
             <summary>
-            IBaiduService
+            IBaseBaiduService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Baidu.IBaiduService.GetAccessTokenAsync(System.Boolean)">
+        <member name="M:AhDai.Integration.Baidu.IBaseBaiduService`1.GetAccessTokenAsync(System.Boolean)">
             <summary>
             获取令牌
             </summary>
@@ -2323,41 +2383,6 @@
             传入OFD文件的总页数，当 ofd_file 参数有效时返回该字段
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Baidu.Models.BaseFaceprintH5Output`1">
-            <summary>
-            BaseFaceprintH5Output
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Baidu.Models.BaseFaceprintH5Output`1.Success">
-            <summary>
-            请求是否成功
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Baidu.Models.BaseFaceprintH5Output`1.Result">
-            <summary>
-            请求结果
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Baidu.Models.BaseFaceprintH5Output`1.Code">
-            <summary>
-            错误代码
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Baidu.Models.BaseFaceprintH5Output`1.Message">
-            <summary>
-            错误消息
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Baidu.Models.BaseFaceprintH5Output`1.LogId">
-            <summary>
-            调用的日志id
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.Baidu.Models.BaseFaceprintH5Output`1.EnsureResult">
-            <summary>
-            确保结果
-            </summary>
-        </member>
         <member name="T:AhDai.Integration.Baidu.Models.BaseMapInput">
             <summary>
             BaseMapInput
@@ -2546,6 +2571,41 @@
             降级返回true，未降级返回false
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Baidu.Models.FaceprintH5Output`1">
+            <summary>
+            FaceprintH5Output
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Baidu.Models.FaceprintH5Output`1.Success">
+            <summary>
+            请求是否成功
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Baidu.Models.FaceprintH5Output`1.Result">
+            <summary>
+            请求结果
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Baidu.Models.FaceprintH5Output`1.Code">
+            <summary>
+            错误代码
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Baidu.Models.FaceprintH5Output`1.Message">
+            <summary>
+            错误消息
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Baidu.Models.FaceprintH5Output`1.LogId">
+            <summary>
+            调用的日志id
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Baidu.Models.FaceprintH5Output`1.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Baidu.Models.IdCardConfirmOutput">
             <summary>
             用户二次确认的身份证信息
@@ -2700,6 +2760,11 @@
         <member name="P:AhDai.Integration.Baidu.Models.IpLocationOutput.Content">
             <summary>
             内容
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Baidu.Models.IpLocationOutput.EnsureResult">
+            <summary>
+            确保结果
             </summary>
         </member>
         <member name="T:AhDai.Integration.Baidu.Models.LocationOutput">
@@ -3868,6 +3933,11 @@
             结果
             </summary>
         </member>
+        <member name="M:AhDai.Integration.Baidu.Models.ReverseGeocodingOutput.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Baidu.Models.ReverseGeoCodingResultOutput">
             <summary>
             逆地理编码
@@ -4043,6 +4113,21 @@
             VerifyToken
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Baidu.Providers.IBaiduFaceprintConfigProvider">
+            <summary>
+            IBaiduFaceprintConfigProvider
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Baidu.Providers.IBaiduMapConfigProvider">
+            <summary>
+            IBaiduMapConfigProvider
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Baidu.Providers.IBaiduOcrConfigProvider">
+            <summary>
+            IBaiduOcrConfigProvider
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.ESign.Configs.ESignConfig">
             <summary>
             ESignConfig
@@ -4068,14 +4153,9 @@
             ESignService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.ESign.ESignService.#ctor(AhDai.Integration.ESign.IESignConfigProvider,System.Net.Http.IHttpClientFactory,AhDai.Core.Interfaces.Services.IBaseFileService)">
+        <member name="M:AhDai.Integration.ESign.ESignService.#ctor(AhDai.Integration.ESign.Providers.IESignConfigProvider,System.Net.Http.IHttpClientFactory,AhDai.Core.Interfaces.Services.IBaseFileService)">
             <summary>
             ESignService
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.ESign.IESignConfigProvider">
-            <summary>
-            IESignConfigProvider
             </summary>
         </member>
         <member name="T:AhDai.Integration.ESign.IESignService">
@@ -4247,27 +4327,6 @@
             </summary>
             <param name="httpContext"></param>
             <returns></returns>
-        </member>
-        <member name="T:AhDai.Integration.ESign.Models.BaseOutput`1">
-            <summary>
-            BaseOutput
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:AhDai.Integration.ESign.Models.BaseOutput`1.Code">
-            <summary>
-            业务码，0表示成功，非0表示异常
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.ESign.Models.BaseOutput`1.Message">
-            <summary>
-            业务信息
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.ESign.Models.BaseOutput`1.Data">
-            <summary>
-            业务数据
-            </summary>
         </member>
         <member name="T:AhDai.Integration.ESign.Models.CoordinateOutput">
             <summary>
@@ -4660,6 +4719,11 @@
             业务信息
             </summary>
         </member>
+        <member name="M:AhDai.Integration.ESign.Models.FileUploadOutput.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.ESign.Models.FileUploadUrlInput">
             <summary>
             获取文件上传地址入参
@@ -4862,6 +4926,32 @@
         <member name="P:AhDai.Integration.ESign.Models.OrgSignerOutput.Transactor">
             <summary>
             机构经办人
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.ESign.Models.Output`1">
+            <summary>
+            BaseOutput
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AhDai.Integration.ESign.Models.Output`1.Code">
+            <summary>
+            业务码，0表示成功，非0表示异常
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.ESign.Models.Output`1.Message">
+            <summary>
+            业务信息
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.ESign.Models.Output`1.Data">
+            <summary>
+            业务数据
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.ESign.Models.Output`1.EnsureResult">
+            <summary>
+            确保结果
             </summary>
         </member>
         <member name="T:AhDai.Integration.ESign.Models.PersonAccountInput">
@@ -5573,10 +5663,30 @@
             按被催签人的账号标识或账号ID方式（二选一，根据发起签署时传入方式决定）
             </summary>
         </member>
+        <member name="T:AhDai.Integration.ESign.Providers.IESignConfigProvider">
+            <summary>
+            IESignConfigProvider
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Extensions.ServiceCollectionExtensions">
             <summary>
             ServiceCollectionExtensions
             </summary>
+        </member>
+        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.ConfigureRedisKeyBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            AddRedisKeyBuilder
+            </summary>
+            <param name="services"></param>
+            <param name="prefix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddRedisKeyBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddRedisKeyBuilder
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
         </member>
         <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddAliyunOssService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
@@ -5620,9 +5730,9 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddBaiduService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddBaiduFaceprintService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
-            AddBaiduService
+            AddBaiduFaceprintService
             </summary>
             <param name="services"></param>
             <returns></returns>
@@ -5630,13 +5740,6 @@
         <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddBaiduMapService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             AddBaiduMapService
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddBaiduFaceprintService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            AddBaiduFaceprintService
             </summary>
             <param name="services"></param>
             <returns></returns>
@@ -5697,59 +5800,441 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.Infrastructure.Services.BaseService">
+        <member name="T:AhDai.Integration.Hikvision.BaseHikvisionService`2">
+            <summary>
+            BaseHikvisionService
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.BaseHikvisionService`2.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,`1,System.Net.Http.IHttpClientFactory)">
+            <summary>
+            BaseHikvisionService
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Configs.BaseHikvisionConfig">
+            <summary>
+            BaseHikvisionConfig
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Configs.BaseHikvisionConfig.AppKey">
+            <summary>
+            AppKey
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Configs.BaseHikvisionConfig.AppSecret">
+            <summary>
+            AppSecret
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Configs.BaseHikvisionConfig.EnableSecret">
+            <summary>
+            启用数据加密
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Configs.HikIoTConfig">
+            <summary>
+            HikIoTConfig
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Configs.HikIoTConfig.Username">
+            <summary>
+            用户名：登录账号手机号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Configs.HikIoTConfig.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.HikIoTRsaHelper">
+            <summary>
+            HikIoTRsaHelper
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.HikIoTRsaHelper.EncryptWithPrivateKey(System.String,System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="privateKey"></param>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.HikIoTRsaHelper.DecryptWithPrivateKey(System.String,System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="privateKey"></param>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.HikIoTService">
+            <summary>
+            HikIoTService
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.HikIoTService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Hikvision.Providers.IHikIoTConfigProvider,System.Net.Http.IHttpClientFactory)">
+            <summary>
+            HikIoTService
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.IBaseHikvisionService`1">
+            <summary>
+            IBaseHikvisionService
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.IHikIoTService">
+            <summary>
+            IHikIoTService
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetAppAccessTokenAsync(System.Boolean)">
+            <summary>
+            获取应用访问凭证
+            </summary>
+            <param name="enableCache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetAuthCodeAsync(AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput)">
+            <summary>
+            申请授权码
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetUserAccessTokenAsync(System.String)">
+            <summary>
+            授权码获取用户访问凭证
+            </summary>
+            <param name="authCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.RefreshUserAccessTokenAsync(System.String,System.String)">
+            <summary>
+            刷新用户授权凭证
+            </summary>
+            <param name="userAccessToken"></param>
+            <param name="refreshUserToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.PageDeviceAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            设备分页查询
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTAppAccessTokenOutput">
+            <summary>
+            应用访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAppAccessTokenOutput.AppKey">
+            <summary>
+            应用唯一标识
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAppAccessTokenOutput.AppAccessToken">
+            <summary>
+            应用访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAppAccessTokenOutput.RefreshAppToken">
+            <summary>
+            刷新token
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAppAccessTokenOutput.ExpiresIn">
+            <summary>
+            过期时间，单位：小时，最大有效期 7*24小时
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput">
+            <summary>
+            授权码
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput.AppKey">
+            <summary>
+            AppKey
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput.UserName">
+            <summary>
+            登录账号手机号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput.RedirectUrl">
+            <summary>
+            重定向回调地址，需要在应用-安全设置中配置
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput.State">
+            <summary>
+            第三方业务参数, 重定向跳转时回传
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeOutput">
+            <summary>
+            授权码
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeOutput.AppKey">
+            <summary>
+            AppKey
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeOutput.RedirectUrl">
+            <summary>
+            重定向回调地址
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeOutput.AuthCode">
+            <summary>
+            授权码
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTDeviceOutput">
+            <summary>
+            HikIoTDeviceOutput
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTOutput`1">
+            <summary>
+            HikIoTOutput
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTOutput`1.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTOutput`1.Msg">
+            <summary>
+            结果描述信息
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTOutput`1.Data">
+            <summary>
+            结果描述信息
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTOutput`1.Count">
+            <summary>
+            总数
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.Models.HikIoTOutput`1.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput">
+            <summary>
+            用户访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.AppKey">
+            <summary>
+            AppKey
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.UserAccessToken">
+            <summary>
+            用户访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.RefreshUserToken">
+            <summary>
+            刷新用户访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.ExpiresIn">
+            <summary>
+            有效时间，单位：天
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.TeamNo">
+            <summary>
+            团队编号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.PersonNo">
+            <summary>
+            成员编号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.AccountNo">
+            <summary>
+            海康通行证账号
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Providers.IHikIoTConfigProvider">
+            <summary>
+            IHikIoTConfigProvider
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Infrastructure.BaseService">
             <summary>
             BaseService
             </summary>
         </member>
-        <member name="F:AhDai.Integration.Infrastructure.Services.BaseService._logger">
+        <member name="F:AhDai.Integration.Infrastructure.BaseService._logger">
             <summary>
             _logger
             </summary>
         </member>
-        <member name="F:AhDai.Integration.Infrastructure.Services.BaseService._httpClientFactory">
+        <member name="F:AhDai.Integration.Infrastructure.BaseService._httpClientFactory">
             <summary>
             _httpClientFactory
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Infrastructure.Services.BaseService.#ctor(System.Net.Http.IHttpClientFactory)">
+        <member name="P:AhDai.Integration.Infrastructure.BaseService.ServiceName">
+            <summary>
+            服务名称
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.#ctor(System.Net.Http.IHttpClientFactory)">
             <summary>
             BaseService
             </summary>
             <param name="httpClientFactory"></param>
         </member>
-        <member name="M:AhDai.Integration.Infrastructure.Services.BaseService.CreateHttpClient(System.String,System.String)">
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.CreateHttpClient(System.String,System.String,System.String)">
             <summary>
             CreateHttpClient
             </summary>
             <param name="baseAddress"></param>
             <param name="authorization"></param>
+            <param name="scheme"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.Infrastructure.Services.BaseService`2">
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.GetAsync``1(System.String,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            发送请求
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+            <param name="url"></param>
+            <param name="query"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.GetAsync``1(System.Net.Http.HttpClient,System.String,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            发送请求
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+            <param name="client"></param>
+            <param name="url"></param>
+            <param name="query"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.PostAsync``1(System.String,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            发送请求
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+            <param name="url"></param>
+            <param name="body"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.PostAsync``1(System.Net.Http.HttpClient,System.String,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            发送请求
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+            <param name="client"></param>
+            <param name="url"></param>
+            <param name="body"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.SendAsync``1(System.Net.Http.HttpMethod,System.String,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            发送请求
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.SendAsync``1(System.Net.Http.HttpClient,System.Net.Http.HttpMethod,System.String,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            发送请求
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+            <param name="client"></param>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.SendAsync``1(System.Net.Http.HttpClient,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            SendAsync
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+            <param name="client"></param>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Integration.Infrastructure.BaseService`2">
             <summary>
             BaseService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Infrastructure.Services.BaseService`2.#ctor(`1,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Infrastructure.BaseService`2.#ctor(`1,System.Net.Http.IHttpClientFactory)">
             <summary>
             BaseService
             </summary>
         </member>
-        <member name="F:AhDai.Integration.Infrastructure.Services.BaseService`2._configProvider">
+        <member name="F:AhDai.Integration.Infrastructure.BaseService`2._configProvider">
             <summary>
             _configProvider
             </summary>
         </member>
-        <member name="F:AhDai.Integration.Infrastructure.Services.BaseService`2._configName">
-            <summary>
-            _configName
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.Infrastructure.Services.BaseService`2.GetConfigAsync">
+        <member name="M:AhDai.Integration.Infrastructure.BaseService`2.GetConfigAsync">
             <summary>
             GetConfigAsync
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService`2.SendAsync``1(System.Net.Http.HttpClient,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            发送请求
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+            <param name="client"></param>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Integration.Infrastructure.RedisKeyBuilder">
+            <summary>
+            RedisKeyBuilder
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.RedisKeyBuilder.#ctor(Microsoft.Extensions.Options.IOptions{AhDai.Integration.Options.IntegrationOptions})">
+            <summary>
+            RedisKeyBuilder
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.RedisKeyBuilder.Build(System.String[])">
+            <summary>
+            Build
+            </summary>
+            <param name="segments"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Integration.Models.BaseConfig">
@@ -5761,57 +6246,6 @@
             <summary>
             Host
             </summary>
-        </member>
-        <member name="T:AhDai.Integration.Models.BaseConfigProvider`1">
-            <summary>
-            BaseConfigProvider
-            </summary>
-            <typeparam name="TConfig"></typeparam>
-            <param name="configuration"></param>
-        </member>
-        <member name="M:AhDai.Integration.Models.BaseConfigProvider`1.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            BaseConfigProvider
-            </summary>
-            <typeparam name="TConfig"></typeparam>
-            <param name="configuration"></param>
-        </member>
-        <member name="F:AhDai.Integration.Models.BaseConfigProvider`1._configuration">
-            <summary>
-            系统配置
-            </summary>
-        </member>
-        <member name="F:AhDai.Integration.Models.BaseConfigProvider`1._cachedConfigs">
-            <summary>
-            配置缓存
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.Models.BaseConfigProvider`1.GetTenantId">
-            <summary>
-            获取租户Id
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Models.BaseConfigProvider`1.GetAsync">
-            <summary>
-            GetAsync
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Models.BaseConfigProvider`1.GetAsync(System.String)">
-            <summary>
-            GetAsync
-            </summary>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Models.BaseConfigProvider`1.GetAsync(System.String,System.Int64)">
-            <summary>
-            GetAsync
-            </summary>
-            <param name="name"></param>
-            <param name="tenantId"></param>
-            <returns></returns>
         </member>
         <member name="T:AhDai.Integration.Models.BaseOcrFriendlyOutput">
             <summary>
@@ -6303,6 +6737,67 @@
             检验记录（即年审截止日期说明）
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Options.IntegrationOptions">
+            <summary>
+            IntegrationOptions
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Options.IntegrationOptions.RedisKeyPrefix">
+            <summary>
+            RedisKeyPrefix
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Providers.BaseConfigProvider`1">
+            <summary>
+            BaseConfigProvider
+            </summary>
+            <typeparam name="TConfig"></typeparam>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:AhDai.Integration.Providers.BaseConfigProvider`1.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            BaseConfigProvider
+            </summary>
+            <typeparam name="TConfig"></typeparam>
+            <param name="configuration"></param>
+        </member>
+        <member name="F:AhDai.Integration.Providers.BaseConfigProvider`1._configuration">
+            <summary>
+            系统配置
+            </summary>
+        </member>
+        <member name="F:AhDai.Integration.Providers.BaseConfigProvider`1._cachedConfigs">
+            <summary>
+            配置缓存
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Providers.BaseConfigProvider`1.GetTenantId">
+            <summary>
+            获取租户Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Providers.BaseConfigProvider`1.GetAsync">
+            <summary>
+            GetAsync
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Providers.BaseConfigProvider`1.GetAsync(System.String)">
+            <summary>
+            GetAsync
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Providers.BaseConfigProvider`1.GetAsync(System.String,System.Int64)">
+            <summary>
+            GetAsync
+            </summary>
+            <param name="name"></param>
+            <param name="tenantId"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Tencent.Configs.TencentMapConfig">
             <summary>
             TencentMapConfig
@@ -6311,11 +6806,6 @@
         <member name="P:AhDai.Integration.Tencent.Configs.TencentMapConfig.Key">
             <summary>
             密钥
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.Tencent.ITencentMapConfigProvider">
-            <summary>
-            ITencentMapConfigProvider
             </summary>
         </member>
         <member name="T:AhDai.Integration.Tencent.ITencentMapService">
@@ -6535,37 +7025,6 @@
             JSONP方式回调函数
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Tencent.Models.BaseMapOutput`1">
-            <summary>
-            BaseMapOutput
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:AhDai.Integration.Tencent.Models.BaseMapOutput`1.Status">
-            <summary>
-            状态码，0为正常，其它为异常
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Tencent.Models.BaseMapOutput`1.Message">
-            <summary>
-            状态说明
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Tencent.Models.BaseMapOutput`1.RequestId">
-            <summary>
-            本次请求的唯一标识
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Tencent.Models.BaseMapOutput`1.Result">
-            <summary>
-            结果
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.Tencent.Models.BaseMapOutput`1.EnsureResult">
-            <summary>
-            确保结果
-            </summary>
-        </member>
         <member name="T:AhDai.Integration.Tencent.Models.FormattedAddressesOutput">
             <summary>
             结合知名地点形成的描述性地址，更具人性化特点
@@ -6765,6 +7224,37 @@
             经度
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Tencent.Models.MapOutput`1">
+            <summary>
+            MapOutput
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AhDai.Integration.Tencent.Models.MapOutput`1.Status">
+            <summary>
+            状态码，0为正常，其它为异常
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Tencent.Models.MapOutput`1.Message">
+            <summary>
+            状态说明
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Tencent.Models.MapOutput`1.RequestId">
+            <summary>
+            本次请求的唯一标识
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Tencent.Models.MapOutput`1.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Tencent.Models.MapOutput`1.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Tencent.Models.OceanOutput">
             <summary>
             OceanOutput
@@ -6866,12 +7356,17 @@
             附加字段：控制aoi返回面积，单位：平方米，非aoi返回-1
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Tencent.Providers.ITencentMapConfigProvider">
+            <summary>
+            ITencentMapConfigProvider
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Tencent.TencentMapService">
             <summary>
             TianyanchaService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Tencent.TencentMapService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Tencent.ITencentMapConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Tencent.TencentMapService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Tencent.Providers.ITencentMapConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             TianyanchaService
             </summary>
@@ -6884,11 +7379,6 @@
         <member name="P:AhDai.Integration.Tianyancha.Configs.TianyanchaConfig.Key">
             <summary>
             Key
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.Tianyancha.ITianyanchaConfigProvider">
-            <summary>
-            ITianyanchaConfigProvider
             </summary>
         </member>
         <member name="T:AhDai.Integration.Tianyancha.ITianyanchaService">
@@ -6915,7 +7405,7 @@
         </member>
         <member name="T:AhDai.Integration.Tianyancha.Models.BaseInfoOutput">
             <summary>
-            TianyanchaBaseInfoOutput
+            BaseInfoOutput
             </summary>
         </member>
         <member name="P:AhDai.Integration.Tianyancha.Models.BaseInfoOutput.Id">
@@ -7088,26 +7578,32 @@
             天眼评分
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Tianyancha.Models.BaseOutput`1">
+        <member name="T:AhDai.Integration.Tianyancha.Models.Output`1">
             <summary>
-            BaseOutput
+            Output
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="P:AhDai.Integration.Tianyancha.Models.BaseOutput`1.ErrorCode">
+        <member name="P:AhDai.Integration.Tianyancha.Models.Output`1.ErrorCode">
             <summary>
             错误代码，返回 0 代表请求成功
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Tianyancha.Models.BaseOutput`1.Reason">
+        <member name="P:AhDai.Integration.Tianyancha.Models.Output`1.Reason">
             <summary>
             错误原因
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Tianyancha.Models.BaseOutput`1.Result">
+        <member name="P:AhDai.Integration.Tianyancha.Models.Output`1.Result">
             <summary>
             结果
             </summary>
+        </member>
+        <member name="M:AhDai.Integration.Tianyancha.Models.Output`1.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+            <exception cref="T:System.Exception"></exception>
         </member>
         <member name="T:AhDai.Integration.Tianyancha.Models.PageOutput`1">
             <summary>
@@ -7170,33 +7666,20 @@
             结束日期
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Tianyancha.Providers.ITianyanchaConfigProvider">
+            <summary>
+            ITianyanchaConfigProvider
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Tianyancha.TianyanchaService">
             <summary>
             TianyanchaService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Tianyancha.TianyanchaService.#ctor(AhDai.Integration.Tianyancha.ITianyanchaConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Tianyancha.TianyanchaService.#ctor(AhDai.Integration.Tianyancha.Providers.ITianyanchaConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             TianyanchaService
             </summary>
-        </member>
-        <member name="T:AhDai.Integration.Utils.HttpUtils">
-            <summary>
-            HttpUtils
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.Utils.HttpUtils.SendAsync``1(System.Net.Http.HttpClient,System.Net.Http.HttpMethod,System.String,System.Net.Http.HttpContent,System.String)">
-            <summary>
-            
-            </summary>
-            <typeparam name="TOutput"></typeparam>
-            <param name="client"></param>
-            <param name="method"></param>
-            <param name="url"></param>
-            <param name="content"></param>
-            <param name="serviceName"></param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
         </member>
         <member name="T:AhDai.Integration.Utils.ObjectUtls">
             <summary>
@@ -7274,27 +7757,37 @@
             <param name="str"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.WeChat.Configs.WeChatConfig">
+        <member name="T:AhDai.Integration.WeChat.BaseWeChatService`2">
             <summary>
-            WeChatConfig
+            BaseWeChatService
             </summary>
         </member>
-        <member name="P:AhDai.Integration.WeChat.Configs.WeChatConfig.AppId">
+        <member name="M:AhDai.Integration.WeChat.BaseWeChatService`2.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,`1,System.Net.Http.IHttpClientFactory)">
+            <summary>
+            BaseWeChatService
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.WeChat.Configs.BaseWeChatConfig">
+            <summary>
+            BaseWeChatConfig
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.WeChat.Configs.BaseWeChatConfig.AppId">
             <summary>
             AppId
             </summary>
         </member>
-        <member name="P:AhDai.Integration.WeChat.Configs.WeChatConfig.AppSecret">
+        <member name="P:AhDai.Integration.WeChat.Configs.BaseWeChatConfig.AppSecret">
             <summary>
             AppSecret
             </summary>
         </member>
-        <member name="P:AhDai.Integration.WeChat.Configs.WeChatConfig.Token">
+        <member name="P:AhDai.Integration.WeChat.Configs.BaseWeChatConfig.Token">
             <summary>
             Token
             </summary>
         </member>
-        <member name="P:AhDai.Integration.WeChat.Configs.WeChatConfig.AESKey">
+        <member name="P:AhDai.Integration.WeChat.Configs.BaseWeChatConfig.AESKey">
             <summary>
             AESKey
             </summary>
@@ -7369,10 +7862,75 @@
             WeChatWebAppConfig
             </summary>
         </member>
-        <member name="T:AhDai.Integration.WeChat.IWeChatMiniProgramConfigProvider">
+        <member name="T:AhDai.Integration.WeChat.IBaseWeChatService`1">
             <summary>
-            IWeChatMiniProgramConfigProvider
+            IBaseWeChatService
             </summary>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.IBaseWeChatService`1.VerifyTokenAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            验证Token
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.IBaseWeChatService`1.GetAccessTokenAsync(System.Boolean)">
+            <summary>
+            获取接口调用凭据
+            </summary>
+            <param name="enableCache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.IBaseWeChatService`1.GetStableAccessTokenAsync(System.Boolean)">
+            <summary>
+            获取稳定版接口调用凭据
+            </summary>
+            <param name="enableCache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.IBaseWeChatService`1.GetTicketAsync(System.String,System.Boolean)">
+            <summary>
+            获取Ticket
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.IBaseWeChatService`1.SignAsync(AhDai.Integration.WeChat.Models.SignInput)">
+            <summary>
+            生成签名
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.IBaseWeChatService`1.GenerateAuthUrlAsync(System.String,System.String)">
+            <summary>
+            生成用户授权地址
+            </summary>
+            <param name="redirectUrl"></param>
+            <param name="scope"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.IBaseWeChatService`1.GenerateLoginQrCodeUrlAsync(System.String,System.String)">
+            <summary>
+            生成用户登录二维码地址
+            </summary>
+            <param name="redirectUrl"></param>
+            <param name="scope"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.IBaseWeChatService`1.GetAuthTokenByCodeAsync(System.String)">
+            <summary>
+            根据用户授权码获取用户授权凭据
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.IBaseWeChatService`1.GetUserByAccessTokenAsync(System.String,System.String)">
+            <summary>
+            根据授权凭据获取用户信息
+            </summary>
+            <param name="accessToken"></param>
+            <param name="openId"></param>
+            <returns></returns>
         </member>
         <member name="T:AhDai.Integration.WeChat.IWeChatMiniProgramService">
             <summary>
@@ -7385,11 +7943,6 @@
             </summary>
             <param name="code"></param>
             <returns></returns>
-        </member>
-        <member name="T:AhDai.Integration.WeChat.IWeChatOfficialAccountConfigProvider">
-            <summary>
-            IWeChatOfficialAccountConfigProvider
-            </summary>
         </member>
         <member name="T:AhDai.Integration.WeChat.IWeChatOfficialAccountService">
             <summary>
@@ -7420,11 +7973,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.WeChat.IWeChatPayConfigProvider">
-            <summary>
-            IWeChatPayConfigProvider
-            </summary>
-        </member>
         <member name="T:AhDai.Integration.WeChat.IWeChatPayService">
             <summary>
             IWeChatPayService
@@ -7451,88 +7999,13 @@
             <param name="httpContext"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Integration.WeChat.IWeChatPayService.DownloadbillAsync(System.DateTime,System.String)">
+        <member name="M:AhDai.Integration.WeChat.IWeChatPayService.DownloadBillAsync(System.DateTime,System.String)">
             <summary>
             下载交易账单
             </summary>
             <param name="date"></param>
             <param name="type"></param>
             <returns></returns>
-        </member>
-        <member name="T:AhDai.Integration.WeChat.IWeChatService`1">
-            <summary>
-            IWeChatService
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.IWeChatService`1.VerifyTokenAsync(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-            验证Token
-            </summary>
-            <param name="httpContext"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.IWeChatService`1.GetAccessTokenAsync(System.Boolean)">
-            <summary>
-            获取接口调用凭据
-            </summary>
-            <param name="enableCache"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.IWeChatService`1.GetStableAccessTokenAsync(System.Boolean)">
-            <summary>
-            获取稳定版接口调用凭据
-            </summary>
-            <param name="enableCache"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.IWeChatService`1.GetTicketAsync(System.String,System.Boolean)">
-            <summary>
-            获取Ticket
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.IWeChatService`1.SignAsync(AhDai.Integration.WeChat.Models.SignInput)">
-            <summary>
-            生成签名
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.IWeChatService`1.GenerateAuthUrlAsync(System.String,System.String)">
-            <summary>
-            生成用户授权地址
-            </summary>
-            <param name="redirectUrl"></param>
-            <param name="scope"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.IWeChatService`1.GenerateLoginQrCodeUrlAsync(System.String,System.String)">
-            <summary>
-            生成用户登录二维码地址
-            </summary>
-            <param name="redirectUrl"></param>
-            <param name="scope"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.IWeChatService`1.GetAuthTokenByCodeAsync(System.String)">
-            <summary>
-            根据用户授权码获取用户授权凭据
-            </summary>
-            <param name="code"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.IWeChatService`1.GetUserByAccessTokenAsync(System.String,System.String)">
-            <summary>
-            根据授权凭据获取用户信息
-            </summary>
-            <param name="accessToken"></param>
-            <param name="openId"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Integration.WeChat.IWeChatWebAppConfigProvider">
-            <summary>
-            IWeChatWebAppConfigProvider
-            </summary>
         </member>
         <member name="T:AhDai.Integration.WeChat.IWeChatWebAppService">
             <summary>
@@ -7644,6 +8117,11 @@
             错误信息
             </summary>
         </member>
+        <member name="M:AhDai.Integration.WeChat.Models.BaseOutput.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.WeChat.Models.BasePayOutput">
             <summary>
             BasePayOutput
@@ -7659,24 +8137,34 @@
             错误信息
             </summary>
         </member>
-        <member name="T:AhDai.Integration.WeChat.Models.BasePayOutput2">
+        <member name="M:AhDai.Integration.WeChat.Models.BasePayOutput.EnsureResult">
             <summary>
-            BasePayOutput2
+            确保结果
             </summary>
         </member>
-        <member name="P:AhDai.Integration.WeChat.Models.BasePayOutput2.ReturnCode">
+        <member name="T:AhDai.Integration.WeChat.Models.DownloadBillOutput">
+            <summary>
+            DownloadBillOutput
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.WeChat.Models.DownloadBillOutput.ReturnCode">
             <summary>
             返回状态码
             </summary>
         </member>
-        <member name="P:AhDai.Integration.WeChat.Models.BasePayOutput2.ReturnMessage">
+        <member name="P:AhDai.Integration.WeChat.Models.DownloadBillOutput.ReturnMessage">
             <summary>
             错误码描述	
             </summary>
         </member>
-        <member name="P:AhDai.Integration.WeChat.Models.BasePayOutput2.ErrorCode">
+        <member name="P:AhDai.Integration.WeChat.Models.DownloadBillOutput.ErrorCode">
             <summary>
             错误码
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.Models.DownloadBillOutput.EnsureResult">
+            <summary>
+            确保结果
             </summary>
         </member>
         <member name="T:AhDai.Integration.WeChat.Models.GoodsDetailInput">
@@ -8467,12 +8955,32 @@
             UnionId，只有在用户将公众号绑定到微信开放平台账号后，才会出现该字段
             </summary>
         </member>
+        <member name="T:AhDai.Integration.WeChat.Providers.IWeChatMiniProgramConfigProvider">
+            <summary>
+            IWeChatMiniProgramConfigProvider
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.WeChat.Providers.IWeChatOfficialAccountConfigProvider">
+            <summary>
+            IWeChatOfficialAccountConfigProvider
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.WeChat.Providers.IWeChatPayConfigProvider">
+            <summary>
+            IWeChatPayConfigProvider
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.WeChat.Providers.IWeChatWebAppConfigProvider">
+            <summary>
+            IWeChatWebAppConfigProvider
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.WeChat.WeChatMiniProgramService">
             <summary>
             WeChatMiniProgramService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.WeChat.WeChatMiniProgramService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.WeChat.IWeChatMiniProgramConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.WeChat.WeChatMiniProgramService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.WeChat.Providers.IWeChatMiniProgramConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             WeChatMiniProgramService
             </summary>
@@ -8482,7 +8990,7 @@
             WeChatOfficialAccountService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.WeChat.WeChatOfficialAccountService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.WeChat.IWeChatOfficialAccountConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.WeChat.WeChatOfficialAccountService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.WeChat.Providers.IWeChatOfficialAccountConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             WeChatOfficialAccountService
             </summary>
@@ -8492,7 +9000,7 @@
             WeChatPayService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.WeChat.WeChatPayService.#ctor(AhDai.Integration.WeChat.IWeChatPayConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.WeChat.WeChatPayService.#ctor(AhDai.Integration.WeChat.Providers.IWeChatPayConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             WeChatPayService
             </summary>
@@ -8505,22 +9013,12 @@
             <param name="type">1-商户证书，2-商户私钥，3-平台证书</param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.WeChat.WeChatService`2">
-            <summary>
-            WeChatService
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.WeChatService`2.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,`1,System.Net.Http.IHttpClientFactory)">
-            <summary>
-            WeChatService
-            </summary>
-        </member>
         <member name="T:AhDai.Integration.WeChat.WeChatWebAppService">
             <summary>
             WeChatWebAppService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.WeChat.WeChatWebAppService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.WeChat.IWeChatWebAppConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.WeChat.WeChatWebAppService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.WeChat.Providers.IWeChatWebAppConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             WeChatWebAppService
             </summary>

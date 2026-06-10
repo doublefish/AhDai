@@ -1,7 +1,7 @@
 ﻿namespace AhDai.Integration.Tianyancha.Models;
 
 /// <summary>
-/// TianyanchaBaseInfoOutput
+/// BaseInfoOutput
 /// </summary>
 public class BaseInfoOutput
 {

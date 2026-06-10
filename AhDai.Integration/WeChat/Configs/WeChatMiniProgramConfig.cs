@@ -3,6 +3,6 @@
 /// <summary>
 /// WeChatMiniProgramConfig
 /// </summary>
-public class WeChatMiniProgramConfig : WeChatConfig
+public class WeChatMiniProgramConfig : BaseWeChatConfig
 {
 }

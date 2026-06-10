@@ -3,6 +3,6 @@
 /// <summary>
 /// AliyunOcrConfig
 /// </summary>
-public class AliyunOcrConfig : AliyunConfig
+public class AliyunOcrConfig : BaseAliyunConfig
 {
 }

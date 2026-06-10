@@ -5,6 +5,6 @@ namespace AhDai.Integration.WeChat;
 /// <summary>
 /// IWeChatWebAppService
 /// </summary>
-public interface IWeChatWebAppService : IWeChatService<WeChatWebAppConfig>
+public interface IWeChatWebAppService : IBaseWeChatService<WeChatWebAppConfig>
 {
 }

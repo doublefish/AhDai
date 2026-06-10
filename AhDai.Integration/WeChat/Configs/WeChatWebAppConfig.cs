@@ -3,6 +3,6 @@
 /// <summary>
 /// WeChatWebAppConfig
 /// </summary>
-public class WeChatWebAppConfig : WeChatConfig
+public class WeChatWebAppConfig : BaseWeChatConfig
 {
 }

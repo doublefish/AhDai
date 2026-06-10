@@ -1,4 +1,5 @@
 ﻿using AhDai.Core.Utils;
+using AhDai.Integration.Abstractions;
 using AhDai.Integration.Models;
 
 namespace AhDai.Integration.Aliyun.Models;
@@ -6,7 +7,7 @@ namespace AhDai.Integration.Aliyun.Models;
 /// <summary>
 /// OcrTaxPaymentCertificateOutput
 /// </summary>
-public class OcrTaxPaymentCertificateOutput
+public class OcrTaxPaymentCertificateOutput : IBaseOutput
 {
     /// <summary>
     /// 请求ID
@@ -16,6 +17,13 @@ public class OcrTaxPaymentCertificateOutput
     /// 数据
     /// </summary>
     public string? Data { get; set; }
+
+    /// <summary>
+    /// 确保结果
+    /// </summary>
+    public virtual void EnsureResult()
+    {
+    }
 
     /// <summary>
     /// GetFriendlyOutput

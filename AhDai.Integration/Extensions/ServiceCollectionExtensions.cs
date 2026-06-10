@@ -1,4 +1,7 @@
-﻿using AhDai.Integration.AntChain;
+﻿using AhDai.Integration.Abstractions;
+using AhDai.Integration.AntChain;
+using AhDai.Integration.Infrastructure;
+using AhDai.Integration.Options;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AhDai.Integration.Extensions;
@@ -8,6 +11,32 @@ namespace AhDai.Integration.Extensions;
 /// </summary>
 public static class ServiceCollectionExtensions
 {
+    /// <summary>
+    /// AddRedisKeyBuilder
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="prefix"></param>
+    /// <returns></returns>
+    public static IServiceCollection ConfigureRedisKeyBuilder(this IServiceCollection services, string prefix = "AhDai")
+    {
+        services.Configure<IntegrationOptions>(options =>
+        {
+            options.RedisKeyPrefix = prefix;
+        });
+        return services;
+    }
+
+    /// <summary>
+    /// AddRedisKeyBuilder
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddRedisKeyBuilder(this IServiceCollection services)
+    {
+        services.AddSingleton<IRedisKeyBuilder, RedisKeyBuilder>();
+        return services;
+    }
+
     /// <summary>
     /// AddAliyunOssService
     /// </summary>
@@ -75,13 +104,13 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// AddBaiduService
+    /// AddBaiduFaceprintService
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddBaiduService(this IServiceCollection services)
+    public static IServiceCollection AddBaiduFaceprintService(this IServiceCollection services)
     {
-        services.AddScoped<Baidu.IBaiduService, Baidu.BaiduService>();
+        services.AddScoped<Baidu.IBaiduFaceprintService, Baidu.BaiduFaceprintService>();
         return services;
     }
 
@@ -93,17 +122,6 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddBaiduMapService(this IServiceCollection services)
     {
         services.AddScoped<Baidu.IBaiduMapService, Baidu.BaiduMapService>();
-        return services;
-    }
-
-    /// <summary>
-    /// AddBaiduFaceprintService
-    /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddBaiduFaceprintService(this IServiceCollection services)
-    {
-        services.AddScoped<Baidu.IBaiduFaceprintService, Baidu.BaiduFaceprintService>();
         return services;
     }
 

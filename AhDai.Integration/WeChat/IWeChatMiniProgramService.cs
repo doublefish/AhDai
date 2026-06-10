@@ -7,7 +7,7 @@ namespace AhDai.Integration.WeChat;
 /// <summary>
 /// IWeChatMiniProgramService
 /// </summary>
-public interface IWeChatMiniProgramService : IWeChatService<WeChatMiniProgramConfig>
+public interface IWeChatMiniProgramService : IBaseWeChatService<WeChatMiniProgramConfig>
 {
     /// <summary>
     /// 根据用户授权码获取会话密钥

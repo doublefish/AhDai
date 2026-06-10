@@ -1,4 +1,5 @@
-﻿using AhDai.Integration.Baidu.Models;
+﻿using AhDai.Integration.Baidu.Configs;
+using AhDai.Integration.Baidu.Models;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Baidu;
@@ -6,7 +7,7 @@ namespace AhDai.Integration.Baidu;
 /// <summary>
 /// IBaiduFaceprintService
 /// </summary>
-public interface IBaiduFaceprintService : IBaiduService
+public interface IBaiduFaceprintService : IBaseBaiduService<BaiduFaceprintConfig>
 {
     /// <summary>
     /// 获取验证令牌

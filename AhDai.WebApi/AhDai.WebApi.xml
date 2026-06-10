@@ -183,6 +183,21 @@
             <param name="schema"></param>
             <param name="context"></param>
         </member>
+        <member name="T:AhDai.WebApi.Models.LoginData">
+            <summary>
+            LoginData
+            </summary>
+        </member>
+        <member name="P:AhDai.WebApi.Models.LoginData.Id">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:AhDai.WebApi.Models.LoginData.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
         <member name="T:AhDai.WebApi.Models.LoginInput">
             <summary>
             LoginInput
