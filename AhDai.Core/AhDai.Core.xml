@@ -1003,6 +1003,13 @@
             ServiceCollectionExtensions
             </summary>
         </member>
+        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddServiceProviderAccessor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加IServiceProviderAccessor - 依赖注入单例
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddRedisService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             添加Redis服务 - 依赖注入单例
@@ -1882,6 +1889,42 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:AhDai.Core.Infrastructure.ServiceProviderAccessor">
+            <summary>
+             作用域服务持有者，解决静态工具类与 DI 容器的桥接
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.ServiceProviderAccessor.Current">
+            <summary>
+            Current
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.ServiceProviderScope">
+            <summary>
+            一个可释放的上下文开关
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.ServiceProviderScope.#ctor(System.IServiceProvider)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="provider"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.ServiceProviderScope.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Interfaces.Infrastructure.IServiceProviderAccessor">
+            <summary>
+            作用域服务持有者，解决静态工具类与 DI 容器的桥接
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Interfaces.Infrastructure.IServiceProviderAccessor.Current">
+            <summary>
+            Current
+            </summary>
+        </member>
         <member name="T:AhDai.Core.Interfaces.Models.IActionResult`1">
             <summary>
             IActionResult
@@ -2235,13 +2278,6 @@
             <summary>
             属性元数据封装
             </summary>
-            <param name="info"></param>
-        </member>
-        <member name="M:AhDai.Core.Metadata.PropertyMetadata.#ctor(System.Reflection.PropertyInfo)">
-            <summary>
-            属性元数据封装
-            </summary>
-            <param name="info"></param>
         </member>
         <member name="P:AhDai.Core.Metadata.PropertyMetadata.Info">
             <summary>

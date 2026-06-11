@@ -4,7 +4,9 @@ using AhDai.Integration.Abstractions;
 using AhDai.Integration.Hikvision.Configs;
 using AhDai.Integration.Hikvision.Models.IoT;
 using AhDai.Integration.Hikvision.Providers;
+using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -24,6 +26,7 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
     HttpClient CreateAppHttpClient(string host, string appAccessToken)
     {
         var client = CreateHttpClient(host);
+        client.DefaultRequestHeaders.Remove("App-Access-Token");
         client.DefaultRequestHeaders.Add("App-Access-Token", appAccessToken);
         return client;
     }
@@ -31,10 +34,12 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
     HttpClient CreateUserHttpClient(string host, AccessContext context)
     {
         var client = CreateAppHttpClient(host, context.AppAccessToken);
+        client.DefaultRequestHeaders.Remove("User-Access-Token");
         client.DefaultRequestHeaders.Add("User-Access-Token", context.UserAccessToken);
         return client;
     }
 
+    #region 身份及授权
 
     public async Task<AppAccessTokenOutput> GetAppAccessTokenAsync(bool enableCache = false)
     {
@@ -59,7 +64,7 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         }
         var url = $"auth/exchangeAppToken";
         var result = await PostAsync<Output<AppAccessTokenOutput>>(url, new { appKey = config.AppKey, appSecret = config.AppSecret });
-        return result.Data ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
+        return EnsureSuccess(result);
     }
 
     public async Task<AuthCodeOutput> GetAuthCodeAsync(AuthCodeInput input)
@@ -72,83 +77,172 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         }
         var url = $"artemis/api/v1/oauth/authorize";
         var result = await PostAsync<Output<AuthCodeOutput>>(url, input);
-        return result.Data ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
+        return EnsureSuccess(result);
     }
 
-    public async Task<UserAccessTokenOutput> GetUserAccessTokenAsync(string appAccessToken, string authCode)
+    public async Task<UserAccessTokenOutput> GetUserAccessTokenAsync(string appAccessToken, UserAccessTokenInput input)
     {
         var config = await GetConfigAsync();
-        var url = $"auth/third/code2Token?authCode={authCode}";
+        var url = $"auth/third/code2Token";
         var client = CreateAppHttpClient(config.Host, appAccessToken);
-        var result = await GetAsync<Output<UserAccessTokenOutput>>(client, url);
-        return result.Data ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
+        var result = await GetAsync<Output<UserAccessTokenOutput>>(client, url, input);
+        return EnsureSuccess(result);
     }
 
-    public async Task<UserAccessTokenOutput> RefreshUserAccessTokenAsync(string appAccessToken, string userAccessToken, string refreshUserToken)
+    public async Task<UserAccessTokenOutput> RefreshUserAccessTokenAsync(string appAccessToken, RefreshUserAccessTokenInput input)
     {
         var config = await GetConfigAsync();
         var url = $"auth/third/refreshUserAccessToken";
         var client = CreateAppHttpClient(config.Host, appAccessToken);
-        var result = await PostAsync<Output<UserAccessTokenOutput>>(client, url, new { userAccessToken, refreshUserToken });
-        return result.Data ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
+        var result = await PostAsync<Output<UserAccessTokenOutput>>(client, url, input);
+        return EnsureSuccess(result);
     }
 
-    public async Task<DeviceOutput[]> PageDeviceAsync(AccessContext context, int page = 1, int size = 20)
+    #endregion
+
+    #region 视频 - 取流/预览/对讲
+
+    public async Task<DeviceTokenOutput> GetDeviceTokenAsync(AccessContext context, DeviceTokenInput input)
     {
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
-        var url = $"device/v1/page";
-        var result = await GetSecretAsync<Output<DeviceOutput[]>>(client, url, new { page, size });
-        return result.Data ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
+        var url = $"device/v1/token/device/get";
+        var result = await GetEncryptedAsync<DeviceTokenOutput>(config, client, url, input);
+        return EnsureSuccess(result);
     }
 
-    public async Task<CameraOutput[]> PageCameraAsync(AccessContext context, int page = 1, int size = 20)
+    public async Task<DeviceTokenOutput[]> GetDeviceTokensAsync(AccessContext context, DeviceTokenInput[] inputs)
+    {
+        var config = await GetConfigAsync();
+        var client = CreateUserHttpClient(config.Host, context);
+        var url = $"device/v1/token/device/batch";
+        var result = await PostEncryptedAsync<DeviceTokenOutput[]>(config, client, url, inputs);
+        return EnsureSuccess(result);
+    }
+
+    public async Task<OpsTokenOutput> GetOpsTokenAsync(AccessContext context)
+    {
+        var config = await GetConfigAsync();
+        var client = CreateUserHttpClient(config.Host, context);
+        var url = $"device/v1/token/ops/get";
+        var result = await GetEncryptedAsync<OpsTokenOutput>(config, client, url);
+        return EnsureSuccess(result);
+    }
+
+    public async Task<StreamingMediaAttrsOutput> GetStreamingMediaAttrsAsync(AccessContext context, StreamingMediaAttrsInput input)
+    {
+        var config = await GetConfigAsync();
+        var client = CreateUserHttpClient(config.Host, context);
+        var url = $"device/direct/v1/streamingMedia/getAttrs";
+        var result = await PostEncryptedAsync<StreamingMediaAttrsOutput>(config, client, url, input);
+        return EnsureSuccess(result);
+    }
+
+    #endregion
+
+    #region 视频 - 通道
+
+    public async Task<CameraOutput[]> PageCameraAsync(AccessContext context, PageInput input)
     {
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/camera/v1/page";
-        var result = await GetSecretAsync<Output<CameraOutput[]>>(client, url, new { page, size });
+        var result = await GetEncryptedAsync<CameraOutput[]>(config, client, url, input);
+        return EnsureSuccess(result);
+    }
+
+    #endregion
+
+    #region 硬件设备 - 设备/通道
+
+    public async Task<DeviceOutput[]> PageDeviceAsync(AccessContext context, PageInput input)
+    {
+        var config = await GetConfigAsync();
+        var client = CreateUserHttpClient(config.Host, context);
+        var url = $"device/v1/page";
+        var result = await GetEncryptedAsync<DeviceOutput[]>(config, client, url, input);
+        return EnsureSuccess(result);
+    }
+
+    public async Task<DeviceCapacitiesOutput> GetDeviceCapacitiesAsync(AccessContext context, DeviceCapacitiesQueryInput input)
+    {
+        var config = await GetConfigAsync();
+        var client = CreateUserHttpClient(config.Host, context);
+        var url = $"device/v1/getDeviceCapacities";
+        var result = await GetEncryptedAsync<DeviceCapacitiesOutput>(config, client, url, input);
+        return EnsureSuccess(result);
+    }
+
+    public async Task<DeviceResourceOutput> GetDeviceResourceAsync(AccessContext context, DeviceResourceQueryInput input)
+    {
+        var config = await GetConfigAsync();
+        var client = CreateUserHttpClient(config.Host, context);
+        var url = $"device/desk/pc/resource/v1/getById";
+        var result = await GetEncryptedAsync<DeviceResourceOutput>(config, client, url, input);
+        return EnsureSuccess(result);
+    }
+
+    #endregion
+
+
+    protected async Task<Output<TData>> GetEncryptedAsync<TData>(HikIoTConfig config, HttpClient client, string url, object? query = null)
+    {
+        if (config.EnableSecret)
+        {
+            if (query != null)
+            {
+                var queryString = Utils.StringUtils.ObjectToQueryString(query, true);
+                if (!string.IsNullOrEmpty(queryString))
+                {
+                    var encrypted = HikIoTRsaHelper.EncryptWithPrivateKey(config.AppSecret, queryString);
+                    url += $"?querySecret={HttpUtility.UrlEncode(encrypted)}";
+                }
+            }
+            var result = await GetAsync<Output<string>>(client, url);
+            var data = DeserializeSecretData<TData>(config, result.Data);
+            return ConvertOutput(result, data);
+        }
+        return await GetAsync<Output<TData>>(client, url, query);
+    }
+
+    protected async Task<Output<TData>> PostEncryptedAsync<TData>(HikIoTConfig config, HttpClient client, string url, object? body)
+    {
+        if (config.EnableSecret)
+        {
+            var dict = new Dictionary<string, string>();
+            if (body != null)
+            {
+                var bodyJson = JsonUtil.Serialize(body);
+                var encrypted = HikIoTRsaHelper.EncryptWithPrivateKey(config.AppSecret, bodyJson);
+                dict["bodySecret"] = encrypted;
+            }
+            var result = await PostAsync<Output<string>>(client, url, dict);
+            var data = DeserializeSecretData<TData>(config, result.Data);
+            return ConvertOutput(result, data);
+        }
+        return await PostAsync<Output<TData>>(client, url, body);
+    }
+
+    TData DeserializeSecretData<TData>(HikIoTConfig config, string? encryptedData)
+    {
+        if (string.IsNullOrEmpty(encryptedData)) throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
+
+        var json = HikIoTRsaHelper.DecryptWithPrivateKey(config.AppSecret, encryptedData);
+        if (_logger.IsEnabled(LogLevel.Information)) _logger.LogInformation("解密结果：{json}", json);
+        return JsonUtil.Deserialize<TData>(json) ?? throw new Exception($"请求{ServiceName}返回数据反序列化失败，请联系管理员");
+    }
+
+    TData EnsureSuccess<TData>(Output<TData> result)
+    {
         return result.Data ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
     }
 
-
-    protected async Task<TOutput> GetSecretAsync<TOutput>(HttpClient client, string url, object query)
-        where TOutput : IBaseOutput
-    {
-        var config = await GetConfigAsync();
-        if (config.EnableSecret)
+    static Output<TData> ConvertOutput<TData>(Output<string> source, TData data)
+        => new()
         {
-            var queryString = Utils.StringUtils.ObjectToQueryString(query, true);
-            var encrypted = HikIoTRsaHelper.EncryptWithPrivateKey(config.AppSecret, queryString);
-            //var encrypted = HikIoTRsaHelper2.EncryptWithPrivateKey(config.AppSecret, queryString);
-            url += $"?querySecret={HttpUtility.UrlEncode(encrypted)}";
-            var result = await GetAsync<Output<string>>(client, url);
-            if (string.IsNullOrWhiteSpace(result.Data)) throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
-
-            //var json = HikIoTRsaHelper2.DecryptWithPrivateKey(config.AppSecret, result.Data);
-            var json = HikIoTRsaHelper.DecryptWithPrivateKey(config.AppSecret, result.Data);
-            return JsonUtil.Deserialize<TOutput>(json) ?? throw new Exception($"请求{ServiceName}返回数据反序列化失败，请联系管理员");
-        }
-        return await GetAsync<TOutput>(client, url, query);
-    }
-
-    protected async Task<TOutput> PostSecretAsync<TOutput>(HttpClient client, string url, object body)
-        where TOutput : IBaseOutput
-    {
-        var config = await GetConfigAsync();
-        if (config.EnableSecret)
-        {
-            var bodyJson = JsonUtil.Serialize(body);
-            //var encrypted = HikIoTRsaHelper2.EncryptWithPrivateKey(config.AppSecret, bodyJson);
-            var encrypted = HikIoTRsaHelper.EncryptWithPrivateKey(config.AppSecret, bodyJson);
-            var result = await PostAsync<Output<string>>(client, url, new { data = encrypted });
-
-            if (string.IsNullOrWhiteSpace(result.Data)) throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
-
-            //var json = HikIoTRsaHelper2.DecryptWithPrivateKey(config.AppSecret, result.Data);
-            var json = HikIoTRsaHelper.DecryptWithPrivateKey(config.AppSecret, result.Data);
-            return JsonUtil.Deserialize<TOutput>(json) ?? throw new Exception($"请求{ServiceName}返回数据反序列化失败，请联系管理员");
-        }
-        return await PostAsync<TOutput>(client, url, body);
-    }
+            Code = source.Code,
+            Msg = source.Msg,
+            Data = data,
+            Count = source.Count,
+        };
 }

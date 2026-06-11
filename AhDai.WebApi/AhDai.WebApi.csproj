@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -14,12 +14,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\AhDai.Core\AhDai.Core.csproj" />
+		<Folder Include="certs\" />
+		<Folder Include="wwwroot\" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="certs\" />
-		<Folder Include="wwwroot\" />
+	  <ProjectReference Include="..\AhDai.Service\AhDai.Service.csproj" />
 	</ItemGroup>
 
 </Project>

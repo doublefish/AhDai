@@ -73,28 +73,39 @@ internal class MyStartup : IStartup
         //});
 
         services.AddHttpContextAccessor();
+        services.AddServiceProviderAccessor();
         services.AddRedisService();
         services.AddJwtService();
         services.AddFileService();
 
-        services.ConfigureRedisKeyBuilder("AhDai");
+        services.ConfigureRedisKeyBuilder("DigitalChain");
         services.AddRedisKeyBuilder();
+
         services.AddAliyunOssService();
         services.AddAliyunOcrService();
         services.AddAliyunSmsService();
         services.AddAliyunVodService();
-        services.AddAntChainNotaryService();
+
         services.AddAmapService();
+
+        services.AddAntChainNotaryService();
+
         services.AddBaiduFaceprintService();
         services.AddBaiduMapService();
         services.AddBaiduOcrService();
+
+        services.AddESignService();
+
+        services.AddHikIoTService();
+
         services.AddTencentMapService();
+
+        services.AddTianyanchaService();
+
         services.AddWeChatMiniProgramService();
         services.AddWeChatOfficialAccountService();
         services.AddWeChatPayService();
         services.AddWeChatWebAppService();
-        services.AddESignService();
-        services.AddTianyanchaService();
 
         // 反射注入服务
         var assembly = Assembly.GetExecutingAssembly();

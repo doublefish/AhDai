@@ -15,7 +15,7 @@ namespace AhDai.Integration.Amap;
 /// AmapService
 /// </summary>
 [Attributes.Service()]
-internal abstract class AmapService(IBaseRedisService redisService, IRedisKeyBuilder redisKeyBuilder, IAmapConfigProvider configProvider, IHttpClientFactory httpClientFactory)
+internal class AmapService(IBaseRedisService redisService, IRedisKeyBuilder redisKeyBuilder, IAmapConfigProvider configProvider, IHttpClientFactory httpClientFactory)
     : BaseService<AmapConfig, IAmapConfigProvider>(configProvider, httpClientFactory), IAmapService
 {
     protected readonly IBaseRedisService _redisService = redisService;

@@ -3,18 +3,21 @@
 /// <summary>
 /// AccessContext
 /// </summary>
-public class AccessContext
+/// <param name="appAccessToken">应用访问凭证</param>
+/// <param name="UserAccessToken">用户访问凭证</param>
+/// <param name="refreshUserToken">刷新用户访问凭证</param>
+public class AccessContext(string appAccessToken, string UserAccessToken, string? refreshUserToken = null)
 {
     /// <summary>
     /// 应用访问凭证
     /// </summary>
-    public string AppAccessToken { get; init; } = default!;
+    public string AppAccessToken { get; init; } = appAccessToken;
     /// <summary>
     /// 用户访问凭证
     /// </summary>
-    public string UserAccessToken { get; init; } = default!;
+    public string UserAccessToken { get; init; } = UserAccessToken;
     /// <summary>
     /// 刷新用户访问凭证
     /// </summary>
-    public string? RefreshUserToken { get; init; }
+    public string? RefreshUserToken { get; init; } = refreshUserToken;
 }

@@ -5751,6 +5751,27 @@
             <param name="services"></param>
             <returns></returns>
         </member>
+        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddHikIoTService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddHikIoTService
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddESignService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddESignService
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddTianyanchaService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddTianyanchaService
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddTencentMapService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             AddTencentMapService
@@ -5782,20 +5803,6 @@
         <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddWeChatWebAppService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             AddWeChatWebAppService
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddESignService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            AddESignService
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddTianyanchaService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            AddTianyanchaService
             </summary>
             <param name="services"></param>
             <returns></returns>
@@ -5893,181 +5900,1239 @@
             <param name="enableCache"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetAuthCodeAsync(AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput)">
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetAuthCodeAsync(AhDai.Integration.Hikvision.Models.IoT.AuthCodeInput)">
             <summary>
             申请授权码
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetUserAccessTokenAsync(System.String)">
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetUserAccessTokenAsync(System.String,AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenInput)">
             <summary>
-            授权码获取用户访问凭证
+            获取用户访问凭证
             </summary>
-            <param name="authCode"></param>
+            <param name="appAccessToken"></param>
+            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.RefreshUserAccessTokenAsync(System.String,System.String)">
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.RefreshUserAccessTokenAsync(System.String,AhDai.Integration.Hikvision.Models.IoT.RefreshUserAccessTokenInput)">
             <summary>
             刷新用户授权凭证
             </summary>
-            <param name="userAccessToken"></param>
-            <param name="refreshUserToken"></param>
+            <param name="appAccessToken"></param>
+            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.PageDeviceAsync(System.String,System.Int32,System.Int32)">
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetDeviceTokenAsync(AhDai.Integration.Hikvision.Models.IoT.AccessContext,AhDai.Integration.Hikvision.Models.IoT.DeviceTokenInput)">
+            <summary>
+            获取设备token
+            </summary>
+            <param name="context"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetDeviceTokensAsync(AhDai.Integration.Hikvision.Models.IoT.AccessContext,AhDai.Integration.Hikvision.Models.IoT.DeviceTokenInput[])">
+            <summary>
+            批量获取设备token
+            </summary>
+            <param name="context"></param>
+            <param name="inputs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetOpsTokenAsync(AhDai.Integration.Hikvision.Models.IoT.AccessContext)">
+            <summary>
+            获取非设备操作token
+            非设备操作的token，互联SDK/取流插件等功能会用到，如：萤石token字段[ezAccessData]通过该接口获取：
+            注：无需字段解析，将整个json报文转成string透传
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetStreamingMediaAttrsAsync(AhDai.Integration.Hikvision.Models.IoT.AccessContext,AhDai.Integration.Hikvision.Models.IoT.StreamingMediaAttrsInput)">
+            <summary>
+            获取设备取流清晰度
+            </summary>
+            <param name="context"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.PageCameraAsync(AhDai.Integration.Hikvision.Models.IoT.AccessContext,AhDai.Integration.Hikvision.Models.IoT.PageInput)">
+            <summary>
+            通道分页查询
+            </summary>
+            <param name="context"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.PageDeviceAsync(AhDai.Integration.Hikvision.Models.IoT.AccessContext,AhDai.Integration.Hikvision.Models.IoT.PageInput)">
             <summary>
             设备分页查询
             </summary>
+            <param name="context"></param>
+            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTAppAccessTokenOutput">
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetDeviceCapacitiesAsync(AhDai.Integration.Hikvision.Models.IoT.AccessContext,AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesQueryInput)">
+            <summary>
+            设备/通道能力查询
+            </summary>
+            <param name="context"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.IHikIoTService.GetDeviceResourceAsync(AhDai.Integration.Hikvision.Models.IoT.AccessContext,AhDai.Integration.Hikvision.Models.IoT.DeviceResourceQueryInput)">
+            <summary>
+            设备获取资源详情
+            </summary>
+            <param name="context"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.AccessContext">
+            <summary>
+            AccessContext
+            </summary>
+            <param name="appAccessToken">应用访问凭证</param>
+            <param name="UserAccessToken">用户访问凭证</param>
+            <param name="refreshUserToken">刷新用户访问凭证</param>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.Models.IoT.AccessContext.#ctor(System.String,System.String,System.String)">
+            <summary>
+            AccessContext
+            </summary>
+            <param name="appAccessToken">应用访问凭证</param>
+            <param name="UserAccessToken">用户访问凭证</param>
+            <param name="refreshUserToken">刷新用户访问凭证</param>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AccessContext.AppAccessToken">
             <summary>
             应用访问凭证
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAppAccessTokenOutput.AppKey">
-            <summary>
-            应用唯一标识
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAppAccessTokenOutput.AppAccessToken">
-            <summary>
-            应用访问凭证
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAppAccessTokenOutput.RefreshAppToken">
-            <summary>
-            刷新token
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAppAccessTokenOutput.ExpiresIn">
-            <summary>
-            过期时间，单位：小时，最大有效期 7*24小时
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput">
-            <summary>
-            授权码
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput.AppKey">
-            <summary>
-            AppKey
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput.UserName">
-            <summary>
-            登录账号手机号
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput.Password">
-            <summary>
-            密码
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput.RedirectUrl">
-            <summary>
-            重定向回调地址，需要在应用-安全设置中配置
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeInput.State">
-            <summary>
-            第三方业务参数, 重定向跳转时回传
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeOutput">
-            <summary>
-            授权码
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeOutput.AppKey">
-            <summary>
-            AppKey
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeOutput.RedirectUrl">
-            <summary>
-            重定向回调地址
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTAuthCodeOutput.AuthCode">
-            <summary>
-            授权码
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTDeviceOutput">
-            <summary>
-            HikIoTDeviceOutput
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTOutput`1">
-            <summary>
-            HikIoTOutput
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTOutput`1.Code">
-            <summary>
-            状态码
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTOutput`1.Msg">
-            <summary>
-            结果描述信息
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTOutput`1.Data">
-            <summary>
-            结果描述信息
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTOutput`1.Count">
-            <summary>
-            总数
-            </summary>
-        </member>
-        <member name="M:AhDai.Integration.Hikvision.Models.HikIoTOutput`1.EnsureResult">
-            <summary>
-            确保结果
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput">
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AccessContext.UserAccessToken">
             <summary>
             用户访问凭证
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.AppKey">
-            <summary>
-            AppKey
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.UserAccessToken">
-            <summary>
-            用户访问凭证
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.RefreshUserToken">
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AccessContext.RefreshUserToken">
             <summary>
             刷新用户访问凭证
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.ExpiresIn">
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.AppAccessTokenOutput">
+            <summary>
+            应用访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AppAccessTokenOutput.AppKey">
+            <summary>
+            应用唯一标识
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AppAccessTokenOutput.AppAccessToken">
+            <summary>
+            应用访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AppAccessTokenOutput.RefreshAppToken">
+            <summary>
+            刷新token
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AppAccessTokenOutput.ExpiresIn">
+            <summary>
+            过期时间，单位：小时，最大有效期 7*24小时
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.AuthCodeInput">
+            <summary>
+            授权码
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AuthCodeInput.AppKey">
+            <summary>
+            AppKey
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AuthCodeInput.UserName">
+            <summary>
+            登录账号手机号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AuthCodeInput.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AuthCodeInput.RedirectUrl">
+            <summary>
+            重定向回调地址，需要在应用-安全设置中配置
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AuthCodeInput.State">
+            <summary>
+            第三方业务参数, 重定向跳转时回传
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.AuthCodeOutput">
+            <summary>
+            授权码
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AuthCodeOutput.AppKey">
+            <summary>
+            AppKey
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AuthCodeOutput.RedirectUrl">
+            <summary>
+            重定向回调地址
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.AuthCodeOutput.AuthCode">
+            <summary>
+            授权码
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.BaseInput">
+            <summary>
+            BaseInput
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.CameraOutput">
+            <summary>
+            摄像头
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.CameraOutput.DeviceSerial">
+            <summary>
+            设备序列号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.CameraOutput.ChannelNo">
+            <summary>
+            通道号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.CameraOutput.IpcSerial">
+            <summary>
+            通道序列号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.CameraOutput.Name">
+            <summary>
+            设备名称
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.CameraOutput.Model">
+            <summary>
+            设备型号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.CameraOutput.DeviceVersion">
+            <summary>
+            设备版本
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.CameraOutput.Status">
+            <summary>
+            是否在线 0-离线 1-在线 -1空闲
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.CameraOutput.IsEncrypt">
+            <summary>
+            是否加密 0-未加密 1-加密
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.DeviceCapabilityStateOutput">
+            <summary>
+            能力状态
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapabilityStateOutput.StateDesc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapabilityStateOutput.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapabilityStateOutput.State">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapabilityStateOutput.Entrance">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapabilityStateOutput.CanBuy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput">
+            <summary>
+            设备/通道能力集
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportFDLib">
+            <summary>
+            是否支持人脸，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportBluetooth">
+            <summary>
+            是否支持蓝牙，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportSaveFacePic">
+            <summary>
+            是否支持保存人脸图片，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportUserRightPlanTemplate">
+            <summary>
+            是否支持人员时间计划，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportIdentityTerminal">
+            <summary>
+            是否支持终端显示配置，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportCaptureFingerPrint">
+            <summary>
+            是否支持采集指纹，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportDoorStatusPlanTemplate">
+            <summary>
+            是否支持门时间计划，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportFingerPrintDelete">
+            <summary>
+            是否支持删除指纹，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportFingerPrintCfg">
+            <summary>
+            是否支持指纹，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportUserInfo">
+            <summary>
+            是否支持人员，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportDeviceId">
+            <summary>
+            是否支持对讲设置，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportAcsCfg">
+            <summary>
+            是否支持门禁配置，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportCaptureCardInfo">
+            <summary>
+            是否支持采集卡片，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportRemoteControlDoor">
+            <summary>
+            是否支持远程控门，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportAcsWorkStatus">
+            <summary>
+            是否支持查询门状态，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportCardInfo">
+            <summary>
+            是否支持卡片，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportTTSText">
+            <summary>
+            是否支持认证语音播报配置，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportCustomPrompt">
+            <summary>
+            是否支持认证文本配置，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportUserPassword">
+            <summary>
+            是否支持人员密码开门（组合方式中包含密码），1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportPurePwdVerify">
+            <summary>
+            是否支持人员纯密码开门，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.MaxEmployeeNoLength">
+            <summary>
+            人员编号最大长度
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.MaxDoorNo">
+            <summary>
+            支持最多门数量
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.MaxUserPlanTemplate">
+            <summary>
+            人员最多关联的计划模板数
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.MaxCardReaderNo">
+            <summary>
+            支持的最多读卡器数量
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.CardReaderNoOpt">
+            <summary>
+            支持的读卡器编号枚举
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.DoorCmdOpt">
+            <summary>
+            远程控门支持的枚举：open、close、alwaysOpen、alwaysClose
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportVerifyWeekPlanCfg">
+            <summary>
+            是否支持读卡器认证，1支持、0不支持
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.VerifyModeOpt">
+            <summary>
+            读卡器认证方式枚举
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.MaxUserPasswordLength">
+            <summary>
+            人员密码最大长度
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.MinUserPasswordLength">
+            <summary>
+            人员密码最小长度
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportDeviceVersion">
+            <summary>
+            是否支持设备版本
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportNvrOverlayDT">
+            <summary>
+            是否支持NVR时间叠加
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportQuickplayMaxtime">
+            <summary>
+            快放最大倍速
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportNvrCustomAudioURL">
+            <summary>
+            是否支持自定义音频URL
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportRecordPage">
+            <summary>
+            是否支持录像查询
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportVideoQuality">
+            <summary>
+            是否支持视频清晰度
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.Source">
+            <summary>
+            来源
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportChannelTalkback">
+            <summary>
+            是否支持通道对讲
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportIntranet">
+            <summary>
+            是否支持内网访问
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportPtzPreset">
+            <summary>
+            是否支持预置点
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.MatchSeriesId">
+            <summary>
+            型号系列ID
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.ChannelShortcut">
+            <summary>
+            通道快捷入口
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportEncrypt">
+            <summary>
+            是否支持加密
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportDeviceVideoCover">
+            <summary>
+            是否支持设备视频封面
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportIsapi">
+            <summary>
+            是否支持ISAPI
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.PtzMeta">
+            <summary>
+            云台能力元数据
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportUpgradePackageTask">
+            <summary>
+            是否支持升级任务
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportPtzLeftRight">
+            <summary>
+            是否支持云台左右控制
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportChannelProxy">
+            <summary>
+            是否支持通道代理
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SeriesName">
+            <summary>
+            系列名称
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.Temp59A">
+            <summary>
+            临时能力A
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.Completed">
+            <summary>
+            是否完成
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportRecord">
+            <summary>
+            是否支持录像
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportAlarmMessageDetection">
+            <summary>
+            是否支持报警消息检测
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportLowPower">
+            <summary>
+            是否支持低功耗
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportHuman">
+            <summary>
+            是否支持人体检测
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.LinkProPhysicalVersion">
+            <summary>
+            Link Pro物理版本
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportDownload">
+            <summary>
+            是否支持下载
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportDSTP">
+            <summary>
+            是否支持DSTP
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportCapture">
+            <summary>
+            是否支持抓图
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportTalk">
+            <summary>
+            是否支持对讲
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportLocalStorage">
+            <summary>
+            是否支持本地存储
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.CloudBackup">
+            <summary>
+            云备份能力
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.MatchModel">
+            <summary>
+            匹配型号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.MatchModelId">
+            <summary>
+            型号ID
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportShadow">
+            <summary>
+            是否支持阴影能力
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.LinkPhysicalVersion">
+            <summary>
+            Link物理版本
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.DefaultVideoLevel">
+            <summary>
+            默认视频清晰度
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.ChannelSettingPanel">
+            <summary>
+            通道设置面板
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportVideosClassifiedQuery">
+            <summary>
+            是否支持录像分类查询
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportPtzDirection">
+            <summary>
+            是否支持方向控制
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportAlarmPic">
+            <summary>
+            是否支持报警图片
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportLink">
+            <summary>
+            是否支持Link
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SubErrors">
+            <summary>
+            子错误信息
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportPtz">
+            <summary>
+            是否支持云台
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.Expired">
+            <summary>
+            过期时间（秒）
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.DynamicAttrService">
+            <summary>
+            动态属性服务
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportCarDetect">
+            <summary>
+            是否支持车辆检测
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportVideoBack">
+            <summary>
+            是否支持录像回放
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportUpgrade">
+            <summary>
+            是否支持升级
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SmartMessage">
+            <summary>
+            智能提醒能力
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportPlayQuickOpt">
+            <summary>
+            快放倍速选项
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.FeatureModelIds">
+            <summary>
+            功能模型ID列表
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportVideoBuffer">
+            <summary>
+            是否支持缓冲播放
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportDefenceplan">
+            <summary>
+            是否支持布防计划
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportStreamCodeV2">
+            <summary>
+            是否支持码流V2
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportVideoPicRatio">
+            <summary>
+            是否支持画面比例
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportPlaySlowOpt">
+            <summary>
+            慢放倍速选项
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.A">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.B">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportRecordPlan">
+            <summary>
+            是否支持录像计划
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportVideoQualityOpt">
+            <summary>
+            视频清晰度选项
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportRecordLoop">
+            <summary>
+            是否支持循环录像
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportCar">
+            <summary>
+            是否支持车辆识别
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportNvrOverlayName">
+            <summary>
+            是否支持名称叠加
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportHumanDetect">
+            <summary>
+            是否支持人体识别
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportPtzZoom">
+            <summary>
+            是否支持缩放
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportHdd">
+            <summary>
+            是否支持硬盘管理
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportRemoteLogUpload">
+            <summary>
+            是否支持日志上传
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportDefence">
+            <summary>
+            是否支持布防
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportReplaySpeed">
+            <summary>
+            是否支持回放倍速
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportCloudBackup">
+            <summary>
+            是否支持云备份
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.DeviceSettingPanel">
+            <summary>
+            设备设置面板
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportVideoBackDetection">
+            <summary>
+            是否支持视频回放检测
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportNvrIot">
+            <summary>
+            是否支持NVR物联
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportSmartMessage">
+            <summary>
+            是否支持智能提醒
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportNvrIotMore">
+            <summary>
+            是否支持更多物联能力
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportPtzTopBottom">
+            <summary>
+            是否支持上下控制
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportPhysicalModel">
+            <summary>
+            是否支持物理型号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesOutput.SupportSmartHumanCar">
+            <summary>
+            是否支持人车检测
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesQueryInput">
+            <summary>
+            设备/通道能力集
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesQueryInput.DeviceSerial">
+            <summary>
+            设备序列号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesQueryInput.ResType">
+            <summary>
+            类型，默认Device
+            Device[设备]、Channel[通道]
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceCapacitiesQueryInput.ResIdentifier">
+            <summary>
+            标识	
+            当resType=Channel时必填，代表通道号
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.DeviceOutput">
+            <summary>
+            设备
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceOutput.DeviceSerial">
+            <summary>
+            设备序列号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceOutput.Name">
+            <summary>
+            设备名称
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceOutput.Model">
+            <summary>
+            设备型号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceOutput.DeviceVersion">
+            <summary>
+            设备版本
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceOutput.Status">
+            <summary>
+            是否在线 0-离线 1-在线
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceOutput.IsEncrypt">
+            <summary>
+            是否加密 0-未加密 1-加密
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceOutput.ChannelNum">
+            <summary>
+            通道数
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput">
+            <summary>
+            设备资源详情
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput.DeviceSerial">
+            <summary>
+            设备序列号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput.LogicNo">
+            <summary>
+            通道号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput.Status">
+            <summary>
+            是否在线 0-离线 1-在线 -1空闲
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput.IsEncrypt">
+            <summary>
+            是否加密
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput.GwDeviceSerial">
+            <summary>
+            主设备序列号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput.Name">
+            <summary>
+            资源名称
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput.GwName">
+            <summary>
+            设备名称
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput.Model">
+            <summary>
+            型号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput.DeviceVersion">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceOutput.IconUrl">
+            <summary>
+            设备图标
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceQueryInput">
+            <summary>
+            设备资源详情查询
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceQueryInput.Id">
+            <summary>
+            设备ID
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceQueryInput.DeviceSerial">
+            <summary>
+            设备序列号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceResourceQueryInput.ChannelNo">
+            <summary>
+            通道号
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenInput">
+            <summary>
+            单个获取设备token
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenInput.DeviceSerial">
+            <summary>
+            设备序列号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenInput.ChannelNo">
+            <summary>
+            通道号
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput">
+            <summary>
+            设备token
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.DeviceSerial">
+            <summary>
+            设备序列号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.ChannelNo">
+            <summary>
+            通道号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.TokenExpire">
+            <summary>
+            token过期时间到，时间戳，精确到秒
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.StreamTokenPlayExpire">
+            <summary>
+            streamToken取流播放过期时间到，时间戳，精确到秒
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.StreamLiveToken">
+            <summary>
+            streamToken预览
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.StreamRecToken">
+            <summary>
+            streamToken回放
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.StreamTalkToken">
+            <summary>
+            streamToken对讲
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.DeviceToken">
+            <summary>
+            设备类型token。resourceCategory=Global channelNo=*
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.DeviceGlobalToken">
+            <summary>
+            设备Global类型token。resourceCategory=Global channelNo=具体通道号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.DeviceVideoToken">
+            <summary>
+            设备Video类型token。 resourceCategory=Video channelNo=具体通道号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceTokenOutput.HttpUrlToken">
+            <summary>
+            非设备操作的token
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.DeviceVideoQualityOptionOutput">
+            <summary>
+            视频清晰度选项
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceVideoQualityOptionOutput.StreamType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceVideoQualityOptionOutput.VideoLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.DeviceVideoQualityOptionOutput.VideoLevelDesc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.OpsTokenOutput">
+            <summary>
+            非设备操作token
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.OpsTokenOutput.TokenExpire">
+            <summary>
+            token过期时间到，时间戳，精确到秒
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.OpsTokenOutput.HttpUrlToken">
+            <summary>
+            非设备操作的token
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.OpsTokenOutput.TokenAppKey">
+            <summary>
+            token对应的appKey
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.Output`1">
+            <summary>
+            Output
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.Output`1.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.Output`1.Msg">
+            <summary>
+            结果描述信息
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.Output`1.Data">
+            <summary>
+            结果描述信息
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.Output`1.Count">
+            <summary>
+            总数
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.Models.IoT.Output`1.EnsureResult">
+            <summary>
+            确保结果
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.PageInput">
+            <summary>
+            分页查询
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.PageInput.Page">
+            <summary>
+            第几页，默认值1
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.PageInput.Size">
+            <summary>
+            每页显示数量，默认值20	
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.RefreshUserAccessTokenInput">
+            <summary>
+            刷新用户授权凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.RefreshUserAccessTokenInput.UserAccessToken">
+            <summary>
+            用户访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.RefreshUserAccessTokenInput.RefreshUserToken">
+            <summary>
+            刷新用户访问凭证
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.StreamingMediaAttrsInput">
+            <summary>
+            设备取流清晰度
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.StreamingMediaAttrsInput.DeviceSerial">
+            <summary>
+            设备序列号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.StreamingMediaAttrsInput.Payload">
+            <summary>
+            载荷
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.StreamingMediaAttrsOutput">
+            <summary>
+            设备取流清晰度
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.StreamingMediaAttrsOutput.VideoLevel">
+            <summary>
+            当前视频清晰度，0流畅、1均衡、2高清、3超清、4极清、其他是未知
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.StreamingMediaAttrsOutput.TraceId">
+            <summary>
+            traceId
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.StreamingMediaAttrsPayload">
+            <summary>
+            设备取流清晰度载荷
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.StreamingMediaAttrsPayload.ChannelNo">
+            <summary>
+            通道号
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.StreamingMediaAttrsPayload.Attrs">
+            <summary>
+            videoLevel视频清晰度
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenInput">
+            <summary>
+            获取用户访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenInput.AuthCode">
+            <summary>
+            授权码
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenOutput">
+            <summary>
+            用户访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenOutput.AppKey">
+            <summary>
+            AppKey
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenOutput.UserAccessToken">
+            <summary>
+            用户访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenOutput.RefreshUserToken">
+            <summary>
+            刷新用户访问凭证
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenOutput.ExpiresIn">
             <summary>
             有效时间，单位：天
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.TeamNo">
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenOutput.TeamNo">
             <summary>
             团队编号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.PersonNo">
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenOutput.PersonNo">
             <summary>
             成员编号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Hikvision.Models.HikIoTUserAccessTokenOutput.AccountNo">
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.UserAccessTokenOutput.AccountNo">
             <summary>
             海康通行证账号
             </summary>
@@ -7739,11 +8804,10 @@
             <param name="percent"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Integration.Utils.StringUtils.ObjectToQueryString``1(``0,System.Boolean,System.Boolean,System.Boolean)">
+        <member name="M:AhDai.Integration.Utils.StringUtils.ObjectToQueryString(System.Object,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             ToQueryString
             </summary>
-            <typeparam name="T"></typeparam>
             <param name="obj"></param>
             <param name="ignoreNullOrEmpty"></param>
             <param name="escape"></param>

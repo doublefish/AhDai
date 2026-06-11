@@ -1,5 +1,4 @@
 using AhDai.Core.Extensions;
-using AhDai.Core.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpLogging;
@@ -126,10 +125,8 @@ public class Program
         //builder.Services.AddSwaggerGen();
         builder.Services.AddMySwaggerGen();
 
-        builder.Services.AddRedisService();
-        builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        builder.Services.AddJwtService();
-        builder.Services.AddFileService();
+        // 添加业务服务
+        Service.Startup.ConfigureServices(builder.Services, builder.Configuration);
 
         var app = builder.Build();
 
@@ -192,8 +189,7 @@ public class Program
             app.UseMySwaggerUI();
         }
 
-        // 另存服务实例
-        ServiceUtil.Init(app.Services, app.Services.GetRequiredService<IConfiguration>());
+        Service.Startup.Configure(app);
 
         app.Run();
     }

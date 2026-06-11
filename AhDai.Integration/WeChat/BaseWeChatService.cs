@@ -61,6 +61,7 @@ internal abstract class BaseWeChatService<TConfig, TConfigProvider>(IBaseRedisSe
                 var res = await GetAccessTokenAsync(false);
                 value = JsonUtil.Serialize(res);
                 await rdb.StringSetAsync(key, value, TimeSpan.FromSeconds(res.ExpiresIn - 30));
+                return res;
             }
         }
         var url = $"cgi-bin/token?grant_type=client_credential&appid={config.AppId}&secret={config.AppSecret}";

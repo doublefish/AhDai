@@ -77,17 +77,16 @@ public class StringUtils
     /// <summary>
     /// ToQueryString
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     /// <param name="obj"></param>
     /// <param name="ignoreNullOrEmpty"></param>
     /// <param name="escape"></param>
     /// <param name="percent"></param>
     /// <returns></returns>
-    public static string ObjectToQueryString<T>(T obj, bool ignoreNullOrEmpty = false, bool escape = false, bool percent = false) where T : class
+    public static string ObjectToQueryString(object? obj, bool ignoreNullOrEmpty = false, bool escape = false, bool percent = false)
     {
         if (obj == null) return "";
 
-        var props = TypeMetadataProvider.GetProperties<T>();
+        var props = TypeMetadataProvider.GetProperties(obj.GetType());
         var builder = new StringBuilder();
         foreach (var p in props)
         {

@@ -137,6 +137,39 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
+    /// AddHikIoTService
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddHikIoTService(this IServiceCollection services)
+    {
+        services.AddScoped<Hikvision.IHikIoTService, Hikvision.HikIoTService>();
+        return services;
+    }
+
+    /// <summary>
+    /// AddESignService
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddESignService(this IServiceCollection services)
+    {
+        services.AddScoped<ESign.IESignService, ESign.ESignService>();
+        return services;
+    }
+
+    /// <summary>
+    /// AddTianyanchaService
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddTianyanchaService(this IServiceCollection services)
+    {
+        services.AddScoped<Tianyancha.ITianyanchaService, Tianyancha.TianyanchaService>();
+        return services;
+    }
+
+    /// <summary>
     /// AddTencentMapService
     /// </summary>
     /// <param name="services"></param>
@@ -188,28 +221,6 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddWeChatWebAppService(this IServiceCollection services)
     {
         services.AddScoped<WeChat.IWeChatWebAppService, WeChat.WeChatWebAppService>();
-        return services;
-    }
-
-    /// <summary>
-    /// AddESignService
-    /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddESignService(this IServiceCollection services)
-    {
-        services.AddScoped<ESign.IESignService, ESign.ESignService>();
-        return services;
-    }
-
-    /// <summary>
-    /// AddTianyanchaService
-    /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddTianyanchaService(this IServiceCollection services)
-    {
-        services.AddScoped<Tianyancha.ITianyanchaService, Tianyancha.TianyanchaService>();
         return services;
     }
 }

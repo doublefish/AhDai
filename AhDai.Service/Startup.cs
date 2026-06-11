@@ -30,7 +30,8 @@ public static class Startup
     {
         var startupType = typeof(IStartup);
         var list = new List<IStartup>();
-        var assembly = Assembly.LoadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AhDai.Service.dll"));
+        //var assembly = Assembly.LoadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AhDai.Service.dll"));
+        var assembly = typeof(IStartup).Assembly;
         if (assembly != null)
         {
             var types = assembly.GetTypes();

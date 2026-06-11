@@ -38,14 +38,14 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     {
         var url = $"v3/organizations/identity-info?orgName={orgName}";
         var res = await GetAsync<Output<OrgOutput>>(url);
-        return res.Data ?? throw new Exception("未查询到数据");
+        return EnsureSuccess(res);
     }
 
     public async Task<PersonOutput> GetPersonByAccountAsync(string psnAccount)
     {
         var url = $"v3/persons/identity-info?psnAccount={psnAccount}";
         var res = await GetAsync<Output<PersonOutput>>(url);
-        return res.Data ?? throw new Exception("未查询到数据");
+        return EnsureSuccess(res);
     }
     #endregion
 
@@ -54,7 +54,7 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     {
         var url = $"v3/org-auth-url";
         var res = await PostAsync<Output<OrgAuthUrlOutput>>(url, input);
-        return res.Data ?? throw new Exception("未查询到数据");
+        return EnsureSuccess(res);
     }
     #endregion
 
@@ -63,7 +63,7 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     {
         var url = $"v3/files/file-upload-url";
         var res = await PostAsync<Output<FileUploadUrlOutput>>(url, input);
-        return res.Data ?? throw new Exception("未查询到数据");
+        return EnsureSuccess(res);
     }
 
     public async Task UploadFileToUrlAsync(string url, Stream stream, byte[]? contentMD5 = null, string? contentType = null)
@@ -159,7 +159,7 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     {
         var url = $"v3/files/{fileId}?pageSize={pageSize}";
         var res = await GetAsync<Output<FileInfoOutput>>(url);
-        return res.Data ?? throw new Exception("未查询到数据");
+        return EnsureSuccess(res);
     }
 
     public async Task<FileInfoOutput> GetFileUntilReadyAsync(string fileId, int maxRetryCount = 6)
@@ -192,7 +192,7 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
         };
         var url = $"v3/files/{fileId}/keyword-positions";
         var res = await PostAsync<Output<GetFileKeywordPositionsOutput>>(url, dict);
-        var data = res.Data ?? throw new Exception("未查询到数据");
+        var data = EnsureSuccess(res);
         return data.KeywordPositions;
     }
     #endregion
@@ -202,28 +202,28 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     {
         var url = $"v3/doc-templates/doc-template-create-url";
         var res = await PostAsync<Output<DocTemplateCreateUrlOutput>>(url, input);
-        return res.Data ?? throw new ArgumentException("未查询到数据");
+        return EnsureSuccess(res);
     }
 
     public async Task<DocTemplateEditUrlOutput> GetDocTemplateEditUrlAsync(string docTemplateId, DocTemplateEditUrlInput input)
     {
         var url = $"v3/doc-templates/{docTemplateId}/doc-template-edit-url";
         var res = await PostAsync<Output<DocTemplateEditUrlOutput>>(url, input);
-        return res.Data ?? throw new ArgumentException("未查询到数据");
+        return EnsureSuccess(res);
     }
 
     public async Task<IDictionary<string, object>> GetDocTemplateAsync(string docTemplateId)
     {
         var url = $"v3/doc-templates/{docTemplateId}";
         var res = await GetAsync<Output<IDictionary<string, object>>>(url);
-        return res.Data ?? throw new ArgumentException("未查询到数据");
+        return EnsureSuccess(res);
     }
 
     public async Task<FileCreateByDocTemplateOutput> CreateFileByDocTemplateAsync(FileCreateByDocTemplateInput input)
     {
         var url = $"v3/files/create-by-doc-template";
         var res = await PostAsync<Output<FileCreateByDocTemplateOutput>>(url, input);
-        return res.Data ?? throw new Exception("未查询到数据");
+        return EnsureSuccess(res);
     }
     #endregion
 
@@ -232,15 +232,16 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     {
         var url = $"v3/sign-flow/create-by-file";
         var res = await PostAsync<Output<SignFlowCreateByFileOutput>>(url, input);
-        if (res.Data == null || string.IsNullOrEmpty(res.Data.SignFlowId)) throw new Exception("发起签署流程发生异常，请联系管理员");
-        return res.Data.SignFlowId;
+        var data = EnsureSuccess(res);
+        if (string.IsNullOrEmpty(data.SignFlowId)) throw new Exception($"请求{ServiceName}未返回SignFlowId，请联系管理员");
+        return data.SignFlowId;
     }
 
     public async Task RevokeSignFlowAsync(string signFlowId, SignFlowRevokeInput input)
     {
         var url = $"v3/sign-flow/{signFlowId}/revoke";
         var res = await PostAsync<Output<IDictionary<string, string>>>(url, input);
-        if (res.Data == null) throw new Exception("撤销签署流程发生异常，请联系管理员");
+        EnsureSuccess(res);
     }
 
     public async Task UrgeSignFlowAsync(string signFlowId, SignFlowUrgeInput input)
@@ -287,32 +288,30 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
         var config = await GetConfigAsync();
         var url = $"v3/sign-flow/{signFlowId}/initiate-rescission";
         var res = await PostAsync<Output<SignFlowRescissionOutput>>(url, input);
-        return res.Data ?? throw new Exception("发起合同解约发生异常，请联系管理员");
+        return EnsureSuccess(res);
     }
 
     public async Task<SignFlowDetailOutput> GetSignFlowDetailAsync(string signFlowId)
     {
         var url = $"v3/sign-flow/{signFlowId}/detail";
         var res = await GetAsync<Output<SignFlowDetailOutput>>(url);
-        if (res.Data == null) throw new Exception("未查询到数据");
-        res.Data.SignFlowId = signFlowId;
-        return res.Data;
+        var data = EnsureSuccess(res);
+        data.SignFlowId = signFlowId;
+        return data;
     }
 
     public async Task<SignFlowSignUrlOutput> GetSignFlowSignUrlAsync(string signFlowId, SignFlowSignUrlInput input)
     {
         var url = $"v3/sign-flow/{signFlowId}/sign-url";
         var res = await PostAsync<Output<SignFlowSignUrlOutput>>(url, input);
-        if (res.Data == null) throw new Exception("未查询到数据");
-        return res.Data;
+        return EnsureSuccess(res);
     }
 
     public async Task<SignFileDownloadOutput> GetSignFlowFileDownloadUrlAsync(string signFlowId)
     {
         var url = $"v3/sign-flow/{signFlowId}/file-download-url";
         var res = await GetAsync<Output<SignFileDownloadOutput>>(url);
-        if (res.Data == null) throw new Exception("未查询到数据");
-        return res.Data;
+        return EnsureSuccess(res);
     }
 
     public async Task<SignFlowNotifyOutput> GetSignFlowNotifyResultAsync(HttpContext httpContext)
@@ -401,5 +400,10 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
         {
             throw new ArgumentException("验签失败");
         }
+    }
+
+    TData EnsureSuccess<TData>(Output<TData> result)
+    {
+        return result.Data ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
     }
 }

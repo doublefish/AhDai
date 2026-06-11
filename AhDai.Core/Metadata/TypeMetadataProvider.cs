@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace AhDai.Core.Metadata;
 
@@ -19,7 +20,12 @@ public class TypeMetadataProvider
     /// </summary>
     public static PropertyMetadata[] GetProperties(Type type)
     {
-        return _arrayCache.GetOrAdd(type, t => [.. t.GetProperties(BindingFlags.Public | BindingFlags.Instance).Select(p => new PropertyMetadata(p))]);
+        return _arrayCache.GetOrAdd(type, t => [.. t.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            .Select(p => new PropertyMetadata()
+            {
+                Info = p,
+                JsonName = p.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name
+            })]);
     }
 
     /// <summary>

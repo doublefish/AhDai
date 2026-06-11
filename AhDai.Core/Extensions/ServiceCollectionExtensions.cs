@@ -19,6 +19,17 @@ namespace AhDai.Core.Extensions;
 public static class ServiceCollectionExtensions
 {
     /// <summary>
+    /// 添加IServiceProviderAccessor - 依赖注入单例
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddServiceProviderAccessor(this IServiceCollection services)
+    {
+        services.AddSingleton<Interfaces.Infrastructure.IServiceProviderAccessor, Infrastructure.ServiceProviderAccessor>();
+        return services;
+    }
+
+    /// <summary>
     /// 添加Redis服务 - 依赖注入单例
     /// </summary>
     /// <param name="services"></param>

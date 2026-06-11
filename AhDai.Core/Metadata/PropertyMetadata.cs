@@ -1,20 +1,18 @@
 ﻿using System.Reflection;
-using System.Text.Json.Serialization;
 
 namespace AhDai.Core.Metadata;
 
 /// <summary>
 /// 属性元数据封装
 /// </summary>
-/// <param name="info"></param>
-public class PropertyMetadata(PropertyInfo info)
+public class PropertyMetadata
 {
     /// <summary>
     /// PropertyInfo
     /// </summary>
-    public PropertyInfo Info { get; } = info;
+    public PropertyInfo Info { get; set; } = default!;
     /// <summary>
     /// 预解析常用的 JsonPropertyName
     /// </summary>
-    public string? JsonName { get; } = info.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name;
+    public string? JsonName { get; set; }
 }
