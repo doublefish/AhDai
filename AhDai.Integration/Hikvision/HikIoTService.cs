@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AhDai.Integration.Hikvision;
 
@@ -142,26 +143,28 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
 
     #region 视频 - 通道
 
-    public async Task<CameraOutput[]> PageCameraAsync(AccessContext context, PageInput input)
+    public async Task<PageOutput<CameraOutput>> PageCameraAsync(AccessContext context, PageInput input)
     {
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/camera/v1/page";
         var result = await GetEncryptedAsync<CameraOutput[]>(config, client, url, input);
-        return EnsureSuccess(result);
+        var data = EnsureSuccess(result);
+        return new PageOutput<CameraOutput>(data, result.Count);
     }
 
     #endregion
 
     #region 硬件设备 - 设备/通道
 
-    public async Task<DeviceOutput[]> PageDeviceAsync(AccessContext context, PageInput input)
+    public async Task<PageOutput<DeviceOutput>> PageDeviceAsync(AccessContext context, PageInput input)
     {
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/v1/page";
         var result = await GetEncryptedAsync<DeviceOutput[]>(config, client, url, input);
-        return EnsureSuccess(result);
+        var data = EnsureSuccess(result);
+        return new PageOutput<DeviceOutput>(data, result.Count);
     }
 
     public async Task<DeviceCapacitiesOutput> GetDeviceCapacitiesAsync(AccessContext context, DeviceCapacitiesQueryInput input)

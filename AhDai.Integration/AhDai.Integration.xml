@@ -5993,7 +5993,7 @@
             AccessContext
             </summary>
             <param name="appAccessToken">应用访问凭证</param>
-            <param name="UserAccessToken">用户访问凭证</param>
+            <param name="userAccessToken">用户访问凭证</param>
             <param name="refreshUserToken">刷新用户访问凭证</param>
         </member>
         <member name="M:AhDai.Integration.Hikvision.Models.IoT.AccessContext.#ctor(System.String,System.String,System.String)">
@@ -6001,7 +6001,7 @@
             AccessContext
             </summary>
             <param name="appAccessToken">应用访问凭证</param>
-            <param name="UserAccessToken">用户访问凭证</param>
+            <param name="userAccessToken">用户访问凭证</param>
             <param name="refreshUserToken">刷新用户访问凭证</param>
         </member>
         <member name="P:AhDai.Integration.Hikvision.Models.IoT.AccessContext.AppAccessToken">
@@ -7025,6 +7025,32 @@
         <member name="P:AhDai.Integration.Hikvision.Models.IoT.PageInput.Size">
             <summary>
             每页显示数量，默认值20	
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.Models.IoT.PageOutput`1">
+            <summary>
+            分页查询
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.Models.IoT.PageOutput`1.#ctor(`0[],System.Int64)">
+            <summary>
+            分页查询
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <param name="count"></param>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.PageOutput`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Hikvision.Models.IoT.PageOutput`1.Count">
+            <summary>
+            总数
             </summary>
         </member>
         <member name="T:AhDai.Integration.Hikvision.Models.IoT.RefreshUserAccessTokenInput">

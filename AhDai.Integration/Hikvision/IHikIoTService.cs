@@ -89,7 +89,7 @@ public interface IHikIoTService : IBaseService<HikIoTConfig>
     /// <param name="context"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<CameraOutput[]> PageCameraAsync(AccessContext context, PageInput input);
+    Task<PageOutput<CameraOutput>> PageCameraAsync(AccessContext context, PageInput input);
 
     #endregion
 
@@ -101,7 +101,7 @@ public interface IHikIoTService : IBaseService<HikIoTConfig>
     /// <param name="context"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<DeviceOutput[]> PageDeviceAsync(AccessContext context, PageInput input);
+    Task<PageOutput<DeviceOutput>> PageDeviceAsync(AccessContext context, PageInput input);
 
     /// <summary>
     /// 设备/通道能力查询
@@ -120,12 +120,5 @@ public interface IHikIoTService : IBaseService<HikIoTConfig>
     Task<DeviceResourceOutput> GetDeviceResourceAsync(AccessContext context, DeviceResourceQueryInput input);
 
     #endregion
-
-
-
-
-
-
-
 
 }
