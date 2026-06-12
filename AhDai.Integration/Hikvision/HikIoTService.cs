@@ -26,7 +26,7 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
     HttpClient CreateAppHttpClient(string host, string appAccessToken)
     {
         var client = CreateHttpClient(host);
-        client.DefaultRequestHeaders.Remove("App-Access-Token");
+        //client.DefaultRequestHeaders.Remove("App-Access-Token");
         client.DefaultRequestHeaders.Add("App-Access-Token", appAccessToken);
         return client;
     }
@@ -34,7 +34,7 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
     HttpClient CreateUserHttpClient(string host, AccessContext context)
     {
         var client = CreateAppHttpClient(host, context.AppAccessToken);
-        client.DefaultRequestHeaders.Remove("User-Access-Token");
+        //client.DefaultRequestHeaders.Remove("User-Access-Token");
         client.DefaultRequestHeaders.Add("User-Access-Token", context.UserAccessToken);
         return client;
     }
