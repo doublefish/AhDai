@@ -39,7 +39,7 @@ internal class AliyunSmsService(IAliyunSmsConfigProvider configProvider, IHttpCl
             { "SignatureMethod", "HMAC-SHA1" },
             { "SignatureNonce", Utils.StringUtils.GenerateRandomString(32) },
             { "SignatureVersion", "1.0" },
-            { "Timestamp", DateTime.UtcNow.ToString(Core.Consts.DateTimeFormat.Iso8601Utc) },
+            { "Timestamp", DateTime.UtcNow.ToString(Core.Consts.DateTimeFormats.Iso8601Utc) },
             { "Version", "2017-05-25" }
         };
         return await SendAsync<SmsOutput>(config, HttpMethod.Post, input);

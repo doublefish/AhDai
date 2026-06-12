@@ -7242,6 +7242,29 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.SendContentAsync``1(System.Net.Http.HttpMethod,System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)">
+            <summary>
+            发送请求
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="content"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.SendContentAsync``1(System.Net.Http.HttpClient,System.Net.Http.HttpMethod,System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)">
+            <summary>
+            发送请求
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+            <param name="client"></param>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="content"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:AhDai.Integration.Infrastructure.BaseService.SendAsync``1(System.Net.Http.HttpClient,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
             <summary>
             SendAsync

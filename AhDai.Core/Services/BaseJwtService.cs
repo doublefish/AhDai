@@ -118,8 +118,8 @@ public class BaseJwtService(IConfiguration configuration, IBaseRedisService? red
             var redis = RedisService;
             var dict = claims.GroupBy(claim => claim.Type).ToDictionary(g => g.Key, g => string.Join(",", g.Select(c => c.Value)));
             dict.Add("Issuer", Config.Issuer);
-            dict.Add("IssueTime", DateTime.Now.ToString(DateTimeFormat.Standard));
-            dict.Add("ExpirationTime", expires.ToLocalTime().ToString(DateTimeFormat.Standard));
+            dict.Add("IssueTime", DateTime.Now.ToString(DateTimeFormats.Standard));
+            dict.Add("ExpirationTime", expires.ToLocalTime().ToString(DateTimeFormats.Standard));
             dict.Add("Token", token);
             if (!dict.TryGetValue("Username", out var username) || string.IsNullOrEmpty(username))
             {

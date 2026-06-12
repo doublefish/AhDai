@@ -10,7 +10,7 @@ namespace AhDai.Core.Models;
 /// <param name="method"></param>
 /// <param name="url"></param>
 /// <param name="contentType"></param>
-public class HttpRequest(HttpMethod method, string url, string contentType = HttpContentType.Url)
+public class HttpRequest(HttpMethod method, string url, string contentType = HttpContentTypes.FormUrlEncoded)
 {
     /// <summary>
     /// 类型

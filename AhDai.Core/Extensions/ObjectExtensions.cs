@@ -1,6 +1,7 @@
 ﻿using AhDai.Core.Metadata;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AhDai.Core.Extensions;
 
@@ -81,5 +82,18 @@ public static class ObjectExtensions
             TypeCode.DateTime => DateTime.MinValue,
             _ => null
         };
+    }
+
+    /// <summary>
+    /// ToStringDictionary
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public static IDictionary<string, string> ToStringDictionary(this object obj)
+    {
+        return TypeMetadataProvider.GetProperties(obj.GetType())
+            .ToDictionary(
+                p => p.JsonName ?? p.Info.Name,
+                p => p.Info.GetValue(obj)?.ToString() ?? "");
     }
 }

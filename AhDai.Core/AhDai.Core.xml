@@ -272,107 +272,102 @@
             默认库
             </summary>
         </member>
-        <member name="T:AhDai.Core.Consts.DateTimeFormat">
+        <member name="T:AhDai.Core.Consts.DateTimeFormats">
             <summary>
-            DateTimeFormat
+            DateTimeFormats
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.DateTimeFormat.Standard">
+        <member name="F:AhDai.Core.Consts.DateTimeFormats.Standard">
             <summary>
             标准日期时间格式：yyyy-MM-dd HH:mm:ss
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.DateTimeFormat.Iso8601Utc">
+        <member name="F:AhDai.Core.Consts.DateTimeFormats.Iso8601Utc">
             <summary>
             ISO 8601 UTC格式：yyyy-MM-ddTHH:mm:ssZ
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.DateTimeFormat.Iso8601WithOffset">
+        <member name="F:AhDai.Core.Consts.DateTimeFormats.Iso8601WithOffset">
             <summary>
             ISO 8601 带时区偏移格式：yyyy-MM-ddTHH:mm:sszzz
             </summary>
         </member>
-        <member name="T:AhDai.Core.Consts.HashHalg">
+        <member name="T:AhDai.Core.Consts.HashAlgorithms">
             <summary>
             哈希算法名称
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.HashHalg.MD5">
+        <member name="F:AhDai.Core.Consts.HashAlgorithms.MD5">
             <summary>
             MD5
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.HashHalg.SHA1">
+        <member name="F:AhDai.Core.Consts.HashAlgorithms.SHA1">
             <summary>
             SHA1
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.HashHalg.SHA256">
+        <member name="F:AhDai.Core.Consts.HashAlgorithms.SHA256">
             <summary>
             SHA256
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.HashHalg.SHA384">
+        <member name="F:AhDai.Core.Consts.HashAlgorithms.SHA384">
             <summary>
             SHA384
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.HashHalg.SHA512">
+        <member name="F:AhDai.Core.Consts.HashAlgorithms.SHA512">
             <summary>
             SHA512
             </summary>
         </member>
-        <member name="T:AhDai.Core.Consts.HttpContentType">
+        <member name="T:AhDai.Core.Consts.HttpContentTypes">
             <summary>
-            HttpContentType
+            HttpContentTypes
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.HttpContentType.Text">
-            <summary>
-            Text
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Consts.HttpContentType.TextHtml">
-            <summary>
-            TextHtml
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Consts.HttpContentType.TextXml">
-            <summary>
-            TextXml
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Consts.HttpContentType.Url">
-            <summary>
-            Url
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Consts.HttpContentType.FormData">
-            <summary>
-            Form
-            </summary>
-        </member>
-        <member name="F:AhDai.Core.Consts.HttpContentType.Json">
+        <member name="F:AhDai.Core.Consts.HttpContentTypes.Json">
             <summary>
             Json
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.HttpContentType.Xml">
+        <member name="F:AhDai.Core.Consts.HttpContentTypes.Xml">
             <summary>
             Xml
             </summary>
         </member>
-        <member name="T:AhDai.Core.Consts.Language">
+        <member name="F:AhDai.Core.Consts.HttpContentTypes.FormUrlEncoded">
             <summary>
-            Language
+            Url
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.Language.ZH_CN">
+        <member name="F:AhDai.Core.Consts.HttpContentTypes.MultipartFormData">
+            <summary>
+            Form
+            </summary>
+        </member>
+        <member name="F:AhDai.Core.Consts.HttpContentTypes.PlainText">
+            <summary>
+            text/plain
+            </summary>
+        </member>
+        <member name="F:AhDai.Core.Consts.HttpContentTypes.Html">
+            <summary>
+            text/html
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Consts.Languages">
+            <summary>
+            Languages
+            </summary>
+        </member>
+        <member name="F:AhDai.Core.Consts.Languages.ZhCn">
             <summary>
             中文（简体）
             </summary>
         </member>
-        <member name="F:AhDai.Core.Consts.Language.EN_US">
+        <member name="F:AhDai.Core.Consts.Languages.EnUs">
             <summary>
             英文（美国）
             </summary>
@@ -957,6 +952,13 @@
             </summary>
             <param name="obj"></param>
             <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.ObjectExtensions.ToStringDictionary(System.Object)">
+            <summary>
+            ToStringDictionary
+            </summary>
+            <param name="obj"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Extensions.OptionsExtensions">

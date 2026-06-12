@@ -47,7 +47,7 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                 PropertyNameCaseInsensitive = true,
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-                Converters = { new DateTimeJsonConverter(Core.Consts.DateTimeFormat.Iso8601WithOffset) },
+                Converters = { new DateTimeJsonConverter(Core.Consts.DateTimeFormats.Iso8601WithOffset) },
             };
             return _JsonOptions;
         }

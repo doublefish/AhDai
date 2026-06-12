@@ -22,13 +22,13 @@ public static class HttpResponseExtensions
     {
         var contentType = response.ContentType?.ToLower();
         response.StatusCode = StatusCodes.Status200OK;
-        if (!string.IsNullOrEmpty(contentType) && (contentType == HttpContentType.Xml || contentType == HttpContentType.TextHtml))
+        if (!string.IsNullOrEmpty(contentType) && (contentType == HttpContentTypes.Xml || contentType == HttpContentTypes.Html))
         {
             return response.WriteAsync(Utils.XmlUtil.SerializeObject(data), cancellationToken);
         }
         else
         {
-            response.ContentType = HttpContentType.Json;
+            response.ContentType = HttpContentTypes.Json;
             return response.WriteAsync(Utils.JsonUtil.Serialize(data), cancellationToken);
         }
     }

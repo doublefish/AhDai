@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AhDai.Integration.Infrastructure;
 
@@ -160,6 +161,36 @@ public abstract class BaseService : IBaseService
         {
             content = data != null ? JsonContent.Create(data) : null;
         }
+        return await SendAsync<TOutput>(client, method, url, content, cancellationToken);
+    }
+
+
+    /// <summary>
+    /// 发送请求
+    /// </summary>
+    /// <typeparam name="TOutput"></typeparam>
+    /// <param name="method"></param>
+    /// <param name="url"></param>
+    /// <param name="content"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected virtual Task<TOutput> SendContentAsync<TOutput>(HttpMethod method, string url, HttpContent? content, CancellationToken cancellationToken = default)
+        where TOutput : IBaseOutput
+        => SendContentAsync<TOutput>(null, method, url, content, cancellationToken);
+
+    /// <summary>
+    /// 发送请求
+    /// </summary>
+    /// <typeparam name="TOutput"></typeparam>
+    /// <param name="client"></param>
+    /// <param name="method"></param>
+    /// <param name="url"></param>
+    /// <param name="content"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected virtual async Task<TOutput> SendContentAsync<TOutput>(HttpClient? client, HttpMethod method, string url, HttpContent? content, CancellationToken cancellationToken = default)
+        where TOutput : IBaseOutput
+    {
         var request = new HttpRequestMessage(method, url)
         {
             Content = content,

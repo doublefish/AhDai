@@ -15,7 +15,7 @@ namespace AhDai.Core.Models;
 /// <param name="message">消息</param>
 /// <param name="content">内容</param>
 /// <param name="contentType">内容类型</param>
-public class ActionResult<T>(string actionId, int code, string message, T content, string contentType = HttpContentType.Json) : IActionResult<T>
+public class ActionResult<T>(string actionId, int code, string message, T content, string contentType = HttpContentTypes.Json) : IActionResult<T>
 {
     /// <summary>
     /// 动作Id
@@ -44,7 +44,7 @@ public class ActionResult<T>(string actionId, int code, string message, T conten
     /// <param name="actionId">动作Id</param>
     /// <param name="content">内容</param>
     /// <param name="contentType">内容类型</param>
-    public ActionResult(string actionId, T content, string contentType = HttpContentType.Json) : this(actionId, 0, "success", content, contentType)
+    public ActionResult(string actionId, T content, string contentType = HttpContentTypes.Json) : this(actionId, 0, "success", content, contentType)
     {
     }
 
@@ -57,8 +57,7 @@ public class ActionResult<T>(string actionId, int code, string message, T conten
     {
         var text = ContentType switch
         {
-            HttpContentType.Xml => Utils.XmlUtil.SerializeObject(this),
-            HttpContentType.TextXml => Utils.XmlUtil.SerializeObject(this),
+            HttpContentTypes.Xml => Utils.XmlUtil.SerializeObject(this),
             _ => Utils.JsonUtil.Serialize(this),
         };
         //var bytes = Encoding.Default.GetBytes(text);

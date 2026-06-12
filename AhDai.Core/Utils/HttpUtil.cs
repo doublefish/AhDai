@@ -58,7 +58,7 @@ public static partial class HttpUtil
     /// <returns></returns>
     public static HttpRequestMessage CreateRequest(Models.HttpRequest data)
     {
-        if (data.ContentType == HttpContentType.Json && data.Body != null)
+        if (data.ContentType == HttpContentTypes.Json && data.Body != null)
         {
             data.Content = JsonUtil.Serialize(data.Body);
         }

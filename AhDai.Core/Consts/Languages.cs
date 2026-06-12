@@ -1,16 +1,16 @@
 ﻿namespace AhDai.Core.Consts;
 
 /// <summary>
-/// Language
+/// Languages
 /// </summary>
-public class Language
+public static class Languages
 {
     /// <summary>
     /// 中文（简体）
     /// </summary>
-    public const string ZH_CN = "zh-CN";
+    public const string ZhCn = "zh-CN";
     /// <summary>
     /// 英文（美国）
     /// </summary>
-    public const string EN_US = "en-US";
+    public const string EnUs = "en-US";
 }

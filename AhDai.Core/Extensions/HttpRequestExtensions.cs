@@ -68,8 +68,8 @@ public static partial class HttpRequestExtensions
         var contentType = httpRequest.ContentType?.Split(";")[0];
         return contentType switch
         {
-            HttpContentType.Url => httpRequest.Query.ToQueryString(),
-            HttpContentType.FormData => httpRequest.Form.ToQueryString(),
+            HttpContentTypes.FormUrlEncoded => httpRequest.Query.ToQueryString(),
+            HttpContentTypes.MultipartFormData => httpRequest.Form.ToQueryString(),
             _ => httpRequest.ReadBody(encoding),
         };
     }
