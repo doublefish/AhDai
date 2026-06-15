@@ -1,7 +1,6 @@
 ﻿using AhDai.Integration.Abstractions;
 using AhDai.Integration.Aliyun.Configs;
-using AhDai.Integration.Aliyun.Models;
-using System.Collections.Generic;
+using AhDai.Integration.Aliyun.Models.Sms;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Aliyun;
@@ -14,10 +13,7 @@ public interface IAliyunSmsService : IBaseService<AliyunSmsConfig>
     /// <summary>
     /// 发送短信
     /// </summary>
-    /// <param name="phoneNumber"></param>
-    /// <param name="templateCode"></param>
-    /// <param name="templateParam"></param>
-    /// <param name="signName"></param>
+    /// <param name="input"></param>
     /// <returns></returns>
-    Task<SmsOutput> SendAsync(string phoneNumber, string templateCode, IDictionary<string, string> templateParam, string signName);
+    Task<SendOutput> SendAsync(SendInput input);
 }

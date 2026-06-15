@@ -1,5 +1,5 @@
 ﻿using AhDai.Integration.AntChain.Configs;
-using AhDai.Integration.AntChain.Models;
+using AhDai.Integration.AntChain.Models.Notary;
 using AhDai.Integration.AntChain.Providers;
 using AhDai.Integration.Infrastructure;
 using System;
@@ -22,37 +22,37 @@ internal class AntChainNotaryService(IAntChainNotaryConfigProvider configProvide
     protected override string ServiceName => "蚂蚁链存证";
 
 
-    public async Task<TwcNotaryTransCreateOutput> CreateTransAsync(TwcNotaryTransCreateInput input)
+    public async Task<TransCreateOutput> CreateTransAsync(TransCreateInput input)
     {
         if (input.Customer == null) throw new ArgumentException("关联实体的身份识别信息不可为空");
         //var res = await new AntChainNotaryTestService(Config).CreateTransAsync(input);
-        return await SendAsync<TwcNotaryTransCreateOutput, TwcNotaryTransCreateInput>(HttpMethod.Post, "twc.notary.trans.create", input);
+        return await SendAsync<TransCreateOutput, TransCreateInput>(HttpMethod.Post, "twc.notary.trans.create", input);
     }
 
-    public async Task<TwcNotaryTransGetOutput> GetTransAsync(TwcNotaryTransGetInput input)
+    public async Task<TransGetOutput> GetTransAsync(TransGetInput input)
     {
         //var res = await new AntChainNotaryTestService(Config).GetTransAsync(input);
-        return await SendAsync<TwcNotaryTransGetOutput, TwcNotaryTransGetInput>(HttpMethod.Post, "twc.notary.trans.get", input);
+        return await SendAsync<TransGetOutput, TransGetInput>(HttpMethod.Post, "twc.notary.trans.get", input);
     }
 
-    public async Task<TwcNotaryFileCreateOutput> CreateFileAsync(TwcNotaryFileCreateInput input)
+    public async Task<FileCreateOutput> CreateFileAsync(FileCreateInput input)
     {
-        return await SendAsync<TwcNotaryFileCreateOutput, TwcNotaryFileCreateInput>(HttpMethod.Post, "twc.notary.file.create", input);
+        return await SendAsync<FileCreateOutput, FileCreateInput>(HttpMethod.Post, "twc.notary.file.create", input);
     }
 
-    public async Task<TwcNotaryFileGetOutput> GetFileAsync(TwcNotaryFileGetInput input)
+    public async Task<FileGetOutput> GetFileAsync(FileGetInput input)
     {
-        return await SendAsync<TwcNotaryFileGetOutput, TwcNotaryFileGetInput>(HttpMethod.Post, "twc.notary.file.get", input);
+        return await SendAsync<FileGetOutput, FileGetInput>(HttpMethod.Post, "twc.notary.file.get", input);
     }
 
-    public async Task<TwcNotaryCertificateDetailGetOutput> GetCertificateDetailAsync(TwcNotaryCertificateDetailGetInput input)
+    public async Task<CertificateDetailGetOutput> GetCertificateDetailAsync(CertificateDetailGetInput input)
     {
-        return await SendAsync<TwcNotaryCertificateDetailGetOutput, TwcNotaryCertificateDetailGetInput>(HttpMethod.Post, "twc.notary.certificate.detail.get", input);
+        return await SendAsync<CertificateDetailGetOutput, CertificateDetailGetInput>(HttpMethod.Post, "twc.notary.certificate.detail.get", input);
     }
 
     protected async Task<TOutput> SendAsync<TOutput, TInput>(HttpMethod method, string action, TInput input)
-        where TOutput : BaseTwcNotaryOutput
-        where TInput : BaseTwcNotaryInput
+        where TOutput : BaseOutput
+        where TInput : BaseInput
     {
         var config = await GetConfigAsync();
         input.ProductInstanceId ??= config.InstanceId;
@@ -63,7 +63,7 @@ internal class AntChainNotaryService(IAntChainNotaryConfigProvider configProvide
     }
 
     async Task<TOutput> SendAsync<TOutput>(AntChainNotaryConfig config, HttpMethod method, string action, SortedDictionary<string, string?> body, SortedDictionary<string, string?>? query = null, SortedDictionary<string, string?>? headers = null)
-        where TOutput : BaseTwcNotaryOutput
+        where TOutput : BaseOutput
     {
         var time = DateTime.UtcNow;
         var timestamp = time.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'", CultureInfo.InvariantCulture);
@@ -102,10 +102,16 @@ internal class AntChainNotaryService(IAntChainNotaryConfigProvider configProvide
         }
         request.Content = new FormUrlEncodedContent(body);
 
-        var res = await SendAsync<TwcOutput<TOutput>>(client, request);
-        if (res.Response == null) throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
-        res.Response.EnsureResult();
-        return res.Response;
+        var res = await SendAsync<Output<TOutput>>(client, request);
+        return EnsureSuccess(res);
+    }
+
+    T EnsureSuccess<T>(Output<T> result)
+        where T : BaseOutput
+    {
+        var response = result.Response ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
+        response.EnsureResult();
+        return response;
     }
 
     static string ComputeSignature(string data, string accessKeySecret)

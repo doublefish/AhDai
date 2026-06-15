@@ -78,7 +78,8 @@ internal class MyStartup : IStartup
         services.AddJwtService();
         services.AddFileService();
 
-        services.ConfigureRedisKeyBuilder("DigitalChain");
+        //services.ConfigureRedisKeyBuilder("DigitalChain");
+        services.ConfigureRedisKeyBuilder("Logistics");
         services.AddRedisKeyBuilder();
 
         services.AddAliyunOssService();

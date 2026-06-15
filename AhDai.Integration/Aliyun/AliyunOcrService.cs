@@ -1,5 +1,5 @@
 ﻿using AhDai.Integration.Aliyun.Configs;
-using AhDai.Integration.Aliyun.Models;
+using AhDai.Integration.Aliyun.Models.Ocr;
 using AhDai.Integration.Aliyun.Providers;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +19,7 @@ internal class AliyunOcrService(IAliyunOcrConfigProvider configProvider, IHttpCl
     protected override string ServiceName => "阿里云文字识别";
 
 
-    public async Task<OcrTaxPaymentCertificateOutput> TaxPaymentCertificateAsync(string? url, Stream? stream)
+    public async Task<TaxPaymentCertificateOutput> TaxPaymentCertificateAsync(string? url, Stream? stream)
     {
         //var query = Utils.ObjectUtl.ToSortedDictionary(input);
         var query = new SortedDictionary<string, string?>()
@@ -36,6 +36,6 @@ internal class AliyunOcrService(IAliyunOcrConfigProvider configProvider, IHttpCl
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
         }
         //var res = await new AliyunOcrTestService(Config).TaxPaymentCertificateAsync(url, stream);
-        return await SendAsync<OcrTaxPaymentCertificateOutput>(HttpMethod.Post, "RecognizeTaxClearanceCertificate", content, query);
+        return await SendAsync<TaxPaymentCertificateOutput>(HttpMethod.Post, "RecognizeTaxClearanceCertificate", content, query);
     }
 }

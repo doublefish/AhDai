@@ -1,6 +1,6 @@
 ﻿using AhDai.Integration.Abstractions;
 using AhDai.Integration.WeChat.Configs;
-using AhDai.Integration.WeChat.Models;
+using AhDai.Integration.WeChat.Models.Pay;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;

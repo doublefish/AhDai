@@ -1,6 +1,6 @@
 ﻿using AhDai.Integration.Abstractions;
 using AhDai.Integration.Baidu.Configs;
-using AhDai.Integration.Baidu.Models;
+using AhDai.Integration.Baidu.Models.Map;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Baidu;

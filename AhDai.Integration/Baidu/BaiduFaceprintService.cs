@@ -1,7 +1,7 @@
 ﻿using AhDai.Core.Interfaces.Services;
 using AhDai.Integration.Abstractions;
 using AhDai.Integration.Baidu.Configs;
-using AhDai.Integration.Baidu.Models;
+using AhDai.Integration.Baidu.Models.Faceprint;
 using AhDai.Integration.Baidu.Providers;
 using System;
 using System.Collections.Generic;
@@ -29,14 +29,14 @@ internal class BaiduFaceprintService(IBaseRedisService redisService, IRedisKeyBu
         {
             ["plan_id"] = config.FaceprintPlanId
         };
-        var res = await PostAsync<FaceprintH5Output<VerifyTokenOutput>>(url, input);
-        return res.Result;
+        var res = await PostAsync<H5Output<VerifyTokenOutput>>(url, input);
+        return EnsureSuccess(res);
     }
 
     public async Task SubmitIdCardAsync(string accessToken, IdCardSumbitInput input)
     {
         var url = $"rpc/2.0/brain/solution/faceprint/idcard/submit?access_token={accessToken}";
-        await PostAsync<FaceprintH5Output<int?>>(url, input);
+        await PostAsync<H5Output<int?>>(url, input);
     }
 
     public async Task<SimpleResultOutput> GetSimpleResultAsync(string token)
@@ -47,8 +47,8 @@ internal class BaiduFaceprintService(IBaseRedisService redisService, IRedisKeyBu
         {
             ["verify_token"] = token
         };
-        var res = await PostAsync<FaceprintH5Output<SimpleResultOutput>>(url, input);
-        return res.Result;
+        var res = await PostAsync<H5Output<SimpleResultOutput>>(url, input);
+        return EnsureSuccess(res);
     }
 
     public async Task<MediaResultOutput> GetMediaResultAsync(string token)
@@ -59,8 +59,8 @@ internal class BaiduFaceprintService(IBaseRedisService redisService, IRedisKeyBu
         {
             ["verify_token"] = token
         };
-        var res = await PostAsync<FaceprintH5Output<MediaResultOutput>>(url, input);
-        return res.Result;
+        var res = await PostAsync<H5Output<MediaResultOutput>>(url, input);
+        return EnsureSuccess(res);
     }
 
     public async Task<DetailResultOutput> GetDetailResultAsync(string token)
@@ -71,8 +71,8 @@ internal class BaiduFaceprintService(IBaseRedisService redisService, IRedisKeyBu
         {
             ["verify_token"] = token
         };
-        var res = await PostAsync<FaceprintH5Output<DetailResultOutput>>(url, input);
-        return res.Result;
+        var res = await PostAsync<H5Output<DetailResultOutput>>(url, input);
+        return EnsureSuccess(res);
     }
 
     public async Task<AllResultOutput> GetAllResultAsync(string token)
@@ -83,8 +83,8 @@ internal class BaiduFaceprintService(IBaseRedisService redisService, IRedisKeyBu
         {
             ["verify_token"] = token
         };
-        var res = await PostAsync<FaceprintH5Output<AllResultOutput>>(url, input);
-        return res.Result;
+        var res = await PostAsync<H5Output<AllResultOutput>>(url, input);
+        return EnsureSuccess(res);
     }
 
     public async Task<string> GenerateUrlAsync(string token, string? callbackUrl = null, string? successUrl = null, string? failedUrl = null)
@@ -104,5 +104,10 @@ internal class BaiduFaceprintService(IBaseRedisService redisService, IRedisKeyBu
             url += $"&failedUrl={Uri.EscapeDataString(failedUrl)}";
         }
         return url;
+    }
+
+    T EnsureSuccess<T>(H5Output<T> result)
+    {
+        return result.Result ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
     }
 }

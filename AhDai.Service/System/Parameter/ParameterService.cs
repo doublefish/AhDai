@@ -21,6 +21,11 @@ internal class ParameterService : IParameterService
                 result["ApiKey"] = "zHkcwRutyBWLMUzhhIRvsR2k";
                 result["AppSecret"] = "75e3Aad1ppVJt0Jh272IY6yaVg2ppxa9";
                 break;
+            case "ESign":
+                result["Host"] = "https://openapi.esign.cn";
+                result["AppId"] = "5111863009";
+                result["AppSecret"] = "711308bc54c0793374318c3a432ac881";
+                break;
             case "HikIoT":
                 result["Host"] = "https://open-api.hikiot.com";
                 result["AppKey"] = "2061987339252871241";
@@ -32,6 +37,16 @@ internal class ParameterService : IParameterService
             case "Tianyancha":
                 result["Host"] = "http://open.api.tianyancha.com";
                 result["Key"] = "0cd3f431-32c6-4eb5-912b-6955e409eb5f";
+                break;
+            case "WeChatPay":
+                result["Host"] = "http://open.api.tianyancha.com";
+                result["AppId"] = "wx455642de3664d7fd";
+                result["AppSecret"] = "94062326d8bcc8a7653427cbc8dbbd82";
+                result["MchId"] = "1541387281";
+                result["ApiKey"] = "D1FDF1CF8CD54B60A1DF55E1AC229920";
+                result["MchSerialNo"] = "502146C8DE8A8908B51A4BC896D4178CABAA609C";
+                result["SerialNo"] = "27572A38382F945A98C136C8F3219E602D2FB32A";
+                result["NotifyUrl"] = "";
                 break;
             default:
                 throw new ArgumentException($"Unsupported category: {category}");

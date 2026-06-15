@@ -3,7 +3,7 @@ using AhDai.Core.Utils;
 using AhDai.Integration.Abstractions;
 using AhDai.Integration.Infrastructure;
 using AhDai.Integration.Tencent.Configs;
-using AhDai.Integration.Tencent.Models;
+using AhDai.Integration.Tencent.Models.Map;
 using AhDai.Integration.Tencent.Providers;
 using System;
 using System.Net.Http;
@@ -30,8 +30,8 @@ internal class TencentMapService(IBaseRedisService redisService, IRedisKeyBuilde
         var config = await GetConfigAsync();
         input.Key = config.Key;
         var url = "ws/geocoder/v1";
-        var res = await GetAsync<MapOutput<GeocoderOutput>>(url, input);
-        return res.Result;
+        var res = await GetAsync<Output<GeocoderOutput>>(url, input);
+        return EnsureSuccess(res);
     }
 
     public async Task<IpLocationOutput> GetIpLocationAsync(string ip, bool enableCache = false)
@@ -63,8 +63,12 @@ internal class TencentMapService(IBaseRedisService redisService, IRedisKeyBuilde
         var config = await GetConfigAsync();
         input.Key = config.Key;
         var url = "ws/location/v1/ip";
-        var res = await GetAsync<MapOutput<IpLocationOutput>>(url, input);
-        return res.Result;
+        var res = await GetAsync<Output<IpLocationOutput>>(url, input);
+        return EnsureSuccess(res);
+    }
 
+    T EnsureSuccess<T>(Output<T> result)
+    {
+        return result.Result ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
     }
 }

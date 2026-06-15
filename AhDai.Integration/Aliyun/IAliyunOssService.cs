@@ -1,6 +1,6 @@
 ﻿using AhDai.Integration.Abstractions;
 using AhDai.Integration.Aliyun.Configs;
-using AhDai.Integration.Aliyun.Models;
+using AhDai.Integration.Aliyun.Models.Oss;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.IO;
@@ -18,14 +18,14 @@ public interface IAliyunOssService : IBaseService<AliyunOssConfig>
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<OssPolicyTokenOutput> GeneratePolicyTokenAsync(OssPolicyTokenInput input);
+    Task<PolicyTokenOutput> GeneratePolicyTokenAsync(PolicyTokenInput input);
 
     /// <summary>
     /// 上传回调
     /// </summary>
     /// <param name="httpContext"></param>
     /// <returns></returns>
-    Task<OssUploadCallbackOutput> UploadCallbackAsync(HttpContext httpContext);
+    Task<UploadCallbackOutput> UploadCallbackAsync(HttpContext httpContext);
 
     /// <summary>
     /// 上传文件

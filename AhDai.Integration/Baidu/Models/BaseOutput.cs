@@ -13,12 +13,12 @@ public abstract class BaseOutput : IBaseOutput
     /// 错误代码
     /// </summary>
     [JsonPropertyName("error")]
-    public string? Error { get; set; }
+    public virtual string? Error { get; set; }
     /// <summary>
     /// 错误信息
     /// </summary>
     [JsonPropertyName("error_description")]
-    public string? ErrorMessage { get; set; }
+    public virtual string? ErrorMessage { get; set; }
 
     /// <summary>
     /// 确保结果

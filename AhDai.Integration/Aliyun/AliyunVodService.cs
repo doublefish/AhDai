@@ -1,5 +1,5 @@
 ﻿using AhDai.Integration.Aliyun.Configs;
-using AhDai.Integration.Aliyun.Models;
+using AhDai.Integration.Aliyun.Models.Vod;
 using AhDai.Integration.Aliyun.Providers;
 using System.Net.Http;
 using System.Threading.Tasks;

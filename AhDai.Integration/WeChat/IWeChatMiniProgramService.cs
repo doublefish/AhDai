@@ -1,5 +1,5 @@
 ﻿using AhDai.Integration.WeChat.Configs;
-using AhDai.Integration.WeChat.Models;
+using AhDai.Integration.WeChat.Models.MiniProgram;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.WeChat;

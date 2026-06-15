@@ -1,6 +1,6 @@
 ﻿using AhDai.Integration.Abstractions;
 using AhDai.Integration.Aliyun.Configs;
-using AhDai.Integration.Aliyun.Models;
+using AhDai.Integration.Aliyun.Models.Vod;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Aliyun;

@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AhDai.Integration.Hikvision;
 
@@ -48,24 +47,24 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         if (enableCache)
         {
             var rdb = _redisService.GetDatabase();
-            var key = _redisKeyBuilder.Build($"HikIoT:{config.AppKey}:AccessToken");
+            var key = _redisKeyBuilder.Build($"HikIoT:{config.AppKey}:AppAccessToken");
             var value = await rdb.StringGetAsync(key);
             if (value.HasValue)
             {
-                var res = JsonUtil.Deserialize<AppAccessTokenOutput>(value.ToString());
-                return res ?? throw new Exception("反序列化缓存失败");
+                var data = JsonUtil.Deserialize<AppAccessTokenOutput>(value.ToString());
+                return data ?? throw new Exception("反序列化缓存失败");
             }
             else
             {
-                var res = await GetAppAccessTokenAsync(false);
-                value = JsonUtil.Serialize(res);
-                await rdb.StringSetAsync(key, value, TimeSpan.FromSeconds(res.ExpiresIn * 60 - 30));
-                return res;
+                var data = await GetAppAccessTokenAsync(false);
+                value = JsonUtil.Serialize(data);
+                await rdb.StringSetAsync(key, value, TimeSpan.FromSeconds(data.ExpiresIn * 60 - 30));
+                return data;
             }
         }
         var url = $"auth/exchangeAppToken";
-        var result = await PostAsync<Output<AppAccessTokenOutput>>(url, new { appKey = config.AppKey, appSecret = config.AppSecret });
-        return EnsureSuccess(result);
+        var res = await PostAsync<Output<AppAccessTokenOutput>>(url, new { appKey = config.AppKey, appSecret = config.AppSecret });
+        return EnsureSuccess(res);
     }
 
     public async Task<AuthCodeOutput> GetAuthCodeAsync(AuthCodeInput input)
@@ -77,26 +76,26 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
             input.Password = config.Password;
         }
         var url = $"artemis/api/v1/oauth/authorize";
-        var result = await PostAsync<Output<AuthCodeOutput>>(url, input);
-        return EnsureSuccess(result);
+        var res = await PostAsync<Output<AuthCodeOutput>>(url, input);
+        return EnsureSuccess(res);
     }
 
     public async Task<UserAccessTokenOutput> GetUserAccessTokenAsync(string appAccessToken, UserAccessTokenInput input)
     {
         var config = await GetConfigAsync();
-        var url = $"auth/third/code2Token";
         var client = CreateAppHttpClient(config.Host, appAccessToken);
-        var result = await GetAsync<Output<UserAccessTokenOutput>>(client, url, input);
-        return EnsureSuccess(result);
+        var url = $"auth/third/code2Token";
+        var res = await GetEncryptedAsync<UserAccessTokenOutput>(config, client, url, input);
+        return EnsureSuccess(res);
     }
 
     public async Task<UserAccessTokenOutput> RefreshUserAccessTokenAsync(string appAccessToken, RefreshUserAccessTokenInput input)
     {
         var config = await GetConfigAsync();
-        var url = $"auth/third/refreshUserAccessToken";
         var client = CreateAppHttpClient(config.Host, appAccessToken);
-        var result = await PostAsync<Output<UserAccessTokenOutput>>(client, url, input);
-        return EnsureSuccess(result);
+        var url = $"auth/third/refreshUserAccessToken";
+        var res = await PostEncryptedAsync<UserAccessTokenOutput>(config, client, url, input);
+        return EnsureSuccess(res);
     }
 
     #endregion
@@ -108,8 +107,8 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/v1/token/device/get";
-        var result = await GetEncryptedAsync<DeviceTokenOutput>(config, client, url, input);
-        return EnsureSuccess(result);
+        var res = await GetEncryptedAsync<DeviceTokenOutput>(config, client, url, input);
+        return EnsureSuccess(res);
     }
 
     public async Task<DeviceTokenOutput[]> GetDeviceTokensAsync(AccessContext context, DeviceTokenInput[] inputs)
@@ -117,8 +116,8 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/v1/token/device/batch";
-        var result = await PostEncryptedAsync<DeviceTokenOutput[]>(config, client, url, inputs);
-        return EnsureSuccess(result);
+        var res = await PostEncryptedAsync<DeviceTokenOutput[]>(config, client, url, inputs);
+        return EnsureSuccess(res);
     }
 
     public async Task<OpsTokenOutput> GetOpsTokenAsync(AccessContext context)
@@ -126,8 +125,8 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/v1/token/ops/get";
-        var result = await GetEncryptedAsync<OpsTokenOutput>(config, client, url);
-        return EnsureSuccess(result);
+        var res = await GetEncryptedAsync<OpsTokenOutput>(config, client, url);
+        return EnsureSuccess(res);
     }
 
     public async Task<StreamingMediaAttrsOutput> GetStreamingMediaAttrsAsync(AccessContext context, StreamingMediaAttrsInput input)
@@ -135,8 +134,8 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/direct/v1/streamingMedia/getAttrs";
-        var result = await PostEncryptedAsync<StreamingMediaAttrsOutput>(config, client, url, input);
-        return EnsureSuccess(result);
+        var res = await PostEncryptedAsync<StreamingMediaAttrsOutput>(config, client, url, input);
+        return EnsureSuccess(res);
     }
 
     #endregion
@@ -148,9 +147,9 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/camera/v1/page";
-        var result = await GetEncryptedAsync<CameraOutput[]>(config, client, url, input);
-        var data = EnsureSuccess(result);
-        return new PageOutput<CameraOutput>(data, result.Count);
+        var res = await GetEncryptedAsync<CameraOutput[]>(config, client, url, input);
+        var data = EnsureSuccess(res);
+        return new PageOutput<CameraOutput>(data, res.Count);
     }
 
     #endregion
@@ -162,9 +161,9 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/v1/page";
-        var result = await GetEncryptedAsync<DeviceOutput[]>(config, client, url, input);
-        var data = EnsureSuccess(result);
-        return new PageOutput<DeviceOutput>(data, result.Count);
+        var res = await GetEncryptedAsync<DeviceOutput[]>(config, client, url, input);
+        var data = EnsureSuccess(res);
+        return new PageOutput<DeviceOutput>(data, res.Count);
     }
 
     public async Task<DeviceCapacitiesOutput> GetDeviceCapacitiesAsync(AccessContext context, DeviceCapacitiesQueryInput input)
@@ -172,8 +171,8 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/v1/getDeviceCapacities";
-        var result = await GetEncryptedAsync<DeviceCapacitiesOutput>(config, client, url, input);
-        return EnsureSuccess(result);
+        var res = await GetEncryptedAsync<DeviceCapacitiesOutput>(config, client, url, input);
+        return EnsureSuccess(res);
     }
 
     public async Task<DeviceResourceOutput> GetDeviceResourceAsync(AccessContext context, DeviceResourceQueryInput input)
@@ -181,8 +180,8 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
         var config = await GetConfigAsync();
         var client = CreateUserHttpClient(config.Host, context);
         var url = $"device/desk/pc/resource/v1/getById";
-        var result = await GetEncryptedAsync<DeviceResourceOutput>(config, client, url, input);
-        return EnsureSuccess(result);
+        var res = await GetEncryptedAsync<DeviceResourceOutput>(config, client, url, input);
+        return EnsureSuccess(res);
     }
 
     #endregion
@@ -201,9 +200,9 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
                     url += $"?querySecret={HttpUtility.UrlEncode(encrypted)}";
                 }
             }
-            var result = await GetAsync<Output<string>>(client, url);
-            var data = DeserializeSecretData<TData>(config, result.Data);
-            return ConvertOutput(result, data);
+            var res = await GetAsync<Output<string>>(client, url);
+            var data = DeserializeSecretData<TData>(config, res.Data);
+            return ConvertOutput(res, data);
         }
         return await GetAsync<Output<TData>>(client, url, query);
     }
@@ -219,23 +218,23 @@ internal class HikIoTService(IBaseRedisService redisService, IRedisKeyBuilder re
                 var encrypted = HikIoTRsaHelper.EncryptWithPrivateKey(config.AppSecret, bodyJson);
                 dict["bodySecret"] = encrypted;
             }
-            var result = await PostAsync<Output<string>>(client, url, dict);
-            var data = DeserializeSecretData<TData>(config, result.Data);
-            return ConvertOutput(result, data);
+            var res = await PostAsync<Output<string>>(client, url, dict);
+            var data = DeserializeSecretData<TData>(config, res.Data);
+            return ConvertOutput(res, data);
         }
         return await PostAsync<Output<TData>>(client, url, body);
     }
 
-    TData DeserializeSecretData<TData>(HikIoTConfig config, string? encryptedData)
+    T DeserializeSecretData<T>(HikIoTConfig config, string? encryptedData)
     {
         if (string.IsNullOrEmpty(encryptedData)) throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
 
         var json = HikIoTRsaHelper.DecryptWithPrivateKey(config.AppSecret, encryptedData);
         if (_logger.IsEnabled(LogLevel.Information)) _logger.LogInformation("解密结果：{json}", json);
-        return JsonUtil.Deserialize<TData>(json) ?? throw new Exception($"请求{ServiceName}返回数据反序列化失败，请联系管理员");
+        return JsonUtil.Deserialize<T>(json) ?? throw new Exception($"请求{ServiceName}返回数据反序列化失败，请联系管理员");
     }
 
-    TData EnsureSuccess<TData>(Output<TData> result)
+    T EnsureSuccess<T>(Output<T> result)
     {
         return result.Data ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
     }

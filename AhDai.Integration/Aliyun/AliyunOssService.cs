@@ -1,7 +1,7 @@
 ﻿using AhDai.Core.Extensions;
 using AhDai.Core.Utils;
 using AhDai.Integration.Aliyun.Configs;
-using AhDai.Integration.Aliyun.Models;
+using AhDai.Integration.Aliyun.Models.Oss;
 using AhDai.Integration.Aliyun.Providers;
 using AhDai.Integration.Infrastructure;
 using Microsoft.AspNetCore.Http;
@@ -40,10 +40,10 @@ internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpCl
         return contentType ?? "application/octet-stream";
     }
 
-    public async Task<OssPolicyTokenOutput> GeneratePolicyTokenAsync(OssPolicyTokenInput input)
+    public async Task<PolicyTokenOutput> GeneratePolicyTokenAsync(PolicyTokenInput input)
     {
         var config = await GetConfigAsync();
-        var policyConfig = new OssPolicyConfig()
+        var policyConfig = new PolicyConfig()
         {
             Expiration = input.Expiration.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'"),
             Conditions = []
@@ -71,7 +71,7 @@ internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpCl
         var signature = Convert.ToBase64String(sha1.ComputeHash(Encoding.UTF8.GetBytes(policyBase64)));
 
         var host = AliyunOssHelper.GetHost(input.Region, input.Bucket);
-        return new OssPolicyTokenOutput()
+        return new PolicyTokenOutput()
         {
             AccessKeyId = config.AccessKeyId,
             Host = host,
@@ -81,7 +81,7 @@ internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpCl
         };
     }
 
-    public async Task<OssUploadCallbackOutput> UploadCallbackAsync(HttpContext httpContext)
+    public async Task<UploadCallbackOutput> UploadCallbackAsync(HttpContext httpContext)
     {
         var config = await GetConfigAsync();
         //_logger.LogInformation("请求头：{Headers}", JsonUtil.Serialize(httpContext.Request.Headers));
@@ -106,7 +106,7 @@ internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpCl
         if (!res) throw new ArgumentException("验签失败");
 
         var json = body.Replace("\"width\":,", "\"width\":null,").Replace("\"height\":,", "\"height\":null,");
-        return JsonUtil.Deserialize<OssUploadCallbackOutput>(json) ?? throw new ArgumentException($"反序列换请求内容发生异常=>{body}");
+        return JsonUtil.Deserialize<UploadCallbackOutput>(json) ?? throw new ArgumentException($"反序列换请求内容发生异常=>{body}");
     }
 
     public async Task PutObjectAsync(string region, string bucket, string dir, string name, string filePath, bool enableMD5 = false)
@@ -233,7 +233,7 @@ internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpCl
     }
 
 
-    static OssSignOutput Sign(AliyunOssConfig config, HttpMethod method, string url, DateTime time, string region, string bucket, SortedDictionary<string, string?>? query, SortedDictionary<string, string?>? headers)
+    static SignOutput Sign(AliyunOssConfig config, HttpMethod method, string url, DateTime time, string region, string bucket, SortedDictionary<string, string?>? query, SortedDictionary<string, string?>? headers)
     {
         var date = AliyunOssHelper.GetDate(time);
         var timestamp = AliyunOssHelper.GetTimestamp(time);
@@ -251,7 +251,7 @@ internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpCl
         Console.WriteLine("dataToSign: {0}", dataToSign);
         var signature = ComputeSignature(dataToSign, date, region, config.AccessKeySecret);
 
-        return new OssSignOutput()
+        return new SignOutput()
         {
             AdditionalHeaders = additionalHeaderNameString,
             Signature = signature,

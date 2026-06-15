@@ -1,5 +1,5 @@
 ﻿using AhDai.Integration.Baidu.Configs;
-using AhDai.Integration.Baidu.Models;
+using AhDai.Integration.Baidu.Models.Faceprint;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Baidu;

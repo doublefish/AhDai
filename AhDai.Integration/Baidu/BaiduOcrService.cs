@@ -1,11 +1,13 @@
 ﻿using AhDai.Core.Interfaces.Services;
 using AhDai.Integration.Abstractions;
 using AhDai.Integration.Baidu.Configs;
-using AhDai.Integration.Baidu.Models;
+using AhDai.Integration.Baidu.Models.Ocr;
 using AhDai.Integration.Baidu.Providers;
 using System;
 using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Baidu;
@@ -21,52 +23,52 @@ internal class BaiduOcrService(IBaseRedisService redisService, IRedisKeyBuilder 
     protected override string ServiceName => "百度文字识别";
 
 
-    public async Task<OcrAccurateBasicOutput> AccurateBasicAsync(OcrAccurateBasicInput input, string accessToken)
+    public async Task<AccurateBasicOutput> AccurateBasicAsync(string accessToken, AccurateBasicInput input)
     {
         var url = $"rest/2.0/ocr/v1/accurate_basic?access_token={accessToken}";
-        return await SendAsync<OcrAccurateBasicOutput, OcrAccurateBasicInput>(HttpMethod.Post, url, input, 8192);
+        return await SendAsync<AccurateBasicOutput, AccurateBasicInput>(HttpMethod.Post, url, input, 8192);
     }
 
-    public async Task<OcrIdCardOutput> IdCardAsync(OcrIdCardInput input, string accessToken)
+    public async Task<IdCardOutput> IdCardAsync(string accessToken, IdCardInput input)
     {
         var url = $"rest/2.0/ocr/v1/idcard?access_token={accessToken}";
-        return await SendAsync<OcrIdCardOutput, OcrIdCardInput>(HttpMethod.Post, url, input, 8192);
+        return await SendAsync<IdCardOutput, IdCardInput>(HttpMethod.Post, url, input, 8192);
     }
 
-    public async Task<OcrDrivingLicenseOutput> DrivingLicenseAsync(OcrDrivingLicenseInput input, string accessToken)
+    public async Task<DrivingLicenseOutput> DrivingLicenseAsync(string accessToken, DrivingLicenseInput input)
     {
         var url = $"rest/2.0/ocr/v1/driving_license?access_token={accessToken}";
-        return await SendAsync<OcrDrivingLicenseOutput, OcrDrivingLicenseInput>(HttpMethod.Post, url, input, 4096);
+        return await SendAsync<DrivingLicenseOutput, DrivingLicenseInput>(HttpMethod.Post, url, input, 4096);
     }
 
-    public async Task<OcrVehicleLicenseOutput> VehicleLicenseAsync(OcrVehicleLicenseInput input, string accessToken)
+    public async Task<VehicleLicenseOutput> VehicleLicenseAsync(string accessToken, VehicleLicenseInput input)
     {
         var url = $"rest/2.0/ocr/v1/vehicle_license?access_token={accessToken}";
-        return await SendAsync<OcrVehicleLicenseOutput, OcrVehicleLicenseInput>(HttpMethod.Post, url, input, 4096);
+        return await SendAsync<VehicleLicenseOutput, VehicleLicenseInput>(HttpMethod.Post, url, input, 4096);
     }
 
-    public async Task<OcrRoadTransportCertificateOutput> RoadTransportCertificateAsync(OcrRoadTransportCertificateInput input, string accessToken)
+    public async Task<RoadTransportCertificateOutput> RoadTransportCertificateAsync(string accessToken, RoadTransportCertificateInput input)
     {
         var url = $"rest/2.0/ocr/v1/road_transport_certificate?access_token={accessToken}";
-        return await SendAsync<OcrRoadTransportCertificateOutput, OcrRoadTransportCertificateInput>(HttpMethod.Post, url, input, 4096);
+        return await SendAsync<RoadTransportCertificateOutput, RoadTransportCertificateInput>(HttpMethod.Post, url, input, 4096);
     }
 
-    public async Task<OcrVatInvoiceOutput> VatInvoiceAsync(OcrVatInvoiceInput input, string accessToken)
+    public async Task<VatInvoiceOutput> VatInvoiceAsync(string accessToken, VatInvoiceInput input)
     {
         var url = $"rest/2.0/ocr/v1/vat_invoice?access_token={accessToken}";
-        return await SendAsync<OcrVatInvoiceOutput, OcrVatInvoiceInput>(HttpMethod.Post, url, input, 8192);
+        return await SendAsync<VatInvoiceOutput, VatInvoiceInput>(HttpMethod.Post, url, input, 8192);
     }
 
-    public async Task<OcrBankReceiptOutput> BankReceiptAsync(OcrBankReceiptInput input, string accessToken)
+    public async Task<BankReceiptOutput> BankReceiptAsync(string accessToken, BankReceiptInput input)
     {
         var url = $"rest/2.0/ocr/v1/bank_receipt_new?access_token={accessToken}";
-        return await SendAsync<OcrBankReceiptOutput, OcrBankReceiptInput>(HttpMethod.Post, url, input, 4096);
+        return await SendAsync<BankReceiptOutput, BankReceiptInput>(HttpMethod.Post, url, input, 4096);
     }
 
 
     async Task<TOutput> SendAsync<TOutput, TInput>(HttpMethod method, string url, TInput input, long maxSizeKb = 4096)
         where TOutput : IBaseOutput
-        where TInput : BaseOcrInput
+        where TInput : BaseInput
     {
         if (input.File != null)
         {
@@ -83,14 +85,8 @@ internal class BaiduOcrService(IBaseRedisService redisService, IRedisKeyBuilder 
             var base64String = await Utils.StringUtils.ConvertToBase64Async(input.File);
             input.SetFile(base64String, fileType);
         }
-
         var queryString = Utils.StringUtils.ObjectToQueryString(input, true, true);
-
-        var request = new HttpRequestMessage(method, url)
-        {
-            Content = new StringContent(queryString),
-        };
-        return await SendAsync<TOutput>(null, request);
+        return await SendContentAsync<TOutput>(method, url, new StringContent(queryString, new MediaTypeHeaderValue("application/x-www-form-urlencoded")));
     }
 
 }

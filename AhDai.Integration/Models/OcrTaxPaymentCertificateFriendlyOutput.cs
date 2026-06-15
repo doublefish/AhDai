@@ -8,5 +8,5 @@ public class OcrTaxPaymentCertificateFriendlyOutput : BaseOcrFriendlyOutput
     /// <summary>
     /// 数据
     /// </summary>
-    public Aliyun.Models.OrcTaxClearanceOutput? Data { get; set; }
+    public Aliyun.Models.Ocr.TaxClearanceOutput? Data { get; set; }
 }

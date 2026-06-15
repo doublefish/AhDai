@@ -2,7 +2,7 @@
 using AhDai.Core.Utils;
 using AhDai.Integration.Abstractions;
 using AhDai.Integration.Baidu.Configs;
-using AhDai.Integration.Baidu.Models;
+using AhDai.Integration.Baidu.Models.Map;
 using AhDai.Integration.Baidu.Providers;
 using AhDai.Integration.Infrastructure;
 using System;

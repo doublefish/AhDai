@@ -161,7 +161,7 @@ public abstract class BaseService : IBaseService
         {
             content = data != null ? JsonContent.Create(data) : null;
         }
-        return await SendAsync<TOutput>(client, method, url, content, cancellationToken);
+        return await SendContentAsync<TOutput>(client, method, url, content, cancellationToken);
     }
 
 

@@ -1,0 +1,20 @@
+﻿using System.Text.Json.Serialization;
+
+namespace AhDai.Integration.Baidu.Models.Ocr;
+
+/// <summary>
+/// WordProbabilityOutput
+/// </summary>
+public class WordProbabilityOutput
+{
+    /// <summary>
+    /// 字段识别结果中各字符的置信度平均值
+    /// </summary>
+    [JsonPropertyName("average")]
+    public float Average { get; set; }
+    /// <summary>
+    /// 字段识别结果中各字符的置信度最小值
+    /// </summary>
+    [JsonPropertyName("min")]
+    public float Min { get; set; }
+}

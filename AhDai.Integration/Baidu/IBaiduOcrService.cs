@@ -1,5 +1,6 @@
 ﻿using AhDai.Integration.Baidu.Configs;
 using AhDai.Integration.Baidu.Models;
+using AhDai.Integration.Baidu.Models.Ocr;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Baidu;
@@ -15,53 +16,56 @@ public interface IBaiduOcrService : IBaseBaiduService<BaiduOcrConfig>
     /// <summary>
     /// 通用文字识别（高精度版）
     /// </summary>
-    Task<OcrAccurateBasicOutput> AccurateBasicAsync(OcrAccurateBasicInput input, string accessToken);
+    /// <param name="accessToken"></param>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<AccurateBasicOutput> AccurateBasicAsync(string accessToken, AccurateBasicInput input);
 
     /// <summary>
     /// 身份证识别
     /// </summary>
-    /// <param name="input"></param>
     /// <param name="accessToken"></param>
+    /// <param name="input"></param>
     /// <returns></returns>
-    Task<OcrIdCardOutput> IdCardAsync(OcrIdCardInput input, string accessToken);
+    Task<IdCardOutput> IdCardAsync(string accessToken, IdCardInput input);
 
     /// <summary>
     /// 驾驶证识别
     /// </summary>
-    /// <param name="input"></param>
     /// <param name="accessToken"></param>
+    /// <param name="input"></param>
     /// <returns></returns>
-    Task<OcrDrivingLicenseOutput> DrivingLicenseAsync(OcrDrivingLicenseInput input, string accessToken);
+    Task<DrivingLicenseOutput> DrivingLicenseAsync(string accessToken, DrivingLicenseInput input);
 
     /// <summary>
     /// 行驶证识别
     /// </summary>
-    /// <param name="input"></param>
     /// <param name="accessToken"></param>
+    /// <param name="input"></param>
     /// <returns></returns>
-    Task<OcrVehicleLicenseOutput> VehicleLicenseAsync(OcrVehicleLicenseInput input, string accessToken);
+    Task<VehicleLicenseOutput> VehicleLicenseAsync(string accessToken, VehicleLicenseInput input);
 
     /// <summary>
     /// 道路运输证识别
     /// </summary>
-    /// <param name="input"></param>
     /// <param name="accessToken"></param>
+    /// <param name="input"></param>
     /// <returns></returns>
-    Task<OcrRoadTransportCertificateOutput> RoadTransportCertificateAsync(OcrRoadTransportCertificateInput input, string accessToken);
+    Task<RoadTransportCertificateOutput> RoadTransportCertificateAsync(string accessToken, RoadTransportCertificateInput input);
 
     /// <summary>
     /// 增值税发票识别
     /// </summary>
-    /// <param name="input"></param>
     /// <param name="accessToken"></param>
+    /// <param name="input"></param>
     /// <returns></returns>
-    Task<OcrVatInvoiceOutput> VatInvoiceAsync(OcrVatInvoiceInput input, string accessToken);
+    Task<VatInvoiceOutput> VatInvoiceAsync(string accessToken, VatInvoiceInput input);
 
     /// <summary>
     /// 银行回单识别
     /// </summary>
-    /// <param name="input"></param>
     /// <param name="accessToken"></param>
+    /// <param name="input"></param>
     /// <returns></returns>
-    Task<OcrBankReceiptOutput> BankReceiptAsync(OcrBankReceiptInput input, string accessToken);
+    Task<BankReceiptOutput> BankReceiptAsync(string accessToken, BankReceiptInput input);
 }

@@ -339,7 +339,7 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
     }
     #endregion
 
-    protected override async Task<TOutput> SendAsync<TOutput>(HttpMethod method, string url, object? data, CancellationToken cancellationToken = default)
+    protected override async Task<TOutput> SendAsync<TOutput>(HttpClient? client, HttpMethod method, string url, object? data, CancellationToken cancellationToken = default)
     {
         var config = await GetConfigAsync();
         var request = new HttpRequestMessage(method, url);
@@ -353,7 +353,7 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
             contentMD5 = Convert.ToBase64String(contentMD5Bytes);
 
             var content = new StringContent(body);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "UTF-8" };
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json", "UTF-8");
             content.Headers.ContentMD5 = contentMD5Bytes;
             request.Content = content;
             contentType = content.Headers.ContentType.ToString();
@@ -368,14 +368,15 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
             .Append('/').Append(url).ToString();
         var signature = ComputeSignature(dataToSign, config.AppSecret);
 
-        var client = CreateHttpClient(config.Host);
+        request.Headers.Add("Accept", accept);
+        request.Headers.Add("X-Tsign-Open-App-Id", config.AppId);
+        request.Headers.Add("X-Tsign-Open-Auth-Mode", "Signature");
+        request.Headers.Add("X-Tsign-Open-Ca-Signature", signature);
+        request.Headers.Add("X-Tsign-Open-Ca-Timestamp", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString());
+
+        client = CreateHttpClient(config.Host);
         // E签宝好像会读取所有头用来签名
         client.DefaultRequestHeaders.Clear();
-        client.DefaultRequestHeaders.Add("Accept", accept);
-        client.DefaultRequestHeaders.Add("X-Tsign-Open-App-Id", config.AppId);
-        client.DefaultRequestHeaders.Add("X-Tsign-Open-Auth-Mode", "Signature");
-        client.DefaultRequestHeaders.Add("X-Tsign-Open-Ca-Signature", signature);
-        client.DefaultRequestHeaders.Add("X-Tsign-Open-Ca-Timestamp", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString());
         return await SendAsync<TOutput>(client, request, cancellationToken);
     }
 
@@ -402,7 +403,7 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
         }
     }
 
-    TData EnsureSuccess<TData>(Output<TData> result)
+    T EnsureSuccess<T>(Output<T> result)
     {
         return result.Data ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
     }

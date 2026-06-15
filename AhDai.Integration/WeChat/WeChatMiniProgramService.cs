@@ -1,7 +1,7 @@
 ﻿using AhDai.Core.Interfaces.Services;
 using AhDai.Integration.Abstractions;
 using AhDai.Integration.WeChat.Configs;
-using AhDai.Integration.WeChat.Models;
+using AhDai.Integration.WeChat.Models.MiniProgram;
 using AhDai.Integration.WeChat.Providers;
 using System.Net.Http;
 using System.Threading.Tasks;

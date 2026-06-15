@@ -5,9 +5,9 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
-		<Version>1.0.6</Version>
-		<AssemblyVersion>1.0.6</AssemblyVersion>
-		<FileVersion>1.0.5</FileVersion>
+		<Version>1.1.2</Version>
+		<AssemblyVersion>1.1.2</AssemblyVersion>
+		<FileVersion>1.1.2</FileVersion>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
 		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
@@ -42,6 +42,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\AhDai.Core\AhDai.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="WeChat\Models\WebApp\" />
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using AhDai.Integration.Abstractions;
 using AhDai.Integration.Tencent.Configs;
-using AhDai.Integration.Tencent.Models;
+using AhDai.Integration.Tencent.Models.Map;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Tencent;

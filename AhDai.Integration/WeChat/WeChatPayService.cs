@@ -1,11 +1,9 @@
 ﻿using AhDai.Core.Converters;
 using AhDai.Core.Extensions;
 using AhDai.Core.Utils;
-using AhDai.Integration.Abstractions;
-using AhDai.Integration.AntChain.Models;
 using AhDai.Integration.Infrastructure;
 using AhDai.Integration.WeChat.Configs;
-using AhDai.Integration.WeChat.Models;
+using AhDai.Integration.WeChat.Models.Pay;
 using AhDai.Integration.WeChat.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -15,7 +13,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -110,11 +107,8 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
         var xml = new XElement("xml", input.Select(kvp => new XElement(kvp.Key, kvp.Value)));
 
         var url = "/pay/downloadbill";
-        var request = new HttpRequestMessage(HttpMethod.Post, url)
-        {
-            Content = new StringContent(xml.ToString(), Encoding.UTF8, new MediaTypeHeaderValue("application/xml"))
-        };
-        return await SendAsync<DownloadBillOutput>(null, request);
+        var content = new StringContent(xml.ToString(), new MediaTypeHeaderValue("application/xml"));
+        return await SendContentAsync<DownloadBillOutput>(null, HttpMethod.Post, url, content);
     }
 
     public async Task<OrderNotifyOutput> GetNotifyResultAsync(HttpContext httpContext)
@@ -147,7 +141,7 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
         return output;
     }
 
-    protected override async Task<TOutput> SendAsync<TOutput>(HttpMethod method, string url, object? data = null, CancellationToken cancellationToken = default)
+    protected override async Task<TOutput> SendAsync<TOutput>(HttpClient? client, HttpMethod method, string url, object? data = null, CancellationToken cancellationToken = default)
     {
         var config = await GetConfigAsync();
         var request = new HttpRequestMessage(method, url);
@@ -168,10 +162,11 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
 
         var authorization = $"WECHATPAY2-SHA256-RSA2048 mchid=\"{mchid}\",serial_no=\"{serialNo}\",nonce_str=\"{nonce}\",timestamp=\"{timestamp}\",signature=\"{signature}\"";
 
-        var client = CreateHttpClient(config.Host);
-        client.DefaultRequestHeaders.Add("Authorization", authorization);
-        client.DefaultRequestHeaders.Add("Accept", "application/json");
-        client.DefaultRequestHeaders.Add("User-Agent", "lsl-wechat-pay");
+        request.Headers.Add("Authorization", authorization);
+        request.Headers.Add("Accept", "application/json");
+        request.Headers.Add("User-Agent", "lsl-wechat-pay");
+
+        //client = CreateHttpClient(config.Host);
         return await SendAsync<TOutput>(client, request, cancellationToken);
     }
 

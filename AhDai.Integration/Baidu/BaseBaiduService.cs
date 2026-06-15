@@ -5,7 +5,6 @@ using AhDai.Integration.Baidu.Models;
 using AhDai.Integration.Infrastructure;
 using System;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Baidu;

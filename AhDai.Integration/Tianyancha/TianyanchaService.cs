@@ -1,8 +1,8 @@
-﻿using AhDai.Integration.Abstractions;
-using AhDai.Integration.Infrastructure;
+﻿using AhDai.Integration.Infrastructure;
 using AhDai.Integration.Tianyancha.Configs;
 using AhDai.Integration.Tianyancha.Models;
 using AhDai.Integration.Tianyancha.Providers;
+using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,14 +24,14 @@ internal class TianyanchaService(ITianyanchaConfigProvider configProvider, IHttp
     {
         var url = $"services/open/ic/baseinfo/2.0?id={id}&name={name}";
         var res = await GetAsync<Output<BaseInfoOutput>>(url);
-        return res.Result;
+        return EnsureSuccess(res);
     }
 
     public async Task<PageOutput<TaxpayerOutput>> GetTaxpayerAsync(string keyword, int pageNum = 1, int pageSize = 20)
     {
         var url = $"services/open/m/taxpayer/2.0?keyword={keyword}&pageNum={pageNum}&pageSize={pageSize}";
         var res = await GetAsync<Output<PageOutput<TaxpayerOutput>>>(url);
-        return res.Result;
+        return EnsureSuccess(res);
     }
 
     protected override async Task<TOutput> SendAsync<TOutput>(HttpClient? client, HttpRequestMessage request, CancellationToken cancellationToken = default)
@@ -42,5 +42,10 @@ internal class TianyanchaService(ITianyanchaConfigProvider configProvider, IHttp
             client = CreateHttpClient(config.Host, config.Key);
         }
         return await base.SendAsync<TOutput>(client, request, cancellationToken);
+    }
+
+    T EnsureSuccess<T>(Output<T> result)
+    {
+        return result.Result ?? throw new Exception($"请求{ServiceName}返回数据为空，请联系管理员");
     }
 }

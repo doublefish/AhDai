@@ -24,7 +24,7 @@ public class Output<T> : IBaseOutput
     /// 结果
     /// </summary>
     [JsonPropertyName("result")]
-    public T Result { get; set; } = default!;
+    public T? Result { get; set; } = default!;
 
     /// <summary>
     /// 确保结果
