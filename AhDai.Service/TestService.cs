@@ -1,6 +1,7 @@
 ﻿using AhDai.Core.Interfaces.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -17,23 +18,48 @@ internal class TestService(IServiceProvider serviceProvider) : ITestService
 
     public async Task StartAsync()
     {
-        //await TestFileAsync();
-
-        //await TestWeChatAsync();
-        //await TestBaiduAsync();
-        //await TestESignAsync();
-        await TestHikvisionAsync();
-        //await TestTianyanchaAsync();
+        var action = "";
+        switch (action)
+        {
+            case "Aliyun":
+                await TestAliyunAsync();
+                break;
+            case "Baidu":
+                await TestBaiduAsync();
+                break;
+            case "ESign":
+                await TestESignAsync();
+                break;
+            case "Hikvision":
+                await TestHikvisionAsync();
+                break;
+            case "WeChat":
+                await TestWeChatAsync();
+                break;
+            case "File":
+                await TestFileAsync();
+                break;
+            default: break;
+        }
     }
 
-    protected async Task TestWeChatAsync()
+    async Task TestAliyunAsync()
     {
-        var service = _serviceProvider.GetRequiredService<Integration.WeChat.IWeChatOfficialAccountService>();
+        var service = _serviceProvider.GetRequiredService<Integration.Aliyun.IAliyunSmsService>();
 
-        var accessToken = await service.GetAccessTokenAsync(true);
+        var res = await service.SendAsync(new Integration.Aliyun.Models.Sms.SendInput()
+        {
+            PhoneNumbers = "",
+            SignName = "",
+            TemplateCode = "",
+            TemplateParam = new Dictionary<string, string>()
+            {
+                ["code"] = "1234"
+            }
+        });
     }
 
-    protected async Task TestBaiduAsync()
+    async Task TestBaiduAsync()
     {
         var service = _serviceProvider.GetRequiredService<Integration.Baidu.IBaiduOcrService>();
 
@@ -49,14 +75,14 @@ internal class TestService(IServiceProvider serviceProvider) : ITestService
         });
     }
 
-    protected async Task TestESignAsync()
+    async Task TestESignAsync()
     {
         var service = _serviceProvider.GetRequiredService<Integration.ESign.IESignService>();
 
         var res = await service.GetSignFlowDetailAsync("2f090f8cb12d4fefb7c20511916bdc81");
     }
 
-    protected async Task TestHikvisionAsync()
+    async Task TestHikvisionAsync()
     {
         var service = _serviceProvider.GetRequiredService<Integration.Hikvision.IHikIoTService>();
 
@@ -119,7 +145,7 @@ internal class TestService(IServiceProvider serviceProvider) : ITestService
         });
     }
 
-    protected async Task TestTianyanchaAsync()
+    async Task TestTianyanchaAsync()
     {
         var service = _serviceProvider.GetRequiredService<Integration.Tianyancha.ITianyanchaService>();
 
@@ -128,7 +154,14 @@ internal class TestService(IServiceProvider serviceProvider) : ITestService
 
     }
 
-    protected async Task TestFileAsync()
+    async Task TestWeChatAsync()
+    {
+        var service = _serviceProvider.GetRequiredService<Integration.WeChat.IWeChatOfficialAccountService>();
+
+        var accessToken = await service.GetAccessTokenAsync(true);
+    }
+
+    async Task TestFileAsync()
     {
         var service = _serviceProvider.GetRequiredService<IBaseFileService>();
         var dir = DateTime.Now.ToString("yyyy-MM-dd"); ;

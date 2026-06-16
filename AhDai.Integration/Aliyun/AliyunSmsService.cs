@@ -50,7 +50,7 @@ internal class AliyunSmsService(IAliyunSmsConfigProvider configProvider, IHttpCl
     async Task<TOutput> SendAsync<TOutput>(AliyunSmsConfig config, HttpMethod method, SortedDictionary<string, string?> body)
         where TOutput : BaseOutput
     {
-        var bodyString = Utils.StringUtils.ToQueryString(body, true, true);
+        var bodyString = Utils.StringUtils.ToQueryString(body, false, true);
         var dataToSign = $"{method.Method.ToUpper()}&%2F&" + Uri.EscapeDataString(bodyString);
         var signature = ComputeSignature(dataToSign, config.AccessKeySecret);
         body.Add("Signature", signature);
