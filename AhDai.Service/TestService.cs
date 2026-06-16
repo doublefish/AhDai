@@ -43,7 +43,7 @@ internal class TestService(IServiceProvider serviceProvider) : ITestService
         var bytes = await File.ReadAllBytesAsync(filePath);
         var base64 = Convert.ToBase64String(bytes);
 
-        var res = await service.BankReceiptAsync(accessToken.AccessToken, new Integration.Baidu.Models.OcrBankReceiptInput()
+        var res = await service.BankReceiptAsync(accessToken.AccessToken, new Integration.Baidu.Models.Ocr.BankReceiptInput()
         {
             Image = base64
         });
