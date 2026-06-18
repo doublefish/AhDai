@@ -12,5 +12,5 @@ public class ErrorCodeAttribute(string message) : Attribute
     /// <summary>
     /// 消息
     /// </summary>
-    public string Message { get; private set; } = message;
+    public string Message { get; } = message;
 }

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace AhDai.Core.Handlers;
 
 /// <summary>
-/// GenericClaimHandler
+/// PermissionAuthorizationHandler
 /// </summary>
-public class GenericClaimHandler : AuthorizationHandler<ClaimRequirement>
+public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement>
 {
     /// <summary>
     /// HandleRequirementAsync
@@ -18,7 +18,7 @@ public class GenericClaimHandler : AuthorizationHandler<ClaimRequirement>
     /// <param name="context"></param>
     /// <param name="requirement"></param>
     /// <returns></returns>
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ClaimRequirement requirement)
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
     {
         if (context.User?.Identity?.IsAuthenticated != true)
         {
@@ -30,17 +30,17 @@ public class GenericClaimHandler : AuthorizationHandler<ClaimRequirement>
             return Task.CompletedTask;
         }
 
-        var bypassAttribute = httpContext.GetEndpoint()?.Metadata.GetMetadata<AllowClaimBypassAttribute>();
+        var bypassAttribute = httpContext.GetEndpoint()?.Metadata.GetMetadata<AllowPermissionBypassAttribute>();
         if (bypassAttribute != null)
         {
-            if (bypassAttribute.ClaimTypes == null || bypassAttribute.ClaimTypes.Length == 0 || bypassAttribute.ClaimTypes.Contains(requirement.ClaimType))
+            if (bypassAttribute.PermissionTypes == null || bypassAttribute.PermissionTypes.Length == 0 || bypassAttribute.PermissionTypes.Contains(requirement.PermissionType))
             {
                 context.Succeed(requirement);
                 return Task.CompletedTask;
             }
         }
 
-        if (context.User.HasClaim(c => c.Type == requirement.ClaimType && c.Value == requirement.ClaimValue))
+        if (context.User.HasClaim(c => c.Type == requirement.PermissionType && c.Value == requirement.PermissionValue))
         {
             context.Succeed(requirement);
         }

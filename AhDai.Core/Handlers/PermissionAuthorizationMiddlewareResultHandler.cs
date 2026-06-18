@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace AhDai.Core.Handlers;
 
 /// <summary>
-/// GenericAuthorizationMiddlewareResultHandler
+/// PermissionAuthorizationMiddlewareResultHandler
 /// </summary>
-public class GenericAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewareResultHandler
+public class PermissionAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewareResultHandler
 {
     readonly AuthorizationMiddlewareResultHandler _defaultHandler = new();
 
