@@ -42,5 +42,5 @@ public class Worker(ILogger<Worker> logger, IServiceProvider serviceProvider) : 
         }
     }
 
-   
+
 }

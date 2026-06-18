@@ -16,5 +16,5 @@ internal abstract class BaseHikvisionService<TConfig, TConfigProvider>(IBaseRedi
 {
     protected readonly IBaseRedisService _redisService = redisService;
     protected readonly IRedisKeyBuilder _redisKeyBuilder = redisKeyBuilder;
-    
+
 }

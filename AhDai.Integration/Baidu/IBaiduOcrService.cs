@@ -1,5 +1,4 @@
 ﻿using AhDai.Integration.Baidu.Configs;
-using AhDai.Integration.Baidu.Models;
 using AhDai.Integration.Baidu.Models.Ocr;
 using System.Threading.Tasks;
 
