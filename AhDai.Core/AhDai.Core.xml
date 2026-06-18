@@ -240,61 +240,6 @@
             BuilderExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.ConfigureOptions``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-            Configure
-            </summary>
-            <typeparam name="TOptions"></typeparam>
-            <param name="builder"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.AddServiceProviderAccessor(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
-            <summary>
-            添加IServiceProviderAccessor - 依赖注入单例
-            </summary>
-            <param name="builder"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.AddFileService(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-            AddFileService
-            </summary>
-            <param name="builder"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.AddJwtService(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-            AddJwtService
-            </summary>
-            <param name="builder"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.AddMailService(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-            AddMailService
-            </summary>
-            <param name="builder"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.AddRedisService(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-            添加Redis服务 - 依赖注入单例
-            </summary>
-            <param name="builder"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.BuilderExtensions.AddGenericAuthorization(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
-            <summary>
-            添加通用授权服务
-            </summary>
-            <param name="builder"></param>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Core.Extensions.ConfigurationExtensions">
             <summary>
             ConfigurationExtensions
@@ -794,32 +739,50 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddFileService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddOptions
+            </summary>
+            <typeparam name="TOptions"></typeparam>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddFileService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
             <summary>
             AddFileService
             </summary>
             <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddMailService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            AddMailService
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddJwtService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddJwtService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
             <summary>
             AddJwtService
             </summary>
             <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddRedisService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddMailService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddMailService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddRedisService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
             <summary>
             添加Redis服务 - 依赖注入单例
             </summary>
             <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Extensions.StringExtensions">
