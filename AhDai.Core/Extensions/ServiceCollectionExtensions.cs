@@ -66,7 +66,7 @@ public static class ServiceCollectionExtensions
     /// <param name="services"></param>
     /// <param name="config"></param>
     /// <returns></returns>
-    public static AuthenticationBuilder AddJwtAuthentication(this AuthenticationBuilder services, Configs.JwtConfig config)
+    public static AuthenticationBuilder AddJwtAuthentication(this AuthenticationBuilder services, Options.JwtOptions config)
     {
         return services.AddJwtBearer(options =>
         {

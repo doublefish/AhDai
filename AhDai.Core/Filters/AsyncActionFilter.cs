@@ -31,7 +31,7 @@ public class AsyncActionFilter(ILogger<AsyncActionFilter> logger) : IAsyncAction
         var executedContext = await next();
         if (executedContext.Exception != null)
         {
-            _logger.LogError(executedContext.Exception, "{Message}", executedContext.Exception.Message);
+            _logger.LogError(executedContext.Exception, "发生异常");
             executedContext.ExceptionHandled = true;
             ApiResult<string> result;
             if (executedContext.Exception is ApiException apiException)

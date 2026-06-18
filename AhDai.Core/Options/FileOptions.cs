@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace AhDai.Core.Configs;
+namespace AhDai.Core.Options;
 
 /// <summary>
-/// 文件配置
+/// FileOptions
 /// </summary>
-public class FileConfig
+public class FileOptions
 {
     /// <summary>
     /// 上传根目录
@@ -26,7 +26,7 @@ public class FileConfig
     /// <summary>
     /// 扩展名
     /// </summary>
-    public IDictionary<string, string[]> Extensions { get; set; } = new Dictionary<string, string[]>();
+    public Dictionary<string, string[]> Extensions { get; set; } = [];
     /// <summary>
     /// 是否需要计算文件哈希（SHA256）
     /// </summary>

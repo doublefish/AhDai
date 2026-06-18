@@ -20,5 +20,5 @@ public interface IBaseService<TConfig> : IBaseService where TConfig : class
     /// 获取配置
     /// </summary>
     /// <returns></returns>
-    Task<TConfig> GetConfigAsync();
+    ValueTask<TConfig> GetConfigAsync();
 }

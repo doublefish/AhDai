@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace AhDai.Core.Extensions;
 
@@ -10,74 +8,64 @@ namespace AhDai.Core.Extensions;
 /// </summary>
 public static class BuilderExtensions
 {
-    #region UseRedis
     /// <summary>
-    /// UseRedis
+    /// ConfigureFile
     /// </summary>
-    /// <param name="app"></param>
-    /// <param name="options"></param>
+    /// <param name="builder"></param>
+    /// <param name="key"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseRedis(this IApplicationBuilder app, Options.RedisOptions options)
+    public static IHostApplicationBuilder ConfigureFile(this IHostApplicationBuilder builder, string key = "File")
     {
-        if (options != null)
-        {
-            //Utils.RedisHelper.Init(options.Config);
-        }
-        return app;
+        return builder.Configure<Options.FileOptions>(key);
     }
 
     /// <summary>
-    /// UseRedis
+    /// ConfigureJwt
     /// </summary>
-    /// <param name="app"></param>
-    /// <param name="setupAction"></param>
+    /// <param name="builder"></param>
+    /// <param name="key"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseRedis(this IApplicationBuilder app, Action<Options.RedisOptions>? setupAction = null)
+    public static IHostApplicationBuilder ConfigureJwt(this IHostApplicationBuilder builder, string key = "Jwt")
     {
-        Options.RedisOptions options;
-        using (var scope = app.ApplicationServices.CreateScope())
-        {
-            // 这里才会执行添加配置时传入的action
-            options = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<Options.RedisOptions>>().Value;
-            setupAction?.Invoke(options);
-        }
-        return app.UseRedis(options);
-    }
-    #endregion
-
-    #region UseMail
-    /// <summary>
-    /// UseMail
-    /// </summary>
-    /// <param name="app"></param>
-    /// <param name="options"></param>
-    /// <returns></returns>
-    public static IApplicationBuilder UseMail(this IApplicationBuilder app, Options.MailOptions options)
-    {
-        if (options != null)
-        {
-            //Services.MailService.Init(options.Config);
-        }
-        return app;
+        return builder.Configure<Options.JwtOptions>(key);
     }
 
     /// <summary>
-    /// UseMail
+    /// ConfigureMail
     /// </summary>
-    /// <param name="app"></param>
-    /// <param name="setupAction"></param>
+    /// <param name="builder"></param>
+    /// <param name="key"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseMail(this IApplicationBuilder app, Action<Options.MailOptions>? setupAction = null)
+    public static IHostApplicationBuilder ConfigureMail(this IHostApplicationBuilder builder, string key = "Mail")
     {
-        Options.MailOptions options;
-        using (var scope = app.ApplicationServices.CreateScope())
-        {
-            // 这里才会执行添加配置时传入的action
-            options = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<Options.MailOptions>>().Value;
-            setupAction?.Invoke(options);
-        }
-        return app.UseMail(options);
+        return builder.Configure<Options.MailOptions>(key);
     }
-    #endregion
 
+    /// <summary>
+    /// ConfigureRedis
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public static IHostApplicationBuilder ConfigureRedis(this IHostApplicationBuilder builder, string key = "Redis")
+    {
+        return builder.Configure<Options.RedisOptions>(key);
+    }
+
+    /// <summary>
+    /// Configure
+    /// </summary>
+    /// <typeparam name="TOptions"></typeparam>
+    /// <param name="builder"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public static IHostApplicationBuilder Configure<TOptions>(this IHostApplicationBuilder builder, string key)
+        where TOptions : class
+    {
+        builder.Services.Configure<TOptions>(builder.Configuration.GetSection(key));
+        //builder.Services.AddOptions<TOptions>().Bind(builder.Configuration.GetSection(key)).PostConfigure(o =>
+        //{
+        //}).ValidateDataAnnotations().ValidateOnStart();
+        return builder;
+    }
 }

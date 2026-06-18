@@ -1,5 +1,4 @@
-﻿using AhDai.Core.Configs;
-using StackExchange.Redis;
+﻿using StackExchange.Redis;
 
 namespace AhDai.Core.Interfaces.Services;
 
@@ -23,35 +22,35 @@ public interface IBaseRedisService
     /// </summary>
     /// <param name="configuration">配置</param>
     /// <returns></returns>
-    IConnectionMultiplexer CreateConnectionMultiplexer(string configuration);
+    IConnectionMultiplexer CreateConnection(string configuration);
 
     /// <summary>
     /// 创建连接配置
     /// </summary>
-    /// <param name="config">自定义配置</param>
+    /// <param name="options">自定义配置</param>
     /// <returns></returns>
-    string CreateConfiguration(RedisConfig? config = null);
+    string CreateConfiguration(Options.RedisOptions? options = null);
 
     /// <summary>
     /// 创建连接器
     /// </summary>
-    /// <param name="config">自定义配置</param>
+    /// <param name="options">自定义配置</param>
     /// <returns></returns>
-    IConnectionMultiplexer CreateConnectionMultiplexer(RedisConfig? config = null);
+    IConnectionMultiplexer CreateConnection(Options.RedisOptions? options = null);
 
     /// <summary>
     /// 获取连接实例
     /// </summary>
-    /// <param name="config">自定义配置</param>
+    /// <param name="options">自定义配置</param>
     /// <returns></returns>
-    IConnectionMultiplexer GetConnectionMultiplexer(RedisConfig? config = null);
+    IConnectionMultiplexer GetConnection(Options.RedisOptions? options = null);
 
     /// <summary>
     /// GetDatabase
     /// </summary>
     /// <param name="db"></param>
     /// <param name="asyncState"></param>
-    /// <param name="config">自定义配置</param>
+    /// <param name="options">自定义配置</param>
     /// <returns></returns>
-    IDatabase GetDatabase(int db = -1, object? asyncState = null, RedisConfig? config = null);
+    IDatabase GetDatabase(int db = -1, object? asyncState = null, Options.RedisOptions? options = null);
 }

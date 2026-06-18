@@ -1,4 +1,6 @@
-﻿using System.Net.Mail;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AhDai.Core.Interfaces.Services;
 
@@ -7,12 +9,17 @@ namespace AhDai.Core.Interfaces.Services;
 /// </summary>
 public interface IBaseMailService
 {
+
     /// <summary>
-    /// 创建客户端
+    /// 发送
     /// </summary>
-    /// <param name="config"></param>
-    /// <returns></returns>
-    SmtpClient CreateSmtpClient(Configs.MailConfig? config = null);
+    /// <param name="recipient">接收人</param>
+    /// <param name="subject">主题</param>
+    /// <param name="body">正文</param>
+    /// <param name="options">自定义配置</param>
+    /// <param name="cancellationToken"></param>
+    Task SendAsync(string recipient, string subject, string body, Options.MailOptions? options = null, CancellationToken cancellationToken = default)
+        => SendAsync([recipient], subject, body, options, cancellationToken);
 
     /// <summary>
     /// 发送
@@ -20,6 +27,7 @@ public interface IBaseMailService
     /// <param name="recipients">接收人</param>
     /// <param name="subject">主题</param>
     /// <param name="body">正文</param>
-    /// <param name="config">自定义配置</param>
-    void Send(string recipients, string subject, string body, Configs.MailConfig? config = null);
+    /// <param name="options">自定义配置</param>
+    /// <param name="cancellationToken"></param>
+    Task SendAsync(IEnumerable<string> recipients, string subject, string body, Options.MailOptions? options = null, CancellationToken cancellationToken = default);
 }

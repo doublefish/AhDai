@@ -1,9 +1,9 @@
-﻿namespace AhDai.Core.Configs;
+﻿namespace AhDai.Core.Options;
 
 /// <summary>
-/// JwtConfig
+/// JwtOptions
 /// </summary>
-public class JwtConfig
+public class JwtOptions
 {
     /// <summary>
     /// 签发人

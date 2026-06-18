@@ -1,9 +1,9 @@
-﻿namespace AhDai.Core.Configs;
+﻿namespace AhDai.Core.Options;
 
 /// <summary>
-/// ElasticConfig
+/// ElasticOptions
 /// </summary>
-public class ElasticConfig
+public class ElasticOptions
 {
     /// <summary>
     /// 主机

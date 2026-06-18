@@ -21,11 +21,11 @@ internal abstract class BaseIntegrationConfigProvider<TConfig>(IConfiguration co
 
     protected override long GetTenantId() => 10000;
 
-    public override Task<TConfig> GetAsync() => base.GetAsync();
+    public override ValueTask<TConfig> GetAsync() => base.GetAsync();
 
-    protected override Task<TConfig> GetAsync(string name) => base.GetAsync(name);
+    protected override ValueTask<TConfig> GetAsync(string name) => base.GetAsync(name);
 
-    protected override async Task<TConfig> GetAsync(string name, long tenantId)
+    protected override async ValueTask<TConfig> GetAsync(string name, long tenantId)
     {
         if (tenantId == 0)
         {

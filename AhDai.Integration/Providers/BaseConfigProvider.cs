@@ -34,7 +34,7 @@ public abstract class BaseConfigProvider<TConfig>(IConfiguration configuration)
     /// GetAsync
     /// </summary>
     /// <returns></returns>
-    public virtual async Task<TConfig> GetAsync()
+    public virtual async ValueTask<TConfig> GetAsync()
     {
         var tenantId = GetTenantId();
         if (_cachedConfigs.TryGetValue(tenantId, out var cachedConfig))
@@ -54,10 +54,10 @@ public abstract class BaseConfigProvider<TConfig>(IConfiguration configuration)
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    protected virtual Task<TConfig> GetAsync(string name)
+    protected virtual ValueTask<TConfig> GetAsync(string name)
     {
         var config = _configuration.GetSection(name).Get<TConfig>() ?? throw new Exception($"未读取到配置：{name}");
-        return Task.FromResult(config);
+        return ValueTask.FromResult(config);
     }
 
     /// <summary>
@@ -66,5 +66,5 @@ public abstract class BaseConfigProvider<TConfig>(IConfiguration configuration)
     /// <param name="name"></param>
     /// <param name="tenantId"></param>
     /// <returns></returns>
-    protected virtual Task<TConfig> GetAsync(string name, long tenantId) => GetAsync(name);
+    protected virtual ValueTask<TConfig> GetAsync(string name, long tenantId) => GetAsync(name);
 }

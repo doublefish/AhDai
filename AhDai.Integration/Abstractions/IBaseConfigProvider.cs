@@ -12,5 +12,5 @@ public interface IBaseConfigProvider<TConfig>
     /// 获取配置
     /// </summary>
     /// <returns></returns>
-    Task<TConfig> GetAsync();
+    ValueTask<TConfig> GetAsync();
 }

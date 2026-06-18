@@ -7,7 +7,6 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AhDai.Integration.Infrastructure;
 
@@ -235,7 +234,7 @@ public abstract class BaseService<TConfig, TConfigProvider>(TConfigProvider conf
     /// GetConfigAsync
     /// </summary>
     /// <returns></returns>
-    public Task<TConfig> GetConfigAsync() => _configProvider.GetAsync();
+    public ValueTask<TConfig> GetConfigAsync() => _configProvider.GetAsync();
 
     /// <summary>
     /// 发送请求

@@ -1,10 +1,9 @@
-﻿using AhDai.Core.Configs;
-using AhDai.Core.Consts;
-using AhDai.Core.Extensions;
+﻿using AhDai.Core.Consts;
 using AhDai.Core.Interfaces.Services;
 using AhDai.Core.Models;
+using AhDai.Core.Options;
 using AhDai.Core.Utils;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
 using System;
@@ -20,34 +19,40 @@ namespace AhDai.Core.Services;
 /// <summary>
 /// Jwt服务
 /// </summary>
-/// <param name="configuration"></param>
-/// <param name="redisService"></param>
-public class BaseJwtService(IConfiguration configuration, IBaseRedisService? redisService) : IBaseJwtService
+public class BaseJwtService : IBaseJwtService, IDisposable
 {
-    readonly JwtConfig _config = configuration.GetJwtConfig();
-    readonly IBaseRedisService? _redisService = redisService;
-    SigningCredentials? _signingCredentials;
+    readonly JwtOptions _options;
+    readonly IBaseRedisService? _redisService;
+    readonly Lazy<RSA> _rsa;
+    readonly Lazy<SigningCredentials> _signingCredentials;
 
     /// <summary>
-    /// 配置
+    /// 构造函数
     /// </summary>
-    public JwtConfig Config => _config;
+    /// <param name="options"></param>
+    /// <param name="redisService"></param>
+    public BaseJwtService(IOptions<JwtOptions> options, IBaseRedisService? redisService)
+    {
+        _options = options.Value;
+        _redisService = redisService;
+
+        _rsa = new Lazy<RSA>(() =>
+        {
+            var rsa = RSA.Create();
+            rsa.ImportRSAPrivateKey(Convert.FromBase64String(_options.PrivateKey), out _);
+            return rsa;
+        });
+        _signingCredentials = new Lazy<SigningCredentials>(() =>
+        {
+            return new SigningCredentials(new RsaSecurityKey(_rsa.Value), SecurityAlgorithms.RsaSha256);
+        });
+    }
+
+
     /// <summary>
     /// RSA
     /// </summary>
-    public SigningCredentials SigningCredentials
-    {
-        get
-        {
-            if (_signingCredentials == null)
-            {
-                var rsa = RSA.Create();
-                rsa.ImportRSAPrivateKey(Convert.FromBase64String(Config.PrivateKey), out _);
-                _signingCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256);
-            }
-            return _signingCredentials;
-        }
-    }
+    public SigningCredentials SigningCredentials => _signingCredentials.Value;
     /// <summary>
     /// RedisService
     /// </summary>
@@ -84,7 +89,7 @@ public class BaseJwtService(IConfiguration configuration, IBaseRedisService? red
         {
             foreach (var item in data.Extensions)
             {
-                claims.Add(new Claim(item.Key, string.Join(",", item.Value)));
+                claims.Add(new Claim(item.Key, string.Join("|", item.Value)));
             }
         }
         var result = await GenerateTokenAsync([.. claims], expiration);
@@ -101,33 +106,33 @@ public class BaseJwtService(IConfiguration configuration, IBaseRedisService? red
     /// <returns></returns>
     public virtual async Task<TokenResult> GenerateTokenAsync(Claim[] claims, int? expiration = null)
     {
-        var expiryMinutes = expiration ?? Config.Expiration;
+        var expiryMinutes = expiration ?? _options.Expiration;
         var expires = DateTime.UtcNow.AddMinutes(expiryMinutes);
 
         var jwt = new JwtSecurityToken(
-            issuer: Config.Issuer,
-            audience: Config.Audience,
+            issuer: _options.Issuer,
+            audience: _options.Audience,
             claims: claims,
             notBefore: DateTime.UtcNow,
             expires: expires,
             signingCredentials: SigningCredentials);
         var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-        if (Config.EnableRedis)
+        if (_options.EnableRedis)
         {
-            var redis = RedisService;
             var dict = claims.GroupBy(claim => claim.Type).ToDictionary(g => g.Key, g => string.Join(",", g.Select(c => c.Value)));
-            dict.Add("Issuer", Config.Issuer);
-            dict.Add("IssueTime", DateTime.Now.ToString(DateTimeFormats.Standard));
-            dict.Add("ExpirationTime", expires.ToLocalTime().ToString(DateTimeFormats.Standard));
+            dict.Add("Issuer", _options.Issuer);
+            dict.Add("IssueTime", DateTime.UtcNow.ToString(DateTimeFormats.Standard));
+            dict.Add("ExpirationTime", expires.ToString(DateTimeFormats.Standard));
             dict.Add("Token", token);
             if (!dict.TryGetValue("Username", out var username) || string.IsNullOrEmpty(username))
             {
                 throw new ArgumentException("Username不可为空");
             }
+            var key = BuildRedisKey(username, token);
             var value = JsonUtil.Serialize(dict);
-            var rdb = redis.GetDatabase();
-            await rdb.StringSetAsync($"{Config.RedisKey}:{username}:{token}", value, TimeSpan.FromMinutes(expiryMinutes));
+            var rdb = RedisService.GetDatabase();
+            await rdb.StringSetAsync(key, value, TimeSpan.FromMinutes(expiryMinutes));
         }
         return new TokenResult()
         {
@@ -167,6 +172,7 @@ public class BaseJwtService(IConfiguration configuration, IBaseRedisService? red
     public virtual async Task<TokenResult> RefreshTokenAsync(string token)
     {
         var securityToken = ReadToken(token);
+        if (securityToken.ValidTo < DateTime.UtcNow) throw new SecurityTokenExpiredException();
         return await GenerateTokenAsync([.. securityToken.Claims]);
     }
 
@@ -177,14 +183,13 @@ public class BaseJwtService(IConfiguration configuration, IBaseRedisService? red
     /// <returns></returns>
     public virtual async Task<bool> ValidateTokenAsync(string token)
     {
-        if (!Config.EnableRedis) return false;
+        if (!_options.EnableRedis) return false;
         var securityToken = ReadToken(token);
-        var username = securityToken.Claims.Where(x => x.Type == "Username").FirstOrDefault()?.Value;
+        var username = securityToken.Claims.FirstOrDefault(x => x.Type == "Username")?.Value;
         if (string.IsNullOrEmpty(username)) return false;
-        var data = securityToken.RawData;
-        var redis = RedisService;
-        var rdb = redis.GetDatabase();
-        return await rdb.KeyExistsAsync($"{Config.RedisKey}:{username}:{data}");
+        var key = BuildRedisKey(username, securityToken.RawData);
+        var rdb = RedisService.GetDatabase();
+        return await rdb.KeyExistsAsync(key);
     }
 
     /// <summary>
@@ -194,13 +199,12 @@ public class BaseJwtService(IConfiguration configuration, IBaseRedisService? red
     /// <returns></returns>
     public virtual async Task<bool> RemoveTokenAsync(string token)
     {
-        if (!Config.EnableRedis || string.IsNullOrEmpty(token)) return false;
+        if (!_options.EnableRedis || string.IsNullOrEmpty(token)) return false;
         var securityToken = ReadToken(token);
-        var username = securityToken.Claims.Where(x => x.Type == "Username").FirstOrDefault()?.Value;
-        var data = securityToken.RawData;
-        var redis = RedisService;
-        var rdb = redis.GetDatabase();
-        return await rdb.KeyDeleteAsync($"{Config.RedisKey}:{username}:{data}");
+        var username = securityToken.Claims.FirstOrDefault(x => x.Type == "Username")?.Value ?? "";
+        var key = BuildRedisKey(username, securityToken.RawData);
+        var rdb = RedisService.GetDatabase();
+        return await rdb.KeyDeleteAsync(key);
     }
 
     /// <summary>
@@ -234,5 +238,26 @@ public class BaseJwtService(IConfiguration configuration, IBaseRedisService? red
             }
         }
         return data;
+    }
+
+    /// <summary>
+    /// BuildRedisKey
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    protected string BuildRedisKey(string username, string token)
+    {
+        var tokenHash = Convert.ToHexString(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(token)));
+        return $"{_options.RedisKey}:{username}:{tokenHash}";
+    }
+
+    /// <summary>
+    /// Dispose
+    /// </summary>
+    public void Dispose()
+    {
+        _rsa.Value.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

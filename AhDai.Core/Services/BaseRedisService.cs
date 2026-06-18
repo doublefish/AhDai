@@ -1,9 +1,8 @@
-﻿using AhDai.Core.Configs;
-using AhDai.Core.Extensions;
-using AhDai.Core.Interfaces.Services;
-using Microsoft.Extensions.Configuration;
+﻿using AhDai.Core.Interfaces.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using StackExchange.Redis;
+using System;
 using System.Collections.Concurrent;
 
 namespace AhDai.Core.Services;
@@ -11,27 +10,43 @@ namespace AhDai.Core.Services;
 /// <summary>
 /// Redis服务
 /// </summary>
-/// <param name="logger"></param>
-/// <param name="configuration"></param>
-public class BaseRedisService(ILogger<BaseRedisService> logger, IConfiguration configuration) : IBaseRedisService
+public class BaseRedisService : IBaseRedisService, IDisposable
 {
-    readonly ILogger<BaseRedisService> _logger = logger;
-    readonly RedisConfig _config = configuration.GetRedisConfig();
-    readonly ConcurrentDictionary<string, IConnectionMultiplexer> _connectionMultiplexer = [];
-#if NET9_0_OR_GREATER
-    readonly System.Threading.Lock _locker = new();
-#else
-    readonly object _locker = new();
-#endif
+    readonly ILogger<BaseRedisService> _logger;
+    readonly IOptionsMonitor<Options.RedisOptions> _options;
+    readonly ConcurrentDictionary<string, Lazy<IConnectionMultiplexer>> _connections;
 
     /// <summary>
-    /// 配置
+    /// 构造函数
     /// </summary>
-    public RedisConfig Config => _config;
-    /// <summary>
-    /// ConnectionMultiplexer
-    /// </summary>
-    public ConcurrentDictionary<string, IConnectionMultiplexer> ConnectionMultiplexers => _connectionMultiplexer;
+    /// <param name="logger"></param>
+    /// <param name="options"></param>
+    public BaseRedisService(ILogger<BaseRedisService> logger, IOptionsMonitor<Options.RedisOptions> options)
+    {
+        _logger = logger;
+        _options = options;
+        _connections = [];
+
+        _options.OnChange(o =>
+        {
+            _logger.LogInformation("Redis config changed, disposing old connections");
+
+            var old = _connections.ToArray();
+            _connections.Clear();
+
+            foreach (var kv in old)
+            {
+                try
+                {
+                    if (kv.Value.IsValueCreated) kv.Value.Value.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Dispose failed");
+                }
+            }
+        });
+    }
 
     /// <summary>
     /// 创建连接配置
@@ -49,12 +64,12 @@ public class BaseRedisService(ILogger<BaseRedisService> logger, IConfiguration c
     /// <summary>
     /// 创建连接配置
     /// </summary>
-    /// <param name="config">自定义配置</param>
+    /// <param name="options">自定义配置</param>
     /// <returns></returns>
-    public virtual string CreateConfiguration(RedisConfig? config = null)
+    public virtual string CreateConfiguration(Options.RedisOptions? options = null)
     {
-        var c = config ?? Config;
-        return CreateConfiguration(c.Host, c.Port, c.Password, c.AbortConnect);
+        var o = options ?? _options.CurrentValue;
+        return CreateConfiguration(o.Host, o.Port, o.Password, o.AbortConnect);
     }
 
     /// <summary>
@@ -62,57 +77,60 @@ public class BaseRedisService(ILogger<BaseRedisService> logger, IConfiguration c
     /// </summary>
     /// <param name="configuration">配置</param>
     /// <returns></returns>
-    public virtual IConnectionMultiplexer CreateConnectionMultiplexer(string configuration)
+    public virtual IConnectionMultiplexer CreateConnection(string configuration)
     {
         var options = ConfigurationOptions.Parse(configuration);
-        var multiplexer = ConnectionMultiplexer.Connect(options);
+        options.AbortOnConnectFail = false;
+        var connection = ConnectionMultiplexer.Connect(options);
         // 注册事件
-        multiplexer.ConfigurationChangedBroadcast += ConfigurationChangedBroadcast;
-        multiplexer.ConfigurationChanged += ConfigurationChanged;
-        multiplexer.HashSlotMoved += HashSlotMoved;
-        multiplexer.ErrorMessage += ErrorMessage;
-        multiplexer.InternalError += InternalError;
-        multiplexer.ConnectionFailed += ConnectionFailed;
-        multiplexer.ConnectionRestored += ConnectionRestored;
-        return multiplexer;
+        connection.ConfigurationChangedBroadcast += ConfigurationChangedBroadcast;
+        connection.ConfigurationChanged += ConfigurationChanged;
+        connection.HashSlotMoved += HashSlotMoved;
+        connection.ErrorMessage += ErrorMessage;
+        connection.InternalError += InternalError;
+        connection.ConnectionFailed += ConnectionFailed;
+        connection.ConnectionRestored += ConnectionRestored;
+        return connection;
     }
-
-
 
     /// <summary>
     /// 创建连接器
     /// </summary>
-    /// <param name="config">自定义配置</param>
+    /// <param name="options">自定义配置</param>
     /// <returns></returns>
-    public virtual IConnectionMultiplexer CreateConnectionMultiplexer(RedisConfig? config = null)
+    public virtual IConnectionMultiplexer CreateConnection(Options.RedisOptions? options = null)
     {
-        var c = config ?? Config;
-        var configString = CreateConfiguration(c);
-        return CreateConnectionMultiplexer(configString);
+        var o = options ?? _options.CurrentValue;
+        var configString = CreateConfiguration(o);
+        return CreateConnection(configString);
     }
 
     /// <summary>
     /// 获取连接实例
     /// </summary>
-    /// <param name="config">自定义配置</param>
+    /// <param name="options">自定义配置</param>
     /// <returns></returns>
-    public virtual IConnectionMultiplexer GetConnectionMultiplexer(RedisConfig? config = null)
+    public virtual IConnectionMultiplexer GetConnection(Options.RedisOptions? options = null)
     {
-        var c = config ?? Config;
-        var configString = CreateConfiguration(c);
-
-        if (!ConnectionMultiplexers.TryGetValue(configString, out var multiplexer) || !multiplexer.IsConnected)
+        var o = options ?? _options.CurrentValue;
+        var configString = CreateConfiguration(o);
+        var key = $"{o.Host}:{o.Port}:{o.Password}:{o.AbortConnect}";
+        var lazy = _connections.GetOrAdd(key, _ => new Lazy<IConnectionMultiplexer>(() =>
         {
-            lock (_locker)
-            {
-                if (!ConnectionMultiplexers.TryGetValue(configString, out multiplexer) || !multiplexer.IsConnected)
-                {
-                    multiplexer = CreateConnectionMultiplexer(configString);
-                    ConnectionMultiplexers[configString] = multiplexer;
-                }
-            }
-        }
-        return multiplexer;
+            return CreateConnection(configString);
+        }, true));
+        var connection = lazy.Value;
+        //if (!connection.IsConnected)
+        //{
+        //    _logger.LogWarning("Redis disconnected, recreating...");
+        //    _connections.TryRemove(key, out _);
+        //    lazy = _connections.GetOrAdd(key, _ => new Lazy<IConnectionMultiplexer>(() =>
+        //    {
+        //        return CreateConnection(configString);
+        //    }, true));
+        //    connection = lazy.Value;
+        //}
+        return connection;
     }
 
     /// <summary>
@@ -120,13 +138,29 @@ public class BaseRedisService(ILogger<BaseRedisService> logger, IConfiguration c
     /// </summary>
     /// <param name="db"></param>
     /// <param name="asyncState"></param>
-    /// <param name="config">自定义配置</param>
+    /// <param name="options">自定义配置</param>
     /// <returns></returns>
-    public virtual IDatabase GetDatabase(int db = -1, object? asyncState = null, RedisConfig? config = null)
+    public virtual IDatabase GetDatabase(int db = -1, object? asyncState = null, Options.RedisOptions? options = null)
     {
-        var c = config ?? Config;
-        var multiplexer = GetConnectionMultiplexer(c);
-        return multiplexer.GetDatabase(db > -1 ? db : c.Database, asyncState);
+        var o = options ?? _options.CurrentValue;
+        var connection = GetConnection(o);
+        return connection.GetDatabase(db > -1 ? db : o.Database, asyncState);
+    }
+
+    /// <summary>
+    /// Dispose
+    /// </summary>
+    public virtual void Dispose()
+    {
+        foreach (var item in _connections.Values)
+        {
+            if (item.IsValueCreated)
+            {
+                item.Value.Dispose();
+            }
+        }
+        _connections.Clear();
+        GC.SuppressFinalize(this);
     }
 
     #region 接收通知事件
@@ -167,7 +201,7 @@ public class BaseRedisService(ILogger<BaseRedisService> logger, IConfiguration c
     /// <param name="e"></param>
     protected virtual void ErrorMessage(object? sender, RedisErrorEventArgs e)
     {
-        if (_logger.IsEnabled(LogLevel.Error)) _logger.LogError("ErrorMessage=>{Message}", e.Message);
+        if (_logger.IsEnabled(LogLevel.Error)) _logger.LogError("ErrorMessage");
     }
 
     /// <summary>
@@ -177,7 +211,7 @@ public class BaseRedisService(ILogger<BaseRedisService> logger, IConfiguration c
     /// <param name="e"></param>
     protected virtual void InternalError(object? sender, InternalErrorEventArgs e)
     {
-        if (_logger.IsEnabled(LogLevel.Error)) _logger.LogError(e.Exception, "InternalError=>{Message}", e.Exception.Message);
+        if (_logger.IsEnabled(LogLevel.Error)) _logger.LogError(e.Exception, "InternalError");
     }
 
     /// <summary>

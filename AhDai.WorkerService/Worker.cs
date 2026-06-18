@@ -36,7 +36,7 @@ public class Worker(ILogger<Worker> logger, IServiceProvider serviceProvider) : 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "发生异常=>{time}", ex.Message);
+                _logger.LogError(ex, "发生异常");
             }
             await Task.Delay(1000, stoppingToken);
         }
