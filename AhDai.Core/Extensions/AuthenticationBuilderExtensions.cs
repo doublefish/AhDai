@@ -20,22 +20,22 @@ public static class AuthenticationBuilderExtensions
     /// 添加Jwt认证服务
     /// </summary>
     /// <param name="builder"></param>
-    /// <param name="config"></param>
+    /// <param name="jwtOptions"></param>
     /// <returns></returns>
-    public static AuthenticationBuilder AddJwtAuthentication(this AuthenticationBuilder builder, Options.JwtOptions config)
+    public static AuthenticationBuilder AddJwtAuthentication(this AuthenticationBuilder builder, Options.JwtOptions jwtOptions)
     {
         return builder.AddJwtBearer(options =>
         {
             var rsa = RSA.Create();
-            rsa.ImportRSAPublicKey(Convert.FromBase64String(config.PublicKey), out _);
+            rsa.ImportRSAPublicKey(Convert.FromBase64String(jwtOptions.PublicKey), out _);
             options.TokenValidationParameters = new TokenValidationParameters()
             {
                 // 是否验证签发人
                 ValidateIssuer = true,
-                ValidIssuer = config.Issuer,
+                ValidIssuer = jwtOptions.Issuer,
                 // 是否验证受众
                 ValidateAudience = true,
-                ValidAudience = config.Audience,
+                ValidAudience = jwtOptions.Audience,
                 // 是否验证密钥
                 ValidateIssuerSigningKey = true,
                 // 密钥
@@ -46,13 +46,13 @@ public static class AuthenticationBuilderExtensions
                 // 过期时间，是否要求Token的Claims中必须包含Expires
                 RequireExpirationTime = false,
                 // 允许服务器时间偏移量
-                ClockSkew = TimeSpan.FromMinutes(config.ClockSkew)
+                ClockSkew = TimeSpan.FromMinutes(jwtOptions.ClockSkew)
             };
             options.Events = new JwtBearerEvents
             {
                 OnTokenValidated = async context =>
                 {
-                    if (config.EnableRedis)
+                    if (jwtOptions.EnableRedis)
                     {
                         var token = context.Request.Headers.Authorization.ToString();
                         var jwtService = ServiceUtil.Services.GetRequiredService<Interfaces.Services.IBaseJwtService>();
