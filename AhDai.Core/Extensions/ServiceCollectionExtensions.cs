@@ -1,4 +1,5 @@
 ﻿using AhDai.Core.Handlers;
+using AhDai.Core.Requirements;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,12 +32,13 @@ public static class ServiceCollectionExtensions
     /// 添加权限授权服务
     /// </summary>
     /// <param name="services"></param>
+    /// <param name="requirements"></param>
     /// <returns></returns>
-    public static IServiceCollection AddPermissionAuthorization(this IServiceCollection services)
+    public static IServiceCollection AddPermissionAuthorization(this IServiceCollection services, params IAuthorizationRequirement[] requirements)
     {
         services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
         services.AddSingleton<IAuthorizationMiddlewareResultHandler, PermissionAuthorizationMiddlewareResultHandler>();
-        //services.AddAuthorizationBuilder().SetDefaultPolicy(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().AddRequirements(new ClaimRequirement("", "")).Build());
+        services.AddAuthorizationBuilder().SetDefaultPolicy(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().AddRequirements(requirements).Build());
         return services;
     }
 
