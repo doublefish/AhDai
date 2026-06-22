@@ -6,11 +6,11 @@
 public class BaiduFaceprintConfig : BaseBaiduConfig
 {
     /// <summary>
-    /// 人脸识别方案Id
+    /// 方案Id
     /// </summary>
-    public string FaceprintPlanId { get; set; } = default!;
+    public string PlanId { get; set; } = default!;
     /// <summary>
-    /// 人脸识别Url
+    /// Url
     /// </summary>
-    public string FaceprintUrl { get; set; } = default!;
+    public string Url { get; set; } = default!;
 }

@@ -1913,14 +1913,14 @@
             BaiduFaceprintConfig
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Baidu.Configs.BaiduFaceprintConfig.FaceprintPlanId">
+        <member name="P:AhDai.Integration.Baidu.Configs.BaiduFaceprintConfig.PlanId">
             <summary>
-            人脸识别方案Id
+            方案Id
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Baidu.Configs.BaiduFaceprintConfig.FaceprintUrl">
+        <member name="P:AhDai.Integration.Baidu.Configs.BaiduFaceprintConfig.Url">
             <summary>
-            人脸识别Url
+            Url
             </summary>
         </member>
         <member name="T:AhDai.Integration.Baidu.Configs.BaiduMapConfig">

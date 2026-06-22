@@ -27,7 +27,7 @@ internal class BaiduFaceprintService(IBaseRedisService redisService, IRedisKeyBu
         var url = $"rpc/2.0/brain/solution/faceprint/verifyToken/generate?access_token={accessToken}";
         var input = new Dictionary<string, object>()
         {
-            ["plan_id"] = config.FaceprintPlanId
+            ["plan_id"] = config.PlanId
         };
         var res = await PostAsync<H5Output<VerifyTokenOutput>>(url, input);
         return EnsureSuccess(res);
@@ -90,7 +90,7 @@ internal class BaiduFaceprintService(IBaseRedisService redisService, IRedisKeyBu
     public async Task<string> GenerateUrlAsync(string token, string? callbackUrl = null, string? successUrl = null, string? failedUrl = null)
     {
         var config = await GetConfigAsync();
-        var url = $"{config.FaceprintUrl}?token={token}";
+        var url = $"{config.Url}?token={token}";
         if (!string.IsNullOrEmpty(callbackUrl))
         {
             url += $"&callbackUrl={Uri.EscapeDataString(callbackUrl)}";
