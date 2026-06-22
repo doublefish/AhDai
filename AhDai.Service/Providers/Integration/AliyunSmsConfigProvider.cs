@@ -1,13 +1,13 @@
 ﻿using AhDai.Integration.Aliyun.Configs;
 using AhDai.Integration.Aliyun.Providers;
 using AhDai.Service.System.Parameter;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace AhDai.Service.Providers.Integration;
 
 [Attributes.Service]
-internal class AliyunSmsConfigProvider(IConfiguration configuration, IParameterService parameterService)
-    : BaseIntegrationConfigProvider<AliyunSmsConfig>(configuration, parameterService)
+internal class AliyunSmsConfigProvider(IOptionsMonitor<AliyunSmsConfig> options, IParameterService parameterService)
+    : BaseIntegrationConfigProvider<AliyunSmsConfig>(options, parameterService)
     , IAliyunSmsConfigProvider
 {
 }

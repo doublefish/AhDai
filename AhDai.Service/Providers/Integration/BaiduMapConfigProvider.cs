@@ -1,12 +1,12 @@
 ﻿using AhDai.Integration.Baidu.Configs;
 using AhDai.Integration.Baidu.Providers;
 using AhDai.Service.System.Parameter;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace AhDai.Service.Providers.Integration;
 
 [Attributes.Service]
-internal class BaiduMapConfigProvider(IConfiguration configuration, IParameterService parameterService)
-    : BaseIntegrationConfigProvider<BaiduMapConfig>(configuration, parameterService), IBaiduMapConfigProvider
+internal class BaiduMapConfigProvider(IOptionsMonitor<BaiduMapConfig> options, IParameterService parameterService)
+    : BaseIntegrationConfigProvider<BaiduMapConfig>(options, parameterService), IBaiduMapConfigProvider
 {
 }

@@ -1,13 +1,13 @@
 ﻿using AhDai.Integration.WeChat.Configs;
 using AhDai.Integration.WeChat.Providers;
 using AhDai.Service.System.Parameter;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace AhDai.Service.Providers.Integration;
 
 [Attributes.Service]
-internal class WeChatPayConfigProvider(IConfiguration configuration, IParameterService parameterService)
-    : BaseIntegrationConfigProvider<WeChatPayConfig>(configuration, parameterService)
+internal class WeChatPayConfigProvider(IOptionsMonitor<WeChatPayConfig> options, IParameterService parameterService)
+    : BaseIntegrationConfigProvider<WeChatPayConfig>(options, parameterService)
     , IWeChatPayConfigProvider
 {
 }

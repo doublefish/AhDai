@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -63,25 +62,24 @@ public static class Startup
     /// <summary>
     /// ConfigureServices
     /// </summary>
-    /// <param name="services"></param>
-    /// <param name="configuration"></param>
+    /// <param name="builder"></param>
     /// <param name="isWorker"></param>
     /// <returns></returns>
-    public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration, bool isWorker = false)
+    public static IHostApplicationBuilder ConfigureServices(IHostApplicationBuilder builder, IConfiguration configuration, bool isWorker = false)
     {
         try
         {
             var statuUps = Startups;
             foreach (var s in statuUps)
             {
-                s.ConfigureServices(services, configuration, isWorker);
+                s.ConfigureServices(builder, isWorker);
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine("ConfigureServices异常=>" + ex.Message);
         }
-        return services;
+        return builder;
     }
 
 

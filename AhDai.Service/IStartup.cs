@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace AhDai.Service;
@@ -13,11 +11,10 @@ public interface IStartup
     /// <summary>
     /// ConfigureServices
     /// </summary>
-    /// <param name="services"></param>
-    /// <param name="configuration"></param>
+    /// <param name="builder"></param>
     /// <param name="isWorker"></param>
     /// <returns></returns>
-    void ConfigureServices(IServiceCollection services, IConfiguration configuration, bool isWorker = false);
+    void ConfigureServices(IHostApplicationBuilder builder, bool isWorker = false);
 
     /// <summary>
     /// Configure

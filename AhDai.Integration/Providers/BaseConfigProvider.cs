@@ -1,7 +1,6 @@
 ﻿using AhDai.Integration.Abstractions;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Providers;
@@ -10,19 +9,15 @@ namespace AhDai.Integration.Providers;
 /// BaseConfigProvider
 /// </summary>
 /// <typeparam name="TConfig"></typeparam>
-/// <param name="configuration"></param>
-public abstract class BaseConfigProvider<TConfig>(IConfiguration configuration)
+/// <param name="options"></param>
+public abstract class BaseConfigProvider<TConfig>(IOptionsMonitor<TConfig> options)
     : IBaseConfigProvider<TConfig>
     where TConfig : class, new()
 {
     /// <summary>
     /// 系统配置
     /// </summary>
-    protected readonly IConfiguration _configuration = configuration;
-    /// <summary>
-    /// 配置缓存
-    /// </summary>
-    protected readonly Dictionary<long, TConfig> _cachedConfigs = [];
+    protected readonly IOptionsMonitor<TConfig> _options = options;
 
     /// <summary>
     /// 获取租户Id
@@ -37,34 +32,17 @@ public abstract class BaseConfigProvider<TConfig>(IConfiguration configuration)
     public virtual async ValueTask<TConfig> GetAsync()
     {
         var tenantId = GetTenantId();
-        if (_cachedConfigs.TryGetValue(tenantId, out var cachedConfig))
-        {
-            return cachedConfig;
-        }
-
-        var type = typeof(TConfig);
-        var name = type.Name[..^6];
-        var config = await GetAsync(name, tenantId);
-        _cachedConfigs[tenantId] = config;
-        return config;
+        return await GetAsync(tenantId);
     }
 
     /// <summary>
     /// GetAsync
     /// </summary>
-    /// <param name="name"></param>
-    /// <returns></returns>
-    protected virtual ValueTask<TConfig> GetAsync(string name)
-    {
-        var config = _configuration.GetSection(name).Get<TConfig>() ?? throw new Exception($"未读取到配置：{name}");
-        return ValueTask.FromResult(config);
-    }
-
-    /// <summary>
-    /// GetAsync
-    /// </summary>
-    /// <param name="name"></param>
     /// <param name="tenantId"></param>
     /// <returns></returns>
-    protected virtual ValueTask<TConfig> GetAsync(string name, long tenantId) => GetAsync(name);
+    protected virtual ValueTask<TConfig> GetAsync(long tenantId)
+    {
+        var config = _options.CurrentValue ?? throw new Exception("未读取到配置");
+        return ValueTask.FromResult(config);
+    }
 }

@@ -3,7 +3,7 @@ using AhDai.Core.Metadata;
 using AhDai.Integration.Abstractions;
 using AhDai.Integration.Providers;
 using AhDai.Service.System.Parameter;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace AhDai.Service.Providers.Integration;
 
-internal abstract class BaseIntegrationConfigProvider<TConfig>(IConfiguration configuration, IParameterService parameterService)
-    : BaseConfigProvider<TConfig>(configuration), IBaseConfigProvider<TConfig>
+internal abstract class BaseIntegrationConfigProvider<TConfig>(IOptionsMonitor<TConfig> options, IParameterService parameterService)
+    : BaseConfigProvider<TConfig>(options), IBaseConfigProvider<TConfig>
     where TConfig : class, new()
 {
     protected readonly IParameterService _parameterService = parameterService;
@@ -21,16 +21,15 @@ internal abstract class BaseIntegrationConfigProvider<TConfig>(IConfiguration co
 
     protected override long GetTenantId() => 10000;
 
-    public override ValueTask<TConfig> GetAsync() => base.GetAsync();
-
-    protected override ValueTask<TConfig> GetAsync(string name) => base.GetAsync(name);
-
-    protected override async ValueTask<TConfig> GetAsync(string name, long tenantId)
+    protected override async ValueTask<TConfig> GetAsync(long tenantId)
     {
         if (tenantId == 0)
         {
-            return await GetAsync(name);
+            return await base.GetAsync(tenantId);
         }
+
+        var type = typeof(TConfig);
+        var name = type.Name[..^6];
 
         var paraValues = await _parameterService.GetValueByCategoryAsync(name, tenantId);
         var hasParaValue = false;

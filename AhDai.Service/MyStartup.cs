@@ -20,17 +20,16 @@ internal class MyStartup : IStartup
     /// <summary>
     /// ConfigureServices
     /// </summary>
-    /// <param name="services"></param>
-    /// <param name="configuration"></param>
+    /// <param name="builder"></param>
     /// <param name="isWorker"></param>
-    public void ConfigureServices(IServiceCollection services, IConfiguration configuration, bool isWorker = false)
+    public void ConfigureServices(IHostApplicationBuilder builder, bool isWorker = false)
     {
         //var masterConnectionString = configuration.GetConnectionString("Master");
         //ArgumentException.ThrowIfNullOrEmpty(masterConnectionString);
-        //AddDbContextFactory<MasterDbContext>(services, masterConnectionString, new Interceptors.MySaveChangesInterceptor(true), new Interceptors.MyDbCommandInterceptor());
+        //AddDbContextFactory<MasterDbContext>(builder.Services, masterConnectionString, new Interceptors.MySaveChangesInterceptor(true), new Interceptors.MyDbCommandInterceptor());
 
-        services.AddTransient<Core.Handlers.HttpLoggingHandler>();
-        services.AddHttpClient("", client =>
+        builder.Services.AddTransient<Core.Handlers.HttpLoggingHandler>();
+        builder.Services.AddHttpClient("", client =>
         {
             client.DefaultRequestHeaders.Connection.Add("keep-alive");
             //client.DefaultRequestHeaders.ExpectContinue = true;
@@ -72,46 +71,46 @@ internal class MyStartup : IStartup
         //    return handler;
         //});
 
-        services.AddHttpContextAccessor();
-        services.AddServiceProviderAccessor();
-        services.AddRedisService();
-        services.AddJwtService();
-        services.AddFileService();
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddServiceProviderAccessor();
+        builder.Services.AddRedisService(builder.Configuration);
+        builder.Services.AddJwtService(builder.Configuration);
+        builder.Services.AddFileService(builder.Configuration);
 
         //services.ConfigureRedisKeyBuilder("DigitalChain");
-        services.ConfigureRedisKeyBuilder("Logistics");
-        services.AddRedisKeyBuilder();
+        builder.Services.ConfigureRedisKeyBuilder("Logistics");
+        builder.Services.AddRedisKeyBuilder();
 
-        services.AddAliyunOssService();
-        services.AddAliyunOcrService();
-        services.AddAliyunSmsService();
-        services.AddAliyunVodService();
+        builder.Services.AddAliyunOssService(builder.Configuration);
+        builder.Services.AddAliyunOcrService(builder.Configuration);
+        builder.Services.AddAliyunSmsService(builder.Configuration);
+        builder.Services.AddAliyunVodService(builder.Configuration);
 
-        services.AddAmapService();
+        builder.Services.AddAmapService(builder.Configuration);
 
-        services.AddAntChainNotaryService();
+        builder.Services.AddAntChainNotaryService(builder.Configuration);
 
-        services.AddBaiduFaceprintService();
-        services.AddBaiduMapService();
-        services.AddBaiduOcrService();
+        builder.Services.AddBaiduFaceprintService(builder.Configuration);
+        builder.Services.AddBaiduMapService(builder.Configuration);
+        builder.Services.AddBaiduOcrService(builder.Configuration);
 
-        services.AddESignService();
+        builder.Services.AddESignService(builder.Configuration);
 
-        services.AddHikIoTService();
+        builder.Services.AddHikIoTService(builder.Configuration);
 
-        services.AddTencentMapService();
+        builder.Services.AddTencentMapService(builder.Configuration);
 
-        services.AddTianyanchaService();
+        builder.Services.AddTianyanchaService(builder.Configuration);
 
-        services.AddWeChatMiniProgramService();
-        services.AddWeChatOfficialAccountService();
-        services.AddWeChatPayService();
-        services.AddWeChatWebAppService();
+        builder.Services.AddWeChatMiniProgramService(builder.Configuration);
+        builder.Services.AddWeChatOfficialAccountService(builder.Configuration);
+        builder.Services.AddWeChatPayService(builder.Configuration);
+        builder.Services.AddWeChatWebAppService(builder.Configuration);
 
         // 反射注入服务
         var assembly = Assembly.GetExecutingAssembly();
         var types = assembly.GetTypes();
-        AddServices(services, types);
+        AddServices(builder.Services, types);
 
         // 反射注入AutoMapper
         //services.AddAutoMapper(config => { }, types);
