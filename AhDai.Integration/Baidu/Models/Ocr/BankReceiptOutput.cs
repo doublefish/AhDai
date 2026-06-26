@@ -24,7 +24,7 @@ public class BankReceiptOutput : BaseDocumentOutput<Dictionary<string, BankRecei
             Summary = WordsResult.GetValueOrDefault("摘要")?.FirstOrDefault()?.Word,
             Purpose = WordsResult.GetValueOrDefault("用途")?.FirstOrDefault()?.Word,
             Date = WordsResult.GetValueOrDefault("交易日期")?.FirstOrDefault()?.Word?.ToDateOnlyExactOrNull(["yyyyMMdd"]),
-            Amount = WordsResult.GetValueOrDefault("小写金额")?.FirstOrDefault()?.Word?.ToDecimalOrNull(),
+            Amount = WordsResult.GetValueOrDefault("小写金额")?.FirstOrDefault()?.Word?.Replace("元", "").ToDecimalOrNull(),
             AmountInWords = WordsResult.GetValueOrDefault("大写金额")?.FirstOrDefault()?.Word,
             PayerBankName = WordsResult.GetValueOrDefault("付款人开户银行")?.FirstOrDefault()?.Word,
             PayerAccountName = WordsResult.GetValueOrDefault("付款人户名")?.FirstOrDefault()?.Word,
