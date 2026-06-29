@@ -32,6 +32,6 @@ public class Output<T> : IBaseOutput
     /// <exception cref="Exception"></exception>
     public void EnsureResult()
     {
-        if (ErrorCode != 0 && ErrorCode != 300000) throw new Exception($"请求天眼查发生异常：[{ErrorCode}]{Reason}");
+        if (ErrorCode != 0) throw new Exception($"请求天眼查发生异常：[{ErrorCode}]{Reason}");
     }
 }
