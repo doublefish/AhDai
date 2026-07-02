@@ -4,6 +4,27 @@
         <name>AhDai.WebApi</name>
     </assembly>
     <members>
+        <member name="T:AhDai.WebApi.ApiGroupName">
+            <summary>
+            ApiGroupName
+            </summary>
+        </member>
+        <member name="F:AhDai.WebApi.ApiGroupName.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="F:AhDai.WebApi.ApiGroupName.All">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.ApiGroupName.Get">
+            <summary>
+            获取所有
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.WebApi.Configs.CommaSeparatedArrayModelBinder">
             <summary>
             CommaSeparatedArrayModelBinder
@@ -54,42 +75,6 @@
         <member name="P:AhDai.WebApi.Configs.KestrelServerLimitsConfig.MaxRequestBodySize">
             <summary>
             请求体最大限制
-            </summary>
-        </member>
-        <member name="T:AhDai.WebApi.SwaggerExtensions">
-            <summary>
-            SwaggerExtensions
-            </summary>
-        </member>
-        <member name="M:AhDai.WebApi.SwaggerExtensions.AddMySwaggerGen(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions})">
-            <summary>
-            AddMySwaggerGen
-            </summary>
-            <param name="services"></param>
-            <param name="setupAction"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.WebApi.SwaggerExtensions.UseMySwaggerUI(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIOptions})">
-            <summary>
-            UseMySwaggerUI
-            </summary>
-            <param name="app"></param>
-            <param name="setupAction"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.WebApi.SwaggerGroupName">
-            <summary>
-            SwaggerGroupName
-            </summary>
-        </member>
-        <member name="F:AhDai.WebApi.SwaggerGroupName.All">
-            <summary>
-            全部
-            </summary>
-        </member>
-        <member name="F:AhDai.WebApi.SwaggerGroupName.Account">
-            <summary>
-            账号
             </summary>
         </member>
         <member name="T:AhDai.WebApi.Controllers.AuthController">
@@ -146,12 +131,40 @@
             _service
             </summary>
         </member>
+        <member name="T:AhDai.WebApi.Extensions.ServiceCollectionExtensions">
+            <summary>
+            ServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.WebApi.Extensions.ServiceCollectionExtensions.AddMyAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            添加Jwt认证服务
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.WebApi.Extensions.ServiceCollectionExtensions.AddMyAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            AddMyAuthorization
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.WebApi.Extensions.ServiceCollectionExtensions.AddMySwaggerGen(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddMySwaggerGen
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.WebApi.Filters.SwaggerDocumentFilter">
             <summary>
             添加控制器模块说明
             </summary>
         </member>
-        <member name="M:AhDai.WebApi.Filters.SwaggerDocumentFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+        <member name="M:AhDai.WebApi.Filters.SwaggerDocumentFilter.Apply(Microsoft.OpenApi.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
             <summary>
             Apply
             </summary>
@@ -163,7 +176,7 @@
             操作过过滤器 添加通用参数等
             </summary>
         </member>
-        <member name="M:AhDai.WebApi.Filters.SwaggerOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+        <member name="M:AhDai.WebApi.Filters.SwaggerOperationFilter.Apply(Microsoft.OpenApi.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
             <summary>
             
             </summary>
@@ -176,7 +189,7 @@
             SwaggerSchemaFilter
             </summary>
         </member>
-        <member name="M:AhDai.WebApi.Filters.SwaggerSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+        <member name="M:AhDai.WebApi.Filters.SwaggerSchemaFilter.Apply(Microsoft.OpenApi.IOpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
             <summary>
             Apply
             </summary>

@@ -17,7 +17,7 @@ namespace AhDai.WebApi.Controllers;
 /// 
 /// </summary>
 /// <param name="jwtService"></param>
-[ApiExplorerSettings(GroupName = SwaggerGroupName.Account)]
+[ApiExplorerSettings(GroupName = ApiGroupName.Account)]
 public class AuthController(IBaseJwtService jwtService) : BaseEmptyController
 {
     readonly IBaseJwtService _jwtService = jwtService;

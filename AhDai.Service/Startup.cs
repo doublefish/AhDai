@@ -65,7 +65,7 @@ public static class Startup
     /// <param name="builder"></param>
     /// <param name="isWorker"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder ConfigureServices(IHostApplicationBuilder builder, IConfiguration configuration, bool isWorker = false)
+    public static IHostApplicationBuilder ConfigureServices(IHostApplicationBuilder builder, bool isWorker = false)
     {
         try
         {

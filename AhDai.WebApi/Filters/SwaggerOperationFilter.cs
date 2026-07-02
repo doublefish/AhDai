@@ -1,4 +1,4 @@
-﻿//using AhDai.Core.Attributes;
+﻿using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 
@@ -17,6 +17,7 @@ public class SwaggerOperationFilter : IOperationFilter
     /// <exception cref="NotImplementedException"></exception>
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
+        operation.Parameters ??= [];
         operation.Parameters.Add(new OpenApiParameter
         {
             Name = "Accept-Language",
@@ -24,8 +25,8 @@ public class SwaggerOperationFilter : IOperationFilter
             Required = false,
             Schema = new OpenApiSchema
             {
-                Type = "string",
-                Default = new OpenApiString("zh-CN")
+                Type = JsonSchemaType.String,
+                //Default = new OpenApiString("zh-CN")
             },
             Description = "接受语言"
         });
@@ -36,8 +37,8 @@ public class SwaggerOperationFilter : IOperationFilter
             Required = false,
             Schema = new OpenApiSchema
             {
-                Type = "string",
-                Default = new OpenApiString(Guid.NewGuid().ToString("N"))
+                Type = JsonSchemaType.String,
+                //Default = new OpenApiString(Guid.NewGuid().ToString("N"))
             },
             Description = "请求Id"
         });
@@ -84,5 +85,4 @@ public class SwaggerOperationFilter : IOperationFilter
         //}
         //}
     }
-
 }

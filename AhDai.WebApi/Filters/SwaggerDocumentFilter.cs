@@ -1,4 +1,5 @@
-﻿using Swashbuckle.AspNetCore.SwaggerGen;
+﻿using Microsoft.OpenApi;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace AhDai.WebApi.Filters;
 
@@ -14,6 +15,6 @@ public class SwaggerDocumentFilter : IDocumentFilter
     /// <param name="context"></param>
     public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
     {
-        //base.Apply(swaggerDoc, context);
+        //throw new System.NotImplementedException();
     }
 }

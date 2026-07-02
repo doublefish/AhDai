@@ -5,9 +5,9 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 
-		<Version>1.10.19</Version>
-		<AssemblyVersion>1.10.19</AssemblyVersion>
-		<FileVersion>1.10.19</FileVersion>
+		<Version>1.10.20</Version>
+		<AssemblyVersion>1.10.20</AssemblyVersion>
+		<FileVersion>1.10.20</FileVersion>
 		<Authors>Shuang Yu</Authors>
 		<Company>AhDai</Company>
 		<Copyright>© Shuang Yu. All rights reserved.</Copyright>
@@ -34,16 +34,14 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0' ">
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.25" />
-		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.25" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.25" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.25" />
-		<PackageReference Include="System.Drawing.Common" Version="8.0.25" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.28" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.28" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.28" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.28" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0' ">
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.9" />
-		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.9" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.9" />
 		<PackageReference Include="System.Drawing.Common" Version="10.0.9" />

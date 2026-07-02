@@ -1,4 +1,6 @@
 using AhDai.Core.Extensions;
+using AhDai.WebApi.Configs;
+using AhDai.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpLogging;
@@ -10,9 +12,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace AhDai.WebApi;
 
@@ -99,10 +103,9 @@ public class Program
             });
         });
 
-        var config = builder.Configuration.GetJwtConfig();
-
         // 认证和授权
-        builder.Services.AddAuthentication().AddJwtAuthentication(config);
+        builder.Services.AddMyAuthentication(builder.Configuration);
+        builder.Services.AddMyAuthorization(builder.Configuration);
         // 控制器
         builder.Services.AddControllers(options =>
         {
@@ -126,7 +129,7 @@ public class Program
         builder.Services.AddMySwaggerGen();
 
         // 添加业务服务
-        Service.Startup.ConfigureServices(builder.Services, builder.Configuration);
+        Service.Startup.ConfigureServices(builder);
 
         var app = builder.Build();
 
@@ -184,9 +187,20 @@ public class Program
 
         if (app.Environment.IsDevelopment())
         {
+            var groups = ApiGroupName.Get();
             app.UseSwagger();
             //app.UseSwaggerUI();
-            app.UseMySwaggerUI();
+            app.UseSwaggerUI(options =>
+            {
+                foreach (var group in groups)
+                {
+                    options.SwaggerEndpoint($"/swagger/{group.Key}/swagger.json", group.Value);
+                }
+
+                options.EnablePersistAuthorization();
+                options.DefaultModelsExpandDepth(-1);
+                options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+            });
         }
 
         Service.Startup.Configure(app);

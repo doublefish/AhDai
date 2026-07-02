@@ -1,6 +1,8 @@
-﻿using Swashbuckle.AspNetCore.SwaggerGen;
+﻿using Microsoft.OpenApi;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 
 namespace AhDai.WebApi.Filters;
@@ -15,25 +17,27 @@ public class SwaggerSchemaFilter : ISchemaFilter
     /// </summary>
     /// <param name="schema"></param>
     /// <param name="context"></param>
-    public void Apply(OpenApiSchema schema, SchemaFilterContext context)
+    public void Apply(IOpenApiSchema schema, SchemaFilterContext context)
     {
-        if (context.Type.IsEnum)
-        {
-            var enumType = context.Type;
-            var enumValues = Enum.GetValues(enumType);
+        var type = context.Type;
+        type = Nullable.GetUnderlyingType(type) ?? type;
 
-            schema.Enum.Clear();
-            foreach (var enumValue in enumValues)
-            {
-                if (enumValue == null) continue;
-                var name = enumValue.ToString();
-                if (name == null) continue;
-                var value = (int)enumValue;
-                var field = enumType.GetField(name);
-                var attribute = field?.GetCustomAttribute<DisplayAttribute>();
-                var description = attribute?.Name ?? name;
-                schema.Enum.Add(new OpenApiString($"{name}={value} - {description}"));
-            }
+        if (type != null && type.IsEnum)
+        {
+            // 开始构建 “值 - 说明” 的文本字符串
+            var values = type.GetFields(BindingFlags.Public | BindingFlags.Static)
+                .Select(field =>
+                {
+                    var value = Convert.ToInt64(field.GetValue(null));
+                    var text = field.GetCustomAttribute<DisplayAttribute>()?.Name
+                    ?? field.GetCustomAttribute<DescriptionAttribute>()?.Description
+                    ?? field.Name;
+                    return $"{value} = {text}";
+                });
+
+            var enumText = "\n\n枚举值：\n" + string.Join("，", values);
+            //var enumText = $"<br />配置值：<br />{string.Join("<br />", values)}";
+            schema.Description = (schema.Description ?? "") + enumText;
         }
     }
 }
