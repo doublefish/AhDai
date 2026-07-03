@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
-namespace AhDai.Core.Infrastructure.AspNetCore;
+namespace AhDai.Core.Infrastructure.Mvc;
 
 /// <summary>
 /// ActionFilter

@@ -1,4 +1,4 @@
-using AhDai.Core.Infrastructure.AspNetCore;
+using AhDai.Core.Infrastructure.Mvc;
 using AhDai.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace AhDai.Core.Infrastructure.AspNetCore;
+namespace AhDai.Core.Infrastructure.Mvc;
 
 /// <summary>
 /// AsyncActionFilter

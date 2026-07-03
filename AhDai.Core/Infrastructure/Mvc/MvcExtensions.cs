@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
-namespace AhDai.Core.Infrastructure.AspNetCore;
+namespace AhDai.Core.Infrastructure.Mvc;
 
 /// <summary>
 /// MvcExtensions

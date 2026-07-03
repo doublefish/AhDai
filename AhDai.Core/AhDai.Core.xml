@@ -2241,53 +2241,53 @@
             <param name="group"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Infrastructure.AspNetCore.ActionFilter">
+        <member name="T:AhDai.Core.Infrastructure.Mvc.ActionFilter">
             <summary>
             ActionFilter
             </summary>
             <param name="logger"></param>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.AspNetCore.ActionFilter.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Infrastructure.AspNetCore.ActionFilter})">
+        <member name="M:AhDai.Core.Infrastructure.Mvc.ActionFilter.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Infrastructure.Mvc.ActionFilter})">
             <summary>
             ActionFilter
             </summary>
             <param name="logger"></param>
         </member>
-        <member name="P:AhDai.Core.Infrastructure.AspNetCore.ActionFilter.Order">
+        <member name="P:AhDai.Core.Infrastructure.Mvc.ActionFilter.Order">
             <summary>
             Order
             </summary>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.AspNetCore.ActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+        <member name="M:AhDai.Core.Infrastructure.Mvc.ActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
             <summary>
             OnActionExecuting
             </summary>
             <param name="context"></param>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.AspNetCore.ActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+        <member name="M:AhDai.Core.Infrastructure.Mvc.ActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
             <summary>
             OnActionExecuted
             </summary>
             <param name="context"></param>
         </member>
-        <member name="T:AhDai.Core.Infrastructure.AspNetCore.AsyncActionFilter">
+        <member name="T:AhDai.Core.Infrastructure.Mvc.AsyncActionFilter">
             <summary>
             AsyncActionFilter
             </summary>
             <param name="logger"></param>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.AspNetCore.AsyncActionFilter.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Infrastructure.AspNetCore.AsyncActionFilter})">
+        <member name="M:AhDai.Core.Infrastructure.Mvc.AsyncActionFilter.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Infrastructure.Mvc.AsyncActionFilter})">
             <summary>
             AsyncActionFilter
             </summary>
             <param name="logger"></param>
         </member>
-        <member name="P:AhDai.Core.Infrastructure.AspNetCore.AsyncActionFilter.Order">
+        <member name="P:AhDai.Core.Infrastructure.Mvc.AsyncActionFilter.Order">
             <summary>
             Order
             </summary>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.AspNetCore.AsyncActionFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
+        <member name="M:AhDai.Core.Infrastructure.Mvc.AsyncActionFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
             <summary>
             OnActionExecutionAsync
             </summary>
@@ -2295,12 +2295,12 @@
             <param name="next"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Infrastructure.AspNetCore.MvcExtensions">
+        <member name="T:AhDai.Core.Infrastructure.Mvc.MvcExtensions">
             <summary>
             MvcExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.AspNetCore.MvcExtensions.ConfigInvalidModelStateResponse(Microsoft.AspNetCore.Mvc.ApiBehaviorOptions)">
+        <member name="M:AhDai.Core.Infrastructure.Mvc.MvcExtensions.ConfigInvalidModelStateResponse(Microsoft.AspNetCore.Mvc.ApiBehaviorOptions)">
             <summary>
             配置实体验证错误返回结果
             </summary>
@@ -3712,8 +3712,8 @@
         <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
             <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
         </member>
-        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_indexOfAnyStrings_OrdinalIgnoreCase_46014A8B7B3C7A2F9033727512F94E85EAA984C17CE55A0D78E1E676BFA041AA">
-            <summary>Supports searching for the specified strings.</summary>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_ascii_662A8000662A800">
+            <summary>Supports searching for characters in or not in "ABIMNSUWabimnsuw".</summary>
         </member>
     </members>
 </doc>
