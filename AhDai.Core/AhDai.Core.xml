@@ -222,29 +222,6 @@
             Hex
             </summary>
         </member>
-        <member name="T:AhDai.Core.Extensions.AuthenticationBuilderExtensions">
-            <summary>
-            AuthenticationBuilderExtensions
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Extensions.AuthenticationBuilderExtensions.AddJwtAuthentication(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,AhDai.Core.Options.JwtOptions)">
-            <summary>
-            添加Jwt认证服务
-            </summary>
-            <param name="builder"></param>
-            <param name="jwtOptions"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Extensions.BuilderExtensions">
-            <summary>
-            BuilderExtensions
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Extensions.ConfigurationExtensions">
-            <summary>
-            ConfigurationExtensions
-            </summary>
-        </member>
         <member name="T:AhDai.Core.Extensions.DataTableExtensions">
             <summary>
             DataTableExt
@@ -376,208 +353,6 @@
             The attribute of the specified type or null.
             </returns>
         </member>
-        <member name="T:AhDai.Core.Extensions.HttpContextExtensions">
-            <summary>
-            HttpContextExtensions
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Extensions.HttpContextExtensions.GetClientIpAddress(Microsoft.AspNetCore.Http.HttpContext,System.Boolean)">
-            <summary>
-            获取客户端IP地址
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Extensions.HttpRequestExtensions">
-            <summary>
-            HttpRequestExtensions
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.MobileDeviceRegex">
-            <remarks>
-            Pattern:<br/>
-            <code>(iemobile|iphone|ipod|android|nokia|sonyericsson|blackberry|samsung|sec\\-|windows ce|motorola|mot\\-|up.b|midp\\-)</code><br/>
-            Options:<br/>
-            <code>RegexOptions.IgnoreCase | RegexOptions.Compiled</code><br/>
-            Explanation:<br/>
-            <code>
-            ○ 1st capture group.<br/>
-                ○ Match with 10 alternative expressions, atomically.<br/>
-                    ○ Match a sequence of expressions.<br/>
-                        ○ Match a character in the set [Ii].<br/>
-                        ○ Match with 2 alternative expressions, atomically.<br/>
-                            ○ Match a sequence of expressions.<br/>
-                                ○ Match a character in the set [Ee].<br/>
-                                ○ Match a character in the set [Mm].<br/>
-                                ○ Match a character in the set [Oo].<br/>
-                                ○ Match a character in the set [Bb].<br/>
-                                ○ Match a character in the set [Ii].<br/>
-                                ○ Match a character in the set [Ll].<br/>
-                                ○ Match a character in the set [Ee].<br/>
-                            ○ Match a sequence of expressions.<br/>
-                                ○ Match a character in the set [Pp].<br/>
-                                ○ Match with 2 alternative expressions, atomically.<br/>
-                                    ○ Match a sequence of expressions.<br/>
-                                        ○ Match a character in the set [Hh].<br/>
-                                        ○ Match a character in the set [Oo].<br/>
-                                        ○ Match a character in the set [Nn].<br/>
-                                        ○ Match a character in the set [Ee].<br/>
-                                    ○ Match a sequence of expressions.<br/>
-                                        ○ Match a character in the set [Oo].<br/>
-                                        ○ Match a character in the set [Dd].<br/>
-                    ○ Match a sequence of expressions.<br/>
-                        ○ Match a character in the set [Aa].<br/>
-                        ○ Match a character in the set [Nn].<br/>
-                        ○ Match a character in the set [Dd].<br/>
-                        ○ Match a character in the set [Rr].<br/>
-                        ○ Match a character in the set [Oo].<br/>
-                        ○ Match a character in the set [Ii].<br/>
-                        ○ Match a character in the set [Dd].<br/>
-                    ○ Match a sequence of expressions.<br/>
-                        ○ Match a character in the set [Nn].<br/>
-                        ○ Match a character in the set [Oo].<br/>
-                        ○ Match a character in the set [Kk\u212A].<br/>
-                        ○ Match a character in the set [Ii].<br/>
-                        ○ Match a character in the set [Aa].<br/>
-                    ○ Match a sequence of expressions.<br/>
-                        ○ Match a character in the set [Ss].<br/>
-                        ○ Match a character in the set [Oo].<br/>
-                        ○ Match a character in the set [Nn].<br/>
-                        ○ Match a character in the set [Yy].<br/>
-                        ○ Match a character in the set [Ee].<br/>
-                        ○ Match a character in the set [Rr].<br/>
-                        ○ Match a character in the set [Ii].<br/>
-                        ○ Match a character in the set [Cc].<br/>
-                        ○ Match a character in the set [Ss] exactly 2 times.<br/>
-                        ○ Match a character in the set [Oo].<br/>
-                        ○ Match a character in the set [Nn].<br/>
-                    ○ Match a sequence of expressions.<br/>
-                        ○ Match a character in the set [Bb].<br/>
-                        ○ Match a character in the set [Ll].<br/>
-                        ○ Match a character in the set [Aa].<br/>
-                        ○ Match a character in the set [Cc].<br/>
-                        ○ Match a character in the set [Kk\u212A].<br/>
-                        ○ Match a character in the set [Bb].<br/>
-                        ○ Match a character in the set [Ee].<br/>
-                        ○ Match a character in the set [Rr] exactly 2 times.<br/>
-                        ○ Match a character in the set [Yy].<br/>
-                    ○ Match a sequence of expressions.<br/>
-                        ○ Match a character in the set [Ss].<br/>
-                        ○ Match with 2 alternative expressions, atomically.<br/>
-                            ○ Match a sequence of expressions.<br/>
-                                ○ Match a character in the set [Aa].<br/>
-                                ○ Match a character in the set [Mm].<br/>
-                                ○ Match a character in the set [Ss].<br/>
-                                ○ Match a character in the set [Uu].<br/>
-                                ○ Match a character in the set [Nn].<br/>
-                                ○ Match a character in the set [Gg].<br/>
-                            ○ Match a sequence of expressions.<br/>
-                                ○ Match a character in the set [Ee].<br/>
-                                ○ Match a character in the set [Cc].<br/>
-                                ○ Match '-'.<br/>
-                    ○ Match a sequence of expressions.<br/>
-                        ○ Match a character in the set [Ww].<br/>
-                        ○ Match a character in the set [Ii].<br/>
-                        ○ Match a character in the set [Nn].<br/>
-                        ○ Match a character in the set [Dd].<br/>
-                        ○ Match a character in the set [Oo].<br/>
-                        ○ Match a character in the set [Ww].<br/>
-                        ○ Match a character in the set [Ss].<br/>
-                        ○ Match ' '.<br/>
-                        ○ Match a character in the set [Cc].<br/>
-                        ○ Match a character in the set [Ee].<br/>
-                    ○ Match a sequence of expressions.<br/>
-                        ○ Match a character in the set [Mm].<br/>
-                        ○ Match a character in the set [Oo].<br/>
-                        ○ Match a character in the set [Tt].<br/>
-                        ○ Match with 2 alternative expressions, atomically.<br/>
-                            ○ Match a sequence of expressions.<br/>
-                                ○ Match a character in the set [Oo].<br/>
-                                ○ Match a character in the set [Rr].<br/>
-                                ○ Match a character in the set [Oo].<br/>
-                                ○ Match a character in the set [Ll].<br/>
-                                ○ Match a character in the set [Aa].<br/>
-                            ○ Match '-'.<br/>
-                    ○ Match a sequence of expressions.<br/>
-                        ○ Match a character in the set [Uu].<br/>
-                        ○ Match a character in the set [Pp].<br/>
-                        ○ Match any character other than '\n'.<br/>
-                        ○ Match a character in the set [Bb].<br/>
-                    ○ Match a sequence of expressions.<br/>
-                        ○ Match a character in the set [Mm].<br/>
-                        ○ Match a character in the set [Ii].<br/>
-                        ○ Match a character in the set [Dd].<br/>
-                        ○ Match a character in the set [Pp].<br/>
-                        ○ Match '-'.<br/>
-            </code>
-            </remarks>
-        </member>
-        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.GetFullPath(Microsoft.AspNetCore.Http.HttpRequest)">
-            <summary>
-            GetFullPath
-            </summary>
-            <param name="httpRequest"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.GetPath(Microsoft.AspNetCore.Http.HttpRequest)">
-            <summary>
-            获取请求路径
-            </summary>
-            <param name="httpRequest"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.GetParameters(Microsoft.AspNetCore.Http.HttpRequest)">
-            <summary>
-            获取请求参数
-            </summary>
-            <param name="httpRequest"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.ReadBody(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
-            <summary>
-            读取内容
-            </summary>
-            <param name="httpRequest"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.ReadBodyAsync(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
-            <summary>
-            读取内容
-            </summary>
-            <param name="httpRequest"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.IsMobileDevice(Microsoft.AspNetCore.Http.HttpRequest)">
-            <summary>
-            是否移动设备
-            </summary>
-            <param name="httpRequest"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.GetValue(Microsoft.AspNetCore.Http.IHeaderDictionary,System.String)">
-            <summary>
-            获取值
-            </summary>
-            <param name="headers"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Extensions.HttpResponseExtensions">
-            <summary>
-            HttpResponseExtensions
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Extensions.HttpResponseExtensions.WriteObjectAsync``1(Microsoft.AspNetCore.Http.HttpResponse,``0,System.Threading.CancellationToken)">
-            <summary>
-            写返回值
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="response"></param>
-            <param name="data"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Core.Extensions.LinqExtensions">
             <summary>
             LinqExt
@@ -681,17 +456,6 @@
             <param name="obj"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Extensions.OptionsExtensions">
-            <summary>
-            OptionsExtensions
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Extensions.OptionsExtensions.ConfigInvalidModelStateResponse(Microsoft.AspNetCore.Mvc.ApiBehaviorOptions)">
-            <summary>
-            配置实体验证错误返回结果
-            </summary>
-            <param name="options"></param>
-        </member>
         <member name="T:AhDai.Core.Extensions.ReflectionExtensions">
             <summary>
             ReflectionExtensions
@@ -719,72 +483,6 @@
             <summary>
             将当前 RSA 实例导出为标准的兼容 XML 字符串
             </summary>
-        </member>
-        <member name="T:AhDai.Core.Extensions.ServiceCollectionExtensions">
-            <summary>
-            ServiceCollectionExtensions
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddServiceProviderAccessor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            添加IServiceProviderAccessor - 依赖注入单例
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddPermissionAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement[])">
-            <summary>
-            添加权限授权服务
-            </summary>
-            <param name="services"></param>
-            <param name="requirements"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddOptions
-            </summary>
-            <typeparam name="TOptions"></typeparam>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddFileService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddFileService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddJwtService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddJwtService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddMailService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddMailService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.ServiceCollectionExtensions.AddRedisService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            添加Redis服务 - 依赖注入单例
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
         </member>
         <member name="T:AhDai.Core.Extensions.StringExtensions">
             <summary>
@@ -1527,86 +1225,201 @@
             <param name="xpath"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Filters.ActionFilter">
+        <member name="T:AhDai.Core.Extensions.HttpRequestExtensions">
             <summary>
-            ActionFilter
-            </summary>
-            <param name="logger"></param>
-        </member>
-        <member name="M:AhDai.Core.Filters.ActionFilter.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Filters.ActionFilter})">
-            <summary>
-            ActionFilter
-            </summary>
-            <param name="logger"></param>
-        </member>
-        <member name="P:AhDai.Core.Filters.ActionFilter.Order">
-            <summary>
-            Order
+            HttpRequestExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Core.Filters.ActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
-            <summary>
-            OnActionExecuting
-            </summary>
-            <param name="context"></param>
+        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.MobileDeviceRegex">
+            <remarks>
+            Pattern:<br/>
+            <code>(iemobile|iphone|ipod|android|nokia|sonyericsson|blackberry|samsung|sec\\-|windows ce|motorola|mot\\-|up.b|midp\\-)</code><br/>
+            Options:<br/>
+            <code>RegexOptions.IgnoreCase | RegexOptions.Compiled</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ 1st capture group.<br/>
+                ○ Match with 10 alternative expressions, atomically.<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Ii].<br/>
+                        ○ Match with 2 alternative expressions, atomically.<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [Ee].<br/>
+                                ○ Match a character in the set [Mm].<br/>
+                                ○ Match a character in the set [Oo].<br/>
+                                ○ Match a character in the set [Bb].<br/>
+                                ○ Match a character in the set [Ii].<br/>
+                                ○ Match a character in the set [Ll].<br/>
+                                ○ Match a character in the set [Ee].<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [Pp].<br/>
+                                ○ Match with 2 alternative expressions, atomically.<br/>
+                                    ○ Match a sequence of expressions.<br/>
+                                        ○ Match a character in the set [Hh].<br/>
+                                        ○ Match a character in the set [Oo].<br/>
+                                        ○ Match a character in the set [Nn].<br/>
+                                        ○ Match a character in the set [Ee].<br/>
+                                    ○ Match a sequence of expressions.<br/>
+                                        ○ Match a character in the set [Oo].<br/>
+                                        ○ Match a character in the set [Dd].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Aa].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                        ○ Match a character in the set [Rr].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Ii].<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Kk\u212A].<br/>
+                        ○ Match a character in the set [Ii].<br/>
+                        ○ Match a character in the set [Aa].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Ss].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Yy].<br/>
+                        ○ Match a character in the set [Ee].<br/>
+                        ○ Match a character in the set [Rr].<br/>
+                        ○ Match a character in the set [Ii].<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                        ○ Match a character in the set [Ss] exactly 2 times.<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Bb].<br/>
+                        ○ Match a character in the set [Ll].<br/>
+                        ○ Match a character in the set [Aa].<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                        ○ Match a character in the set [Kk\u212A].<br/>
+                        ○ Match a character in the set [Bb].<br/>
+                        ○ Match a character in the set [Ee].<br/>
+                        ○ Match a character in the set [Rr] exactly 2 times.<br/>
+                        ○ Match a character in the set [Yy].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Ss].<br/>
+                        ○ Match with 2 alternative expressions, atomically.<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [Aa].<br/>
+                                ○ Match a character in the set [Mm].<br/>
+                                ○ Match a character in the set [Ss].<br/>
+                                ○ Match a character in the set [Uu].<br/>
+                                ○ Match a character in the set [Nn].<br/>
+                                ○ Match a character in the set [Gg].<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [Ee].<br/>
+                                ○ Match a character in the set [Cc].<br/>
+                                ○ Match '-'.<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Ww].<br/>
+                        ○ Match a character in the set [Ii].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Ww].<br/>
+                        ○ Match a character in the set [Ss].<br/>
+                        ○ Match ' '.<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                        ○ Match a character in the set [Ee].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Mm].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Tt].<br/>
+                        ○ Match with 2 alternative expressions, atomically.<br/>
+                            ○ Match a sequence of expressions.<br/>
+                                ○ Match a character in the set [Oo].<br/>
+                                ○ Match a character in the set [Rr].<br/>
+                                ○ Match a character in the set [Oo].<br/>
+                                ○ Match a character in the set [Ll].<br/>
+                                ○ Match a character in the set [Aa].<br/>
+                            ○ Match '-'.<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Uu].<br/>
+                        ○ Match a character in the set [Pp].<br/>
+                        ○ Match any character other than '\n'.<br/>
+                        ○ Match a character in the set [Bb].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Mm].<br/>
+                        ○ Match a character in the set [Ii].<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                        ○ Match a character in the set [Pp].<br/>
+                        ○ Match '-'.<br/>
+            </code>
+            </remarks>
         </member>
-        <member name="M:AhDai.Core.Filters.ActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.GetFullPath(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
-            OnActionExecuted
+            GetFullPath
             </summary>
-            <param name="context"></param>
-        </member>
-        <member name="T:AhDai.Core.Filters.AsyncActionFilter">
-            <summary>
-            AsyncActionFilter
-            </summary>
-            <param name="logger"></param>
-        </member>
-        <member name="M:AhDai.Core.Filters.AsyncActionFilter.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Filters.AsyncActionFilter})">
-            <summary>
-            AsyncActionFilter
-            </summary>
-            <param name="logger"></param>
-        </member>
-        <member name="P:AhDai.Core.Filters.AsyncActionFilter.Order">
-            <summary>
-            Order
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Filters.AsyncActionFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
-            <summary>
-            OnActionExecutionAsync
-            </summary>
-            <param name="context"></param>
-            <param name="next"></param>
+            <param name="httpRequest"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Handlers.HttpLoggingHandler">
+        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.GetPath(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
-            HttpLoggingHandler
+            获取请求路径
             </summary>
-            <param name="logger"></param>
-        </member>
-        <member name="M:AhDai.Core.Handlers.HttpLoggingHandler.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Handlers.HttpLoggingHandler})">
-            <summary>
-            HttpLoggingHandler
-            </summary>
-            <param name="logger"></param>
-        </member>
-        <member name="M:AhDai.Core.Handlers.HttpLoggingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
-            <summary>
-            SendAsync
-            </summary>
-            <param name="request"></param>
-            <param name="cancellationToken"></param>
+            <param name="httpRequest"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Handlers.PermissionAuthorizationHandler">
+        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.GetParameters(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            获取请求参数
+            </summary>
+            <param name="httpRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.ReadBody(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            读取内容
+            </summary>
+            <param name="httpRequest"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.ReadBodyAsync(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            读取内容
+            </summary>
+            <param name="httpRequest"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.IsMobileDevice(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            是否移动设备
+            </summary>
+            <param name="httpRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Extensions.HttpRequestExtensions.GetValue(Microsoft.AspNetCore.Http.IHeaderDictionary,System.String)">
+            <summary>
+            获取值
+            </summary>
+            <param name="headers"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Authorization.AuthorizationServiceCollectionExtensions">
+            <summary>
+            AuthorizationServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Authorization.AuthorizationServiceCollectionExtensions.AddPermissionAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement[])">
+            <summary>
+            添加权限授权服务
+            </summary>
+            <param name="services"></param>
+            <param name="requirements"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Authorization.PermissionAuthorizationHandler">
             <summary>
             PermissionAuthorizationHandler
             </summary>
         </member>
-        <member name="M:AhDai.Core.Handlers.PermissionAuthorizationHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,AhDai.Core.Requirements.PermissionRequirement)">
+        <member name="M:AhDai.Core.Infrastructure.Authorization.PermissionAuthorizationHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,AhDai.Core.Requirements.PermissionRequirement)">
             <summary>
             HandleRequirementAsync
             </summary>
@@ -1614,12 +1427,12 @@
             <param name="requirement"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Handlers.PermissionAuthorizationMiddlewareResultHandler">
+        <member name="T:AhDai.Core.Infrastructure.Authorization.PermissionAuthorizationMiddlewareResultHandler">
             <summary>
             PermissionAuthorizationMiddlewareResultHandler
             </summary>
         </member>
-        <member name="M:AhDai.Core.Handlers.PermissionAuthorizationMiddlewareResultHandler.HandleAsync(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Authorization.AuthorizationPolicy,Microsoft.AspNetCore.Authorization.Policy.PolicyAuthorizationResult)">
+        <member name="M:AhDai.Core.Infrastructure.Authorization.PermissionAuthorizationMiddlewareResultHandler.HandleAsync(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Authorization.AuthorizationPolicy,Microsoft.AspNetCore.Authorization.Policy.PolicyAuthorizationResult)">
             <summary>
             HandleAsync
             </summary>
@@ -1629,122 +1442,126 @@
             <param name="authorizeResult"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Infrastructure.ServiceProviderAccessor">
+        <member name="T:AhDai.Core.Infrastructure.DependencyInjection.IServiceProviderAccessor">
             <summary>
-             作用域服务持有者，解决静态工具类与 DI 容器的桥接
+            作用域服务持有者，解决静态工具类与 DI 容器的桥接
             </summary>
         </member>
-        <member name="P:AhDai.Core.Infrastructure.ServiceProviderAccessor.Current">
+        <member name="P:AhDai.Core.Infrastructure.DependencyInjection.IServiceProviderAccessor.Current">
             <summary>
             Current
             </summary>
         </member>
-        <member name="T:AhDai.Core.Infrastructure.ServiceProviderScope">
+        <member name="T:AhDai.Core.Infrastructure.DependencyInjection.OptionsServiceCollectionExtensions">
+            <summary>
+            OptionsServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.DependencyInjection.OptionsServiceCollectionExtensions.AddOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddOptions
+            </summary>
+            <typeparam name="TOptions"></typeparam>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.DependencyInjection.ServiceProviderAccessor">
+            <summary>
+             作用域服务持有者，解决静态工具类与 DI 容器的桥接
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.DependencyInjection.ServiceProviderAccessor.Current">
+            <summary>
+            Current
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.DependencyInjection.ServiceProviderAccessorServiceCollectionExtensions">
+            <summary>
+            ServiceProviderAccessorServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.DependencyInjection.ServiceProviderAccessorServiceCollectionExtensions.AddServiceProviderAccessor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加IServiceProviderAccessor - 依赖注入单例
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.DependencyInjection.ServiceProviderScope">
             <summary>
             一个可释放的上下文开关
             </summary>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.ServiceProviderScope.#ctor(System.IServiceProvider)">
+        <member name="M:AhDai.Core.Infrastructure.DependencyInjection.ServiceProviderScope.#ctor(System.IServiceProvider)">
             <summary>
             构造函数
             </summary>
             <param name="provider"></param>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.ServiceProviderScope.Dispose">
+        <member name="M:AhDai.Core.Infrastructure.DependencyInjection.ServiceProviderScope.Dispose">
             <summary>
             释放
             </summary>
         </member>
-        <member name="T:AhDai.Core.Interfaces.Infrastructure.IServiceProviderAccessor">
+        <member name="T:AhDai.Core.Infrastructure.Elastic.ElasticOptions">
             <summary>
-            作用域服务持有者，解决静态工具类与 DI 容器的桥接
+            ElasticOptions
             </summary>
         </member>
-        <member name="P:AhDai.Core.Interfaces.Infrastructure.IServiceProviderAccessor.Current">
+        <member name="P:AhDai.Core.Infrastructure.Elastic.ElasticOptions.Host">
             <summary>
-            Current
+            主机
             </summary>
         </member>
-        <member name="T:AhDai.Core.Interfaces.Models.IActionResult`1">
+        <member name="P:AhDai.Core.Infrastructure.Elastic.ElasticOptions.Username">
             <summary>
-            IActionResult
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:AhDai.Core.Interfaces.Models.IActionResult`1.ActionId">
-            <summary>
-            动作Id
+            用户名
             </summary>
         </member>
-        <member name="P:AhDai.Core.Interfaces.Models.IActionResult`1.Code">
+        <member name="P:AhDai.Core.Infrastructure.Elastic.ElasticOptions.Password">
             <summary>
-            状态代码
+            密码
             </summary>
         </member>
-        <member name="P:AhDai.Core.Interfaces.Models.IActionResult`1.Message">
+        <member name="P:AhDai.Core.Infrastructure.Elastic.ElasticOptions.DefaultIndex">
             <summary>
-            消息
+            默认索引
             </summary>
         </member>
-        <member name="P:AhDai.Core.Interfaces.Models.IActionResult`1.Content">
+        <member name="T:AhDai.Core.Infrastructure.File.BaseFileService">
             <summary>
-            结果
+            文件服务
+            </summary>
+            <param name="options"></param>
+            <param name="httpClientFactory"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.File.BaseFileService.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{AhDai.Core.Infrastructure.File.FileOptions},System.Net.Http.IHttpClientFactory)">
+            <summary>
+            文件服务
+            </summary>
+            <param name="options"></param>
+            <param name="httpClientFactory"></param>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.File.BaseFileService.ContentTypeProvider">
+            <summary>
+            TypeProvider
             </summary>
         </member>
-        <member name="P:AhDai.Core.Interfaces.Models.IActionResult`1.ContentType">
+        <member name="P:AhDai.Core.Infrastructure.File.BaseFileService.HttpClientFactory">
             <summary>
-            内容类型
+            httpClientFactory
             </summary>
         </member>
-        <member name="T:AhDai.Core.Interfaces.Models.IApiResult">
-            <summary>
-            IApiResult
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Interfaces.Models.IApiResult.Code">
-            <summary>
-            状态代码
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Interfaces.Models.IApiResult.Message">
-            <summary>
-            消息
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Interfaces.Models.IApiResult.TraceId">
-            <summary>
-            追踪Id
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Interfaces.Models.IApiResult`1">
-            <summary>
-            IApiResult
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:AhDai.Core.Interfaces.Models.IApiResult`1.Data">
-            <summary>
-            结果
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Interfaces.Models.IApiResult`1.ExtraData">
-            <summary>
-            扩展数据
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Interfaces.Services.IBaseFileService">
-            <summary>
-            IBaseFileService
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseFileService.GetType(System.String)">
+        <member name="M:AhDai.Core.Infrastructure.File.BaseFileService.GetType(System.String)">
             <summary>
             获取类型
             </summary>
             <param name="extension"></param>
             <returns>MimeType</returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile,System.String,System.Threading.CancellationToken)">
+        <member name="M:AhDai.Core.Infrastructure.File.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile,System.String,System.Threading.CancellationToken)">
             <summary>
             上传
             </summary>
@@ -1755,7 +1572,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String,System.Threading.CancellationToken)">
+        <member name="M:AhDai.Core.Infrastructure.File.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String,System.Threading.CancellationToken)">
             <summary>
             上传
             </summary>
@@ -1766,18 +1583,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseFileService.DownloadAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            下载
-            </summary>
-            <param name="root"></param>
-            <param name="dir"></param>
-            <param name="url"></param>
-            <param name="name"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:AhDai.Core.Infrastructure.File.BaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             下载
             </summary>
@@ -1789,7 +1595,142 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseFileService.DownloadAndOpenAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:AhDai.Core.Infrastructure.File.BaseFileService.DownloadAndOpenAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            下载并打开
+            </summary>
+            <param name="httpClient"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="url"></param>
+            <param name="name"></param>
+            <param name="cancellationToken"></param>
+            <returns>fs的Position=0</returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.File.BaseFileService.ComputeHashAsync(System.IO.Stream,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            计算哈希
+            </summary>
+            <param name="fs"></param>
+            <param name="computeHash"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.File.BaseFileService.ComputeHash(System.Byte[],System.Nullable{System.Boolean})">
+            <summary>
+            计算哈希
+            </summary>
+            <param name="bytes"></param>
+            <param name="computeHash"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.File.FileOptions">
+            <summary>
+            FileOptions
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.File.FileOptions.UploadDirectory">
+            <summary>
+            上传根目录
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.File.FileOptions.DownloadDirectory">
+            <summary>
+            下载根目录
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.File.FileOptions.ExportDirectory">
+            <summary>
+            文件导出目录
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.File.FileOptions.MaxLength">
+            <summary>
+            最大长度
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.File.FileOptions.Extensions">
+            <summary>
+            扩展名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.File.FileOptions.ComputeHash">
+            <summary>
+            是否需要计算文件哈希（SHA256）
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.File.FileServiceCollectionExtensions">
+            <summary>
+            FileServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.File.FileServiceCollectionExtensions.AddFileService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddFileService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.File.IBaseFileService">
+            <summary>
+            IBaseFileService
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.File.IBaseFileService.GetType(System.String)">
+            <summary>
+            获取类型
+            </summary>
+            <param name="extension"></param>
+            <returns>MimeType</returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.File.IBaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile,System.String,System.Threading.CancellationToken)">
+            <summary>
+            上传
+            </summary>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="file"></param>
+            <param name="category"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.File.IBaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String,System.Threading.CancellationToken)">
+            <summary>
+            上传
+            </summary>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="files"></param>
+            <param name="category"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.File.IBaseFileService.DownloadAsync(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            下载
+            </summary>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="url"></param>
+            <param name="name"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.File.IBaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            下载
+            </summary>
+            <param name="httpClient"></param>
+            <param name="root"></param>
+            <param name="dir"></param>
+            <param name="url"></param>
+            <param name="name"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.File.IBaseFileService.DownloadAndOpenAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             下载并打开
             </summary>
@@ -1801,7 +1742,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseFileService.ComputeHashAsync(System.IO.Stream,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:AhDai.Core.Infrastructure.File.IBaseFileService.ComputeHashAsync(System.IO.Stream,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             计算哈希
             </summary>
@@ -1810,7 +1751,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseFileService.ComputeHash(System.Byte[],System.Nullable{System.Boolean})">
+        <member name="M:AhDai.Core.Infrastructure.File.IBaseFileService.ComputeHash(System.Byte[],System.Nullable{System.Boolean})">
             <summary>
             计算哈希
             </summary>
@@ -1818,12 +1759,151 @@
             <param name="computeHash"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Interfaces.Services.IBaseJwtService">
+        <member name="T:AhDai.Core.Infrastructure.Http.HttpContextExtensions">
+            <summary>
+            HttpContextExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Http.HttpContextExtensions.GetClientIpAddress(Microsoft.AspNetCore.Http.HttpContext,System.Boolean)">
+            <summary>
+            获取客户端IP地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Http.HttpLoggingHandler">
+            <summary>
+            HttpLoggingHandler
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Http.HttpLoggingHandler.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Infrastructure.Http.HttpLoggingHandler})">
+            <summary>
+            HttpLoggingHandler
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Http.HttpLoggingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            SendAsync
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Http.HttpResponseExtensions">
+            <summary>
+            HttpResponseExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Http.HttpResponseExtensions.WriteObjectAsync``1(Microsoft.AspNetCore.Http.HttpResponse,``0,System.Threading.CancellationToken)">
+            <summary>
+            写返回值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="response"></param>
+            <param name="data"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Jwt.BaseJwtService">
             <summary>
             Jwt服务
             </summary>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.#ctor(Microsoft.Extensions.Options.IOptions{AhDai.Core.Infrastructure.Jwt.JwtOptions},AhDai.Core.Infrastructure.Redis.IBaseRedisService)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="options"></param>
+            <param name="redisService"></param>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Jwt.BaseJwtService.SigningCredentials">
+            <summary>
+            RSA
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Jwt.BaseJwtService.RedisService">
+            <summary>
+            RedisService
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
+            <summary>
+            GenerateToken
+            </summary>
+            <param name="data"></param>
+            <param name="expiration">分钟</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.GenerateTokenAsync(System.Security.Claims.Claim[],System.Nullable{System.Int32})">
+            <summary>
+            GenerateToken
+            </summary>
+            <param name="claims"></param>
+            <param name="expiration">分钟</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.ReadToken(System.String)">
+            <summary>
+            获取声明的数据
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.GetTokenData(System.String)">
+            <summary>
+            获取声明的数据
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.RefreshTokenAsync(System.String)">
+            <summary>
+            刷新Token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.ValidateTokenAsync(System.String)">
+            <summary>
+            从缓存验证Token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.RemoveTokenAsync(System.String)">
+            <summary>
+            从缓存中移除Token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.ToTokenData(System.Security.Claims.Claim[])">
+            <summary>
+            转数据
+            </summary>
+            <param name="claims"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.BuildRedisKey(System.String,System.String)">
+            <summary>
+            BuildRedisKey
+            </summary>
+            <param name="username"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Jwt.IBaseJwtService">
+            <summary>
+            Jwt服务
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.IBaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
             <summary>
             生成Token
             </summary>
@@ -1831,7 +1911,7 @@
             <param name="expiration">分钟</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseJwtService.GenerateTokenAsync(System.Security.Claims.Claim[],System.Nullable{System.Int32})">
+        <member name="M:AhDai.Core.Infrastructure.Jwt.IBaseJwtService.GenerateTokenAsync(System.Security.Claims.Claim[],System.Nullable{System.Int32})">
             <summary>
             生成Token
             </summary>
@@ -1839,54 +1919,155 @@
             <param name="expiration">分钟</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseJwtService.ReadToken(System.String)">
+        <member name="M:AhDai.Core.Infrastructure.Jwt.IBaseJwtService.ReadToken(System.String)">
             <summary>
             读取Token
             </summary>
             <param name="token"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseJwtService.GetTokenData(System.String)">
+        <member name="M:AhDai.Core.Infrastructure.Jwt.IBaseJwtService.GetTokenData(System.String)">
             <summary>
             获取声明的数据
             </summary>
             <param name="token"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseJwtService.RefreshTokenAsync(System.String)">
+        <member name="M:AhDai.Core.Infrastructure.Jwt.IBaseJwtService.RefreshTokenAsync(System.String)">
             <summary>
             刷新Token
             </summary>
             <param name="token"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseJwtService.ValidateTokenAsync(System.String)">
+        <member name="M:AhDai.Core.Infrastructure.Jwt.IBaseJwtService.ValidateTokenAsync(System.String)">
             <summary>
             从缓存验证Token
             </summary>
             <param name="token"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseJwtService.RemoveTokenAsync(System.String)">
+        <member name="M:AhDai.Core.Infrastructure.Jwt.IBaseJwtService.RemoveTokenAsync(System.String)">
             <summary>
             从缓存中移除Token
             </summary>
             <param name="token"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseJwtService.ToTokenData(System.Security.Claims.Claim[])">
+        <member name="M:AhDai.Core.Infrastructure.Jwt.IBaseJwtService.ToTokenData(System.Security.Claims.Claim[])">
             <summary>
             转数据
             </summary>
             <param name="claims"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Interfaces.Services.IBaseMailService">
+        <member name="T:AhDai.Core.Infrastructure.Jwt.JwtAuthenticationBuilderExtensions">
+            <summary>
+            JwtAuthenticationBuilderExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.JwtAuthenticationBuilderExtensions.AddJwtAuthentication(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,AhDai.Core.Infrastructure.Jwt.JwtOptions)">
+            <summary>
+            添加Jwt认证服务
+            </summary>
+            <param name="builder"></param>
+            <param name="jwtOptions"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Jwt.JwtOptions">
+            <summary>
+            JwtOptions
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Jwt.JwtOptions.Issuer">
+            <summary>
+            签发人
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Jwt.JwtOptions.Audience">
+            <summary>
+            受众
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Jwt.JwtOptions.PrivateKey">
+            <summary>
+            私钥
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Jwt.JwtOptions.PublicKey">
+            <summary>
+            公钥
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Jwt.JwtOptions.Expiration">
+            <summary>
+            超时时间（分钟）
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Jwt.JwtOptions.ClockSkew">
+            <summary>
+            允许服务器时间偏移量（分钟）
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Jwt.JwtOptions.EnableRedis">
+            <summary>
+            启用Redis，声明数据里必须有 Username，且具有唯一性
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Jwt.JwtOptions.RedisKey">
+            <summary>
+            RedisKey
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Jwt.JwtServiceCollectionExtensions">
+            <summary>
+            JwtServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Jwt.JwtServiceCollectionExtensions.AddJwtService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddJwtService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Mail.BaseMailService">
+            <summary>
+            邮件服务
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Mail.BaseMailService.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{AhDai.Core.Infrastructure.Mail.MailOptions})">
+            <summary>
+            邮件服务
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Mail.BaseMailService.SendAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.String,AhDai.Core.Infrastructure.Mail.MailOptions,System.Threading.CancellationToken)">
+            <summary>
+            发送
+            </summary>
+            <param name="recipients">接收人</param>
+            <param name="subject">主题</param>
+            <param name="body">正文</param>
+            <param name="options">自定义配置</param>
+            <param name="cancellationToken">自定义配置</param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Mail.BaseMailService.CreateSmtpClient(AhDai.Core.Infrastructure.Mail.MailOptions)">
+            <summary>
+            创建客户端
+            </summary>
+            <param name="options">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Mail.IBaseMailService">
             <summary>
             IMailService
             </summary>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseMailService.SendAsync(System.String,System.String,System.String,AhDai.Core.Options.MailOptions,System.Threading.CancellationToken)">
+        <member name="M:AhDai.Core.Infrastructure.Mail.IBaseMailService.SendAsync(System.String,System.String,System.String,AhDai.Core.Infrastructure.Mail.MailOptions,System.Threading.CancellationToken)">
             <summary>
             发送
             </summary>
@@ -1896,7 +2077,7 @@
             <param name="options">自定义配置</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseMailService.SendAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.String,AhDai.Core.Options.MailOptions,System.Threading.CancellationToken)">
+        <member name="M:AhDai.Core.Infrastructure.Mail.IBaseMailService.SendAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.String,AhDai.Core.Infrastructure.Mail.MailOptions,System.Threading.CancellationToken)">
             <summary>
             发送
             </summary>
@@ -1906,12 +2087,238 @@
             <param name="options">自定义配置</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="T:AhDai.Core.Interfaces.Services.IBaseRedisService">
+        <member name="T:AhDai.Core.Infrastructure.Mail.MailOptions">
+            <summary>
+            MailOptions
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Mail.MailOptions.SmtpHost">
+            <summary>
+            Smtp主机
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Mail.MailOptions.SmtpPort">
+            <summary>
+            Smtp端口
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Mail.MailOptions.EnableSsl">
+            <summary>
+            EnableSsl
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Mail.MailOptions.SmtpUsername">
+            <summary>
+            Smtp用户名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Mail.MailOptions.SmtpPassword">
+            <summary>
+            Smtp密码
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Mail.MailOptions.FromAddress">
+            <summary>
+            发送地址
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Mail.MailOptions.FromDisplayName">
+            <summary>
+            发送显示名
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Mail.MailServiceCollectionExtensions">
+            <summary>
+            MailServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Mail.MailServiceCollectionExtensions.AddMailService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddMailService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.MessageBus.IMessageBus">
+            <summary>
+            IMessageBus
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.EnsureConsumerGroupAsync(System.String,System.String)">
+            <summary>
+            确保消费者组已创建
+            </summary>
+            <param name="stream"></param>
+            <param name="group"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.PublishAsync``1(System.String,``0,System.Threading.CancellationToken)">
+            <summary>
+            发布消息
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="stream"></param>
+            <param name="message"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.ConsumeAsync``1(System.String,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            批量消费
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="stream"></param>
+            <param name="group"></param>
+            <param name="consumer"></param>
+            <param name="count"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.AckAsync(System.String,System.String,System.Collections.Generic.IReadOnlyCollection{System.String},System.Threading.CancellationToken)">
+            <summary>
+            ACK
+            </summary>
+            <param name="stream"></param>
+            <param name="group"></param>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.MessageBus.MessageBusMessage`1">
+            <summary>
+            MessageBusMessage
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.MessageBus.MessageBusMessage`1.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.MessageBus.MessageBusMessage`1.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.MessageBus.MessageBusOptions">
+            <summary>
+            MessageBusOptions
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.MessageBus.MessageBusServiceCollectionExtensions">
+            <summary>
+            MessageBusServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.MessageBus.MessageBusServiceCollectionExtensions.AddRedisMessageBus(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加IMessageBus - 依赖注入单例
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.MessageBus.RedisMessageBus">
+            <summary>
+            RedisMessageBus
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.MessageBus.RedisMessageBus.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService)">
+            <summary>
+            RedisMessageBus
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.MessageBus.RedisStreamExtensions">
+            <summary>
+            RedisStreamExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.MessageBus.RedisStreamExtensions.CreateGroupIfNotExistsAsync(StackExchange.Redis.IDatabase,System.String,System.String)">
+            <summary>
+            CreateGroupIfNotExistsAsync
+            </summary>
+            <param name="db"></param>
+            <param name="stream"></param>
+            <param name="group"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.AspNetCore.ActionFilter">
+            <summary>
+            ActionFilter
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.AspNetCore.ActionFilter.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Infrastructure.AspNetCore.ActionFilter})">
+            <summary>
+            ActionFilter
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.AspNetCore.ActionFilter.Order">
+            <summary>
+            Order
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.AspNetCore.ActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            OnActionExecuting
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.AspNetCore.ActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            OnActionExecuted
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.AspNetCore.AsyncActionFilter">
+            <summary>
+            AsyncActionFilter
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.AspNetCore.AsyncActionFilter.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Infrastructure.AspNetCore.AsyncActionFilter})">
+            <summary>
+            AsyncActionFilter
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.AspNetCore.AsyncActionFilter.Order">
+            <summary>
+            Order
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.AspNetCore.AsyncActionFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
+            <summary>
+            OnActionExecutionAsync
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.AspNetCore.MvcExtensions">
+            <summary>
+            MvcExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.AspNetCore.MvcExtensions.ConfigInvalidModelStateResponse(Microsoft.AspNetCore.Mvc.ApiBehaviorOptions)">
+            <summary>
+            配置实体验证错误返回结果
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Redis.BaseRedisService">
             <summary>
             Redis服务
             </summary>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseRedisService.CreateConfiguration(System.String,System.Int32,System.String,System.Boolean)">
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Infrastructure.Redis.BaseRedisService},Microsoft.Extensions.Options.IOptions{AhDai.Core.Infrastructure.Redis.RedisOptions})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="logger"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.CreateConfiguration(System.String,System.Int32,System.String,System.Boolean)">
             <summary>
             创建连接配置
             </summary>
@@ -1921,41 +2328,192 @@
             <param name="abortConnect"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseRedisService.CreateConnection(System.String)">
-            <summary>
-            创建连接器
-            </summary>
-            <param name="configuration">配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseRedisService.CreateConfiguration(AhDai.Core.Options.RedisOptions)">
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.CreateConfiguration(AhDai.Core.Infrastructure.Redis.RedisOptions)">
             <summary>
             创建连接配置
             </summary>
             <param name="options">自定义配置</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseRedisService.CreateConnection(AhDai.Core.Options.RedisOptions)">
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.CreateConnection(System.String)">
+            <summary>
+            创建连接器
+            </summary>
+            <param name="configuration">配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.CreateConnection(AhDai.Core.Infrastructure.Redis.RedisOptions)">
             <summary>
             创建连接器
             </summary>
             <param name="options">自定义配置</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseRedisService.GetConnection(AhDai.Core.Options.RedisOptions)">
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.GetConnection(AhDai.Core.Infrastructure.Redis.RedisOptions)">
             <summary>
             获取连接实例
             </summary>
             <param name="options">自定义配置</param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Core.Interfaces.Services.IBaseRedisService.GetDatabase(System.Int32,System.Object,AhDai.Core.Options.RedisOptions)">
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.GetDatabase(System.Int32,System.Object,AhDai.Core.Infrastructure.Redis.RedisOptions)">
             <summary>
             GetDatabase
             </summary>
             <param name="db"></param>
             <param name="asyncState"></param>
             <param name="options">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.ConfigurationChangedBroadcast(System.Object,StackExchange.Redis.EndPointEventArgs)">
+            <summary>
+            当节点被明确请求通过广播重新配置时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.ConfigurationChanged(System.Object,StackExchange.Redis.EndPointEventArgs)">
+            <summary>
+            检测到配置更改时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.HashSlotMoved(System.Object,StackExchange.Redis.HashSlotMovedEventArgs)">
+            <summary>
+            当哈希槽被重新定位时/更改集群
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.ErrorMessage(System.Object,StackExchange.Redis.RedisErrorEventArgs)">
+            <summary>
+            发生错误时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.InternalError(System.Object,StackExchange.Redis.InternalErrorEventArgs)">
+            <summary>
+            发生内部错误时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.ConnectionFailed(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            连接失败，如果重新连接成功将不会收到这个通知
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.ConnectionRestored(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            建立物理连接时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Redis.IBaseRedisService">
+            <summary>
+            Redis服务
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.IBaseRedisService.CreateConfiguration(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            创建连接配置
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+            <param name="password"></param>
+            <param name="abortConnect"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.IBaseRedisService.CreateConnection(System.String)">
+            <summary>
+            创建连接器
+            </summary>
+            <param name="configuration">配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.IBaseRedisService.CreateConfiguration(AhDai.Core.Infrastructure.Redis.RedisOptions)">
+            <summary>
+            创建连接配置
+            </summary>
+            <param name="options">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.IBaseRedisService.CreateConnection(AhDai.Core.Infrastructure.Redis.RedisOptions)">
+            <summary>
+            创建连接器
+            </summary>
+            <param name="options">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.IBaseRedisService.GetConnection(AhDai.Core.Infrastructure.Redis.RedisOptions)">
+            <summary>
+            获取连接实例
+            </summary>
+            <param name="options">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.IBaseRedisService.GetDatabase(System.Int32,System.Object,AhDai.Core.Infrastructure.Redis.RedisOptions)">
+            <summary>
+            GetDatabase
+            </summary>
+            <param name="db"></param>
+            <param name="asyncState"></param>
+            <param name="options">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Redis.RedisOptions">
+            <summary>
+            RedisOptions
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Redis.RedisOptions.Host">
+            <summary>
+            主机
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Redis.RedisOptions.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Redis.RedisOptions.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Redis.RedisOptions.AbortConnect">
+            <summary>
+            连接失败时放弃连接
+            如果为 true，则 Connect 不会在没有可用服务器时创建连接
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.Redis.RedisOptions.Database">
+            <summary>
+            默认库
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.Redis.RedisServiceCollectionExtensions">
+            <summary>
+            RedisServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Redis.RedisServiceCollectionExtensions.AddRedisService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            添加Redis服务 - 依赖注入单例
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Metadata.OptionItem`1">
@@ -2408,6 +2966,73 @@
             Content
             </summary>
         </member>
+        <member name="T:AhDai.Core.Models.IActionResult`1">
+            <summary>
+            IActionResult
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AhDai.Core.Models.IActionResult`1.ActionId">
+            <summary>
+            动作Id
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.IActionResult`1.Code">
+            <summary>
+            状态代码
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.IActionResult`1.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.IActionResult`1.Content">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.IActionResult`1.ContentType">
+            <summary>
+            内容类型
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Models.IApiResult">
+            <summary>
+            IApiResult
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.IApiResult.Code">
+            <summary>
+            状态代码
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.IApiResult.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.IApiResult.TraceId">
+            <summary>
+            追踪Id
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Models.IApiResult`1">
+            <summary>
+            IApiResult
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AhDai.Core.Models.IApiResult`1.Data">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.IApiResult`1.ExtraData">
+            <summary>
+            扩展数据
+            </summary>
+        </member>
         <member name="T:AhDai.Core.Models.TokenData">
             <summary>
             TokenData
@@ -2488,182 +3113,6 @@
             错误信息
             </summary>
         </member>
-        <member name="T:AhDai.Core.Options.ElasticOptions">
-            <summary>
-            ElasticOptions
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.ElasticOptions.Host">
-            <summary>
-            主机
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.ElasticOptions.Username">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.ElasticOptions.Password">
-            <summary>
-            密码
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.ElasticOptions.DefaultIndex">
-            <summary>
-            默认索引
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Options.FileOptions">
-            <summary>
-            FileOptions
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.FileOptions.UploadDirectory">
-            <summary>
-            上传根目录
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.FileOptions.DownloadDirectory">
-            <summary>
-            下载根目录
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.FileOptions.ExportDirectory">
-            <summary>
-            文件导出目录
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.FileOptions.MaxLength">
-            <summary>
-            最大长度
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.FileOptions.Extensions">
-            <summary>
-            扩展名
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.FileOptions.ComputeHash">
-            <summary>
-            是否需要计算文件哈希（SHA256）
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Options.JwtOptions">
-            <summary>
-            JwtOptions
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.JwtOptions.Issuer">
-            <summary>
-            签发人
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.JwtOptions.Audience">
-            <summary>
-            受众
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.JwtOptions.PrivateKey">
-            <summary>
-            私钥
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.JwtOptions.PublicKey">
-            <summary>
-            公钥
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.JwtOptions.Expiration">
-            <summary>
-            超时时间（分钟）
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.JwtOptions.ClockSkew">
-            <summary>
-            允许服务器时间偏移量（分钟）
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.JwtOptions.EnableRedis">
-            <summary>
-            启用Redis，声明数据里必须有 Username，且具有唯一性
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.JwtOptions.RedisKey">
-            <summary>
-            RedisKey
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Options.MailOptions">
-            <summary>
-            MailOptions
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.MailOptions.SmtpHost">
-            <summary>
-            Smtp主机
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.MailOptions.SmtpPort">
-            <summary>
-            Smtp端口
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.MailOptions.EnableSsl">
-            <summary>
-            EnableSsl
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.MailOptions.SmtpUsername">
-            <summary>
-            Smtp用户名
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.MailOptions.SmtpPassword">
-            <summary>
-            Smtp密码
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.MailOptions.FromAddress">
-            <summary>
-            发送地址
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.MailOptions.FromDisplayName">
-            <summary>
-            发送显示名
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Options.RedisOptions">
-            <summary>
-            RedisOptions
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.RedisOptions.Host">
-            <summary>
-            主机
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.RedisOptions.Port">
-            <summary>
-            端口
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.RedisOptions.Password">
-            <summary>
-            密码
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.RedisOptions.AbortConnect">
-            <summary>
-            连接失败时放弃连接
-            如果为 true，则 Connect 不会在没有可用服务器时创建连接
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Options.RedisOptions.Database">
-            <summary>
-            默认库
-            </summary>
-        </member>
         <member name="T:AhDai.Core.Requirements.PermissionRequirement">
             <summary>
             PermissionRequirement
@@ -2694,335 +3143,6 @@
             <summary>
             错误消息
             </summary>
-        </member>
-        <member name="T:AhDai.Core.Services.BaseFileService">
-            <summary>
-            文件服务
-            </summary>
-            <param name="options"></param>
-            <param name="httpClientFactory"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{AhDai.Core.Options.FileOptions},System.Net.Http.IHttpClientFactory)">
-            <summary>
-            文件服务
-            </summary>
-            <param name="options"></param>
-            <param name="httpClientFactory"></param>
-        </member>
-        <member name="P:AhDai.Core.Services.BaseFileService.ContentTypeProvider">
-            <summary>
-            TypeProvider
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.BaseFileService.HttpClientFactory">
-            <summary>
-            httpClientFactory
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.GetType(System.String)">
-            <summary>
-            获取类型
-            </summary>
-            <param name="extension"></param>
-            <returns>MimeType</returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile,System.String,System.Threading.CancellationToken)">
-            <summary>
-            上传
-            </summary>
-            <param name="root"></param>
-            <param name="dir"></param>
-            <param name="file"></param>
-            <param name="category"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.UploadAsync(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile[],System.String,System.Threading.CancellationToken)">
-            <summary>
-            上传
-            </summary>
-            <param name="root"></param>
-            <param name="dir"></param>
-            <param name="files"></param>
-            <param name="category"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.DownloadAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            下载
-            </summary>
-            <param name="httpClient"></param>
-            <param name="root"></param>
-            <param name="dir"></param>
-            <param name="url"></param>
-            <param name="name"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.DownloadAndOpenAsync(System.Net.Http.HttpClient,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            下载并打开
-            </summary>
-            <param name="httpClient"></param>
-            <param name="root"></param>
-            <param name="dir"></param>
-            <param name="url"></param>
-            <param name="name"></param>
-            <param name="cancellationToken"></param>
-            <returns>fs的Position=0</returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.ComputeHashAsync(System.IO.Stream,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
-            <summary>
-            计算哈希
-            </summary>
-            <param name="fs"></param>
-            <param name="computeHash"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseFileService.ComputeHash(System.Byte[],System.Nullable{System.Boolean})">
-            <summary>
-            计算哈希
-            </summary>
-            <param name="bytes"></param>
-            <param name="computeHash"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Services.BaseJwtService">
-            <summary>
-            Jwt服务
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.#ctor(Microsoft.Extensions.Options.IOptions{AhDai.Core.Options.JwtOptions},AhDai.Core.Interfaces.Services.IBaseRedisService)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="options"></param>
-            <param name="redisService"></param>
-        </member>
-        <member name="P:AhDai.Core.Services.BaseJwtService.SigningCredentials">
-            <summary>
-            RSA
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Services.BaseJwtService.RedisService">
-            <summary>
-            RedisService
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
-            <summary>
-            GenerateToken
-            </summary>
-            <param name="data"></param>
-            <param name="expiration">分钟</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.GenerateTokenAsync(System.Security.Claims.Claim[],System.Nullable{System.Int32})">
-            <summary>
-            GenerateToken
-            </summary>
-            <param name="claims"></param>
-            <param name="expiration">分钟</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.ReadToken(System.String)">
-            <summary>
-            获取声明的数据
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.GetTokenData(System.String)">
-            <summary>
-            获取声明的数据
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.RefreshTokenAsync(System.String)">
-            <summary>
-            刷新Token
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.ValidateTokenAsync(System.String)">
-            <summary>
-            从缓存验证Token
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.RemoveTokenAsync(System.String)">
-            <summary>
-            从缓存中移除Token
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.ToTokenData(System.Security.Claims.Claim[])">
-            <summary>
-            转数据
-            </summary>
-            <param name="claims"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.BuildRedisKey(System.String,System.String)">
-            <summary>
-            BuildRedisKey
-            </summary>
-            <param name="username"></param>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseJwtService.Dispose">
-            <summary>
-            Dispose
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Services.BaseMailService">
-            <summary>
-            邮件服务
-            </summary>
-            <param name="options"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseMailService.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{AhDai.Core.Options.MailOptions})">
-            <summary>
-            邮件服务
-            </summary>
-            <param name="options"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseMailService.SendAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.String,AhDai.Core.Options.MailOptions,System.Threading.CancellationToken)">
-            <summary>
-            发送
-            </summary>
-            <param name="recipients">接收人</param>
-            <param name="subject">主题</param>
-            <param name="body">正文</param>
-            <param name="options">自定义配置</param>
-            <param name="cancellationToken">自定义配置</param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseMailService.CreateSmtpClient(AhDai.Core.Options.MailOptions)">
-            <summary>
-            创建客户端
-            </summary>
-            <param name="options">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Services.BaseRedisService">
-            <summary>
-            Redis服务
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Services.BaseRedisService},Microsoft.Extensions.Options.IOptionsMonitor{AhDai.Core.Options.RedisOptions})">
-            <summary>
-            构造函数
-            </summary>
-            <param name="logger"></param>
-            <param name="options"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.CreateConfiguration(System.String,System.Int32,System.String,System.Boolean)">
-            <summary>
-            创建连接配置
-            </summary>
-            <param name="host"></param>
-            <param name="port"></param>
-            <param name="password"></param>
-            <param name="abortConnect"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.CreateConfiguration(AhDai.Core.Options.RedisOptions)">
-            <summary>
-            创建连接配置
-            </summary>
-            <param name="options">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.CreateConnection(System.String)">
-            <summary>
-            创建连接器
-            </summary>
-            <param name="configuration">配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.CreateConnection(AhDai.Core.Options.RedisOptions)">
-            <summary>
-            创建连接器
-            </summary>
-            <param name="options">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.GetConnection(AhDai.Core.Options.RedisOptions)">
-            <summary>
-            获取连接实例
-            </summary>
-            <param name="options">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.GetDatabase(System.Int32,System.Object,AhDai.Core.Options.RedisOptions)">
-            <summary>
-            GetDatabase
-            </summary>
-            <param name="db"></param>
-            <param name="asyncState"></param>
-            <param name="options">自定义配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.Dispose">
-            <summary>
-            Dispose
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.ConfigurationChangedBroadcast(System.Object,StackExchange.Redis.EndPointEventArgs)">
-            <summary>
-            当节点被明确请求通过广播重新配置时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.ConfigurationChanged(System.Object,StackExchange.Redis.EndPointEventArgs)">
-            <summary>
-            检测到配置更改时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.HashSlotMoved(System.Object,StackExchange.Redis.HashSlotMovedEventArgs)">
-            <summary>
-            当哈希槽被重新定位时/更改集群
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.ErrorMessage(System.Object,StackExchange.Redis.RedisErrorEventArgs)">
-            <summary>
-            发生错误时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.InternalError(System.Object,StackExchange.Redis.InternalErrorEventArgs)">
-            <summary>
-            发生内部错误时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.ConnectionFailed(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
-            <summary>
-            连接失败，如果重新连接成功将不会收到这个通知
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AhDai.Core.Services.BaseRedisService.ConnectionRestored(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
-            <summary>
-            建立物理连接时
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
         </member>
         <member name="T:AhDai.Core.Utils.Base64Util">
             <summary>
@@ -3592,8 +3712,8 @@
         <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
             <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
         </member>
-        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_ascii_662A8000662A800">
-            <summary>Supports searching for characters in or not in "ABIMNSUWabimnsuw".</summary>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_indexOfAnyStrings_OrdinalIgnoreCase_46014A8B7B3C7A2F9033727512F94E85EAA984C17CE55A0D78E1E676BFA041AA">
+            <summary>Supports searching for the specified strings.</summary>
         </member>
     </members>
 </doc>

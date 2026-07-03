@@ -1,4 +1,8 @@
-﻿using AhDai.Core.Extensions;
+﻿using AhDai.Core.Infrastructure.DependencyInjection;
+using AhDai.Core.Infrastructure.File;
+using AhDai.Core.Infrastructure.Http;
+using AhDai.Core.Infrastructure.Jwt;
+using AhDai.Core.Infrastructure.Redis;
 using AhDai.Core.Utils;
 using AhDai.Integration.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +32,7 @@ internal class MyStartup : IStartup
         //ArgumentException.ThrowIfNullOrEmpty(masterConnectionString);
         //AddDbContextFactory<MasterDbContext>(builder.Services, masterConnectionString, new Interceptors.MySaveChangesInterceptor(true), new Interceptors.MyDbCommandInterceptor());
 
-        builder.Services.AddTransient<Core.Handlers.HttpLoggingHandler>();
+        builder.Services.AddTransient<HttpLoggingHandler>();
         builder.Services.AddHttpClient("", client =>
         {
             client.DefaultRequestHeaders.Connection.Add("keep-alive");
@@ -58,7 +62,7 @@ internal class MyStartup : IStartup
             //    RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true
             //}
 
-        }).AddHttpMessageHandler<Core.Handlers.HttpLoggingHandler>();
+        }).AddHttpMessageHandler<HttpLoggingHandler>();
         //services.AddHttpClient("NoCertificateValidation", client =>
         //{
 

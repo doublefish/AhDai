@@ -18,7 +18,7 @@ public class Program
         builder.Configuration.AddJsonFile("appsettings.secrets.json", optional: false, reloadOnChange: true);
 
         // 添加业务服务
-        Service.Startup.ConfigureServices(builder.Services, builder.Configuration, true);
+        Service.Startup.ConfigureServices(builder, true);
 
         //builder.Services.AddRedisService();
         //builder.Services.AddJwtService();

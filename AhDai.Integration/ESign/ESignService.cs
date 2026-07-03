@@ -1,4 +1,4 @@
-﻿using AhDai.Core.Interfaces.Services;
+﻿using AhDai.Core.Infrastructure.File;
 using AhDai.Core.Utils;
 using AhDai.Integration.ESign.Configs;
 using AhDai.Integration.ESign.Models;

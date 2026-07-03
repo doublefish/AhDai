@@ -1,5 +1,4 @@
-using AhDai.Core.Extensions;
-using AhDai.WebApi.Configs;
+using AhDai.Core.Infrastructure.AspNetCore;
 using AhDai.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -12,11 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 
 namespace AhDai.WebApi;
 
@@ -112,7 +109,7 @@ public class Program
             //options.Filters.Add<HttpResponseExceptionFilter>();
             options.Filters.Add(new AuthorizeFilter());
             options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory());
-            options.Filters.Add<Core.Filters.AsyncActionFilter>();
+            options.Filters.Add<AsyncActionFilter>();
             options.ModelBinderProviders.Insert(0, new Configs.CommaSeparatedArrayModelBinderProvider());
         }).ConfigureApiBehaviorOptions(options =>
         {

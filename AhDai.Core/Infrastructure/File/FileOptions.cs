@@ -1,0 +1,34 @@
+﻿using System.Collections.Generic;
+
+namespace AhDai.Core.Infrastructure.File;
+
+/// <summary>
+/// FileOptions
+/// </summary>
+public class FileOptions
+{
+    /// <summary>
+    /// 上传根目录
+    /// </summary>
+    public string UploadDirectory { get; set; } = "uploads";
+    /// <summary>
+    /// 下载根目录
+    /// </summary>
+    public string DownloadDirectory { get; set; } = "downloads";
+    /// <summary>
+    /// 文件导出目录
+    /// </summary>
+    public string ExportDirectory { get; set; } = "exports";
+    /// <summary>
+    /// 最大长度
+    /// </summary>
+    public long MaxLength { get; set; }
+    /// <summary>
+    /// 扩展名
+    /// </summary>
+    public Dictionary<string, string[]> Extensions { get; set; } = [];
+    /// <summary>
+    /// 是否需要计算文件哈希（SHA256）
+    /// </summary>
+    public bool ComputeHash { get; set; }
+}

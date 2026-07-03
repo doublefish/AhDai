@@ -1,6 +1,4 @@
-﻿using AhDai.Core.Interfaces.Models;
-
-namespace AhDai.Core.Models;
+﻿namespace AhDai.Core.Models;
 
 /// <summary>
 /// ApiResult

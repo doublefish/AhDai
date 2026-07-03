@@ -83,7 +83,7 @@
             </summary>
             <param name="jwtService"></param>
         </member>
-        <member name="M:AhDai.WebApi.Controllers.AuthController.#ctor(AhDai.Core.Interfaces.Services.IBaseJwtService)">
+        <member name="M:AhDai.WebApi.Controllers.AuthController.#ctor(AhDai.Core.Infrastructure.Jwt.IBaseJwtService)">
             <summary>
             
             </summary>

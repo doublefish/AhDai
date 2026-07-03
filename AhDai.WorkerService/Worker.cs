@@ -1,4 +1,4 @@
-using AhDai.Core.Infrastructure;
+using AhDai.Core.Infrastructure.DependencyInjection;
 using AhDai.Service;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

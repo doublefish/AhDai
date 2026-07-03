@@ -1,4 +1,4 @@
-﻿using AhDai.Core.Interfaces.Services;
+﻿using AhDai.Core.Infrastructure.File;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

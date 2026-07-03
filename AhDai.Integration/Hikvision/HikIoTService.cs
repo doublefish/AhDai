@@ -1,4 +1,4 @@
-﻿using AhDai.Core.Interfaces.Services;
+﻿using AhDai.Core.Infrastructure.Redis;
 using AhDai.Core.Utils;
 using AhDai.Integration.Abstractions;
 using AhDai.Integration.Hikvision.Configs;

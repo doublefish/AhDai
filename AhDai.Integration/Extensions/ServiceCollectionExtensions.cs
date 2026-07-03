@@ -1,4 +1,4 @@
-﻿using AhDai.Core.Extensions;
+﻿using AhDai.Core.Infrastructure.DependencyInjection;
 using AhDai.Integration.Abstractions;
 using AhDai.Integration.Infrastructure;
 using AhDai.Integration.Options;

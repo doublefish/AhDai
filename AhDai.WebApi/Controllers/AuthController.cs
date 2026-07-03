@@ -1,6 +1,5 @@
 ﻿using AhDai.Core.Extensions;
-using AhDai.Core.Interfaces.Models;
-using AhDai.Core.Interfaces.Services;
+using AhDai.Core.Infrastructure.Jwt;
 using AhDai.Core.Models;
 using AhDai.WebApi.Models;
 using Microsoft.AspNetCore.Authorization;

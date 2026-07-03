@@ -1,18 +1,15 @@
-﻿using AhDai.Core.Extensions;
+﻿using AhDai.Core.Infrastructure.Authorization;
+using AhDai.Core.Infrastructure.Jwt;
 using AhDai.Core.Requirements;
 using AhDai.WebApi.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Xml.Linq;
 
 namespace AhDai.WebApi.Extensions;
 
@@ -30,7 +27,7 @@ internal static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddMyAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtOptions = configuration.GetSection("Jwt").Get<Core.Options.JwtOptions>() ?? throw new InvalidOperationException("未配置Jwt");
+        var jwtOptions = configuration.GetSection("Jwt").Get<JwtOptions>() ?? throw new InvalidOperationException("未配置Jwt");
         services.AddAuthentication(options =>
         {
             //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;

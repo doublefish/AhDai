@@ -1,4 +1,4 @@
-﻿using AhDai.Core.Interfaces.Services;
+﻿using AhDai.Core.Infrastructure.Redis;
 using AhDai.Integration.Abstractions;
 using AhDai.Integration.Baidu.Configs;
 using AhDai.Integration.Baidu.Models.Ocr;

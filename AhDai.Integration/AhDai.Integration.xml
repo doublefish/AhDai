@@ -802,7 +802,7 @@
             AmapService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Amap.AmapService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Amap.Providers.IAmapConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Amap.AmapService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Amap.Providers.IAmapConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             AmapService
             </summary>
@@ -1873,7 +1873,7 @@
             BaiduFaceprintService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Baidu.BaiduFaceprintService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduFaceprintConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Baidu.BaiduFaceprintService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduFaceprintConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             BaiduFaceprintService
             </summary>
@@ -1883,7 +1883,7 @@
             BaiduMapService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Baidu.BaiduMapService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduMapConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Baidu.BaiduMapService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduMapConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             BaiduMapService
             </summary>
@@ -1893,7 +1893,7 @@
             BaiduOcrService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Baidu.BaiduOcrService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduOcrConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Baidu.BaiduOcrService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduOcrConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             BaiduOcrService
             </summary>
@@ -1903,7 +1903,7 @@
             BaseBaiduService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Baidu.BaseBaiduService`2.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,`1,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Baidu.BaseBaiduService`2.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,`1,System.Net.Http.IHttpClientFactory)">
             <summary>
             BaseBaiduService
             </summary>
@@ -4188,7 +4188,7 @@
             ESignService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.ESign.ESignService.#ctor(AhDai.Integration.ESign.Providers.IESignConfigProvider,System.Net.Http.IHttpClientFactory,AhDai.Core.Interfaces.Services.IBaseFileService)">
+        <member name="M:AhDai.Integration.ESign.ESignService.#ctor(AhDai.Integration.ESign.Providers.IESignConfigProvider,System.Net.Http.IHttpClientFactory,AhDai.Core.Infrastructure.File.IBaseFileService)">
             <summary>
             ESignService
             </summary>
@@ -5881,7 +5881,7 @@
             BaseHikvisionService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Hikvision.BaseHikvisionService`2.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,`1,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Hikvision.BaseHikvisionService`2.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,`1,System.Net.Http.IHttpClientFactory)">
             <summary>
             BaseHikvisionService
             </summary>
@@ -5947,7 +5947,7 @@
             HikIoTService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Hikvision.HikIoTService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Hikvision.Providers.IHikIoTConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Hikvision.HikIoTService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Hikvision.Providers.IHikIoTConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             HikIoTService
             </summary>
@@ -8536,7 +8536,7 @@
             TianyanchaService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Tencent.TencentMapService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Tencent.Providers.ITencentMapConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Tencent.TencentMapService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Tencent.Providers.ITencentMapConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             TianyanchaService
             </summary>
@@ -8931,7 +8931,7 @@
             BaseWeChatService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.WeChat.BaseWeChatService`2.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,`1,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.WeChat.BaseWeChatService`2.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,`1,System.Net.Http.IHttpClientFactory)">
             <summary>
             BaseWeChatService
             </summary>
@@ -10149,7 +10149,7 @@
             WeChatMiniProgramService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.WeChat.WeChatMiniProgramService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.WeChat.Providers.IWeChatMiniProgramConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.WeChat.WeChatMiniProgramService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.WeChat.Providers.IWeChatMiniProgramConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             WeChatMiniProgramService
             </summary>
@@ -10159,7 +10159,7 @@
             WeChatOfficialAccountService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.WeChat.WeChatOfficialAccountService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.WeChat.Providers.IWeChatOfficialAccountConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.WeChat.WeChatOfficialAccountService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.WeChat.Providers.IWeChatOfficialAccountConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             WeChatOfficialAccountService
             </summary>
@@ -10187,7 +10187,7 @@
             WeChatWebAppService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.WeChat.WeChatWebAppService.#ctor(AhDai.Core.Interfaces.Services.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.WeChat.Providers.IWeChatWebAppConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.WeChat.WeChatWebAppService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.WeChat.Providers.IWeChatWebAppConfigProvider,System.Net.Http.IHttpClientFactory)">
             <summary>
             WeChatWebAppService
             </summary>
