@@ -84,6 +84,47 @@
             AliyunOssService
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Aliyun.AliyunServiceCollectionExtensions">
+            <summary>
+            AliyunServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Aliyun.AliyunServiceCollectionExtensions.AddAliyunOssService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddAliyunOssService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Aliyun.AliyunServiceCollectionExtensions.AddAliyunVodService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddAliyunVodService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Aliyun.AliyunServiceCollectionExtensions.AddAliyunOcrService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddAliyunOcrService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Aliyun.AliyunServiceCollectionExtensions.AddAliyunSmsService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddAliyunSmsService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Aliyun.AliyunSmsService">
             <summary>
             AliyunService
@@ -807,6 +848,20 @@
             AmapService
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Amap.AmapServiceCollectionExtensions">
+            <summary>
+            AmapServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Amap.AmapServiceCollectionExtensions.AddAmapService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddAmapService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Amap.AmapStringConverter">
             <summary>
             AmapStringConverter
@@ -1394,6 +1449,20 @@
             AntChainNotaryService
             </summary>
         </member>
+        <member name="T:AhDai.Integration.AntChain.AntChainServiceCollectionExtensions">
+            <summary>
+            AntChainServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.AntChain.AntChainServiceCollectionExtensions.AddAntChainNotaryService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddAntChainNotaryService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.AntChain.Configs.AntChainConfig">
             <summary>
             AntChainConfig
@@ -1897,6 +1966,38 @@
             <summary>
             BaiduOcrService
             </summary>
+        </member>
+        <member name="T:AhDai.Integration.Baidu.BaiduServiceCollectionExtensions">
+            <summary>
+            BaiduServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Baidu.BaiduServiceCollectionExtensions.AddBaiduFaceprintService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddBaiduFaceprintService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Baidu.BaiduServiceCollectionExtensions.AddBaiduMapService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddBaiduMapService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Baidu.BaiduServiceCollectionExtensions.AddBaiduOcrService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddBaiduOcrService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
         </member>
         <member name="T:AhDai.Integration.Baidu.BaseBaiduService`2">
             <summary>
@@ -4193,6 +4294,20 @@
             ESignService
             </summary>
         </member>
+        <member name="T:AhDai.Integration.ESign.ESignServiceCollectionExtensions">
+            <summary>
+            ESignServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.ESign.ESignServiceCollectionExtensions.AddESignService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddESignService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.ESign.IESignService">
             <summary>
             IESignService
@@ -5708,174 +5823,6 @@
             ServiceCollectionExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.ConfigureRedisKeyBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
-            <summary>
-            AddRedisKeyBuilder
-            </summary>
-            <param name="services"></param>
-            <param name="prefix"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddRedisKeyBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            AddRedisKeyBuilder
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddAliyunOssService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddAliyunOssService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddAliyunVodService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddAliyunVodService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddAliyunOcrService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddAliyunOcrService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddAliyunSmsService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddAliyunSmsService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddAmapService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddAmapService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddAntChainNotaryService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddAntChainNotaryService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddBaiduFaceprintService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddBaiduFaceprintService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddBaiduMapService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddBaiduMapService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddBaiduOcrService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddBaiduOcrService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddHikIoTService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddHikIoTService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddESignService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddESignService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddTianyanchaService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddTianyanchaService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddTencentMapService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddTencentMapService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddWeChatMiniProgramService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddWeChatMiniProgramService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddWeChatOfficialAccountService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddWeChatOfficialAccountService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddWeChatPayService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddWeChatPayService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Integration.Extensions.ServiceCollectionExtensions.AddWeChatWebAppService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            AddWeChatWebAppService
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Integration.Hikvision.BaseHikvisionService`2">
             <summary>
             BaseHikvisionService
@@ -5951,6 +5898,20 @@
             <summary>
             HikIoTService
             </summary>
+        </member>
+        <member name="T:AhDai.Integration.Hikvision.HikvisionServiceCollectionExtensions">
+            <summary>
+            HikvisionServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Hikvision.HikvisionServiceCollectionExtensions.AddHikIoTService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddHikIoTService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
         </member>
         <member name="T:AhDai.Integration.Hikvision.IBaseHikvisionService`1">
             <summary>
@@ -7420,6 +7381,26 @@
             <param name="segments"></param>
             <returns></returns>
         </member>
+        <member name="T:AhDai.Integration.Infrastructure.RedisServiceCollectionExtensions">
+            <summary>
+            RedisServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.RedisServiceCollectionExtensions.ConfigureRedisKeyBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            AddRedisKeyBuilder
+            </summary>
+            <param name="services"></param>
+            <param name="prefix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.RedisServiceCollectionExtensions.AddRedisKeyBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddRedisKeyBuilder
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Models.BaseConfig">
             <summary>
             BaseConfig
@@ -8541,6 +8522,20 @@
             TianyanchaService
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Tencent.TencentServiceCollectionExtensions">
+            <summary>
+            TencentServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Tencent.TencentServiceCollectionExtensions.AddTencentMapService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddTencentMapService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Tianyancha.Configs.TianyanchaConfig">
             <summary>
             TianyanchaConfig
@@ -8850,6 +8845,20 @@
             <summary>
             TianyanchaService
             </summary>
+        </member>
+        <member name="T:AhDai.Integration.Tianyancha.TianyanchaServiceCollectionExtensions">
+            <summary>
+            TianyanchaServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Tianyancha.TianyanchaServiceCollectionExtensions.AddTianyanchaService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddTianyanchaService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
         </member>
         <member name="T:AhDai.Integration.Utils.ObjectUtls">
             <summary>
@@ -10180,6 +10189,47 @@
             </summary>
             <param name="config"></param>
             <param name="type">1-商户证书，2-商户私钥，3-平台证书</param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Integration.WeChat.WeChatServiceCollectionExtensions">
+            <summary>
+            WeChatServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.WeChatServiceCollectionExtensions.AddWeChatMiniProgramService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddWeChatMiniProgramService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.WeChatServiceCollectionExtensions.AddWeChatOfficialAccountService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddWeChatOfficialAccountService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.WeChatServiceCollectionExtensions.AddWeChatPayService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddWeChatPayService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.WeChatServiceCollectionExtensions.AddWeChatWebAppService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            AddWeChatWebAppService
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Integration.WeChat.WeChatWebAppService">
