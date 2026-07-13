@@ -14,15 +14,16 @@ public static class RedisStreamExtensions
     /// <param name="db"></param>
     /// <param name="stream"></param>
     /// <param name="group"></param>
+    /// <param name="startId"></param>
     /// <returns></returns>
-    public static async Task CreateGroupIfNotExistsAsync(this IDatabase db, string stream, string group)
+    public static async Task CreateGroupIfNotExistsAsync(this IDatabase db, string stream, string group, RedisValue? startId = null)
     {
         try
         {
-            await db.StreamCreateConsumerGroupAsync(stream, group, "$", true);
+            await db.StreamCreateConsumerGroupAsync(stream, group, startId ?? "$", true);
         }
         catch (RedisServerException ex)
-        when (ex.Message.StartsWith("BUSYGROUP"))
+        when (ex.Message.Contains("BUSYGROUP"))
         {
         }
     }

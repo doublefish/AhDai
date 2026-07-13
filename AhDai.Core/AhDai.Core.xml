@@ -2141,6 +2141,22 @@
             <param name="key"></param>
             <returns></returns>
         </member>
+        <member name="T:AhDai.Core.Infrastructure.MessageBus.ClaimResult`1">
+            <summary>
+            ClaimResult
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.MessageBus.ClaimResult`1.Messages">
+            <summary>
+            Messages
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.MessageBus.ClaimResult`1.NextId">
+            <summary>
+            NextId
+            </summary>
+        </member>
         <member name="T:AhDai.Core.Infrastructure.MessageBus.IMessageBus">
             <summary>
             IMessageBus
@@ -2155,20 +2171,20 @@
         </member>
         <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.PublishAsync``1(System.String,``0,System.Threading.CancellationToken)">
             <summary>
-            发布消息
+            发布
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="stream"></param>
+            <param name="topic"></param>
             <param name="message"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.ConsumeAsync``1(System.String,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
             <summary>
-            批量消费
+            消费
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="stream"></param>
+            <param name="topic"></param>
             <param name="group"></param>
             <param name="consumer"></param>
             <param name="count"></param>
@@ -2177,11 +2193,24 @@
         </member>
         <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.AckAsync(System.String,System.String,System.Collections.Generic.IReadOnlyCollection{System.String},System.Threading.CancellationToken)">
             <summary>
-            ACK
+            确认回答
             </summary>
-            <param name="stream"></param>
+            <param name="topic"></param>
             <param name="group"></param>
             <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.RecoverAsync``1(System.String,System.String,System.String,System.TimeSpan,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            恢复未确认的消息
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="topic"></param>
+            <param name="group"></param>
+            <param name="consumer"></param>
+            <param name="minIdleTime"></param>
+            <param name="count"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -2189,6 +2218,7 @@
             <summary>
             MessageBusMessage
             </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="P:AhDai.Core.Infrastructure.MessageBus.MessageBusMessage`1.Id">
             <summary>
@@ -2232,13 +2262,14 @@
             RedisStreamExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.MessageBus.RedisStreamExtensions.CreateGroupIfNotExistsAsync(StackExchange.Redis.IDatabase,System.String,System.String)">
+        <member name="M:AhDai.Core.Infrastructure.MessageBus.RedisStreamExtensions.CreateGroupIfNotExistsAsync(StackExchange.Redis.IDatabase,System.String,System.String,System.Nullable{StackExchange.Redis.RedisValue})">
             <summary>
             CreateGroupIfNotExistsAsync
             </summary>
             <param name="db"></param>
             <param name="stream"></param>
             <param name="group"></param>
+            <param name="startId"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Infrastructure.Mvc.ActionFilter">

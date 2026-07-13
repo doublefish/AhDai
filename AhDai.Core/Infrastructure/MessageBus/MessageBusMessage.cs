@@ -3,6 +3,7 @@
 /// <summary>
 /// MessageBusMessage
 /// </summary>
+/// <typeparam name="T"></typeparam>
 public class MessageBusMessage<T>
 {
     /// <summary>
