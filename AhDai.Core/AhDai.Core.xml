@@ -2141,22 +2141,6 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Infrastructure.MessageBus.ClaimResult`1">
-            <summary>
-            ClaimResult
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:AhDai.Core.Infrastructure.MessageBus.ClaimResult`1.Messages">
-            <summary>
-            Messages
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Infrastructure.MessageBus.ClaimResult`1.NextId">
-            <summary>
-            NextId
-            </summary>
-        </member>
         <member name="T:AhDai.Core.Infrastructure.MessageBus.IMessageBus">
             <summary>
             IMessageBus
@@ -3529,23 +3513,24 @@
         <member name="M:AhDai.Core.Utils.LoggerUtil.Initialize(Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             允许在系统启动时手动注册或通过 DI 容器自动解耦注入工厂。
-            彻底解决由于 ServiceLocator 尚未初始化导致的程序启动早期死锁崩溃隐患。
             </summary>
+            <param name="factory"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:AhDai.Core.Utils.LoggerUtil.GetLogger``1">
             <summary>
-            获取高性能强类型日志器（现代泛型快路径：无任何锁、0 反射、0 内存分配开销）
+            获取日志器
             </summary>
             <typeparam name="T">业务分类类型</typeparam>
         </member>
         <member name="M:AhDai.Core.Utils.LoggerUtil.GetLogger(System.Type)">
             <summary>
-            获取日志器（基于指定的 Type 分类）
+            获取日志器
             </summary>
         </member>
         <member name="M:AhDai.Core.Utils.LoggerUtil.GetLogger(System.String)">
             <summary>
-            获取日志器（基于字符串分类名）
+            获取日志器
             </summary>
             <param name="categoryName">日志类别名称（如 "AhDai.Core.DigitalChain"）</param>
         </member>
@@ -3743,8 +3728,8 @@
         <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
             <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
         </member>
-        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_ascii_662A8000662A800">
-            <summary>Supports searching for characters in or not in "ABIMNSUWabimnsuw".</summary>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_indexOfAnyStrings_OrdinalIgnoreCase_46014A8B7B3C7A2F9033727512F94E85EAA984C17CE55A0D78E1E676BFA041AA">
+            <summary>Supports searching for the specified strings.</summary>
         </member>
     </members>
 </doc>
