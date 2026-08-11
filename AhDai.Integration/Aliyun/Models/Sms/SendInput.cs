@@ -6,7 +6,7 @@ namespace AhDai.Integration.Aliyun.Models.Sms;
 /// <summary>
 /// SendInput
 /// </summary>
-public class SendInput
+public record SendInput
 {
     /// <summary>
     /// 接收短信的手机号码
@@ -35,5 +35,4 @@ public class SendInput
     /// 外部流水扩展字段
     /// </summary>
     public string? OutId { get; set; }
-
 }

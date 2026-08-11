@@ -5,7 +5,7 @@ namespace AhDai.Integration.WeChat.Models.OfficialAccount;
 /// <summary>
 /// 模板消息
 /// </summary>
-public class TemplateMessageInput
+public record TemplateMessageInput
 {
     /// <summary>
     /// 接收者openid

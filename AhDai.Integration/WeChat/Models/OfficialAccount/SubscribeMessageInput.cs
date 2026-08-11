@@ -5,7 +5,7 @@ namespace AhDai.Integration.WeChat.Models.OfficialAccount;
 /// <summary>
 /// 订阅消息
 /// </summary>
-public class SubscribeMessageInput
+public record SubscribeMessageInput
 {
     /// <summary>
     /// 接收者（用户）的 openid

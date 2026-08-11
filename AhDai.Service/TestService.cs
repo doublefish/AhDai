@@ -46,8 +46,7 @@ internal class TestService(IServiceProvider serviceProvider) : ITestService
     async Task TestAliyunAsync()
     {
         var service = _serviceProvider.GetRequiredService<Integration.Aliyun.IAliyunSmsService>();
-
-        var res = await service.SendAsync(new Integration.Aliyun.Models.Sms.SendInput()
+        _ = await service.SendAsync(new Integration.Aliyun.Models.Sms.SendInput()
         {
             PhoneNumbers = "",
             SignName = "",

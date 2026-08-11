@@ -9370,16 +9370,6 @@
             订阅消息
             </summary>
         </member>
-        <member name="T:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageDataInput">
-            <summary>
-            模板消息数据
-            </summary>
-        </member>
-        <member name="P:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageDataInput.Data">
-            <summary>
-            模板数据
-            </summary>
-        </member>
         <member name="T:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageInput">
             <summary>
             模板消息
