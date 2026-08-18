@@ -9380,6 +9380,12 @@
             模板字段值
             </summary>
         </member>
+        <member name="M:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateDataValue.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="value">模板字段值</param>
+        </member>
         <member name="T:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageInput">
             <summary>
             模板消息
