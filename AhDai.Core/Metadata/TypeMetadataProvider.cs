@@ -21,9 +21,8 @@ public class TypeMetadataProvider
     public static PropertyMetadata[] GetProperties(Type type)
     {
         return _arrayCache.GetOrAdd(type, t => [.. t.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Select(p => new PropertyMetadata()
+            .Select(p => new PropertyMetadata(p)
             {
-                Info = p,
                 JsonName = p.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name
             })]);
     }

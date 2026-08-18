@@ -9370,6 +9370,16 @@
             订阅消息
             </summary>
         </member>
+        <member name="T:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateDataValue">
+            <summary>
+            模板数据
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateDataValue.Value">
+            <summary>
+            模板字段值
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageInput">
             <summary>
             模板消息
@@ -9397,7 +9407,7 @@
         </member>
         <member name="P:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageInput.Data">
             <summary>
-            模板数据：value=> { "data": "", "color": "" }
+            模板数据：格式形如 { "key1": { "value": any }, "key2": { "value": any } }
             </summary>
         </member>
         <member name="P:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageInput.ClientMsgId">

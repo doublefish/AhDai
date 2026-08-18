@@ -16,8 +16,7 @@ public interface IAmapService : IBaseService<AmapConfig>
     /// <param name="lat"></param>
     /// <param name="lng"></param>
     /// <returns></returns>
-    Task<ReverseGeocodeOutput> GetReverseGeocodeAsync(double lat, double lng)
-        => GetReverseGeocodeAsync(new ReverseGeocodeInput() { Location = $"{lng},{lat}" });
+    Task<ReverseGeocodeOutput> GetReverseGeocodeAsync(double lat, double lng);
 
     /// <summary>
     /// 逆地理编码

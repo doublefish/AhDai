@@ -10,26 +10,25 @@ public class TokenData
     /// <summary>
     /// 用户标识
     /// </summary>
-    public string Id { get; set; } = null!;
+    public string Id { get; set; } = default!;
     /// <summary>
     /// 用户名
     /// </summary>
-    public string Username { get; set; } = null!;
+    public string Username { get; set; } = default!;
     /// <summary>
     /// 姓名
     /// </summary>
-    public string Name { get; set; } = null!;
+    public string Name { get; set; } = default!;
     /// <summary>
     /// 类型
     /// </summary>
-    public string Type { get; set; } = null!;
+    public string Type { get; set; } = default!;
     /// <summary>
     /// 平台
     /// </summary>
-    public string Platform { get; set; } = null!;
+    public string Platform { get; set; } = default!;
     /// <summary>
     /// 扩展数据
     /// </summary>
-    public IDictionary<string, ICollection<string>> Extensions { get; set; } = null!;
-
+    public IDictionary<string, ICollection<string>> Extensions { get; set; } = default!;
 }

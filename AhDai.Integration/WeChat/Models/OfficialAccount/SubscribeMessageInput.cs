@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace AhDai.Integration.WeChat.Models.OfficialAccount;
 
@@ -34,5 +35,5 @@ public record SubscribeMessageInput
     /// </summary>
     [JsonRequired]
     [JsonPropertyName("data")]
-    public object Data { get; set; } = default!;
+    public IDictionary<string, TemplateDataValue> Data { get; set; } = default!;
 }

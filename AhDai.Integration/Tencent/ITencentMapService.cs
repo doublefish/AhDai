@@ -16,8 +16,7 @@ public interface ITencentMapService : IBaseService<TencentMapConfig>
     /// <param name="lat"></param>
     /// <param name="lng"></param>
     /// <returns></returns>
-    Task<GeocoderOutput> GetGeocoderAsync(double lat, double lng)
-        => GetGeocoderAsync(new GeocoderInput() { Location = $"{lat},{lng}" });
+    Task<GeocoderOutput> GetGeocoderAsync(double lat, double lng);
 
     /// <summary>
     /// 逆地址解析

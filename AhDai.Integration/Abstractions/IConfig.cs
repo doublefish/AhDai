@@ -8,5 +8,5 @@ public interface IConfig
     /// <summary>
     /// Host
     /// </summary>
-    public string Host { get; set; }
+    string Host { get; set; }
 }

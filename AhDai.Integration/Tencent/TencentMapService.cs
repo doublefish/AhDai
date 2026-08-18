@@ -24,11 +24,15 @@ internal class TencentMapService(IBaseRedisService redisService, IRedisKeyBuilde
 
     protected override string ServiceName => "腾讯地图";
 
+    public async Task<GeocoderOutput> GetGeocoderAsync(double lat, double lng)
+    {
+        return await GetGeocoderAsync(new GeocoderInput() { Location = $"{lat},{lng}" });
+    }
 
     public async Task<GeocoderOutput> GetGeocoderAsync(GeocoderInput input)
     {
-        var config = await GetConfigAsync();
-        input.Key = config.Key;
+        await EnsureKeyAsync(input);
+
         var url = "ws/geocoder/v1";
         var res = await GetAsync<Output<GeocoderOutput>>(url, input);
         return EnsureSuccess(res);
@@ -36,9 +40,9 @@ internal class TencentMapService(IBaseRedisService redisService, IRedisKeyBuilde
 
     public async Task<IpLocationOutput> GetIpLocationAsync(string ip, bool enableCache = false)
     {
-        var config = await GetConfigAsync();
         if (enableCache)
         {
+            var config = await GetConfigAsync();
             var rdb = _redisService.GetDatabase();
             var key = _redisKeyBuilder.Build($"TencentMap:{config.Key}:IpLocation:{ip}");
             var value = await rdb.StringGetAsync(key);
@@ -60,11 +64,19 @@ internal class TencentMapService(IBaseRedisService redisService, IRedisKeyBuilde
 
     public async Task<IpLocationOutput> GetIpLocationAsync(IpLocationInput input)
     {
-        var config = await GetConfigAsync();
-        input.Key = config.Key;
+        await EnsureKeyAsync(input);
+
         var url = "ws/location/v1/ip";
         var res = await GetAsync<Output<IpLocationOutput>>(url, input);
         return EnsureSuccess(res);
+    }
+
+    async Task EnsureKeyAsync(BaseInput input)
+    {
+        if (!string.IsNullOrEmpty(input.Key)) return;
+        var config = await GetConfigAsync();
+        if (string.IsNullOrWhiteSpace(config.Key)) throw new InvalidOperationException($"未配置{ServiceName} Key");
+        input.Key = config.Key;
     }
 
     T EnsureSuccess<T>(Output<T> result)

@@ -23,10 +23,16 @@ internal class AmapService(IBaseRedisService redisService, IRedisKeyBuilder redi
 
     protected override string ServiceName => "高德地图";
 
+    public async Task<ReverseGeocodeOutput> GetReverseGeocodeAsync(double lat, double lng)
+    {
+        return await GetReverseGeocodeAsync(new ReverseGeocodeInput() { Location = $"{lng},{lat}" });
+    }
 
     public async Task<ReverseGeocodeOutput> GetReverseGeocodeAsync(ReverseGeocodeInput input)
     {
         //if (string.IsNullOrEmpty(input.Output)) input.Output = "json";
+        await EnsureKeyAsync(input);
+
         var url = $"v3/geocode/regeo";
         var res = await GetAsync<ReverseGeocodeOutput>(url, input);
         return res;
@@ -34,9 +40,9 @@ internal class AmapService(IBaseRedisService redisService, IRedisKeyBuilder redi
 
     public async Task<IpLocationOutput> GetIpLocationAsync(string ip, bool enableCache = false)
     {
-        var config = await GetConfigAsync();
         if (enableCache)
         {
+            var config = await GetConfigAsync();
             var rdb = _redisService.GetDatabase();
             var key = _redisKeyBuilder.Build($"Amap:{config.AccessKey}:IpLocation:{ip}");
             var value = await rdb.StringGetAsync(key);
@@ -58,10 +64,18 @@ internal class AmapService(IBaseRedisService redisService, IRedisKeyBuilder redi
 
     public async Task<IpLocationOutput> GetIpLocationAsync(IpLocationInput input)
     {
-        var config = await GetConfigAsync();
-        input.Key = config.AccessKey;
+        await EnsureKeyAsync(input);
+
         var url = $"v3/ip";
         var res = await GetAsync<IpLocationOutput>(url, input);
         return res;
+    }
+
+    async Task EnsureKeyAsync(BaseInput input)
+    {
+        if (!string.IsNullOrEmpty(input.Key)) return;
+        var config = await GetConfigAsync();
+        if (string.IsNullOrWhiteSpace(config.AccessKey)) throw new InvalidOperationException($"未配置{ServiceName} Key");
+        input.Key = config.AccessKey;
     }
 }

@@ -24,23 +24,26 @@ internal class BaiduMapService(IBaseRedisService redisService, IRedisKeyBuilder 
 
     protected override string ServiceName => "百度地图";
 
+    public async Task<ReverseGeocodingOutput> GetReverseGeocodingAsync(double lat, double lng)
+    {
+        return await GetReverseGeocodingAsync(new ReverseGeocodingInput() { Location = $"{lat},{lng}" });
+    }
 
     public async Task<ReverseGeocodingOutput> GetReverseGeocodingAsync(ReverseGeocodingInput input)
     {
         if (string.IsNullOrEmpty(input.Language)) input.Language = "zh-cn";
         if (string.IsNullOrEmpty(input.Output)) input.Output = "json";
+        await EnsureKeyAsync(input);
 
-        var config = await GetConfigAsync();
-        input.Ak = config.AccessKey;
         var url = $"reverse_geocoding/v3/";
         return await GetAsync<ReverseGeocodingOutput>(url, input);
     }
 
     public async Task<IpLocationOutput> GetIpLocationAsync(string ip, bool enableCache = false)
     {
-        var config = await GetConfigAsync();
         if (enableCache)
         {
+            var config = await GetConfigAsync();
             var rdb = _redisService.GetDatabase();
             var key = _redisKeyBuilder.Build($"BaiduMap:{config.AccessKey}:IpLocation:{ip}");
             var value = await rdb.StringGetAsync(key);
@@ -62,9 +65,17 @@ internal class BaiduMapService(IBaseRedisService redisService, IRedisKeyBuilder 
 
     public async Task<IpLocationOutput> GetIpLocationAsync(IpLocationInput input)
     {
-        var config = await GetConfigAsync();
-        input.Ak = config.AccessKey;
+        await EnsureKeyAsync(input);
+
         var url = $"location/ip";
         return await GetAsync<IpLocationOutput>(url, input);
+    }
+
+    async Task EnsureKeyAsync(BaseInput input)
+    {
+        if (!string.IsNullOrEmpty(input.Ak)) return;
+        var config = await GetConfigAsync();
+        if (string.IsNullOrWhiteSpace(config.AccessKey)) throw new InvalidOperationException($"未配置{ServiceName} Key");
+        input.Ak = config.AccessKey;
     }
 }

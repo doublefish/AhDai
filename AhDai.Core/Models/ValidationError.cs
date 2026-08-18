@@ -8,9 +8,9 @@ public class ValidationError
     /// <summary>
     /// 字段名
     /// </summary>
-    public string Field { get; set; } = null!;
+    public required string Field { get; set; }
     /// <summary>
     /// 错误信息
     /// </summary>
-    public string Message { get; set; } = null!;
+    public required string Message { get; set; }
 }

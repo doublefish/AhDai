@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace AhDai.Integration.WeChat.Models.OfficialAccount;
 
@@ -30,11 +31,11 @@ public record TemplateMessageInput
     [JsonPropertyName("miniprogram")]
     public object? MiniProgram { get; set; }
     /// <summary>
-    /// 模板数据：value=> { "data": "", "color": "" }
+    /// 模板数据：格式形如 { "key1": { "value": any }, "key2": { "value": any } }
     /// </summary>
     [JsonRequired]
     [JsonPropertyName("data")]
-    public object Data { get; set; } = default!;
+    public IDictionary<string, TemplateDataValue> Data { get; set; } = default!;
     /// <summary>
     /// 防重入id。对于同一个openid + client_msg_id, 只发送一条消息,10分钟有效,超过10分钟不保证效果。若无防重入需求，可不填
     /// </summary>

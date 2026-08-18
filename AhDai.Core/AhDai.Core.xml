@@ -2602,6 +2602,11 @@
             属性元数据封装
             </summary>
         </member>
+        <member name="M:AhDai.Core.Metadata.PropertyMetadata.#ctor(System.Reflection.PropertyInfo)">
+            <summary>
+            属性元数据封装
+            </summary>
+        </member>
         <member name="P:AhDai.Core.Metadata.PropertyMetadata.Info">
             <summary>
             PropertyInfo

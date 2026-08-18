@@ -16,8 +16,7 @@ public interface IBaiduMapService : IBaseService<BaiduMapConfig>
     /// <param name="lat"></param>
     /// <param name="lng"></param>
     /// <returns></returns>
-    Task<ReverseGeocodingOutput> GetReverseGeocodingAsync(double lat, double lng)
-        => GetReverseGeocodingAsync(new ReverseGeocodingInput() { Location = $"{lat},{lng}" });
+    Task<ReverseGeocodingOutput> GetReverseGeocodingAsync(double lat, double lng);
 
     /// <summary>
     /// 逆地理编码
