@@ -209,7 +209,7 @@ public abstract class BaseService : IBaseService
     protected virtual async Task<TOutput> SendAsync<TOutput>(HttpClient? client, HttpRequestMessage request, CancellationToken cancellationToken = default)
         where TOutput : IBaseOutput
     {
-        var response = await ExecuteAsync(client, client => client.SendAsync(request, cancellationToken));
+        var response = await ExecuteAsync(client, client => client.SendAsync(request, cancellationToken), cancellationToken);
         response.EnsureSuccessStatusCode();
         var res = await response.Content.ReadFromJsonAsync<TOutput>(cancellationToken) ?? throw new Exception($"请求{ServiceName}返回数据反序列化失败，请联系管理员");
         res.EnsureResult();
@@ -221,8 +221,9 @@ public abstract class BaseService : IBaseService
     /// </summary>
     /// <param name="client"></param>
     /// <param name="action"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected virtual async Task<HttpResponseMessage> ExecuteAsync(HttpClient? client, Func<HttpClient, Task<HttpResponseMessage>> action)
+    protected virtual async Task<HttpResponseMessage> ExecuteAsync(HttpClient? client, Func<HttpClient, Task<HttpResponseMessage>> action, CancellationToken cancellationToken = default)
     {
         client ??= CreateHttpClient();
         return await action(client);
@@ -253,14 +254,15 @@ public abstract class BaseService<TConfig, TConfigProvider>(TConfigProvider conf
     /// </summary>
     /// <param name="client"></param>
     /// <param name="action"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected override async Task<HttpResponseMessage> ExecuteAsync(HttpClient? client, Func<HttpClient, Task<HttpResponseMessage>> action)
+    protected override async Task<HttpResponseMessage> ExecuteAsync(HttpClient? client, Func<HttpClient, Task<HttpResponseMessage>> action, CancellationToken cancellationToken = default)
     {
         if (client == null)
         {
             var config = await GetConfigAsync();
             client ??= CreateHttpClient(config.Host);
         }
-        return await base.ExecuteAsync(client, action);
+        return await base.ExecuteAsync(client, action, cancellationToken);
     }
 }

@@ -34,14 +34,14 @@ internal class TianyanchaService(ITianyanchaConfigProvider configProvider, IHttp
         return EnsureSuccess(res);
     }
 
-    protected override async Task<HttpResponseMessage> ExecuteAsync(HttpClient? client, Func<HttpClient, Task<HttpResponseMessage>> action)
+    protected override async Task<HttpResponseMessage> ExecuteAsync(HttpClient? client, Func<HttpClient, Task<HttpResponseMessage>> action, CancellationToken cancellationToken = default)
     {
         if (client == null)
         {
             var config = await GetConfigAsync();
             client = CreateHttpClient(config.Host, config.Key);
         }
-        return await base.ExecuteAsync(client, action);
+        return await base.ExecuteAsync(client, action, cancellationToken);
     }
 
     T EnsureSuccess<T>(Output<T> result)
