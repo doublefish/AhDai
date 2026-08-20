@@ -7331,6 +7331,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseService.ExecuteAsync(System.Net.Http.HttpClient,System.Func{System.Net.Http.HttpClient,System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}})">
+            <summary>
+            执行
+            </summary>
+            <param name="client"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Infrastructure.BaseService`2">
             <summary>
             BaseService
@@ -7352,14 +7360,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Integration.Infrastructure.BaseService`2.SendAsync``1(System.Net.Http.HttpClient,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+        <member name="M:AhDai.Integration.Infrastructure.BaseService`2.ExecuteAsync(System.Net.Http.HttpClient,System.Func{System.Net.Http.HttpClient,System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}})">
             <summary>
-            发送请求
+            执行
             </summary>
-            <typeparam name="TOutput"></typeparam>
             <param name="client"></param>
-            <param name="request"></param>
-            <param name="cancellationToken"></param>
+            <param name="action"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Integration.Infrastructure.RedisKeyBuilder">

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading;
+using System.Threading.RateLimiting;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Infrastructure;
@@ -208,12 +209,23 @@ public abstract class BaseService : IBaseService
     protected virtual async Task<TOutput> SendAsync<TOutput>(HttpClient? client, HttpRequestMessage request, CancellationToken cancellationToken = default)
         where TOutput : IBaseOutput
     {
-        client ??= CreateHttpClient();
-        var response = await client.SendAsync(request, cancellationToken);
+        var response = await ExecuteAsync(client, client => client.SendAsync(request, cancellationToken));
         response.EnsureSuccessStatusCode();
         var res = await response.Content.ReadFromJsonAsync<TOutput>(cancellationToken) ?? throw new Exception($"请求{ServiceName}返回数据反序列化失败，请联系管理员");
         res.EnsureResult();
         return res;
+    }
+
+    /// <summary>
+    /// 执行
+    /// </summary>
+    /// <param name="client"></param>
+    /// <param name="action"></param>
+    /// <returns></returns>
+    protected virtual async Task<HttpResponseMessage> ExecuteAsync(HttpClient? client, Func<HttpClient, Task<HttpResponseMessage>> action)
+    {
+        client ??= CreateHttpClient();
+        return await action(client);
     }
 }
 
@@ -237,20 +249,18 @@ public abstract class BaseService<TConfig, TConfigProvider>(TConfigProvider conf
     public ValueTask<TConfig> GetConfigAsync() => _configProvider.GetAsync();
 
     /// <summary>
-    /// 发送请求
+    /// 执行
     /// </summary>
-    /// <typeparam name="TOutput"></typeparam>
     /// <param name="client"></param>
-    /// <param name="request"></param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="action"></param>
     /// <returns></returns>
-    protected override async Task<TOutput> SendAsync<TOutput>(HttpClient? client, HttpRequestMessage request, CancellationToken cancellationToken = default)
+    protected override async Task<HttpResponseMessage> ExecuteAsync(HttpClient? client, Func<HttpClient, Task<HttpResponseMessage>> action)
     {
         if (client == null)
         {
             var config = await GetConfigAsync();
             client ??= CreateHttpClient(config.Host);
         }
-        return await base.SendAsync<TOutput>(client, request, cancellationToken);
+        return await base.ExecuteAsync(client, action);
     }
 }
