@@ -94,7 +94,7 @@ internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpCl
         var publicKeyUrl = Encoding.ASCII.GetString(Convert.FromBase64String(publicKeyUrlBase64));
 
         var client = CreateHttpClient(config.Host);
-        var response = await client.GetAsync(publicKeyUrl);
+        var response = await ExecuteAsync(client, client => client.GetAsync(publicKeyUrl));
         response.EnsureSuccessStatusCode();
         var pem = await response.Content.ReadAsStringAsync();
         pem = pem.Replace("-----BEGIN PUBLIC KEY-----\n", "").Replace("-----END PUBLIC KEY-----", "").Replace("\n", "");
@@ -226,7 +226,7 @@ internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpCl
         }
         request.Headers.ExpectContinue = true;
         request.Content = content;
-        var response = await client.SendAsync(request);
+        var response = await ExecuteAsync(client, client => client.SendAsync(request));
         var res = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode) throw new ArgumentException($"请求{ServiceName}发生异常，请联系管理员=>{res}");
         return res;
