@@ -180,7 +180,7 @@ public class BaseRedisService : IBaseRedisService, IDisposable
     /// <param name="e"></param>
     protected virtual void ErrorMessage(object? sender, RedisErrorEventArgs e)
     {
-        if (_logger.IsEnabled(LogLevel.Error)) _logger.LogError("ErrorMessage");
+        if (_logger.IsEnabled(LogLevel.Error)) _logger.LogError("ErrorMessage=>{Message}", e.Message);
     }
 
     /// <summary>
