@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace AhDai.Integration.Infrastructure;
 
 /// <summary>
-/// RedisServiceCollectionExtensions
+/// RedisKeyBuilderServiceCollectionExtensions
 /// </summary>
-public static class RedisServiceCollectionExtensions
+public static class RedisKeyBuilderServiceCollectionExtensions
 {
     /// <summary>
     /// AddRedisKeyBuilder

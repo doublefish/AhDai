@@ -1,5 +1,6 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
 using AhDai.Core.Infrastructure.Redis;
+using AhDai.Integration.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +22,7 @@ public static class WeChatServiceCollectionExtensions
     {
         services.AddOptions<Configs.WeChatMiniProgramConfig>(configuration, key);
         services.AddRedisService(configuration);
+        services.AddRedisKeyBuilder();
         services.AddScoped<IWeChatMiniProgramService, WeChatMiniProgramService>();
         return services;
     }
@@ -36,6 +38,7 @@ public static class WeChatServiceCollectionExtensions
     {
         services.AddOptions<Configs.WeChatOfficialAccountConfig>(configuration, key);
         services.AddRedisService(configuration);
+        services.AddRedisKeyBuilder();
         services.AddScoped<IWeChatOfficialAccountService, WeChatOfficialAccountService>();
         return services;
     }
@@ -65,6 +68,7 @@ public static class WeChatServiceCollectionExtensions
     {
         services.AddOptions<Configs.WeChatWebAppConfig>(configuration, key);
         services.AddRedisService(configuration);
+        services.AddRedisKeyBuilder();
         services.AddScoped<IWeChatWebAppService, WeChatWebAppService>();
         return services;
     }

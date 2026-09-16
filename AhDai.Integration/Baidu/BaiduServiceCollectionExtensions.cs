@@ -1,6 +1,7 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
 using AhDai.Core.Infrastructure.Redis;
 using AhDai.Integration.Extensions;
+using AhDai.Integration.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +23,7 @@ public static class BaiduServiceCollectionExtensions
     {
         services.AddOptions<Configs.BaiduFaceprintConfig>(configuration, key);
         services.AddRedisService(configuration);
+        services.AddRedisKeyBuilder();
         services.AddScoped<IBaiduFaceprintService, BaiduFaceprintService>();
         return services;
     }
@@ -37,6 +39,7 @@ public static class BaiduServiceCollectionExtensions
     {
         services.AddOptions<Configs.BaiduMapConfig>(configuration, key);
         services.AddRedisService(configuration);
+        services.AddRedisKeyBuilder();
         services.AddRateLimiterProvider();
         services.AddScoped<IBaiduMapService, BaiduMapService>();
         return services;
@@ -53,6 +56,7 @@ public static class BaiduServiceCollectionExtensions
     {
         services.AddOptions<Configs.BaiduOcrConfig>(configuration, key);
         services.AddRedisService(configuration);
+        services.AddRedisKeyBuilder();
         services.AddScoped<IBaiduOcrService, BaiduOcrService>();
         return services;
     }

@@ -1,6 +1,7 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
 using AhDai.Core.Infrastructure.Redis;
 using AhDai.Integration.Extensions;
+using AhDai.Integration.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +23,7 @@ public static class AmapServiceCollectionExtensions
     {
         services.AddOptions<Configs.AmapConfig>(configuration, key);
         services.AddRedisService(configuration);
+        services.AddRedisKeyBuilder();
         services.AddRateLimiterProvider();
         services.AddScoped<IAmapService, AmapService>();
         return services;

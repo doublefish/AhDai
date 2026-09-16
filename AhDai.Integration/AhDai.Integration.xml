@@ -7461,12 +7461,12 @@
             <param name="segments"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Integration.Infrastructure.RedisServiceCollectionExtensions">
+        <member name="T:AhDai.Integration.Infrastructure.RedisKeyBuilderServiceCollectionExtensions">
             <summary>
-            RedisServiceCollectionExtensions
+            RedisKeyBuilderServiceCollectionExtensions
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Infrastructure.RedisServiceCollectionExtensions.ConfigureRedisKeyBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+        <member name="M:AhDai.Integration.Infrastructure.RedisKeyBuilderServiceCollectionExtensions.ConfigureRedisKeyBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
             <summary>
             AddRedisKeyBuilder
             </summary>
@@ -7474,7 +7474,7 @@
             <param name="prefix"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Integration.Infrastructure.RedisServiceCollectionExtensions.AddRedisKeyBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:AhDai.Integration.Infrastructure.RedisKeyBuilderServiceCollectionExtensions.AddRedisKeyBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             AddRedisKeyBuilder
             </summary>

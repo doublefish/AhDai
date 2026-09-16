@@ -1,5 +1,6 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
 using AhDai.Core.Infrastructure.Redis;
+using AhDai.Integration.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +22,7 @@ public static class HikvisionServiceCollectionExtensions
     {
         services.AddOptions<Configs.HikIoTConfig>(configuration, key);
         services.AddRedisService(configuration);
+        services.AddRedisKeyBuilder();
         services.AddScoped<IHikIoTService, HikIoTService>();
         return services;
     }

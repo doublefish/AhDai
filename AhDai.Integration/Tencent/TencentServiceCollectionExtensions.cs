@@ -1,6 +1,7 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
 using AhDai.Core.Infrastructure.Redis;
 using AhDai.Integration.Extensions;
+using AhDai.Integration.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +23,7 @@ public static class TencentServiceCollectionExtensions
     {
         services.AddOptions<Configs.TencentMapConfig>(configuration, key);
         services.AddRedisService(configuration);
+        services.AddRedisKeyBuilder();
         services.AddRateLimiterProvider();
         services.AddScoped<ITencentMapService, TencentMapService>();
         return services;
