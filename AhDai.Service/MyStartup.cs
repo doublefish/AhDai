@@ -9,7 +9,6 @@ using AhDai.Integration.Amap;
 using AhDai.Integration.AntChain;
 using AhDai.Integration.Baidu;
 using AhDai.Integration.ESign;
-using AhDai.Integration.Extensions;
 using AhDai.Integration.Hikvision;
 using AhDai.Integration.Infrastructure;
 using AhDai.Integration.Tencent;

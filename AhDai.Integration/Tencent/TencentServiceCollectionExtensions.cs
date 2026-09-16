@@ -1,4 +1,5 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
+using AhDai.Integration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +20,7 @@ public static class TencentServiceCollectionExtensions
     public static IServiceCollection AddTencentMapService(this IServiceCollection services, IConfiguration configuration, string key = "TencentMap")
     {
         services.AddOptions<Configs.TencentMapConfig>(configuration, key);
+        services.AddRateLimiterProvider();
         services.AddScoped<ITencentMapService, TencentMapService>();
         return services;
     }

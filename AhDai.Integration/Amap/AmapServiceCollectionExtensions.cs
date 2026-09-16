@@ -1,4 +1,5 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
+using AhDai.Integration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +20,7 @@ public static class AmapServiceCollectionExtensions
     public static IServiceCollection AddAmapService(this IServiceCollection services, IConfiguration configuration, string key = "Amap")
     {
         services.AddOptions<Configs.AmapConfig>(configuration, key);
+        services.AddRateLimiterProvider();
         services.AddScoped<IAmapService, AmapService>();
         return services;
     }

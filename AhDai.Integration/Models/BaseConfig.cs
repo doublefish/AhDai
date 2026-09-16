@@ -11,4 +11,8 @@ public abstract class BaseConfig : IConfig
     /// Host
     /// </summary>
     public string Host { get; set; } = default!;
+    /// <summary>
+    /// 请求限流配置
+    /// </summary>
+    public RateLimitConfig? RateLimit { get; set; }
 }

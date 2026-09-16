@@ -15,8 +15,8 @@ namespace AhDai.Integration.Baidu;
 /// BaiduMapService
 /// </summary>
 [Attributes.Service()]
-internal class BaiduMapService(IBaseRedisService redisService, IRedisKeyBuilder redisKeyBuilder, IBaiduMapConfigProvider configProvider, IHttpClientFactory httpClientFactory)
-    : BaseService<BaiduMapConfig, IBaiduMapConfigProvider>(configProvider, httpClientFactory)
+internal class BaiduMapService(IBaseRedisService redisService, IRedisKeyBuilder redisKeyBuilder, IBaiduMapConfigProvider configProvider, IHttpClientFactory httpClientFactory, IRateLimiterProvider rateLimiterProvider)
+    : BaseRateLimitService<BaiduMapConfig, IBaiduMapConfigProvider>(configProvider, httpClientFactory, rateLimiterProvider)
     , IBaiduMapService
 {
     protected readonly IBaseRedisService _redisService = redisService;

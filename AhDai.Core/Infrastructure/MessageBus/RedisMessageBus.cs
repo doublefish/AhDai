@@ -59,7 +59,7 @@ internal class RedisMessageBus(IBaseRedisService redis) : IMessageBus
         await _db.StreamAcknowledgeAsync(stream, group, values);
     }
 
-    public async Task<IReadOnlyList<MessageBusMessage<T>>> RecoverAsync<T>(string topic, string group, string consumer, TimeSpan minIdleTime,  int count, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<MessageBusMessage<T>>> RecoverAsync<T>(string topic, string group, string consumer, TimeSpan minIdleTime, int count, CancellationToken cancellationToken = default)
     {
         var result = await _db.StreamAutoClaimAsync(topic, group, consumer, (long)minIdleTime.TotalMilliseconds, "0-0", count);
 

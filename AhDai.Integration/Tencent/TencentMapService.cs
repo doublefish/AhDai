@@ -15,8 +15,8 @@ namespace AhDai.Integration.Tencent;
 /// TianyanchaService
 /// </summary>
 [Attributes.Service()]
-internal class TencentMapService(IBaseRedisService redisService, IRedisKeyBuilder redisKeyBuilder, ITencentMapConfigProvider configProvider, IHttpClientFactory httpClientFactory)
-    : BaseService<TencentMapConfig, ITencentMapConfigProvider>(configProvider, httpClientFactory)
+internal class TencentMapService(IBaseRedisService redisService, IRedisKeyBuilder redisKeyBuilder, ITencentMapConfigProvider configProvider, IHttpClientFactory httpClientFactory, IRateLimiterProvider rateLimiterProvider)
+    : BaseRateLimitService<TencentMapConfig, ITencentMapConfigProvider>(configProvider, httpClientFactory, rateLimiterProvider)
     , ITencentMapService
 {
     readonly IBaseRedisService _redisService = redisService;

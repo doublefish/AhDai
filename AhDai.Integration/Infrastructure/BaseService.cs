@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading;
-using System.Threading.RateLimiting;
 using System.Threading.Tasks;
 
 namespace AhDai.Integration.Infrastructure;

@@ -52,6 +52,24 @@
             Host
             </summary>
         </member>
+        <member name="P:AhDai.Integration.Abstractions.IConfig.RateLimit">
+            <summary>
+            请求限流配置
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Abstractions.IRateLimiterProvider">
+            <summary>
+            RateLimiterProvider
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Abstractions.IRateLimiterProvider.Get(System.String,AhDai.Integration.Models.RateLimitConfig)">
+            <summary>
+            获取限流器
+            </summary>
+            <param name="key">限流器Key</param>
+            <param name="config">配置</param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Abstractions.IRedisKeyBuilder">
             <summary>
             IRedisKeyBuilder
@@ -843,7 +861,7 @@
             AmapService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Amap.AmapService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Amap.Providers.IAmapConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Amap.AmapService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Amap.Providers.IAmapConfigProvider,System.Net.Http.IHttpClientFactory,AhDai.Integration.Abstractions.IRateLimiterProvider)">
             <summary>
             AmapService
             </summary>
@@ -1952,7 +1970,7 @@
             BaiduMapService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Baidu.BaiduMapService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduMapConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Baidu.BaiduMapService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Baidu.Providers.IBaiduMapConfigProvider,System.Net.Http.IHttpClientFactory,AhDai.Integration.Abstractions.IRateLimiterProvider)">
             <summary>
             BaiduMapService
             </summary>
@@ -5823,6 +5841,18 @@
             ServiceCollectionExtensions
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Extensions.RateLimiterProviderServiceCollectionExtensions">
+            <summary>
+            RateLimiterProviderServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Extensions.RateLimiterProviderServiceCollectionExtensions.AddRateLimiterProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddRateLimiter
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Hikvision.BaseHikvisionService`2">
             <summary>
             BaseHikvisionService
@@ -7198,6 +7228,35 @@
             IHikIoTConfigProvider
             </summary>
         </member>
+        <member name="T:AhDai.Integration.Infrastructure.BaseRateLimitService`2">
+            <summary>
+            BaseRateLimitService
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseRateLimitService`2.#ctor(`1,System.Net.Http.IHttpClientFactory,AhDai.Integration.Abstractions.IRateLimiterProvider)">
+            <summary>
+            BaseRateLimitService
+            </summary>
+        </member>
+        <member name="F:AhDai.Integration.Infrastructure.BaseRateLimitService`2._rateLimiterProvider">
+            <summary>
+            _rateLimiterProvider
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Infrastructure.BaseRateLimitService`2.RateLimiterKey">
+            <summary>
+            RateLimiterKey
+            </summary>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.BaseRateLimitService`2.ExecuteAsync(System.Net.Http.HttpClient,System.Func{System.Net.Http.HttpClient,System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}},System.Threading.CancellationToken)">
+            <summary>
+            执行
+            </summary>
+            <param name="client"></param>
+            <param name="action"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Integration.Infrastructure.BaseService">
             <summary>
             BaseService
@@ -7370,6 +7429,19 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:AhDai.Integration.Infrastructure.RateLimiterProvider.Get(System.String,AhDai.Integration.Models.RateLimitConfig)">
+            <summary>
+            获取限流器
+            </summary>
+            <param name="key"></param>
+            <param name="config">配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Integration.Infrastructure.RateLimiterProvider.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
         <member name="T:AhDai.Integration.Infrastructure.RedisKeyBuilder">
             <summary>
             RedisKeyBuilder
@@ -7417,6 +7489,11 @@
         <member name="P:AhDai.Integration.Models.BaseConfig.Host">
             <summary>
             Host
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Models.BaseConfig.RateLimit">
+            <summary>
+            请求限流配置
             </summary>
         </member>
         <member name="T:AhDai.Integration.Models.BaseOcrFriendlyOutput">
@@ -7907,6 +7984,21 @@
         <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.InspectionRecord">
             <summary>
             检验记录（即年审截止日期说明）
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Models.RateLimitConfig">
+            <summary>
+            RateLimitConfig
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Models.RateLimitConfig.RequestsPerSecond">
+            <summary>
+            每秒允许的请求数
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Models.RateLimitConfig.QueueLimit">
+            <summary>
+            允许排队等待的请求数
             </summary>
         </member>
         <member name="T:AhDai.Integration.Options.IntegrationOptions">
@@ -8525,7 +8617,7 @@
             TianyanchaService
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Tencent.TencentMapService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Tencent.Providers.ITencentMapConfigProvider,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AhDai.Integration.Tencent.TencentMapService.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService,AhDai.Integration.Abstractions.IRedisKeyBuilder,AhDai.Integration.Tencent.Providers.ITencentMapConfigProvider,System.Net.Http.IHttpClientFactory,AhDai.Integration.Abstractions.IRateLimiterProvider)">
             <summary>
             TianyanchaService
             </summary>

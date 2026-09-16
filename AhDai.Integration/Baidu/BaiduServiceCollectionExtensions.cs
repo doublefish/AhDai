@@ -1,4 +1,5 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
+using AhDai.Integration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -33,6 +34,7 @@ public static class BaiduServiceCollectionExtensions
     public static IServiceCollection AddBaiduMapService(this IServiceCollection services, IConfiguration configuration, string key = "BaiduMap")
     {
         services.AddOptions<Configs.BaiduMapConfig>(configuration, key);
+        services.AddRateLimiterProvider();
         services.AddScoped<IBaiduMapService, BaiduMapService>();
         return services;
     }
