@@ -73,9 +73,9 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
         var finalMd5 = contentMD5;
         if (finalMd5 == null)
         {
-            stream.Seek(0, SeekOrigin.Begin);
+            stream.Position = 0;
             finalMd5 = await MD5.HashDataAsync(stream);
-            stream.Seek(0, SeekOrigin.Begin);
+            stream.Position = 0;
         }
 
         var content = new StreamContent(stream);
@@ -128,7 +128,7 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
 
             var fileName = input.FileName ?? Path.GetFileName(filePath);
             var contentMd5 = await MD5.HashDataAsync(fileStream);
-            fileStream.Seek(0, SeekOrigin.Begin);
+            fileStream.Position = 0;
             var res = await GetFileUploadUrlAsync(new FileUploadUrlInput()
             {
                 ContentMd5 = Convert.ToBase64String(contentMd5),
@@ -320,7 +320,7 @@ internal class ESignService(IESignConfigProvider configProvider, IHttpClientFact
         var appId = httpContext.Request.Headers["X-Tsign-Open-App-Id"].FirstOrDefault() ?? throw new ArgumentException("验签失败：未读取到AppId");
         var signature = httpContext.Request.Headers["X-Tsign-Open-SIGNATURE"].FirstOrDefault() ?? throw new ArgumentException("验签失败：未读取到签名");
         var timestamp = httpContext.Request.Headers["X-Tsign-Open-TIMESTAMP"].FirstOrDefault() ?? throw new ArgumentException("验签失败：未读取到时间戳");
-        httpContext.Request.Body.Seek(0, SeekOrigin.Begin);
+        httpContext.Request.Body.Position = 0;
         using var requestReader = new StreamReader(httpContext.Request.Body, Encoding.UTF8, detectEncodingFromByteOrderMarks: true, leaveOpen: true);
         var body = await requestReader.ReadToEndAsync();
         if (_logger.IsEnabled(LogLevel.Information)) _logger.LogInformation("请求体：{Body}", body);

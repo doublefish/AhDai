@@ -127,9 +127,9 @@ internal class AliyunOssService(IAliyunOssConfigProvider configProvider, IHttpCl
             content.Headers.ContentLength = stream.Length;
             if (enableMD5)
             {
-                stream.Seek(0, SeekOrigin.Begin);
+                stream.Position = 0;
                 content.Headers.ContentMD5 = await MD5.HashDataAsync(stream);
-                stream.Seek(0, SeekOrigin.Begin);
+                stream.Position = 0;
             }
         }
 

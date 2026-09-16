@@ -122,7 +122,7 @@ internal class WeChatPayService(IWeChatPayConfigProvider configProvider, IHttpCl
         var serialNo = httpContext.Request.Headers["Wechatpay-Serial"].FirstOrDefault() ?? throw new ArgumentException("验签失败：未读取到证书序列号");
         var signature = httpContext.Request.Headers["Wechatpay-Signature"].FirstOrDefault() ?? throw new ArgumentException("验签失败：未读取到签名");
 
-        httpContext.Request.Body.Seek(0, SeekOrigin.Begin);
+        httpContext.Request.Body.Position = 0;
         using var requestReader = new StreamReader(httpContext.Request.Body, Encoding.UTF8, detectEncodingFromByteOrderMarks: true, leaveOpen: true);
         var bodyString = await requestReader.ReadToEndAsync();
         if (string.IsNullOrEmpty(bodyString)) throw new ArgumentException("验签失败：未读取到内容");

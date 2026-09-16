@@ -97,10 +97,10 @@ public static partial class HttpRequestExtensions
     {
         encoding ??= Encoding.UTF8;
         httpRequest.EnableBuffering();
-        httpRequest.Body.Seek(0L, SeekOrigin.Begin);
+        httpRequest.Body.Position = 0;
         using var reader = new StreamReader(httpRequest.Body, encoding);
         var content = await reader.ReadToEndAsync();
-        httpRequest.Body.Position = 0L;
+        httpRequest.Body.Position = 0;
         return content;
     }
 
