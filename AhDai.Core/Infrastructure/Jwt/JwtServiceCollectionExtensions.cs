@@ -1,6 +1,7 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AhDai.Core.Infrastructure.Jwt;
 
@@ -20,7 +21,7 @@ public static class JwtServiceCollectionExtensions
     public static IServiceCollection AddJwtService(this IServiceCollection services, IConfiguration configuration, string key = "Jwt")
     {
         services.AddOptions<JwtOptions>(configuration, key);
-        services.AddSingleton<IBaseJwtService, BaseJwtService>();
+        services.TryAddSingleton<IBaseJwtService, BaseJwtService>();
         return services;
     }
 }

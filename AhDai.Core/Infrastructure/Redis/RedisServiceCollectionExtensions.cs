@@ -1,6 +1,7 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AhDai.Core.Infrastructure.Redis;
 
@@ -19,7 +20,7 @@ public static class RedisServiceCollectionExtensions
     public static IServiceCollection AddRedisService(this IServiceCollection services, IConfiguration configuration, string key = "Redis")
     {
         services.AddOptions<RedisOptions>(configuration, key);
-        services.AddSingleton<IBaseRedisService, BaseRedisService>();
+        services.TryAddSingleton<IBaseRedisService, BaseRedisService>();
         return services;
     }
 }

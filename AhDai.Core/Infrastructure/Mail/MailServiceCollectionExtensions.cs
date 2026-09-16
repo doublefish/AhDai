@@ -1,6 +1,7 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AhDai.Core.Infrastructure.Mail;
 
@@ -19,7 +20,7 @@ public static class MailServiceCollectionExtensions
     public static IServiceCollection AddMailService(this IServiceCollection services, IConfiguration configuration, string key = "Mail")
     {
         services.AddOptions<MailOptions>(configuration, key);
-        services.AddSingleton<IBaseMailService, BaseMailService>();
+        services.TryAddSingleton<IBaseMailService, BaseMailService>();
         return services;
     }
 }

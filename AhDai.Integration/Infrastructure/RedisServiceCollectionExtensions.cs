@@ -1,6 +1,7 @@
 ﻿using AhDai.Integration.Abstractions;
 using AhDai.Integration.Options;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AhDai.Integration.Infrastructure;
 
@@ -31,7 +32,7 @@ public static class RedisServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddRedisKeyBuilder(this IServiceCollection services)
     {
-        services.AddSingleton<IRedisKeyBuilder, RedisKeyBuilder>();
+        services.TryAddSingleton<IRedisKeyBuilder, RedisKeyBuilder>();
         return services;
     }
 }

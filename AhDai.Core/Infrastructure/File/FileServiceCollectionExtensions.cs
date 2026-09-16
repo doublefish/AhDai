@@ -1,6 +1,7 @@
 ﻿using AhDai.Core.Infrastructure.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AhDai.Core.Infrastructure.File;
 
@@ -19,7 +20,7 @@ public static class FileServiceCollectionExtensions
     public static IServiceCollection AddFileService(this IServiceCollection services, IConfiguration configuration, string key = "File")
     {
         services.AddOptions<FileOptions>(configuration, key);
-        services.AddSingleton<IBaseFileService, BaseFileService>();
+        services.TryAddSingleton<IBaseFileService, BaseFileService>();
         return services;
     }
 }

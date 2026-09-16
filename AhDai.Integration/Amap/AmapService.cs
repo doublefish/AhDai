@@ -16,7 +16,8 @@ namespace AhDai.Integration.Amap;
 /// </summary>
 [Attributes.Service()]
 internal class AmapService(IBaseRedisService redisService, IRedisKeyBuilder redisKeyBuilder, IAmapConfigProvider configProvider, IHttpClientFactory httpClientFactory, IRateLimiterProvider rateLimiterProvider)
-    : BaseRateLimitService<AmapConfig, IAmapConfigProvider>(configProvider, httpClientFactory, rateLimiterProvider), IAmapService
+    : BaseRateLimitService<AmapConfig, IAmapConfigProvider>(configProvider, httpClientFactory, rateLimiterProvider)
+    , IAmapService
 {
     protected readonly IBaseRedisService _redisService = redisService;
     protected readonly IRedisKeyBuilder _redisKeyBuilder = redisKeyBuilder;

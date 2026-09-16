@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AhDai.Core.Infrastructure.MessageBus;
 
@@ -14,7 +15,7 @@ public static class MessageBusServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddRedisMessageBus(this IServiceCollection services)
     {
-        services.AddSingleton<IMessageBus, RedisMessageBus>();
+        services.TryAddSingleton<IMessageBus, RedisMessageBus>();
         return services;
     }
 }
