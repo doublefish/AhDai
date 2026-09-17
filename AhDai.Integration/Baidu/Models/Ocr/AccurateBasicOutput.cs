@@ -1,4 +1,4 @@
-﻿using AhDai.Integration.Models;
+﻿using AhDai.Integration.Models.Ocr;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -34,10 +34,10 @@ public class AccurateBasicOutput : BaseDocumentOutput<GeneralWordsResult[]>
     /// GetFriendlyOutput
     /// </summary>
     /// <returns></returns>
-    public OcrAccurateBasicFriendlyOutput? GetFriendlyOutput()
+    public AccurateBasicFriendlyOutput? GetFriendlyOutput()
     {
         if (WordsResultNum == 0 || WordsResult == null) return null;
-        var output = new OcrAccurateBasicFriendlyOutput();
+        var output = new AccurateBasicFriendlyOutput();
         var list = new List<string>();
         foreach (var words in WordsResult)
         {

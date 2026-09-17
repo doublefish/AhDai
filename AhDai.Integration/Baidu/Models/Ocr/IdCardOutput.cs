@@ -1,5 +1,5 @@
 ﻿using AhDai.Core.Extensions;
-using AhDai.Integration.Models;
+using AhDai.Integration.Models.Ocr;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -98,11 +98,11 @@ public class IdCardOutput : BaseOutput<Dictionary<string, CardWordsResult>>
     /// GetFriendlyOutput
     /// </summary>
     /// <returns></returns>
-    public OcrIdCardFriendlyOutput? GetFriendlyOutput()
+    public IdCardFriendlyOutput? GetFriendlyOutput()
     {
         if (WordsResultNum == 0 || WordsResult == null) return null;
 
-        var output = new OcrIdCardFriendlyOutput()
+        var output = new IdCardFriendlyOutput()
         {
             Name = WordsResult.GetValueOrDefault("姓名")?.Words,
             Sex = WordsResult.GetValueOrDefault("性别")?.Words,

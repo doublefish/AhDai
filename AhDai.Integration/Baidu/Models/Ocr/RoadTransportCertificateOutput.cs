@@ -1,5 +1,5 @@
 ﻿using AhDai.Core.Extensions;
-using AhDai.Integration.Models;
+using AhDai.Integration.Models.Ocr;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,10 +14,10 @@ public class RoadTransportCertificateOutput : BasePdfOutput<Dictionary<string, W
     /// GetFriendlyOutput
     /// </summary>
     /// <returns></returns>
-    public OcrRoadTransportCertificateFriendlyOutput? GetFriendlyOutput()
+    public RoadTransportCertificateFriendlyOutput? GetFriendlyOutput()
     {
         if (WordsResultNum == 0 || WordsResult == null) return null;
-        var output = new OcrRoadTransportCertificateFriendlyOutput()
+        var output = new RoadTransportCertificateFriendlyOutput()
         {
             Number = WordsResult.GetValueOrDefault("道路运输证号")?.FirstOrDefault()?.Word,
             OwnerName = WordsResult.GetValueOrDefault("业户名称")?.FirstOrDefault()?.Word,

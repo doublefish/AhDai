@@ -52,9 +52,14 @@
             Host
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Abstractions.IConfig.RateLimit">
+        <member name="P:AhDai.Integration.Abstractions.IConfig.RequestsPerSecond">
             <summary>
-            请求限流配置
+            每秒允许的请求数，0 表示不限制
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Abstractions.IConfig.QueueLimit">
+            <summary>
+            允许排队等待的请求数
             </summary>
         </member>
         <member name="T:AhDai.Integration.Abstractions.IRateLimiterProvider">
@@ -62,12 +67,13 @@
             RateLimiterProvider
             </summary>
         </member>
-        <member name="M:AhDai.Integration.Abstractions.IRateLimiterProvider.Get(System.String,AhDai.Integration.Models.RateLimitConfig)">
+        <member name="M:AhDai.Integration.Abstractions.IRateLimiterProvider.Get(System.String,System.Int32,System.Int32)">
             <summary>
             获取限流器
             </summary>
             <param name="key">限流器Key</param>
-            <param name="config">配置</param>
+            <param name="requestsPerSecond">每秒允许的请求数</param>
+            <param name="queueLimit">允许排队等待的请求数</param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Integration.Abstractions.IRedisKeyBuilder">
@@ -7429,12 +7435,13 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:AhDai.Integration.Infrastructure.RateLimiterProvider.Get(System.String,AhDai.Integration.Models.RateLimitConfig)">
+        <member name="M:AhDai.Integration.Infrastructure.RateLimiterProvider.Get(System.String,System.Int32,System.Int32)">
             <summary>
             获取限流器
             </summary>
             <param name="key"></param>
-            <param name="config">配置</param>
+            <param name="requestsPerSecond">每秒允许的请求数</param>
+            <param name="queueLimit">允许排队等待的请求数</param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Integration.Infrastructure.RateLimiterProvider.Dispose">
@@ -7491,497 +7498,502 @@
             Host
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.BaseConfig.RateLimit">
+        <member name="P:AhDai.Integration.Models.BaseConfig.RequestsPerSecond">
             <summary>
-            请求限流配置
+            每秒允许的请求数，0 表示不限制
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Models.BaseOcrFriendlyOutput">
+        <member name="P:AhDai.Integration.Models.BaseConfig.QueueLimit">
             <summary>
-            BaseOcrFriendlyOutput
+            允许排队等待的请求数
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.BaseOcrFriendlyOutput.AttachmentId">
-            <summary>
-            附件
-            </summary>
-        </member>
-        <member name="T:AhDai.Integration.Models.OcrAccurateBasicFriendlyOutput">
+        <member name="T:AhDai.Integration.Models.Ocr.AccurateBasicFriendlyOutput">
             <summary>
             通用文字识别
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrAccurateBasicFriendlyOutput.Words">
+        <member name="P:AhDai.Integration.Models.Ocr.AccurateBasicFriendlyOutput.Words">
             <summary>
             回单编号
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput">
+        <member name="T:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput">
             <summary>
             银行回单文字识别
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.Number">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.Number">
             <summary>
             回单编号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.Title">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.Title">
             <summary>
             标题
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.Summary">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.Summary">
             <summary>
             摘要
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.Purpose">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.Purpose">
             <summary>
             用途
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.Date">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.Date">
             <summary>
             交易日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.Amount">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.Amount">
             <summary>
             小写金额
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.AmountInWords">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.AmountInWords">
             <summary>
             大写金额
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.PayerAccountName">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.PayerAccountName">
             <summary>
             付款人户名
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.PayerAccountNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.PayerAccountNumber">
             <summary>
             付款人账号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.PayerBankName">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.PayerBankName">
             <summary>
             付款人开户银行
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.PayeeAccountName">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.PayeeAccountName">
             <summary>
             收款人户名
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.PayeeAccountNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.PayeeAccountNumber">
             <summary>
             收款人账号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.PayeeBankName">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.PayeeBankName">
             <summary>
             收款人开户银行
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrBankReceiptFriendlyOutput.TransactionId">
+        <member name="P:AhDai.Integration.Models.Ocr.BankReceiptFriendlyOutput.TransactionId">
             <summary>
             流水号
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput">
+        <member name="T:AhDai.Integration.Models.Ocr.BaseFriendlyOutput">
+            <summary>
+            BaseFriendlyOutput
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.Models.Ocr.BaseFriendlyOutput.AttachmentId">
+            <summary>
+            附件
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput">
             <summary>
             驾驶证文字识别
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.Name">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.Name">
             <summary>
             姓名
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.Number">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.Number">
             <summary>
             证号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.Sex">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.Sex">
             <summary>
             性别
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.Nationality">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.Nationality">
             <summary>
             国籍
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.Address">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.Address">
             <summary>
             住址
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.Birthday">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.Birthday">
             <summary>
             出生日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.Class">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.Class">
             <summary>
             准驾车型
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.IssuingAuthority">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.IssuingAuthority">
             <summary>
             签发机关
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.FirstIssueDate">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.FirstIssueDate">
             <summary>
             初次领证日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.IssueDate">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.IssueDate">
             <summary>
             有效起始日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrDrivingLicenseFriendlyOutput.ExpiryDate">
+        <member name="P:AhDai.Integration.Models.Ocr.DrivingLicenseFriendlyOutput.ExpiryDate">
             <summary>
             有效截止日期
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Models.OcrIdCardFriendlyOutput">
+        <member name="T:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput">
             <summary>
             身份证文字识别
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrIdCardFriendlyOutput.Name">
+        <member name="P:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput.Name">
             <summary>
             姓名
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrIdCardFriendlyOutput.Sex">
+        <member name="P:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput.Sex">
             <summary>
             性别
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrIdCardFriendlyOutput.Nation">
+        <member name="P:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput.Nation">
             <summary>
             民族
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrIdCardFriendlyOutput.BirthDate">
+        <member name="P:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput.BirthDate">
             <summary>
             出生日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrIdCardFriendlyOutput.Address">
+        <member name="P:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput.Address">
             <summary>
             住址
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrIdCardFriendlyOutput.IdNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput.IdNumber">
             <summary>
             公民身份号码
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrIdCardFriendlyOutput.IssuingAuthority">
+        <member name="P:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput.IssuingAuthority">
             <summary>
             签发机关
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrIdCardFriendlyOutput.IssueDate">
+        <member name="P:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput.IssueDate">
             <summary>
             签发日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrIdCardFriendlyOutput.ExpirationDate">
+        <member name="P:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput.ExpirationDate">
             <summary>
             失效日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrIdCardFriendlyOutput.IsLongTerm">
+        <member name="P:AhDai.Integration.Models.Ocr.IdCardFriendlyOutput.IsLongTerm">
             <summary>
             是否是长期有效
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput">
+        <member name="T:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput">
             <summary>
             道路运输证文字识别
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.Number">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.Number">
             <summary>
             证号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.OwnerName">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.OwnerName">
             <summary>
             业户名称
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.Address">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.Address">
             <summary>
             住址
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.PlateNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.PlateNumber">
             <summary>
             车辆号牌
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.BusinessLicenseNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.BusinessLicenseNumber">
             <summary>
             经营许可证号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.VehicleType">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.VehicleType">
             <summary>
             车辆类型
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.TonnageSeat">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.TonnageSeat">
             <summary>
             吨/座位
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.Length">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.Length">
             <summary>
             车辆长度（毫米）
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.Width">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.Width">
             <summary>
             车辆宽度（毫米）
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.Height">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.Height">
             <summary>
             车辆高度（毫米）
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.BusinessScope">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.BusinessScope">
             <summary>
             经营范围
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.EconomyType">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.EconomyType">
             <summary>
             经济类型
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.Remark">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.Remark">
             <summary>
             备注信息
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.IssuingAuthority">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.IssuingAuthority">
             <summary>
             发证机关
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.FirstIssueDate">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.FirstIssueDate">
             <summary>
             初次领证日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.IssueDate">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.IssueDate">
             <summary>
             发证日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrRoadTransportCertificateFriendlyOutput.ExpiryDate">
+        <member name="P:AhDai.Integration.Models.Ocr.RoadTransportCertificateFriendlyOutput.ExpiryDate">
             <summary>
             有效期至 
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Models.OcrTaxPaymentCertificateFriendlyOutput">
+        <member name="T:AhDai.Integration.Models.Ocr.TaxPaymentCertificateFriendlyOutput">
             <summary>
             完税证明文字识别
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrTaxPaymentCertificateFriendlyOutput.Data">
+        <member name="P:AhDai.Integration.Models.Ocr.TaxPaymentCertificateFriendlyOutput.Data">
             <summary>
             数据
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput">
+        <member name="T:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput">
             <summary>
             增值税发票文字识别
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.Number">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.Number">
             <summary>
             发票号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.Type">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.Type">
             <summary>
             发票类型
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.SellerName">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.SellerName">
             <summary>
             销售方名称
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.SellerTaxNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.SellerTaxNumber">
             <summary>
             销售方纳税人识别号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.BuyerName">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.BuyerName">
             <summary>
             购方名称
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.BuyerTaxNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.BuyerTaxNumber">
             <summary>
             购方纳税人识别号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.Date">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.Date">
             <summary>
             开票日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.Amount">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.Amount">
             <summary>
             含税金额
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.TaxRate">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.TaxRate">
             <summary>
             税率
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.Tax">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.Tax">
             <summary>
             税费
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.AmountExcludingTax">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.AmountExcludingTax">
             <summary>
             不含税金额
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVatInvoiceFriendlyOutput.Remark">
+        <member name="P:AhDai.Integration.Models.Ocr.VatInvoiceFriendlyOutput.Remark">
             <summary>
             备注
             </summary>
         </member>
-        <member name="T:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput">
+        <member name="T:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput">
             <summary>
             行驶证文字识别
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.PlateNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.PlateNumber">
             <summary>
             号牌号码
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.VehicleType">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.VehicleType">
             <summary>
             车辆类型
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.Owner">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.Owner">
             <summary>
             所有人
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.Address">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.Address">
             <summary>
             住址
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.UseCharacter">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.UseCharacter">
             <summary>
             使用性质
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.Model">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.Model">
             <summary>
             品牌型号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.Vin">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.Vin">
             <summary>
             车辆识别代号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.EngineNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.EngineNumber">
             <summary>
             发动机号码
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.IssuingAuthority">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.IssuingAuthority">
             <summary>
             签发机关
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.RegisterDate">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.RegisterDate">
             <summary>
             注册日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.IssueDate">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.IssueDate">
             <summary>
             发证日期
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.CertificateSerialNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.CertificateSerialNumber">
             <summary>
             证芯编号（主页上的防伪编号）
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.FileNumber">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.FileNumber">
             <summary>
             档案编号
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.AppraisedPassengerCapacity">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.AppraisedPassengerCapacity">
             <summary>
             核定载人数 (人)
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.TotalMass">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.TotalMass">
             <summary>
             总质量（千克）
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.CurbWeight">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.CurbWeight">
             <summary>
             整备质量（千克） - 车辆自重
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.AppraisedPayload">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.AppraisedPayload">
             <summary>
             核定载质量（千克） - 允许装载的最大货物重量
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.ExternalDimensions">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.ExternalDimensions">
             <summary>
             外廓尺寸（毫米） - 长x宽x高
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.TractionMass">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.TractionMass">
             <summary>
             准牵引总质量（千克） - 牵引车特有字段
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.FuelType">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.FuelType">
             <summary>
             燃料类型
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.Remark">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.Remark">
             <summary>
             备注
             </summary>
         </member>
-        <member name="P:AhDai.Integration.Models.OcrVehicleLicenseFriendlyOutput.InspectionRecord">
+        <member name="P:AhDai.Integration.Models.Ocr.VehicleLicenseFriendlyOutput.InspectionRecord">
             <summary>
             检验记录（即年审截止日期说明）
             </summary>

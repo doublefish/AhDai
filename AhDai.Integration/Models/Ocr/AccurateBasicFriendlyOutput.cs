@@ -1,9 +1,9 @@
-﻿namespace AhDai.Integration.Models;
+﻿namespace AhDai.Integration.Models.Ocr;
 
 /// <summary>
 /// 通用文字识别
 /// </summary>
-public class OcrAccurateBasicFriendlyOutput : BaseOcrFriendlyOutput
+public class AccurateBasicFriendlyOutput : BaseFriendlyOutput
 {
     /// <summary>
     /// 回单编号

@@ -1,5 +1,5 @@
 ﻿using AhDai.Core.Extensions;
-using AhDai.Integration.Models;
+using AhDai.Integration.Models.Ocr;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -51,10 +51,10 @@ public class DrivingLicenseOutput : BaseOutput<Dictionary<string, WordsResult>>
     /// GetFriendlyOutput
     /// </summary>
     /// <returns></returns>
-    public OcrDrivingLicenseFriendlyOutput? GetFriendlyOutput()
+    public DrivingLicenseFriendlyOutput? GetFriendlyOutput()
     {
         if (WordsResultNum == 0 || WordsResult == null) return null;
-        var output = new OcrDrivingLicenseFriendlyOutput()
+        var output = new DrivingLicenseFriendlyOutput()
         {
             Name = WordsResult.GetValueOrDefault("姓名")?.Words,
             Number = WordsResult.GetValueOrDefault("证号")?.Words,

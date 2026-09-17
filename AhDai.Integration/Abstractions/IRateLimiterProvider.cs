@@ -1,5 +1,4 @@
-﻿using AhDai.Integration.Models;
-using System.Threading.RateLimiting;
+﻿using System.Threading.RateLimiting;
 
 namespace AhDai.Integration.Abstractions;
 
@@ -12,7 +11,8 @@ public interface IRateLimiterProvider
     /// 获取限流器
     /// </summary>
     /// <param name="key">限流器Key</param>
-    /// <param name="config">配置</param>
+    /// <param name="requestsPerSecond">每秒允许的请求数</param>
+    /// <param name="queueLimit">允许排队等待的请求数</param>
     /// <returns></returns>
-    RateLimiter Get(string key, RateLimitConfig config);
+    RateLimiter Get(string key, int requestsPerSecond, int queueLimit);
 }

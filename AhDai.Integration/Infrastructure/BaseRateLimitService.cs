@@ -41,9 +41,9 @@ public abstract class BaseRateLimitService<TConfig, TConfigProvider>(TConfigProv
             client ??= CreateHttpClient(config.Host);
         }
 
-        if (config.RateLimit?.RequestsPerSecond > 0)
+        if (config.RequestsPerSecond > 0)
         {
-            var rateLimiter = _rateLimiterProvider.Get(RateLimiterKey, config.RateLimit);
+            var rateLimiter = _rateLimiterProvider.Get(RateLimiterKey, config.RequestsPerSecond, config.QueueLimit);
             using var lease = await rateLimiter.AcquireAsync(permitCount: 1, cancellationToken);
 
             if (!lease.IsAcquired)

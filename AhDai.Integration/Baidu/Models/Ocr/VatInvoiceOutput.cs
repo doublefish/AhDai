@@ -1,5 +1,5 @@
 ﻿using AhDai.Core.Extensions;
-using AhDai.Integration.Models;
+using AhDai.Integration.Models.Ocr;
 using System.Linq;
 
 namespace AhDai.Integration.Baidu.Models.Ocr;
@@ -13,10 +13,10 @@ public class VatInvoiceOutput : BaseDocumentOutput<VatInvoiceWordsResult>
     /// GetFriendlyOutput
     /// </summary>
     /// <returns></returns>
-    public OcrVatInvoiceFriendlyOutput? GetFriendlyOutput()
+    public VatInvoiceFriendlyOutput? GetFriendlyOutput()
     {
         if (WordsResultNum == 0 || WordsResult == null) return null;
-        var output = new OcrVatInvoiceFriendlyOutput()
+        var output = new VatInvoiceFriendlyOutput()
         {
             Number = WordsResult.InvoiceNum,
             Type = WordsResult.InvoiceType,

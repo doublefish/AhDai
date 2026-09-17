@@ -1,9 +1,9 @@
-﻿namespace AhDai.Integration.Models;
+﻿namespace AhDai.Integration.Models.Ocr;
 
 /// <summary>
 /// 完税证明文字识别
 /// </summary>
-public class OcrTaxPaymentCertificateFriendlyOutput : BaseOcrFriendlyOutput
+public class TaxPaymentCertificateFriendlyOutput : BaseFriendlyOutput
 {
     /// <summary>
     /// 数据

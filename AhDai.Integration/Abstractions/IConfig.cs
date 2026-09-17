@@ -12,7 +12,11 @@ public interface IConfig
     /// </summary>
     string Host { get; set; }
     /// <summary>
-    /// 请求限流配置
+    /// 每秒允许的请求数，0 表示不限制
     /// </summary>
-    RateLimitConfig? RateLimit { get; set; }
+    int RequestsPerSecond { get; set; }
+    /// <summary>
+    /// 允许排队等待的请求数
+    /// </summary>
+    int QueueLimit { get; set; }
 }

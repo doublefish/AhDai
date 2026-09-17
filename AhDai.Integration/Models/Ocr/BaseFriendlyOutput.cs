@@ -1,9 +1,9 @@
-﻿namespace AhDai.Integration.Models;
+﻿namespace AhDai.Integration.Models.Ocr;
 
 /// <summary>
-/// BaseOcrFriendlyOutput
+/// BaseFriendlyOutput
 /// </summary>
-public abstract class BaseOcrFriendlyOutput
+public abstract class BaseFriendlyOutput
 {
     /// <summary>
     /// 附件

@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace AhDai.Integration.Models;
+namespace AhDai.Integration.Models.Ocr;
 
 /// <summary>
 /// 身份证文字识别
 /// </summary>
-public class OcrIdCardFriendlyOutput : BaseOcrFriendlyOutput
+public class IdCardFriendlyOutput : BaseFriendlyOutput
 {
     /// <summary>
     /// 姓名

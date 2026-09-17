@@ -1,5 +1,5 @@
 ﻿using AhDai.Core.Extensions;
-using AhDai.Integration.Models;
+using AhDai.Integration.Models.Ocr;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,10 +14,10 @@ public class BankReceiptOutput : BaseDocumentOutput<Dictionary<string, BankRecei
     /// GetFriendlyOutput
     /// </summary>
     /// <returns></returns>
-    public OcrBankReceiptFriendlyOutput? GetFriendlyOutput()
+    public BankReceiptFriendlyOutput? GetFriendlyOutput()
     {
         if (WordsResultNum == 0 || WordsResult == null) return null;
-        var output = new OcrBankReceiptFriendlyOutput()
+        var output = new BankReceiptFriendlyOutput()
         {
             Number = WordsResult.GetValueOrDefault("回单编号")?.FirstOrDefault()?.Word,
             Title = WordsResult.GetValueOrDefault("标题")?.FirstOrDefault()?.Word,

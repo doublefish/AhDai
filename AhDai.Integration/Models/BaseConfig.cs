@@ -12,7 +12,11 @@ public abstract class BaseConfig : IConfig
     /// </summary>
     public string Host { get; set; } = default!;
     /// <summary>
-    /// 请求限流配置
+    /// 每秒允许的请求数，0 表示不限制
     /// </summary>
-    public RateLimitConfig? RateLimit { get; set; }
+    public int RequestsPerSecond { get; set; }
+    /// <summary>
+    /// 允许排队等待的请求数
+    /// </summary>
+    public int QueueLimit { get; set; }
 }

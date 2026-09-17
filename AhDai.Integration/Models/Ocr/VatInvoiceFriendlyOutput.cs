@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace AhDai.Integration.Models;
+namespace AhDai.Integration.Models.Ocr;
 
 /// <summary>
 /// 增值税发票文字识别
 /// </summary>
-public class OcrVatInvoiceFriendlyOutput : BaseOcrFriendlyOutput
+public class VatInvoiceFriendlyOutput : BaseFriendlyOutput
 {
     /// <summary>
     /// 发票号

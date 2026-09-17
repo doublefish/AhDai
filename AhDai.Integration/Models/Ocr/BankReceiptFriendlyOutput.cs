@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace AhDai.Integration.Models;
+namespace AhDai.Integration.Models.Ocr;
 
 /// <summary>
 /// 银行回单文字识别
 /// </summary>
-public class OcrBankReceiptFriendlyOutput : BaseOcrFriendlyOutput
+public class BankReceiptFriendlyOutput : BaseFriendlyOutput
 {
     /// <summary>
     /// 回单编号
