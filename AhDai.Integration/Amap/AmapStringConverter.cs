@@ -18,12 +18,17 @@ public class AmapStringConverter : JsonConverter<string>
     /// <returns></returns>
     public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TokenType == JsonTokenType.StartArray)
+        switch (reader.TokenType)
         {
-            reader.Skip(); // 跳过空数组 []
-            return string.Empty;
+            case JsonTokenType.StartArray:
+                reader.Skip(); // 跳过空数组 []
+                return string.Empty;
+            case JsonTokenType.String:
+                return reader.GetString() ?? string.Empty;
+            case JsonTokenType.Null:
+                return string.Empty;
+            default: throw new JsonException($"无法将 {reader.TokenType} 转换为 string");
         }
-        return reader.GetString() ?? string.Empty;
     }
 
     /// <summary>

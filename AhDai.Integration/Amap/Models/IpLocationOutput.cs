@@ -12,20 +12,24 @@ public class IpLocationOutput : BaseOutput
     /// 省份名称
     /// </summary>
     [JsonPropertyName("province")]
+    [JsonConverter(typeof(AmapStringConverter))]
     public string Province { get; set; } = default!;
     /// <summary>
     /// 城市名称
     /// </summary>
     [JsonPropertyName("city")]
+    [JsonConverter(typeof(AmapStringConverter))]
     public string City { get; set; } = default!;
     /// <summary>
     /// 城市的 adcode 编码
     /// </summary>
     [JsonPropertyName("adcode")]
+    [JsonConverter(typeof(AmapStringConverter))]
     public string Adcode { get; set; } = default!;
     /// <summary>
     /// 所在城市矩形区域范围
     /// </summary>
     [JsonPropertyName("rectangle")]
+    [JsonConverter(typeof(AmapStringConverter))]
     public string Rectangle { get; set; } = default!;
 }
