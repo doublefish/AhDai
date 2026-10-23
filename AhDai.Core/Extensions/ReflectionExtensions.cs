@@ -25,21 +25,44 @@ public static class ReflectionExtensions
         }
 
         var targetType = propertyInfo.PropertyType;
+        var nullableType = Nullable.GetUnderlyingType(targetType);
+        var underlyingType = nullableType ?? targetType;
+
+        if (value is null || value is DBNull)
+        {
+            // 引用类型和可空值类型可以赋 null。
+            // 非可空值类型保持对象当前值不变。
+            if (!targetType.IsValueType || nullableType is not null)
+            {
+                propertyInfo.SetValue(obj, null);
+            }
+            return;
+        }
+
+        var stringValue = value as string;
+
+        // 空字符串或纯空白字符串：
+        // 对可空值类型赋 null，例如 DateTime?、decimal?。
+        // string 属性保留原始字符串。
+        if (stringValue is not null && string.IsNullOrWhiteSpace(stringValue) && nullableType is not null)
+        {
+            if (Nullable.GetUnderlyingType(targetType) != null)
+            {
+                propertyInfo.SetValue(obj, null);
+                return;
+            }
+        }
 
         var valueType = value.GetType();
-        if (targetType == valueType)
+
+        // 类型一致时直接赋值
+        if (targetType == valueType || underlyingType == valueType)
         {
             propertyInfo.SetValue(obj, value);
             return;
         }
 
-        var underlyingType = Nullable.GetUnderlyingType(targetType) ?? targetType;
-        if (underlyingType == valueType)
-        {
-            propertyInfo.SetValue(obj, value);
-            return;
-        }
-
+        // 不在这里自动转换数组和集合类型
         if (underlyingType.IsArray || underlyingType.IsGenericType && typeof(System.Collections.IEnumerable).IsAssignableFrom(underlyingType))
         {
             return;
@@ -50,30 +73,27 @@ public static class ReflectionExtensions
         {
             if (underlyingType.IsEnum)
             {
-                if (value is string strEnumValue)
-                {
-                    convertedValue = Enum.Parse(underlyingType, strEnumValue, true);
-                }
-                else
-                {
-                    convertedValue = Enum.ToObject(underlyingType, value);
-                }
+                convertedValue = stringValue is not null
+                   ? Enum.Parse(underlyingType, stringValue, ignoreCase: true)
+                   : Enum.ToObject(underlyingType, value);
             }
             else if (underlyingType == typeof(Guid))
             {
-                convertedValue = value is string strGuid ? Guid.Parse(strGuid) : (Guid)value;
+                convertedValue = stringValue is not null
+                    ? Guid.Parse(stringValue)
+                    : (Guid)value;
             }
-            else if (value is string strValue)
+            else if (stringValue is not null)
             {
                 var typeCode = Type.GetTypeCode(underlyingType);
                 if (typeCode != TypeCode.Object)
                 {
-                    convertedValue = Convert.ChangeType(strValue, underlyingType, CultureInfo.InvariantCulture);
+                    convertedValue = Convert.ChangeType(stringValue, underlyingType, CultureInfo.InvariantCulture);
                 }
                 else
                 {
                     var converter = TypeDescriptor.GetConverter(underlyingType);
-                    convertedValue = converter.ConvertFromInvariantString(strValue);
+                    convertedValue = converter.ConvertFromInvariantString(stringValue);
                 }
             }
             else

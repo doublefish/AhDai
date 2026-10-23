@@ -222,9 +222,22 @@
             Hex
             </summary>
         </member>
+        <member name="T:AhDai.Core.Extensions.DataReaderExtensions">
+            <summary>
+            DataReaderExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Extensions.DataReaderExtensions.ToList``1(System.Data.IDataReader)">
+            <summary>
+            ToList
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataReader"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Core.Extensions.DataTableExtensions">
             <summary>
-            DataTableExt
+            DataTableExtensions
             </summary>
         </member>
         <member name="M:AhDai.Core.Extensions.DataTableExtensions.ToList``1(System.Data.DataTable)">
@@ -250,14 +263,6 @@
             <typeparam name="T"></typeparam>
             <param name="dataRow"></param>
             <param name="propertyDict"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Extensions.DataTableExtensions.ToList``1(System.Data.IDataReader)">
-            <summary>
-            ToList
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="dataReader"></param>
             <returns></returns>
         </member>
         <member name="T:AhDai.Core.Extensions.DictionaryExtensions">
