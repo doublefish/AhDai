@@ -1406,6 +1406,16 @@
             <param name="key"></param>
             <returns></returns>
         </member>
+        <member name="T:AhDai.Core.Infrastructure.Authorization.AccessKeyCredentialGenerator">
+            <summary>
+            AccessKey 凭据生成器
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.Authorization.AccessKeyCredentialGenerator.Generate">
+            <summary>
+            生成一组新的 AccessKey 凭据
+            </summary>
+        </member>
         <member name="T:AhDai.Core.Infrastructure.Authorization.AuthorizationServiceCollectionExtensions">
             <summary>
             AuthorizationServiceCollectionExtensions
@@ -1832,7 +1842,7 @@
             RedisService
             </summary>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
+        <member name="M:AhDai.Core.Infrastructure.Jwt.BaseJwtService.GenerateTokenAsync(AhDai.Core.Models.Authorization.TokenData,System.Nullable{System.Int32})">
             <summary>
             GenerateToken
             </summary>
@@ -1908,7 +1918,7 @@
             Jwt服务
             </summary>
         </member>
-        <member name="M:AhDai.Core.Infrastructure.Jwt.IBaseJwtService.GenerateTokenAsync(AhDai.Core.Models.TokenData,System.Nullable{System.Int32})">
+        <member name="M:AhDai.Core.Infrastructure.Jwt.IBaseJwtService.GenerateTokenAsync(AhDai.Core.Models.Authorization.TokenData,System.Nullable{System.Int32})">
             <summary>
             生成Token
             </summary>
@@ -2845,6 +2855,100 @@
             <param name="message">消息</param>
             <param name="data">内容</param>
         </member>
+        <member name="T:AhDai.Core.Models.Authorization.AccessKeyCredential">
+            <summary>
+            AccessKey 访问凭据
+            </summary>
+            <param name="AccessKeyId">标识</param>
+            <param name="AccessKeySecret">明文密钥</param>
+        </member>
+        <member name="M:AhDai.Core.Models.Authorization.AccessKeyCredential.#ctor(System.String,System.String)">
+            <summary>
+            AccessKey 访问凭据
+            </summary>
+            <param name="AccessKeyId">标识</param>
+            <param name="AccessKeySecret">明文密钥</param>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.AccessKeyCredential.AccessKeyId">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.AccessKeyCredential.AccessKeySecret">
+            <summary>
+            密钥
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Models.Authorization.AccessKeyCredential.ToString">
+            <summary>
+            避免输出明文密钥
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Models.Authorization.TokenData">
+            <summary>
+            TokenData
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenData.Id">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenData.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenData.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenData.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenData.Platform">
+            <summary>
+            平台
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenData.Extensions">
+            <summary>
+            扩展数据
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Models.Authorization.TokenResult">
+            <summary>
+            TokenResult
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenResult.Id">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenResult.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenResult.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenResult.Expiration">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Models.Authorization.TokenResult.Type">
+            <summary>
+            认证类型：Bearer
+            </summary>
+        </member>
         <member name="T:AhDai.Core.Models.FileData">
             <summary>
             上传文件
@@ -3056,71 +3160,6 @@
         <member name="P:AhDai.Core.Models.IApiResult`1.ExtraData">
             <summary>
             扩展数据
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Models.TokenData">
-            <summary>
-            TokenData
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.Id">
-            <summary>
-            用户标识
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.Username">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.Name">
-            <summary>
-            姓名
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.Type">
-            <summary>
-            类型
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.Platform">
-            <summary>
-            平台
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenData.Extensions">
-            <summary>
-            扩展数据
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Models.TokenResult">
-            <summary>
-            TokenResult
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenResult.Id">
-            <summary>
-            用户Id
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenResult.Username">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenResult.Token">
-            <summary>
-            Token
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenResult.Expiration">
-            <summary>
-            过期时间
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Models.TokenResult.Type">
-            <summary>
-            认证类型：Bearer
             </summary>
         </member>
         <member name="T:AhDai.Core.Models.ValidationError">

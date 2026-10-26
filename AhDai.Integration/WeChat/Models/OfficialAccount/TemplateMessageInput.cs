@@ -13,32 +13,32 @@ public record TemplateMessageInput
     /// </summary>
     [JsonRequired]
     [JsonPropertyName("touser")]
-    public string ToUser { get; set; } = default!;
+    public string ToUser { get; init; } = default!;
     /// <summary>
     /// 模板ID
     /// </summary>
     [JsonRequired]
     [JsonPropertyName("template_id")]
-    public string TemplateId { get; set; } = default!;
+    public string TemplateId { get; init; } = default!;
     /// <summary>
     /// 模板跳转链接（海外账号没有跳转能力）
     /// </summary>
     [JsonPropertyName("url")]
-    public string? Url { get; set; }
+    public string? Url { get; init; }
     /// <summary>
     /// 跳小程序所需数据，不需跳小程序可不用传该数据
     /// </summary>
     [JsonPropertyName("miniprogram")]
-    public object? MiniProgram { get; set; }
+    public object? MiniProgram { get; init; }
     /// <summary>
     /// 模板数据：格式形如 { "key1": { "value": any }, "key2": { "value": any } }
     /// </summary>
     [JsonRequired]
     [JsonPropertyName("data")]
-    public IDictionary<string, TemplateDataValue> Data { get; set; } = default!;
+    public IDictionary<string, TemplateDataValue> Data { get; init; } = default!;
     /// <summary>
     /// 防重入id。对于同一个openid + client_msg_id, 只发送一条消息,10分钟有效,超过10分钟不保证效果。若无防重入需求，可不填
     /// </summary>
     [JsonPropertyName("client_msg_id")]
-    public string? ClientMsgId { get; set; }
+    public string? ClientMsgId { get; init; }
 }

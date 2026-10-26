@@ -1,6 +1,6 @@
 ﻿using AhDai.Core.Consts;
 using AhDai.Core.Infrastructure.Redis;
-using AhDai.Core.Models;
+using AhDai.Core.Models.Authorization;
 using AhDai.Core.Utils;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

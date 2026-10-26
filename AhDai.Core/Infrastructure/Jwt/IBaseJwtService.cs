@@ -1,4 +1,4 @@
-﻿using AhDai.Core.Models;
+﻿using AhDai.Core.Models.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;

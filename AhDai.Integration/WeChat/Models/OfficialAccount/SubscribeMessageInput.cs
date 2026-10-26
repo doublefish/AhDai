@@ -13,27 +13,27 @@ public record SubscribeMessageInput
     /// </summary>
     [JsonRequired]
     [JsonPropertyName("touser")]
-    public string ToUser { get; set; } = default!;
+    public string ToUser { get; init; } = default!;
     /// <summary>
     /// 模板ID
     /// </summary>
     [JsonRequired]
     [JsonPropertyName("template_id")]
-    public string TemplateId { get; set; } = default!;
+    public string TemplateId { get; init; } = default!;
     /// <summary>
     /// 跳转网页时填写
     /// </summary>
     [JsonPropertyName("page")]
-    public string? Page { get; set; }
+    public string? Page { get; init; }
     /// <summary>
     /// 跳转小程序时填写，格式如{ "appid": "pagepath": { "value": any } }
     /// </summary>
     [JsonPropertyName("miniprogram")]
-    public object? MiniProgram { get; set; }
+    public object? MiniProgram { get; init; }
     /// <summary>
     /// 模板内容，格式形如 { "key1": { "value": any }, "key2": { "value": any } }
     /// </summary>
     [JsonRequired]
     [JsonPropertyName("data")]
-    public IDictionary<string, TemplateDataValue> Data { get; set; } = default!;
+    public IDictionary<string, TemplateDataValue> Data { get; init; } = default!;
 }

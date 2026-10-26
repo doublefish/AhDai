@@ -12,27 +12,27 @@ public record SendInput
     /// 接收短信的手机号码
     /// </summary>
     [Required]
-    public string PhoneNumbers { get; set; } = default!;
+    public string PhoneNumbers { get; init; } = default!;
     /// <summary>
     /// 短信签名名称
     /// </summary>
     [Required]
-    public string SignName { get; set; } = default!;
+    public string SignName { get; init; } = default!;
     /// <summary>
     /// 短信模板 Code
     /// </summary>
     [Required]
-    public string TemplateCode { get; set; } = default!;
+    public string TemplateCode { get; init; } = default!;
     /// <summary>
     /// 短信模板变量对应的实际值
     /// </summary>
-    public IDictionary<string, string>? TemplateParam { get; set; }
+    public IDictionary<string, string>? TemplateParam { get; init; }
     /// <summary>
     /// 上行短信扩展码
     /// </summary>
-    public string? SmsUpExtendCode { get; set; }
+    public string? SmsUpExtendCode { get; init; }
     /// <summary>
     /// 外部流水扩展字段
     /// </summary>
-    public string? OutId { get; set; }
+    public string? OutId { get; init; }
 }

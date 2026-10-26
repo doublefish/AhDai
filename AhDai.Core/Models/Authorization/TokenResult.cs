@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AhDai.Core.Models;
+namespace AhDai.Core.Models.Authorization;
 
 /// <summary>
 /// TokenResult

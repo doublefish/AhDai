@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AhDai.Core.Models;
+namespace AhDai.Core.Models.Authorization;
 
 /// <summary>
 /// TokenData
