@@ -29,7 +29,7 @@ public record TemplateMessageInput
     /// 跳小程序所需数据，不需跳小程序可不用传该数据
     /// </summary>
     [JsonPropertyName("miniprogram")]
-    public object? MiniProgram { get; init; }
+    public TemplateMessageMiniProgram? MiniProgram { get; init; }
     /// <summary>
     /// 模板数据：格式形如 { "key1": { "value": any }, "key2": { "value": any } }
     /// </summary>

@@ -9486,17 +9486,18 @@
             <summary>
             模板数据
             </summary>
+            <param name="Value"></param>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateDataValue.#ctor(System.String)">
+            <summary>
+            模板数据
+            </summary>
+            <param name="Value"></param>
         </member>
         <member name="P:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateDataValue.Value">
             <summary>
             模板字段值
             </summary>
-        </member>
-        <member name="M:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateDataValue.#ctor(System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="value">模板字段值</param>
         </member>
         <member name="T:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageInput">
             <summary>
@@ -9531,6 +9532,30 @@
         <member name="P:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageInput.ClientMsgId">
             <summary>
             防重入id。对于同一个openid + client_msg_id, 只发送一条消息,10分钟有效,超过10分钟不保证效果。若无防重入需求，可不填
+            </summary>
+        </member>
+        <member name="T:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageMiniProgram">
+            <summary>
+            模板消息小程序跳转配置
+            </summary>
+            <param name="AppId"></param>
+            <param name="PagePath"></param>
+        </member>
+        <member name="M:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageMiniProgram.#ctor(System.String,System.String)">
+            <summary>
+            模板消息小程序跳转配置
+            </summary>
+            <param name="AppId"></param>
+            <param name="PagePath"></param>
+        </member>
+        <member name="P:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageMiniProgram.AppId">
+            <summary>
+            AppId
+            </summary>
+        </member>
+        <member name="P:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageMiniProgram.PagePath">
+            <summary>
+            页面路径
             </summary>
         </member>
         <member name="T:AhDai.Integration.WeChat.Models.OfficialAccount.TemplateMessageOutput">

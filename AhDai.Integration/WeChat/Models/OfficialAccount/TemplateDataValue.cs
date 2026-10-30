@@ -5,20 +5,12 @@ namespace AhDai.Integration.WeChat.Models.OfficialAccount;
 /// <summary>
 /// 模板数据
 /// </summary>
-public record TemplateDataValue
+/// <param name="Value"></param>
+public record TemplateDataValue(string Value)
 {
     /// <summary>
     /// 模板字段值
     /// </summary>
     [JsonPropertyName("value")]
-    public string Value { get; init; }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="value">模板字段值</param>
-    public TemplateDataValue(string value)
-    {
-        Value = value;
-    }
+    public string Value { get; init; } = Value;
 }
