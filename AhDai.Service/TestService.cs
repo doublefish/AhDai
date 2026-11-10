@@ -18,7 +18,7 @@ internal class TestService(IServiceProvider serviceProvider) : ITestService
 
     public async Task StartAsync()
     {
-        var action = "";
+        var action = "Tianyancha";
         switch (action)
         {
             case "Aliyun":
@@ -33,6 +33,9 @@ internal class TestService(IServiceProvider serviceProvider) : ITestService
             case "Hikvision":
                 await TestHikvisionAsync();
                 break;
+            case "Tianyancha":
+                await TestTianyanchaAsync();
+                break;  
             case "WeChat":
                 await TestWeChatAsync();
                 break;
@@ -148,8 +151,8 @@ internal class TestService(IServiceProvider serviceProvider) : ITestService
     {
         var service = _serviceProvider.GetRequiredService<Integration.Tianyancha.ITianyanchaService>();
 
-        var baseInfo = await service.GetBaseInfoAsync("", "山东华建铝业集团有限公司");
-        var taxpayer = await service.GetTaxpayerAsync("山东华建铝业集团有限公司");
+        var baseInfo = await service.GetBaseInfoAsync("", "成都兴盛利华商贸有限公司");
+        var taxpayer = await service.GetTaxpayerAsync("成都兴盛利华商贸有限公司");
 
     }
 

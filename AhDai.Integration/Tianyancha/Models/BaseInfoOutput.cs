@@ -28,7 +28,7 @@ public class BaseInfoOutput
     /// <summary>
     /// 注销日期
     /// </summary>
-    public string? CancelDate { get; set; }
+    public long? CancelDate { get; set; }
     /// <summary>
     /// 注销原因
     /// </summary>
