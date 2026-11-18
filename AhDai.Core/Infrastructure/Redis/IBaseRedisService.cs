@@ -39,14 +39,14 @@ public interface IBaseRedisService
     IConnectionMultiplexer CreateConnection(RedisOptions? options = null);
 
     /// <summary>
-    /// 获取连接实例
+    /// 获取连接实例，连接实例由服务管理和释放
     /// </summary>
     /// <param name="options">自定义配置</param>
     /// <returns></returns>
     IConnectionMultiplexer GetConnection(RedisOptions? options = null);
 
     /// <summary>
-    /// GetDatabase
+    /// GetDatabase，服务管理的连接，调用者负责释放 Database
     /// </summary>
     /// <param name="db"></param>
     /// <param name="asyncState"></param>

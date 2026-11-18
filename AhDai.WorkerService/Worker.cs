@@ -18,10 +18,7 @@ public class Worker(ILogger<Worker> logger, IServiceProvider serviceProvider) : 
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            if (_logger.IsEnabled(LogLevel.Information))
-            {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-            }
+            if (_logger.IsEnabled(LogLevel.Information)) _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
             try
             {
                 await using (var scope = _serviceProvider.CreateAsyncScope())

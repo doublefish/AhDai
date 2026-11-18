@@ -2156,121 +2156,6 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="T:AhDai.Core.Infrastructure.MessageBus.IMessageBus">
-            <summary>
-            IMessageBus
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.EnsureConsumerGroupAsync(System.String,System.String)">
-            <summary>
-            确保消费者组已创建
-            </summary>
-            <param name="stream"></param>
-            <param name="group"></param>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.PublishAsync``1(System.String,``0,System.Threading.CancellationToken)">
-            <summary>
-            发布
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="topic"></param>
-            <param name="message"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.ConsumeAsync``1(System.String,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            消费
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="topic"></param>
-            <param name="group"></param>
-            <param name="consumer"></param>
-            <param name="count"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.AckAsync(System.String,System.String,System.Collections.Generic.IReadOnlyCollection{System.String},System.Threading.CancellationToken)">
-            <summary>
-            确认回答
-            </summary>
-            <param name="topic"></param>
-            <param name="group"></param>
-            <param name="ids"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.MessageBus.IMessageBus.RecoverAsync``1(System.String,System.String,System.String,System.TimeSpan,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            恢复未确认的消息
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="topic"></param>
-            <param name="group"></param>
-            <param name="consumer"></param>
-            <param name="minIdleTime"></param>
-            <param name="count"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Infrastructure.MessageBus.MessageBusMessage`1">
-            <summary>
-            MessageBusMessage
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:AhDai.Core.Infrastructure.MessageBus.MessageBusMessage`1.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:AhDai.Core.Infrastructure.MessageBus.MessageBusMessage`1.Value">
-            <summary>
-            Value
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Infrastructure.MessageBus.MessageBusOptions">
-            <summary>
-            MessageBusOptions
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Infrastructure.MessageBus.MessageBusServiceCollectionExtensions">
-            <summary>
-            MessageBusServiceCollectionExtensions
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.MessageBus.MessageBusServiceCollectionExtensions.AddRedisMessageBus(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            添加IMessageBus - 依赖注入单例
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AhDai.Core.Infrastructure.MessageBus.RedisMessageBus">
-            <summary>
-            RedisMessageBus
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.MessageBus.RedisMessageBus.#ctor(AhDai.Core.Infrastructure.Redis.IBaseRedisService)">
-            <summary>
-            RedisMessageBus
-            </summary>
-        </member>
-        <member name="T:AhDai.Core.Infrastructure.MessageBus.RedisStreamExtensions">
-            <summary>
-            RedisStreamExtensions
-            </summary>
-        </member>
-        <member name="M:AhDai.Core.Infrastructure.MessageBus.RedisStreamExtensions.CreateGroupIfNotExistsAsync(StackExchange.Redis.IDatabase,System.String,System.String,System.Nullable{StackExchange.Redis.RedisValue})">
-            <summary>
-            CreateGroupIfNotExistsAsync
-            </summary>
-            <param name="db"></param>
-            <param name="stream"></param>
-            <param name="group"></param>
-            <param name="startId"></param>
-            <returns></returns>
-        </member>
         <member name="T:AhDai.Core.Infrastructure.Mvc.ActionFilter">
             <summary>
             ActionFilter
@@ -2336,14 +2221,200 @@
             </summary>
             <param name="options"></param>
         </member>
+        <member name="T:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService">
+            <summary>
+            RabbitMQ
+            </summary>
+            <param name="logger"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService},Microsoft.Extensions.Options.IOptions{AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions})">
+            <summary>
+            RabbitMQ
+            </summary>
+            <param name="logger"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.CreateConnectionFactory(AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions)">
+            <summary>
+            创建连接工厂
+            </summary>
+            <param name="options">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.CreateConnectionAsync(AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions,System.Threading.CancellationToken)">
+            <summary>
+            创建独立连接
+            </summary>
+            <param name="options">自定义配置</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.GetConnectionAsync(AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions,System.Threading.CancellationToken)">
+            <summary>
+            获取连接实例
+            </summary>
+            <param name="options">自定义配置</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.CreateChannelAsync(AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions,RabbitMQ.Client.CreateChannelOptions,System.Threading.CancellationToken)">
+            <summary>
+            创建 Channel
+            </summary>
+            <param name="options">自定义连接配置</param>
+            <param name="channelOptions">Channel 配置</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.CreateConnectionKey(AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions)">
+            <summary>
+            创建连接缓存 Key
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.CopyOptions(AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions)">
+            <summary>
+            复制配置，避免缓存期间外部修改配置对象
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.RegisterConnectionEvents(RabbitMQ.Client.IConnection,AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions)">
+            <summary>
+            注册连接事件
+            </summary>
+            <param name="connection"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.ThrowIfDisposed">
+            <summary>
+            检查服务是否已释放
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.BaseRabbitMQService.DisposeAsync">
+            <summary>
+            DisposeAsync
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.RabbitMQ.IRabbitMQService">
+            <summary>
+            IRabbitMQService
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.IRabbitMQService.CreateConnectionFactory(AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions)">
+            <summary>
+            创建连接工厂
+            </summary>
+            <param name="options">自定义配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.IRabbitMQService.CreateConnectionAsync(AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions,System.Threading.CancellationToken)">
+            <summary>
+            创建独立连接
+            </summary>
+            <param name="options">自定义配置</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.IRabbitMQService.GetConnectionAsync(AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions,System.Threading.CancellationToken)">
+            <summary>
+            获取长期复用的连接，连接由服务管理和释放
+            </summary>
+            <param name="options">自定义配置</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.IRabbitMQService.CreateChannelAsync(AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions,RabbitMQ.Client.CreateChannelOptions,System.Threading.CancellationToken)">
+            <summary>
+            创建 Channel，服务管理的连接，调用者负责释放 Channel
+            </summary>
+            <param name="options">自定义连接配置</param>
+            <param name="channelOptions">Channel 配置</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions">
+            <summary>
+            RabbitMQOptions
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions.HostName">
+            <summary>
+            主机名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions.VirtualHost">
+            <summary>
+            Virtual Host
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions.ClientProvidedName">
+            <summary>
+            客户端连接名称
+            用于 RabbitMQ 管理后台识别连接来源
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions.AutomaticRecoveryEnabled">
+            <summary>
+            是否启用自动连接恢复
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions.TopologyRecoveryEnabled">
+            <summary>
+            是否启用拓扑恢复
+            </summary>
+        </member>
+        <member name="P:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQOptions.NetworkRecoveryIntervalSeconds">
+            <summary>
+            网络连接恢复间隔（秒）
+            </summary>
+        </member>
+        <member name="T:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQServiceCollectionExtensions">
+            <summary>
+            RabbitMQServiceCollectionExtensions
+            </summary>
+        </member>
+        <member name="M:AhDai.Core.Infrastructure.RabbitMQ.RabbitMQServiceCollectionExtensions.AddRabbitMQService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            添加 RabbitMQ 服务 - 依赖注入单例
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="T:AhDai.Core.Infrastructure.Redis.BaseRedisService">
             <summary>
             Redis服务
             </summary>
+            <param name="logger"></param>
+            <param name="options"></param>
         </member>
         <member name="M:AhDai.Core.Infrastructure.Redis.BaseRedisService.#ctor(Microsoft.Extensions.Logging.ILogger{AhDai.Core.Infrastructure.Redis.BaseRedisService},Microsoft.Extensions.Options.IOptions{AhDai.Core.Infrastructure.Redis.RedisOptions})">
             <summary>
-            构造函数
+            Redis服务
             </summary>
             <param name="logger"></param>
             <param name="options"></param>
@@ -2487,14 +2558,14 @@
         </member>
         <member name="M:AhDai.Core.Infrastructure.Redis.IBaseRedisService.GetConnection(AhDai.Core.Infrastructure.Redis.RedisOptions)">
             <summary>
-            获取连接实例
+            获取连接实例，连接实例由服务管理和释放
             </summary>
             <param name="options">自定义配置</param>
             <returns></returns>
         </member>
         <member name="M:AhDai.Core.Infrastructure.Redis.IBaseRedisService.GetDatabase(System.Int32,System.Object,AhDai.Core.Infrastructure.Redis.RedisOptions)">
             <summary>
-            GetDatabase
+            GetDatabase，服务管理的连接，调用者负责释放 Database
             </summary>
             <param name="db"></param>
             <param name="asyncState"></param>
@@ -3777,8 +3848,8 @@
         <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
             <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
         </member>
-        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_ascii_662A8000662A800">
-            <summary>Supports searching for characters in or not in "ABIMNSUWabimnsuw".</summary>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_indexOfAnyStrings_OrdinalIgnoreCase_46014A8B7B3C7A2F9033727512F94E85EAA984C17CE55A0D78E1E676BFA041AA">
+            <summary>Supports searching for the specified strings.</summary>
         </member>
     </members>
 </doc>

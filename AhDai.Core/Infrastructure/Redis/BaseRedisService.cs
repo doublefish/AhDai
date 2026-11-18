@@ -9,23 +9,13 @@ namespace AhDai.Core.Infrastructure.Redis;
 /// <summary>
 /// Redis服务
 /// </summary>
-public class BaseRedisService : IBaseRedisService, IDisposable
+/// <param name="logger"></param>
+/// <param name="options"></param>
+public class BaseRedisService(ILogger<BaseRedisService> logger, IOptions<RedisOptions> options) : IBaseRedisService, IDisposable
 {
-    readonly ILogger<BaseRedisService> _logger;
-    readonly RedisOptions _options;
-    readonly ConcurrentDictionary<string, Lazy<IConnectionMultiplexer>> _connections;
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="logger"></param>
-    /// <param name="options"></param>
-    public BaseRedisService(ILogger<BaseRedisService> logger, IOptions<RedisOptions> options)
-    {
-        _logger = logger;
-        _options = options.Value;
-        _connections = [];
-    }
+    readonly ILogger<BaseRedisService> _logger = logger;
+    readonly RedisOptions _options = options.Value;
+    readonly ConcurrentDictionary<string, Lazy<IConnectionMultiplexer>> _connections = [];
 
     /// <summary>
     /// 创建连接配置
