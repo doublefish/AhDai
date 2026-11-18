@@ -15,7 +15,7 @@
 		<Description>集成服务</Description>
 		<PackageIcon></PackageIcon>
 		<PackageTags>AhDai;Integration</PackageTags>
-		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageProjectUrl></PackageProjectUrl>
 		<RepositoryUrl></RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
@@ -42,6 +42,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\AhDai.Core\AhDai.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
