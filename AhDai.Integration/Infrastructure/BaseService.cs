@@ -53,7 +53,8 @@ public abstract class BaseService : IBaseService
         var client = _httpClientFactory.CreateClient();
         if (!string.IsNullOrEmpty(baseAddress))
         {
-            client.BaseAddress = new Uri(baseAddress);
+            //client.BaseAddress = new Uri(baseAddress);
+            client.BaseAddress = new Uri(baseAddress.TrimEnd('/') + "/", UriKind.Absolute);
         }
         if (!string.IsNullOrEmpty(authorization))
         {

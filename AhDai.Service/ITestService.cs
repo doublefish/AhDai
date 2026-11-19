@@ -10,6 +10,7 @@ public interface ITestService
     /// <summary>
     /// 开始
     /// </summary>
+    /// <param name="action"></param>
     /// <returns></returns>
-    Task StartAsync();
+    Task StartAsync(string? action = null);
 }

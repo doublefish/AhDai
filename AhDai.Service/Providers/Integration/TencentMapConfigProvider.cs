@@ -10,4 +10,5 @@ internal class TencentMapConfigProvider(IOptionsMonitor<TencentMapConfig> option
     : BaseIntegrationConfigProvider<TencentMapConfig>(options, parameterService)
     , ITencentMapConfigProvider
 {
+    protected override long GetTenantId() => 0;
 }
